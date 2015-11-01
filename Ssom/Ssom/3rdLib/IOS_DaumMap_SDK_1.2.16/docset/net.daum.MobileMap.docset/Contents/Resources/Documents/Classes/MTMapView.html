@@ -1,0 +1,3137 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MTMapView Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MobileMap </a></h1>
+				<a id="developerHome" href="../index.html">Daum Communications</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTMapView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/baseMapType">&nbsp;&nbsp;&nbsp;&nbsp;baseMapType</option>
+	
+	<option value="//api/name/circles">&nbsp;&nbsp;&nbsp;&nbsp;circles</option>
+	
+	<option value="//api/name/currentLocationTrackingMode">&nbsp;&nbsp;&nbsp;&nbsp;currentLocationTrackingMode</option>
+	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/mapCenterPoint">&nbsp;&nbsp;&nbsp;&nbsp;mapCenterPoint</option>
+	
+	<option value="//api/name/mapRotationAngle">&nbsp;&nbsp;&nbsp;&nbsp;mapRotationAngle</option>
+	
+	<option value="//api/name/poiItems">&nbsp;&nbsp;&nbsp;&nbsp;poiItems</option>
+	
+	<option value="//api/name/polylines">&nbsp;&nbsp;&nbsp;&nbsp;polylines</option>
+	
+	<option value="//api/name/showCurrentLocationMarker">&nbsp;&nbsp;&nbsp;&nbsp;showCurrentLocationMarker</option>
+	
+	<option value="//api/name/useHDMapTile">&nbsp;&nbsp;&nbsp;&nbsp;useHDMapTile</option>
+	
+	<option value="//api/name/zoomLevel">&nbsp;&nbsp;&nbsp;&nbsp;zoomLevel</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/clearMapTilePersistentCache">&nbsp;&nbsp;&nbsp;&nbsp;+ clearMapTilePersistentCache</option>
+	
+	<option value="//api/name/isMapTilePersistentCacheEnabled">&nbsp;&nbsp;&nbsp;&nbsp;+ isMapTilePersistentCacheEnabled</option>
+	
+	<option value="//api/name/setMapTilePersistentCacheEnabled:">&nbsp;&nbsp;&nbsp;&nbsp;+ setMapTilePersistentCacheEnabled:</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/addCircle:">&nbsp;&nbsp;&nbsp;&nbsp;- addCircle:</option>
+	
+	<option value="//api/name/addPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- addPOIItem:</option>
+	
+	<option value="//api/name/addPOIItems:">&nbsp;&nbsp;&nbsp;&nbsp;- addPOIItems:</option>
+	
+	<option value="//api/name/addPolyline:">&nbsp;&nbsp;&nbsp;&nbsp;- addPolyline:</option>
+	
+	<option value="//api/name/animateWithCameraUpdate:">&nbsp;&nbsp;&nbsp;&nbsp;- animateWithCameraUpdate:</option>
+	
+	<option value="//api/name/deselectPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- deselectPOIItem:</option>
+	
+	<option value="//api/name/didReceiveMemoryWarning">&nbsp;&nbsp;&nbsp;&nbsp;- didReceiveMemoryWarning</option>
+	
+	<option value="//api/name/findCircleByTag:">&nbsp;&nbsp;&nbsp;&nbsp;- findCircleByTag:</option>
+	
+	<option value="//api/name/findPOIItemByName:">&nbsp;&nbsp;&nbsp;&nbsp;- findPOIItemByName:</option>
+	
+	<option value="//api/name/findPOIItemByTag:">&nbsp;&nbsp;&nbsp;&nbsp;- findPOIItemByTag:</option>
+	
+	<option value="//api/name/findPolylineByTag:">&nbsp;&nbsp;&nbsp;&nbsp;- findPolylineByTag:</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowAllCircleOverlays">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowAllCircleOverlays</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowAllPOIItems">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowAllPOIItems</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowAllPolylines">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowAllPolylines</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowCircle:">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowCircle:</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowMapPoints:">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowMapPoints:</option>
+	
+	<option value="//api/name/fitMapViewAreaToShowPolyline:">&nbsp;&nbsp;&nbsp;&nbsp;- fitMapViewAreaToShowPolyline:</option>
+	
+	<option value="//api/name/refreshMapTiles">&nbsp;&nbsp;&nbsp;&nbsp;- refreshMapTiles</option>
+	
+	<option value="//api/name/removeAllCircles">&nbsp;&nbsp;&nbsp;&nbsp;- removeAllCircles</option>
+	
+	<option value="//api/name/removeAllPOIItems">&nbsp;&nbsp;&nbsp;&nbsp;- removeAllPOIItems</option>
+	
+	<option value="//api/name/removeAllPolylines">&nbsp;&nbsp;&nbsp;&nbsp;- removeAllPolylines</option>
+	
+	<option value="//api/name/removeCircle:">&nbsp;&nbsp;&nbsp;&nbsp;- removeCircle:</option>
+	
+	<option value="//api/name/removePOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- removePOIItem:</option>
+	
+	<option value="//api/name/removePOIItems:">&nbsp;&nbsp;&nbsp;&nbsp;- removePOIItems:</option>
+	
+	<option value="//api/name/removePolyline:">&nbsp;&nbsp;&nbsp;&nbsp;- removePolyline:</option>
+	
+	<option value="//api/name/selectPOIItem:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- selectPOIItem:animated:</option>
+	
+	<option value="//api/name/setDaumMapApiKey:">&nbsp;&nbsp;&nbsp;&nbsp;- setDaumMapApiKey:</option>
+	
+	<option value="//api/name/setMapCenterPoint:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setMapCenterPoint:animated:</option>
+	
+	<option value="//api/name/setMapCenterPoint:zoomLevel:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setMapCenterPoint:zoomLevel:animated:</option>
+	
+	<option value="//api/name/setMapRotationAngle:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setMapRotationAngle:animated:</option>
+	
+	<option value="//api/name/setZoomLevel:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setZoomLevel:animated:</option>
+	
+	<option value="//api/name/updateCurrentLocationMarker:">&nbsp;&nbsp;&nbsp;&nbsp;- updateCurrentLocationMarker:</option>
+	
+	<option value="//api/name/zoomInAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- zoomInAnimated:</option>
+	
+	<option value="//api/name/zoomOutAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- zoomOutAnimated:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/baseMapType">baseMapType</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/circles">circles</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/currentLocationTrackingMode">currentLocationTrackingMode</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapCenterPoint">mapCenterPoint</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapRotationAngle">mapRotationAngle</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/poiItems">poiItems</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/polylines">polylines</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showCurrentLocationMarker">showCurrentLocationMarker</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/useHDMapTile">useHDMapTile</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/zoomLevel">zoomLevel</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clearMapTilePersistentCache">clearMapTilePersistentCache</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isMapTilePersistentCacheEnabled">isMapTilePersistentCacheEnabled</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setMapTilePersistentCacheEnabled:">setMapTilePersistentCacheEnabled:</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addCircle:">addCircle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPOIItem:">addPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPOIItems:">addPOIItems:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPolyline:">addPolyline:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/animateWithCameraUpdate:">animateWithCameraUpdate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/deselectPOIItem:">deselectPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/didReceiveMemoryWarning">didReceiveMemoryWarning</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findCircleByTag:">findCircleByTag:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findPOIItemByName:">findPOIItemByName:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findPOIItemByTag:">findPOIItemByTag:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findPolylineByTag:">findPolylineByTag:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowAllCircleOverlays">fitMapViewAreaToShowAllCircleOverlays</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowAllPOIItems">fitMapViewAreaToShowAllPOIItems</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowAllPolylines">fitMapViewAreaToShowAllPolylines</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowCircle:">fitMapViewAreaToShowCircle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowMapPoints:">fitMapViewAreaToShowMapPoints:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fitMapViewAreaToShowPolyline:">fitMapViewAreaToShowPolyline:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/refreshMapTiles">refreshMapTiles</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeAllCircles">removeAllCircles</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeAllPOIItems">removeAllPOIItems</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeAllPolylines">removeAllPolylines</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeCircle:">removeCircle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removePOIItem:">removePOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removePOIItems:">removePOIItems:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removePolyline:">removePolyline:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/selectPOIItem:animated:">selectPOIItem:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setDaumMapApiKey:">setDaumMapApiKey:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setMapCenterPoint:animated:">setMapCenterPoint:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setMapCenterPoint:zoomLevel:animated:">setMapCenterPoint:zoomLevel:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setMapRotationAngle:animated:">setMapRotationAngle:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setZoomLevel:animated:">setZoomLevel:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateCurrentLocationMarker:">updateCurrentLocationMarker:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/zoomInAnimated:">zoomInAnimated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/zoomOutAnimated:">zoomOutAnimated:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MTMapView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTMapView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UIView</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MTMapView.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setDaumMapApiKey:">&ndash;&nbsp;setDaumMapApiKey:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/baseMapType">&nbsp;&nbsp;baseMapType</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/useHDMapTile">&nbsp;&nbsp;useHDMapTile</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isMapTilePersistentCacheEnabled">+&nbsp;isMapTilePersistentCacheEnabled</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setMapTilePersistentCacheEnabled:">+&nbsp;setMapTilePersistentCacheEnabled:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clearMapTilePersistentCache">+&nbsp;clearMapTilePersistentCache</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/showCurrentLocationMarker">&nbsp;&nbsp;showCurrentLocationMarker</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/updateCurrentLocationMarker:">&ndash;&nbsp;updateCurrentLocationMarker:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/currentLocationTrackingMode">&nbsp;&nbsp;currentLocationTrackingMode</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapCenterPoint">&nbsp;&nbsp;mapCenterPoint</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/zoomLevel">&nbsp;&nbsp;zoomLevel</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapRotationAngle">&nbsp;&nbsp;mapRotationAngle</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setMapCenterPoint:animated:">&ndash;&nbsp;setMapCenterPoint:animated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setMapCenterPoint:zoomLevel:animated:">&ndash;&nbsp;setMapCenterPoint:zoomLevel:animated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setZoomLevel:animated:">&ndash;&nbsp;setZoomLevel:animated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/zoomInAnimated:">&ndash;&nbsp;zoomInAnimated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/zoomOutAnimated:">&ndash;&nbsp;zoomOutAnimated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setMapRotationAngle:animated:">&ndash;&nbsp;setMapRotationAngle:animated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowMapPoints:">&ndash;&nbsp;fitMapViewAreaToShowMapPoints:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/animateWithCameraUpdate:">&ndash;&nbsp;animateWithCameraUpdate:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/refreshMapTiles">&ndash;&nbsp;refreshMapTiles</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/didReceiveMemoryWarning">&ndash;&nbsp;didReceiveMemoryWarning</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/poiItems">&nbsp;&nbsp;poiItems</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPOIItem:">&ndash;&nbsp;addPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPOIItems:">&ndash;&nbsp;addPOIItems:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/selectPOIItem:animated:">&ndash;&nbsp;selectPOIItem:animated:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/deselectPOIItem:">&ndash;&nbsp;deselectPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findPOIItemByTag:">&ndash;&nbsp;findPOIItemByTag:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findPOIItemByName:">&ndash;&nbsp;findPOIItemByName:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removePOIItem:">&ndash;&nbsp;removePOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removePOIItems:">&ndash;&nbsp;removePOIItems:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeAllPOIItems">&ndash;&nbsp;removeAllPOIItems</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowAllPOIItems">&ndash;&nbsp;fitMapViewAreaToShowAllPOIItems</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/polylines">&nbsp;&nbsp;polylines</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPolyline:">&ndash;&nbsp;addPolyline:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findPolylineByTag:">&ndash;&nbsp;findPolylineByTag:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removePolyline:">&ndash;&nbsp;removePolyline:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeAllPolylines">&ndash;&nbsp;removeAllPolylines</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowPolyline:">&ndash;&nbsp;fitMapViewAreaToShowPolyline:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowAllPolylines">&ndash;&nbsp;fitMapViewAreaToShowAllPolylines</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/circles">&nbsp;&nbsp;circles</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addCircle:">&ndash;&nbsp;addCircle:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findCircleByTag:">&ndash;&nbsp;findCircleByTag:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeCircle:">&ndash;&nbsp;removeCircle:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeAllCircles">&ndash;&nbsp;removeAllCircles</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowCircle:">&ndash;&nbsp;fitMapViewAreaToShowCircle:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fitMapViewAreaToShowAllCircleOverlays">&ndash;&nbsp;fitMapViewAreaToShowAllCircleOverlays</a></code>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/baseMapType" title="baseMapType"></a>
+	<h3 class="subsubtitle method-title">baseMapType</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 종류(기본 지도, 위성 지도, 하이브리드 지도)를 지정하거나 현재 보여주고 있는 지도 종류를 확인할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic) MTMapType baseMapType</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 종류(기본 지도, 위성 지도, 하이브리드 지도)를 지정하거나 현재 보여주고 있는 지도 종류를 확인할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/circles" title="circles"></a>
+	<h3 class="subsubtitle method-title">circles</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 보여주고 있는 CircleOverlay 리스트를 조회할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *circles</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 보여주고 있는 CircleOverlay 리스트를 조회할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/currentLocationTrackingMode" title="currentLocationTrackingMode"></a>
+	<h3 class="subsubtitle method-title">currentLocationTrackingMode</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>현위치 트래킹 모드 및 나침반 모드를 설정한다.
+- 현위치 트래킹 모드 : 지도화면 중심을 단말의 현재 위치로 이동시켜줌
+- 나침반 모드 : 단말의 방향에 따라 지도화면이 회전됨
+현위치 트래킹 모드만 On시키거나 현위치 트래킹 모드, 나침반 모드 둘다 On 시킬 수 있다.
+현위치 트래킹/나침반 모드를 활성화 시키면 현위치 정보가 설정된 <a href="../Protocols/MTMapViewDelegate.html">MTMapViewDelegate</a> 객체에 전달된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic) MTMapCurrentLocationTrackingMode currentLocationTrackingMode</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>현위치 트래킹 모드 및 나침반 모드를 설정한다.
+- 현위치 트래킹 모드 : 지도화면 중심을 단말의 현재 위치로 이동시켜줌
+- 나침반 모드 : 단말의 방향에 따라 지도화면이 회전됨
+현위치 트래킹 모드만 On시키거나 현위치 트래킹 모드, 나침반 모드 둘다 On 시킬 수 있다.
+현위치 트래킹/나침반 모드를 활성화 시키면 현위치 정보가 설정된 <a href="../Protocols/MTMapViewDelegate.html">MTMapViewDelegate</a> 객체에 전달된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Constants/MTMapCurrentLocationTrackingMode.html">MTMapCurrentLocationTrackingMode</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/MTMapViewDelegate.html">MTMapViewDelegate</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 객체에서 발생하는 이벤트를 처리할 delegate 객체를 설정한다.
+delegate 객체는 Open API Key 인증 결과 이벤트, 지도 이동/확대/축소,
+지도 화면 터치(Single Tap / Double Tap / Long Press) 이벤트,
+현위치 트래킹 이벤트, POI(Point Of Interest) 관련 이벤트를 통보받을 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) id&lt;MTMapViewDelegate&gt; delegate</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 객체에서 발생하는 이벤트를 처리할 delegate 객체를 설정한다.
+delegate 객체는 Open API Key 인증 결과 이벤트, 지도 이동/확대/축소,
+지도 화면 터치(Single Tap / Double Tap / Long Press) 이벤트,
+현위치 트래킹 이벤트, POI(Point Of Interest) 관련 이벤트를 통보받을 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapCenterPoint" title="mapCenterPoint"></a>
+	<h3 class="subsubtitle method-title">mapCenterPoint</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>현재 지도 화면의 중심점을 확인할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTMapPoint *mapCenterPoint</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>현재 지도 화면의 중심점을 확인할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapRotationAngle" title="mapRotationAngle"></a>
+	<h3 class="subsubtitle method-title">mapRotationAngle</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>현재 지도화면의 회전 각도(360 degree)를 확인할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTMapRotationAngle mapRotationAngle</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>현재 지도화면의 회전 각도(360 degree)를 확인할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/poiItems" title="poiItems"></a>
+	<h3 class="subsubtitle method-title">poiItems</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 보여주고 있는 POI(Point Of Interest) 아이템 리스트를 조회할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *poiItems</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 보여주고 있는 POI(Point Of Interest) 아이템 리스트를 조회할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/polylines" title="polylines"></a>
+	<h3 class="subsubtitle method-title">polylines</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 보여주고 있는 Polyline 리스트를 조회할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *polylines</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 보여주고 있는 Polyline 리스트를 조회할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showCurrentLocationMarker" title="showCurrentLocationMarker"></a>
+	<h3 class="subsubtitle method-title">showCurrentLocationMarker</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
+<a href="#//api/name/currentLocationTrackingMode">currentLocationTrackingMode</a> property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
+현위치 트래킹 기능을 Off한 후에 현위치 아이콘을 지도 화면에서 제거할 때 사용할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL showCurrentLocationMarker</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>현위치를 표시하는 아이콘(마커)를 화면에 표시할지 여부를 설정한다.
+<a href="#//api/name/currentLocationTrackingMode">currentLocationTrackingMode</a> property를 이용하여 현위치 트래킹 기능을 On 시키면 자동으로 현위치 마커가 보여지게 된다.
+현위치 트래킹 기능을 Off한 후에 현위치 아이콘을 지도 화면에서 제거할 때 사용할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/useHDMapTile" title="useHDMapTile"></a>
+	<h3 class="subsubtitle method-title">useHDMapTile</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>고해상도 지도 타일 사용 여부를 설정한다.
+Retina Display인 경우 기본값은 YES, 아닌경우 기본값은 NO</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL useHDMapTile</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>고해상도 지도 타일 사용 여부를 설정한다.
+Retina Display인 경우 기본값은 YES, 아닌경우 기본값은 NO</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/zoomLevel" title="zoomLevel"></a>
+	<h3 class="subsubtitle method-title">zoomLevel</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>현재 지도 화면의 확대/축소 레벨을 확인할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTMapZoomLevel zoomLevel</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>현재 지도 화면의 확대/축소 레벨을 확인할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/clearMapTilePersistentCache" title="clearMapTilePersistentCache"></a>
+	<h3 class="subsubtitle method-title">clearMapTilePersistentCache</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Application의 Document Directory의 임시 디렉토리에
+저장된 지도 타일 캐쉬 데이터를 모두 삭제한다.
+MTMapView가 동작 중인 상태에서도 사용가능하다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)clearMapTilePersistentCache</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Application의 Document Directory의 임시 디렉토리에
+저장된 지도 타일 캐쉬 데이터를 모두 삭제한다.
+MTMapView가 동작 중인 상태에서도 사용가능하다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isMapTilePersistentCacheEnabled" title="isMapTilePersistentCacheEnabled"></a>
+	<h3 class="subsubtitle method-title">isMapTilePersistentCacheEnabled</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 타일 이미지 Persistent Cache 기능 활성화 여부를 조회한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isMapTilePersistentCacheEnabled</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Persistent Cache 기능 활성화 여부</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 타일 이미지 Persistent Cache 기능 활성화 여부를 조회한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setMapTilePersistentCacheEnabled:" title="setMapTilePersistentCacheEnabled:"></a>
+	<h3 class="subsubtitle method-title">setMapTilePersistentCacheEnabled:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 타일 이미지 Persistent Cache 기능은
+네트워크를 통해 다운로드한 지도 이미지 데이터를
+단말의 영구(persistent) 캐쉬 영역에 저장하는 기능이다.
+같은 영역의 지도를 다시 로드할때 캐쉬에 저장된 지도 타일들은
+네트워크를 통해 다운로드 받지 않고 단말의 캐쉬에서 바로 로드하여
+네트워크 사용량을 줄이고 지도 로딩 시간을 단축할 수 있다.
+사용되지 않는 지도 타일 이미지 캐쉬 데이터는 MapView 동작 중에 자동으로
+삭제되어 캐쉬 용량의 크기가 너무 커지지 않도록 조절된다.
+Application의 Cache 영역 사용량이 부담이 되면 Cache 기능을 비활성화 하는 것이 좋다.
+MTMapView가 동작하는 중에는 Cache 기능 활성화 설정 변경이 적용되지 않으며
+MTMapView를 사용하기 전에 Cache 활성화 여부를 설정해야 한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)setMapTilePersistentCacheEnabled:(BOOL)<em>enableCache</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>enableCache</em></dt>
+			<dd><p>Persistent Cache 기능 활성화 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 타일 이미지 Persistent Cache 기능은
+네트워크를 통해 다운로드한 지도 이미지 데이터를
+단말의 영구(persistent) 캐쉬 영역에 저장하는 기능이다.
+같은 영역의 지도를 다시 로드할때 캐쉬에 저장된 지도 타일들은
+네트워크를 통해 다운로드 받지 않고 단말의 캐쉬에서 바로 로드하여
+네트워크 사용량을 줄이고 지도 로딩 시간을 단축할 수 있다.
+사용되지 않는 지도 타일 이미지 캐쉬 데이터는 MapView 동작 중에 자동으로
+삭제되어 캐쉬 용량의 크기가 너무 커지지 않도록 조절된다.
+Application의 Cache 영역 사용량이 부담이 되면 Cache 기능을 비활성화 하는 것이 좋다.
+MTMapView가 동작하는 중에는 Cache 기능 활성화 설정 변경이 적용되지 않으며
+MTMapView를 사용하기 전에 Cache 활성화 여부를 설정해야 한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/addCircle:" title="addCircle:"></a>
+	<h3 class="subsubtitle method-title">addCircle:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 Circle을 추가한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)addCircle:(MTMapCircle *)<em>circle</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>circle</em></dt>
+			<dd><p>추가할 CircleOverlay 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 Circle을 추가한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addPOIItem:" title="addPOIItem:"></a>
+	<h3 class="subsubtitle method-title">addPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 POI(Point Of Interest) Item 아이콘(마커)를 추가한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)addPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>추가할 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 POI(Point Of Interest) Item 아이콘(마커)를 추가한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addPOIItems:" title="addPOIItems:"></a>
+	<h3 class="subsubtitle method-title">addPOIItems:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 POI(Point Of Interest) Item 아이콘(마커) 리스트를 추가한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)addPOIItems:(NSArray *)<em>poiItems</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItems</em></dt>
+			<dd><p>추가할 POI Item 객체 리스트 (array of <a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>(s))</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 POI(Point Of Interest) Item 아이콘(마커) 리스트를 추가한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addPolyline:" title="addPolyline:"></a>
+	<h3 class="subsubtitle method-title">addPolyline:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 Polyline을 추가한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)addPolyline:(MTMapPolyline *)<em>polyline</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>polyline</em></dt>
+			<dd><p>추가할 Polyline 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 Polyline을 추가한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/animateWithCameraUpdate:" title="animateWithCameraUpdate:"></a>
+	<h3 class="subsubtitle method-title">animateWithCameraUpdate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면 이동 혹은 확대/축소 시킨다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)animateWithCameraUpdate:(MTMapCameraUpdate *)<em>cameraUpdate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>cameraUpdate</em></dt>
+			<dd><p>지도 화면 이동을 위한 중심점, 확대/축소 레벨 등을 지정한 MTMapCameraUpdate 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면 이동 혹은 확대/축소 시킨다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/deselectPOIItem:" title="deselectPOIItem:"></a>
+	<h3 class="subsubtitle method-title">deselectPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 POI(Point Of Interest) Item 을 선택 해제한다.
+선택 해제된 POI Item은 Callout Balloon(말풍선)이 POI 아이콘(마커)위에서 사라진다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)deselectPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>선택 해제할 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 POI(Point Of Interest) Item 을 선택 해제한다.
+선택 해제된 POI Item은 Callout Balloon(말풍선)이 POI 아이콘(마커)위에서 사라진다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/didReceiveMemoryWarning" title="didReceiveMemoryWarning"></a>
+	<h3 class="subsubtitle method-title">didReceiveMemoryWarning</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>MTMapView를 포함하고 있는 UIViewController 객체의 didReceiveMemoryWarning 메소드 구현에서 호출해 주어야 한다.
+iOS에서 Memory Warning 발생시 메모리에 저장하고 있는
+지도 타일 이미지 캐쉬 데이터 들을 삭제하여 메모리를 확보할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)didReceiveMemoryWarning</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>MTMapView를 포함하고 있는 UIViewController 객체의 didReceiveMemoryWarning 메소드 구현에서 호출해 주어야 한다.
+iOS에서 Memory Warning 발생시 메모리에 저장하고 있는
+지도 타일 이미지 캐쉬 데이터 들을 삭제하여 메모리를 확보할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/findCircleByTag:" title="findCircleByTag:"></a>
+	<h3 class="subsubtitle method-title">findCircleByTag:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 추가된 Circle들 중에서 tag값이 일치하는 Circle를 찾는다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (MTMapCircle *)findCircleByTag:(NSInteger)<em>tag</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tag</em></dt>
+			<dd><p>찾고자 하는 Circle의 tag 값</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>tag값이 일치하는 Circle 객체, 일치하는 Circle이 없는 경우 nil이 리턴된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 추가된 Circle들 중에서 tag값이 일치하는 Circle를 찾는다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/findPOIItemByName:" title="findPOIItemByName:"></a>
+	<h3 class="subsubtitle method-title">findPOIItemByName:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 추가된 POI(Point Of Interest) Item 들 중에서 이름이 일치하는 POI Item 객체(리스트)를 찾는다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSArray *)findPOIItemByName:(NSString *)<em>name</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>찾고자 하는 POI Item의 이름 문자열</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>이름 문자열이 일치하는 POI Item 객체(리스트), 일치하는 POI Item이 없는 경우 nil이 리턴된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 추가된 POI(Point Of Interest) Item 들 중에서 이름이 일치하는 POI Item 객체(리스트)를 찾는다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/findPOIItemByTag:" title="findPOIItemByTag:"></a>
+	<h3 class="subsubtitle method-title">findPOIItemByTag:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 추가된 POI(Point Of Interest) Item 들 중에서 tag값이 일치하는 POI Item을 찾는다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (MTMapPOIItem *)findPOIItemByTag:(NSInteger)<em>tag</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tag</em></dt>
+			<dd><p>찾고자 하는 POI Item의 tag 값</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>tag가 일치하는 POI Item 객체, 일치하는 POI Item이 없는 경우 nil이 리턴된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 추가된 POI(Point Of Interest) Item 들 중에서 tag값이 일치하는 POI Item을 찾는다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/findPolylineByTag:" title="findPolylineByTag:"></a>
+	<h3 class="subsubtitle method-title">findPolylineByTag:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도화면에 추가된 Polyline들 중에서 tag값이 일치하는 Polyline을 찾는다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (MTMapPolyline *)findPolylineByTag:(NSInteger)<em>tag</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tag</em></dt>
+			<dd><p>찾고자 하는 Polyline의 tag 값</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>tag값이 일치하는 Polyline 객체, 일치하는 Polyline이 없는 경우 nil이 리턴된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도화면에 추가된 Polyline들 중에서 tag값이 일치하는 Polyline을 찾는다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowAllCircleOverlays" title="fitMapViewAreaToShowAllCircleOverlays"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowAllCircleOverlays</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 Circle들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowAllCircleOverlays</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 Circle들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowAllPOIItems" title="fitMapViewAreaToShowAllPOIItems"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowAllPOIItems</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 POI(Point Of Interest) Item들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowAllPOIItems</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 POI(Point Of Interest) Item들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowAllPolylines" title="fitMapViewAreaToShowAllPolylines"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowAllPolylines</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 Polyline 들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowAllPolylines</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 Polyline 들이
+화면에 나타나도록 지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowCircle:" title="fitMapViewAreaToShowCircle:"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowCircle:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 Circle이 화면에 전부 나타나도록
+지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowCircle:(MTMapCircle *)<em>circle</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>circle</em></dt>
+			<dd><p>화면에 보여주고자 하는 Circle</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 Circle이 화면에 전부 나타나도록
+지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowMapPoints:" title="fitMapViewAreaToShowMapPoints:"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowMapPoints:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지정한 지도 좌표들이 모두 화면에 나타나도록 지도화면 중심과 확대/축소 레벨을 자동조절 한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowMapPoints:(NSArray *)<em>mapPoints</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoints</em></dt>
+			<dd><p>화면에 모두 보여주고자 하는 지도 좌표 리스트 (Array of <a href="../Classes/MTMapPoint.html">MTMapPoint</a>)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지정한 지도 좌표들이 모두 화면에 나타나도록 지도화면 중심과 확대/축소 레벨을 자동조절 한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fitMapViewAreaToShowPolyline:" title="fitMapViewAreaToShowPolyline:"></a>
+	<h3 class="subsubtitle method-title">fitMapViewAreaToShowPolyline:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 Polyline의 모든 점들이 화면에 전부 나타나도록
+지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fitMapViewAreaToShowPolyline:(MTMapPolyline *)<em>polyline</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>polyline</em></dt>
+			<dd><p>화면에 보여주고자 하는 polyline</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 Polyline의 모든 점들이 화면에 전부 나타나도록
+지도 화면 중심과 확대/축소 레벨을 자동으로 조정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/refreshMapTiles" title="refreshMapTiles"></a>
+	<h3 class="subsubtitle method-title">refreshMapTiles</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 나타나는 지도 타일들을 지도 타일 서버에서 다시 받아와서 갱신한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)refreshMapTiles</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 나타나는 지도 타일들을 지도 타일 서버에서 다시 받아와서 갱신한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeAllCircles" title="removeAllCircles"></a>
+	<h3 class="subsubtitle method-title">removeAllCircles</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 Circle를 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeAllCircles</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 Circle를 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeAllPOIItems" title="removeAllPOIItems"></a>
+	<h3 class="subsubtitle method-title">removeAllPOIItems</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 POI(Point Of Interest) Item들을 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeAllPOIItems</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 POI(Point Of Interest) Item들을 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeAllPolylines" title="removeAllPolylines"></a>
+	<h3 class="subsubtitle method-title">removeAllPolylines</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면에 추가된 모든 Polyline을 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeAllPolylines</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면에 추가된 모든 Polyline을 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeCircle:" title="removeCircle:"></a>
+	<h3 class="subsubtitle method-title">removeCircle:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 Circle을 지도화면에서 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeCircle:(MTMapCircle *)<em>circle</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>circle</em></dt>
+			<dd><p>제거하고자 하는 CircleOverlay 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 Circle을 지도화면에서 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removePOIItem:" title="removePOIItem:"></a>
+	<h3 class="subsubtitle method-title">removePOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 POI(Point Of Interest) Item을 지도화면에서 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removePOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>제거하고자 하는 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 POI(Point Of Interest) Item을 지도화면에서 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removePOIItems:" title="removePOIItems:"></a>
+	<h3 class="subsubtitle method-title">removePOIItems:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>POI(Point Of Interest) Item 리스트를 지도화면에서 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removePOIItems:(NSArray *)<em>poiItems</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItems</em></dt>
+			<dd><p>제거하고자 하는 POI Item 객체 리스트</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>POI(Point Of Interest) Item 리스트를 지도화면에서 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removePolyline:" title="removePolyline:"></a>
+	<h3 class="subsubtitle method-title">removePolyline:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 Polyline을 지도화면에서 제거한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removePolyline:(MTMapPolyline *)<em>polyline</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>polyline</em></dt>
+			<dd><p>제거하고자 하는 Polyline 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 Polyline을 지도화면에서 제거한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/selectPOIItem:animated:" title="selectPOIItem:animated:"></a>
+	<h3 class="subsubtitle method-title">selectPOIItem:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>특정 POI(Point Of Interest) Item 을 선택한다.
+선택된 POI Item은 Callout Balloon(말풍선)이 아이콘(마커)위에 나타난다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)selectPOIItem:(MTMapPOIItem *)<em>poiItem</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>선택할 POI Item 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>POI Item 선택시 말풍선이 나타날 때 애니매이션 효과가 적용될 지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>특정 POI(Point Of Interest) Item 을 선택한다.
+선택된 POI Item은 Callout Balloon(말풍선)이 아이콘(마커)위에 나타난다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setDaumMapApiKey:" title="setDaumMapApiKey:"></a>
+	<h3 class="subsubtitle method-title">setDaumMapApiKey:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Daum Map Open API Key 발급 페이지에서 발급 받은 API Key를 설정한다.
+Open API Key 는 App. Bundle Id 당 하나씩 발급 된다.
+Open API Key는 지도화면이 화면에 보여지기 전에 반드시 설정되어야 한다.
+설정된 Open API Key가 정상적으로 등록되지 않은 Key 이거나
+트래픽 제한에 걸린 경우에는 다음 지도 화면 사용이 제한될 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setDaumMapApiKey:(NSString *)<em>apiKey</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>apiKey</em></dt>
+			<dd><p>발급받은 Open API Key 문자열</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Daum Map Open API Key 발급 페이지에서 발급 받은 API Key를 설정한다.
+Open API Key 는 App. Bundle Id 당 하나씩 발급 된다.
+Open API Key는 지도화면이 화면에 보여지기 전에 반드시 설정되어야 한다.
+설정된 Open API Key가 정상적으로 등록되지 않은 Key 이거나
+트래픽 제한에 걸린 경우에는 다음 지도 화면 사용이 제한될 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setMapCenterPoint:animated:" title="setMapCenterPoint:animated:"></a>
+	<h3 class="subsubtitle method-title">setMapCenterPoint:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면의 중심점을 설정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setMapCenterPoint:(MTMapPoint *)<em>mapPoint</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>지도화면 중심점을 나타내는 <a href="../Classes/MTMapPoint.html">MTMapPoint</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>지도화면 중심점 이동시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면의 중심점을 설정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setMapCenterPoint:zoomLevel:animated:" title="setMapCenterPoint:zoomLevel:animated:"></a>
+	<h3 class="subsubtitle method-title">setMapCenterPoint:zoomLevel:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면의 중심점과 확대/축소 레벨을 설정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setMapCenterPoint:(MTMapPoint *)<em>mapPoint</em> zoomLevel:(MTMapZoomLevel)<em>zoomLevel</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>지도화면 중심점을 나타내는 <a href="../Classes/MTMapPoint.html">MTMapPoint</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomLevel</em></dt>
+			<dd><p>지도화면 확대 축소 레벨 값 (-2~12, 값이 클수록 더 넓은 영역이 화면이 보임)</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>지도화면 중심점 이동 및 확대/축소 레벨 변경시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면의 중심점과 확대/축소 레벨을 설정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setMapRotationAngle:animated:" title="setMapRotationAngle:animated:"></a>
+	<h3 class="subsubtitle method-title">setMapRotationAngle:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면의 회전 각도를 설정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setMapRotationAngle:(MTMapRotationAngle)<em>angle</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>angle</em></dt>
+			<dd><p>회전 각도 (0~360도)</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>회전 각도 변경시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면의 회전 각도를 설정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setZoomLevel:animated:" title="setZoomLevel:animated:"></a>
+	<h3 class="subsubtitle method-title">setZoomLevel:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면의 확대/축소 레벨을 설정한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setZoomLevel:(MTMapZoomLevel)<em>zoomLevel</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomLevel</em></dt>
+			<dd><p>지도화면 확대 축소 레벨 값 (-2~12, 값이 클수록 더 넓은 영역이 화면이 보임)</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>지도화면의 확대/축소 레벨 변경시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면의 확대/축소 레벨을 설정한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/updateCurrentLocationMarker:" title="updateCurrentLocationMarker:"></a>
+	<h3 class="subsubtitle method-title">updateCurrentLocationMarker:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>화면상에 보이는 현위치 마커의 UI를 업데이트 한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)updateCurrentLocationMarker:(MTMapLocationMarkerItem *)<em>locationMarkerItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>locationMarkerItem</em></dt>
+			<dd><p>현위치 마커 정보. nil일 경우, Default 현위치 마커로 노출된다.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>화면상에 보이는 현위치 마커의 UI를 업데이트 한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/zoomInAnimated:" title="zoomInAnimated:"></a>
+	<h3 class="subsubtitle method-title">zoomInAnimated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면을 한단계 확대한다. (더 좁은 영역이 크게 보임)
+확대/축소 레벨 값이 1 감소됨</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)zoomInAnimated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>지도화면의 확대 시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면을 한단계 확대한다. (더 좁은 영역이 크게 보임)
+확대/축소 레벨 값이 1 감소됨</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/zoomOutAnimated:" title="zoomOutAnimated:"></a>
+	<h3 class="subsubtitle method-title">zoomOutAnimated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>지도 화면을 한단계 축소한다. (더 넓은 영역이 화면에 나타남)
+확대/축소 레벨 값이 1 증가됨</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)zoomOutAnimated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>지도화면의 축소 시 애니매이션 효과를 적용할지 여부</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>지도 화면을 한단계 축소한다. (더 넓은 영역이 화면에 나타남)
+확대/축소 레벨 값이 1 증가됨</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Daum Communications. All rights reserved. (Last updated: 2015-06-17)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

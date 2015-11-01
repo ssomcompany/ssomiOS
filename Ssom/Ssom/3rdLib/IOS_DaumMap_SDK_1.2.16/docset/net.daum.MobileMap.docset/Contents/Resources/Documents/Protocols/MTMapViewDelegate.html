@@ -1,0 +1,2714 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MTMapViewDelegate Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MobileMap </a></h1>
+				<a id="developerHome" href="../index.html">Daum Communications</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTMapViewDelegate Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/MTMapView:centerPointMovedTo:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:centerPointMovedTo:</option>
+	
+	<option value="//api/name/MTMapView:doubleTapOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:doubleTapOnMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:dragEndedOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:dragEndedOnMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:dragStartedOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:dragStartedOnMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:draggablePOIItem:movedToNewMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:draggablePOIItem:movedToNewMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:failedUpdatingCurrentLocationWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:failedUpdatingCurrentLocationWithError:</option>
+	
+	<option value="//api/name/MTMapView:finishedMapMoveAnimation:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:finishedMapMoveAnimation:</option>
+	
+	<option value="//api/name/MTMapView:longPressOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:longPressOnMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:</option>
+	
+	<option value="//api/name/MTMapView:selectedPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:selectedPOIItem:</option>
+	
+	<option value="//api/name/MTMapView:singleTapOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:singleTapOnMapPoint:</option>
+	
+	<option value="//api/name/MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:</option>
+	
+	<option value="//api/name/MTMapView:touchedCalloutBalloonOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:touchedCalloutBalloonOfPOIItem:</option>
+	
+	<option value="//api/name/MTMapView:touchedCalloutBalloonRightSideOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:touchedCalloutBalloonRightSideOfPOIItem:</option>
+	
+	<option value="//api/name/MTMapView:updateCurrentLocation:withAccuracy:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:updateCurrentLocation:withAccuracy:</option>
+	
+	<option value="//api/name/MTMapView:updateDeviceHeading:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:updateDeviceHeading:</option>
+	
+	<option value="//api/name/MTMapView:zoomLevelChangedTo:">&nbsp;&nbsp;&nbsp;&nbsp;- MTMapView:zoomLevelChangedTo:</option>
+	
+	<option value="//api/name/mapView:centerPointMovedTo:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:centerPointMovedTo:</option>
+	
+	<option value="//api/name/mapView:doubleTapOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:doubleTapOnMapPoint:</option>
+	
+	<option value="//api/name/mapView:dragEndedOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:dragEndedOnMapPoint:</option>
+	
+	<option value="//api/name/mapView:dragStartedOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:dragStartedOnMapPoint:</option>
+	
+	<option value="//api/name/mapView:draggablePOIItem:movedToNewMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:draggablePOIItem:movedToNewMapPoint:</option>
+	
+	<option value="//api/name/mapView:failedUpdatingCurrentLocationWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:failedUpdatingCurrentLocationWithError:</option>
+	
+	<option value="//api/name/mapView:finishedMapMoveAnimation:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:finishedMapMoveAnimation:</option>
+	
+	<option value="//api/name/mapView:longPressOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:longPressOnMapPoint:</option>
+	
+	<option value="//api/name/mapView:openAPIKeyAuthenticationResultCode:resultMessage:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:openAPIKeyAuthenticationResultCode:resultMessage:</option>
+	
+	<option value="//api/name/mapView:selectedPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:selectedPOIItem:</option>
+	
+	<option value="//api/name/mapView:singleTapOnMapPoint:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:singleTapOnMapPoint:</option>
+	
+	<option value="//api/name/mapView:touchedCalloutBalloonLeftSideOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:touchedCalloutBalloonLeftSideOfPOIItem:</option>
+	
+	<option value="//api/name/mapView:touchedCalloutBalloonOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:touchedCalloutBalloonOfPOIItem:</option>
+	
+	<option value="//api/name/mapView:touchedCalloutBalloonRightSideOfPOIItem:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:touchedCalloutBalloonRightSideOfPOIItem:</option>
+	
+	<option value="//api/name/mapView:updateCurrentLocation:withAccuracy:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:updateCurrentLocation:withAccuracy:</option>
+	
+	<option value="//api/name/mapView:updateDeviceHeading:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:updateDeviceHeading:</option>
+	
+	<option value="//api/name/mapView:zoomLevelChangedTo:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:zoomLevelChangedTo:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:centerPointMovedTo:">MTMapView:centerPointMovedTo:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:doubleTapOnMapPoint:">MTMapView:doubleTapOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:dragEndedOnMapPoint:">MTMapView:dragEndedOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:dragStartedOnMapPoint:">MTMapView:dragStartedOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:draggablePOIItem:movedToNewMapPoint:">MTMapView:draggablePOIItem:movedToNewMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:failedUpdatingCurrentLocationWithError:">MTMapView:failedUpdatingCurrentLocationWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:finishedMapMoveAnimation:">MTMapView:finishedMapMoveAnimation:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:longPressOnMapPoint:">MTMapView:longPressOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:">MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:selectedPOIItem:">MTMapView:selectedPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:singleTapOnMapPoint:">MTMapView:singleTapOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:">MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:touchedCalloutBalloonOfPOIItem:">MTMapView:touchedCalloutBalloonOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:touchedCalloutBalloonRightSideOfPOIItem:">MTMapView:touchedCalloutBalloonRightSideOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:updateCurrentLocation:withAccuracy:">MTMapView:updateCurrentLocation:withAccuracy:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:updateDeviceHeading:">MTMapView:updateDeviceHeading:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MTMapView:zoomLevelChangedTo:">MTMapView:zoomLevelChangedTo:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:centerPointMovedTo:">mapView:centerPointMovedTo:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:doubleTapOnMapPoint:">mapView:doubleTapOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:dragEndedOnMapPoint:">mapView:dragEndedOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:dragStartedOnMapPoint:">mapView:dragStartedOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:draggablePOIItem:movedToNewMapPoint:">mapView:draggablePOIItem:movedToNewMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:failedUpdatingCurrentLocationWithError:">mapView:failedUpdatingCurrentLocationWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:finishedMapMoveAnimation:">mapView:finishedMapMoveAnimation:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:longPressOnMapPoint:">mapView:longPressOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:openAPIKeyAuthenticationResultCode:resultMessage:">mapView:openAPIKeyAuthenticationResultCode:resultMessage:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:selectedPOIItem:">mapView:selectedPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:singleTapOnMapPoint:">mapView:singleTapOnMapPoint:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:touchedCalloutBalloonLeftSideOfPOIItem:">mapView:touchedCalloutBalloonLeftSideOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:touchedCalloutBalloonOfPOIItem:">mapView:touchedCalloutBalloonOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:touchedCalloutBalloonRightSideOfPOIItem:">mapView:touchedCalloutBalloonRightSideOfPOIItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:updateCurrentLocation:withAccuracy:">mapView:updateCurrentLocation:withAccuracy:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:updateDeviceHeading:">mapView:updateDeviceHeading:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:zoomLevelChangedTo:">mapView:zoomLevelChangedTo:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MTMapViewDelegate Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTMapViewDelegate Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MTMapView.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>지도 객체에서 발생하는 이벤트를 처리할 delegate interface protocol.
+MTMapViewDelegate protocol을 구현한 객체를 생성하여 <a href="../Classes/MTMapView.html">MTMapView</a> 객체의 delegate property에 설정해야한다.
+delegate 객체는 Open API Key 인증 결과 이벤트, 지도 이동/확대/축소,
+지도 화면 터치(Single Tap / Double Tap / Long Press) 이벤트,
+현위치 트래킹 이벤트, POI(Point Of Interest) 관련 이벤트를 통보받을 수 있다.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:openAPIKeyAuthenticationResultCode:resultMessage:">&ndash;&nbsp;mapView:openAPIKeyAuthenticationResultCode:resultMessage:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:centerPointMovedTo:">&ndash;&nbsp;mapView:centerPointMovedTo:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:finishedMapMoveAnimation:">&ndash;&nbsp;mapView:finishedMapMoveAnimation:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:zoomLevelChangedTo:">&ndash;&nbsp;mapView:zoomLevelChangedTo:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:singleTapOnMapPoint:">&ndash;&nbsp;mapView:singleTapOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:doubleTapOnMapPoint:">&ndash;&nbsp;mapView:doubleTapOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:dragStartedOnMapPoint:">&ndash;&nbsp;mapView:dragStartedOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:dragEndedOnMapPoint:">&ndash;&nbsp;mapView:dragEndedOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:longPressOnMapPoint:">&ndash;&nbsp;mapView:longPressOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:updateCurrentLocation:withAccuracy:">&ndash;&nbsp;mapView:updateCurrentLocation:withAccuracy:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:failedUpdatingCurrentLocationWithError:">&ndash;&nbsp;mapView:failedUpdatingCurrentLocationWithError:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:updateDeviceHeading:">&ndash;&nbsp;mapView:updateDeviceHeading:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:selectedPOIItem:">&ndash;&nbsp;mapView:selectedPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:touchedCalloutBalloonOfPOIItem:">&ndash;&nbsp;mapView:touchedCalloutBalloonOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:touchedCalloutBalloonLeftSideOfPOIItem:">&ndash;&nbsp;mapView:touchedCalloutBalloonLeftSideOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:touchedCalloutBalloonRightSideOfPOIItem:">&ndash;&nbsp;mapView:touchedCalloutBalloonRightSideOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:draggablePOIItem:movedToNewMapPoint:">&ndash;&nbsp;mapView:draggablePOIItem:movedToNewMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:">&ndash;&nbsp;MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:centerPointMovedTo:">&ndash;&nbsp;MTMapView:centerPointMovedTo:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:finishedMapMoveAnimation:">&ndash;&nbsp;MTMapView:finishedMapMoveAnimation:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:zoomLevelChangedTo:">&ndash;&nbsp;MTMapView:zoomLevelChangedTo:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:singleTapOnMapPoint:">&ndash;&nbsp;MTMapView:singleTapOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:doubleTapOnMapPoint:">&ndash;&nbsp;MTMapView:doubleTapOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:dragStartedOnMapPoint:">&ndash;&nbsp;MTMapView:dragStartedOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:dragEndedOnMapPoint:">&ndash;&nbsp;MTMapView:dragEndedOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:longPressOnMapPoint:">&ndash;&nbsp;MTMapView:longPressOnMapPoint:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:updateCurrentLocation:withAccuracy:">&ndash;&nbsp;MTMapView:updateCurrentLocation:withAccuracy:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:failedUpdatingCurrentLocationWithError:">&ndash;&nbsp;MTMapView:failedUpdatingCurrentLocationWithError:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:updateDeviceHeading:">&ndash;&nbsp;MTMapView:updateDeviceHeading:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:selectedPOIItem:">&ndash;&nbsp;MTMapView:selectedPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:touchedCalloutBalloonOfPOIItem:">&ndash;&nbsp;MTMapView:touchedCalloutBalloonOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:">&ndash;&nbsp;MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:touchedCalloutBalloonRightSideOfPOIItem:">&ndash;&nbsp;MTMapView:touchedCalloutBalloonRightSideOfPOIItem:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MTMapView:draggablePOIItem:movedToNewMapPoint:">&ndash;&nbsp;MTMapView:draggablePOIItem:movedToNewMapPoint:</a></code>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:centerPointMovedTo:" title="MTMapView:centerPointMovedTo:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:centerPointMovedTo:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 중심 좌표가 이동한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> centerPointMovedTo:(MTMapPoint *)<em>mapCenterPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapCenterPoint</em></dt>
+			<dd><p>새로 이동한 지도 중심 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 중심 좌표가 이동한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:doubleTapOnMapPoint:" title="MTMapView:doubleTapOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:doubleTapOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 더블 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> doubleTapOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 더블 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:dragEndedOnMapPoint:" title="MTMapView:dragEndedOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:dragEndedOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 끝낼 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> dragEndedOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자의 드래그가 끝난 지도 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 끝낼 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:dragStartedOnMapPoint:" title="MTMapView:dragStartedOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:dragStartedOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 시작할 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> dragStartedOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자의 드래그가 시작한 지도 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 시작할 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:draggablePOIItem:movedToNewMapPoint:" title="MTMapView:draggablePOIItem:movedToNewMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:draggablePOIItem:movedToNewMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 길게 누른후(long press) 끌어서(dragging) 위치 이동 가능한 POI Item의 위치를 이동시킨 경우 호출된다.
+이동가능한 POI Item을 Draggable POI Item이라 한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> draggablePOIItem:(MTMapPOIItem *)<em>poiItem</em> movedToNewMapPoint:(MTMapPoint *)<em>newMapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>새로운 위치로 이동된 Draggable POI Item 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>newMapPoint</em></dt>
+			<dd><p>이동된 POI Item의 위치에 해당하는 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 길게 누른후(long press) 끌어서(dragging) 위치 이동 가능한 POI Item의 위치를 이동시킨 경우 호출된다.
+이동가능한 POI Item을 Draggable POI Item이라 한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>
+@deprecated</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:failedUpdatingCurrentLocationWithError:" title="MTMapView:failedUpdatingCurrentLocationWithError:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:failedUpdatingCurrentLocationWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 현위치를 얻고자 할때 실패한 경우 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜고자 했을 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+위치 사용 권한이나 기타 다른 이유로 인해 오류가 발생했을 때 발생한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> failedUpdatingCurrentLocationWithError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>오류가 발생한 정보를 담고 있는 객체
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 현위치를 얻고자 할때 실패한 경우 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜고자 했을 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+위치 사용 권한이나 기타 다른 이유로 인해 오류가 발생했을 때 발생한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:finishedMapMoveAnimation:" title="MTMapView:finishedMapMoveAnimation:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:finishedMapMoveAnimation:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 화면의 이동이 끝난 뒤 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> finishedMapMoveAnimation:(MTMapPoint *)<em>mapCenterPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapCenterPoint</em></dt>
+			<dd><p>새로 이동한 지도 중심 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 화면의 이동이 끝난 뒤 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:longPressOnMapPoint:" title="MTMapView:longPressOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:longPressOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 길게 누른 경우(long press) 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> longPressOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 길게 누른 경우(long press) 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:" title="MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:openAPIKeyAuthenticationResultCode:resultMessage:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Open API Key Authentication] <a href="../Classes/MTMapView.html">MTMapView</a> 객체의 setDaumMapApiKey 메소드로 설정한 Open API Key값을
+Daum Open API Key 인증 서버에 인증한 결과를 통보받을 수 있다.
+Open API Key 는 App. Bundle Id 당 하나씩 Daum Open API Key 발급 페이지를 통해서 발급 된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> openAPIKeyAuthenticationResultCode:(int)<em>resultCode</em> resultMessage:(NSString *)<em>resultMessage</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>resultCode</em></dt>
+			<dd><p>인증 결과 코드, 200 : 인증성공, 200이 아닌경우에는 인증 실패</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>resultMessage</em></dt>
+			<dd><p>인증 결과 메세지, 인증 성공 및 실패에 대한 구체적인 메세지를 제공함
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Open API Key Authentication] <a href="../Classes/MTMapView.html">MTMapView</a> 객체의 setDaumMapApiKey 메소드로 설정한 Open API Key값을
+Daum Open API Key 인증 서버에 인증한 결과를 통보받을 수 있다.
+Open API Key 는 App. Bundle Id 당 하나씩 Daum Open API Key 발급 페이지를 통해서 발급 된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:selectedPOIItem:" title="MTMapView:selectedPOIItem:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:selectedPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item을 선택한 경우 호출된다.
+사용자가 MTMapView에 등록된 POI(Point Of Interest) Item 아이콘(마커)를 터치한 경우 호출된다.
+MTMapViewDelegate protocol을 구현하는 delegate 객체의 구현의 리턴값(BOOL)에 따라
+해당 POI Item 선택 시, POI Item 마커 위에 말풍선(Callout Balloon)을 보여줄지 여부를 선택할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)MTMapView:(MTMapView *)<em>mapView</em> selectedPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>선택된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>POI Item 선택 시, 말풍선을 보여줄지 여부. YES:터치 시 말풍선이 나타남. NO:터치 시 말풍선이 나타나지 않음.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item을 선택한 경우 호출된다.
+사용자가 MTMapView에 등록된 POI(Point Of Interest) Item 아이콘(마커)를 터치한 경우 호출된다.
+MTMapViewDelegate protocol을 구현하는 delegate 객체의 구현의 리턴값(BOOL)에 따라
+해당 POI Item 선택 시, POI Item 마커 위에 말풍선(Callout Balloon)을 보여줄지 여부를 선택할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>
+@deprecated</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:singleTapOnMapPoint:" title="MTMapView:singleTapOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:singleTapOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위를 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> singleTapOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위를 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:" title="MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:touchedCalloutBalloonLeftSideOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 왼쪽 영역을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonLeftSideOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 왼쪽 영역을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>
+@deprecated</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:touchedCalloutBalloonOfPOIItem:" title="MTMapView:touchedCalloutBalloonOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:touchedCalloutBalloonOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>
+@deprecated</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:touchedCalloutBalloonRightSideOfPOIItem:" title="MTMapView:touchedCalloutBalloonRightSideOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:touchedCalloutBalloonRightSideOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 오른쪽 영역을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonRightSideOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 오른쪽 영역을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a>
+@deprecated</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:updateCurrentLocation:withAccuracy:" title="MTMapView:updateCurrentLocation:withAccuracy:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:updateCurrentLocation:withAccuracy:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 단말의 현위치 좌표값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜진 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+단말의 위치에 해당하는 지도 좌표와 위치 정확도가 주기적으로 delegate 객체에 통보된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> updateCurrentLocation:(MTMapPoint *)<em>location</em> withAccuracy:(MTMapLocationAccuracy)<em>accuracy</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>location</em></dt>
+			<dd><p>사용자 단말의 현재 위치 좌표</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>accuracy</em></dt>
+			<dd><p>현위치 좌표의 오차 반경(정확도) (meter)
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 단말의 현위치 좌표값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜진 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+단말의 위치에 해당하는 지도 좌표와 위치 정확도가 주기적으로 delegate 객체에 통보된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:updateDeviceHeading:" title="MTMapView:updateDeviceHeading:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:updateDeviceHeading:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 단말의 방향(Heading) 각도값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹과 나침반 모드가 켜진 경우(MTMapCurrentLocationTrackingOnWithHeading)
+단말의 방향 각도값이 주기적으로 delegate 객체에 통보된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> updateDeviceHeading:(MTMapRotationAngle)<em>headingAngle</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>headingAngle</em></dt>
+			<dd><p>사용자 단말의 방향 각도 값(degree)
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 단말의 방향(Heading) 각도값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹과 나침반 모드가 켜진 경우(MTMapCurrentLocationTrackingOnWithHeading)
+단말의 방향 각도값이 주기적으로 delegate 객체에 통보된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/MTMapView:zoomLevelChangedTo:" title="MTMapView:zoomLevelChangedTo:"></a>
+	<h3 class="subsubtitle method-title">MTMapView:zoomLevelChangedTo:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 확대/축소 레벨이 변경된 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)MTMapView:(MTMapView *)<em>mapView</em> zoomLevelChangedTo:(MTMapZoomLevel)<em>zoomLevel</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomLevel</em></dt>
+			<dd><p>변경된 지도 확대/축소 레벨
+@deprecated</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 확대/축소 레벨이 변경된 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:centerPointMovedTo:" title="mapView:centerPointMovedTo:"></a>
+	<h3 class="subsubtitle method-title">mapView:centerPointMovedTo:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 중심 좌표가 이동한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> centerPointMovedTo:(MTMapPoint *)<em>mapCenterPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapCenterPoint</em></dt>
+			<dd><p>새로 이동한 지도 중심 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 중심 좌표가 이동한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:doubleTapOnMapPoint:" title="mapView:doubleTapOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:doubleTapOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 더블 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> doubleTapOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 더블 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:dragEndedOnMapPoint:" title="mapView:dragEndedOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:dragEndedOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 끝낼 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> dragEndedOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자의 드래그가 끝난 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 끝낼 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:dragStartedOnMapPoint:" title="mapView:dragStartedOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:dragStartedOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 시작할 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> dragStartedOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자의 드래그가 시작한 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 터치하여 드래그를 시작할 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:draggablePOIItem:movedToNewMapPoint:" title="mapView:draggablePOIItem:movedToNewMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:draggablePOIItem:movedToNewMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 길게 누른후(long press) 끌어서(dragging) 위치 이동 가능한 POI Item의 위치를 이동시킨 경우 호출된다.
+이동가능한 POI Item을 Draggable POI Item이라 한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> draggablePOIItem:(MTMapPOIItem *)<em>poiItem</em> movedToNewMapPoint:(MTMapPoint *)<em>newMapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>새로운 위치로 이동된 Draggable POI Item 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>newMapPoint</em></dt>
+			<dd><p>이동된 POI Item의 위치에 해당하는 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 길게 누른후(long press) 끌어서(dragging) 위치 이동 가능한 POI Item의 위치를 이동시킨 경우 호출된다.
+이동가능한 POI Item을 Draggable POI Item이라 한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:failedUpdatingCurrentLocationWithError:" title="mapView:failedUpdatingCurrentLocationWithError:"></a>
+	<h3 class="subsubtitle method-title">mapView:failedUpdatingCurrentLocationWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 현위치를 얻고자 할때 실패한 경우 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜고자 했을 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+위치 사용 권한이나 기타 다른 이유로 인해 오류가 발생했을 때 발생한다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> failedUpdatingCurrentLocationWithError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>오류가 발생한 정보를 담고 있는 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 현위치를 얻고자 할때 실패한 경우 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜고자 했을 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+위치 사용 권한이나 기타 다른 이유로 인해 오류가 발생했을 때 발생한다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:finishedMapMoveAnimation:" title="mapView:finishedMapMoveAnimation:"></a>
+	<h3 class="subsubtitle method-title">mapView:finishedMapMoveAnimation:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 화면의 이동이 끝난 뒤 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> finishedMapMoveAnimation:(MTMapPoint *)<em>mapCenterPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapCenterPoint</em></dt>
+			<dd><p>새로 이동한 지도 중심 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 화면의 이동이 끝난 뒤 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:longPressOnMapPoint:" title="mapView:longPressOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:longPressOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 길게 누른 경우(long press) 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> longPressOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위 한 지점을 길게 누른 경우(long press) 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:openAPIKeyAuthenticationResultCode:resultMessage:" title="mapView:openAPIKeyAuthenticationResultCode:resultMessage:"></a>
+	<h3 class="subsubtitle method-title">mapView:openAPIKeyAuthenticationResultCode:resultMessage:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Open API Key Authentication] <a href="../Classes/MTMapView.html">MTMapView</a> 객체의 setDaumMapApiKey 메소드로 설정한 Open API Key값을
+Daum Open API Key 인증 서버에 인증한 결과를 통보받을 수 있다.
+Open API Key 는 App. Bundle Id 당 하나씩 Daum Open API Key 발급 페이지를 통해서 발급 된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> openAPIKeyAuthenticationResultCode:(int)<em>resultCode</em> resultMessage:(NSString *)<em>resultMessage</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>resultCode</em></dt>
+			<dd><p>인증 결과 코드, 200 : 인증성공, 200이 아닌경우에는 인증 실패</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>resultMessage</em></dt>
+			<dd><p>인증 결과 메세지, 인증 성공 및 실패에 대한 구체적인 메세지를 제공함</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Open API Key Authentication] <a href="../Classes/MTMapView.html">MTMapView</a> 객체의 setDaumMapApiKey 메소드로 설정한 Open API Key값을
+Daum Open API Key 인증 서버에 인증한 결과를 통보받을 수 있다.
+Open API Key 는 App. Bundle Id 당 하나씩 Daum Open API Key 발급 페이지를 통해서 발급 된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:selectedPOIItem:" title="mapView:selectedPOIItem:"></a>
+	<h3 class="subsubtitle method-title">mapView:selectedPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item을 선택한 경우 호출된다.
+사용자가 MTMapView에 등록된 POI(Point Of Interest) Item 아이콘(마커)를 터치한 경우 호출된다.
+MTMapViewDelegate protocol을 구현하는 delegate 객체의 구현의 리턴값(BOOL)에 따라
+해당 POI Item 선택 시, POI Item 마커 위에 말풍선(Callout Balloon)을 보여줄지 여부를 선택할 수 있다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)mapView:(MTMapView *)<em>mapView</em> selectedPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>선택된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>POI Item 선택 시, 말풍선을 보여줄지 여부. YES:터치 시 말풍선이 나타남. NO:터치 시 말풍선이 나타나지 않음.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item을 선택한 경우 호출된다.
+사용자가 MTMapView에 등록된 POI(Point Of Interest) Item 아이콘(마커)를 터치한 경우 호출된다.
+MTMapViewDelegate protocol을 구현하는 delegate 객체의 구현의 리턴값(BOOL)에 따라
+해당 POI Item 선택 시, POI Item 마커 위에 말풍선(Callout Balloon)을 보여줄지 여부를 선택할 수 있다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:singleTapOnMapPoint:" title="mapView:singleTapOnMapPoint:"></a>
+	<h3 class="subsubtitle method-title">mapView:singleTapOnMapPoint:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 사용자가 지도 위를 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> singleTapOnMapPoint:(MTMapPoint *)<em>mapPoint</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapPoint</em></dt>
+			<dd><p>사용자가 터치한 지도 좌표</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 사용자가 지도 위를 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:touchedCalloutBalloonLeftSideOfPOIItem:" title="mapView:touchedCalloutBalloonLeftSideOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">mapView:touchedCalloutBalloonLeftSideOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 왼쪽 영역을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonLeftSideOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 왼쪽 영역을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:touchedCalloutBalloonOfPOIItem:" title="mapView:touchedCalloutBalloonOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">mapView:touchedCalloutBalloonOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:touchedCalloutBalloonRightSideOfPOIItem:" title="mapView:touchedCalloutBalloonRightSideOfPOIItem:"></a>
+	<h3 class="subsubtitle method-title">mapView:touchedCalloutBalloonRightSideOfPOIItem:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 오른쪽 영역을 터치한 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> touchedCalloutBalloonRightSideOfPOIItem:(MTMapPOIItem *)<em>poiItem</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>poiItem</em></dt>
+			<dd><p>말풍선이 터치된 POI Item 객체</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[POI Item] 단말 사용자가 POI Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)의 오른쪽 영역을 터치한 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/MTMapPOIItem.html">MTMapPOIItem</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:updateCurrentLocation:withAccuracy:" title="mapView:updateCurrentLocation:withAccuracy:"></a>
+	<h3 class="subsubtitle method-title">mapView:updateCurrentLocation:withAccuracy:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 단말의 현위치 좌표값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜진 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+단말의 위치에 해당하는 지도 좌표와 위치 정확도가 주기적으로 delegate 객체에 통보된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> updateCurrentLocation:(MTMapPoint *)<em>location</em> withAccuracy:(MTMapLocationAccuracy)<em>accuracy</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>location</em></dt>
+			<dd><p>사용자 단말의 현재 위치 좌표</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>accuracy</em></dt>
+			<dd><p>현위치 좌표의 오차 반경(정확도) (meter)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 단말의 현위치 좌표값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹 기능이 켜진 경우(MTMapCurrentLocationTrackingOnWithoutHeading, MTMapCurrentLocationTrackingOnWithHeading)
+단말의 위치에 해당하는 지도 좌표와 위치 정확도가 주기적으로 delegate 객체에 통보된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:updateDeviceHeading:" title="mapView:updateDeviceHeading:"></a>
+	<h3 class="subsubtitle method-title">mapView:updateDeviceHeading:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[User Location Tracking] 단말의 방향(Heading) 각도값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹과 나침반 모드가 켜진 경우(MTMapCurrentLocationTrackingOnWithHeading)
+단말의 방향 각도값이 주기적으로 delegate 객체에 통보된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> updateDeviceHeading:(MTMapRotationAngle)<em>headingAngle</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>headingAngle</em></dt>
+			<dd><p>사용자 단말의 방향 각도 값(degree)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[User Location Tracking] 단말의 방향(Heading) 각도값을 통보받을 수 있다.
+<a href="../Classes/MTMapView.html">MTMapView</a> 클래스의 currentLocationTrackingMode property를 통해서
+사용자 현위치 트래킹과 나침반 모드가 켜진 경우(MTMapCurrentLocationTrackingOnWithHeading)
+단말의 방향 각도값이 주기적으로 delegate 객체에 통보된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:zoomLevelChangedTo:" title="mapView:zoomLevelChangedTo:"></a>
+	<h3 class="subsubtitle method-title">mapView:zoomLevelChangedTo:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>[Map View Event] 지도 확대/축소 레벨이 변경된 경우 호출된다.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTMapView *)<em>mapView</em> zoomLevelChangedTo:(MTMapZoomLevel)<em>zoomLevel</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p><a href="../Classes/MTMapView.html">MTMapView</a> 객체</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomLevel</em></dt>
+			<dd><p>변경된 지도 확대/축소 레벨</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>[Map View Event] 지도 확대/축소 레벨이 변경된 경우 호출된다.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Daum Communications. All rights reserved. (Last updated: 2015-06-17)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

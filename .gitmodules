@@ -1,0 +1,3 @@
+[submodule "Ssom/Ssom/3rdLib/AFNetworking"]
+	path = Ssom/Ssom/3rdLib/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git

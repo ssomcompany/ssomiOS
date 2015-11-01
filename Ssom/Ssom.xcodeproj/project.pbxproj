@@ -23,6 +23,8 @@
 		97343E671BE65DDD00A9D39D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E661BE65DDD00A9D39D /* libsqlite3.tbd */; };
 		97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */ = {isa = PBXBuildFile; fileRef = 97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */; };
 		97343E701BE65EEB00A9D39D /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E6F1BE65EEB00A9D39D /* DaumMap.framework */; };
+		97343E741BE662C100A9D39D /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 97343E731BE662C100A9D39D /* AFNetworking */; };
+		97343E761BE662CE00A9D39D /* UIKit+AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 97343E751BE662CE00A9D39D /* UIKit+AFNetworking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		97343E661BE65DDD00A9D39D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DaumMap.embeddedframework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework; sourceTree = "<group>"; };
 		97343E6F1BE65EEB00A9D39D /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DaumMap.framework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework/DaumMap.framework; sourceTree = "<group>"; };
+		97343E731BE662C100A9D39D /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworking; path = Ssom/3rdLib/AFNetworking/AFNetworking; sourceTree = "<group>"; };
+		97343E751BE662CE00A9D39D /* UIKit+AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "UIKit+AFNetworking"; path = "Ssom/3rdLib/AFNetworking/UIKit+AFNetworking"; sourceTree = "<group>"; };
+		97343E771BE663D500A9D39D /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcBridge.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +136,7 @@
 				97343E2E1BE65AB300A9D39D /* Assets.xcassets */,
 				97343E301BE65AB300A9D39D /* LaunchScreen.storyboard */,
 				97343E331BE65AB300A9D39D /* Info.plist */,
+				97343E771BE663D500A9D39D /* ObjcBridge.h */,
 			);
 			path = Ssom;
 			sourceTree = "<group>";
@@ -156,6 +162,8 @@
 		97343E551BE65CD000A9D39D /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				97343E751BE662CE00A9D39D /* UIKit+AFNetworking */,
+				97343E731BE662C100A9D39D /* AFNetworking */,
 				97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */,
 			);
 			name = "3rd Party";
@@ -283,6 +291,8 @@
 				97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */,
 				97343E321BE65AB300A9D39D /* LaunchScreen.storyboard in Resources */,
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
+				97343E741BE662C100A9D39D /* AFNetworking in Resources */,
+				97343E761BE662CE00A9D39D /* UIKit+AFNetworking in Resources */,
 				97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +468,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Ssom/ObjcBridge.h;
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
 			};
 			name = Debug;
 		};
@@ -474,6 +486,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Ssom/ObjcBridge.h;
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
 			};
 			name = Release;
 		};

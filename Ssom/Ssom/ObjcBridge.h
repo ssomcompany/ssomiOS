@@ -6,5 +6,4 @@
 //  Copyright © 2015년 SsomCompany. All rights reserved.
 //
 
-#import "AFNetworking/AFNetworking.h"
 #import <DaumMap/MTMapView.h>

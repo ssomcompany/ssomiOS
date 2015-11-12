@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum DeviceType {
     case NotAvailable
@@ -99,8 +100,8 @@ public extension UIDevice {
                 identifier.append(UnicodeScalar(UInt8(value)));
             }
         }
-
+        
         return parseDeviceType(identifier);
     }
-
+    
 }

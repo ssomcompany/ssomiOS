@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class Util {
     class func convertScreenSize(isWidth:Bool, size:Float, fromWidth:Float, fromHeight:Float) -> CGFloat {

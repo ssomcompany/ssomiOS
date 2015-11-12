@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+struct PreDefine {
+    let GoogleMapKey: String = "AIzaSyCrQIOi-sQBvikxrc577aXER7Rl0wEnROQ";
+}

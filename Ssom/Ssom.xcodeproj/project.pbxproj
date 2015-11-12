@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2FF081681B4E36A5E2769A /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -28,11 +29,8 @@
 		979A4A031BF4525A00FAFB21 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A001BF4525A00FAFB21 /* Define.swift */; };
 		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
 		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
-		979A4A081BF4527E00FAFB21 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 979A4A071BF4527E00FAFB21 /* Podfile */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
 		97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CD1BEBB26F00F3DDFB /* ChatViewController.swift */; };
-		97D5A3EE1BF23E5500F3DDFB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */; };
-		97D5A3EF1BF23E5500F3DDFB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,62 +48,6 @@
 			remoteGlobalIDString = 97343E231BE65AB300A9D39D;
 			remoteInfo = Ssom;
 		};
-		97D5A3E01BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		97D5A3E21BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		97D5A3E41BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire OSX";
-		};
-		97D5A3E61BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire OSX Tests";
-		};
-		97D5A3E81BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS";
-		};
-		97D5A3EA1BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS Tests";
-		};
-		97D5A3EC1BF23DB700F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4202FE01B667AA100C997FB;
-			remoteInfo = "Alamofire watchOS";
-		};
-		97D5A3F01BF23E5500F3DDFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,7 +57,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				97D5A3EF1BF23E5500F3DDFB /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +64,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.debug.xcconfig"; sourceTree = "<group>"; };
+		8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ssom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.release.xcconfig"; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -151,10 +95,8 @@
 		979A4A011BF4525A00FAFB21 /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcBridge.h; path = Ssom/Common/ObjcBridge.h; sourceTree = "<group>"; };
 		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
 		979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Util.swift"; path = "Ssom/3rdLib/UIDevice+Util.swift"; sourceTree = "<group>"; };
-		979A4A071BF4527E00FAFB21 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = Ssom/3rdLib/Podfile; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97D5A3CD1BEBB26F00F3DDFB /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				97343E701BE65EEB00A9D39D /* DaumMap.framework in Frameworks */,
-				97D5A3EE1BF23E5500F3DDFB /* Alamofire.framework in Frameworks */,
 				97343E671BE65DDD00A9D39D /* libsqlite3.tbd in Frameworks */,
 				97343E651BE65DD100A9D39D /* libxml2.tbd in Frameworks */,
 				97343E631BE65DC800A9D39D /* libstdc++.6.tbd in Frameworks */,
@@ -171,6 +112,7 @@
 				97343E5F1BE65DAF00A9D39D /* CoreLocation.framework in Frameworks */,
 				97343E5D1BE65DA500A9D39D /* SystemConfiguration.framework in Frameworks */,
 				97343E5B1BE65D8C00A9D39D /* OpenGLES.framework in Frameworks */,
+				2F2FF081681B4E36A5E2769A /* Pods_Ssom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +133,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78FE04C740BA87D69CD14E20 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */,
+				8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		97343E1B1BE65AB300A9D39D = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +152,7 @@
 				97343E3B1BE65AB300A9D39D /* SsomTests */,
 				97343E461BE65AB300A9D39D /* SsomUITests */,
 				97343E251BE65AB300A9D39D /* Products */,
+				78FE04C740BA87D69CD14E20 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,8 +205,6 @@
 		97343E551BE65CD000A9D39D /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
-				979A4A071BF4527E00FAFB21 /* Podfile */,
-				97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */,
 				97D5A3D31BEF373800F3DDFB /* extension */,
 				97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */,
 			);
@@ -272,6 +222,7 @@
 				97343E5E1BE65DAF00A9D39D /* CoreLocation.framework */,
 				97343E5C1BE65DA500A9D39D /* SystemConfiguration.framework */,
 				97343E5A1BE65D8C00A9D39D /* OpenGLES.framework */,
+				8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -294,20 +245,6 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
-		97D5A3D71BF23DB700F3DDFB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */,
-				97D5A3E31BF23DB700F3DDFB /* Alamofire iOS Tests.xctest */,
-				97D5A3E51BF23DB700F3DDFB /* Alamofire.framework */,
-				97D5A3E71BF23DB700F3DDFB /* Alamofire OSX Tests.xctest */,
-				97D5A3E91BF23DB700F3DDFB /* Alamofire.framework */,
-				97D5A3EB1BF23DB700F3DDFB /* Alamofire tvOS Tests.xctest */,
-				97D5A3ED1BF23DB700F3DDFB /* Alamofire.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,15 +252,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97343E4C1BE65AB300A9D39D /* Build configuration list for PBXNativeTarget "Ssom" */;
 			buildPhases = (
+				E9CC34B73AB66214555A792A /* Check Pods Manifest.lock */,
 				97343E201BE65AB300A9D39D /* Sources */,
 				97343E211BE65AB300A9D39D /* Frameworks */,
 				97343E221BE65AB300A9D39D /* Resources */,
 				97D5A3F21BF23E5500F3DDFB /* Embed Frameworks */,
+				82A47EC02E2C0BBAFC2DF625 /* Embed Pods Frameworks */,
+				4AA9A0ED5B3C4F8E8844E875 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				97D5A3F11BF23E5500F3DDFB /* PBXTargetDependency */,
 			);
 			name = Ssom;
 			productName = Ssom;
@@ -400,12 +339,6 @@
 			mainGroup = 97343E1B1BE65AB300A9D39D;
 			productRefGroup = 97343E251BE65AB300A9D39D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 97D5A3D71BF23DB700F3DDFB /* Products */;
-					ProjectRef = 97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				97343E231BE65AB300A9D39D /* Ssom */,
@@ -415,64 +348,11 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 97D5A3E01BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3E31BF23DB700F3DDFB /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = 97D5A3E21BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3E51BF23DB700F3DDFB /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 97D5A3E41BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3E71BF23DB700F3DDFB /* Alamofire OSX Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire OSX Tests.xctest";
-			remoteRef = 97D5A3E61BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3E91BF23DB700F3DDFB /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 97D5A3E81BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3EB1BF23DB700F3DDFB /* Alamofire tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire tvOS Tests.xctest";
-			remoteRef = 97D5A3EA1BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		97D5A3ED1BF23DB700F3DDFB /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 97D5A3EC1BF23DB700F3DDFB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		97343E221BE65AB300A9D39D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				979A4A081BF4527E00FAFB21 /* Podfile in Resources */,
 				97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */,
 				97343E321BE65AB300A9D39D /* LaunchScreen.storyboard in Resources */,
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
@@ -496,6 +376,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4AA9A0ED5B3C4F8E8844E875 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ssom/Pods-Ssom-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82A47EC02E2C0BBAFC2DF625 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ssom/Pods-Ssom-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9CC34B73AB66214555A792A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		97343E201BE65AB300A9D39D /* Sources */ = {
@@ -541,11 +469,6 @@
 			isa = PBXTargetDependency;
 			target = 97343E231BE65AB300A9D39D /* Ssom */;
 			targetProxy = 97343E441BE65AB300A9D39D /* PBXContainerItemProxy */;
-		};
-		97D5A3F11BF23E5500F3DDFB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Alamofire iOS";
-			targetProxy = 97D5A3F01BF23E5500F3DDFB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -652,9 +575,10 @@
 		};
 		97343E4D1BE65AB300A9D39D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework",
@@ -664,16 +588,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = Ssom/ObjcBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
 			};
 			name = Debug;
 		};
 		97343E4E1BE65AB300A9D39D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework",
@@ -683,7 +608,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = Ssom/ObjcBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
 			};
 			name = Release;

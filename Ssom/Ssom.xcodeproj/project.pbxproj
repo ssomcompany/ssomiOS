@@ -25,10 +25,12 @@
 		97343E701BE65EEB00A9D39D /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E6F1BE65EEB00A9D39D /* DaumMap.framework */; };
 		974291051BF25F7000609974 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974291041BF25F7000609974 /* ListTableViewCell.xib */; };
 		9742910D1BF25FC600609974 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742910C1BF25FC600609974 /* ListTableViewCell.swift */; };
+		979A4A031BF4525A00FAFB21 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A001BF4525A00FAFB21 /* Define.swift */; };
+		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
+		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
+		979A4A081BF4527E00FAFB21 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 979A4A071BF4527E00FAFB21 /* Podfile */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
 		97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CD1BEBB26F00F3DDFB /* ChatViewController.swift */; };
-		97D5A3D21BEF30AA00F3DDFB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3D11BEF30AA00F3DDFB /* Util.swift */; };
-		97D5A3D51BEF375A00F3DDFB /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3D41BEF375A00F3DDFB /* UIDevice+Util.swift */; };
 		97D5A3EE1BF23E5500F3DDFB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */; };
 		97D5A3EF1BF23E5500F3DDFB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97D5A3E11BF23DB700F3DDFB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -143,13 +145,15 @@
 		97343E661BE65DDD00A9D39D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DaumMap.embeddedframework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework; sourceTree = "<group>"; };
 		97343E6F1BE65EEB00A9D39D /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DaumMap.framework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework/DaumMap.framework; sourceTree = "<group>"; };
-		97343E771BE663D500A9D39D /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcBridge.h; path = Ssom/ObjcBridge.h; sourceTree = "<group>"; };
 		974291041BF25F7000609974 /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		9742910C1BF25FC600609974 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		979A4A001BF4525A00FAFB21 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Define.swift; path = Ssom/Common/Define.swift; sourceTree = "<group>"; };
+		979A4A011BF4525A00FAFB21 /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcBridge.h; path = Ssom/Common/ObjcBridge.h; sourceTree = "<group>"; };
+		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
+		979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Util.swift"; path = "Ssom/3rdLib/UIDevice+Util.swift"; sourceTree = "<group>"; };
+		979A4A071BF4527E00FAFB21 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = Ssom/3rdLib/Podfile; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97D5A3CD1BEBB26F00F3DDFB /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		97D5A3D11BEF30AA00F3DDFB /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		97D5A3D41BEF375A00F3DDFB /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Util.swift"; sourceTree = "<group>"; };
 		97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +253,7 @@
 		97343E551BE65CD000A9D39D /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				979A4A071BF4527E00FAFB21 /* Podfile */,
 				97D5A3D61BF23DB700F3DDFB /* Alamofire.xcodeproj */,
 				97D5A3D31BEF373800F3DDFB /* extension */,
 				97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */,
@@ -274,8 +279,9 @@
 		97D5A3CC1BEBB24600F3DDFB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				97343E771BE663D500A9D39D /* ObjcBridge.h */,
-				97D5A3D11BEF30AA00F3DDFB /* Util.swift */,
+				979A4A011BF4525A00FAFB21 /* ObjcBridge.h */,
+				979A4A001BF4525A00FAFB21 /* Define.swift */,
+				979A4A021BF4525A00FAFB21 /* Util.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -283,7 +289,7 @@
 		97D5A3D31BEF373800F3DDFB /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				97D5A3D41BEF375A00F3DDFB /* UIDevice+Util.swift */,
+				979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				979A4A081BF4527E00FAFB21 /* Podfile in Resources */,
 				97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */,
 				97343E321BE65AB300A9D39D /* LaunchScreen.storyboard in Resources */,
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
@@ -497,11 +504,12 @@
 			files = (
 				9742910D1BF25FC600609974 /* ListTableViewCell.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */,
-				97D5A3D51BEF375A00F3DDFB /* UIDevice+Util.swift in Sources */,
+				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */,
-				97D5A3D21BEF30AA00F3DDFB /* Util.swift in Sources */,
+				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
+				979A4A031BF4525A00FAFB21 /* Define.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

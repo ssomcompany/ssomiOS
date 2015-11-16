@@ -9,7 +9,12 @@
 import UIKit
 
 class ListTableViewCell: UITableViewCell {
-    @IBOutlet var label: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var updatedTimeLabel: UILabel!
+    @IBOutlet var memberInfoLabel: UILabel!
+    @IBOutlet var ingLabel: UILabel!
+    @IBOutlet var distanceLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

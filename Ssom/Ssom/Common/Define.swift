@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct PreDefine {
-    let GoogleMapKey: String = "AIzaSyCrQIOi-sQBvikxrc577aXER7Rl0wEnROQ";
+public class PreDefine {
+    static let GoogleMapKey: String = "AIzaSyCrQIOi-sQBvikxrc577aXER7Rl0wEnROQ";
 }

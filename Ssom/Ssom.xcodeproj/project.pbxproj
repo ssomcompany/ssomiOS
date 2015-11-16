@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2F2FF081681B4E36A5E2769A /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */; };
+		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
+		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
+		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -67,6 +70,9 @@
 		565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.debug.xcconfig"; sourceTree = "<group>"; };
 		8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ssom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.release.xcconfig"; sourceTree = "<group>"; };
+		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
+		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
+		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -142,9 +148,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		973003391BF84EA600734D8D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9730033A1BF84F1500734D8D /* SSNetworkContext.swift */,
+				9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */,
+				9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		97343E1B1BE65AB300A9D39D = {
 			isa = PBXGroup;
 			children = (
+				973003391BF84EA600734D8D /* Network */,
 				97D5A3CC1BEBB24600F3DDFB /* Common */,
 				97343E261BE65AB300A9D39D /* Ssom UI */,
 				97343E551BE65CD000A9D39D /* 3rd Party */,
@@ -430,10 +447,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
 				9742910D1BF25FC600609974 /* ListTableViewCell.swift in Sources */,
+				9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */,
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
+				9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,

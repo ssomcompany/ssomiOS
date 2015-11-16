@@ -12,6 +12,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var chatListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
     let testArr:[String] = ["a", "b", "c"]
+    var dataArray:[[String: AnyObject]]
+
+    init() {
+        self.dataArray = []
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        self.dataArray = []
+
+        super.init(coder: aDecoder)
+    }
+
+    convenience init(dataArray:[[String: AnyObject]]) {
+        self.init()
+
+        self.dataArray = dataArray
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +49,35 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.loadingData()
+    }
+
+// MARK: private
+    func loadingData() {
+        weak var wSelf = self
+        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
+            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
+            print("result is : \(wSelf!.dataArray)")
+
+            wSelf?.chatListTableView.reloadData()
+        }
     }
 
 // MARK:- UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! ListTableViewCell
 
-        cell.label.text = testArr[indexPath.row]
+        let rowDict:[String: AnyObject] = dataArray[indexPath.row]
+        if let content = rowDict["content"] as? String {
+            print("content is \(content.stringByRemovingPercentEncoding)")
+
+            cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
+        }
 
         return cell;
     }
@@ -47,7 +87,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testArr.count;
+        return dataArray.count;
     }
 
 }

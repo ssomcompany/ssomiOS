@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol SSListTableViewCellDelegate: NSObjectProtocol {
+    optional func tapProfileImage(sender: AnyObject, imageUrl: String)
+}
+
 class ListTableViewCell: UITableViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
@@ -15,8 +19,18 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet var memberInfoLabel: UILabel!
     @IBOutlet var ingLabel: UILabel!
     @IBOutlet var distanceLabel: UILabel!
+    @IBOutlet var imageTapButton: UIButton!
+
+    var delegate: SSListTableViewCellDelegate?
+    var profilImageUrl: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+
+    @IBAction func tapProfileImage(sender: AnyObject) {
+        if (self.delegate?.respondsToSelector("tapProfileImage:imageUrl:") != nil) {
+            self.delegate?.tapProfileImage!(sender, imageUrl:self.profilImageUrl!)
+        }
     }
 }

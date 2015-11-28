@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SDWebImage
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate {
     @IBOutlet var chatListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
-    let testArr:[String] = ["a", "b", "c"]
+
     var dataArray:[[String: AnyObject]]
+    var profileImageView: SSPhotoView?
 
     init() {
         self.dataArray = []
@@ -68,6 +70,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+// MARK:- SSListTableViewCellDelegate
+    func tapProfileImage(sender: AnyObject, imageUrl: String) {
+        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
+        self.profileImageView!.delegate = self
+
+        self.navigationController?.navigationBarHidden = true;
+        self.view.addSubview(self.profileImageView!)
+    }
+
+// MARK:- SSPhotoViewDelegate
+    func tapClose() {
+        self.navigationController?.navigationBarHidden = false;
+
+        self.profileImageView!.removeFromSuperview()
+    }
+
 // MARK:- UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! ListTableViewCell
@@ -78,6 +97,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
         }
+
+        if let imageUrl = rowDict["imageUrl"] as? String {
+            print("imageUrl is \(imageUrl)")
+
+            cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl))
+            cell.profilImageUrl = imageUrl
+        }
+
+        var memberInfoString:String? = "";
+
+        if let minAge = rowDict["minAge"] as? Int {
+            memberInfoString = memberInfoString?.stringByAppendingFormat("\(minAge)살")
+        }
+        if let maxAge = rowDict["maxAge"] as? Int {
+            memberInfoString = memberInfoString?.stringByAppendingFormat("~\(maxAge)살")
+        }
+        if let userCount = rowDict["userCount"] as? Int {
+            memberInfoString = memberInfoString?.stringByAppendingFormat(" \(userCount)명 있어요")
+        }
+
+        cell.memberInfoLabel.text = memberInfoString!
+
+        cell.delegate = self
 
         return cell;
     }

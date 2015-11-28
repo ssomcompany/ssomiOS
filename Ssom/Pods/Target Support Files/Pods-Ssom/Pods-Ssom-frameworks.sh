@@ -85,7 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Ssom/Alamofire.framework"
+  install_framework "Pods-Ssom/MMDrawerController.framework"
+  install_framework "Pods-Ssom/SDWebImage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Ssom/Alamofire.framework"
+  install_framework "Pods-Ssom/MMDrawerController.framework"
+  install_framework "Pods-Ssom/SDWebImage.framework"
 fi

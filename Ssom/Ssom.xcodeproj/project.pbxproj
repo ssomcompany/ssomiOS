@@ -11,6 +11,8 @@
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
 		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
 		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
+		973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003421BFCDF0500734D8D /* SSPhotoView.swift */; };
+		973003451BFCE06400734D8D /* SSPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973003441BFCE06400734D8D /* SSPhotoView.xib */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -25,8 +27,6 @@
 		97343E631BE65DC800A9D39D /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E621BE65DC800A9D39D /* libstdc++.6.tbd */; };
 		97343E651BE65DD100A9D39D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E641BE65DD100A9D39D /* libxml2.tbd */; };
 		97343E671BE65DDD00A9D39D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E661BE65DDD00A9D39D /* libsqlite3.tbd */; };
-		97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */ = {isa = PBXBuildFile; fileRef = 97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */; };
-		97343E701BE65EEB00A9D39D /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E6F1BE65EEB00A9D39D /* DaumMap.framework */; };
 		974291051BF25F7000609974 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974291041BF25F7000609974 /* ListTableViewCell.xib */; };
 		9742910D1BF25FC600609974 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742910C1BF25FC600609974 /* ListTableViewCell.swift */; };
 		979A4A031BF4525A00FAFB21 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A001BF4525A00FAFB21 /* Define.swift */; };
@@ -73,6 +73,8 @@
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
 		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
+		973003421BFCDF0500734D8D /* SSPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSPhotoView.swift; sourceTree = "<group>"; };
+		973003441BFCE06400734D8D /* SSPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSPhotoView.xib; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +95,6 @@
 		97343E621BE65DC800A9D39D /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		97343E641BE65DD100A9D39D /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		97343E661BE65DDD00A9D39D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DaumMap.embeddedframework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework; sourceTree = "<group>"; };
 		97343E6F1BE65EEB00A9D39D /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DaumMap.framework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework/DaumMap.framework; sourceTree = "<group>"; };
 		974291041BF25F7000609974 /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		9742910C1BF25FC600609974 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97343E701BE65EEB00A9D39D /* DaumMap.framework in Frameworks */,
 				97343E671BE65DDD00A9D39D /* libsqlite3.tbd in Frameworks */,
 				97343E651BE65DD100A9D39D /* libxml2.tbd in Frameworks */,
 				97343E631BE65DC800A9D39D /* libstdc++.6.tbd in Frameworks */,
@@ -196,6 +196,8 @@
 				97D5A3CD1BEBB26F00F3DDFB /* ChatViewController.swift */,
 				974291041BF25F7000609974 /* ListTableViewCell.xib */,
 				9742910C1BF25FC600609974 /* ListTableViewCell.swift */,
+				973003421BFCDF0500734D8D /* SSPhotoView.swift */,
+				973003441BFCE06400734D8D /* SSPhotoView.xib */,
 			);
 			name = "Ssom UI";
 			path = Ssom;
@@ -223,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				97D5A3D31BEF373800F3DDFB /* extension */,
-				97343E6D1BE65EB100A9D39D /* DaumMap.embeddedframework */,
 			);
 			name = "3rd Party";
 			sourceTree = "<group>";
@@ -370,8 +371,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97343E6E1BE65EB100A9D39D /* DaumMap.embeddedframework in Resources */,
 				97343E321BE65AB300A9D39D /* LaunchScreen.storyboard in Resources */,
+				973003451BFCE06400734D8D /* SSPhotoView.xib in Resources */,
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
 				97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */,
 				974291051BF25F7000609974 /* ListTableViewCell.xib in Resources */,
@@ -454,6 +455,7 @@
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
 				9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */,
+				973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,

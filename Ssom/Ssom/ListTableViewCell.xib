@@ -23,7 +23,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아 완전 심심하다... 집에 가긴 싫구 ㅠㅠ 여자 넷이 있는데 놀아줄 사람 진짜 없는거니? ㅋㅋㅋㅋ우리 빙수만 먹다 집에갈듯" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5G7-6s-2iE" userLabel="DescriptionLabel">
-                        <rect key="frame" x="88" y="35.5" width="214" height="43"/>
+                        <rect key="frame" x="88" y="35" width="214" height="43"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,6 +57,13 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR0-BV-lOa" userLabel="ImageTapButton">
+                        <rect key="frame" x="8" y="13" width="70" height="70.5"/>
+                        <animations/>
+                        <connections>
+                            <action selector="tapProfileImage:" destination="jN3-Xd-2ok" eventType="touchUpInside" id="3cn-2r-1B4"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,6 +73,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="kKv-N3-kEs" secondAttribute="trailing" constant="5" id="61A-ON-dr4"/>
                     <constraint firstItem="kKv-N3-kEs" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" id="7D5-C7-uDq"/>
                     <constraint firstItem="fMB-B2-YMI" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" id="FZM-Cp-hbS"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="bottom" secondItem="2Xq-QM-OnV" secondAttribute="bottom" id="KPE-TV-9IC"/>
                     <constraint firstItem="2Xq-QM-OnV" firstAttribute="leading" secondItem="57r-fi-ckc" secondAttribute="leadingMargin" id="L9i-E4-BRu"/>
                     <constraint firstItem="2Xq-QM-OnV" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" constant="5" id="OXa-Kp-GQx"/>
                     <constraint firstItem="UK6-lH-Fzb" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" id="PmK-vO-19U"/>
@@ -73,14 +81,20 @@
                     <constraint firstAttribute="trailingMargin" secondItem="5G7-6s-2iE" secondAttribute="trailing" constant="10" id="UU8-vM-Xkx"/>
                     <constraint firstItem="Z0A-Ua-y3D" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" id="d2W-q4-GX9"/>
                     <constraint firstItem="5G7-6s-2iE" firstAttribute="leading" secondItem="Z0A-Ua-y3D" secondAttribute="leading" id="dRq-5w-Vj1"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="width" secondItem="2Xq-QM-OnV" secondAttribute="width" id="fsi-RE-qTB"/>
                     <constraint firstItem="fMB-B2-YMI" firstAttribute="leading" secondItem="Z0A-Ua-y3D" secondAttribute="trailing" constant="5" id="gQB-TQ-ePP"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="top" secondItem="2Xq-QM-OnV" secondAttribute="top" id="hyy-GB-eSo"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="height" secondItem="2Xq-QM-OnV" secondAttribute="height" id="jak-aG-6tF"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="trailing" secondItem="2Xq-QM-OnV" secondAttribute="trailing" id="keR-GW-FQA"/>
                     <constraint firstAttribute="bottomMargin" secondItem="2Xq-QM-OnV" secondAttribute="bottom" constant="5" id="v3q-on-gWw"/>
+                    <constraint firstItem="hR0-BV-lOa" firstAttribute="leading" secondItem="2Xq-QM-OnV" secondAttribute="leading" id="yo2-iX-c6j"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
                 <outlet property="descriptionLabel" destination="5G7-6s-2iE" id="7Jm-qY-NqQ"/>
                 <outlet property="distanceLabel" destination="UK6-lH-Fzb" id="Y0c-Bd-PIK"/>
+                <outlet property="imageTapButton" destination="hR0-BV-lOa" id="0fC-vt-Wk2"/>
                 <outlet property="ingLabel" destination="kKv-N3-kEs" id="PhY-Fj-RlB"/>
                 <outlet property="memberInfoLabel" destination="fMB-B2-YMI" id="Fjv-vU-kDl"/>
                 <outlet property="profileImageView" destination="2Xq-QM-OnV" id="O6B-1a-Tmm"/>

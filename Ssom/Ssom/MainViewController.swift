@@ -9,13 +9,34 @@
 import UIKit
 import GoogleMaps
 
-class MainViewController: UIViewController, CLLocationManagerDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     var locationManager: CLLocationManager!
+    var dataArray: [[String: AnyObject]]
+
+    init() {
+        self.dataArray = []
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    convenience init(dataArray:[[String: AnyObject]]) {
+        self.init()
+
+        self.dataArray = dataArray
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        self.dataArray = []
+
+        super.init(coder: aDecoder)
+    }
 
     func initView() {
 
         initMapView()
+
+        loadingData()
     }
 
     func initMapView() {
@@ -35,6 +56,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     func showCurrentLocation() {
         locationManager.startUpdatingLocation()
+    }
+
+    func loadingData() {
+        weak var wSelf = self
+        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
+            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
+            print("result is : \(wSelf!.dataArray)")
+
+            for dataDict in wSelf!.dataArray {
+                print("position is \(dataDict["latitude"]), \(dataDict["longitude"])")
+                wSelf!.setMarker(dataDict["latitude"] as! CLLocationDegrees, dataDict["longitude"] as! CLLocationDegrees)
+            }
+        }
     }
 
     func setMarker(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees) {
@@ -62,11 +96,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
     }
 
+// MARK: - GMSMapViewDelegate
+    func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
+        locationManager.stopUpdatingLocation()
+    }
+
 // MARK: - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 6, bearing: 0, viewingAngle: 0)
+        let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
 
         mainView.camera = camera
+
+        locationManager.stopUpdatingLocation()
     }
 
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

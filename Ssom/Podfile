@@ -6,6 +6,8 @@ use_frameworks!
 target 'Ssom' do
  pod 'GoogleMaps'
  pod 'Alamofire'
+ pod 'SDWebImage'
+ pod 'MMDrawerController'
 end
 
 target 'SsomTests' do

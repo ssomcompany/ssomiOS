@@ -8,9 +8,13 @@
 
 import UIKit
 import GoogleMaps
+import Alamofire
 
 class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     @IBOutlet var mainView: GMSMapView!
+    @IBOutlet var writeButton: UIButton!
+    @IBOutlet var myLocationButton: UIButton!
+    
     var locationManager: CLLocationManager!
     var dataArray: [[String: AnyObject]]
 
@@ -49,9 +53,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         }
 
         mainView.myLocationEnabled = true
-        mainView.settings.myLocationButton = true
+//        mainView.settings.myLocationButton = true
 
-        showCurrentLocation()
+        mainView.delegate = self
     }
 
     func showCurrentLocation() {
@@ -59,24 +63,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func loadingData() {
-        weak var wSelf = self
+        weak var wSelf: MainViewController? = self
         SSNetworkAPIClient.getPosts { (responseObject) -> Void in
             wSelf!.dataArray = responseObject as! [[String: AnyObject]]
             print("result is : \(wSelf!.dataArray)")
 
             for dataDict in wSelf!.dataArray {
-                print("position is \(dataDict["latitude"]), \(dataDict["longitude"])")
-                wSelf!.setMarker(dataDict["latitude"] as! CLLocationDegrees, dataDict["longitude"] as! CLLocationDegrees)
+                let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
+                let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
+
+                print("position is \(latitude), \(longitude)")
+
+                wSelf!.setMarker(latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
             }
         }
-    }
-
-    func setMarker(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees) {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(latitude, longitude)
-//        marker.title = "Sydney"
-//        marker.snippet = "Australia"
-        marker.map = mainView
     }
 
     override func viewDidLoad() {
@@ -93,7 +93,39 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+    }
+
+    func setMarker(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(latitude, longitude)
+        marker.map = mainView
+        Alamofire.request(.GET, imageUrl)
+            .responseData { (response) -> Void in
+                let profileImage: UIImage = UIImage(data: response.data!)!
+
+                marker.icon = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 43, 43))
+        }
+    }
+
+    @IBAction func tapMyLocationButton(sender: AnyObject) {
+        showCurrentLocation()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if (segue.identifier == "SSListViewSegue") {
+            let vc: ListViewController = segue.destinationViewController as! ListViewController
+
+            vc.dataArray = self.dataArray
+        }
+    }
+
+    func getDistance(locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
+
+        let location1: CLLocation = CLLocation(latitude: locationFrom.latitude, longitude: locationFrom.longitude)
+        let location2: CLLocation = CLLocation(latitude: locationTo.latitude, longitude: locationTo.longitude)
+
+        return location2.distanceFromLocation(location1)
     }
 
 // MARK: - GMSMapViewDelegate
@@ -101,11 +133,32 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         locationManager.stopUpdatingLocation()
     }
 
+    func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
+        print("now finished to move the map camera! : \(position)")
+
+        var index: Int = 0;
+        for dataDict in self.dataArray {
+            let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
+            let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
+
+            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+
+            let distance: Int = Int(self.getDistance(nowLocation, locationTo: tempLocation))
+
+            var dataDictWithDistance: Dictionary = dataDict
+            dataDictWithDistance["distance"] = distance
+            self.dataArray[index] = dataDictWithDistance
+            
+            index++
+        }
+    }
+
 // MARK: - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
 
-        mainView.camera = camera
+        mainView.animateToCameraPosition(camera)
 
         locationManager.stopUpdatingLocation()
     }

@@ -21,6 +21,16 @@ public class Util {
         }
         
     }
+
+    class func getDistanceString(distance: Int) -> String {
+        if distance > 1000 {
+            let kilometerOfDistance: Double = Double(distance)/1000
+
+            return "\(kilometerOfDistance)km";
+        } else {
+            return "\(distance)m";
+        }
+    }
 }
 
 extension UIView {

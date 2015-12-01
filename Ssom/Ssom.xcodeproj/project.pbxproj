@@ -13,6 +13,8 @@
 		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
 		973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003421BFCDF0500734D8D /* SSPhotoView.swift */; };
 		973003451BFCE06400734D8D /* SSPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973003441BFCE06400734D8D /* SSPhotoView.xib */; };
+		973003471C0B4ABB00734D8D /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003461C0B4ABB00734D8D /* UIImage+Crop.swift */; };
+		973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003481C0B4F4D00734D8D /* SSWriteViewController.swift */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -75,6 +77,8 @@
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
 		973003421BFCDF0500734D8D /* SSPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSPhotoView.swift; sourceTree = "<group>"; };
 		973003441BFCE06400734D8D /* SSPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSPhotoView.xib; sourceTree = "<group>"; };
+		973003461C0B4ABB00734D8D /* UIImage+Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Crop.swift"; sourceTree = "<group>"; };
+		973003481C0B4F4D00734D8D /* SSWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSWriteViewController.swift; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				9742910C1BF25FC600609974 /* ListTableViewCell.swift */,
 				973003421BFCDF0500734D8D /* SSPhotoView.swift */,
 				973003441BFCE06400734D8D /* SSPhotoView.xib */,
+				973003481C0B4F4D00734D8D /* SSWriteViewController.swift */,
 			);
 			name = "Ssom UI";
 			path = Ssom;
@@ -259,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */,
+				973003461C0B4ABB00734D8D /* UIImage+Crop.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
 				9742910D1BF25FC600609974 /* ListTableViewCell.swift in Sources */,
 				9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */,
+				973003471C0B4ABB00734D8D /* UIImage+Crop.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */,
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
@@ -459,6 +466,7 @@
 				97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
+				973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */,
 				979A4A031BF4525A00FAFB21 /* Define.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

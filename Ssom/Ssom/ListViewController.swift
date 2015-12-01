@@ -61,13 +61,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK: private
     func loadingData() {
-        weak var wSelf = self
-        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
-            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
-            print("result is : \(wSelf!.dataArray)")
+//        weak var wSelf = self
+//        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
+//            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
+//            print("result is : \(wSelf!.dataArray)")
+//
+//            wSelf?.chatListTableView.reloadData()
+//        }
 
-            wSelf?.chatListTableView.reloadData()
-        }
+        print("result is : \(self.dataArray)")
+
+        self.chatListTableView.reloadData()
     }
 
 // MARK:- SSListTableViewCellDelegate
@@ -105,19 +109,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.profilImageUrl = imageUrl
         }
 
-        var memberInfoString:String? = "";
-
+        var memberInfoString:String = "";
         if let minAge = rowDict["minAge"] as? Int {
-            memberInfoString = memberInfoString?.stringByAppendingFormat("\(minAge)살")
+            memberInfoString = memberInfoString.stringByAppendingFormat("\(minAge)살")
         }
         if let maxAge = rowDict["maxAge"] as? Int {
-            memberInfoString = memberInfoString?.stringByAppendingFormat("~\(maxAge)살")
+            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
         }
         if let userCount = rowDict["userCount"] as? Int {
-            memberInfoString = memberInfoString?.stringByAppendingFormat(" \(userCount)명 있어요")
+            memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
         }
+        cell.memberInfoLabel.text = memberInfoString
 
-        cell.memberInfoLabel.text = memberInfoString!
+        if let distance = rowDict["distance"] as? Int {
+            cell.distanceLabel.text = Util.getDistanceString(distance)
+        }
 
         cell.delegate = self
 

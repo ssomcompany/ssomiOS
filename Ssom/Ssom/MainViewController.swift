@@ -10,13 +10,15 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
     
     var locationManager: CLLocationManager!
     var dataArray: [[String: AnyObject]]
+
+    var filterView: SSFilterView!
 
     init() {
         self.dataArray = []
@@ -111,6 +113,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         showCurrentLocation()
     }
 
+    @IBAction func tapFilter(sender: AnyObject) {
+        self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
+        self.filterView.frame = self.view.bounds
+        self.filterView.delegate = self
+        self.view.addSubview(self.filterView)
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if (segue.identifier == "SSListViewSegue") {
@@ -187,6 +196,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         if (shouldIAllow == true) {
             locationManager.startUpdatingLocation()
         }
+    }
+
+// MARK: - SSFilterViewDelegate
+    func closeFilterView() {
+        self.filterView.removeFromSuperview()
     }
 }
 

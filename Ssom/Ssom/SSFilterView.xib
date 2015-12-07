@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSFilterView" customModule="Ssom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="084-nz-SrR" userLabel="Filter Main View">
+                    <rect key="frame" x="24" y="280" width="491" height="308"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvM-oc-t2h" userLabel="Close Button">
+                            <rect key="frame" x="0.0" y="268" width="40" height="40"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="vnj-VE-MOD"/>
+                                <constraint firstAttribute="height" constant="40" id="whG-X5-c5W"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="bg_filter_cancel_b.png"/>
+                            <connections>
+                                <action selector="tapCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="qMP-X8-PpX"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_filter_type.png" translatesAutoresizingMaskIntoConstraints="NO" id="ytf-gR-J0o" userLabel="Filter Title Image View">
+                            <rect key="frame" x="70" y="15" width="351" height="14"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="9nl-8L-ct8"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJR-Qi-8AN" userLabel="Filter Button Bar View">
+                            <rect key="frame" x="20" y="55" width="451" height="35"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toggle_filter_bg_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="IBx-gV-dRy" userLabel="Background Image View">
+                                    <rect key="frame" x="0.0" y="0.0" width="451" height="35"/>
+                                    <animations/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li3-09-JyG" userLabel="Filter All Button">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <state key="normal" title="모두">
+                                        <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" title="모두" backgroundImage="toggle_filter_all.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapFilterAllButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="IOS-so-r0l"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_filter_toggle_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="uVv-l0-boX" userLabel="Button Line View1">
+                                    <rect key="frame" x="149" y="0.0" width="1" height="35"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="1" id="GrO-lG-mji"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57Y-uB-ZM1" userLabel="Filter I Pay Button">
+                                    <rect key="frame" x="150" y="0.0" width="150.5" height="35"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <state key="normal" title="내가 쏨">
+                                        <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" backgroundImage="toggle_filter_2.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapIPayButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="3aW-RO-ZVq"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_filter_toggle_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="2fn-aB-z8I" userLabel="Button Line View2">
+                                    <rect key="frame" x="299" y="0.0" width="1" height="35"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="1" id="W1r-nK-hw8"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0G-oh-iLo" userLabel="Filter You Pay Button">
+                                    <rect key="frame" x="300" y="0.0" width="150.5" height="35"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <state key="normal" title="니가 쏴">
+                                        <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" backgroundImage="toggle_filter_3.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapFilterYouPayButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="zUJ-ow-uwe"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="L0G-oh-iLo" firstAttribute="leading" secondItem="57Y-uB-ZM1" secondAttribute="trailing" id="2tt-ah-d8C"/>
+                                <constraint firstItem="57Y-uB-ZM1" firstAttribute="leading" secondItem="Li3-09-JyG" secondAttribute="trailing" id="8iv-Pl-59n"/>
+                                <constraint firstAttribute="bottom" secondItem="2fn-aB-z8I" secondAttribute="bottom" id="DCr-Yb-bN0"/>
+                                <constraint firstAttribute="trailing" secondItem="IBx-gV-dRy" secondAttribute="trailing" id="FoI-Dh-NzF"/>
+                                <constraint firstItem="57Y-uB-ZM1" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="MRP-al-Ktp"/>
+                                <constraint firstItem="L0G-oh-iLo" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="PhI-W1-g60"/>
+                                <constraint firstAttribute="trailing" secondItem="L0G-oh-iLo" secondAttribute="trailing" id="WEW-UD-TiA"/>
+                                <constraint firstItem="L0G-oh-iLo" firstAttribute="height" secondItem="57Y-uB-ZM1" secondAttribute="height" id="Z85-jr-d1A"/>
+                                <constraint firstAttribute="bottom" secondItem="L0G-oh-iLo" secondAttribute="bottom" id="ZgA-Ts-38K"/>
+                                <constraint firstAttribute="bottom" secondItem="IBx-gV-dRy" secondAttribute="bottom" id="cy3-Oi-VEO"/>
+                                <constraint firstItem="IBx-gV-dRy" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="gJw-pG-8Tn"/>
+                                <constraint firstItem="Li3-09-JyG" firstAttribute="trailing" secondItem="uVv-l0-boX" secondAttribute="trailing" id="h6N-sm-ttn"/>
+                                <constraint firstItem="IBx-gV-dRy" firstAttribute="leading" secondItem="pJR-Qi-8AN" secondAttribute="leading" id="iaK-wb-fQ7"/>
+                                <constraint firstAttribute="height" constant="35" id="jxy-QM-ad1"/>
+                                <constraint firstItem="Li3-09-JyG" firstAttribute="leading" secondItem="pJR-Qi-8AN" secondAttribute="leading" id="lvv-gb-82f"/>
+                                <constraint firstItem="2fn-aB-z8I" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="mnG-Ms-iE9"/>
+                                <constraint firstItem="57Y-uB-ZM1" firstAttribute="trailing" secondItem="2fn-aB-z8I" secondAttribute="trailing" id="oFe-q3-ygy"/>
+                                <constraint firstAttribute="bottom" secondItem="57Y-uB-ZM1" secondAttribute="bottom" id="oJK-b3-Z4T"/>
+                                <constraint firstItem="Li3-09-JyG" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="oix-i1-6R7"/>
+                                <constraint firstItem="Li3-09-JyG" firstAttribute="width" secondItem="57Y-uB-ZM1" secondAttribute="width" id="ona-2Z-KQ2"/>
+                                <constraint firstItem="L0G-oh-iLo" firstAttribute="width" secondItem="57Y-uB-ZM1" secondAttribute="width" id="rfD-Ko-Xe5"/>
+                                <constraint firstItem="Li3-09-JyG" firstAttribute="height" secondItem="57Y-uB-ZM1" secondAttribute="height" id="sIO-8E-D1x"/>
+                                <constraint firstAttribute="bottom" secondItem="Li3-09-JyG" secondAttribute="bottom" id="trw-po-ekU"/>
+                                <constraint firstAttribute="bottom" secondItem="uVv-l0-boX" secondAttribute="bottom" id="ukn-bP-n0l"/>
+                                <constraint firstItem="uVv-l0-boX" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="x4c-sO-K6l"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2~3 명이 한 팀이었으면 좋겠어요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-xd-zDR" userLabel="People Label">
+                            <rect key="frame" x="35" y="115" width="421" height="19.5"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="INI-Dv-kII" userLabel="People count Slider">
+                            <rect key="frame" x="33" y="147" width="425" height="31"/>
+                            <animations/>
+                            <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="maximumTrackTintColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25~26 살이었으면 좋겠어요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDa-Ri-Ofu" userLabel="Age Label">
+                            <rect key="frame" x="35" y="202" width="421" height="19.5"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VpQ-Ga-zE6" userLabel="Age Slider">
+                            <rect key="frame" x="33" y="235" width="425" height="31"/>
+                            <animations/>
+                            <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="maximumTrackTintColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </slider>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
+                            <rect key="frame" x="60" y="248" width="371" height="48"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="1B3-Wn-jHp"/>
+                            </constraints>
+                            <state key="normal" title="적용하기" backgroundImage="bg_filter_ok_b.png"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ytf-gR-J0o" firstAttribute="top" secondItem="084-nz-SrR" secondAttribute="top" constant="15" id="0MC-67-wmf"/>
+                        <constraint firstItem="hvM-oc-t2h" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" id="3Q6-0E-Ulp"/>
+                        <constraint firstAttribute="trailing" secondItem="ytf-gR-J0o" secondAttribute="trailing" constant="70" id="3f1-ui-bv8"/>
+                        <constraint firstItem="VDa-Ri-Ofu" firstAttribute="width" secondItem="rBP-xd-zDR" secondAttribute="width" id="3tb-HY-hGk"/>
+                        <constraint firstItem="pGH-nG-dgi" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="60" id="68x-HZ-b7n"/>
+                        <constraint firstAttribute="trailing" secondItem="INI-Dv-kII" secondAttribute="trailing" constant="35" id="7PI-9Q-Rfm"/>
+                        <constraint firstItem="pGH-nG-dgi" firstAttribute="centerX" secondItem="084-nz-SrR" secondAttribute="centerX" id="7WH-le-YMO"/>
+                        <constraint firstItem="rBP-xd-zDR" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="35" id="B6u-eJ-uyB"/>
+                        <constraint firstItem="INI-Dv-kII" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="35" id="GTm-CG-Z15"/>
+                        <constraint firstItem="ytf-gR-J0o" firstAttribute="centerX" secondItem="084-nz-SrR" secondAttribute="centerX" id="IOe-0h-0yG"/>
+                        <constraint firstItem="ytf-gR-J0o" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="70" id="IRJ-he-faJ"/>
+                        <constraint firstItem="INI-Dv-kII" firstAttribute="top" secondItem="rBP-xd-zDR" secondAttribute="bottom" constant="13" id="KTf-K7-y2G"/>
+                        <constraint firstItem="pJR-Qi-8AN" firstAttribute="top" secondItem="ytf-gR-J0o" secondAttribute="bottom" constant="26" id="OZ4-96-OBI"/>
+                        <constraint firstItem="pJR-Qi-8AN" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="20" id="Rfl-8k-CNq"/>
+                        <constraint firstAttribute="trailing" secondItem="rBP-xd-zDR" secondAttribute="trailing" constant="35" id="VEY-31-hhc"/>
+                        <constraint firstAttribute="trailing" secondItem="VDa-Ri-Ofu" secondAttribute="trailing" constant="35" id="YF2-Y1-ONy"/>
+                        <constraint firstAttribute="trailing" secondItem="pGH-nG-dgi" secondAttribute="trailing" constant="60" id="a2g-Bq-VHw"/>
+                        <constraint firstItem="VpQ-Ga-zE6" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="35" id="awh-vd-vvK"/>
+                        <constraint firstItem="VpQ-Ga-zE6" firstAttribute="width" secondItem="VDa-Ri-Ofu" secondAttribute="width" id="c70-Cq-3Qq"/>
+                        <constraint firstAttribute="trailing" secondItem="VpQ-Ga-zE6" secondAttribute="trailing" constant="35" id="dXA-gc-haW"/>
+                        <constraint firstItem="INI-Dv-kII" firstAttribute="width" secondItem="rBP-xd-zDR" secondAttribute="width" id="hRT-44-SA4"/>
+                        <constraint firstAttribute="bottom" secondItem="pGH-nG-dgi" secondAttribute="bottom" constant="12" id="ilP-D7-cTc"/>
+                        <constraint firstAttribute="trailing" secondItem="pJR-Qi-8AN" secondAttribute="trailing" constant="20" id="iog-jh-m3E"/>
+                        <constraint firstItem="VpQ-Ga-zE6" firstAttribute="top" secondItem="VDa-Ri-Ofu" secondAttribute="bottom" constant="13" id="lNt-mD-YVi"/>
+                        <constraint firstItem="VDa-Ri-Ofu" firstAttribute="top" secondItem="INI-Dv-kII" secondAttribute="bottom" constant="25" id="mnt-CQ-leh"/>
+                        <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" id="onz-ux-gbH"/>
+                        <constraint firstItem="VpQ-Ga-zE6" firstAttribute="width" secondItem="rBP-xd-zDR" secondAttribute="width" id="sxb-fB-6h1"/>
+                        <constraint firstItem="VDa-Ri-Ofu" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="35" id="tER-Nh-p8i"/>
+                        <constraint firstItem="rBP-xd-zDR" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="bottom" constant="25" id="u6X-VY-QnU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="084-nz-SrR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="3gC-qs-ZIZ"/>
+                <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="85" id="4SP-39-FSi"/>
+                <constraint firstItem="084-nz-SrR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="280" id="O7D-dw-x2p"/>
+                <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="12" id="kwE-a0-1s0"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <connections>
+                <outlet property="ageLabel" destination="VDa-Ri-Ofu" id="ldZ-em-GeR"/>
+                <outlet property="closeButton" destination="hvM-oc-t2h" id="LEg-xi-1MC"/>
+                <outlet property="filterAllButton" destination="Li3-09-JyG" id="VbW-Dh-Hyt"/>
+                <outlet property="filterIPayButton" destination="57Y-uB-ZM1" id="Iye-QX-yoT"/>
+                <outlet property="filterMainView" destination="084-nz-SrR" id="Z83-QP-egA"/>
+                <outlet property="filterYouPayButton" destination="L0G-oh-iLo" id="CBp-Nt-8gS"/>
+                <outlet property="peopleLabel" destination="rBP-xd-zDR" id="MmR-gl-F1h"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_filter_cancel_b.png" width="160" height="160"/>
+        <image name="bg_filter_ok_b.png" width="498" height="149"/>
+        <image name="line_filter_toggle_g.png" width="3" height="119"/>
+        <image name="title_filter_type.png" width="442" height="59"/>
+        <image name="toggle_filter_2.png" width="280" height="117"/>
+        <image name="toggle_filter_3.png" width="277" height="117"/>
+        <image name="toggle_filter_all.png" width="280" height="117"/>
+        <image name="toggle_filter_bg_g.png" width="842" height="118"/>
+    </resources>
+</document>

@@ -76,7 +76,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
                 print("position is \(latitude), \(longitude)")
 
-                wSelf!.setMarker(latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
+                wSelf!.setMarker(false, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
             }
         }
     }
@@ -97,10 +97,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         super.viewDidAppear(animated)
     }
 
-    func setMarker(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String) {
+    func setMarker(isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
         marker.map = mainView
+
         Alamofire.request(.GET, imageUrl)
             .responseData { (response) -> Void in
                 let profileImage: UIImage = UIImage(data: response.data!)!

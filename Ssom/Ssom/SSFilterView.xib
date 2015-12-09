@@ -12,10 +12,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="084-nz-SrR" userLabel="Filter Main View">
-                    <rect key="frame" x="24" y="280" width="506" height="308"/>
+                    <rect key="frame" x="24" y="221" width="506" height="367"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvM-oc-t2h" userLabel="Close Button">
-                            <rect key="frame" x="0.0" y="268" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="327" width="40" height="40"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="vnj-VE-MOD"/>
@@ -179,7 +179,7 @@
                             <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
-                            <rect key="frame" x="60" y="248" width="386" height="48"/>
+                            <rect key="frame" x="60" y="307" width="386" height="48"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="1B3-Wn-jHp"/>
@@ -205,6 +205,7 @@
                         <constraint firstItem="ytf-gR-J0o" firstAttribute="centerX" secondItem="084-nz-SrR" secondAttribute="centerX" id="IOe-0h-0yG"/>
                         <constraint firstItem="ytf-gR-J0o" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="70" id="IRJ-he-faJ"/>
                         <constraint firstItem="INI-Dv-kII" firstAttribute="top" secondItem="rBP-xd-zDR" secondAttribute="bottom" constant="13" id="KTf-K7-y2G"/>
+                        <constraint firstAttribute="height" constant="367" id="MgH-tJ-onF"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="top" secondItem="ytf-gR-J0o" secondAttribute="bottom" constant="26" id="OZ4-96-OBI"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="20" id="Rfl-8k-CNq"/>
                         <constraint firstAttribute="trailing" secondItem="rBP-xd-zDR" secondAttribute="trailing" constant="35" id="VEY-31-hhc"/>
@@ -218,6 +219,7 @@
                         <constraint firstAttribute="trailing" secondItem="pJR-Qi-8AN" secondAttribute="trailing" constant="20" id="iog-jh-m3E"/>
                         <constraint firstItem="VpQ-Ga-zE6" firstAttribute="top" secondItem="VDa-Ri-Ofu" secondAttribute="bottom" constant="13" id="lNt-mD-YVi"/>
                         <constraint firstItem="VDa-Ri-Ofu" firstAttribute="top" secondItem="INI-Dv-kII" secondAttribute="bottom" constant="25" id="mnt-CQ-leh"/>
+                        <constraint firstItem="pGH-nG-dgi" firstAttribute="top" secondItem="VpQ-Ga-zE6" secondAttribute="bottom" constant="42" id="oIV-et-7WH"/>
                         <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" id="onz-ux-gbH"/>
                         <constraint firstItem="VpQ-Ga-zE6" firstAttribute="width" secondItem="rBP-xd-zDR" secondAttribute="width" id="sxb-fB-6h1"/>
                         <constraint firstItem="VDa-Ri-Ofu" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="35" id="tER-Nh-p8i"/>
@@ -230,7 +232,6 @@
             <constraints>
                 <constraint firstItem="084-nz-SrR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="3gC-qs-ZIZ"/>
                 <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="70" id="4SP-39-FSi"/>
-                <constraint firstItem="084-nz-SrR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="280" id="O7D-dw-x2p"/>
                 <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="12" id="kwE-a0-1s0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

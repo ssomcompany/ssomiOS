@@ -114,6 +114,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     @IBAction func tapFilter(sender: AnyObject) {
+
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.frame = self.view.bounds
         self.filterView.delegate = self
@@ -201,6 +202,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 // MARK: - SSFilterViewDelegate
     func closeFilterView() {
         self.filterView.removeFromSuperview()
+    }
+
+    func applyFilter(filterViewModel: SSFilterViewModel) {
+        self.filterView.removeFromSuperview()
+
+        // apply filter value to get the ssom list
     }
 }
 

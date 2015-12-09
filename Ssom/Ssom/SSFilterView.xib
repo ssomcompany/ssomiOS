@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="084-nz-SrR" userLabel="Filter Main View">
-                    <rect key="frame" x="24" y="280" width="491" height="308"/>
+                    <rect key="frame" x="24" y="280" width="506" height="308"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvM-oc-t2h" userLabel="Close Button">
                             <rect key="frame" x="0.0" y="268" width="40" height="40"/>
@@ -27,23 +27,24 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_filter_type.png" translatesAutoresizingMaskIntoConstraints="NO" id="ytf-gR-J0o" userLabel="Filter Title Image View">
-                            <rect key="frame" x="70" y="15" width="351" height="14"/>
+                            <rect key="frame" x="70" y="15" width="366" height="14"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="9nl-8L-ct8"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJR-Qi-8AN" userLabel="Filter Button Bar View">
-                            <rect key="frame" x="20" y="55" width="451" height="35"/>
+                            <rect key="frame" x="20" y="55" width="466" height="35"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toggle_filter_bg_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="IBx-gV-dRy" userLabel="Background Image View">
-                                    <rect key="frame" x="0.0" y="0.0" width="451" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="466" height="35"/>
                                     <animations/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li3-09-JyG" userLabel="Filter All Button">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <state key="normal" title="모두">
                                         <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -55,16 +56,17 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_filter_toggle_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="uVv-l0-boX" userLabel="Button Line View1">
-                                    <rect key="frame" x="149" y="0.0" width="1" height="35"/>
+                                    <rect key="frame" x="154" y="0.0" width="1" height="35"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="1" id="GrO-lG-mji"/>
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57Y-uB-ZM1" userLabel="Filter I Pay Button">
-                                    <rect key="frame" x="150" y="0.0" width="150.5" height="35"/>
+                                    <rect key="frame" x="155" y="0.0" width="155.5" height="35"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <state key="normal" title="내가 쏨">
                                         <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -75,17 +77,26 @@
                                         <action selector="tapIPayButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="3aW-RO-ZVq"/>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1" verticalHuggingPriority="251" image="icon_check_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="86b-fK-OFz" userLabel="Filter I Pay Icon Image">
+                                    <rect key="frame" x="163" y="10" width="15" height="15"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="15" id="avC-dW-dmJ"/>
+                                        <constraint firstAttribute="height" constant="15" id="x1o-sg-Mc9"/>
+                                    </constraints>
+                                </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_filter_toggle_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="2fn-aB-z8I" userLabel="Button Line View2">
-                                    <rect key="frame" x="299" y="0.0" width="1" height="35"/>
+                                    <rect key="frame" x="309" y="0.0" width="1" height="35"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="1" id="W1r-nK-hw8"/>
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0G-oh-iLo" userLabel="Filter You Pay Button">
-                                    <rect key="frame" x="300" y="0.0" width="150.5" height="35"/>
+                                    <rect key="frame" x="310" y="0.0" width="155.5" height="35"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <state key="normal" title="니가 쏴">
                                         <color key="titleColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -96,20 +107,32 @@
                                         <action selector="tapFilterYouPayButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="zUJ-ow-uwe"/>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1" verticalHuggingPriority="251" image="icon_target_g.png" translatesAutoresizingMaskIntoConstraints="NO" id="v1z-CA-IZN" userLabel="Filter You Pay Icon Image">
+                                    <rect key="frame" x="318" y="10" width="15" height="15"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="15" id="HFu-7X-CaP"/>
+                                        <constraint firstAttribute="height" constant="15" id="dc9-6a-RML"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="L0G-oh-iLo" firstAttribute="leading" secondItem="57Y-uB-ZM1" secondAttribute="trailing" id="2tt-ah-d8C"/>
                                 <constraint firstItem="57Y-uB-ZM1" firstAttribute="leading" secondItem="Li3-09-JyG" secondAttribute="trailing" id="8iv-Pl-59n"/>
+                                <constraint firstItem="v1z-CA-IZN" firstAttribute="centerY" secondItem="pJR-Qi-8AN" secondAttribute="centerY" id="8pM-1r-ZTV"/>
                                 <constraint firstAttribute="bottom" secondItem="2fn-aB-z8I" secondAttribute="bottom" id="DCr-Yb-bN0"/>
                                 <constraint firstAttribute="trailing" secondItem="IBx-gV-dRy" secondAttribute="trailing" id="FoI-Dh-NzF"/>
+                                <constraint firstItem="86b-fK-OFz" firstAttribute="leading" secondItem="uVv-l0-boX" secondAttribute="trailing" constant="8" id="Gse-wg-I7B"/>
                                 <constraint firstItem="57Y-uB-ZM1" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="MRP-al-Ktp"/>
                                 <constraint firstItem="L0G-oh-iLo" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="PhI-W1-g60"/>
+                                <constraint firstItem="86b-fK-OFz" firstAttribute="centerY" secondItem="pJR-Qi-8AN" secondAttribute="centerY" id="VQw-Uk-C7l"/>
                                 <constraint firstAttribute="trailing" secondItem="L0G-oh-iLo" secondAttribute="trailing" id="WEW-UD-TiA"/>
                                 <constraint firstItem="L0G-oh-iLo" firstAttribute="height" secondItem="57Y-uB-ZM1" secondAttribute="height" id="Z85-jr-d1A"/>
                                 <constraint firstAttribute="bottom" secondItem="L0G-oh-iLo" secondAttribute="bottom" id="ZgA-Ts-38K"/>
                                 <constraint firstAttribute="bottom" secondItem="IBx-gV-dRy" secondAttribute="bottom" id="cy3-Oi-VEO"/>
+                                <constraint firstItem="v1z-CA-IZN" firstAttribute="leading" secondItem="2fn-aB-z8I" secondAttribute="trailing" constant="8" id="dlW-Kq-KFN"/>
                                 <constraint firstItem="IBx-gV-dRy" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" id="gJw-pG-8Tn"/>
                                 <constraint firstItem="Li3-09-JyG" firstAttribute="trailing" secondItem="uVv-l0-boX" secondAttribute="trailing" id="h6N-sm-ttn"/>
                                 <constraint firstItem="IBx-gV-dRy" firstAttribute="leading" secondItem="pJR-Qi-8AN" secondAttribute="leading" id="iaK-wb-fQ7"/>
@@ -128,40 +151,43 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2~3 명이 한 팀이었으면 좋겠어요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-xd-zDR" userLabel="People Label">
-                            <rect key="frame" x="35" y="115" width="421" height="19.5"/>
+                            <rect key="frame" x="35" y="115" width="436" height="19.5"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="INI-Dv-kII" userLabel="People count Slider">
-                            <rect key="frame" x="33" y="147" width="425" height="31"/>
+                            <rect key="frame" x="33" y="147" width="440" height="31"/>
                             <animations/>
                             <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="maximumTrackTintColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25~26 살이었으면 좋겠어요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDa-Ri-Ofu" userLabel="Age Label">
-                            <rect key="frame" x="35" y="202" width="421" height="19.5"/>
+                            <rect key="frame" x="35" y="202" width="436" height="19.5"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VpQ-Ga-zE6" userLabel="Age Slider">
-                            <rect key="frame" x="33" y="235" width="425" height="31"/>
+                            <rect key="frame" x="33" y="235" width="440" height="31"/>
                             <animations/>
                             <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="maximumTrackTintColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
-                            <rect key="frame" x="60" y="248" width="371" height="48"/>
+                            <rect key="frame" x="60" y="248" width="386" height="48"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="1B3-Wn-jHp"/>
                             </constraints>
                             <state key="normal" title="적용하기" backgroundImage="bg_filter_ok_b.png"/>
+                            <connections>
+                                <action selector="tapApplyButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="q7y-r5-Twe"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -203,7 +229,7 @@
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="084-nz-SrR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="3gC-qs-ZIZ"/>
-                <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="85" id="4SP-39-FSi"/>
+                <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="70" id="4SP-39-FSi"/>
                 <constraint firstItem="084-nz-SrR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="280" id="O7D-dw-x2p"/>
                 <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="12" id="kwE-a0-1s0"/>
             </constraints>
@@ -214,8 +240,10 @@
                 <outlet property="closeButton" destination="hvM-oc-t2h" id="LEg-xi-1MC"/>
                 <outlet property="filterAllButton" destination="Li3-09-JyG" id="VbW-Dh-Hyt"/>
                 <outlet property="filterIPayButton" destination="57Y-uB-ZM1" id="Iye-QX-yoT"/>
+                <outlet property="filterIPayIconImageView" destination="86b-fK-OFz" id="LuE-K0-igD"/>
                 <outlet property="filterMainView" destination="084-nz-SrR" id="Z83-QP-egA"/>
                 <outlet property="filterYouPayButton" destination="L0G-oh-iLo" id="CBp-Nt-8gS"/>
+                <outlet property="filterYouPayIconImageView" destination="v1z-CA-IZN" id="YRr-ag-aNm"/>
                 <outlet property="peopleLabel" destination="rBP-xd-zDR" id="MmR-gl-F1h"/>
             </connections>
         </view>
@@ -223,6 +251,8 @@
     <resources>
         <image name="bg_filter_cancel_b.png" width="160" height="160"/>
         <image name="bg_filter_ok_b.png" width="498" height="149"/>
+        <image name="icon_check_g.png" width="37" height="27"/>
+        <image name="icon_target_g.png" width="42" height="42"/>
         <image name="line_filter_toggle_g.png" width="3" height="119"/>
         <image name="title_filter_type.png" width="442" height="59"/>
         <image name="toggle_filter_2.png" width="280" height="117"/>

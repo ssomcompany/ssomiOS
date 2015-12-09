@@ -9,12 +9,14 @@
 import UIKit
 import SDWebImage
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate {
     @IBOutlet var chatListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
 
     var dataArray:[[String: AnyObject]]
     var profileImageView: SSPhotoView?
+
+    var filterView: SSFilterView!
 
     init() {
         self.dataArray = []
@@ -57,6 +59,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
 
         self.loadingData()
+    }
+
+    @IBAction func tapFilterButton(sender: AnyObject) {
+
+        self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
+        self.filterView.frame = self.view.bounds
+        self.filterView.delegate = self
+        self.view.addSubview(self.filterView)
     }
 
 // MARK: private
@@ -136,6 +146,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count;
+    }
+
+// MARK: - SSFilterViewDelegate
+    func closeFilterView() {
+        self.filterView.removeFromSuperview()
+    }
+
+    func applyFilter(filterViewModel: SSFilterViewModel) {
+        self.filterView.removeFromSuperview()
+
+        // apply filter value to get the ssom list
     }
 
 }

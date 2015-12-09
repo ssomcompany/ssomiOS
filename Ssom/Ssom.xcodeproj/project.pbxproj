@@ -93,6 +93,7 @@
 		973003E41C1094B700734D8D /* toggle_write_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 973003981C1094B700734D8D /* toggle_write_black.png */; };
 		973003E51C1094B700734D8D /* toggle_write_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 973003991C1094B700734D8D /* toggle_write_red.png */; };
 		973003E61C1094B700734D8D /* type_slogan_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9730039A1C1094B700734D8D /* type_slogan_white.png */; };
+		973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -235,6 +236,7 @@
 		973003981C1094B700734D8D /* toggle_write_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toggle_write_black.png; path = Resource/toggle_write_black.png; sourceTree = "<group>"; };
 		973003991C1094B700734D8D /* toggle_write_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toggle_write_red.png; path = Resource/toggle_write_red.png; sourceTree = "<group>"; };
 		9730039A1C1094B700734D8D /* type_slogan_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = type_slogan_white.png; path = Resource/type_slogan_white.png; sourceTree = "<group>"; };
+		973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSFilterViewModel.swift; path = ViewModel/SSFilterViewModel.swift; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -401,6 +403,14 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		973003E91C15EDA600734D8D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		97343E1B1BE65AB300A9D39D = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +439,7 @@
 		97343E261BE65AB300A9D39D /* Ssom UI */ = {
 			isa = PBXGroup;
 			children = (
+				973003E91C15EDA600734D8D /* ViewModel */,
 				9730034E1C10947100734D8D /* Resource */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E291BE65AB300A9D39D /* MainViewController.swift */,
@@ -583,6 +594,7 @@
 				TargetAttributes = {
 					97343E231BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = DRS9CQ7V2Z;
 					};
 					97343E371BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
@@ -783,6 +795,7 @@
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
 				9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */,
 				973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */,
+				973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* ChatViewController.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
@@ -928,18 +941,16 @@
 			baseConfigurationReference = 565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Ssom/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
-				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -948,18 +959,16 @@
 			baseConfigurationReference = 8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Ssom/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.Ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
-				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/${PROJECT_NAME}/3rdLib/AFNetworking";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

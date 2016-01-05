@@ -116,6 +116,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("imageUrl is \(imageUrl)")
 
             cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl))
+            cell.profileImageView!.layer.cornerRadius = cell.profileImageView!.frame.size.height / 2;
+            cell.profileImageView!.layer.masksToBounds = true
+            cell.profileImageView!.layer.borderWidth = 0
+
             cell.profilImageUrl = imageUrl
         }
 
@@ -141,7 +145,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return Util.convertScreenSize(false, size: 280, fromWidth: 1080, fromHeight: 1920);
+        return Util.convertScreenSize(false, size: 200, fromWidth: 750, fromHeight: 1334);
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

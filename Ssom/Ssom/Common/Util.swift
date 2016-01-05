@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class Util {
-    class func convertScreenSize(isWidth:Bool, size:Float, fromWidth:Float, fromHeight:Float) -> CGFloat {
+    class func convertScreenSize(isWidth:Bool, size:Float, fromWidth:CGFloat, fromHeight:CGFloat) -> CGFloat {
 
         let bounds: CGRect = UIScreen.mainScreen().bounds;
 
@@ -20,6 +20,13 @@ public class Util {
             return CGFloat(size)*bounds.height/CGFloat(fromHeight);
         }
         
+    }
+
+    class func convertScreenCGSize(size:CGSize, fromWidth:CGFloat, fromHeight:CGFloat) -> CGSize {
+        let width:CGFloat = convertScreenSize(true, size: Float(size.width), fromWidth: fromWidth, fromHeight: fromHeight)
+        let height:CGFloat = convertScreenSize(false, size: Float(size.height), fromWidth: fromWidth, fromHeight: fromHeight)
+
+        return CGSizeMake(width, height)
     }
 
     class func getDistanceString(distance: Int) -> String {

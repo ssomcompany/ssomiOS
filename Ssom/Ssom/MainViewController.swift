@@ -10,10 +10,19 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
+enum SStype : String {
+    case SSOM = "ssom"
+    case SSOSEYO = "ssoseyo"
+}
+
 class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
+    @IBOutlet var btnIPay: UIButton!
+    @IBOutlet var imageIPayButtonLineView: UIImageView!
+    @IBOutlet var btnYouPay: UIButton!
+    @IBOutlet var imageYouPayButtonLineView: UIImageView!
     
     var locationManager: CLLocationManager!
     var dataArray: [[String: AnyObject]]
@@ -70,14 +79,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             wSelf!.dataArray = responseObject as! [[String: AnyObject]]
             print("result is : \(wSelf!.dataArray)")
 
-            for dataDict in wSelf!.dataArray {
-                let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
-                let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
-
-                print("position is \(latitude), \(longitude)")
-
-                wSelf!.setMarker(false, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
-            }
+            wSelf!.showMarkers()
         }
     }
 
@@ -86,6 +88,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         // Do any additional setup after loading the view, typically from a nib.
         
         self.initView()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.setNavigationBarView()
+    }
+
+    func setNavigationBarView() {
+        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "toggle_bg_w.png"))
+        titleBackgroundView.frame = CGRectMake(0, 0, 263.7/2.0, 57.3/2.0)
+
+        self.navigationItem.titleView!.addSubview(titleBackgroundView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,16 +112,51 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         super.viewDidAppear(animated)
     }
 
+    func showMarkers() {
+
+        mainView.clear()
+
+        for dataDict in self.dataArray {
+            let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
+            let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
+
+            print("position is \(latitude), \(longitude)")
+
+            let sellString: String = dataDict["ssom"] as! String
+            var isSell = false;
+            if sellString == SStype.SSOM.rawValue {
+                isSell = true
+            } else {
+                isSell = false
+            }
+
+            if self.btnIPay.selected {
+                if isSell {
+                    self.setMarker(isSell, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
+                }
+            }
+
+            if self.btnYouPay.selected {
+                if !isSell {
+                    self.setMarker(isSell, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
+                }
+            }
+        }
+    }
+
     func setMarker(isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
-        marker.map = mainView
 
         Alamofire.request(.GET, imageUrl)
             .responseData { (response) -> Void in
                 let profileImage: UIImage = UIImage(data: response.data!)!
+                let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
 
-                marker.icon = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 43, 43))
+                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "miniRed.png" : "miniGreen.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
+
+                marker.icon = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                marker.map = self.mainView
         }
     }
 
@@ -120,6 +170,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         self.filterView.frame = self.view.bounds
         self.filterView.delegate = self
         self.view.addSubview(self.filterView)
+    }
+
+    @IBAction func tapIPayButton(sender: AnyObject) {
+        self.btnIPay.selected = true
+        self.imageIPayButtonLineView.hidden = false
+        self.btnYouPay.selected = false
+        self.imageYouPayButtonLineView.hidden = true
+
+        self.showMarkers()
+    }
+
+    @IBAction func tapYouPayButton(sender: AnyObject) {
+        self.btnYouPay.selected = true
+        self.imageIPayButtonLineView.hidden = true
+        self.btnIPay.selected = false
+        self.imageYouPayButtonLineView.hidden = false
+
+        self.showMarkers()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

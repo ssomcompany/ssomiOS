@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,59 +15,51 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Xq-QM-OnV" userLabel="ProfileImageView">
-                        <rect key="frame" x="8" y="13" width="67" height="67.5"/>
-                        <animations/>
+                        <rect key="frame" x="8" y="13" width="71" height="67.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="67" id="k3w-sJ-pyY"/>
+                            <constraint firstAttribute="width" constant="71" id="k3w-sJ-pyY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아 완전 심심하다... 집에 가긴 싫구 ㅠㅠ 여자 넷이 있는데 놀아줄 사람 진짜 없는거니? ㅋㅋㅋㅋ우리 빙수만 먹다 집에갈듯" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5G7-6s-2iE" userLabel="DescriptionLabel">
-                        <rect key="frame" x="85" y="33" width="217" height="43"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="89" y="32" width="221" height="44"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대화 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-N3-kEs" userLabel="IngLabel">
-                        <rect key="frame" x="275" y="8" width="31.5" height="13.5"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                        <rect key="frame" x="276" y="10" width="29" height="12"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR0-BV-lOa" userLabel="ImageTapButton">
-                        <rect key="frame" x="8" y="13" width="67" height="67.5"/>
-                        <animations/>
+                        <rect key="frame" x="8" y="13" width="71" height="67.5"/>
                         <connections>
                             <action selector="tapProfileImage:" destination="jN3-Xd-2ok" eventType="touchUpInside" id="3cn-2r-1B4"/>
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1O-ZM-gOU" userLabel="Top View">
-                        <rect key="frame" x="85" y="8" width="190" height="13.5"/>
+                        <rect key="frame" x="89" y="8" width="187" height="12"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방금 전," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0A-Ua-y3D" userLabel="UpdatedTimeLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="35.5" height="13.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="32.5" height="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21~25살 4명 있어요," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMB-B2-YMI" userLabel="MemberInfoLabel">
-                                <rect key="frame" x="40" y="0.0" width="99" height="13.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="37" y="0.0" width="90.5" height="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UK6-lH-Fzb" userLabel="DistanceLabel">
-                                <rect key="frame" x="144" y="0.0" width="33" height="13.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <rect key="frame" x="132" y="0.0" width="30.5" height="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstItem="UK6-lH-Fzb" firstAttribute="leading" secondItem="fMB-B2-YMI" secondAttribute="trailing" constant="5" id="Dzg-41-hIn"/>
                             <constraint firstAttribute="bottom" secondItem="UK6-lH-Fzb" secondAttribute="bottom" id="Ie5-iz-xaJ"/>
@@ -81,31 +72,38 @@
                             <constraint firstItem="fMB-B2-YMI" firstAttribute="top" secondItem="i1O-ZM-gOU" secondAttribute="top" id="t97-ho-qux"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_list_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
+                        <rect key="frame" x="0.0" y="91.5" width="320" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="crZ-Z8-q2E"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="kKv-N3-kEs" firstAttribute="leading" secondItem="i1O-ZM-gOU" secondAttribute="trailing" id="1GN-Mj-krh"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="kKv-N3-kEs" secondAttribute="trailing" constant="5" id="61A-ON-dr4"/>
-                    <constraint firstItem="kKv-N3-kEs" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" id="7D5-C7-uDq"/>
+                    <constraint firstAttribute="trailing" secondItem="kKv-N3-kEs" secondAttribute="trailing" constant="15" id="61A-ON-dr4"/>
+                    <constraint firstItem="kKv-N3-kEs" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="top" constant="10" id="7D5-C7-uDq"/>
                     <constraint firstItem="i1O-ZM-gOU" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="top" constant="8" id="8et-k5-Adw"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="bottom" secondItem="2Xq-QM-OnV" secondAttribute="bottom" id="KPE-TV-9IC"/>
-                    <constraint firstItem="2Xq-QM-OnV" firstAttribute="leading" secondItem="57r-fi-ckc" secondAttribute="leadingMargin" id="L9i-E4-BRu"/>
-                    <constraint firstItem="2Xq-QM-OnV" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="topMargin" constant="5" id="OXa-Kp-GQx"/>
+                    <constraint firstItem="2Xq-QM-OnV" firstAttribute="leading" secondItem="57r-fi-ckc" secondAttribute="leading" constant="8" id="L9i-E4-BRu"/>
+                    <constraint firstItem="2Xq-QM-OnV" firstAttribute="top" secondItem="57r-fi-ckc" secondAttribute="top" constant="13" id="OXa-Kp-GQx"/>
+                    <constraint firstItem="eXW-6Z-5cd" firstAttribute="leading" secondItem="57r-fi-ckc" secondAttribute="leading" id="R4e-VB-1ym"/>
                     <constraint firstItem="5G7-6s-2iE" firstAttribute="leading" secondItem="2Xq-QM-OnV" secondAttribute="trailing" constant="10" id="RyK-Mp-3se"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="5G7-6s-2iE" secondAttribute="trailing" constant="10" id="UU8-vM-Xkx"/>
+                    <constraint firstAttribute="trailing" secondItem="5G7-6s-2iE" secondAttribute="trailing" constant="10" id="UU8-vM-Xkx"/>
+                    <constraint firstAttribute="bottom" secondItem="eXW-6Z-5cd" secondAttribute="bottom" id="UfA-jR-7ng"/>
                     <constraint firstAttribute="bottom" secondItem="5G7-6s-2iE" secondAttribute="bottom" constant="17" id="aJU-78-xgx"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="width" secondItem="2Xq-QM-OnV" secondAttribute="width" id="fsi-RE-qTB"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="top" secondItem="2Xq-QM-OnV" secondAttribute="top" id="hyy-GB-eSo"/>
+                    <constraint firstAttribute="trailing" secondItem="eXW-6Z-5cd" secondAttribute="trailing" id="ip7-Dy-ym9"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="height" secondItem="2Xq-QM-OnV" secondAttribute="height" id="jak-aG-6tF"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="trailing" secondItem="2Xq-QM-OnV" secondAttribute="trailing" id="keR-GW-FQA"/>
                     <constraint firstItem="5G7-6s-2iE" firstAttribute="leading" secondItem="i1O-ZM-gOU" secondAttribute="leading" id="uRK-bV-xkQ"/>
                     <constraint firstItem="5G7-6s-2iE" firstAttribute="top" secondItem="i1O-ZM-gOU" secondAttribute="bottom" constant="12" id="usU-Tl-yxy"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="2Xq-QM-OnV" secondAttribute="bottom" constant="5" id="v3q-on-gWw"/>
+                    <constraint firstAttribute="bottom" secondItem="2Xq-QM-OnV" secondAttribute="bottom" constant="13" id="v3q-on-gWw"/>
                     <constraint firstItem="hR0-BV-lOa" firstAttribute="leading" secondItem="2Xq-QM-OnV" secondAttribute="leading" id="yo2-iX-c6j"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="descriptionLabel" destination="5G7-6s-2iE" id="7Jm-qY-NqQ"/>
                 <outlet property="distanceLabel" destination="UK6-lH-Fzb" id="Y0c-Bd-PIK"/>
@@ -118,4 +116,7 @@
             <point key="canvasLocation" x="155" y="299"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="line_list_gray.png" width="1440" height="2"/>
+    </resources>
 </document>

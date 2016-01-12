@@ -10,6 +10,13 @@ import UIKit
 
 class SSWriteViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet var profileView: UIView!
+
+    let minWidthPayButton:CGFloat = 76
+    let minHeightPayButton:CGFloat = 68
+    let maxWidthPayButton:CGFloat = 95
+    let maxHeightPayButton:CGFloat = 85
+
     @IBOutlet var textView: UITextView!
     @IBOutlet var textGuideLabel: UILabel!
 
@@ -18,12 +25,10 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var ageButton3: UIButton!
     @IBOutlet var ageButton4: UIButton!
 
-    @IBOutlet var profileView: UIView!
-
-    let minWidthPayButton:CGFloat = 76
-    let minHeightPayButton:CGFloat = 68
-    let maxWidthPayButton:CGFloat = 95
-    let maxHeightPayButton:CGFloat = 85
+    @IBOutlet var peopleButton1: UIButton!
+    @IBOutlet var peopleButton2: UIButton!
+    @IBOutlet var peopleButton3: UIButton!
+    @IBOutlet var peopleButton4: UIButton!
 
     @IBOutlet var btnIPay: UIButton!
     @IBOutlet var constWidthIPayButton: NSLayoutConstraint!
@@ -164,12 +169,10 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func tapRegisterButton(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
-        self.navigationController!.navigationBarHidden = false
     }
 
     @IBAction func tapCloseButton(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
-        self.navigationController!.navigationBarHidden = false
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

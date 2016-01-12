@@ -15,14 +15,18 @@ protocol SSFilterViewDelegate: NSObjectProtocol {
 
 class SSFilterView: UIView {
     @IBOutlet var filterMainView: UIView!
-    @IBOutlet var closeButton: UIButton!
-    @IBOutlet var filterAllButton: UIButton!
-    @IBOutlet var filterIPayButton: UIButton!
-    @IBOutlet var filterIPayIconImageView: UIImageView!
-    @IBOutlet var filterYouPayButton: UIButton!
-    @IBOutlet var filterYouPayIconImageView: UIImageView!
+
+    @IBOutlet var filter20beginAgeButton: UIButton!
+    @IBOutlet var filter20middleAgeButton: UIButton!
+    @IBOutlet var filter20lateAgeButton: UIButton!
+    @IBOutlet var filter30overAgeButton: UIButton!
+
     @IBOutlet var peopleLabel: UILabel!
-    @IBOutlet var ageLabel: UILabel!
+
+    @IBOutlet var filter1PersonButton: UIButton!
+    @IBOutlet var filter2PeopleButton: UIButton!
+    @IBOutlet var filter3PeopleButton: UIButton!
+    @IBOutlet var filter4PeopleButton: UIButton!
 
     var delegate: SSFilterViewDelegate?
 
@@ -48,47 +52,125 @@ class SSFilterView: UIView {
         }
     }
 
-    @IBAction func tapFilterAllButton(sender: AnyObject) {
-        self.filterAllButton.selected = true;
-        self.filterIPayButton.selected = false;
-        self.filterIPayIconImageView.image = UIImage(named: "icon_check_g.png")
-        self.filterYouPayButton.selected = false;
-        self.filterYouPayIconImageView.image = UIImage(named: "icon_target_g.png")
+    @IBAction func tapFilter20beginAgeButton(sender: AnyObject) {
+        self.filter20beginAgeButton.selected = true;
+        self.filter20middleAgeButton.selected = false;
+        self.filter20lateAgeButton.selected = false;
+        self.filter30overAgeButton.selected = false;
+
+        self.filter20beginAgeButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter20middleAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20lateAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter30overAgeButton.backgroundColor = UIColor.whiteColor()
+
     }
 
-    @IBAction func tapIPayButton(sender: AnyObject) {
-        self.filterAllButton.selected = false;
-        self.filterIPayButton.selected = true;
-        self.filterIPayIconImageView.image = UIImage(named: "icon_check_w.png")
-        self.filterYouPayButton.selected = false;
-        self.filterYouPayIconImageView.image = UIImage(named: "icon_target_g.png")
+    @IBAction func tap20middleAgeButton(sender: AnyObject) {
+        self.filter20beginAgeButton.selected = false;
+        self.filter20middleAgeButton.selected = true;
+        self.filter20lateAgeButton.selected = false;
+        self.filter30overAgeButton.selected = false;
+
+        self.filter20beginAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20middleAgeButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter20lateAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter30overAgeButton.backgroundColor = UIColor.whiteColor()
     }
 
-    @IBAction func tapFilterYouPayButton(sender: AnyObject) {
-        self.filterAllButton.selected = false;
-        self.filterIPayButton.selected = false;
-        self.filterIPayIconImageView.image = UIImage(named: "icon_check_g.png")
-        self.filterYouPayButton.selected = true;
-        self.filterYouPayIconImageView.image = UIImage(named: "icon_target_w.png")
+    @IBAction func tapFilter20lateAgeButton(sender: AnyObject) {
+        self.filter20beginAgeButton.selected = false;
+        self.filter20middleAgeButton.selected = false;
+        self.filter20lateAgeButton.selected = true;
+        self.filter30overAgeButton.selected = false;
+
+        self.filter20beginAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20middleAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20lateAgeButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter30overAgeButton.backgroundColor = UIColor.whiteColor()
+    }
+
+    @IBAction func tapFilter30overAgeButton(sender: AnyObject) {
+        self.filter20beginAgeButton.selected = false;
+        self.filter20middleAgeButton.selected = false;
+        self.filter20lateAgeButton.selected = false;
+        self.filter30overAgeButton.selected = true;
+
+        self.filter20beginAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20middleAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter20lateAgeButton.backgroundColor = UIColor.whiteColor()
+        self.filter30overAgeButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+    }
+
+    @IBAction func tap1PersonButton(sender: AnyObject) {
+        self.filter1PersonButton.selected = true;
+        self.filter2PeopleButton.selected = false;
+        self.filter3PeopleButton.selected = false;
+        self.filter4PeopleButton.selected = false;
+
+        self.filter1PersonButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter2PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter3PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter4PeopleButton.backgroundColor = UIColor.whiteColor()
+    }
+
+    @IBAction func tap2PeopleButton(sender: AnyObject) {
+        self.filter1PersonButton.selected = false;
+        self.filter2PeopleButton.selected = true;
+        self.filter3PeopleButton.selected = false;
+        self.filter4PeopleButton.selected = false;
+
+        self.filter1PersonButton.backgroundColor = UIColor.whiteColor()
+        self.filter2PeopleButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter3PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter4PeopleButton.backgroundColor = UIColor.whiteColor()
+    }
+
+    @IBAction func tap3PeopleButton(sender: AnyObject) {
+        self.filter1PersonButton.selected = false;
+        self.filter2PeopleButton.selected = false;
+        self.filter3PeopleButton.selected = true;
+        self.filter4PeopleButton.selected = false;
+
+        self.filter1PersonButton.backgroundColor = UIColor.whiteColor()
+        self.filter2PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter3PeopleButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.filter4PeopleButton.backgroundColor = UIColor.whiteColor()
+    }
+
+    @IBAction func tapOver4PeopleButton(sender: AnyObject) {
+        self.filter1PersonButton.selected = false;
+        self.filter2PeopleButton.selected = false;
+        self.filter3PeopleButton.selected = false;
+        self.filter4PeopleButton.selected = true;
+
+        self.filter1PersonButton.backgroundColor = UIColor.whiteColor()
+        self.filter2PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter3PeopleButton.backgroundColor = UIColor.whiteColor()
+        self.filter4PeopleButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
     }
 
     @IBAction func tapApplyButton(sender: AnyObject) {
-        var filterValue: SSFilterViewModel = SSFilterViewModel(payType: .All, minPerson: 0, maxPerson: 0, minAge: 0, maxAge: 0)
-        if self.filterAllButton.selected {
-            filterValue.payType = .All
-        } else if self.filterIPayButton.selected {
-            filterValue.payType = .IPay
-        } else if self.filterYouPayButton.selected {
-            filterValue.payType = .YouPay
+        var filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .k20begin, personCount: 0)
+        if self.filter20beginAgeButton.selected {
+            filterValue.ageType = .k20begin
+        } else if self.filter20middleAgeButton.selected {
+            filterValue.ageType = .k20middle
+        } else if self.filter20lateAgeButton.selected {
+            filterValue.ageType = .k20late
+        } else if self.filter30overAgeButton.selected {
+            filterValue.ageType = .k30over
         }
 
-        // min person
-
-        // max person
-
-        // min age
-
-        // max age
+        // how many people
+        if self.filter1PersonButton.selected {
+            filterValue.personCount = 1
+        } else if self.filter2PeopleButton.selected {
+            filterValue.personCount = 2
+        } else if self.filter3PeopleButton.selected {
+            filterValue.personCount = 3
+        } else if self.filter4PeopleButton.selected {
+            filterValue.personCount = 4
+        }
 
         if self.delegate?.respondsToSelector("applyFilter") != nil {
             self.delegate?.applyFilter(filterValue)

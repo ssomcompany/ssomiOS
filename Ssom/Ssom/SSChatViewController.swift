@@ -1,5 +1,5 @@
 //
-//  ChatViewController.swift
+//  SSChatViewController.swift
 //  Ssom
 //
 //  Created by DongSoo Lee on 2015. 11. 6..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class SSChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

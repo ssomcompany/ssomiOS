@@ -97,10 +97,44 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func setNavigationBarView() {
-        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "toggle_bg_w.png"))
-        titleBackgroundView.frame = CGRectMake(0, 0, 263.7/2.0, 57.3/2.0)
+        var naviTitleViewFrame:CGRect = self.navigationItem.titleView!.frame
+        naviTitleViewFrame = CGRectMake(naviTitleViewFrame.origin.x, naviTitleViewFrame.origin.y
+                                        , naviTitleViewFrame.size.width, 38)
+        self.navigationItem.titleView!.frame = naviTitleViewFrame
 
+        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1dep_toggle_on.png"))
+        titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
         self.navigationItem.titleView!.addSubview(titleBackgroundView)
+
+        let btnNavi1: UIButton = UIButton(frame: CGRectMake(0, 0, 97, 38))
+        btnNavi1.setTitle("MAP", forState: .Normal)
+        btnNavi1.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+        btnNavi1.setBackgroundImage(UIImage(named: "1dep_toggle_off.png"), forState: .Selected)
+        btnNavi1.selected = true
+        self.navigationItem.titleView!.addSubview(btnNavi1)
+
+        let btnNavi2: UIButton = UIButton(frame: CGRectMake(175-97, 0, 97, 38))
+        btnNavi2.setTitle("LIST", forState: .Normal)
+        btnNavi2.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
+        btnNavi2.selected = false
+        self.navigationItem.titleView!.addSubview(btnNavi2)
+
+        if #available(iOS 8.2, *) {
+            btnNavi1.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+            btnNavi2.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+        } else {
+            // Fallback on earlier versions
+            btnNavi1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+            btnNavi2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+        }
+
+        self.navigationItem.leftBarButtonItem?.title = ""
+        self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
+
+        let rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
+        let barBtnHeart:UIBarButtonItem = rightBarButtonItems[1]
+        barBtnHeart.title = ""
+        barBtnHeart.image = UIImage.resizeImage(UIImage(named: "heart.png")!, frame: CGRectMake(0, 0, 27, 24))
     }
 
     override func didReceiveMemoryWarning() {
@@ -153,7 +187,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
                 let profileImage: UIImage = UIImage(data: response.data!)!
                 let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
 
-                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "miniRed.png" : "miniGreen.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
+                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "miniGreen.png" : "miniRed.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
                 marker.icon = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
                 marker.map = self.mainView
@@ -195,7 +229,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         if (segue.identifier == "SSListViewSegue") {
             let vc: ListViewController = segue.destinationViewController as! ListViewController
 
-            vc.dataArray = self.dataArray
+            vc.mainViewModel = SSMainViewModel(dataArray: self.dataArray, isSell: self.btnIPay.selected)
         }
     }
 

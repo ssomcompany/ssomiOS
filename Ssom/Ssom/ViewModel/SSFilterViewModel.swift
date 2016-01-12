@@ -8,18 +8,15 @@
 
 import Foundation
 
-enum SSFilterPayType {
-    case All
-    case IPay
-    case YouPay
+enum SSFilterAgeType {
+    case k20begin
+    case k20middle
+    case k20late
+    case k30over
 }
 
 public struct SSFilterViewModel {
-    var payType: SSFilterPayType
+    var ageType: SSFilterAgeType
 
-    var minPerson: Int
-    var maxPerson: Int
-
-    var minAge: Int
-    var maxAge: Int
+    var personCount: Int
 }

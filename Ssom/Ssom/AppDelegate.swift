@@ -18,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        [GMSServices .provideAPIKey(PreDefine.GoogleMapKey)];
+        GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
+
+        (self.window!.rootViewController as! UINavigationController).navigationBar.barTintColor = UIColor.whiteColor()
+
         return true
     }
 

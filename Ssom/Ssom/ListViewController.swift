@@ -10,40 +10,39 @@ import UIKit
 import SDWebImage
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate {
-    @IBOutlet var chatListTableView: UITableView!
+    @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
 
-    var dataArray:[[String: AnyObject]]
+    var mainViewModel: SSMainViewModel
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
 
     init() {
-        self.dataArray = []
+        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true)
 
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.dataArray = []
+        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true)
 
         super.init(coder: aDecoder)
     }
 
-    convenience init(dataArray:[[String: AnyObject]]) {
+    convenience init(dataArray:[[String: AnyObject]], isSell: Bool) {
         self.init()
 
-        self.dataArray = dataArray
+        self.mainViewModel = SSMainViewModel(dataArray: dataArray, isSell: isSell)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        chatListTableView.delegate = self
-        chatListTableView.dataSource = self
 
-        chatListTableView.registerNib(UINib.init(nibName: "ListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell");
+        ssomListTableView.registerNib(UINib.init(nibName: "ListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell");
+
+        self.edgesForExtendedLayout = UIRectEdge.None;
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +57,53 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.setNavigationBarView()
+
         self.loadingData()
+    }
+
+    func setNavigationBarView() {
+        var naviTitleViewFrame:CGRect = self.navigationItem.titleView!.frame
+        naviTitleViewFrame = CGRectMake(naviTitleViewFrame.origin.x, naviTitleViewFrame.origin.y
+            , naviTitleViewFrame.size.width, 38)
+        self.navigationItem.titleView!.frame = naviTitleViewFrame
+
+        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1dep_toggle_on.png"))
+        titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
+        self.navigationItem.titleView!.addSubview(titleBackgroundView)
+
+        let btnNavi1: UIButton = UIButton(frame: CGRectMake(0, 0, 97, 38))
+        btnNavi1.setTitle("MAP", forState: .Normal)
+        btnNavi1.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
+        btnNavi1.selected = false
+        self.navigationItem.titleView!.addSubview(btnNavi1)
+
+        let btnNavi2: UIButton = UIButton(frame: CGRectMake(175-97, 0, 97, 38))
+        btnNavi2.setTitle("LIST", forState: .Normal)
+        btnNavi2.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+        btnNavi2.setBackgroundImage(UIImage(named: "1dep_toggle_off.png"), forState: .Selected)
+        btnNavi2.selected = true
+        self.navigationItem.titleView!.addSubview(btnNavi2)
+
+        if #available(iOS 8.2, *) {
+            btnNavi1.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+            btnNavi2.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+        } else {
+            // Fallback on earlier versions
+            btnNavi1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+            btnNavi2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+        }
+
+        self.navigationItem.leftBarButtonItem?.title = ""
+        self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
+    }
+
+    @IBAction func tapIPayButton(sender: AnyObject) {
+
+    }
+
+    @IBAction func tapYouPayButton(sender: AnyObject) {
+
     }
 
     @IBAction func tapFilterButton(sender: AnyObject) {
@@ -79,9 +124,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            wSelf?.chatListTableView.reloadData()
 //        }
 
-        print("result is : \(self.dataArray)")
+        print("result is : \(self.mainViewModel.dataArray)")
 
-        self.chatListTableView.reloadData()
+        self.ssomListTableView.reloadData()
     }
 
 // MARK:- SSListTableViewCellDelegate
@@ -105,7 +150,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! ListTableViewCell
 
-        let rowDict:[String: AnyObject] = dataArray[indexPath.row]
+        let rowDict:[String: AnyObject] = mainViewModel.dataArray[indexPath.row]
         if let content = rowDict["content"] as? String {
             print("content is \(content.stringByRemovingPercentEncoding)")
 
@@ -115,12 +160,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let imageUrl = rowDict["imageUrl"] as? String {
             print("imageUrl is \(imageUrl)")
 
-            cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl))
-            cell.profileImageView!.layer.cornerRadius = cell.profileImageView!.frame.size.height / 2;
-            cell.profileImageView!.layer.masksToBounds = true
-            cell.profileImageView!.layer.borderWidth = 0
+            SDWebImageDownloader.sharedDownloader().downloadImageWithURL(NSURL(string: imageUrl)
+                , options: SDWebImageDownloaderOptions.UseNSURLCache
+                , progress: nil
+                , completed: { [weak self] (image, data, error, finished) -> Void in
+                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
-            cell.profilImageUrl = imageUrl
+                    let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self!.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+
+                    cell.profileImageView!.image = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+
+                    cell.profilImageUrl = imageUrl
+            })
         }
 
         var memberInfoString:String = "";
@@ -149,7 +200,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count;
+        return mainViewModel.dataArray.count;
     }
 
 // MARK: - SSFilterViewDelegate

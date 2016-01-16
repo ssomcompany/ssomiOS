@@ -13,10 +13,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
 
+    @IBOutlet var btnIPayButton: UIButton!
+    @IBOutlet var iPayButtonBottomLineView: UIImageView!
+    @IBOutlet var btnYouPayButton: UIButton!
+    @IBOutlet var youPayButtonBottomLineView: UIImageView!
+
     var mainViewModel: SSMainViewModel
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
+
+    var needReload: Bool = false
 
     init() {
         self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true)
@@ -40,9 +47,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        ssomListTableView.registerNib(UINib.init(nibName: "ListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell");
+        ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell");
 
         self.edgesForExtendedLayout = UIRectEdge.None;
+
+        self.initView()
+    }
+
+    func initView() {
+        if self.mainViewModel.isSell {
+            self.tapIPayButton(self.btnIPayButton);
+        } else {
+            self.tapYouPayButton(self.btnYouPayButton);
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,10 +117,22 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapIPayButton(sender: AnyObject) {
 
+        self.btnIPayButton.selected = true;
+        self.iPayButtonBottomLineView.hidden = false;
+        self.btnYouPayButton.selected = false;
+        self.youPayButtonBottomLineView.hidden = true;
+
+        self.loadingData()
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
 
+        self.btnIPayButton.selected = false;
+        self.iPayButtonBottomLineView.hidden = true;
+        self.btnYouPayButton.selected = true;
+        self.youPayButtonBottomLineView.hidden = false;
+
+        self.loadingData()
     }
 
     @IBAction func tapFilterButton(sender: AnyObject) {
@@ -116,26 +145,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK: private
     func loadingData() {
-//        weak var wSelf = self
-//        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
-//            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
-//            print("result is : \(wSelf!.dataArray)")
-//
-//            wSelf?.chatListTableView.reloadData()
-//        }
+        if self.needReload {
 
-        print("result is : \(self.mainViewModel.dataArray)")
+            SSNetworkAPIClient.getPosts { [weak self] (responseObject) -> Void in
+                self!.mainViewModel.dataArray = responseObject as! [[String: AnyObject]]
+                print("result is : \(self!.mainViewModel.dataArray)")
 
-        self.ssomListTableView.reloadData()
+                self!.ssomListTableView.reloadData()
+            }
+        } else {
+            // initially loading
+            self.ssomListTableView.reloadData()
+
+            self.needReload = true;
+        }
     }
 
 // MARK:- SSListTableViewCellDelegate
     func tapProfileImage(sender: AnyObject, imageUrl: String) {
+        self.navigationController?.navigationBarHidden = true;
+        
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
-        self.navigationController?.navigationBarHidden = true;
         self.view.addSubview(self.profileImageView!)
     }
 
@@ -148,7 +181,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK:- UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! ListTableViewCell
+        let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
 
         let rowDict:[String: AnyObject] = mainViewModel.dataArray[indexPath.row]
         if let content = rowDict["content"] as? String {
@@ -160,18 +193,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let imageUrl = rowDict["imageUrl"] as? String {
             print("imageUrl is \(imageUrl)")
 
-            SDWebImageDownloader.sharedDownloader().downloadImageWithURL(NSURL(string: imageUrl)
-                , options: SDWebImageDownloaderOptions.UseNSURLCache
-                , progress: nil
-                , completed: { [weak self] (image, data, error, finished) -> Void in
-                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
+            cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
+                , placeholderImage: nil
+                , completed: { [weak self] (image, error, cacheType, url) -> Void in
 
-                    let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self!.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+                let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
-                    cell.profileImageView!.image = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self!.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
 
-                    cell.profilImageUrl = imageUrl
+                cell.profileImageView!.image = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
             })
+
+            cell.profilImageUrl = imageUrl
         }
 
         var memberInfoString:String = "";
@@ -193,10 +226,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.delegate = self
 
         return cell;
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return Util.convertScreenSize(false, size: 200, fromWidth: 750, fromHeight: 1334);
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

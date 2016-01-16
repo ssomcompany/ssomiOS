@@ -264,7 +264,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
                                 <rect key="frame" x="0.0" y="77" width="600" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -429,7 +429,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomInfoView" destination="4cE-r7-rmG" id="8hI-al-d6l"/>
+                        <outlet property="btnIPayButton" destination="OM2-Da-teJ" id="tQN-IK-V87"/>
+                        <outlet property="btnYouPayButton" destination="hYp-m4-vLX" id="fWq-z3-zxW"/>
+                        <outlet property="iPayButtonBottomLineView" destination="qLP-u4-evS" id="qbG-Dz-ees"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
+                        <outlet property="youPayButtonBottomLineView" destination="MFJ-b2-VZo" id="FtP-0C-Xjf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qE-7b-7m6" userLabel="First Responder" sceneMemberID="firstResponder"/>

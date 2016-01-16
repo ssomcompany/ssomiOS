@@ -7,26 +7,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jN3-Xd-2ok" customClass="ListTableViewCell" customModule="Ssom" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jN3-Xd-2ok" customClass="SSListTableViewCell" customModule="Ssom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jN3-Xd-2ok" id="57r-fi-ckc">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="93.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xq-QM-OnV" userLabel="ProfileImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Xq-QM-OnV" userLabel="ProfileImageView">
                         <rect key="frame" x="21" y="8" width="92" height="77.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="92" id="RfF-iB-8SE"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="방콕 중인 친구들입니다 ㅋㅋㅋㅋ 신촌까지는 나갈 수 있는데 노실 분 없나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5G7-6s-2iE" userLabel="DescriptionLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방콕 중인 친구들입니다 ㅋㅋㅋㅋ 신촌까지는 나갈 수 있는데 노실 분 없나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5G7-6s-2iE" userLabel="DescriptionLabel">
                         <rect key="frame" x="128" y="32" width="268" height="45.5"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR0-BV-lOa" userLabel="ImageTapButton">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR0-BV-lOa" userLabel="ImageTapButton">
                         <rect key="frame" x="21" y="8" width="92" height="77.5"/>
                         <connections>
                             <action selector="tapProfileImage:" destination="jN3-Xd-2ok" eventType="touchUpInside" id="3cn-2r-1B4"/>
@@ -36,14 +36,14 @@
                         <rect key="frame" x="128" y="8" width="266" height="17"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방금 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0A-Ua-y3D" userLabel="UpdatedTimeLabel">
-                                <rect key="frame" x="131" y="0.0" width="29" height="17"/>
+                                <rect key="frame" x="123" y="0.0" width="29" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                 <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21~25살 4명 있어요," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMB-B2-YMI" userLabel="MemberInfoLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="122" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <rect key="frame" x="0.0" y="0.0" width="114" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" red="0.90196078431372551" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -66,8 +66,8 @@
                             <constraint firstItem="Z0A-Ua-y3D" firstAttribute="leading" secondItem="fMB-B2-YMI" secondAttribute="trailing" constant="9" id="x1Z-u8-evz"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="line.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
-                        <rect key="frame" x="0.0" y="92" width="414" height="1"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
+                        <rect key="frame" x="0.0" y="92.5" width="414" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="crZ-Z8-q2E"/>
                         </constraints>

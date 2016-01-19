@@ -8,9 +8,13 @@
 
 import UIKit
 
-class SSWriteViewController: UIViewController, UITextViewDelegate {
+class SSWriteViewController: UIViewController, UITextViewDelegate
+, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var profileView: UIView!
+    @IBOutlet var imgDefaultProfile: UIImageView!
+    @IBOutlet var imgPhotoGradation: UIImageView!
+    @IBOutlet var imgProfile: UIImageView!
 
     let minWidthPayButton:CGFloat = 76
     let minHeightPayButton:CGFloat = 68
@@ -274,7 +278,11 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func tapCameraButton(sender: AnyObject) {
-        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.allowsEditing = true
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
 
     @IBAction func tapRegisterButton(sender: AnyObject) {
@@ -307,4 +315,17 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         }
     }
 
+
+// MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.imgDefaultProfile.hidden = true
+        self.imgPhotoGradation.hidden = true    
+
+        self.imgProfile.contentMode = .ScaleAspectFill
+        self.imgProfile.clipsToBounds = true
+        self.imgProfile.image = image
+        self.imgProfile.hidden = false
+
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

@@ -455,7 +455,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
                                 <rect key="frame" x="0.0" y="20" width="414" height="209"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoMapbg" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-Bg-Hra" userLabel="Profil Bg Image View">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoMapbg" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-Bg-Hra" userLabel="Profile Bg Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writePhotoArea.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bpd-P8-zgt" userLabel="Photo Area Bg Image View">
@@ -469,6 +469,9 @@
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-3P-WDp" userLabel="Photo Default Image View">
                                         <rect key="frame" x="57" y="41" width="192.5" height="120"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="23d-05-cuL" userLabel="Profile Image View">
+                                        <rect key="frame" x="42" y="9" width="222.5" height="191"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pF2-h3-AGe" userLabel="Camera Button">
                                         <rect key="frame" x="228" y="171" width="23" height="21"/>
@@ -522,6 +525,7 @@
                                 <constraints>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" constant="33.299999999999997" id="16A-A8-0FD"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w4W-pw-n2I" secondAttribute="top" constant="5" id="AjQ-AM-dwr"/>
+                                    <constraint firstItem="23d-05-cuL" firstAttribute="top" secondItem="Bpd-P8-zgt" secondAttribute="top" constant="9" id="BAk-cL-oeU"/>
                                     <constraint firstAttribute="bottom" secondItem="pF2-h3-AGe" secondAttribute="bottom" constant="17.100000000000001" id="CMa-f4-iuX"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="top" relation="lessThanOrEqual" secondItem="w4W-pw-n2I" secondAttribute="top" constant="20" id="DDY-r8-sGj"/>
                                     <constraint firstItem="gKC-ov-S6Q" firstAttribute="top" secondItem="HT6-Gk-hiB" secondAttribute="bottom" constant="7" id="Eqw-w3-Wny"/>
@@ -534,14 +538,17 @@
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="top" id="M94-fC-lkK"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="bottom" secondItem="lNy-3P-WDp" secondAttribute="bottom" constant="48" id="O5Y-B6-fz5"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="pF2-h3-AGe" secondAttribute="trailing" constant="22" id="SC1-7R-fcP"/>
+                                    <constraint firstItem="23d-05-cuL" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="leading" constant="9" id="T0h-pA-s75"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="lNy-3P-WDp" secondAttribute="leading" constant="-24" id="URa-ER-dbn"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="11" id="UuO-zs-9R2"/>
                                     <constraint firstAttribute="trailing" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="140" id="Zsj-7b-tqt"/>
+                                    <constraint firstItem="23d-05-cuL" firstAttribute="bottom" secondItem="Bpd-P8-zgt" secondAttribute="bottom" constant="-9" id="dao-Dk-t95"/>
                                     <constraint firstItem="gKC-ov-S6Q" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="11" id="edp-te-79Q"/>
                                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="gKC-ov-S6Q" secondAttribute="bottom" constant="29" id="gBK-OX-cd3"/>
                                     <constraint firstAttribute="trailing" secondItem="tfr-Bg-Hra" secondAttribute="trailing" id="hHp-nM-GJd"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="P9S-IU-A95" secondAttribute="trailing" constant="9" id="hu3-tL-3bl"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="P9S-IU-A95" secondAttribute="leading" constant="-9" id="phR-fN-VcM"/>
+                                    <constraint firstItem="23d-05-cuL" firstAttribute="trailing" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="-9" id="qcz-9T-J8G"/>
                                     <constraint firstItem="tfr-Bg-Hra" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" id="vi7-FN-RnJ"/>
                                     <constraint firstAttribute="bottom" secondItem="Bpd-P8-zgt" secondAttribute="bottom" id="wSB-t9-reE"/>
                                 </constraints>
@@ -868,6 +875,9 @@
                         <outlet property="constHeightYouPayButton" destination="bjN-fe-4dj" id="dhh-dk-mhl"/>
                         <outlet property="constWidthIPayButton" destination="p3z-cL-JJE" id="xlL-p0-do5"/>
                         <outlet property="constWidthYouPayButton" destination="rVF-x5-qDP" id="ufM-Xu-qLU"/>
+                        <outlet property="imgDefaultProfile" destination="lNy-3P-WDp" id="hYK-Aj-5UU"/>
+                        <outlet property="imgPhotoGradation" destination="P9S-IU-A95" id="tbw-Nt-Juv"/>
+                        <outlet property="imgProfile" destination="23d-05-cuL" id="cvd-rk-apt"/>
                         <outlet property="lbAge" destination="Ea0-FR-tNQ" id="Og3-ns-qpS"/>
                         <outlet property="lbAgeTrailingText" destination="miY-9s-Jb3" id="vrY-3C-nnN"/>
                         <outlet property="lbPeopleCount" destination="0HF-h6-nXu" id="a6m-ym-tdN"/>

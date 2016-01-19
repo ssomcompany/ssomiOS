@@ -20,10 +20,16 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var textView: UITextView!
     @IBOutlet var textGuideLabel: UILabel!
 
+    @IBOutlet var lbAge: UILabel!
+    @IBOutlet var lbAgeTrailingText: UILabel!
+
     @IBOutlet var ageButton1: UIButton!
     @IBOutlet var ageButton2: UIButton!
     @IBOutlet var ageButton3: UIButton!
     @IBOutlet var ageButton4: UIButton!
+
+    @IBOutlet var lbPeopleCount: UILabel!
+    @IBOutlet var lbPeopleCountTrailingText: UILabel!
 
     @IBOutlet var peopleButton1: UIButton!
     @IBOutlet var peopleButton2: UIButton!
@@ -64,6 +70,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton2.backgroundColor = UIColor.whiteColor()
         self.ageButton3.backgroundColor = UIColor.whiteColor()
         self.ageButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbAge.text = (self.ageButton1.titleLabel!.text)!+"반"
     }
 
     @IBAction func tapAgeButton2(sender: AnyObject) {
@@ -78,6 +86,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton2.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         self.ageButton3.backgroundColor = UIColor.whiteColor()
         self.ageButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbAge.text = (self.ageButton2.titleLabel!.text)!+"반"
     }
 
     @IBAction func tapAgeButton3(sender: AnyObject) {
@@ -92,6 +102,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton2.backgroundColor = UIColor.whiteColor()
         self.ageButton3.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         self.ageButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbAge.text = (self.ageButton3.titleLabel!.text)!+"반"
     }
 
     @IBAction func tapAgeButton4(sender: AnyObject) {
@@ -106,6 +118,72 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton2.backgroundColor = UIColor.whiteColor()
         self.ageButton3.backgroundColor = UIColor.whiteColor()
         self.ageButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+
+        self.lbAge.text = (self.ageButton4.titleLabel!.text)!
+    }
+
+    @IBAction func tapPeopleButton1(sender: AnyObject) {
+        self.textView.resignFirstResponder();
+
+        self.peopleButton1.selected = true;
+        self.peopleButton2.selected = false;
+        self.peopleButton3.selected = false;
+        self.peopleButton4.selected = false;
+
+        self.peopleButton1.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.peopleButton2.backgroundColor = UIColor.whiteColor()
+        self.peopleButton3.backgroundColor = UIColor.whiteColor()
+        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbPeopleCount.text = "1"
+    }
+
+    @IBAction func tapPeopleButton2(sender: AnyObject) {
+        self.textView.resignFirstResponder();
+
+        self.peopleButton1.selected = false;
+        self.peopleButton2.selected = true;
+        self.peopleButton3.selected = false;
+        self.peopleButton4.selected = false;
+
+        self.peopleButton1.backgroundColor = UIColor.whiteColor()
+        self.peopleButton2.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.peopleButton3.backgroundColor = UIColor.whiteColor()
+        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbPeopleCount.text = "2"
+    }
+
+    @IBAction func tapPeopleButton3(sender: AnyObject) {
+        self.textView.resignFirstResponder();
+
+        self.peopleButton1.selected = false;
+        self.peopleButton2.selected = false;
+        self.peopleButton3.selected = true;
+        self.peopleButton4.selected = false;
+
+        self.peopleButton1.backgroundColor = UIColor.whiteColor()
+        self.peopleButton2.backgroundColor = UIColor.whiteColor()
+        self.peopleButton3.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+
+        self.lbPeopleCount.text = "3"
+    }
+
+    @IBAction func tapPeopleButton4(sender: AnyObject) {
+        self.textView.resignFirstResponder();
+
+        self.peopleButton1.selected = false;
+        self.peopleButton2.selected = false;
+        self.peopleButton3.selected = false;
+        self.peopleButton4.selected = true;
+
+        self.peopleButton1.backgroundColor = UIColor.whiteColor()
+        self.peopleButton2.backgroundColor = UIColor.whiteColor()
+        self.peopleButton3.backgroundColor = UIColor.whiteColor()
+        self.peopleButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+
+        self.lbPeopleCount.text = "4+"
     }
 
     func switchTheme(isIPay:Bool) {

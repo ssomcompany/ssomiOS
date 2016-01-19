@@ -546,13 +546,28 @@
                                     <constraint firstAttribute="bottom" secondItem="Bpd-P8-zgt" secondAttribute="bottom" id="wSB-t9-reE"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 나이는 20대 초반 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Label">
-                                <rect key="frame" x="69" y="246" width="265" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 나이는 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Leading Text Label">
+                                <rect key="frame" x="69" y="246" width="68" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="u9S-wu-oW2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
+                                <rect key="frame" x="137" y="246" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
+                                <rect key="frame" x="194" y="246" width="40.5" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="kqz-o9-1BP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
@@ -596,7 +611,7 @@
                                         <state key="normal" title="20대 후">
                                             <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="icon_cof_press.png">
+                                        <state key="selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -640,8 +655,14 @@
                                     <constraint firstAttribute="height" constant="43" id="zi0-fq-onG"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Label">
-                                <rect key="frame" x="69" y="328" width="265" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
+                                <rect key="frame" x="69" y="328" width="7" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
+                                <rect key="frame" x="76" y="328" width="120.5" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="bTY-ct-QT1"/>
                                 </constraints>
@@ -663,6 +684,9 @@
                                         <state key="selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapPeopleButton1:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="B1o-nL-q4R"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pk-cD-fEN" userLabel="People Button2">
                                         <rect key="frame" x="104" y="1" width="102" height="41"/>
@@ -675,6 +699,9 @@
                                         <state key="selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapPeopleButton2:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="Jv3-Re-E9A"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6l-XD-moD" userLabel="People Button3">
                                         <rect key="frame" x="207" y="1" width="102" height="41"/>
@@ -684,9 +711,12 @@
                                         <state key="normal" title="3명">
                                             <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="icon_cof_press.png">
+                                        <state key="selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapPeopleButton3:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="qUI-op-iUS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1M-Rt-P8A" userLabel="People Button4">
                                         <rect key="frame" x="310" y="1" width="102.5" height="41"/>
@@ -699,6 +729,9 @@
                                         <state key="selected" backgroundImage="icon_all_perss.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapPeopleButton4:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="JiL-KE-ax4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -783,11 +816,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="h7x-sc-hgh" firstAttribute="leading" secondItem="0HF-h6-nXu" secondAttribute="trailing" id="0DR-Z4-cv1"/>
                             <constraint firstItem="h7x-sc-hgh" firstAttribute="top" secondItem="j1p-3P-eLe" secondAttribute="bottom" constant="15" id="1pI-9v-mGR"/>
                             <constraint firstItem="7iO-Re-L2o" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="bottom" constant="17" id="1sn-d9-gxS"/>
                             <constraint firstItem="w3U-71-a8X" firstAttribute="leading" secondItem="qpN-Tn-LzI" secondAttribute="leading" id="3yg-8f-pPa"/>
+                            <constraint firstItem="h7x-sc-hgh" firstAttribute="top" secondItem="0HF-h6-nXu" secondAttribute="top" id="51h-Z6-iTo"/>
                             <constraint firstItem="BVx-sx-d3O" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="68" id="6R3-Hm-1Hy"/>
-                            <constraint firstItem="h7x-sc-hgh" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="69" id="9G7-ur-LXL"/>
                             <constraint firstItem="l93-S8-Q3c" firstAttribute="width" secondItem="zJ2-h7-Pzq" secondAttribute="width" id="DhS-db-qlU"/>
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="46.399999999999999" id="Ek5-Gz-P5a"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="68" id="HEA-eK-imn"/>
@@ -798,20 +832,23 @@
                             <constraint firstAttribute="trailing" secondItem="BVx-sx-d3O" secondAttribute="trailing" constant="70" id="OLW-2V-3LW"/>
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BVx-sx-d3O" secondAttribute="bottom" constant="21" id="OV9-6i-T7n"/>
                             <constraint firstAttribute="trailing" secondItem="l93-S8-Q3c" secondAttribute="trailing" constant="46.899999999999999" id="P3h-gA-hAL"/>
-                            <constraint firstAttribute="trailing" secondItem="7iO-Re-L2o" secondAttribute="trailing" constant="80" id="PLo-Nw-40I"/>
                             <constraint firstItem="l93-S8-Q3c" firstAttribute="leading" secondItem="zJ2-h7-Pzq" secondAttribute="trailing" constant="9" id="Qzu-Wy-GDS"/>
                             <constraint firstItem="j1p-3P-eLe" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="SDC-jb-65P"/>
+                            <constraint firstItem="miY-9s-Jb3" firstAttribute="leading" secondItem="Ea0-FR-tNQ" secondAttribute="trailing" id="TNB-do-UUw"/>
                             <constraint firstItem="w4W-pw-n2I" firstAttribute="top" secondItem="Dtw-3W-zIC" secondAttribute="bottom" id="U2P-Pj-taN"/>
                             <constraint firstAttribute="trailing" secondItem="w4W-pw-n2I" secondAttribute="trailing" id="V5W-mt-D8W"/>
+                            <constraint firstItem="Ea0-FR-tNQ" firstAttribute="top" secondItem="7iO-Re-L2o" secondAttribute="top" id="VUo-zm-tQl"/>
                             <constraint firstItem="0Yy-Wf-yzs" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="68" id="XBn-91-PCB"/>
                             <constraint firstItem="j1p-3P-eLe" firstAttribute="top" secondItem="7iO-Re-L2o" secondAttribute="bottom" constant="7" id="bG7-Cn-hHc"/>
+                            <constraint firstItem="Ea0-FR-tNQ" firstAttribute="leading" secondItem="7iO-Re-L2o" secondAttribute="trailing" id="cuA-WX-zLy"/>
                             <constraint firstItem="7iO-Re-L2o" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="69" id="d5S-d0-Rrl"/>
-                            <constraint firstAttribute="trailing" secondItem="h7x-sc-hgh" secondAttribute="trailing" constant="80" id="f4j-Z2-LCJ"/>
                             <constraint firstAttribute="trailing" secondItem="qpN-Tn-LzI" secondAttribute="trailing" constant="70" id="fXC-z8-O9l"/>
                             <constraint firstItem="BVx-sx-d3O" firstAttribute="top" secondItem="qpN-Tn-LzI" secondAttribute="bottom" constant="21" id="fho-lp-AVb"/>
+                            <constraint firstItem="0HF-h6-nXu" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="69" id="hAj-xg-kac"/>
                             <constraint firstItem="886-fy-T46" firstAttribute="top" secondItem="l93-S8-Q3c" secondAttribute="bottom" constant="24" id="l3u-vs-Uu6"/>
                             <constraint firstItem="0Yy-Wf-yzs" firstAttribute="top" secondItem="1gQ-Ct-aeF" secondAttribute="bottom" constant="23" id="r1J-Ba-1ky"/>
                             <constraint firstItem="1gQ-Ct-aeF" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="r5n-1b-UbU"/>
+                            <constraint firstItem="miY-9s-Jb3" firstAttribute="top" secondItem="7iO-Re-L2o" secondAttribute="top" id="rcT-LY-KrW"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="top" secondItem="0Yy-Wf-yzs" secondAttribute="bottom" constant="11" id="se8-ab-Y1M"/>
                             <constraint firstItem="w4W-pw-n2I" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="t0T-1t-J6z"/>
                             <constraint firstItem="1gQ-Ct-aeF" firstAttribute="top" secondItem="h7x-sc-hgh" secondAttribute="bottom" constant="7" id="ulp-9M-Rba"/>
@@ -831,6 +868,10 @@
                         <outlet property="constHeightYouPayButton" destination="bjN-fe-4dj" id="dhh-dk-mhl"/>
                         <outlet property="constWidthIPayButton" destination="p3z-cL-JJE" id="xlL-p0-do5"/>
                         <outlet property="constWidthYouPayButton" destination="rVF-x5-qDP" id="ufM-Xu-qLU"/>
+                        <outlet property="lbAge" destination="Ea0-FR-tNQ" id="Og3-ns-qpS"/>
+                        <outlet property="lbAgeTrailingText" destination="miY-9s-Jb3" id="vrY-3C-nnN"/>
+                        <outlet property="lbPeopleCount" destination="0HF-h6-nXu" id="a6m-ym-tdN"/>
+                        <outlet property="lbPeopleCountTrailingText" destination="h7x-sc-hgh" id="iyd-GD-v7w"/>
                         <outlet property="peopleButton1" destination="Q13-hH-yT4" id="EBY-do-giz"/>
                         <outlet property="peopleButton2" destination="3Pk-cD-fEN" id="AnH-Ix-BQi"/>
                         <outlet property="peopleButton3" destination="v6l-XD-moD" id="bbY-05-7xO"/>
@@ -873,7 +914,6 @@
         <image name="filterBg.png" width="234" height="68"/>
         <image name="heartWhite" width="30" height="27"/>
         <image name="icon_all_perss.png" width="321" height="175"/>
-        <image name="icon_cof_press.png" width="321" height="175"/>
         <image name="locationfound.png" width="55" height="55"/>
         <image name="mapShadow.png" width="621" height="115"/>
         <image name="oval4Fill30.png" width="112" height="112"/>

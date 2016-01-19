@@ -8,15 +8,8 @@
 
 import Foundation
 
-enum SSFilterAgeType {
-    case k20begin
-    case k20middle
-    case k20late
-    case k30over
-}
-
 public struct SSFilterViewModel {
-    var ageType: SSFilterAgeType
+    var ageType: SSAgeType
 
     var personCount: Int
 }

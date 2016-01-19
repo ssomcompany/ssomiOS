@@ -10,11 +10,6 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-enum SStype : String {
-    case SSOM = "ssom"
-    case SSOSEYO = "ssoseyo"
-}
-
 class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
@@ -229,16 +224,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         if (segue.identifier == "SSListViewSegue") {
             let vc: ListViewController = segue.destinationViewController as! ListViewController
 
-            vc.mainViewModel = SSMainViewModel(dataArray: self.dataArray, isSell: self.btnIPay.selected)
+            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+            vc.mainViewModel = SSMainViewModel(dataArray: self.dataArray, isSell: self.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
         }
-    }
-
-    func getDistance(locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
-
-        let location1: CLLocation = CLLocation(latitude: locationFrom.latitude, longitude: locationFrom.longitude)
-        let location2: CLLocation = CLLocation(latitude: locationTo.latitude, longitude: locationTo.longitude)
-
-        return location2.distanceFromLocation(location1)
     }
 
 // MARK: - GMSMapViewDelegate
@@ -257,7 +245,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
 
-            let distance: Int = Int(self.getDistance(nowLocation, locationTo: tempLocation))
+            let distance: Int = Int(Util.getDistance(nowLocation, locationTo: tempLocation))
 
             var dataDictWithDistance: Dictionary = dataDict
             dataDictWithDistance["distance"] = distance

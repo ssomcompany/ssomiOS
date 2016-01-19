@@ -8,8 +8,16 @@
 
 import Foundation
 
+enum SStype : String {
+    case SSOM = "ssom"
+    case SSOSEYO = "ssoseyo"
+}
+
 public struct SSMainViewModel {
     var dataArray: [[String: AnyObject]]
 
     var isSell: Bool
+
+    var nowLatitude: Double
+    var nowLongitude: Double
 }

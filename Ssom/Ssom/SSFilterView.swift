@@ -150,26 +150,26 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapApplyButton(sender: AnyObject) {
-        var filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .k20begin, personCount: 0)
+        var filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeEarly20, personCount: 0)
         if self.filter20beginAgeButton.selected {
-            filterValue.ageType = .k20begin
+            filterValue.ageType = .AgeEarly20
         } else if self.filter20middleAgeButton.selected {
-            filterValue.ageType = .k20middle
+            filterValue.ageType = .AgeMiddle20
         } else if self.filter20lateAgeButton.selected {
-            filterValue.ageType = .k20late
+            filterValue.ageType = .AgeLate20
         } else if self.filter30overAgeButton.selected {
-            filterValue.ageType = .k30over
+            filterValue.ageType = .Age30
         }
 
         // how many people
         if self.filter1PersonButton.selected {
-            filterValue.personCount = 1
+            filterValue.personCount = SSPeopleCountType.OnePerson.rawValue
         } else if self.filter2PeopleButton.selected {
-            filterValue.personCount = 2
+            filterValue.personCount = SSPeopleCountType.TwoPeople.rawValue
         } else if self.filter3PeopleButton.selected {
-            filterValue.personCount = 3
+            filterValue.personCount = SSPeopleCountType.ThreePeople.rawValue
         } else if self.filter4PeopleButton.selected {
-            filterValue.personCount = 4
+            filterValue.personCount = SSPeopleCountType.OverFourPeople.rawValue
         }
 
         if self.delegate?.respondsToSelector("applyFilter") != nil {

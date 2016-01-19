@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 public class Util {
     class func convertScreenSize(isWidth:Bool, size:Float, fromWidth:CGFloat, fromHeight:CGFloat) -> CGFloat {
@@ -37,6 +38,14 @@ public class Util {
         } else {
             return "\(distance)m";
         }
+    }
+
+    class func getDistance(locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
+
+        let location1: CLLocation = CLLocation(latitude: locationFrom.latitude, longitude: locationFrom.longitude)
+        let location2: CLLocation = CLLocation(latitude: locationTo.latitude, longitude: locationTo.longitude)
+
+        return location2.distanceFromLocation(location1)
     }
 }
 

@@ -28,7 +28,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨 탐색기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHI-JE-2OX">
                             <rect key="frame" x="24" y="20" width="451" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="몇 살이 좋아?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFI-w6-8e1">
@@ -38,10 +38,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJR-Qi-8AN" userLabel="Filter Age Button Bar View">
-                            <rect key="frame" x="24" y="84" width="460" height="35"/>
+                            <rect key="frame" x="24" y="84" width="461" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li3-09-JyG" userLabel="Age Button1">
-                                    <rect key="frame" x="1" y="1" width="114.5" height="33"/>
+                                    <rect key="frame" x="1" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -86,7 +86,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKO-0P-omN" userLabel="Age Button4">
-                                    <rect key="frame" x="344" y="1" width="114.5" height="33"/>
+                                    <rect key="frame" x="346" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -107,7 +107,7 @@
                                 <constraint firstItem="57Y-uB-ZM1" firstAttribute="leading" secondItem="Li3-09-JyG" secondAttribute="trailing" constant="1" id="8iv-Pl-59n"/>
                                 <constraint firstItem="L0G-oh-iLo" firstAttribute="width" secondItem="Li3-09-JyG" secondAttribute="width" id="9Bl-yD-yaW"/>
                                 <constraint firstItem="tKO-0P-omN" firstAttribute="width" secondItem="Li3-09-JyG" secondAttribute="width" id="FeS-2K-Z0l"/>
-                                <constraint firstItem="L0G-oh-iLo" firstAttribute="trailing" secondItem="tKO-0P-omN" secondAttribute="leading" constant="1" id="HIf-A6-2Vt"/>
+                                <constraint firstItem="L0G-oh-iLo" firstAttribute="trailing" secondItem="tKO-0P-omN" secondAttribute="leading" constant="-1" id="HIf-A6-2Vt"/>
                                 <constraint firstItem="tKO-0P-omN" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" constant="1" id="KxO-5t-uYW"/>
                                 <constraint firstItem="57Y-uB-ZM1" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="top" constant="1" id="MRP-al-Ktp"/>
                                 <constraint firstAttribute="bottom" secondItem="tKO-0P-omN" secondAttribute="bottom" constant="1" id="PXc-ia-uD4"/>
@@ -130,10 +130,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-gb-If4" userLabel="Filter People Button Bar View">
-                            <rect key="frame" x="23" y="156" width="461" height="35"/>
+                            <rect key="frame" x="24" y="156" width="461" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R37-GD-UBy" userLabel="People Button1">
-                                    <rect key="frame" x="1" y="1" width="114.5" height="33"/>
+                                    <rect key="frame" x="1" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -148,7 +148,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62b-pi-hJ9" userLabel="People Button2">
-                                    <rect key="frame" x="116.5" y="1" width="114" height="33"/>
+                                    <rect key="frame" x="116" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -163,7 +163,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ7-ZI-R4n" userLabel="People Button3">
-                                    <rect key="frame" x="231.5" y="1" width="114.5" height="33"/>
+                                    <rect key="frame" x="231" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -178,7 +178,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfS-OS-msB" userLabel="People Button4">
-                                    <rect key="frame" x="345.5" y="1" width="114.5" height="33"/>
+                                    <rect key="frame" x="346" y="1" width="114" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -195,7 +195,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="lJ7-ZI-R4n" firstAttribute="trailing" secondItem="FfS-OS-msB" secondAttribute="leading" constant="1" id="1iq-4i-2zL"/>
+                                <constraint firstItem="lJ7-ZI-R4n" firstAttribute="trailing" secondItem="FfS-OS-msB" secondAttribute="leading" constant="-1" id="1iq-4i-2zL"/>
                                 <constraint firstItem="lJ7-ZI-R4n" firstAttribute="leading" secondItem="62b-pi-hJ9" secondAttribute="trailing" constant="1" id="9cf-tE-ZLt"/>
                                 <constraint firstItem="R37-GD-UBy" firstAttribute="leading" secondItem="jOa-gb-If4" secondAttribute="leading" constant="1" id="Ku3-8e-pGd"/>
                                 <constraint firstItem="R37-GD-UBy" firstAttribute="height" secondItem="62b-pi-hJ9" secondAttribute="height" id="PuX-qh-srm"/>
@@ -245,17 +245,17 @@
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="top" secondItem="HHI-JE-2OX" secondAttribute="bottom" constant="21" id="BqB-tJ-mE0"/>
                         <constraint firstAttribute="height" constant="283" id="MgH-tJ-onF"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="Rfl-8k-CNq"/>
-                        <constraint firstAttribute="trailing" secondItem="jOa-gb-If4" secondAttribute="trailing" constant="29" id="UUt-hO-Fsc"/>
+                        <constraint firstAttribute="trailing" secondItem="jOa-gb-If4" secondAttribute="trailing" constant="28" id="UUt-hO-Fsc"/>
                         <constraint firstAttribute="trailing" secondItem="rBP-xd-zDR" secondAttribute="trailing" constant="40" id="VEY-31-hhc"/>
                         <constraint firstItem="HHI-JE-2OX" firstAttribute="top" secondItem="084-nz-SrR" secondAttribute="top" constant="20" id="VkK-ov-Szv"/>
                         <constraint firstItem="pGH-nG-dgi" firstAttribute="leading" secondItem="B0P-n4-Vsg" secondAttribute="trailing" constant="25" id="Xr4-F5-a36"/>
-                        <constraint firstItem="jOa-gb-If4" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="Z3H-Dl-eO6"/>
+                        <constraint firstItem="jOa-gb-If4" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="Z3H-Dl-eO6"/>
                         <constraint firstAttribute="trailing" secondItem="pGH-nG-dgi" secondAttribute="trailing" constant="29" id="a2g-Bq-VHw"/>
                         <constraint firstAttribute="trailing" secondItem="SFI-w6-8e1" secondAttribute="trailing" constant="40" id="baa-cn-V4M"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="top" secondItem="SFI-w6-8e1" secondAttribute="bottom" constant="6" id="cYi-51-qfu"/>
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="faZ-dQ-u2M"/>
                         <constraint firstAttribute="bottom" secondItem="pGH-nG-dgi" secondAttribute="bottom" constant="23" id="ilP-D7-cTc"/>
-                        <constraint firstAttribute="trailing" secondItem="pJR-Qi-8AN" secondAttribute="trailing" constant="29" id="iog-jh-m3E"/>
+                        <constraint firstAttribute="trailing" secondItem="pJR-Qi-8AN" secondAttribute="trailing" constant="28" id="iog-jh-m3E"/>
                         <constraint firstItem="HHI-JE-2OX" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="jwv-2q-zHR"/>
                         <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" id="onz-ux-gbH"/>
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="bottom" constant="15" id="u6X-VY-QnU"/>

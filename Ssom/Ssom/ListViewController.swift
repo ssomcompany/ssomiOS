@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import SDWebImage
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate {
@@ -26,13 +27,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var needReload: Bool = false
 
     init() {
-        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true)
+        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true, nowLatitude: 0, nowLongitude: 0)
 
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true)
+        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true, nowLatitude: 0, nowLongitude: 0)
 
         super.init(coder: aDecoder)
     }
@@ -40,7 +41,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     convenience init(dataArray:[[String: AnyObject]], isSell: Bool) {
         self.init()
 
-        self.mainViewModel = SSMainViewModel(dataArray: dataArray, isSell: isSell)
+        self.mainViewModel = SSMainViewModel(dataArray: dataArray, isSell: isSell, nowLatitude: 0, nowLongitude: 0)
     }
 
     override func viewDidLoad() {
@@ -122,6 +123,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.btnYouPayButton.selected = false;
         self.youPayButtonBottomLineView.hidden = true;
 
+        self.mainViewModel.isSell = true;
+
         self.loadingData()
     }
 
@@ -131,6 +134,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.iPayButtonBottomLineView.hidden = true;
         self.btnYouPayButton.selected = true;
         self.youPayButtonBottomLineView.hidden = false;
+
+        self.mainViewModel.isSell = false;
 
         self.loadingData()
     }
@@ -151,20 +156,42 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self!.mainViewModel.dataArray = responseObject as! [[String: AnyObject]]
                 print("result is : \(self!.mainViewModel.dataArray)")
 
-                self!.ssomListTableView.reloadData()
+                self!.filterData()
             }
         } else {
             // initially loading
-            self.ssomListTableView.reloadData()
+            self.filterData()
 
             self.needReload = true;
         }
     }
 
+    func filterData() {
+        var tempDatas: [[String: AnyObject]] = []
+
+        let ssomType: SStype
+        if self.mainViewModel.isSell {
+            ssomType = .SSOM
+        } else {
+            ssomType = .SSOSEYO
+        }
+
+        for dataDict: [String: AnyObject] in self.mainViewModel.dataArray {
+            let ssomString = dataDict["ssom"] as! String
+            if ssomString == ssomType.rawValue {
+                tempDatas.append(dataDict)
+            }
+        }
+
+        self.mainViewModel.dataArray = tempDatas
+
+        self.ssomListTableView.reloadData()
+    }
+
 // MARK:- SSListTableViewCellDelegate
     func tapProfileImage(sender: AnyObject, imageUrl: String) {
         self.navigationController?.navigationBarHidden = true;
-        
+
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
@@ -220,6 +247,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.memberInfoLabel.text = memberInfoString
 
         if let distance = rowDict["distance"] as? Int {
+            cell.distanceLabel.text = Util.getDistanceString(distance)
+        } else {
+            let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)
+            let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: rowDict["latitude"] as! CLLocationDegrees, longitude: rowDict["longitude"] as! CLLocationDegrees)
+
+            let distance: Int = Int(Util.getDistance(nowCoordinate, locationTo: ssomCoordinate))
+
             cell.distanceLabel.text = Util.getDistanceString(distance)
         }
 

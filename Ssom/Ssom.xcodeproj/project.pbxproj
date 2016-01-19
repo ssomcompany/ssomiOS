@@ -247,6 +247,7 @@
 		97DE8A301C4961450043B8E2 /* writePhotoArea.png in Resources */ = {isa = PBXBuildFile; fileRef = 97DE89611C4961450043B8E2 /* writePhotoArea.png */; };
 		97DE8A311C4961450043B8E2 /* writePhotoArea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97DE89621C4961450043B8E2 /* writePhotoArea@2x.png */; };
 		97DE8A321C4961450043B8E2 /* writePhotoArea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97DE89631C4961450043B8E2 /* writePhotoArea@3x.png */; };
+		97DE8A341C4B802F0043B8E2 /* SSWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE8A331C4B802F0043B8E2 /* SSWriteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -531,6 +532,7 @@
 		97DE89611C4961450043B8E2 /* writePhotoArea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writePhotoArea.png; path = Resource/writePhotoArea.png; sourceTree = "<group>"; };
 		97DE89621C4961450043B8E2 /* writePhotoArea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@2x.png"; path = "Resource/writePhotoArea@2x.png"; sourceTree = "<group>"; };
 		97DE89631C4961450043B8E2 /* writePhotoArea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@3x.png"; path = "Resource/writePhotoArea@3x.png"; sourceTree = "<group>"; };
+		97DE8A331C4B802F0043B8E2 /* SSWriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSWriteViewModel.swift; path = ViewModel/SSWriteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +806,7 @@
 			children = (
 				973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */,
 				97DE88921C426AC70043B8E2 /* SSMainViewModel.swift */,
+				97DE8A331C4B802F0043B8E2 /* SSWriteViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1328,6 +1331,7 @@
 				973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* SSChatViewController.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
+				97DE8A341C4B802F0043B8E2 /* SSWriteViewModel.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
 				973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */,
 				979A4A031BF4525A00FAFB21 /* Define.swift in Sources */,

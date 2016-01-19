@@ -27,21 +27,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var needReload: Bool = false
 
     init() {
-        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true, nowLatitude: 0, nowLongitude: 0)
+        self.mainViewModel = SSMainViewModel()
 
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.mainViewModel = SSMainViewModel(dataArray: [], isSell:true, nowLatitude: 0, nowLongitude: 0)
+        self.mainViewModel = SSMainViewModel()
 
         super.init(coder: aDecoder)
     }
 
-    convenience init(dataArray:[[String: AnyObject]], isSell: Bool) {
+    convenience init(datas:[[String: AnyObject]], isSell: Bool) {
         self.init()
 
-        self.mainViewModel = SSMainViewModel(dataArray: dataArray, isSell: isSell, nowLatitude: 0, nowLongitude: 0)
+        self.mainViewModel = SSMainViewModel(datas: datas, isSell: isSell)
     }
 
     override func viewDidLoad() {
@@ -116,6 +116,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if (segue.identifier == "SSWriteViewSegueFromList") {
+            let vc: SSWriteViewController = segue.destinationViewController as! SSWriteViewController
+
+            vc.writeViewModel.myLatitude = self.mainViewModel.nowLatitude
+            vc.writeViewModel.myLongitude = self.mainViewModel.nowLongitude
+        }
+    }
+
     @IBAction func tapIPayButton(sender: AnyObject) {
 
         self.btnIPayButton.selected = true;
@@ -153,8 +163,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if self.needReload {
 
             SSNetworkAPIClient.getPosts { [weak self] (responseObject) -> Void in
-                self!.mainViewModel.dataArray = responseObject as! [[String: AnyObject]]
-                print("result is : \(self!.mainViewModel.dataArray)")
+                self!.mainViewModel.datas = responseObject as! [[String: AnyObject]]
+                print("result is : \(self!.mainViewModel.datas)")
 
                 self!.filterData()
             }
@@ -169,21 +179,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func filterData() {
         var tempDatas: [[String: AnyObject]] = []
 
-        let ssomType: SStype
+        let ssomType: SSType
         if self.mainViewModel.isSell {
             ssomType = .SSOM
         } else {
             ssomType = .SSOSEYO
         }
 
-        for dataDict: [String: AnyObject] in self.mainViewModel.dataArray {
+        for dataDict: [String: AnyObject] in self.mainViewModel.datas {
             let ssomString = dataDict["ssom"] as! String
             if ssomString == ssomType.rawValue {
                 tempDatas.append(dataDict)
             }
         }
 
-        self.mainViewModel.dataArray = tempDatas
+        self.mainViewModel.datas = tempDatas
 
         self.ssomListTableView.reloadData()
     }
@@ -210,7 +220,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
 
-        let rowDict:[String: AnyObject] = mainViewModel.dataArray[indexPath.row]
+        let rowDict:[String: AnyObject] = mainViewModel.datas[indexPath.row]
         if let content = rowDict["content"] as? String {
             print("content is \(content.stringByRemovingPercentEncoding)")
 
@@ -252,7 +262,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)
             let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: rowDict["latitude"] as! CLLocationDegrees, longitude: rowDict["longitude"] as! CLLocationDegrees)
 
-            let distance: Int = Int(Util.getDistance(nowCoordinate, locationTo: ssomCoordinate))
+            let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
 
             cell.distanceLabel.text = Util.getDistanceString(distance)
         }
@@ -263,7 +273,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainViewModel.dataArray.count;
+        return mainViewModel.datas.count;
     }
 
 // MARK: - SSFilterViewDelegate

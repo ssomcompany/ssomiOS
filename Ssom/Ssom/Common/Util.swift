@@ -40,7 +40,7 @@ public class Util {
         }
     }
 
-    class func getDistance(locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
+    class func getDistance(locationFrom locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
 
         let location1: CLLocation = CLLocation(latitude: locationFrom.latitude, longitude: locationFrom.longitude)
         let location2: CLLocation = CLLocation(latitude: locationTo.latitude, longitude: locationTo.longitude)

@@ -20,24 +20,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     @IBOutlet var imageYouPayButtonLineView: UIImageView!
     
     var locationManager: CLLocationManager!
-    var dataArray: [[String: AnyObject]]
+    var datas: [[String: AnyObject]]
 
     var filterView: SSFilterView!
 
     init() {
-        self.dataArray = []
+        self.datas = []
 
         super.init(nibName: nil, bundle: nil)
     }
 
-    convenience init(dataArray:[[String: AnyObject]]) {
+    convenience init(datas:[[String: AnyObject]]) {
         self.init()
 
-        self.dataArray = dataArray
+        self.datas = datas
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.dataArray = []
+        self.datas = []
 
         super.init(coder: aDecoder)
     }
@@ -71,8 +71,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     func loadingData() {
         weak var wSelf: MainViewController? = self
         SSNetworkAPIClient.getPosts { (responseObject) -> Void in
-            wSelf!.dataArray = responseObject as! [[String: AnyObject]]
-            print("result is : \(wSelf!.dataArray)")
+            wSelf!.datas = responseObject as! [[String: AnyObject]]
+            print("result is : \(wSelf!.datas)")
 
             wSelf!.showMarkers()
         }
@@ -145,7 +145,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
         mainView.clear()
 
-        for dataDict in self.dataArray {
+        for dataDict in self.datas {
             let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
             let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
 
@@ -153,7 +153,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             let sellString: String = dataDict["ssom"] as! String
             var isSell = false;
-            if sellString == SStype.SSOM.rawValue {
+            if sellString == SSType.SSOM.rawValue {
                 isSell = true
             } else {
                 isSell = false
@@ -225,7 +225,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             let vc: ListViewController = segue.destinationViewController as! ListViewController
 
             let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
-            vc.mainViewModel = SSMainViewModel(dataArray: self.dataArray, isSell: self.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+            vc.mainViewModel = SSMainViewModel(datas: self.datas, isSell: self.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+        }
+
+        if (segue.identifier == "SSWriteViewSegueFromMain") {
+            let vc: SSWriteViewController = segue.destinationViewController as! SSWriteViewController
+
+            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+            vc.writeViewModel.myLatitude = nowLocation.latitude
+            vc.writeViewModel.myLongitude = nowLocation.longitude
         }
     }
 
@@ -238,18 +246,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         print("now finished to move the map camera! : \(position)")
 
         var index: Int = 0;
-        for dataDict in self.dataArray {
+        for dataDict in self.datas {
             let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
             let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
 
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
 
-            let distance: Int = Int(Util.getDistance(nowLocation, locationTo: tempLocation))
+            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
             var dataDictWithDistance: Dictionary = dataDict
             dataDictWithDistance["distance"] = distance
-            self.dataArray[index] = dataDictWithDistance
+            self.datas[index] = dataDictWithDistance
             
             index++
         }

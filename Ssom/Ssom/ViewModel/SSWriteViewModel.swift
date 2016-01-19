@@ -10,10 +10,10 @@ import Foundation
 
 enum SSAgeType: Int
 {
-    case AgeEarly20 = 1
-    case AgeMiddle20
-    case AgeLate20
-    case Age30
+    case AgeEarly20 = 20
+    case AgeMiddle20 = 24
+    case AgeLate20 = 27
+    case Age30 = 30
 }
 
 enum SSPeopleCountType: Int
@@ -26,6 +26,77 @@ enum SSPeopleCountType: Int
 
 public struct SSWriteViewModel
 {
-    var ageType: SSAgeType
-    var peopleCountType: SSPeopleCountType
+    var userId: String      //userId
+
+    var content: String     //content
+
+    var peopleCountType: SSPeopleCountType  //userCount
+    var ageType: SSAgeType  //minAge, maxAge
+
+    var profilePhotoUrl: String  //imageUrl
+
+    var myLatitude: Double  //latitude
+    var myLongitude: Double //longitude
+
+    var menuType: String    //category
+
+    var ssomType: SSType    //ssom
+
+    init() {
+        userId = ""
+
+        content = ""
+
+        peopleCountType = .OnePerson
+
+        ageType = .AgeEarly20
+
+        profilePhotoUrl = ""
+
+        myLatitude = 0
+        myLongitude = 0
+
+        menuType = "" //data["menu"] as! String
+
+        ssomType = .SSOM
+    }
+
+    init(userId: String
+        , content: String
+        , peopleCount: SSPeopleCountType
+        , age: SSAgeType
+        , profilePhotoUrl: String
+        , myLatitude: Double
+        , myLongitude: Double
+        , isSell: Bool)
+    {
+        self.userId = userId
+        self.content = content
+        self.peopleCountType = peopleCount
+        self.ageType = age
+        self.profilePhotoUrl = profilePhotoUrl
+        self.myLatitude = myLatitude
+        self.myLongitude = myLongitude
+        self.menuType = ""
+        self.ssomType = isSell ? .SSOM : .SSOSEYO
+    }
+
+    init(data: [String: AnyObject]) {
+        userId = data["userId"] as! String
+
+        content = data["content"] as! String
+
+        peopleCountType = data["peopleCount"] as! SSPeopleCountType
+
+        ageType = data["age"] as! SSAgeType
+
+        profilePhotoUrl = data["profilePhotoUrl"] as! String
+
+        myLatitude = data["latitude"] as! Double
+        myLongitude = data["longitude"] as! Double
+
+        menuType = "" //data["menu"] as! String
+
+        ssomType = data["ssomType"] as! SSType
+    }
 }

@@ -47,6 +47,20 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
 
     var isIPay:Bool = true
 
+    var writeViewModel: SSWriteViewModel
+
+    init() {
+        self.writeViewModel = SSWriteViewModel()
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        self.writeViewModel = SSWriteViewModel()
+
+        super.init(coder: aDecoder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,6 +86,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbAge.text = (self.ageButton1.titleLabel!.text)!+"반"
+
+        self.writeViewModel.ageType = .AgeEarly20
     }
 
     @IBAction func tapAgeButton2(sender: AnyObject) {
@@ -88,6 +104,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbAge.text = (self.ageButton2.titleLabel!.text)!+"반"
+
+        self.writeViewModel.ageType = .AgeMiddle20
     }
 
     @IBAction func tapAgeButton3(sender: AnyObject) {
@@ -104,6 +122,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbAge.text = (self.ageButton3.titleLabel!.text)!+"반"
+
+        self.writeViewModel.ageType = .AgeLate20
     }
 
     @IBAction func tapAgeButton4(sender: AnyObject) {
@@ -120,6 +140,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.ageButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
 
         self.lbAge.text = (self.ageButton4.titleLabel!.text)!
+
+        self.writeViewModel.ageType = .Age30
     }
 
     @IBAction func tapPeopleButton1(sender: AnyObject) {
@@ -136,6 +158,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.peopleButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbPeopleCount.text = "1"
+
+        self.writeViewModel.peopleCountType = .OnePerson
     }
 
     @IBAction func tapPeopleButton2(sender: AnyObject) {
@@ -152,6 +176,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.peopleButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbPeopleCount.text = "2"
+
+        self.writeViewModel.peopleCountType = .TwoPeople
     }
 
     @IBAction func tapPeopleButton3(sender: AnyObject) {
@@ -168,6 +194,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.peopleButton4.backgroundColor = UIColor.whiteColor()
 
         self.lbPeopleCount.text = "3"
+
+        self.writeViewModel.peopleCountType = .ThreePeople
     }
 
     @IBAction func tapPeopleButton4(sender: AnyObject) {
@@ -184,6 +212,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
         self.peopleButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
 
         self.lbPeopleCount.text = "4+"
+
+        self.writeViewModel.peopleCountType = .OverFourPeople
     }
 
     func switchTheme(isIPay:Bool) {
@@ -234,10 +264,12 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func tapIPayButton(sender: AnyObject) {
+        self.writeViewModel.ssomType = .SSOM
         self.switchTheme(true)
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
+        self.writeViewModel.ssomType = .SSOSEYO
         self.switchTheme(false)
     }
 
@@ -246,6 +278,9 @@ class SSWriteViewController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func tapRegisterButton(sender: AnyObject) {
+        self.writeViewModel.userId = ""
+        self.writeViewModel.content = self.textView.text
+
         self.navigationController!.popViewControllerAnimated(true)
     }
 

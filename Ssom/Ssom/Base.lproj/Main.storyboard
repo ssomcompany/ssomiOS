@@ -128,7 +128,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="W7J-dT-Mhm" kind="show" id="f3i-A6-4bp"/>
+                                    <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="f3i-A6-4bp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
@@ -374,7 +374,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="W7J-dT-Mhm" kind="show" id="8it-yK-IlM"/>
+                                    <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="8it-yK-IlM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -468,7 +468,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-3P-WDp" userLabel="Photo Default Image View">
-                                        <rect key="frame" x="62" y="41" width="182.5" height="120"/>
+                                        <rect key="frame" x="57" y="41" width="192.5" height="120"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pF2-h3-AGe" userLabel="Camera Button">
                                         <rect key="frame" x="228" y="171" width="23" height="21"/>
@@ -507,7 +507,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="   니가 쏴" backgroundImage="ssomSelectNone2.png">
+                                        <state key="normal" title="   니가 쏴" backgroundImage="ssomSelectNone.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" backgroundImage="ssomSelectRed.png">
@@ -525,7 +525,7 @@
                                     <constraint firstAttribute="bottom" secondItem="pF2-h3-AGe" secondAttribute="bottom" constant="17.100000000000001" id="CMa-f4-iuX"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="top" relation="lessThanOrEqual" secondItem="w4W-pw-n2I" secondAttribute="top" constant="20" id="DDY-r8-sGj"/>
                                     <constraint firstItem="gKC-ov-S6Q" firstAttribute="top" secondItem="HT6-Gk-hiB" secondAttribute="bottom" constant="7" id="Eqw-w3-Wny"/>
-                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="lNy-3P-WDp" secondAttribute="trailing" constant="29" id="Ewh-gv-tVQ"/>
+                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="lNy-3P-WDp" secondAttribute="trailing" constant="24" id="Ewh-gv-tVQ"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gKC-ov-S6Q" secondAttribute="bottom" constant="5" id="Eyc-3m-75S"/>
                                     <constraint firstAttribute="bottom" secondItem="P9S-IU-A95" secondAttribute="bottom" constant="8" id="Ht6-qQ-vRH"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="top" secondItem="lNy-3P-WDp" secondAttribute="top" constant="-41" id="I1G-ew-uag"/>
@@ -534,7 +534,7 @@
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="top" id="M94-fC-lkK"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="bottom" secondItem="lNy-3P-WDp" secondAttribute="bottom" constant="48" id="O5Y-B6-fz5"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="pF2-h3-AGe" secondAttribute="trailing" constant="22" id="SC1-7R-fcP"/>
-                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="lNy-3P-WDp" secondAttribute="leading" constant="-29" id="URa-ER-dbn"/>
+                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="lNy-3P-WDp" secondAttribute="leading" constant="-24" id="URa-ER-dbn"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="11" id="UuO-zs-9R2"/>
                                     <constraint firstAttribute="trailing" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="140" id="Zsj-7b-tqt"/>
                                     <constraint firstItem="gKC-ov-S6Q" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="11" id="edp-te-79Q"/>
@@ -626,7 +626,7 @@
                                         <state key="normal" title="30대">
                                             <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="selected" title="30대" backgroundImage="icon_all_perss.png">
+                                        <state key="selected" title="30대">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -726,7 +726,7 @@
                                         <state key="normal" title="4명 이상">
                                             <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="icon_all_perss.png">
+                                        <state key="selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -913,7 +913,6 @@
         <image name="camera.png" width="40" height="36"/>
         <image name="filterBg.png" width="234" height="68"/>
         <image name="heartWhite" width="30" height="27"/>
-        <image name="icon_all_perss.png" width="321" height="175"/>
         <image name="locationfound.png" width="55" height="55"/>
         <image name="mapShadow.png" width="621" height="115"/>
         <image name="oval4Fill30.png" width="112" height="112"/>
@@ -921,6 +920,7 @@
         <image name="photoMapbg" width="475" height="231"/>
         <image name="photoShadow.png" width="336" height="60"/>
         <image name="ssomSelectGreen.png" width="139" height="127"/>
+        <image name="ssomSelectNone.png" width="103" height="92"/>
         <image name="ssomSelectNone2.png" width="105" height="92"/>
         <image name="ssomSelectRed.png" width="90" height="83"/>
         <image name="write.png" width="94" height="94"/>
@@ -928,8 +928,8 @@
         <image name="writePhotoArea.png" width="362" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8it-yK-IlM"/>
         <segue reference="a1k-56-NLr"/>
+        <segue reference="f3i-A6-4bp"/>
         <segue reference="FJc-yc-ab1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -48,8 +48,8 @@ class SSPhotoView: UIView {
     }
 
     @IBAction func tapClose(sender: UIButton) {
-        if (self.delegate?.respondsToSelector("tapClose") != nil) {
-            self.delegate?.tapClose!()
+        if (self.delegate!.respondsToSelector("tapClose")) {
+            self.delegate!.tapClose!()
         }
     }
 }

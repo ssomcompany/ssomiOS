@@ -24,6 +24,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var filterView: SSFilterView!
 
+    var barButtonItems: SSNavigationBarItems!
+
     var needReload: Bool = false
 
     init() {
@@ -114,6 +116,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.navigationItem.leftBarButtonItem?.title = ""
         self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
+
+        var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
+
+        self.barButtonItems = SSNavigationBarItems()
+
+        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+        barButtonSpacer.width = 20
+
+        barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
+        let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
+        //        SSNavigationBarItems.insert(rightBarButtonItems[1].action, target: rightBarButtonItems[1].target, toBarButtonItem: &heartBarButton)
+
+        barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+        let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
+        //        SSNavigationBarItems.insert(rightBarButtonItems[0].action, target: rightBarButtonItems[0].target, toBarButtonItem: &messageBarButton)
+
+        self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

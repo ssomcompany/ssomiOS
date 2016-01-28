@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="77" width="600" height="523"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
                                 <rect key="frame" x="0.0" y="20" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -40,13 +40,13 @@
                                     <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hR3-hZ-JGs"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
                                 <rect key="frame" x="0.0" y="74" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="gbp-RT-CCp"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
                                 <rect key="frame" x="300" y="20" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -64,13 +64,13 @@
                                     <action selector="tapYouPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2nP-id-IzE"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
                                 <rect key="frame" x="300" y="74" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="DQn-p5-ckN"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
                                 <rect key="frame" x="0.0" y="77" width="600" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
@@ -131,7 +131,7 @@
                                     <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="f3i-A6-4bp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
                                 <rect key="frame" x="23" y="100" width="51" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="UAU-je-txb"/>
@@ -264,7 +264,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
                                 <rect key="frame" x="0.0" y="77" width="600" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -272,7 +272,7 @@
                                     <outlet property="delegate" destination="j6y-F4-SAC" id="EEV-1V-fsr"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-Da-teJ" userLabel="I Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-Da-teJ" userLabel="I Pay Button">
                                 <rect key="frame" x="0.0" y="20" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -291,13 +291,13 @@
                                     <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKq-fa-mdY"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLP-u4-evS" userLabel="I Pay Button Line View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLP-u4-evS" userLabel="I Pay Button Line View">
                                 <rect key="frame" x="0.0" y="74" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="rzX-wf-1Y7"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-m4-vLX" userLabel="You Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-m4-vLX" userLabel="You Pay Button">
                                 <rect key="frame" x="300" y="20" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -316,7 +316,7 @@
                                     <action selector="tapYouPayButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="fXD-Eb-tyM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="MFJ-b2-VZo" userLabel="You Pay Button Line View">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="MFJ-b2-VZo" userLabel="You Pay Button Line View">
                                 <rect key="frame" x="300" y="74" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="tmc-pC-geC"/>
@@ -452,12 +452,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
                                 <rect key="frame" x="0.0" y="20" width="414" height="209"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoMapbg" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-Bg-Hra" userLabel="Profile Bg Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xip-mw-Qj2" userLabel="Profile Bg View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
+                                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writePhotoArea.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bpd-P8-zgt" userLabel="Photo Area Bg Image View">
                                         <rect key="frame" x="33" y="0.0" width="240.5" height="209"/>
                                     </imageView>
@@ -537,6 +541,7 @@
                                     <constraint firstItem="tfr-Bg-Hra" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="top" id="Le3-CK-2QN"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="top" id="M94-fC-lkK"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="bottom" secondItem="lNy-3P-WDp" secondAttribute="bottom" constant="48" id="O5Y-B6-fz5"/>
+                                    <constraint firstItem="xip-mw-Qj2" firstAttribute="top" secondItem="w4W-pw-n2I" secondAttribute="top" id="P5i-IZ-HSl"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="pF2-h3-AGe" secondAttribute="trailing" constant="22" id="SC1-7R-fcP"/>
                                     <constraint firstItem="23d-05-cuL" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="leading" constant="9" id="T0h-pA-s75"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="lNy-3P-WDp" secondAttribute="leading" constant="-24" id="URa-ER-dbn"/>
@@ -545,15 +550,18 @@
                                     <constraint firstItem="23d-05-cuL" firstAttribute="bottom" secondItem="Bpd-P8-zgt" secondAttribute="bottom" constant="-9" id="dao-Dk-t95"/>
                                     <constraint firstItem="gKC-ov-S6Q" firstAttribute="leading" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="11" id="edp-te-79Q"/>
                                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="gKC-ov-S6Q" secondAttribute="bottom" constant="29" id="gBK-OX-cd3"/>
+                                    <constraint firstAttribute="trailing" secondItem="xip-mw-Qj2" secondAttribute="trailing" id="hGB-xw-AHm"/>
                                     <constraint firstAttribute="trailing" secondItem="tfr-Bg-Hra" secondAttribute="trailing" id="hHp-nM-GJd"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="trailing" secondItem="P9S-IU-A95" secondAttribute="trailing" constant="9" id="hu3-tL-3bl"/>
+                                    <constraint firstAttribute="bottom" secondItem="xip-mw-Qj2" secondAttribute="bottom" id="pWt-sd-liI"/>
                                     <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="P9S-IU-A95" secondAttribute="leading" constant="-9" id="phR-fN-VcM"/>
                                     <constraint firstItem="23d-05-cuL" firstAttribute="trailing" secondItem="Bpd-P8-zgt" secondAttribute="trailing" constant="-9" id="qcz-9T-J8G"/>
+                                    <constraint firstItem="xip-mw-Qj2" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" id="slK-78-16E"/>
                                     <constraint firstItem="tfr-Bg-Hra" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" id="vi7-FN-RnJ"/>
                                     <constraint firstAttribute="bottom" secondItem="Bpd-P8-zgt" secondAttribute="bottom" id="wSB-t9-reE"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 나이는 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Leading Text Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="우리 나이는 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Leading Text Label">
                                 <rect key="frame" x="69" y="246" width="68" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="u9S-wu-oW2"/>
@@ -562,13 +570,13 @@
                                 <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
                                 <rect key="frame" x="137" y="246" width="57.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
                                 <rect key="frame" x="194" y="246" width="40.5" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="kqz-o9-1BP"/>
@@ -577,7 +585,7 @@
                                 <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
                                 <rect key="frame" x="0.0" y="270" width="414" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-SN-Qwf" userLabel="Age Button1">
@@ -662,13 +670,13 @@
                                     <constraint firstAttribute="height" constant="43" id="zi0-fq-onG"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
                                 <rect key="frame" x="69" y="328" width="7" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
                                 <rect key="frame" x="76" y="328" width="120.5" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="bTY-ct-QT1"/>
@@ -677,7 +685,7 @@
                                 <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
                                 <rect key="frame" x="0.0" y="352" width="414" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-hH-yT4" userLabel="People Button1">
@@ -762,7 +770,7 @@
                                     <constraint firstItem="3Pk-cD-fEN" firstAttribute="top" secondItem="1gQ-Ct-aeF" secondAttribute="top" constant="1" id="w3G-2k-YuY"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한마디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yy-Wf-yzs">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="한마디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yy-Wf-yzs">
                                 <rect key="frame" x="68" y="418" width="26" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="1hk-6y-FJH"/>
@@ -772,7 +780,7 @@
                                 <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-Tn-LzI">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-Tn-LzI">
                                 <rect key="frame" x="68" y="447" width="276" height="89"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -782,13 +790,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 마디를 작성해보세요! 센스 있는 메뉴선택, 멘트가 뜨거운 쏨의 첫 걸음 입니다. : )" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="한 마디를 작성해보세요! 센스 있는 메뉴선택, 멘트가 뜨거운 쏨의 첫 걸음 입니다. : )" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
                                 <rect key="frame" x="68" y="459" width="215" height="64.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-sx-d3O">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-sx-d3O">
                                 <rect key="frame" x="68" y="557" width="276" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="wbz-2q-EyB"/>
@@ -903,6 +911,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -938,8 +947,8 @@
         <image name="writePhotoArea.png" width="362" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a1k-56-NLr"/>
+        <segue reference="AH8-HF-7eE"/>
+        <segue reference="TyQ-LK-xb3"/>
         <segue reference="f3i-A6-4bp"/>
-        <segue reference="FJc-yc-ab1"/>
     </inferredMetricsTieBreakers>
 </document>

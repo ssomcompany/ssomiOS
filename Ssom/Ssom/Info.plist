@@ -33,6 +33,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>00</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>46aaa188a2d4300b0c9713c01b4d9f907cb78d59</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>

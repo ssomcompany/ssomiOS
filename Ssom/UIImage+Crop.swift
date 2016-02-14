@@ -50,7 +50,7 @@ extension UIImage {
         return newImage
     }
 
-    class func mergeImages(firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat) -> UIImage {
+    class func mergeImages(firstImage firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat) -> UIImage {
 
         let firstImageWidth: CGFloat = firstImage.size.width
         let firstImageHeight: CGFloat = firstImage.size.height

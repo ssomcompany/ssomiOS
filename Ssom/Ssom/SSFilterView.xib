@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,10 +12,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="084-nz-SrR" userLabel="Filter Main View">
-                    <rect key="frame" x="23" y="297" width="513" height="283"/>
+                    <rect key="frame" x="23" y="294" width="513" height="283"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvM-oc-t2h" userLabel="Close Button">
-                            <rect key="frame" x="0.0" y="214" width="69" height="69"/>
+                            <rect key="frame" x="-1" y="216" width="69" height="69"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="69" id="vnj-VE-MOD"/>
                                 <constraint firstAttribute="height" constant="69" id="whG-X5-c5W"/>
@@ -32,13 +32,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="몇 살이 좋아?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFI-w6-8e1">
-                            <rect key="frame" x="23" y="62" width="450" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <rect key="frame" x="23" y="62" width="450" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJR-Qi-8AN" userLabel="Filter Age Button Bar View">
-                            <rect key="frame" x="24" y="84" width="461" height="35"/>
+                            <rect key="frame" x="24" y="85" width="461" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li3-09-JyG" userLabel="Age Button1">
                                     <rect key="frame" x="1" y="1" width="114" height="33"/>
@@ -124,13 +124,13 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="몇 명이 좋아?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-xd-zDR" userLabel="People Label">
-                            <rect key="frame" x="23" y="134" width="450" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <rect key="frame" x="23" y="135" width="450" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-gb-If4" userLabel="Filter People Button Bar View">
-                            <rect key="frame" x="24" y="156" width="461" height="35"/>
+                            <rect key="frame" x="24" y="158" width="461" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R37-GD-UBy" userLabel="People Button1">
                                     <rect key="frame" x="1" y="1" width="114" height="33"/>
@@ -225,6 +225,9 @@
                             <state key="normal" title="      취소">
                                 <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="tapCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ygu-mU-oDd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
                             <rect key="frame" x="421" y="226" width="63" height="34"/>
@@ -240,7 +243,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="jOa-gb-If4" firstAttribute="top" secondItem="rBP-xd-zDR" secondAttribute="bottom" constant="6" id="1p0-Tq-qfy"/>
-                        <constraint firstItem="hvM-oc-t2h" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" id="3Q6-0E-Ulp"/>
+                        <constraint firstItem="hvM-oc-t2h" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="-1" id="3Q6-0E-Ulp"/>
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="B6u-eJ-uyB"/>
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="top" secondItem="HHI-JE-2OX" secondAttribute="bottom" constant="21" id="BqB-tJ-mE0"/>
                         <constraint firstAttribute="height" constant="283" id="MgH-tJ-onF"/>
@@ -257,7 +260,7 @@
                         <constraint firstAttribute="bottom" secondItem="pGH-nG-dgi" secondAttribute="bottom" constant="23" id="ilP-D7-cTc"/>
                         <constraint firstAttribute="trailing" secondItem="pJR-Qi-8AN" secondAttribute="trailing" constant="28" id="iog-jh-m3E"/>
                         <constraint firstItem="HHI-JE-2OX" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="jwv-2q-zHR"/>
-                        <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" id="onz-ux-gbH"/>
+                        <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" constant="-2" id="onz-ux-gbH"/>
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="bottom" constant="15" id="u6X-VY-QnU"/>
                         <constraint firstAttribute="trailing" secondItem="HHI-JE-2OX" secondAttribute="trailing" constant="38" id="uBa-X9-1zw"/>
                         <constraint firstAttribute="bottom" secondItem="B0P-n4-Vsg" secondAttribute="bottom" constant="23" id="wRN-gd-eHX"/>
@@ -268,11 +271,12 @@
             <constraints>
                 <constraint firstItem="084-nz-SrR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="23" id="3gC-qs-ZIZ"/>
                 <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="64" id="4SP-39-FSi"/>
-                <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="20" id="kwE-a0-1s0"/>
+                <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="23" id="kwE-a0-1s0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <connections>
+                <outlet property="btnClose" destination="hvM-oc-t2h" id="HcI-Vh-4az"/>
                 <outlet property="filter1PersonButton" destination="R37-GD-UBy" id="Peq-GJ-wqp"/>
                 <outlet property="filter20beginAgeButton" destination="Li3-09-JyG" id="0u7-39-AVG"/>
                 <outlet property="filter20lateAgeButton" destination="L0G-oh-iLo" id="lGo-3q-9FJ"/>
@@ -287,6 +291,6 @@
         </view>
     </objects>
     <resources>
-        <image name="filterOn.png" width="110" height="110"/>
+        <image name="filterOn.png" width="73" height="73"/>
     </resources>
 </document>

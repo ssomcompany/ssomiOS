@@ -257,7 +257,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self!.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
 
-                cell.profileImageView!.image = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
             })
 
             cell.profilImageUrl = imageUrl

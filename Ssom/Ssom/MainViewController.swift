@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSSsomDetailViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
@@ -23,6 +23,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     var datas: [[String: AnyObject]]
 
     var filterView: SSFilterView!
+    var detailView: SSSsomDetailView!
 
     var barButtonItems: SSNavigationBarItems!
 
@@ -129,21 +130,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
 
         var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
+        if rightBarButtonItems.count == 2 {
+            self.barButtonItems = SSNavigationBarItems()
 
-        self.barButtonItems = SSNavigationBarItems()
+            let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+            barButtonSpacer.width = 20
 
-        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
-        barButtonSpacer.width = 20
+            barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
+            let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
 
-        barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
-        let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
-//        SSNavigationBarItems.insert(rightBarButtonItems[1].action, target: rightBarButtonItems[1].target, toBarButtonItem: &heartBarButton)
+            barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+            let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
-        barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
-        let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
-//        SSNavigationBarItems.insert(rightBarButtonItems[0].action, target: rightBarButtonItems[0].target, toBarButtonItem: &messageBarButton)
-
-        self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
+            self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -175,7 +175,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             if self.btnIPay.selected {
                 if isSell {
-                    self.setMarker(isSell, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
+                    if let imageUrl:String = dataDict["imageUrl"] as? String {
+                        self.setMarker(isSell, latitude, longitude, imageUrl: imageUrl)
+                    } else {
+                        self.setMarker(isSell, latitude, longitude, imageUrl: nil)
+                    }
                 }
             }
 
@@ -187,20 +191,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         }
     }
 
-    func setMarker(isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String) {
+    func setMarker(isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
-        Alamofire.request(.GET, imageUrl)
-            .responseData { (response) -> Void in
-                let profileImage: UIImage = UIImage(data: response.data!)!
-                let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
+        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
-                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "miniGreen.png" : "miniRed.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
+        if imageUrl != nil {
+            Alamofire.request(.GET, imageUrl)
+                .responseData { (response) -> Void in
 
-                marker.icon = UIImage.mergeImages(croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                marker.map = self.mainView
+                    if let profileImage: UIImage = UIImage(data: response.data!)! {
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
+
+                        marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                    } else {
+                        marker.icon = maskOfProfileImage
+                    }
+            }
+        } else {
+            marker.icon = maskOfProfileImage
         }
+        marker.map = self.mainView
     }
 
     @IBAction func tapMyLocationButton(sender: AnyObject) {
@@ -277,6 +289,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         }
     }
 
+    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        self.detailView = UIView.loadFromNibNamed("SSSsomDetailView") as! SSSsomDetailView
+        self.detailView.frame = self.view.bounds
+        self.detailView.delegate = self
+        if self.btnIPay.selected {
+            self.detailView.changeTheme(.SSOM)
+        }
+        if self.btnYouPay.selected {
+            self.detailView.changeTheme(.SSOSEYO)
+        }
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.view.addSubview(self.detailView)
+
+        return true
+    }
+
 // MARK: - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
@@ -321,6 +350,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         self.filterView.removeFromSuperview()
 
         // apply filter value to get the ssom list
+    }
+
+// MARK: - SSSsomDetailViewDelegate
+    func closeDetailView() {
+        self.navigationController?.navigationBar.barStyle = .Default
+        self.detailView.removeFromSuperview()
     }
 }
 

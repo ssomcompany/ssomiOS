@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -139,7 +139,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" backgroundImage="locationfound.png">
+                                <state key="normal" backgroundImage="locationFound.png">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -928,23 +928,23 @@
         <image name="2DepToggleGreen.png" width="309" height="5"/>
         <image name="2DepToggleRed.png" width="309" height="6"/>
         <image name="acceptButtonGreen.png" width="241" height="87"/>
-        <image name="buttonCancel.png" width="241" height="87"/>
-        <image name="camera.png" width="40" height="36"/>
-        <image name="filterBg.png" width="234" height="68"/>
+        <image name="buttonCancel.png" width="137" height="49"/>
+        <image name="camera.png" width="26" height="24"/>
+        <image name="filterBg.png" width="235" height="68"/>
         <image name="heartWhite" width="30" height="27"/>
-        <image name="locationfound.png" width="55" height="55"/>
+        <image name="locationFound.png" width="55" height="55"/>
         <image name="mapShadow.png" width="621" height="115"/>
-        <image name="oval4Fill30.png" width="112" height="112"/>
-        <image name="photoDefault.png" width="270" height="159"/>
+        <image name="oval4Fill30.png" width="62" height="62"/>
+        <image name="photoDefault.png" width="181" height="104"/>
         <image name="photoMapbg" width="475" height="231"/>
-        <image name="photoShadow.png" width="336" height="60"/>
+        <image name="photoShadow.png" width="222" height="40"/>
         <image name="ssomSelectGreen.png" width="139" height="127"/>
         <image name="ssomSelectNone.png" width="103" height="92"/>
         <image name="ssomSelectNone2.png" width="105" height="92"/>
         <image name="ssomSelectRed.png" width="90" height="83"/>
         <image name="write.png" width="94" height="94"/>
-        <image name="writeLine.png" width="414" height="3"/>
-        <image name="writePhotoArea.png" width="362" height="300"/>
+        <image name="writeLine.png" width="274" height="2"/>
+        <image name="writePhotoArea.png" width="239" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AH8-HF-7eE"/>

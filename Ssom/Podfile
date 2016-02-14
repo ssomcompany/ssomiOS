@@ -8,6 +8,8 @@ target 'Ssom' do
  pod 'Alamofire'
  pod 'SDWebImage'
  pod 'MMDrawerController'
+ pod 'Fabric'
+ pod 'Crashlytics'
 end
 
 target 'SsomTests' do

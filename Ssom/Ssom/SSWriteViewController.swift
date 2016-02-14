@@ -11,6 +11,8 @@ import UIKit
 class SSWriteViewController: UIViewController, UITextViewDelegate
 , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var barButtonItems: SSNavigationBarItems!
+
     @IBOutlet var profileView: UIView!
     @IBOutlet var imgDefaultProfile: UIImageView!
     @IBOutlet var imgPhotoGradation: UIImageView!
@@ -72,8 +74,18 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
     }
 
     func initView() {
+        self.barButtonItems = SSNavigationBarItems()
+
+        self.barButtonItems.btnBack.addTarget(self, action: "tapBack", forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.lbBackButtonTitle.text = "쏨 등록하기"
+
+        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         self.textView.delegate = self;
+    }
+
+    func tapBack() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     @IBAction func tapAgeButton1(sender: AnyObject) {

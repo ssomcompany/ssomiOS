@@ -14,7 +14,7 @@ enum SSType : String {
 }
 
 public struct SSMainViewModel {
-    var datas: [[String: AnyObject]]
+    var datas: [SSViewModel]
 
     var isSell: Bool
 
@@ -28,14 +28,7 @@ public struct SSMainViewModel {
         self.nowLongitude = 0
     }
 
-    init(datas:[[String: AnyObject]], isSell: Bool) {
-        self.datas = datas
-        self.isSell = isSell
-        self.nowLatitude = 0
-        self.nowLongitude = 0
-    }
-
-    init(datas:[[String: AnyObject]], isSell: Bool, nowLatitude: Double, nowLongitude: Double) {
+    init(datas:[SSViewModel], isSell: Bool, nowLatitude: Double = 0, nowLongitude: Double = 0) {
         self.datas = datas
         self.isSell = isSell
         self.nowLatitude = nowLatitude

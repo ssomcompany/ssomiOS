@@ -1,5 +1,5 @@
 //
-//  SSSsomDetailView.swift
+//  SSDetailView.swift
 //  Ssom
 //
 //  Created by DongSoo Lee on 2016. 2. 10..
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol SSSsomDetailViewDelegate: NSObjectProtocol {
+protocol SSDetailViewDelegate: NSObjectProtocol {
     func closeDetailView() -> Void;
 }
 
-class SSSsomDetailView: UIView {
+class SSDetailView: UIView {
 
     @IBOutlet var viewDetail: UIView!
     @IBOutlet var imgHeart: UIImageView!
@@ -27,8 +27,10 @@ class SSSsomDetailView: UIView {
     @IBOutlet var imgPageLeft: UIImageView!
     @IBOutlet var imgPageRight: UIImageView!
 
-    var delegate: SSSsomDetailViewDelegate!
+    var delegate: SSDetailViewDelegate!
     var ssomType: SSType!
+
+    var viewModel: SSViewModel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +43,14 @@ class SSSsomDetailView: UIView {
         self.btnCancel.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).CGColor
         self.btnCancel.layer.shadowOpacity = 0.3
         self.btnCancel.layer.shadowRadius = 2
+    }
+
+    func configureWithViewModel(viewModel: SSViewModel) {
+        self.viewModel = viewModel;
+
+//        self.imgProfile.sd_setImageWithURL(self.viewModel.) { (image, error, cacheType, url) -> Void in
+//            ;
+//        };
     }
 
     func changeTheme(ssomType: SSType) {

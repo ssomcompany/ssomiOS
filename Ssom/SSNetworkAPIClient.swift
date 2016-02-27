@@ -10,12 +10,26 @@ import Foundation
 import Alamofire
 
 public class SSNetworkAPIClient {
-    class func getPosts(completion: (AnyObject!) -> Void) {
+    class func getPosts(completion: ([SSViewModel]!) -> Void) {
         Alamofire.request(.GET, SSNetworkContext.serverUrlPrefixt+"posts")
         .responseJSON { response in
-            print("Response JSON : \(response.result.value)")
 
-            completion(response.result.value)
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                let rawDatas: Array = response.result.value as! [[String: AnyObject!]]
+                var datas: Array = [SSViewModel]()
+
+                for rawData in rawDatas {
+                    let viewModel: SSViewModel = SSViewModel.init(modelDict: rawData)
+
+                    datas.append(viewModel)
+                }
+
+                completion(datas)
+            } else {
+                print("Response Error : \(response.result.error)")
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.init(coder: aDecoder)
     }
 
-    convenience init(datas:[[String: AnyObject]], isSell: Bool) {
+    convenience init(datas:[SSViewModel], isSell: Bool) {
         self.init()
 
         self.mainViewModel = SSMainViewModel(datas: datas, isSell: isSell)
@@ -181,8 +181,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadingData() {
         if self.needReload {
 
-            SSNetworkAPIClient.getPosts { [weak self] (responseObject) -> Void in
-                self!.mainViewModel.datas = responseObject as! [[String: AnyObject]]
+            SSNetworkAPIClient.getPosts { [weak self] (viewModels) -> Void in
+                self!.mainViewModel.datas = viewModels
                 print("result is : \(self!.mainViewModel.datas)")
 
                 self!.filterData()
@@ -196,7 +196,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func filterData() {
-        var tempDatas: [[String: AnyObject]] = []
+        var tempDatas: [SSViewModel] = []
 
         let ssomType: SSType
         if self.mainViewModel.isSell {
@@ -205,10 +205,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             ssomType = .SSOSEYO
         }
 
-        for dataDict: [String: AnyObject] in self.mainViewModel.datas {
-            let ssomString = dataDict["ssom"] as! String
+        for data: SSViewModel in self.mainViewModel.datas {
+            let ssomString = data.ssomType.rawValue
             if ssomString == ssomType.rawValue {
-                tempDatas.append(dataDict)
+                tempDatas.append(data)
             }
         }
 
@@ -239,14 +239,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
 
-        let rowDict:[String: AnyObject] = mainViewModel.datas[indexPath.row]
-        if let content = rowDict["content"] as? String {
+        let model:SSViewModel = mainViewModel.datas[indexPath.row]
+        if let content = model.content {
             print("content is \(content.stringByRemovingPercentEncoding)")
 
             cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
         }
 
-        if let imageUrl = rowDict["imageUrl"] as? String {
+        if let imageUrl = model.imageUrl {
             print("imageUrl is \(imageUrl)")
 
             cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
@@ -264,22 +264,22 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         var memberInfoString:String = "";
-        if let minAge = rowDict["minAge"] as? Int {
+        if let minAge = model.minAge {
             memberInfoString = memberInfoString.stringByAppendingFormat("\(minAge)살")
         }
-        if let maxAge = rowDict["maxAge"] as? Int {
+        if let maxAge = model.maxAge {
             memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
         }
-        if let userCount = rowDict["userCount"] as? Int {
+        if let userCount = model.userCount {
             memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
         }
         cell.memberInfoLabel.text = memberInfoString
 
-        if let distance = rowDict["distance"] as? Int {
+        if let distance = model.distance {
             cell.distanceLabel.text = Util.getDistanceString(distance)
         } else {
             let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)
-            let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: rowDict["latitude"] as! CLLocationDegrees, longitude: rowDict["longitude"] as! CLLocationDegrees)
+            let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: model.latitude, longitude: model.longitude)
 
             let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
 

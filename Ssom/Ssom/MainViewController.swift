@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSSsomDetailViewDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSDetailViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
@@ -20,10 +20,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     @IBOutlet var imageYouPayButtonLineView: UIImageView!
     
     var locationManager: CLLocationManager!
-    var datas: [[String: AnyObject]]
+    var datas: [SSViewModel]
 
     var filterView: SSFilterView!
-    var detailView: SSSsomDetailView!
+    var detailView: SSDetailView!
 
     var barButtonItems: SSNavigationBarItems!
 
@@ -33,10 +33,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         super.init(nibName: nil, bundle: nil)
     }
 
-    convenience init(datas:[[String: AnyObject]]) {
+    convenience init(datas:[[String: AnyObject!]]) {
         self.init()
 
-        self.datas = datas
+        for data in datas {
+            let viewModel = SSViewModel.init(modelDict: data)
+
+            self.datas.append(viewModel)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -73,8 +77,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     func loadingData() {
         weak var wSelf: MainViewController? = self
-        SSNetworkAPIClient.getPosts { (responseObject) -> Void in
-            wSelf!.datas = responseObject as! [[String: AnyObject]]
+        SSNetworkAPIClient.getPosts { (viewModels) -> Void in
+            wSelf!.datas = viewModels
             print("result is : \(wSelf!.datas)")
 
             wSelf!.showMarkers()
@@ -159,13 +163,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
         mainView.clear()
 
-        for dataDict in self.datas {
-            let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
-            let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
+        for data in self.datas {
+            let latitude: Double = data.latitude 
+            let longitude: Double = data.longitude 
 
             print("position is \(latitude), \(longitude)")
 
-            let sellString: String = dataDict["ssom"] as! String
+            let sellString: String = data.ssomType.rawValue
             var isSell = false;
             if sellString == SSType.SSOM.rawValue {
                 isSell = true
@@ -175,7 +179,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             if self.btnIPay.selected {
                 if isSell {
-                    if let imageUrl:String = dataDict["imageUrl"] as? String {
+                    if let imageUrl:String = data.imageUrl {
                         self.setMarker(isSell, latitude, longitude, imageUrl: imageUrl)
                     } else {
                         self.setMarker(isSell, latitude, longitude, imageUrl: nil)
@@ -185,7 +189,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             if self.btnYouPay.selected {
                 if !isSell {
-                    self.setMarker(isSell, latitude, longitude, imageUrl: dataDict["imageUrl"] as! String)
+                    self.setMarker(isSell, latitude, longitude, imageUrl: data.imageUrl)
                 }
             }
         }
@@ -272,25 +276,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         print("now finished to move the map camera! : \(position)")
 
         var index: Int = 0;
-        for dataDict in self.datas {
-            let latitude: Double = dataDict["latitude"] as! CLLocationDegrees
-            let longitude: Double = dataDict["longitude"] as! CLLocationDegrees
+        for data in self.datas {
+            let latitude: Double = data.latitude
+            let longitude: Double = data.longitude
 
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
 
             let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
-            var dataDictWithDistance: Dictionary = dataDict
-            dataDictWithDistance["distance"] = distance
-            self.datas[index] = dataDictWithDistance
+            var dataWithDistance: SSViewModel = data
+            dataWithDistance.distance = distance
+            self.datas[index] = dataWithDistance
             
             index++
         }
     }
 
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        self.detailView = UIView.loadFromNibNamed("SSSsomDetailView") as! SSSsomDetailView
+        self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
         self.detailView.frame = self.view.bounds
         self.detailView.delegate = self
         if self.btnIPay.selected {
@@ -352,7 +356,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         // apply filter value to get the ssom list
     }
 
-// MARK: - SSSsomDetailViewDelegate
+// MARK: - SSDetailViewDelegate
     func closeDetailView() {
         self.navigationController?.navigationBar.barStyle = .Default
         self.detailView.removeFromSuperview()

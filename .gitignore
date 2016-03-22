@@ -26,5 +26,6 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+*.xcbkptlist
 
 Ssom/Pods/

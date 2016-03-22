@@ -27,5 +27,6 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 *.xcbkptlist
+Podfile.lock
 
 Ssom/Pods/

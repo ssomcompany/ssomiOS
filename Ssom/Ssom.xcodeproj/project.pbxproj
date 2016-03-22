@@ -14,7 +14,6 @@
 		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
 		973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003421BFCDF0500734D8D /* SSPhotoView.swift */; };
 		973003451BFCE06400734D8D /* SSPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973003441BFCE06400734D8D /* SSPhotoView.xib */; };
-		973003471C0B4ABB00734D8D /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003461C0B4ABB00734D8D /* UIImage+Crop.swift */; };
 		973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003481C0B4F4D00734D8D /* SSWriteViewController.swift */; };
 		9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730034A1C0F38EB00734D8D /* SSFilterView.swift */; };
 		9730034D1C1091E700734D8D /* SSFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9730034C1C1091E700734D8D /* SSFilterView.xib */; };
@@ -369,6 +368,20 @@
 		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
 		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
 		97C526531C7F60E100484F03 /* SSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C526521C7F60E100484F03 /* SSViewModel.swift */; };
+		97C526601C9DA16500484F03 /* pageLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526541C9DA16400484F03 /* pageLeft.png */; };
+		97C526611C9DA16500484F03 /* pageLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526551C9DA16400484F03 /* pageLeft@2x.png */; };
+		97C526621C9DA16500484F03 /* pageLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526561C9DA16400484F03 /* pageLeft@3x.png */; };
+		97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526571C9DA16400484F03 /* pageLeftGreen.png */; };
+		97C526641C9DA16500484F03 /* pageLeftGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */; };
+		97C526651C9DA16500484F03 /* pageLeftGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */; };
+		97C526661C9DA16500484F03 /* pageRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265A1C9DA16500484F03 /* pageRight.png */; };
+		97C526671C9DA16500484F03 /* pageRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265B1C9DA16500484F03 /* pageRight@2x.png */; };
+		97C526681C9DA16500484F03 /* pageRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265C1C9DA16500484F03 /* pageRight@3x.png */; };
+		97C526691C9DA16500484F03 /* pageRightGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265D1C9DA16500484F03 /* pageRightGreen.png */; };
+		97C5266A1C9DA16500484F03 /* pageRightGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265E1C9DA16500484F03 /* pageRightGreen@2x.png */; };
+		97C5266B1C9DA16500484F03 /* pageRightGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5265F1C9DA16500484F03 /* pageRightGreen@3x.png */; };
+		97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266C1C9F090400484F03 /* UIImage+Crop.swift */; };
+		97C5266F1C9F091200484F03 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266E1C9F091200484F03 /* String+Util.swift */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
 		97D5A3CE1BEBB26F00F3DDFB /* SSChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CD1BEBB26F00F3DDFB /* SSChatViewController.swift */; };
 		97DE88931C426AC70043B8E2 /* SSMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE88921C426AC70043B8E2 /* SSMainViewModel.swift */; };
@@ -415,7 +428,6 @@
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
 		973003421BFCDF0500734D8D /* SSPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSPhotoView.swift; sourceTree = "<group>"; };
 		973003441BFCE06400734D8D /* SSPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSPhotoView.xib; sourceTree = "<group>"; };
-		973003461C0B4ABB00734D8D /* UIImage+Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Crop.swift"; sourceTree = "<group>"; };
 		973003481C0B4F4D00734D8D /* SSWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSWriteViewController.swift; sourceTree = "<group>"; };
 		9730034A1C0F38EB00734D8D /* SSFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSFilterView.swift; sourceTree = "<group>"; };
 		9730034C1C1091E700734D8D /* SSFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFilterView.xib; sourceTree = "<group>"; };
@@ -778,6 +790,20 @@
 		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
 		979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Util.swift"; path = "Ssom/3rdLib/UIDevice+Util.swift"; sourceTree = "<group>"; };
 		97C526521C7F60E100484F03 /* SSViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSViewModel.swift; path = ViewModel/SSViewModel.swift; sourceTree = "<group>"; };
+		97C526541C9DA16400484F03 /* pageLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageLeft.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageLeft.png; sourceTree = "<group>"; };
+		97C526551C9DA16400484F03 /* pageLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeft@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeft@2x.png"; sourceTree = "<group>"; };
+		97C526561C9DA16400484F03 /* pageLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeft@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeft@3x.png"; sourceTree = "<group>"; };
+		97C526571C9DA16400484F03 /* pageLeftGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageLeftGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen.png; sourceTree = "<group>"; };
+		97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@2x.png"; sourceTree = "<group>"; };
+		97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@3x.png"; sourceTree = "<group>"; };
+		97C5265A1C9DA16500484F03 /* pageRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageRight.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageRight.png; sourceTree = "<group>"; };
+		97C5265B1C9DA16500484F03 /* pageRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageRight@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageRight@2x.png"; sourceTree = "<group>"; };
+		97C5265C1C9DA16500484F03 /* pageRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageRight@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageRight@3x.png"; sourceTree = "<group>"; };
+		97C5265D1C9DA16500484F03 /* pageRightGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageRightGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageRightGreen.png; sourceTree = "<group>"; };
+		97C5265E1C9DA16500484F03 /* pageRightGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageRightGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageRightGreen@2x.png"; sourceTree = "<group>"; };
+		97C5265F1C9DA16500484F03 /* pageRightGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageRightGreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageRightGreen@3x.png"; sourceTree = "<group>"; };
+		97C5266C1C9F090400484F03 /* UIImage+Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Crop.swift"; path = "Ssom/3rdLib/UIImage+Crop.swift"; sourceTree = "<group>"; };
+		97C5266E1C9F091200484F03 /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Util.swift"; path = "Ssom/3rdLib/String+Util.swift"; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97D5A3CD1BEBB26F00F3DDFB /* SSChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSChatViewController.swift; sourceTree = "<group>"; };
 		97DE88921C426AC70043B8E2 /* SSMainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMainViewModel.swift; path = ViewModel/SSMainViewModel.swift; sourceTree = "<group>"; };
@@ -840,6 +866,18 @@
 		9730034E1C10947100734D8D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				97C526541C9DA16400484F03 /* pageLeft.png */,
+				97C526551C9DA16400484F03 /* pageLeft@2x.png */,
+				97C526561C9DA16400484F03 /* pageLeft@3x.png */,
+				97C526571C9DA16400484F03 /* pageLeftGreen.png */,
+				97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */,
+				97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */,
+				97C5265A1C9DA16500484F03 /* pageRight.png */,
+				97C5265B1C9DA16500484F03 /* pageRight@2x.png */,
+				97C5265C1C9DA16500484F03 /* pageRight@3x.png */,
+				97C5265D1C9DA16500484F03 /* pageRightGreen.png */,
+				97C5265E1C9DA16500484F03 /* pageRightGreen@2x.png */,
+				97C5265F1C9DA16500484F03 /* pageRightGreen@3x.png */,
 				974C9B311C6B446F00E17A2B /* 1dep_toggle_off.png */,
 				974C9B321C6B446F00E17A2B /* 1dep_toggle_on.png */,
 				974C9B331C6B446F00E17A2B /* 1depth toggle.png */,
@@ -1301,7 +1339,8 @@
 			isa = PBXGroup;
 			children = (
 				979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */,
-				973003461C0B4ABB00734D8D /* UIImage+Crop.swift */,
+				97C5266C1C9F090400484F03 /* UIImage+Crop.swift */,
+				97C5266E1C9F091200484F03 /* String+Util.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -1449,7 +1488,10 @@
 				974C9D481C6B447000E17A2B /* pageLeft@2x.png in Resources */,
 				974C9CF81C6B447000E17A2B /* icon_book.png in Resources */,
 				974C9CB41C6B447000E17A2B /* chat_guideline.png in Resources */,
+				97C526601C9DA16500484F03 /* pageLeft.png in Resources */,
+				97C5266B1C9DA16500484F03 /* pageRightGreen@3x.png in Resources */,
 				974C9D7D1C6B447000E17A2B /* ssomIngGreenSmall.png in Resources */,
+				97C526661C9DA16500484F03 /* pageRight.png in Resources */,
 				974C9D301C6B447000E17A2B /* menu_line.png in Resources */,
 				974C9D0A1C6B447000E17A2B /* iconNoti.png in Resources */,
 				974C9C8E1C6B447000E17A2B /* arletIcon@2x.png in Resources */,
@@ -1493,6 +1535,7 @@
 				974C9C851C6B447000E17A2B /* accept_button_red.png in Resources */,
 				974C9C881C6B447000E17A2B /* acceptButtonGreen@3x.png in Resources */,
 				974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */,
+				97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */,
 				974C9D2A1C6B447000E17A2B /* manu@3x.png in Resources */,
 				974C9D331C6B447000E17A2B /* message@2x.png in Resources */,
 				974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */,
@@ -1523,6 +1566,7 @@
 				974C9D9A1C6B447000E17A2B /* ssomSelectRed@3x.png in Resources */,
 				974C9CB11C6B447000E17A2B /* cancelButtonRed@2x.png in Resources */,
 				974C9D371C6B447000E17A2B /* messageRed@3x.png in Resources */,
+				97C526691C9DA16500484F03 /* pageRightGreen.png in Resources */,
 				974C9CE51C6B447000E17A2B /* filterOn@3x.png in Resources */,
 				974C9D5E1C6B447000E17A2B /* profileBorderGreen@3x.png in Resources */,
 				974C9DB01C6B447000E17A2B /* write.png in Resources */,
@@ -1546,6 +1590,7 @@
 				974C9CA11C6B447000E17A2B /* bigRed@3x.png in Resources */,
 				974C9D961C6B447000E17A2B /* ssomSelectNone2@2x.png in Resources */,
 				974C9D3A1C6B447000E17A2B /* minigreen.png in Resources */,
+				97C5266A1C9DA16500484F03 /* pageRightGreen@2x.png in Resources */,
 				974C9D511C6B447000E17A2B /* photoDefault@2x.png in Resources */,
 				974C9DA41C6B447000E17A2B /* tostBg@2x.png in Resources */,
 				974C9CE91C6B447000E17A2B /* filterW.png in Resources */,
@@ -1589,8 +1634,10 @@
 				974C9CC11C6B447000E17A2B /* chatlistLine.png in Resources */,
 				974C9D521C6B447000E17A2B /* photoDefault@3x.png in Resources */,
 				974C9D501C6B447000E17A2B /* photoDefault.png in Resources */,
+				97C526651C9DA16500484F03 /* pageLeftGreen@3x.png in Resources */,
 				974C9CC01C6B447000E17A2B /* chatlist_line.png in Resources */,
 				974C9D4A1C6B447000E17A2B /* pageRight.png in Resources */,
+				97C526681C9DA16500484F03 /* pageRight@3x.png in Resources */,
 				974C9D5B1C6B447000E17A2B /* profile_border_red.png in Resources */,
 				974C9D791C6B447000E17A2B /* ssomIngGreen@3x.png in Resources */,
 				974C9D1A1C6B447000E17A2B /* locationFound@3x.png in Resources */,
@@ -1609,6 +1656,7 @@
 				974C9CDA1C6B447000E17A2B /* filterB.png in Resources */,
 				974C9D951C6B447000E17A2B /* ssomSelectNone2.png in Resources */,
 				974C9C991C6B447000E17A2B /* bgDimChat.png in Resources */,
+				97C526671C9DA16500484F03 /* pageRight@2x.png in Resources */,
 				974C9D781C6B447000E17A2B /* ssomIngGreen@2x.png in Resources */,
 				974C9CF51C6B447000E17A2B /* heartWhite.png in Resources */,
 				974C9D7C1C6B447000E17A2B /* ssomIngGreenBig@3x.png in Resources */,
@@ -1644,6 +1692,7 @@
 				974C9D731C6B447000E17A2B /* ssom_select_green.png in Resources */,
 				974C9D321C6B447000E17A2B /* message.png in Resources */,
 				974C9D771C6B447000E17A2B /* ssomIngGreen.png in Resources */,
+				97C526621C9DA16500484F03 /* pageLeft@3x.png in Resources */,
 				974C9C961C6B447000E17A2B /* bgBot50.png in Resources */,
 				974C9CDF1C6B447000E17A2B /* filterBg@3x.png in Resources */,
 				974C9CA51C6B447000E17A2B /* bowIconRed.png in Resources */,
@@ -1679,7 +1728,9 @@
 				974C9D0E1C6B447000E17A2B /* iconPeople@2x.png in Resources */,
 				974C9C861C6B447000E17A2B /* acceptButtonGreen.png in Resources */,
 				974C9D211C6B447000E17A2B /* loginTopPng@2x.png in Resources */,
+				97C526611C9DA16500484F03 /* pageLeft@2x.png in Resources */,
 				974C9C971C6B447000E17A2B /* bgBot50@2x.png in Resources */,
+				97C526641C9DA16500484F03 /* pageLeftGreen@2x.png in Resources */,
 				974C9DB61C6B447000E17A2B /* writePhotoArea.png in Resources */,
 				974C9D701C6B447000E17A2B /* ssom_ing_red_small.png in Resources */,
 				974C9D421C6B447000E17A2B /* myBtn@2x.png in Resources */,
@@ -1839,14 +1890,15 @@
 				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
 				9742910D1BF25FC600609974 /* SSListTableViewCell.swift in Sources */,
 				9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */,
-				973003471C0B4ABB00734D8D /* UIImage+Crop.swift in Sources */,
 				97DE88931C426AC70043B8E2 /* SSMainViewModel.swift in Sources */,
 				9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */,
+				97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */,
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
 				9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */,
 				973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */,
+				97C5266F1C9F091200484F03 /* String+Util.swift in Sources */,
 				973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* SSChatViewController.swift in Sources */,

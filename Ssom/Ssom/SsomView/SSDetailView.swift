@@ -48,9 +48,11 @@ class SSDetailView: UIView {
     func configureWithViewModel(viewModel: SSViewModel) {
         self.viewModel = viewModel;
 
-//        self.imgProfile.sd_setImageWithURL(self.viewModel.) { (image, error, cacheType, url) -> Void in
-//            ;
-//        };
+        self.imgProfile.sd_setImageWithURL(NSURL(string: self.viewModel.imageUrl), placeholderImage: nil) { (image, error, cacheType, url) -> Void in
+        }
+
+        self.lbAge.text = String(format: "%d, %d", arguments: [self.viewModel.minAge, self.viewModel.userCount])
+        self.textViewDescription.text = self.viewModel.content
     }
 
     func changeTheme(ssomType: SSType) {
@@ -58,11 +60,15 @@ class SSDetailView: UIView {
 
         if self.ssomType == .SSOM {
             self.imgHeart.image = UIImage(named: "heartGreen")
+            self.imgPageLeft.image = UIImage(named: "pageLeftGreen")
+            self.imgPageRight.image = UIImage(named: "pageRightGreen")
             self.viewSsomDescription.backgroundColor = UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1)
             self.lbSsom.text = "내가 쏨"
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonGreen"), forState: .Normal)
         } else {
             self.imgHeart.image = UIImage(named: "heartRed")
+            self.imgPageLeft.image = UIImage(named: "pageLeft")
+            self.imgPageRight.image = UIImage(named: "pageRight")
             self.viewSsomDescription.backgroundColor = UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
             self.lbSsom.text = "니가 쏴"
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonRed"), forState: .Normal)

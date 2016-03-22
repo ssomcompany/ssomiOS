@@ -180,23 +180,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             if self.btnIPay.selected {
                 if isSell {
                     if let imageUrl:String = data.imageUrl {
-                        self.setMarker(isSell, latitude, longitude, imageUrl: imageUrl)
+                        self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
                     } else {
-                        self.setMarker(isSell, latitude, longitude, imageUrl: nil)
+                        self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
                     }
                 }
             }
 
             if self.btnYouPay.selected {
                 if !isSell {
-                    self.setMarker(isSell, latitude, longitude, imageUrl: data.imageUrl)
+                    if let imageUrl:String = data.imageUrl {
+                        self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
+                    } else {
+                        self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
+                    }
                 }
             }
         }
     }
 
-    func setMarker(isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
+    func setMarker(data: SSViewModel,_ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
         let marker = GMSMarker()
+        marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
@@ -303,6 +308,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         if self.btnYouPay.selected {
             self.detailView.changeTheme(.SSOSEYO)
         }
+        self.detailView.configureWithViewModel(marker.userData as! SSViewModel)
 
         self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.view.addSubview(self.detailView)

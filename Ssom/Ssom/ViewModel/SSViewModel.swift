@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SSViewModel {
+public class SSViewModel {
     var category: String
     var content: String!
     var imageUrl: String!
@@ -39,7 +39,7 @@ public struct SSViewModel {
 
     init(modelDict:[String: AnyObject!]) {
         self.category   = modelDict["category"] as! String
-        self.content    = modelDict["content"] as! String
+        self.content    = String.encodeSpaceCharacter(modelDict["content"] as! String).stringByRemovingPercentEncoding
         self.imageUrl   = modelDict["imageUrl"] as! String
         self.latitude   = modelDict["latitude"] as! Double
         self.longitude  = modelDict["longitude"] as! Double
@@ -48,7 +48,11 @@ public struct SSViewModel {
         } else {
             self.distance = 0
         }
-        self.maxAge     = modelDict["maxAge"] as! Int
+        if let maxAge: Int = modelDict["maxAge"] as? Int {
+            self.maxAge = maxAge
+        } else {
+            self.maxAge = 0
+        }
         self.minAge     = modelDict["minAge"] as! Int
         self.postId     = modelDict["postId"] as! String
         let ssomType = modelDict["ssom"] as! String

@@ -28,7 +28,7 @@ class SSListTableViewCell: UITableViewCell {
     }
 
     @IBAction func tapProfileImage(sender: AnyObject) {
-        if (self.delegate?.respondsToSelector("tapProfileImage:imageUrl:") != nil) {
+        if (self.delegate?.respondsToSelector(#selector(tapProfileImage(_:))) != nil) {
             self.delegate?.tapProfileImage!(sender, imageUrl:self.profilImageUrl!)
         }
     }

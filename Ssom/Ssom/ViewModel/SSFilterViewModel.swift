@@ -8,8 +8,13 @@
 
 import Foundation
 
-public struct SSFilterViewModel {
+@objc public class SSFilterViewModel: NSObject {
     var ageType: SSAgeType
 
-    var personCount: Int
+    var personCount: Int = 0
+
+    init(ageType: SSAgeType, personCount: Int) {
+        self.ageType = ageType
+        self.personCount = personCount
+    }
 }

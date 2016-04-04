@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SSFilterViewDelegate: NSObjectProtocol {
+@objc protocol SSFilterViewDelegate: NSObjectProtocol {
     func closeFilterView() -> Void;
     func applyFilter(filterViewModel: SSFilterViewModel) -> Void;
 }
@@ -49,7 +49,7 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapCloseButton(sender: AnyObject) {
-        if self.delegate?.respondsToSelector("closeFilterView") != nil {
+        if self.delegate?.respondsToSelector(#selector(SSFilterViewDelegate.closeFilterView)) != nil {
             self.delegate?.closeFilterView()
         }
     }
@@ -152,7 +152,7 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapApplyButton(sender: AnyObject) {
-        var filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeEarly20, personCount: 0)
+        let filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeEarly20, personCount: 0)
         if self.filter20beginAgeButton.selected {
             filterValue.ageType = .AgeEarly20
         } else if self.filter20middleAgeButton.selected {
@@ -174,8 +174,10 @@ class SSFilterView: UIView {
             filterValue.personCount = SSPeopleCountType.OverFourPeople.rawValue
         }
 
-        if self.delegate?.respondsToSelector("applyFilter") != nil {
-            self.delegate?.applyFilter(filterValue)
+        guard let _ = self.delegate?.applyFilter(filterValue) else {
+            NSLog("%@", "This SSFilterView isn't implemented applyFilter function")
+
+            return
         }
     }
 }

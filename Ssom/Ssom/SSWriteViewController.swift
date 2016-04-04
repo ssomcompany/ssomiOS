@@ -76,7 +76,7 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
     func initView() {
         self.barButtonItems = SSNavigationBarItems()
 
-        self.barButtonItems.btnBack.addTarget(self, action: "tapBack", forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = "쏨 등록하기"
 
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)

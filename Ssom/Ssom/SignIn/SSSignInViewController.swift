@@ -10,10 +10,14 @@ import UIKit
 
 class SSSignInViewController: UIViewController {
 
+    @IBOutlet var viewBackground: UIView!
+    @IBOutlet var viewSignIn: UIView!
+    @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
-    @IBOutlet var lbEmailGuide: UILabel!
+    @IBOutlet var viewEmailBottomLine: UIImageView!
+    @IBOutlet var lbPassword: UILabel!
     @IBOutlet var tfPassword: UITextField!
-    @IBOutlet var lbPasswordGuide: UILabel!
+    @IBOutlet var viewPasswordBottomLine: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,25 +26,54 @@ class SSSignInViewController: UIViewController {
     }
 
     func initView() {
+        self.navigationController?.navigationBar.hidden = true
+    }
 
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            if touch.view != self.tfEmail {
+                if self.tfEmail.isFirstResponder() {
+                    self.tfEmail.resignFirstResponder()
+                }
+            }
+
+            if touch.view != self.tfPassword {
+                if self.tfPassword.isFirstResponder() {
+                    self.tfPassword.resignFirstResponder()
+                }
+            }
+        }
+    }
+
+    @IBAction func tapClose(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func tapSignInButton(sender: AnyObject) {
+    }
+    
+    @IBAction func tapFindPasswordButton(sender: AnyObject) {
     }
 
     @IBAction func tapSignUpButton(sender: AnyObject) {
     }
 
-    @IBAction func tapSignInButton(sender: AnyObject) {
-    }
-
     @IBAction func editingDidBeginEmail(sender: AnyObject) {
-        self.lbEmailGuide.hidden = true;
+        self.lbEmail.textColor = UIColor.blackColor()
+        self.viewEmailBottomLine.image = UIImage(named: "pointWriteLine")
     }
     @IBAction func editingDidEndEmail(sender: AnyObject) {
+        self.lbEmail.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+        self.viewEmailBottomLine.image = UIImage(named: "writeLine")
     }
 
     @IBAction func editingDidBeginPassword(sender: AnyObject) {
-        self.lbPasswordGuide.hidden = true;
+        self.lbPassword.textColor = UIColor.blackColor()
+        self.viewPasswordBottomLine.image = UIImage(named: "pointWriteLine")
     }
     @IBAction func editingDidEndPassword(sender: AnyObject) {
+        self.lbPassword.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+        self.viewPasswordBottomLine.image = UIImage(named: "writeLine")
     }
 
 }

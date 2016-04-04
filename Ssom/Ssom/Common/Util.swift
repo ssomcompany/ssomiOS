@@ -47,6 +47,32 @@ public class Util {
 
         return location2.distanceFromLocation(location1)
     }
+
+    class func getAgeArea(age: Int) -> SSAgeType {
+        if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
+            return .AgeEarly20
+        }
+        if age >= SSAgeType.AgeMiddle20.rawValue && age < SSAgeType.AgeLate20.rawValue {
+            return .AgeMiddle20
+        }
+        if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
+            return .AgeLate20
+        }
+        return .Age30
+    }
+
+    class func getAgeArea(age: Int) -> SSAgeAreaType {
+        if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
+            return .AgeEarly20
+        }
+        if age >= SSAgeType.AgeMiddle20.rawValue && age < SSAgeType.AgeLate20.rawValue {
+            return .AgeMiddle20
+        }
+        if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
+            return .AgeLate20
+        }
+        return .Age30
+    }
 }
 
 extension UIView {

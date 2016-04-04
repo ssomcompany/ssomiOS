@@ -48,7 +48,7 @@ class SSPhotoView: UIView {
     }
 
     @IBAction func tapClose(sender: UIButton) {
-        if (self.delegate!.respondsToSelector("tapClose")) {
+        if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapClose))) {
             self.delegate!.tapClose!()
         }
     }

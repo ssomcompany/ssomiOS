@@ -10,19 +10,20 @@ import UIKit
 import CoreLocation
 import SDWebImage
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSDetailViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
 
-    @IBOutlet var btnIPayButton: UIButton!
+    @IBOutlet var btnIPay: UIButton!
     @IBOutlet var iPayButtonBottomLineView: UIImageView!
-    @IBOutlet var btnYouPayButton: UIButton!
+    @IBOutlet var btnYouPay: UIButton!
     @IBOutlet var youPayButtonBottomLineView: UIImageView!
 
     var mainViewModel: SSMainViewModel
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
+    var detailView: SSDetailView!
 
     var barButtonItems: SSNavigationBarItems!
 
@@ -59,9 +60,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func initView() {
         if self.mainViewModel.isSell {
-            self.tapIPayButton(self.btnIPayButton);
+            self.tapIPayButton(self.btnIPay);
         } else {
-            self.tapYouPayButton(self.btnYouPayButton);
+            self.tapYouPayButton(self.btnYouPay);
         }
     }
     
@@ -88,7 +89,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             , naviTitleViewFrame.size.width, 38)
         self.navigationItem.titleView!.frame = naviTitleViewFrame
 
-        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1dep_toggle_on.png"))
+        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1DepToggleOn.png"))
         titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
         self.navigationItem.titleView!.addSubview(titleBackgroundView)
 
@@ -101,7 +102,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let btnNavi2: UIButton = UIButton(frame: CGRectMake(175-97, 0, 97, 38))
         btnNavi2.setTitle("LIST", forState: .Normal)
         btnNavi2.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        btnNavi2.setBackgroundImage(UIImage(named: "1dep_toggle_off.png"), forState: .Selected)
+        btnNavi2.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
         btnNavi2.selected = true
         self.navigationItem.titleView!.addSubview(btnNavi2)
 
@@ -147,9 +148,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapIPayButton(sender: AnyObject) {
 
-        self.btnIPayButton.selected = true;
+        self.btnIPay.selected = true;
         self.iPayButtonBottomLineView.hidden = false;
-        self.btnYouPayButton.selected = false;
+        self.btnYouPay.selected = false;
         self.youPayButtonBottomLineView.hidden = true;
 
         self.mainViewModel.isSell = true;
@@ -159,9 +160,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
 
-        self.btnIPayButton.selected = false;
+        self.btnIPay.selected = false;
         self.iPayButtonBottomLineView.hidden = true;
-        self.btnYouPayButton.selected = true;
+        self.btnYouPay.selected = true;
         self.youPayButtonBottomLineView.hidden = false;
 
         self.mainViewModel.isSell = false;
@@ -265,11 +266,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         var memberInfoString:String = "";
         if let minAge = model.minAge {
-            memberInfoString = memberInfoString.stringByAppendingFormat("\(minAge)살")
+            let ageArea: SSAgeAreaType = Util.getAgeArea(minAge)
+            memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
         }
-        if let maxAge = model.maxAge {
-            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
-        }
+//        if let maxAge = model.maxAge {
+//            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
+//        }
         if let userCount = model.userCount {
             memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
         }
@@ -295,6 +297,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return mainViewModel.datas.count;
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
+        self.detailView.frame = self.view.bounds
+        self.detailView.delegate = self
+
+        if self.btnIPay.selected {
+            self.detailView.changeTheme(.SSOM)
+        }
+        if self.btnYouPay.selected {
+            self.detailView.changeTheme(.SSOSEYO)
+        }
+        let model = self.mainViewModel.datas[indexPath.row]
+        self.detailView.configureWithViewModel(model)
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.view.addSubview(self.detailView)
+    }
+
 // MARK: - SSFilterViewDelegate
     func closeFilterView() {
         self.filterView.removeFromSuperview()
@@ -304,6 +324,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.filterView.removeFromSuperview()
 
         // apply filter value to get the ssom list
+        self.ssomListTableView .reloadData()
+    }
+
+// MARK: - SSDetailViewDelegate
+    func closeDetailView() {
+        self.navigationController?.navigationBar.barStyle = .Default
+        self.detailView.removeFromSuperview()
+    }
+
+    func openSignIn() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let vc = storyBoard.instantiateInitialViewController()
+        vc?.modalPresentationStyle = .OverFullScreen
+
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
 
 }

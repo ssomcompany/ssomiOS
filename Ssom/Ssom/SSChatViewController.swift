@@ -33,7 +33,7 @@ class SSChatViewController: UIViewController {
 
         self.barButtonItems = SSNavigationBarItems()
 
-        self.barButtonItems.btnBack.addTarget(self, action: "tapBack", forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
 
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)

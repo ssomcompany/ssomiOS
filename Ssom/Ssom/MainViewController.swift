@@ -104,14 +104,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
                                         , naviTitleViewFrame.size.width, 38)
         self.navigationItem.titleView!.frame = naviTitleViewFrame
 
-        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1dep_toggle_on.png"))
+        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1DepToggleOn.png"))
         titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
         self.navigationItem.titleView!.addSubview(titleBackgroundView)
 
         let btnNavi1: UIButton = UIButton(frame: CGRectMake(0, 0, 97, 38))
         btnNavi1.setTitle("MAP", forState: .Normal)
         btnNavi1.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        btnNavi1.setBackgroundImage(UIImage(named: "1dep_toggle_off.png"), forState: .Selected)
+        btnNavi1.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
         btnNavi1.selected = true
         self.navigationItem.titleView!.addSubview(btnNavi1)
 
@@ -290,11 +290,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
-            var dataWithDistance: SSViewModel = data
+            let dataWithDistance: SSViewModel = data
             dataWithDistance.distance = distance
             self.datas[index] = dataWithDistance
             
-            index++
+            index += 1
         }
     }
 
@@ -302,6 +302,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
         self.detailView.frame = self.view.bounds
         self.detailView.delegate = self
+        
         if self.btnIPay.selected {
             self.detailView.changeTheme(.SSOM)
         }
@@ -366,6 +367,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     func closeDetailView() {
         self.navigationController?.navigationBar.barStyle = .Default
         self.detailView.removeFromSuperview()
+    }
+
+    func openSignIn() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let vc = storyBoard.instantiateInitialViewController()
+        vc?.modalPresentationStyle = .OverFullScreen
+
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
 }
 

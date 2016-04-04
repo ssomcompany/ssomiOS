@@ -16,6 +16,14 @@ enum SSAgeType: Int
     case Age30 = 30
 }
 
+enum SSAgeAreaType: String
+{
+    case AgeEarly20 = "20대 초반"
+    case AgeMiddle20 = "20대 중반"
+    case AgeLate20 = "20대 후반"
+    case Age30 = "30대"
+}
+
 enum SSPeopleCountType: Int
 {
     case OnePerson = 1

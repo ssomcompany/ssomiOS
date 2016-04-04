@@ -9,17 +9,19 @@
 import Foundation
 
 extension String {
-    static func encodeSpaceCharacter(var rawString: String) -> String {
+    static func encodeSpaceCharacter(rawString: String) -> String {
+        var str: String = rawString
+
         if let rangeOfPlus = rawString.rangeOfString("+") {
-            rawString.replaceRange(rangeOfPlus, with: "%20")
+            str.replaceRange(rangeOfPlus, with: "%20")
 
             if (rawString.rangeOfString("+") != nil) {
-                return String.encodeSpaceCharacter(rawString)
+                return String.encodeSpaceCharacter(str)
             } else {
-                return rawString
+                return str
             }
         } else {
-            return rawString
+            return str
         }
     }
 }

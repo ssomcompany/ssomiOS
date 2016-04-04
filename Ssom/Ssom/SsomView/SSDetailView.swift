@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol SSDetailViewDelegate: NSObjectProtocol {
-    func closeDetailView() -> Void;
+@objc protocol SSDetailViewDelegate: NSObjectProtocol {
+    func closeDetailView();
+    func openSignIn();
 }
 
 class SSDetailView: UIView {
@@ -51,7 +52,8 @@ class SSDetailView: UIView {
         self.imgProfile.sd_setImageWithURL(NSURL(string: self.viewModel.imageUrl), placeholderImage: nil) { (image, error, cacheType, url) -> Void in
         }
 
-        self.lbAge.text = String(format: "%d, %d", arguments: [self.viewModel.minAge, self.viewModel.userCount])
+        let ageArea: SSAgeAreaType = Util.getAgeArea(self.viewModel.minAge)
+        self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount)")
         self.textViewDescription.text = self.viewModel.content
     }
 
@@ -76,11 +78,16 @@ class SSDetailView: UIView {
     }
     
     @IBAction func tapClose(sender: AnyObject) {
-        if self.delegate.respondsToSelector("closeDetailView") {
+        if self.delegate.respondsToSelector(#selector(SSDetailViewDelegate.closeDetailView)) {
             self.delegate.closeDetailView()
         }
     }
 
     @IBAction func tapSsom(sender: AnyObject) {
+        guard let _ = self.delegate?.openSignIn() else {
+            NSLog("%@", "This SSDetailView's delegate isn't implemented openSignIn function")
+
+            return
+        }
     }
 }

@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="121" width="600" height="479"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
                                 <rect key="frame" x="0.0" y="64" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -40,13 +40,13 @@
                                     <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hR3-hZ-JGs"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
                                 <rect key="frame" x="0.0" y="118" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="gbp-RT-CCp"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
                                 <rect key="frame" x="300" y="64" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -64,13 +64,13 @@
                                     <action selector="tapYouPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2nP-id-IzE"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
                                 <rect key="frame" x="300" y="118" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="DQn-p5-ckN"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
                                 <rect key="frame" x="0.0" y="121" width="600" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
@@ -131,7 +131,7 @@
                                     <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="f3i-A6-4bp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
                                 <rect key="frame" x="23" y="144" width="51" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="UAU-je-txb"/>
@@ -363,7 +363,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-Xv-XcV">
-                                <rect key="frame" x="505" y="500" width="86" height="86"/>
+                                <rect key="frame" x="501" y="500" width="86" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="HCQ-TT-LYF"/>
                                     <constraint firstAttribute="width" constant="86" id="Ljk-SR-mtS"/>
@@ -380,7 +380,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="9" id="3Br-So-WTx"/>
+                            <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="13" id="3Br-So-WTx"/>
                             <constraint firstItem="MFJ-b2-VZo" firstAttribute="width" secondItem="hYp-m4-vLX" secondAttribute="width" id="5DE-Ov-bJw"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="bottom" constant="23" id="8cd-P3-BhS"/>
                             <constraint firstItem="OM2-Da-teJ" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="B1H-7V-VWS"/>
@@ -947,8 +947,8 @@
         <image name="writePhotoArea.png" width="239" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FJc-yc-ab1"/>
         <segue reference="AH8-HF-7eE"/>
+        <segue reference="FJc-yc-ab1"/>
         <segue reference="8it-yK-IlM"/>
     </inferredMetricsTieBreakers>
 </document>

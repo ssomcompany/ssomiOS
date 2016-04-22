@@ -84,10 +84,15 @@ class SSDetailView: UIView {
     }
 
     @IBAction func tapSsom(sender: AnyObject) {
-        guard let _ = self.delegate?.openSignIn() else {
-            NSLog("%@", "This SSDetailView's delegate isn't implemented openSignIn function")
+        if SSAccountManager.sharedInstance.isAuthorized() {
+            
+        } else {
+            guard let _ = self.delegate?.openSignIn() else {
+                NSLog("%@", "This SSDetailView's delegate isn't implemented openSignIn function")
 
-            return
+                return
+            }
+
         }
     }
 }

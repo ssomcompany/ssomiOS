@@ -66,7 +66,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         }
 
         mainView.myLocationEnabled = true
-//        mainView.settings.myLocationButton = true
 
         mainView.delegate = self
     }
@@ -76,12 +75,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func loadingData() {
-        weak var wSelf: MainViewController? = self
-        SSNetworkAPIClient.getPosts { (viewModels) -> Void in
-            wSelf!.datas = viewModels
-            print("result is : \(wSelf!.datas)")
+        SSNetworkAPIClient.getPosts { [unowned self] (viewModels) -> Void in
+            self.datas = viewModels
+            print("result is : \(self.datas)")
 
-            wSelf!.showMarkers()
+            self.showMarkers()
         }
     }
 

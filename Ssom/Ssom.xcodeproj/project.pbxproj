@@ -311,6 +311,7 @@
 		979A4A031BF4525A00FAFB21 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A001BF4525A00FAFB21 /* Define.swift */; };
 		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
 		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
+		97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */; };
 		97C526531C7F60E100484F03 /* SSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C526521C7F60E100484F03 /* SSViewModel.swift */; };
 		97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526571C9DA16400484F03 /* pageLeftGreen.png */; };
 		97C526641C9DA16500484F03 /* pageLeftGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */; };
@@ -389,7 +390,6 @@
 		97343E621BE65DC800A9D39D /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		97343E641BE65DD100A9D39D /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		97343E661BE65DDD00A9D39D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		97343E6F1BE65EEB00A9D39D /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DaumMap.framework; path = Ssom/3rdLib/IOS_DaumMap_SDK_1.2.16/lib/DaumMap.embeddedframework/DaumMap.framework; sourceTree = "<group>"; };
 		974291041BF25F7000609974 /* SSListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSListTableViewCell.xib; sourceTree = "<group>"; };
 		9742910C1BF25FC600609974 /* SSListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSListTableViewCell.swift; sourceTree = "<group>"; };
 		974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignInViewController.swift; path = SignIn/SSSignInViewController.swift; sourceTree = "<group>"; };
@@ -671,6 +671,7 @@
 		979A4A011BF4525A00FAFB21 /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcBridge.h; path = Ssom/Common/ObjcBridge.h; sourceTree = "<group>"; };
 		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
 		979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Util.swift"; path = "Ssom/3rdLib/UIDevice+Util.swift"; sourceTree = "<group>"; };
+		97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSAcountManager.swift; path = Ssom/Account/SSAcountManager.swift; sourceTree = "<group>"; };
 		97C526521C7F60E100484F03 /* SSViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSViewModel.swift; path = ViewModel/SSViewModel.swift; sourceTree = "<group>"; };
 		97C526571C9DA16400484F03 /* pageLeftGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageLeftGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen.png; sourceTree = "<group>"; };
 		97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@2x.png"; sourceTree = "<group>"; };
@@ -1036,6 +1037,7 @@
 			children = (
 				97D5A3CC1BEBB24600F3DDFB /* Common */,
 				973003391BF84EA600734D8D /* Network */,
+				97A6BFF21CCA812500DA06D2 /* Account */,
 				97343E261BE65AB300A9D39D /* Ssom UI */,
 				97343E551BE65CD000A9D39D /* 3rd Party */,
 				97343E681BE65E2800A9D39D /* Frameworks */,
@@ -1064,6 +1066,7 @@
 				9730034E1C10947100734D8D /* Resource */,
 				97343E2E1BE65AB300A9D39D /* Assets.xcassets */,
 				97343E331BE65AB300A9D39D /* Info.plist */,
+				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E291BE65AB300A9D39D /* MainViewController.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
@@ -1078,7 +1081,6 @@
 				974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */,
 				9730034A1C0F38EB00734D8D /* SSFilterView.swift */,
 				9730034C1C1091E700734D8D /* SSFilterView.xib */,
-				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */,
 				9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */,
 			);
@@ -1115,7 +1117,6 @@
 		97343E681BE65E2800A9D39D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				97343E6F1BE65EEB00A9D39D /* DaumMap.framework */,
 				97343E661BE65DDD00A9D39D /* libsqlite3.tbd */,
 				97343E641BE65DD100A9D39D /* libxml2.tbd */,
 				97343E621BE65DC800A9D39D /* libstdc++.6.tbd */,
@@ -1136,6 +1137,14 @@
 				974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */,
 			);
 			name = SignIn;
+			sourceTree = "<group>";
+		};
+		97A6BFF21CCA812500DA06D2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		97D5A3CC1BEBB24600F3DDFB /* Common */ = {
@@ -1651,6 +1660,7 @@
 				973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */,
 				9773F95B1CB14E20008E79FE /* SSSignUpViewController.swift in Sources */,
 				97C5266F1C9F091200484F03 /* String+Util.swift in Sources */,
+				97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */,
 				973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
 				97D5A3CE1BEBB26F00F3DDFB /* SSChatViewController.swift in Sources */,

@@ -45,11 +45,18 @@ class SSSignInViewController: UIViewController {
         }
     }
 
-    @IBAction func tapClose(sender: AnyObject) {
+    @IBAction func tapClose(sender: AnyObject?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func tapSignInButton(sender: AnyObject) {
+        SSNetworkAPIClient.postLogin(self.tfEmail.text!, password:self.tfPassword.text!) { error in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                self.tapClose(nil)
+            }
+        }
     }
     
     @IBAction func tapFindPasswordButton(sender: AnyObject) {

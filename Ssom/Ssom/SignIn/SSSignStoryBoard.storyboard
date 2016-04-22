@@ -228,7 +228,6 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="closeWhite.png"/>
                                 <connections>
-                                    <action selector="tapClose:" destination="fHF-ph-zYB" eventType="touchUpInside" id="6dL-eq-Kd3"/>
                                     <action selector="tapClose:" destination="Zim-wO-bXh" eventType="touchUpInside" id="ZCr-f2-AmD"/>
                                 </connections>
                             </button>
@@ -260,14 +259,14 @@
                                             <constraint firstItem="kLQ-ih-3xF" firstAttribute="leading" secondItem="eoH-Qd-7ni" secondAttribute="leading" id="nTp-hz-lXP"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-Rm-MaG">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-Rm-MaG">
                                         <rect key="frame" x="95" y="356" width="358" height="45"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="가입하기" backgroundImage="loginBtn.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="tapSignUpButton:" destination="fHF-ph-zYB" eventType="touchUpInside" id="J5O-bw-NTZ"/>
+                                            <action selector="tapSignUp:" destination="Zim-wO-bXh" eventType="touchUpInside" id="r3z-hs-BA3"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT0-B0-XAW">
@@ -282,11 +281,12 @@
                                             <constraint firstAttribute="height" constant="27" id="3EF-bN-23c"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
-                                            <action selector="editingDidBeginEmail:" destination="fHF-ph-zYB" eventType="editingDidBegin" id="j7E-Bu-ZNu"/>
-                                            <action selector="editingDidEndEmail:" destination="fHF-ph-zYB" eventType="editingDidEnd" id="b7V-R1-bcf"/>
-                                            <outlet property="delegate" destination="fHF-ph-zYB" id="2Fn-wq-CJh"/>
+                                            <action selector="editingChangedEmail:" destination="Zim-wO-bXh" eventType="editingChanged" id="1SW-Tu-oBg"/>
+                                            <action selector="editingDidBeginEmail:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="Xfh-Kc-BEc"/>
+                                            <action selector="editingDidEndEmail:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="6BZ-DA-x2J"/>
+                                            <outlet property="delegate" destination="Zim-wO-bXh" id="lE8-yI-XOk"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-Ly-2cN">
@@ -304,11 +304,12 @@
                                             <constraint firstAttribute="height" constant="27" id="Fzq-GM-Bjt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
-                                            <action selector="editingDidBeginPassword:" destination="fHF-ph-zYB" eventType="editingDidBegin" id="O0k-aW-4Tf"/>
-                                            <action selector="editingDidEndPassword:" destination="fHF-ph-zYB" eventType="editingDidEnd" id="NEM-lX-zA0"/>
-                                            <outlet property="delegate" destination="fHF-ph-zYB" id="1Vc-tz-4EM"/>
+                                            <action selector="editingChangedPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="dwQ-pW-8JY"/>
+                                            <action selector="editingDidBeginPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="PhL-Xo-POj"/>
+                                            <action selector="editingDidEndPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="ws8-bT-au3"/>
+                                            <outlet property="delegate" destination="Zim-wO-bXh" id="gPR-lH-EJQ"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu">
@@ -326,11 +327,12 @@
                                             <constraint firstAttribute="height" constant="27" id="dIH-6X-wvQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
-                                            <action selector="editingDidBeginPassword:" destination="fHF-ph-zYB" eventType="editingDidBegin" id="ADg-PO-Bv8"/>
-                                            <action selector="editingDidEndPassword:" destination="fHF-ph-zYB" eventType="editingDidEnd" id="37M-UO-egR"/>
-                                            <outlet property="delegate" destination="fHF-ph-zYB" id="tty-sk-uFx"/>
+                                            <action selector="editingChangedConfirmPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="lKJ-3k-gO7"/>
+                                            <action selector="editingDidBeginConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="huu-Ny-Y7e"/>
+                                            <action selector="editingDidEndConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="X17-3p-eiH"/>
+                                            <outlet property="delegate" destination="Zim-wO-bXh" id="Wak-U0-NIC"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="liV-BA-Zhr">
@@ -389,6 +391,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="mdN-OK-ZW9"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="btnSignUp" destination="dNs-Rm-MaG" id="B17-9K-4X5"/>
+                        <outlet property="lbConfirmPassword" destination="8dz-D4-EEw" id="1gD-Ml-j7f"/>
+                        <outlet property="lbEmail" destination="VT0-B0-XAW" id="znD-G8-uUQ"/>
+                        <outlet property="lbPassword" destination="Wjn-Ch-SDr" id="PZZ-K5-8Wj"/>
+                        <outlet property="tfConfirmPassword" destination="NxU-Mb-n3B" id="Se0-9r-Yjr"/>
+                        <outlet property="tfEmail" destination="cgJ-kX-SUx" id="Ru6-aB-Hqy"/>
+                        <outlet property="tfPassword" destination="Mjc-4n-6Qd" id="RBy-Uu-2bJ"/>
+                        <outlet property="viewConfirmPasswordBottomLine" destination="liV-BA-Zhr" id="LmE-3H-CdY"/>
+                        <outlet property="viewEmailBottomLine" destination="fp5-Ly-2cN" id="OFC-7R-ofI"/>
+                        <outlet property="viewPasswordBottomLine" destination="tQ5-Qt-3bu" id="J4q-Ao-4QJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bqq-Z4-xp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

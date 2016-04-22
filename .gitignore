@@ -28,5 +28,6 @@ xcuserdata
 *.xcuserstate
 *.xcbkptlist
 Podfile.lock
+*.xctimeline
 
 Ssom/Pods/

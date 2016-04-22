@@ -40,13 +40,4 @@ class SSNavigationBarItems : UIView
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    class func insert(action: Selector?, target: AnyObject?, inout toBarButtonItem: UIBarButtonItem) {
-        if let insertedAction = action {
-            toBarButtonItem.action = insertedAction
-        }
-        if let insertedTarget = target {
-            toBarButtonItem.target = insertedTarget
-        }
-    }
 }

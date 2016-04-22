@@ -127,11 +127,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
         let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
-        //        SSNavigationBarItems.insert(rightBarButtonItems[1].action, target: rightBarButtonItems[1].target, toBarButtonItem: &heartBarButton)
 
         barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
         let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
-        //        SSNavigationBarItems.insert(rightBarButtonItems[0].action, target: rightBarButtonItems[0].target, toBarButtonItem: &messageBarButton)
 
         self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
     }
@@ -182,11 +180,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadingData() {
         if self.needReload {
 
-            SSNetworkAPIClient.getPosts { [weak self] (viewModels) -> Void in
-                self!.mainViewModel.datas = viewModels
-                print("result is : \(self!.mainViewModel.datas)")
+            SSNetworkAPIClient.getPosts { [unowned self] (viewModels) -> Void in
+                self.mainViewModel.datas = viewModels
+                print("result is : \(self.mainViewModel.datas)")
 
-                self!.filterData()
+                self.filterData()
             }
         } else {
             // initially loading
@@ -252,11 +250,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
                 , placeholderImage: nil
-                , completed: { [weak self] (image, error, cacheType, url) -> Void in
+                , completed: { [unowned self] (image, error, cacheType, url) -> Void in
 
                 let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
-                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self!.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
 
                 cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
             })

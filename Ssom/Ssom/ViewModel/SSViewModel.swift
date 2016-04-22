@@ -40,9 +40,19 @@ public class SSViewModel {
     init(modelDict:[String: AnyObject!]) {
         self.category   = modelDict["category"] as! String
         self.content    = String.encodeSpaceCharacter(modelDict["content"] as! String).stringByRemovingPercentEncoding
-        self.imageUrl   = modelDict["imageUrl"] as! String
-        self.latitude   = modelDict["latitude"] as! Double
-        self.longitude  = modelDict["longitude"] as! Double
+        if let imageUrl = modelDict["imageUrl"] as? String {
+            self.imageUrl = imageUrl
+        }
+        if let latitude = modelDict["latitude"] as? Double {
+            self.latitude = latitude
+        } else {
+            self.latitude = 0.0
+        }
+        if let longitude = modelDict["longitude"] as? Double {
+            self.longitude = longitude
+        } else {
+            self.longitude = 0.0
+        }
         if let distance: Int = modelDict["distance"] as? Int {
             self.distance = distance
         } else {
@@ -53,11 +63,19 @@ public class SSViewModel {
         } else {
             self.maxAge = 0
         }
-        self.minAge     = modelDict["minAge"] as! Int
+        if let minAge: Int = modelDict["minAge"] as? Int {
+            self.minAge = minAge
+        } else {
+            self.minAge = 0
+        }
         self.postId     = modelDict["postId"] as! String
         let ssomType = modelDict["ssom"] as! String
         self.ssomType   = SSType(rawValue: ssomType)!
         self.userId     = modelDict["userId"] as! String
-        self.userCount  = modelDict["userCount"] as! Int
+        if let userCount: Int = modelDict["userCount"] as? Int {
+            self.userCount = userCount
+        } else {
+            self.userCount = 0
+        }
     }
 }

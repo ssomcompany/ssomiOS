@@ -8,9 +8,10 @@
 
 import UIKit
 
-@objc protocol SSDetailViewDelegate: NSObjectProtocol {
+protocol SSDetailViewDelegate {
     func closeDetailView();
     func openSignIn();
+    func doSsom(ssomType: SSType);
 }
 
 class SSDetailView: UIView {
@@ -78,14 +79,20 @@ class SSDetailView: UIView {
     }
     
     @IBAction func tapClose(sender: AnyObject) {
-        if self.delegate.respondsToSelector(#selector(SSDetailViewDelegate.closeDetailView)) {
-            self.delegate.closeDetailView()
+        guard let _ = self.delegate?.closeDetailView() else {
+            NSLog("%@", "This SSDetailView's delegate isn't implemented closeDetailView function")
+
+            return
         }
     }
 
     @IBAction func tapSsom(sender: AnyObject) {
         if SSAccountManager.sharedInstance.isAuthorized() {
-            
+            guard let _ = self.delegate?.doSsom(self.ssomType) else {
+                NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
+
+                return
+            }
         } else {
             guard let _ = self.delegate?.openSignIn() else {
                 NSLog("%@", "This SSDetailView's delegate isn't implemented openSignIn function")

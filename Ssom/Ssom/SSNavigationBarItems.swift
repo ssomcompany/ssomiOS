@@ -17,11 +17,13 @@ import UIKit
 class SSNavigationBarItems : UIView
 {
     @IBOutlet var heartBarButtonView: UIView!
+    @IBOutlet var imgViewHeart: UIImageView!
     @IBOutlet var lbHeartCount: UILabel!
     @IBOutlet var lbRechargeTime: UILabel!
     @IBOutlet var btnHeartBar: UIButton!
 
     @IBOutlet var messageBarButtonView: UIView!
+    @IBOutlet var imgViewMessage: UIImageView!
     @IBOutlet var lbUnreadMessageCount: UILabel!
     @IBOutlet var btnMessageBar: UIButton!
 

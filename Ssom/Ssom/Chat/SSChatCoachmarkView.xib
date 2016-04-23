@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSChatCoachmarkView" customModule="Ssom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DV3-Dd-8O2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pathGuideHeart" translatesAutoresizingMaskIntoConstraints="NO" id="exd-ve-d07">
+                            <rect key="frame" x="195" y="78" width="155" height="74"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="155" id="tsz-s8-XVA"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bowIconRed" translatesAutoresizingMaskIntoConstraints="NO" id="ulN-QL-G3c">
+                            <rect key="frame" x="336" y="64" width="28" height="28"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="하트를 누르면 대화 상대에게 만남 요청을 할 수 있쏨!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-gQ-Km9">
+                            <rect key="frame" x="45" y="115" width="236" height="93.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khR-xe-PwW">
+                            <rect key="frame" x="45" y="223" width="285.5" height="41"/>
+                            <string key="text">만남을 시작하면 딴 사람과 쏨을 탈 수 없고,
+서로의 위치도 확인할 수 있어요!</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjP-lL-d5k">
+                            <rect key="frame" x="333" y="22" width="40" height="40"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="kK0-lI-wZG">
+                                    <rect key="frame" x="1" y="4" width="37" height="32"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-JK-AfV">
+                                    <rect key="frame" x="15" y="12.5" width="8" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="8ix-Nd-JGa"/>
+                                <constraint firstItem="mcn-JK-AfV" firstAttribute="centerX" secondItem="hjP-lL-d5k" secondAttribute="centerX" constant="-1" id="Oi2-ko-g6L"/>
+                                <constraint firstItem="kK0-lI-wZG" firstAttribute="centerX" secondItem="hjP-lL-d5k" secondAttribute="centerX" id="bp8-5r-7V1"/>
+                                <constraint firstItem="kK0-lI-wZG" firstAttribute="centerY" secondItem="hjP-lL-d5k" secondAttribute="centerY" id="qcY-Fg-x6Y"/>
+                                <constraint firstItem="mcn-JK-AfV" firstAttribute="centerY" secondItem="hjP-lL-d5k" secondAttribute="centerY" id="zgV-J0-wPH"/>
+                                <constraint firstAttribute="height" constant="40" id="zok-ke-jmU"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="khR-xe-PwW" firstAttribute="centerX" secondItem="DV3-Dd-8O2" secondAttribute="centerX" id="5eW-lR-fff"/>
+                        <constraint firstItem="khR-xe-PwW" firstAttribute="leading" secondItem="R9T-gQ-Km9" secondAttribute="leading" id="TrS-Xf-Gl2"/>
+                        <constraint firstAttribute="trailing" secondItem="hjP-lL-d5k" secondAttribute="trailing" constant="2" id="WAQ-C6-l8Z"/>
+                        <constraint firstAttribute="trailing" secondItem="ulN-QL-G3c" secondAttribute="trailing" constant="11" id="YSe-4n-faa"/>
+                        <constraint firstItem="ulN-QL-G3c" firstAttribute="trailing" secondItem="exd-ve-d07" secondAttribute="trailing" constant="14" id="e5u-3M-mil"/>
+                        <constraint firstItem="khR-xe-PwW" firstAttribute="top" secondItem="R9T-gQ-Km9" secondAttribute="bottom" constant="14" id="fz4-Bw-YWP"/>
+                        <constraint firstItem="exd-ve-d07" firstAttribute="top" secondItem="ulN-QL-G3c" secondAttribute="bottom" constant="-14" id="sXw-Uw-Ni8"/>
+                        <constraint firstItem="ulN-QL-G3c" firstAttribute="top" secondItem="DV3-Dd-8O2" secondAttribute="top" constant="64" id="t0i-ro-BjO"/>
+                        <constraint firstItem="hjP-lL-d5k" firstAttribute="top" secondItem="DV3-Dd-8O2" secondAttribute="top" constant="22" id="zei-PW-8Ej"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wf-7K-QgY">
+                    <rect key="frame" x="109" y="307" width="156" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="156" id="eaC-DX-aoR"/>
+                        <constraint firstAttribute="height" constant="53" id="fdz-4d-f8J"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <state key="normal" title="대화 시작!" backgroundImage="acceptButtonRed.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tapStartChat:" destination="iN0-l3-epB" eventType="touchUpInside" id="9k8-ex-X8k"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9Wf-7K-QgY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="G0D-I5-Eq3"/>
+                <constraint firstAttribute="bottom" secondItem="DV3-Dd-8O2" secondAttribute="bottom" id="Jd0-2N-Dj6"/>
+                <constraint firstItem="DV3-Dd-8O2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UKY-SJ-Sj5"/>
+                <constraint firstItem="DV3-Dd-8O2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cRh-8o-rVN"/>
+                <constraint firstItem="9Wf-7K-QgY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hHE-EF-ZdA"/>
+                <constraint firstItem="9Wf-7K-QgY" firstAttribute="top" secondItem="khR-xe-PwW" secondAttribute="bottom" constant="43" id="s7E-55-baT"/>
+                <constraint firstAttribute="trailing" secondItem="DV3-Dd-8O2" secondAttribute="trailing" id="ufI-x5-EMN"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <connections>
+                <outlet property="lbGuideText" destination="R9T-gQ-Km9" id="O7Y-vw-wmI"/>
+                <outlet property="viewHeartRound" destination="hjP-lL-d5k" id="dsb-k4-nuX"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="acceptButtonRed.png" width="137" height="50"/>
+        <image name="bowIconRed" width="28" height="28"/>
+        <image name="heart.png" width="37" height="32"/>
+        <image name="pathGuideHeart" width="175" height="74"/>
+    </resources>
+</document>

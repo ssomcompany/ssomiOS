@@ -374,5 +374,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
         self.presentViewController(vc!, animated: true, completion: nil)
     }
+
+    func doSsom(ssomType: SSType) {
+        let vc: SSChatViewController = SSChatViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

@@ -12,6 +12,8 @@
                 <outlet property="btnHeartBar" destination="iIy-ck-co3" id="Ytu-7B-xoj"/>
                 <outlet property="btnMessageBar" destination="TSt-lB-147" id="TzT-Cw-zn0"/>
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
+                <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
+                <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>
                 <outlet property="lbBackButtonTitle" destination="Yic-qO-3ps" id="peR-xh-yby"/>
                 <outlet property="lbHeartCount" destination="ls5-ZA-jvE" id="qdJ-aM-hDn"/>
                 <outlet property="lbRechargeTime" destination="169-wf-BeN" id="3IU-6V-cA8"/>

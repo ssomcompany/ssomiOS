@@ -52,10 +52,26 @@ public class SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    if let token = response.result.value!["token"] {
-                        SSNetworkContext.sharedInstance.saveSharedAttribute(token!, forKey: "token")
+                    if let value: [String: AnyObject] = response.result.value as? [String: AnyObject] {
+                        let token = value["token"]
+                        if token != nil {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(token!, forKey: "token")
 
-                        completion(error: nil)
+                            completion(error: nil)
+                        } else {
+
+                            let errorResult = value["error"]
+                            if errorResult != nil {
+                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed", code: 999, userInfo: nil)
+
+                                completion(error: error)
+                            } else {
+                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed", code: 999, userInfo: nil)
+                                
+                                completion(error: error)
+                            }
+
+                        }
                     } else {
                         let error: NSError = NSError(domain: "com.ssom.error.AuthFailed", code: 999, userInfo: nil)
 

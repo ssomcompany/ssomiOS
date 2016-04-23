@@ -199,11 +199,7 @@
                             </connections>
                         </segmentedControl>
                         <rightBarButtonItems>
-                            <barButtonItem title="chat" id="QR1-pF-28b">
-                                <connections>
-                                    <segue destination="waS-ot-a30" kind="show" id="TyQ-LK-xb3"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem title="chat" id="QR1-pF-28b"/>
                             <barButtonItem title="heart" id="bkl-mG-xoJ" userLabel="heart"/>
                         </rightBarButtonItems>
                         <connections>
@@ -224,33 +220,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1257" y="427"/>
-        </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="uFg-aa-wDg">
-            <objects>
-                <viewController id="waS-ot-a30" userLabel="Chat View Controller" customClass="SSChatViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5CU-1A-ocg"/>
-                        <viewControllerLayoutGuide type="bottom" id="UAS-Yh-s6a"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7YN-vU-QiA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q5h-t5-kyv" userLabel="Chat Table View">
-                                <rect key="frame" x="0.0" y="64" width="600" height="502"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Chat" id="zz8-Fh-e2i" userLabel="Chat">
-                        <barButtonItem key="rightBarButtonItem" title="하트" id="fHK-rD-RoM" userLabel="하트"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zok-lV-Nlx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="465" y="1217"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="GoR-vV-C1c">
@@ -419,11 +388,7 @@
                             </connections>
                         </segmentedControl>
                         <rightBarButtonItems>
-                            <barButtonItem title="chat" id="EC0-D3-xmZ">
-                                <connections>
-                                    <segue destination="waS-ot-a30" kind="show" id="FJc-yc-ab1"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem title="chat" id="EC0-D3-xmZ"/>
                             <barButtonItem title="heart" id="eh8-G7-vkv" userLabel="heart"/>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -948,7 +913,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AH8-HF-7eE"/>
-        <segue reference="FJc-yc-ab1"/>
         <segue reference="8it-yK-IlM"/>
     </inferredMetricsTieBreakers>
 </document>

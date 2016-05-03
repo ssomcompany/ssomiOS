@@ -61,7 +61,7 @@
                                             <constraint firstAttribute="bottom" secondItem="cs2-jP-ynq" secondAttribute="bottom" constant="22" id="yXP-sv-GdH"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-Au-fEj">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-Au-fEj">
                                         <rect key="frame" x="95" y="262" width="358" height="45"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="로그인" backgroundImage="loginBtn.png">
@@ -108,6 +108,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                         <connections>
+                                            <action selector="editingChangedEmail:" destination="fHF-ph-zYB" eventType="editingChanged" id="Gpt-xI-YUt"/>
                                             <action selector="editingDidBeginEmail:" destination="fHF-ph-zYB" eventType="editingDidBegin" id="yro-jF-UR2"/>
                                             <action selector="editingDidEndEmail:" destination="fHF-ph-zYB" eventType="editingDidEnd" id="GaU-Pe-tbX"/>
                                             <outlet property="delegate" destination="fHF-ph-zYB" id="2uh-To-cjn"/>
@@ -128,8 +129,9 @@
                                             <constraint firstAttribute="height" constant="27" id="MzF-sG-sp1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
+                                            <action selector="editingChangedPassword:" destination="fHF-ph-zYB" eventType="editingChanged" id="Tnb-y9-D6C"/>
                                             <action selector="editingDidBeginPassword:" destination="fHF-ph-zYB" eventType="editingDidBegin" id="bYc-bC-FIb"/>
                                             <action selector="editingDidEndPassword:" destination="fHF-ph-zYB" eventType="editingDidEnd" id="3tg-O3-Mti"/>
                                             <outlet property="delegate" destination="fHF-ph-zYB" id="eZt-mZ-3Od"/>
@@ -190,6 +192,7 @@
                     <navigationItem key="navigationItem" id="eUP-Gk-0m9"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="btnSignIn" destination="Lig-Au-fEj" id="ovJ-cJ-vhY"/>
                         <outlet property="lbEmail" destination="uu6-jK-UC0" id="ccT-Zc-R6D"/>
                         <outlet property="lbPassword" destination="ute-j3-yBO" id="QEq-51-3n8"/>
                         <outlet property="tfEmail" destination="Wfe-lR-JPp" id="bsn-2R-fBd"/>

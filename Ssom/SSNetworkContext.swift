@@ -9,7 +9,8 @@
 import Foundation
 
 class SSNetworkContext {
-    static let serverUrlPrefixt: String = "http://54.64.154.188/"
+    static let DEVELOPMENT_MODE: Bool = true;
+    static let serverUrlPrefixt: String = DEVELOPMENT_MODE ? "http://localhost:3000/" : "http://54.64.154.188/"
 
     static let sharedInstance = SSNetworkContext()
 

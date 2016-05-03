@@ -204,7 +204,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
-        if imageUrl != nil {
+        if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
             Alamofire.request(.GET, imageUrl)
                 .responseData { (response) -> Void in
 
@@ -367,7 +367,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         self.detailView.removeFromSuperview()
     }
 
-    func openSignIn() {
+    func openSignIn(completion: ((finish:Bool) -> Void)?) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
         let vc = storyBoard.instantiateInitialViewController()
         vc?.modalPresentationStyle = .OverFullScreen
@@ -376,7 +376,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func doSsom(ssomType: SSType) {
-        let vc: SSChatViewController = SSChatViewController()
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("SSChatViewController") as! SSChatViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

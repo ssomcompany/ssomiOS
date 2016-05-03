@@ -298,10 +298,24 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
     }
 
     @IBAction func tapRegisterButton(sender: AnyObject) {
-        self.writeViewModel.userId = ""
-        self.writeViewModel.content = self.textView.text
+        if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
+            self.writeViewModel.userId = token
+            self.writeViewModel.content = self.textView.text
 
-        self.navigationController!.popViewControllerAnimated(true)
+            print("SSWrite is : \(self.writeViewModel)")
+
+            self.navigationController!.popViewControllerAnimated(true)
+        } else {
+            self.openSignIn(nil)
+        }
+    }
+
+    func openSignIn(completion: ((finish:Bool) -> Void)?) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let vc = storyBoard.instantiateInitialViewController()
+        vc?.modalPresentationStyle = .OverFullScreen
+
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
 
     @IBAction func tapCloseButton(sender: AnyObject) {

@@ -18,6 +18,7 @@ class SSSignInViewController: UIViewController {
     @IBOutlet var lbPassword: UILabel!
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var viewPasswordBottomLine: UIImageView!
+    @IBOutlet var btnSignIn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,29 @@ class SSSignInViewController: UIViewController {
 
     func initView() {
         self.navigationController?.navigationBar.hidden = true
+    }
+
+    func validateInput() -> Bool {
+        var isSuccessToValidate = true
+
+        if let email:String = tfEmail.text! {
+            if email.characters.count <= 0 {
+                isSuccessToValidate = isSuccessToValidate && false
+            } else {
+//                if !Util.isValidEmail(email) {
+//                    isSuccessToValidate = isSuccessToValidate && false
+//                }
+            }
+        }
+
+        let password:String = tfPassword.text!
+        if password.characters.count < kPasswordMinLength {
+            isSuccessToValidate = isSuccessToValidate && false
+        }
+
+        self.btnSignIn.enabled = isSuccessToValidate;
+
+        return isSuccessToValidate;
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -50,12 +74,8 @@ class SSSignInViewController: UIViewController {
     }
 
     @IBAction func tapSignInButton(sender: AnyObject) {
-        SSNetworkAPIClient.postLogin(self.tfEmail.text!, password:self.tfPassword.text!) { error in
-            if error != nil {
-                print(error?.localizedDescription)
-            } else {
-                self.tapClose(nil)
-            }
+        SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) {
+            self.tapClose(nil)
         }
     }
     
@@ -73,6 +93,9 @@ class SSSignInViewController: UIViewController {
         self.lbEmail.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
         self.viewEmailBottomLine.image = UIImage(named: "writeLine")
     }
+    @IBAction func editingChangedEmail(sender: AnyObject) {
+        self.validateInput()
+    }
 
     @IBAction func editingDidBeginPassword(sender: AnyObject) {
         self.lbPassword.textColor = UIColor.blackColor()
@@ -81,6 +104,9 @@ class SSSignInViewController: UIViewController {
     @IBAction func editingDidEndPassword(sender: AnyObject) {
         self.lbPassword.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
         self.viewPasswordBottomLine.image = UIImage(named: "writeLine")
+    }
+    @IBAction func editingChangedPassword(sender: AnyObject) {
+        self.validateInput()
     }
 
 }

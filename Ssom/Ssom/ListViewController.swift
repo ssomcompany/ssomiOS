@@ -331,7 +331,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.detailView.removeFromSuperview()
     }
 
-    func openSignIn() {
+    func openSignIn(completion: ((finish:Bool) -> Void)?) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
         let vc = storyBoard.instantiateInitialViewController()
         vc?.modalPresentationStyle = .OverFullScreen
@@ -340,7 +340,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func doSsom(ssomType: SSType) {
-        let vc: SSChatViewController = SSChatViewController()
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("SSChatViewController") as! SSChatViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

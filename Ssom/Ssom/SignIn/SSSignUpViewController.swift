@@ -64,7 +64,7 @@ class SSSignUpViewController: UIViewController {
             if email.characters.count <= 0 {
                 isSuccessToValidate = isSuccessToValidate && false
             } else {
-                if !self.isValidEmail(email) {
+                if !Util.isValidEmail(email) {
                     isSuccessToValidate = isSuccessToValidate && false
                 }
             }
@@ -87,18 +87,6 @@ class SSSignUpViewController: UIViewController {
         self.btnSignUp.enabled = isSuccessToValidate;
 
         return isSuccessToValidate;
-    }
-
-    func isValidEmail(testStr:String) -> Bool {
-
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-
-        let result = emailTest.evaluateWithObject(testStr)
-        
-        return result
-        
     }
 
     @IBAction func tapClose(sender: AnyObject?) {

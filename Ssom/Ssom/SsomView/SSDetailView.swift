@@ -10,7 +10,7 @@ import UIKit
 
 protocol SSDetailViewDelegate {
     func closeDetailView();
-    func openSignIn();
+    func openSignIn(completion: ((finish:Bool) -> Void)?);
     func doSsom(ssomType: SSType);
 }
 
@@ -78,7 +78,7 @@ class SSDetailView: UIView {
         }
     }
     
-    @IBAction func tapClose(sender: AnyObject) {
+    @IBAction func tapClose(sender: AnyObject?) {
         guard let _ = self.delegate?.closeDetailView() else {
             NSLog("%@", "This SSDetailView's delegate isn't implemented closeDetailView function")
 
@@ -93,8 +93,10 @@ class SSDetailView: UIView {
 
                 return
             }
+
+            self.tapClose(nil)
         } else {
-            guard let _ = self.delegate?.openSignIn() else {
+            guard let _ = self.delegate?.openSignIn(nil) else {
                 NSLog("%@", "This SSDetailView's delegate isn't implemented openSignIn function")
 
                 return

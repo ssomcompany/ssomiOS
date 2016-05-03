@@ -38,11 +38,12 @@ public class SSNetworkAPIClient {
         }
     }
 
-    class func postLogin(email:String, password:String, completion: (error:NSError?) -> Void ) {
+    class func postLogin(userId email:String, password:String, completion: (error:NSError?) -> Void ) {
         let plainString = "\(email):\(password)" as NSString
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = plainData?.base64EncodedStringWithOptions([])
 
+        // Basic Auth
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt+"login",
             encoding: .JSON,

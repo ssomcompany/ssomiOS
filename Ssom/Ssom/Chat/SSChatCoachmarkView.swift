@@ -14,8 +14,10 @@ class SSChatCoachmarkView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
 
-        self.viewHeartRound.layer.cornerRadius = self.viewHeartRound.bounds.size.height / 2.0
+    func configView() {
+        self.viewHeartRound.layer.cornerRadius = self.viewHeartRound.bounds.height / 2.0;
     }
 
     @IBAction func tapStartChat(sender: AnyObject) {

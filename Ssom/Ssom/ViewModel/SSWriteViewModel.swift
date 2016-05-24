@@ -41,7 +41,7 @@ public struct SSWriteViewModel
     var peopleCountType: SSPeopleCountType  //userCount
     var ageType: SSAgeType  //minAge, maxAge
 
-    var profilePhotoUrl: String  //imageUrl
+    var profilePhotoUrl: NSURL?  //imageUrl
 
     var myLatitude: Double  //latitude
     var myLongitude: Double //longitude
@@ -59,7 +59,7 @@ public struct SSWriteViewModel
 
         ageType = .AgeEarly20
 
-        profilePhotoUrl = ""
+        profilePhotoUrl = nil
 
         myLatitude = 0
         myLongitude = 0
@@ -73,7 +73,7 @@ public struct SSWriteViewModel
         , content: String
         , peopleCount: SSPeopleCountType
         , age: SSAgeType
-        , profilePhotoUrl: String
+        , profilePhotoUrl: NSURL
         , myLatitude: Double
         , myLongitude: Double
         , isSell: Bool)
@@ -98,7 +98,7 @@ public struct SSWriteViewModel
 
         ageType = data["age"] as! SSAgeType
 
-        profilePhotoUrl = data["profilePhotoUrl"] as! String
+        profilePhotoUrl = data["profilePhotoUrl"] as? NSURL
 
         myLatitude = data["latitude"] as! Double
         myLongitude = data["longitude"] as! Double

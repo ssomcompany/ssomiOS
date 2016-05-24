@@ -75,11 +75,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func loadingData() {
-        SSNetworkAPIClient.getPosts { [unowned self] (viewModels) -> Void in
-            self.datas = viewModels
-            print("result is : \(self.datas)")
+        SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
+            if let models = viewModels {
+                self.datas = models
+                print("result is : \(self.datas)")
 
-            self.showMarkers()
+                self.showMarkers()
+            } else {
+                print("error is : \(error?.localizedDescription)")
+            }
         }
     }
 
@@ -141,7 +145,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
             let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
 
-            barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+            barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
             let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
             self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
@@ -155,6 +159,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+    }
+
+    func tapChat() {
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController")
+
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func showMarkers() {
@@ -298,7 +309,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
         self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
-        self.detailView.frame = self.view.bounds
+        self.detailView.frame = UIScreen.mainScreen().bounds
         self.detailView.delegate = self
         
         if self.btnIPay.selected {
@@ -377,7 +388,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     func doSsom(ssomType: SSType) {
         let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("SSChatViewController") as! SSChatViewController
+        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

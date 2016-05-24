@@ -55,6 +55,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.edgesForExtendedLayout = UIRectEdge.None;
 
+        self.setNavigationBarView()
+
         self.initView()
     }
 
@@ -77,10 +79,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.setNavigationBarView()
-
-        self.loadingData()
     }
 
     func setNavigationBarView() {
@@ -128,10 +126,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
         let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
 
-        barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+        barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
         let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
         self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
+    }
+
+    func tapChat() {
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -180,11 +185,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadingData() {
         if self.needReload {
 
-            SSNetworkAPIClient.getPosts { [unowned self] (viewModels) -> Void in
-                self.mainViewModel.datas = viewModels
-                print("result is : \(self.mainViewModel.datas)")
+            SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
+                if let models = viewModels {
+                    self.mainViewModel.datas = models
+                    print("result is : \(self.mainViewModel.datas)")
 
-                self.filterData()
+                    self.filterData()
+                } else {
+                    print("error is : \(error?.localizedDescription)")
+                }
             }
         } else {
             // initially loading
@@ -246,20 +255,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         if let imageUrl = model.imageUrl {
-            print("imageUrl is \(imageUrl)")
+            if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                print("imageUrl is \(imageUrl)")
 
-            cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
-                , placeholderImage: nil
-                , completed: { [unowned self] (image, error, cacheType, url) -> Void in
+                cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
+                    , placeholderImage: nil
+                    , completed: { [unowned self] (image, error, cacheType, url) -> Void in
 
-                let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
+                        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+
+                        cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                    })
+                
+                cell.profilImageUrl = imageUrl
+            } else {
                 let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
 
-                cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-            })
+                cell.profileImageView!.image = maskOfProfileImage
+            }
+        } else {
+            let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
 
-            cell.profilImageUrl = imageUrl
+            cell.profileImageView!.image = maskOfProfileImage
         }
 
         var memberInfoString:String = "";
@@ -297,7 +316,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
-        self.detailView.frame = self.view.bounds
+        self.detailView.frame = UIScreen.mainScreen().bounds
         self.detailView.delegate = self
 
         if self.btnIPay.selected {
@@ -341,7 +360,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func doSsom(ssomType: SSType) {
         let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("SSChatViewController") as! SSChatViewController
+        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

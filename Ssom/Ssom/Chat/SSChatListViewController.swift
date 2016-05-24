@@ -16,6 +16,8 @@ class SSChatListViewController : UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        self.setNavigationBarView()
+
         self.initView()
     }
 
@@ -31,8 +33,6 @@ class SSChatListViewController : UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.setNavigationBarView()
     }
 
     func setNavigationBarView() {

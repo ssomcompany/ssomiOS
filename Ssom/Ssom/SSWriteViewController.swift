@@ -55,6 +55,10 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
 
     var writeViewModel: SSWriteViewModel
 
+    var pickedImageExtension: String!
+    var pickedImageName: String!
+    var pickedImageData: NSData!
+
     init() {
         self.writeViewModel = SSWriteViewModel()
 
@@ -299,12 +303,32 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
 
     @IBAction func tapRegisterButton(sender: AnyObject) {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
-            self.writeViewModel.userId = token
+            let userId: String = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as! String
+            self.writeViewModel.userId = userId
             self.writeViewModel.content = self.textView.text
 
             print("SSWrite is : \(self.writeViewModel)")
 
-            self.navigationController!.popViewControllerAnimated(true)
+            SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { (photoURLPath, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+                } else {
+                    self.writeViewModel.profilePhotoUrl = NSURL(string: photoURLPath!)
+                    SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [unowned self] (error) in
+                        if error != nil {
+                            print(error?.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: { (action) in
+                                self.navigationController!.popViewControllerAnimated(true)
+                            })
+                        } else {
+                            self.navigationController!.popViewControllerAnimated(true)
+                        }
+                        })
+                }
+            })
         } else {
             self.openSignIn(nil)
         }
@@ -351,6 +375,32 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
         self.imgProfile.clipsToBounds = true
         self.imgProfile.image = image
         self.imgProfile.hidden = false
+
+        let pickedImageURL: NSURL = editingInfo![UIImagePickerControllerReferenceURL] as! NSURL
+        let pickedImageURLQueryParams: Array = pickedImageURL.query!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "=&"))
+        let pickedImage: UIImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
+        var isExt: Bool = false;
+        for queryParam: String in pickedImageURLQueryParams {
+            if queryParam == "ext" {
+                isExt = true
+                continue
+            }
+            if isExt {
+                switch queryParam {
+                case "PNG":
+                    self.pickedImageExtension = "png"
+                    self.pickedImageData = UIImagePNGRepresentation(pickedImage)
+                case "JPG", "JPEG":
+                    self.pickedImageExtension = "jpeg"
+                    self.pickedImageData = UIImageJPEGRepresentation(pickedImage, 1.0)
+                default:
+                    print("")
+                }
+
+                break
+            }
+        }
+        self.pickedImageName = pickedImageURL.lastPathComponent
 
         picker.dismissViewControllerAnimated(true, completion: nil)
     }

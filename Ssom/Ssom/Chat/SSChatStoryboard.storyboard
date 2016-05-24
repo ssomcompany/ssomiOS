@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NXQ-A8-Jsy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NXQ-A8-Jsy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="awN-7C-T6n">
             <objects>
-                <viewController id="pbd-UI-vDd" userLabel="Chat List View Controller" customClass="SSChatListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pbd-UI-vDd" userLabel="Chat List View Controller" customClass="SSChatListViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HUJ-9T-kk2"/>
                         <viewControllerLayoutGuide type="bottom" id="fjO-T2-K7J"/>
@@ -35,7 +35,7 @@
         <!--Chat View Controller-->
         <scene sceneID="I5e-Bw-cJY">
             <objects>
-                <viewController storyboardIdentifier="SSChatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tih-SM-SIo" customClass="SSChatViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tih-SM-SIo" customClass="SSChatViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cdy-RK-2cG"/>
                         <viewControllerLayoutGuide type="bottom" id="JPm-88-MuQ"/>
@@ -87,10 +87,6 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hK4-Jp-SvA" customClass="SSChatCoachmarkView" customModule="Ssom" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,18 +94,13 @@
                             <constraint firstAttribute="trailing" secondItem="Pp4-5O-J26" secondAttribute="trailing" id="Kzy-Ph-HRU"/>
                             <constraint firstItem="Pp4-5O-J26" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="PKe-SK-mAz"/>
                             <constraint firstItem="Pp4-5O-J26" firstAttribute="top" secondItem="cdy-RK-2cG" secondAttribute="bottom" id="PZC-yI-YhI"/>
-                            <constraint firstItem="JPm-88-MuQ" firstAttribute="top" secondItem="hK4-Jp-SvA" secondAttribute="bottom" id="RnN-dJ-Lcr"/>
                             <constraint firstItem="Ew7-iN-Spu" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="UCc-VB-kDt"/>
                             <constraint firstItem="Ew7-iN-Spu" firstAttribute="top" secondItem="Pp4-5O-J26" secondAttribute="bottom" id="Ww1-pI-Cuq"/>
                             <constraint firstAttribute="bottom" secondItem="Ew7-iN-Spu" secondAttribute="bottom" id="dwb-ND-Czw"/>
-                            <constraint firstItem="hK4-Jp-SvA" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="fEd-vV-Xe1"/>
-                            <constraint firstAttribute="trailing" secondItem="hK4-Jp-SvA" secondAttribute="trailing" id="gXY-O8-SUK"/>
-                            <constraint firstItem="hK4-Jp-SvA" firstAttribute="top" secondItem="cdy-RK-2cG" secondAttribute="bottom" id="lJO-do-aUY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableViewChat" destination="Pp4-5O-J26" id="sHW-am-ayz"/>
-                        <outlet property="viewChatCoachmark" destination="hK4-Jp-SvA" id="ZYd-mL-rQi"/>
                         <outlet property="viewInputBar" destination="Ew7-iN-Spu" id="qrk-d2-mBn"/>
                     </connections>
                 </viewController>

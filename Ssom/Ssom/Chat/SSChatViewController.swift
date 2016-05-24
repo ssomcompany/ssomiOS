@@ -10,17 +10,11 @@ import UIKit
 
 class SSChatViewController: UIViewController {
 
-    @IBOutlet var viewChatCoachmark: SSChatCoachmarkView!
+    var viewChatCoachmark: SSChatCoachmarkView!
     @IBOutlet var tableViewChat: UITableView!
     @IBOutlet var viewInputBar: UIView!
 
     var barButtonItems: SSNavigationBarItems!
-
-    init() {
-        self.viewChatCoachmark.configView()
-
-        super.init(nibName: nil, bundle: nil)
-    }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,6 +24,8 @@ class SSChatViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        self.setNavigationBarView()
+
         self.initView()
     }
     
@@ -37,16 +33,18 @@ class SSChatViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    func showCoachmarkView() {
+        self.viewChatCoachmark = UIView.loadFromNibNamed("SSChatCoachmarkView") as? SSChatCoachmarkView
+        if let appDelgate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            let keyWindow = appDelgate.window
+            keyWindow?.addSubview(self.viewChatCoachmark)
+            self.viewChatCoachmark.translatesAutoresizingMaskIntoConstraints = false;
+            keyWindow?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
+            keyWindow?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
 
-        self.setNavigationBarView()
+            keyWindow?.layoutIfNeeded()
+        }
     }
 
     func setNavigationBarView() {
@@ -59,10 +57,10 @@ class SSChatViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 150, 44))
-        naviTitleView.backgroundColor = UIColor.redColor()
         naviTitleView.font = UIFont.systemFontOfSize(18)
         naviTitleView.textAlignment = .Center
         naviTitleView.text = "Chat"
+        naviTitleView.sizeToFit()
         self.navigationItem.titleView = naviTitleView;
 
         let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
@@ -75,6 +73,7 @@ class SSChatViewController: UIViewController {
     }
 
     func initView() {
+        self.showCoachmarkView()
     }
 
     func tapBack() {

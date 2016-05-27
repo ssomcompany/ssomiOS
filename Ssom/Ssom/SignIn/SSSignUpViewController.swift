@@ -94,11 +94,15 @@ class SSSignUpViewController: UIViewController {
     }
 
     @IBAction func tapSignUp(sender: AnyObject) {
-        SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { 
-            print("")
-        }
+        SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { (error) in
+            if error != nil {
+                print(error?.localizedDescription)
 
-        self.tapClose(nil)
+                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+            } else {
+                self.tapClose(nil)
+            }
+        }
     }
 
 // MARK:- UITextFieldDelegate

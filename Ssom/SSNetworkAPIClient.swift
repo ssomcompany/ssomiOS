@@ -168,7 +168,7 @@ public class SSNetworkAPIClient {
 
     }
 
-    class func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: () -> Void ) {
+    class func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: (error: NSError?) -> Void ) {
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt + "users",
             parameters: ["email":email, "password":password, "nickName":nickName!, "gender":gender!.rawValue],
@@ -178,9 +178,11 @@ public class SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    completion()
+                    completion(error: nil)
                 } else {
                     print("Response Error : \(response.result.error)")
+
+                    completion(error: response.result.error)
                 }
         }
     }

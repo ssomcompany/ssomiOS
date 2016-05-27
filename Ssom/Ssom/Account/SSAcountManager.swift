@@ -16,7 +16,11 @@ class SSAccountManager {
             if error != nil {
                 print(error?.localizedDescription)
 
-                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: vc, completion: nil)
+                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: vc, completion: { (alertAction) in
+                    guard let _ = completion!() else {
+                        return
+                    }
+                })
             } else {
                 SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : userId])
 

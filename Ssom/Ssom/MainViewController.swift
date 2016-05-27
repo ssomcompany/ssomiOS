@@ -281,6 +281,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         }
     }
 
+    @IBAction func switchListViewController(sender: UIStoryboardSegue) {
+        print(self.navigationItem.titleView)
+
+        let seg: UISegmentedControl = (self.navigationItem.titleView as? UISegmentedControl)!
+        seg.selectedSegmentIndex = 0
+    }
+
 // MARK: - GMSMapViewDelegate
     func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
         locationManager.stopUpdatingLocation()

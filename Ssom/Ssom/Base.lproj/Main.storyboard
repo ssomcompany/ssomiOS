@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -195,7 +195,7 @@
                             </segments>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="j6y-F4-SAC" kind="show" identifier="SSListViewSegue" id="FV6-g1-zVQ"/>
+                                <segue destination="j6y-F4-SAC" kind="show" identifier="SSListViewSegue" animates="NO" id="QHo-7y-82v"/>
                             </connections>
                         </segmentedControl>
                         <rightBarButtonItems>
@@ -384,7 +384,7 @@
                             </segments>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="a1k-56-NLr"/>
+                                <segue destination="L36-iY-b3c" kind="unwind" identifier="backToSSMainViewUnwindSegue" animates="NO" unwindAction="switchListViewController:" id="Hzv-EI-gu3"/>
                             </connections>
                         </segmentedControl>
                         <rightBarButtonItems>
@@ -402,8 +402,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qE-7b-7m6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="L36-iY-b3c" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1201" y="1350"/>
+            <point key="canvasLocation" x="1257" y="1220"/>
         </scene>
         <!--Write View Controller-->
         <scene sceneID="g2X-oN-2uD">
@@ -866,7 +867,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gor-di-Rc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2263" y="958"/>
+            <point key="canvasLocation" x="2141" y="900"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nA5-GL-cQs">
@@ -912,7 +913,6 @@
         <image name="writePhotoArea.png" width="239" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AH8-HF-7eE"/>
-        <segue reference="8it-yK-IlM"/>
+        <segue reference="f3i-A6-4bp"/>
     </inferredMetricsTieBreakers>
 </document>

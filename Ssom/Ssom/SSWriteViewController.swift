@@ -321,7 +321,7 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
                             print(error?.localizedDescription)
 
                             SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: { (action) in
-                                self.navigationController!.popViewControllerAnimated(true)
+//                                self.navigationController!.popViewControllerAnimated(true)
                             })
                         } else {
                             self.navigationController!.popViewControllerAnimated(true)
@@ -335,11 +335,7 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
     }
 
     func openSignIn(completion: ((finish:Bool) -> Void)?) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
-        let vc = storyBoard.instantiateInitialViewController()
-        vc?.modalPresentationStyle = .OverFullScreen
-
-        self.presentViewController(vc!, animated: true, completion: nil)
+        SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
     @IBAction func tapCloseButton(sender: AnyObject) {

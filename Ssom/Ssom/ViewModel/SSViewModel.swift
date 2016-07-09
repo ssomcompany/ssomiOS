@@ -69,7 +69,7 @@ public class SSViewModel {
             self.minAge = 0
         }
         self.postId     = modelDict["postId"] as! String
-        let ssomType = modelDict["ssom"] as! String
+        let ssomType = modelDict["ssomType"] as! String
         self.ssomType   = SSType(rawValue: ssomType)!
         self.userId     = modelDict["userId"] as! String
         if let userCount: Int = modelDict["userCount"] as? Int {

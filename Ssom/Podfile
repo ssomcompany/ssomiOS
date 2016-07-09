@@ -7,10 +7,12 @@ target 'Ssom' do
  pod 'GoogleMaps'
  pod 'Alamofire'
  pod 'SDWebImage'
- pod 'MMDrawerController'
  pod 'Fabric'
  pod 'Crashlytics'
  pod 'KeychainAccess'
+ pod 'Firebase'
+ pod 'Firebase/Crash'
+ pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 end
 
 target 'SsomTests' do

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import SDWebImage
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSDetailViewDelegate {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
 
@@ -23,9 +23,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
-    var detailView: SSDetailView!
-
-    var barButtonItems: SSNavigationBarItems!
+    var scrollDetailView: SSScrollView!
 
     var needReload: Bool = false
 
@@ -55,8 +53,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.edgesForExtendedLayout = UIRectEdge.None;
 
-        self.setNavigationBarView()
-
         self.initView()
     }
 
@@ -79,64 +75,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-    }
-
-    func setNavigationBarView() {
-        var naviTitleViewFrame:CGRect = self.navigationItem.titleView!.frame
-        naviTitleViewFrame = CGRectMake(naviTitleViewFrame.origin.x, naviTitleViewFrame.origin.y
-            , naviTitleViewFrame.size.width, 38)
-        self.navigationItem.titleView!.frame = naviTitleViewFrame
-
-        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1DepToggleOn.png"))
-        titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
-        self.navigationItem.titleView!.addSubview(titleBackgroundView)
-
-        let btnNavi1: UIButton = UIButton(frame: CGRectMake(0, 0, 97, 38))
-        btnNavi1.setTitle("MAP", forState: .Normal)
-        btnNavi1.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
-        btnNavi1.selected = false
-        self.navigationItem.titleView!.addSubview(btnNavi1)
-
-        let btnNavi2: UIButton = UIButton(frame: CGRectMake(175-97, 0, 97, 38))
-        btnNavi2.setTitle("LIST", forState: .Normal)
-        btnNavi2.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        btnNavi2.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
-        btnNavi2.selected = true
-        self.navigationItem.titleView!.addSubview(btnNavi2)
-
-        if #available(iOS 8.2, *) {
-            btnNavi1.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
-            btnNavi2.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
-        } else {
-            // Fallback on earlier versions
-            btnNavi1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-            btnNavi2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-        }
-
-        self.navigationItem.leftBarButtonItem?.title = ""
-        self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
-
-        var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
-
-        self.barButtonItems = SSNavigationBarItems()
-
-        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
-        barButtonSpacer.width = 20
-
-        barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
-        let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
-
-        barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
-        let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
-
-        self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
-    }
-
-    func tapChat() {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
-
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -315,21 +253,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
-        self.detailView.frame = UIScreen.mainScreen().bounds
-        self.detailView.delegate = self
+        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
+        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
+        self.scrollDetailView.delegate = self
 
+        let model = self.mainViewModel.datas[indexPath.row]
         if self.btnIPay.selected {
-            self.detailView.changeTheme(.SSOM)
+            self.scrollDetailView.ssomType = .SSOM
+            self.scrollDetailView.configureWithDatas(self.mainViewModel.datas, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOM)
         }
         if self.btnYouPay.selected {
-            self.detailView.changeTheme(.SSOSEYO)
+            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.configureWithDatas(self.mainViewModel.datas, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOSEYO)
         }
-        let model = self.mainViewModel.datas[indexPath.row]
-        self.detailView.configureWithViewModel(model)
 
         self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.view.addSubview(self.detailView)
+        self.navigationController?.view.addSubview(self.scrollDetailView)
     }
 
 // MARK: - SSFilterViewDelegate
@@ -344,18 +285,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ssomListTableView .reloadData()
     }
 
-// MARK: - SSDetailViewDelegate
-    func closeDetailView() {
+// MARK: - SSScrollViewDelegate
+    func closeScrollView() {
         self.navigationController?.navigationBar.barStyle = .Default
-        self.detailView.removeFromSuperview()
+        self.scrollDetailView.removeFromSuperview()
     }
 
     func openSignIn(completion: ((finish:Bool) -> Void)?) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
-        let vc = storyBoard.instantiateInitialViewController()
-        vc?.modalPresentationStyle = .OverFullScreen
-
-        self.presentViewController(vc!, animated: true, completion: nil)
+        SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
     func doSsom(ssomType: SSType) {

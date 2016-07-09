@@ -14,6 +14,8 @@ enum SSGender : String {
     case SSGenderFemale = "Female"
 }
 
+public let acceptableStatusCodes: Range<Int> = 200..<300
+
 public class SSNetworkAPIClient {
     class func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
         Alamofire.request(.GET, SSNetworkContext.serverUrlPrefixt+"posts")
@@ -42,8 +44,8 @@ public class SSNetworkAPIClient {
 
     class func postPost(token: String, model: SSWriteViewModel, completion: (error: NSError?) -> Void) {
         let params: [String: AnyObject] = ["userId": "\(model.userId)",
-                                           "content": model.content,
-                                           "ssom": model.ssomType.rawValue,
+                                           "content": model.content.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!,
+                                           "ssomType": model.ssomType.rawValue,
                                            "latitude": "\(model.myLatitude)",
                                            "longitude": "\(model.myLongitude)",
                                            "imageUrl": (model.profilePhotoUrl?.absoluteString)!,
@@ -54,13 +56,20 @@ public class SSNetworkAPIClient {
             SSNetworkContext.serverUrlPrefixt+"posts",
             parameters: params,
             encoding: .JSON,
-            headers: ["Authorization": "Basic " + token])
+            headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
 
                 if response.result.isSuccess {
-                    print("postPost result : \(response.result.value)")
+                    if acceptableStatusCodes.contains(response.response!.statusCode) {
+                        print("postPost result : \(response.result.value)")
 
-                    completion(error: nil)
+                        completion(error: nil)
+                    } else {
+                        let failureReason = "Response status code was unacceptable: \(response.response!.statusCode)"
+                        let err: NSError = Error.errorWithCode(.StatusCodeValidationFailed, failureReason: failureReason)
+
+                        completion(error: err)
+                    }
                 } else {
                     completion(error: response.result.error)
                 }
@@ -73,7 +82,7 @@ public class SSNetworkAPIClient {
         Alamofire.request(.GET,
                           SSNetworkContext.serverUrlPrefixt+"file/images/\(imagePath)",
                           encoding: .JSON,
-                          headers: ["Authorization": "Basic " + token])
+                          headers: ["Authorization": "JWT " + token])
         .responseData { (response) in
 
             if response.result.isSuccess {
@@ -90,9 +99,9 @@ public class SSNetworkAPIClient {
     class func postFile(token: String, fileExt: String, fileName: String, fileData: NSData, completion: (photoURLPath: String?, error: NSError?) -> Void) {
         Alamofire.upload(.POST,
                          SSNetworkContext.serverUrlPrefixt+"file/upload",
-                         headers: ["Authorization": "Basic " + token],
+                         headers: ["Authorization": "JWT " + token],
                          multipartFormData: { (multipartFormData) in
-                            multipartFormData.appendBodyPart(data: fileData, name: "file", fileName: fileName, mimeType: "image/\(fileExt)")
+                            multipartFormData.appendBodyPart(data: fileData, name: "pict", fileName: fileName, mimeType: "image/\(fileExt)")
                         },
                          encodingMemoryThreshold: 0,
                          encodingCompletion: { (encodingResult) in

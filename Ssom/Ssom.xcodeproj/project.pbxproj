@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F2FF081681B4E36A5E2769A /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */; };
+		59689FF47FE2D25F01147592 /* Pods_SsomUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */; };
+		5BD8ADE7AD8C44F99C1F2136 /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */; };
 		9701C4A01C512D3900E1D3DB /* SSNavigationBarItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */; };
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
 		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
@@ -19,7 +20,7 @@
 		9730034D1C1091E700734D8D /* SSFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9730034C1C1091E700734D8D /* SSFilterView.xib */; };
 		973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
-		97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MainViewController.swift */; };
+		97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MapViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
 		97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2E1BE65AB300A9D39D /* Assets.xcassets */; };
 		97343E3D1BE65AB300A9D39D /* SsomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E3C1BE65AB300A9D39D /* SsomTests.swift */; };
@@ -31,6 +32,7 @@
 		97343E631BE65DC800A9D39D /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E621BE65DC800A9D39D /* libstdc++.6.tbd */; };
 		97343E651BE65DD100A9D39D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E641BE65DD100A9D39D /* libxml2.tbd */; };
 		97343E671BE65DDD00A9D39D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97343E661BE65DDD00A9D39D /* libsqlite3.tbd */; };
+		9741C9C61D1565EA00DD090F /* SSDrawerStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */; };
 		974291051BF25F7000609974 /* SSListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974291041BF25F7000609974 /* SSListTableViewCell.xib */; };
 		9742910D1BF25FC600609974 /* SSListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742910C1BF25FC600609974 /* SSListTableViewCell.swift */; };
 		974C9B2E1C5C444C00E17A2B /* SSSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */; };
@@ -146,21 +148,6 @@
 		974C9CFE1C6B447000E17A2B /* iconBook.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBA1C6B446F00E17A2B /* iconBook.png */; };
 		974C9CFF1C6B447000E17A2B /* iconBook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBB1C6B446F00E17A2B /* iconBook@2x.png */; };
 		974C9D001C6B447000E17A2B /* iconBook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBC1C6B446F00E17A2B /* iconBook@3x.png */; };
-		974C9D011C6B447000E17A2B /* iconCreatHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBD1C6B446F00E17A2B /* iconCreatHeart.png */; };
-		974C9D021C6B447000E17A2B /* iconCreatHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBE1C6B446F00E17A2B /* iconCreatHeart@2x.png */; };
-		974C9D031C6B447000E17A2B /* iconCreatHeart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BBF1C6B446F00E17A2B /* iconCreatHeart@3x.png */; };
-		974C9D041C6B447000E17A2B /* iconLock.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC01C6B446F00E17A2B /* iconLock.png */; };
-		974C9D051C6B447000E17A2B /* iconLock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC11C6B446F00E17A2B /* iconLock@2x.png */; };
-		974C9D061C6B447000E17A2B /* iconLock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC21C6B446F00E17A2B /* iconLock@3x.png */; };
-		974C9D071C6B447000E17A2B /* iconMail.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC31C6B446F00E17A2B /* iconMail.png */; };
-		974C9D081C6B447000E17A2B /* iconMail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC41C6B446F00E17A2B /* iconMail@2x.png */; };
-		974C9D091C6B447000E17A2B /* iconMail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC51C6B446F00E17A2B /* iconMail@3x.png */; };
-		974C9D0A1C6B447000E17A2B /* iconNoti.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC61C6B446F00E17A2B /* iconNoti.png */; };
-		974C9D0B1C6B447000E17A2B /* iconNoti@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC71C6B446F00E17A2B /* iconNoti@2x.png */; };
-		974C9D0C1C6B447000E17A2B /* iconNoti@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC81C6B446F00E17A2B /* iconNoti@3x.png */; };
-		974C9D0D1C6B447000E17A2B /* iconPeople.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BC91C6B446F00E17A2B /* iconPeople.png */; };
-		974C9D0E1C6B447000E17A2B /* iconPeople@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BCA1C6B446F00E17A2B /* iconPeople@2x.png */; };
-		974C9D0F1C6B447000E17A2B /* iconPeople@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BCB1C6B446F00E17A2B /* iconPeople@3x.png */; };
 		974C9D111C6B447000E17A2B /* joinBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BCD1C6B446F00E17A2B /* joinBtn.png */; };
 		974C9D121C6B447000E17A2B /* joinBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BCE1C6B446F00E17A2B /* joinBtn@2x.png */; };
 		974C9D131C6B447000E17A2B /* joinBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BCF1C6B446F00E17A2B /* joinBtn@3x.png */; };
@@ -281,9 +268,6 @@
 		974C9D9D1C6B447000E17A2B /* topBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C591C6B447000E17A2B /* topBar.png */; };
 		974C9D9E1C6B447000E17A2B /* topBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5A1C6B447000E17A2B /* topBar@2x.png */; };
 		974C9D9F1C6B447000E17A2B /* topBar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5B1C6B447000E17A2B /* topBar@3x.png */; };
-		974C9DA01C6B447000E17A2B /* topPng.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5C1C6B447000E17A2B /* topPng.png */; };
-		974C9DA11C6B447000E17A2B /* topPng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5D1C6B447000E17A2B /* topPng@2x.png */; };
-		974C9DA21C6B447000E17A2B /* topPng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5E1C6B447000E17A2B /* topPng@3x.png */; };
 		974C9DA31C6B447000E17A2B /* tostBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C5F1C6B447000E17A2B /* tostBg.png */; };
 		974C9DA41C6B447000E17A2B /* tostBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C601C6B447000E17A2B /* tostBg@2x.png */; };
 		974C9DA51C6B447000E17A2B /* tostBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C611C6B447000E17A2B /* tostBg@3x.png */; };
@@ -306,8 +290,20 @@
 		974C9DBC1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBB1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard */; };
 		974C9DBE1C6B5B8B00E17A2B /* SSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */; };
 		9773F95B1CB14E20008E79FE /* SSSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */; };
+		977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */; };
+		977DBA681D239FEC00CFD98F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */; };
+		977DBA6D1D23A26A00CFD98F /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */; };
+		977DBA721D2A5C2900CFD98F /* SSMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */; };
+		977DBA741D2B82A400CFD98F /* SSScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA731D2B82A400CFD98F /* SSScrollView.swift */; };
 		97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */; };
 		97830FF31C57DAD9008BD6DC /* SSAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97830FF21C57DAD9008BD6DC /* SSAlertController.swift */; };
+		9787ACE21CFD37AC001CF18C /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9787ACE11CFD37AC001CF18C /* Menu.storyboard */; };
+		9787ACE41CFDF26F001CF18C /* SSMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACE31CFDF26F001CF18C /* SSMenuViewController.swift */; };
+		9787ACE61CFDF2C8001CF18C /* SSMenuHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9787ACE51CFDF2C8001CF18C /* SSMenuHeadView.xib */; };
+		9787ACE81CFE7B0B001CF18C /* SSMenuHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACE71CFE7B0B001CF18C /* SSMenuHeadView.swift */; };
+		9787ACEA1CFE7B28001CF18C /* SSMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */; };
+		9787ACEC1D042926001CF18C /* Menu.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9787ACEB1D042926001CF18C /* Menu.xcassets */; };
+		9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */; };
 		978DDB751CCBD57700567169 /* SSChatStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB741CCBD57700567169 /* SSChatStoryboard.storyboard */; };
 		978DDB771CCBDD8700567169 /* SSChat.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB761CCBDD8700567169 /* SSChat.xcassets */; };
 		978DDB791CCBE13200567169 /* SSChatCoachmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */; };
@@ -330,6 +326,7 @@
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
 		97DE88931C426AC70043B8E2 /* SSMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE88921C426AC70043B8E2 /* SSMainViewModel.swift */; };
 		97DE8A341C4B802F0043B8E2 /* SSWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE8A331C4B802F0043B8E2 /* SSWriteViewModel.swift */; };
+		BD6B77F5410EB4B139461F16 /* Pods_SsomTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,9 +360,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.debug.xcconfig"; sourceTree = "<group>"; };
-		8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ssom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.release.xcconfig"; sourceTree = "<group>"; };
+		17B5A0F7539C097E36A6A996 /* Pods-Ssom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.debug.xcconfig"; sourceTree = "<group>"; };
+		59A89FB784ADD1A0FC7ECA40 /* Pods-SsomTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests.release.xcconfig"; sourceTree = "<group>"; };
+		90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests.release.xcconfig"; sourceTree = "<group>"; };
 		9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSNavigationBarItems.xib; sourceTree = "<group>"; };
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
 		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
@@ -378,7 +376,7 @@
 		973003E71C15ED9F00734D8D /* SSFilterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSFilterViewModel.swift; path = ViewModel/SSFilterViewModel.swift; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		97343E291BE65AB300A9D39D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		97343E291BE65AB300A9D39D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		97343E2C1BE65AB300A9D39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97343E2E1BE65AB300A9D39D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97343E331BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -395,6 +393,7 @@
 		97343E621BE65DC800A9D39D /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		97343E641BE65DD100A9D39D /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		97343E661BE65DDD00A9D39D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSDrawerStyler.swift; path = Menu/SSDrawerStyler.swift; sourceTree = "<group>"; };
 		974291041BF25F7000609974 /* SSListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSListTableViewCell.xib; sourceTree = "<group>"; };
 		9742910C1BF25FC600609974 /* SSListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSListTableViewCell.swift; sourceTree = "<group>"; };
 		974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignInViewController.swift; path = SignIn/SSSignInViewController.swift; sourceTree = "<group>"; };
@@ -510,21 +509,6 @@
 		974C9BBA1C6B446F00E17A2B /* iconBook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconBook.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconBook.png; sourceTree = "<group>"; };
 		974C9BBB1C6B446F00E17A2B /* iconBook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconBook@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconBook@2x.png"; sourceTree = "<group>"; };
 		974C9BBC1C6B446F00E17A2B /* iconBook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconBook@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconBook@3x.png"; sourceTree = "<group>"; };
-		974C9BBD1C6B446F00E17A2B /* iconCreatHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconCreatHeart.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconCreatHeart.png; sourceTree = "<group>"; };
-		974C9BBE1C6B446F00E17A2B /* iconCreatHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconCreatHeart@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconCreatHeart@2x.png"; sourceTree = "<group>"; };
-		974C9BBF1C6B446F00E17A2B /* iconCreatHeart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconCreatHeart@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconCreatHeart@3x.png"; sourceTree = "<group>"; };
-		974C9BC01C6B446F00E17A2B /* iconLock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconLock.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconLock.png; sourceTree = "<group>"; };
-		974C9BC11C6B446F00E17A2B /* iconLock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconLock@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconLock@2x.png"; sourceTree = "<group>"; };
-		974C9BC21C6B446F00E17A2B /* iconLock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconLock@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconLock@3x.png"; sourceTree = "<group>"; };
-		974C9BC31C6B446F00E17A2B /* iconMail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconMail.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconMail.png; sourceTree = "<group>"; };
-		974C9BC41C6B446F00E17A2B /* iconMail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconMail@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconMail@2x.png"; sourceTree = "<group>"; };
-		974C9BC51C6B446F00E17A2B /* iconMail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconMail@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconMail@3x.png"; sourceTree = "<group>"; };
-		974C9BC61C6B446F00E17A2B /* iconNoti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconNoti.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconNoti.png; sourceTree = "<group>"; };
-		974C9BC71C6B446F00E17A2B /* iconNoti@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconNoti@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconNoti@2x.png"; sourceTree = "<group>"; };
-		974C9BC81C6B446F00E17A2B /* iconNoti@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconNoti@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconNoti@3x.png"; sourceTree = "<group>"; };
-		974C9BC91C6B446F00E17A2B /* iconPeople.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconPeople.png; path = ../../../Ssom/Ssom/Ssom/Resource/iconPeople.png; sourceTree = "<group>"; };
-		974C9BCA1C6B446F00E17A2B /* iconPeople@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconPeople@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconPeople@2x.png"; sourceTree = "<group>"; };
-		974C9BCB1C6B446F00E17A2B /* iconPeople@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconPeople@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/iconPeople@3x.png"; sourceTree = "<group>"; };
 		974C9BCD1C6B446F00E17A2B /* joinBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joinBtn.png; path = ../../../Ssom/Ssom/Ssom/Resource/joinBtn.png; sourceTree = "<group>"; };
 		974C9BCE1C6B446F00E17A2B /* joinBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joinBtn@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/joinBtn@2x.png"; sourceTree = "<group>"; };
 		974C9BCF1C6B446F00E17A2B /* joinBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joinBtn@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/joinBtn@3x.png"; sourceTree = "<group>"; };
@@ -645,9 +629,6 @@
 		974C9C591C6B447000E17A2B /* topBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topBar.png; path = ../../../Ssom/Ssom/Ssom/Resource/topBar.png; sourceTree = "<group>"; };
 		974C9C5A1C6B447000E17A2B /* topBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topBar@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/topBar@2x.png"; sourceTree = "<group>"; };
 		974C9C5B1C6B447000E17A2B /* topBar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topBar@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/topBar@3x.png"; sourceTree = "<group>"; };
-		974C9C5C1C6B447000E17A2B /* topPng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topPng.png; path = ../../../Ssom/Ssom/Ssom/Resource/topPng.png; sourceTree = "<group>"; };
-		974C9C5D1C6B447000E17A2B /* topPng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topPng@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/topPng@2x.png"; sourceTree = "<group>"; };
-		974C9C5E1C6B447000E17A2B /* topPng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "topPng@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/topPng@3x.png"; sourceTree = "<group>"; };
 		974C9C5F1C6B447000E17A2B /* tostBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tostBg.png; path = ../../../Ssom/Ssom/Ssom/Resource/tostBg.png; sourceTree = "<group>"; };
 		974C9C601C6B447000E17A2B /* tostBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tostBg@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/tostBg@2x.png"; sourceTree = "<group>"; };
 		974C9C611C6B447000E17A2B /* tostBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tostBg@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/tostBg@3x.png"; sourceTree = "<group>"; };
@@ -670,8 +651,20 @@
 		974C9DBB1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SSSignStoryBoard.storyboard; path = SignIn/SSSignStoryBoard.storyboard; sourceTree = "<group>"; };
 		974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSDetailView.xib; path = SsomView/SSDetailView.xib; sourceTree = "<group>"; };
 		9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignUpViewController.swift; path = SignIn/SSSignUpViewController.swift; sourceTree = "<group>"; };
+		977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Float.swift"; path = "Ssom/3rdLib/CGSize+Float.swift"; sourceTree = "<group>"; };
+		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
+		977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSMasterViewController.swift; sourceTree = "<group>"; };
+		977DBA731D2B82A400CFD98F /* SSScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSScrollView.swift; path = SsomView/SSScrollView.swift; sourceTree = "<group>"; };
 		97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNavigationBarItems.swift; sourceTree = "<group>"; };
 		97830FF21C57DAD9008BD6DC /* SSAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSAlertController.swift; path = Ssom/Common/SSAlertController.swift; sourceTree = "<group>"; };
+		9787ACE11CFD37AC001CF18C /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Menu.storyboard; path = Menu/Menu.storyboard; sourceTree = "<group>"; };
+		9787ACE31CFDF26F001CF18C /* SSMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuViewController.swift; path = Menu/SSMenuViewController.swift; sourceTree = "<group>"; };
+		9787ACE51CFDF2C8001CF18C /* SSMenuHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuHeadView.xib; path = Menu/SSMenuHeadView.xib; sourceTree = "<group>"; };
+		9787ACE71CFE7B0B001CF18C /* SSMenuHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuHeadView.swift; path = Menu/SSMenuHeadView.swift; sourceTree = "<group>"; };
+		9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuTableViewCell.swift; path = Menu/SSMenuTableViewCell.swift; sourceTree = "<group>"; };
+		9787ACEB1D042926001CF18C /* Menu.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Menu.xcassets; path = Menu/Menu.xcassets; sourceTree = "<group>"; };
+		9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSDrawerViewController.swift; path = Menu/SSDrawerViewController.swift; sourceTree = "<group>"; };
 		978DDB741CCBD57700567169 /* SSChatStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SSChatStoryboard.storyboard; path = Chat/SSChatStoryboard.storyboard; sourceTree = "<group>"; };
 		978DDB761CCBDD8700567169 /* SSChat.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = SSChat.xcassets; path = Chat/SSChat.xcassets; sourceTree = "<group>"; };
 		978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatCoachmarkView.xib; path = Chat/SSChatCoachmarkView.xib; sourceTree = "<group>"; };
@@ -696,6 +689,11 @@
 		97DE88921C426AC70043B8E2 /* SSMainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMainViewModel.swift; path = ViewModel/SSMainViewModel.swift; sourceTree = "<group>"; };
 		97DE88941C4561FE0043B8E2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		97DE8A331C4B802F0043B8E2 /* SSWriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSWriteViewModel.swift; path = ViewModel/SSWriteViewModel.swift; sourceTree = "<group>"; };
+		A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ssom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8D63EF44684737B7FDD792 /* Pods-SsomUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD4D8E1A551570798BFECFB8 /* Pods-Ssom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ssom.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ssom/Pods-Ssom.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -710,7 +708,7 @@
 				97343E5F1BE65DAF00A9D39D /* CoreLocation.framework in Frameworks */,
 				97343E5D1BE65DA500A9D39D /* SystemConfiguration.framework in Frameworks */,
 				97343E5B1BE65D8C00A9D39D /* OpenGLES.framework in Frameworks */,
-				2F2FF081681B4E36A5E2769A /* Pods_Ssom.framework in Frameworks */,
+				5BD8ADE7AD8C44F99C1F2136 /* Pods_Ssom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +716,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD6B77F5410EB4B139461F16 /* Pods_SsomTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,17 +724,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59689FF47FE2D25F01147592 /* Pods_SsomUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		78FE04C740BA87D69CD14E20 /* Pods */ = {
+		5684D2276DFBC16F1DAB7A52 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */,
-				8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */,
+				17B5A0F7539C097E36A6A996 /* Pods-Ssom.debug.xcconfig */,
+				FD4D8E1A551570798BFECFB8 /* Pods-Ssom.release.xcconfig */,
+				59A89FB784ADD1A0FC7ECA40 /* Pods-SsomTests.debug.xcconfig */,
+				90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */,
+				DB8D63EF44684737B7FDD792 /* Pods-SsomUITests.debug.xcconfig */,
+				8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -871,21 +875,6 @@
 				974C9BBA1C6B446F00E17A2B /* iconBook.png */,
 				974C9BBB1C6B446F00E17A2B /* iconBook@2x.png */,
 				974C9BBC1C6B446F00E17A2B /* iconBook@3x.png */,
-				974C9BBD1C6B446F00E17A2B /* iconCreatHeart.png */,
-				974C9BBE1C6B446F00E17A2B /* iconCreatHeart@2x.png */,
-				974C9BBF1C6B446F00E17A2B /* iconCreatHeart@3x.png */,
-				974C9BC01C6B446F00E17A2B /* iconLock.png */,
-				974C9BC11C6B446F00E17A2B /* iconLock@2x.png */,
-				974C9BC21C6B446F00E17A2B /* iconLock@3x.png */,
-				974C9BC31C6B446F00E17A2B /* iconMail.png */,
-				974C9BC41C6B446F00E17A2B /* iconMail@2x.png */,
-				974C9BC51C6B446F00E17A2B /* iconMail@3x.png */,
-				974C9BC61C6B446F00E17A2B /* iconNoti.png */,
-				974C9BC71C6B446F00E17A2B /* iconNoti@2x.png */,
-				974C9BC81C6B446F00E17A2B /* iconNoti@3x.png */,
-				974C9BC91C6B446F00E17A2B /* iconPeople.png */,
-				974C9BCA1C6B446F00E17A2B /* iconPeople@2x.png */,
-				974C9BCB1C6B446F00E17A2B /* iconPeople@3x.png */,
 				974C9BCD1C6B446F00E17A2B /* joinBtn.png */,
 				974C9BCE1C6B446F00E17A2B /* joinBtn@2x.png */,
 				974C9BCF1C6B446F00E17A2B /* joinBtn@3x.png */,
@@ -1006,9 +995,6 @@
 				974C9C591C6B447000E17A2B /* topBar.png */,
 				974C9C5A1C6B447000E17A2B /* topBar@2x.png */,
 				974C9C5B1C6B447000E17A2B /* topBar@3x.png */,
-				974C9C5C1C6B447000E17A2B /* topPng.png */,
-				974C9C5D1C6B447000E17A2B /* topPng@2x.png */,
-				974C9C5E1C6B447000E17A2B /* topPng@3x.png */,
 				974C9C5F1C6B447000E17A2B /* tostBg.png */,
 				974C9C601C6B447000E17A2B /* tostBg@2x.png */,
 				974C9C611C6B447000E17A2B /* tostBg@3x.png */,
@@ -1050,11 +1036,12 @@
 				97A6BFF21CCA812500DA06D2 /* Account */,
 				97343E261BE65AB300A9D39D /* Ssom UI */,
 				97343E551BE65CD000A9D39D /* 3rd Party */,
+				977DBA6B1D23A22B00CFD98F /* Support Files */,
 				97343E681BE65E2800A9D39D /* Frameworks */,
 				97343E3B1BE65AB300A9D39D /* SsomTests */,
 				97343E461BE65AB300A9D39D /* SsomUITests */,
 				97343E251BE65AB300A9D39D /* Products */,
-				78FE04C740BA87D69CD14E20 /* Pods */,
+				5684D2276DFBC16F1DAB7A52 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1071,24 +1058,28 @@
 		97343E261BE65AB300A9D39D /* Ssom UI */ = {
 			isa = PBXGroup;
 			children = (
+				9787ACE01CFD3776001CF18C /* Menu */,
 				97A6BFF91CCA869600DA06D2 /* Chat */,
 				974C9B2C1C5C43F200E17A2B /* SignIn */,
 				973003E91C15EDA600734D8D /* ViewModel */,
 				9730034E1C10947100734D8D /* Resource */,
 				97343E2E1BE65AB300A9D39D /* Assets.xcassets */,
 				97343E331BE65AB300A9D39D /* Info.plist */,
+				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
-				97343E291BE65AB300A9D39D /* MainViewController.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
+				977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */,
+				97343E291BE65AB300A9D39D /* MapViewController.swift */,
 				97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */,
 				974291041BF25F7000609974 /* SSListTableViewCell.xib */,
 				9742910C1BF25FC600609974 /* SSListTableViewCell.swift */,
 				973003421BFCDF0500734D8D /* SSPhotoView.swift */,
 				973003441BFCE06400734D8D /* SSPhotoView.xib */,
 				973003481C0B4F4D00734D8D /* SSWriteViewController.swift */,
-				974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */,
 				974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */,
+				977DBA731D2B82A400CFD98F /* SSScrollView.swift */,
+				974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */,
 				9730034A1C0F38EB00734D8D /* SSFilterView.swift */,
 				9730034C1C1091E700734D8D /* SSFilterView.xib */,
 				97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */,
@@ -1134,7 +1125,9 @@
 				97343E5E1BE65DAF00A9D39D /* CoreLocation.framework */,
 				97343E5C1BE65DA500A9D39D /* SystemConfiguration.framework */,
 				97343E5A1BE65D8C00A9D39D /* OpenGLES.framework */,
-				8908E95D56F47D3632CCC46C /* Pods_Ssom.framework */,
+				D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */,
+				BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */,
+				A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1147,6 +1140,29 @@
 				974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */,
 			);
 			name = SignIn;
+			sourceTree = "<group>";
+		};
+		977DBA6B1D23A22B00CFD98F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		9787ACE01CFD3776001CF18C /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				9787ACEB1D042926001CF18C /* Menu.xcassets */,
+				9787ACE11CFD37AC001CF18C /* Menu.storyboard */,
+				9787ACE31CFDF26F001CF18C /* SSMenuViewController.swift */,
+				9787ACE51CFDF2C8001CF18C /* SSMenuHeadView.xib */,
+				9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */,
+				9787ACE71CFE7B0B001CF18C /* SSMenuHeadView.swift */,
+				9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */,
+				9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		97A6BFF21CCA812500DA06D2 /* Account */ = {
@@ -1187,6 +1203,7 @@
 				979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */,
 				97C5266C1C9F090400484F03 /* UIImage+Crop.swift */,
 				97C5266E1C9F091200484F03 /* String+Util.swift */,
+				977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -1198,14 +1215,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97343E4C1BE65AB300A9D39D /* Build configuration list for PBXNativeTarget "Ssom" */;
 			buildPhases = (
-				E9CC34B73AB66214555A792A /* Check Pods Manifest.lock */,
+				1BC46915E707D77B5252CF08 /* [CP] Check Pods Manifest.lock */,
 				97343E201BE65AB300A9D39D /* Sources */,
 				97343E211BE65AB300A9D39D /* Frameworks */,
 				97343E221BE65AB300A9D39D /* Resources */,
 				97D5A3F21BF23E5500F3DDFB /* Embed Frameworks */,
-				82A47EC02E2C0BBAFC2DF625 /* Embed Pods Frameworks */,
-				4AA9A0ED5B3C4F8E8844E875 /* Copy Pods Resources */,
 				97F2FBC91C705202003CE93C /* ShellScript */,
+				5BA7F3A24E27AB3382D2A663 /* [CP] Embed Pods Frameworks */,
+				9DDD3F6F3A21C26D42D37463 /* [CP] Copy Pods Resources */,
+				977DBA6E1D23A2A900CFD98F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1220,9 +1238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97343E4F1BE65AB300A9D39D /* Build configuration list for PBXNativeTarget "SsomTests" */;
 			buildPhases = (
+				B61B203170BA291F39493D29 /* [CP] Check Pods Manifest.lock */,
 				97343E341BE65AB300A9D39D /* Sources */,
 				97343E351BE65AB300A9D39D /* Frameworks */,
 				97343E361BE65AB300A9D39D /* Resources */,
+				48A841453F40386A94CFEBAD /* [CP] Embed Pods Frameworks */,
+				BD62FD0FE188E7C799FE0354 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1238,9 +1259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97343E521BE65AB300A9D39D /* Build configuration list for PBXNativeTarget "SsomUITests" */;
 			buildPhases = (
+				D071140FE898179AFDDD675C /* [CP] Check Pods Manifest.lock */,
 				97343E3F1BE65AB300A9D39D /* Sources */,
 				97343E401BE65AB300A9D39D /* Frameworks */,
 				97343E411BE65AB300A9D39D /* Resources */,
+				435F803D4A5394C876199BBC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1308,7 +1331,6 @@
 				974C9D201C6B447000E17A2B /* loginTopPng.png in Resources */,
 				974C9D7B1C6B447000E17A2B /* ssomIngGreenBig@2x.png in Resources */,
 				974C9DB71C6B447000E17A2B /* writePhotoArea@2x.png in Resources */,
-				974C9DA01C6B447000E17A2B /* topPng.png in Resources */,
 				974C9D6A1C6B447000E17A2B /* signupTopPng@2x.png in Resources */,
 				974C9CA41C6B447000E17A2B /* bow@3x.png in Resources */,
 				974C9D2C1C6B447000E17A2B /* mapShadow@2x.png in Resources */,
@@ -1328,7 +1350,6 @@
 				97C5266B1C9DA16500484F03 /* pageRightGreen@3x.png in Resources */,
 				974C9D7D1C6B447000E17A2B /* ssomIngGreenSmall.png in Resources */,
 				974C9D301C6B447000E17A2B /* menu_line.png in Resources */,
-				974C9D0A1C6B447000E17A2B /* iconNoti.png in Resources */,
 				974C9C8E1C6B447000E17A2B /* arletIcon@2x.png in Resources */,
 				974C9D141C6B447000E17A2B /* line.png in Resources */,
 				974C9D181C6B447000E17A2B /* locationFound.png in Resources */,
@@ -1342,6 +1363,7 @@
 				974C9D8D1C6B447000E17A2B /* ssomLogoStyle01@2x.png in Resources */,
 				974C9D5D1C6B447000E17A2B /* profileBorderGreen@2x.png in Resources */,
 				974C9D801C6B447000E17A2B /* ssomIngRed.png in Resources */,
+				977DBA6D1D23A26A00CFD98F /* ServiceAccount.json in Resources */,
 				974C9D9F1C6B447000E17A2B /* topBar@3x.png in Resources */,
 				974C9DB11C6B447000E17A2B /* write@2x.png in Resources */,
 				974C9D9D1C6B447000E17A2B /* topBar.png in Resources */,
@@ -1350,10 +1372,8 @@
 				974C9D531C6B447000E17A2B /* photoShadow.png in Resources */,
 				974C9CDB1C6B447000E17A2B /* filterB@2x.png in Resources */,
 				974C9DBE1C6B5B8B00E17A2B /* SSDetailView.xib in Resources */,
-				974C9D051C6B447000E17A2B /* iconLock@2x.png in Resources */,
 				974C9CE01C6B447000E17A2B /* filterOff.png in Resources */,
 				974C9CCD1C6B447000E17A2B /* closeWhite@2x.png in Resources */,
-				974C9D041C6B447000E17A2B /* iconLock.png in Resources */,
 				974C9DB81C6B447000E17A2B /* writePhotoArea@3x.png in Resources */,
 				974C9CD21C6B447000E17A2B /* detailCenterRed.png in Resources */,
 				974C9D3B1C6B447000E17A2B /* minigreen@2x.png in Resources */,
@@ -1363,6 +1383,7 @@
 				974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */,
 				97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */,
 				974C9D2A1C6B447000E17A2B /* manu@3x.png in Resources */,
+				9787ACEC1D042926001CF18C /* Menu.xcassets in Resources */,
 				974C9D331C6B447000E17A2B /* message@2x.png in Resources */,
 				974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */,
 				974C9C911C6B447000E17A2B /* backIcon.png in Resources */,
@@ -1371,18 +1392,17 @@
 				974C9D5C1C6B447000E17A2B /* profileBorderGreen.png in Resources */,
 				974C9DAD1C6B447000E17A2B /* unreadCount@3x.png in Resources */,
 				974C9D491C6B447000E17A2B /* pageLeft@3x.png in Resources */,
+				9787ACE61CFDF2C8001CF18C /* SSMenuHeadView.xib in Resources */,
 				974C9D2E1C6B447000E17A2B /* meet_btn.png in Resources */,
 				974C9D4F1C6B447000E17A2B /* pathGuideHeart@3x.png in Resources */,
 				974C9D441C6B447000E17A2B /* oval4Fill30.png in Resources */,
 				974C9CC91C6B447000E17A2B /* closeBtn.png in Resources */,
 				974C9C7C1C6B447000E17A2B /* 1DepToggleOn@2x.png in Resources */,
-				974C9D081C6B447000E17A2B /* iconMail@2x.png in Resources */,
 				974C9CA71C6B447000E17A2B /* bowIconRed@3x.png in Resources */,
 				974C9CDE1C6B447000E17A2B /* filterBg@2x.png in Resources */,
 				974C9CBF1C6B447000E17A2B /* chatHeart@3x.png in Resources */,
 				974C9CD01C6B447000E17A2B /* detailCenterGreen@2x.png in Resources */,
 				974C9CFE1C6B447000E17A2B /* iconBook.png in Resources */,
-				974C9D0C1C6B447000E17A2B /* iconNoti@3x.png in Resources */,
 				974C9CF41C6B447000E17A2B /* heartRed@3x.png in Resources */,
 				974C9D9A1C6B447000E17A2B /* ssomSelectRed@3x.png in Resources */,
 				974C9CB11C6B447000E17A2B /* cancelButtonRed@2x.png in Resources */,
@@ -1394,7 +1414,6 @@
 				974C9D271C6B447000E17A2B /* logoDumy@3x.png in Resources */,
 				974C9CF21C6B447000E17A2B /* heartRed.png in Resources */,
 				974C9D541C6B447000E17A2B /* photoShadow@2x.png in Resources */,
-				974C9DA21C6B447000E17A2B /* topPng@3x.png in Resources */,
 				974C9D191C6B447000E17A2B /* locationFound@2x.png in Resources */,
 				974C9D261C6B447000E17A2B /* logoDumy@2x.png in Resources */,
 				974C9D841C6B447000E17A2B /* ssomIngRedBig@2x.png in Resources */,
@@ -1405,7 +1424,6 @@
 				974C9D6B1C6B447000E17A2B /* signupTopPng@3x.png in Resources */,
 				974C9CAC1C6B447000E17A2B /* camera.png in Resources */,
 				974C9CAB1C6B447000E17A2B /* buttonCancel@3x.png in Resources */,
-				974C9D0F1C6B447000E17A2B /* iconPeople@3x.png in Resources */,
 				974C9CC31C6B447000E17A2B /* chatlistLine@3x.png in Resources */,
 				974C9CA11C6B447000E17A2B /* bigRed@3x.png in Resources */,
 				974C9D961C6B447000E17A2B /* ssomSelectNone2@2x.png in Resources */,
@@ -1414,7 +1432,6 @@
 				974C9D511C6B447000E17A2B /* photoDefault@2x.png in Resources */,
 				974C9DA41C6B447000E17A2B /* tostBg@2x.png in Resources */,
 				974C9CE91C6B447000E17A2B /* filterW.png in Resources */,
-				974C9D021C6B447000E17A2B /* iconCreatHeart@2x.png in Resources */,
 				974C9D871C6B447000E17A2B /* ssomIngRedPoint@2x.png in Resources */,
 				974C9CF61C6B447000E17A2B /* heartWhite@2x.png in Resources */,
 				974C9CBD1C6B447000E17A2B /* chatHeart.png in Resources */,
@@ -1428,19 +1445,16 @@
 				974C9CED1C6B447000E17A2B /* heart@2x.png in Resources */,
 				974C9C9F1C6B447000E17A2B /* bigRed.png in Resources */,
 				974C9D8F1C6B447000E17A2B /* ssomSelectGreen.png in Resources */,
-				974C9D011C6B447000E17A2B /* iconCreatHeart.png in Resources */,
 				974C9C841C6B447000E17A2B /* 2DepToggleRed@3x.png in Resources */,
 				974C9C831C6B447000E17A2B /* 2DepToggleRed@2x.png in Resources */,
 				974C9C821C6B447000E17A2B /* 2DepToggleRed.png in Resources */,
 				974C9D231C6B447000E17A2B /* logo_bg.png in Resources */,
 				974C9CF01C6B447000E17A2B /* heartGreen@2x.png in Resources */,
-				974C9D0B1C6B447000E17A2B /* iconNoti@2x.png in Resources */,
 				974C9D1D1C6B447000E17A2B /* loginBtn.png in Resources */,
 				974C9CD31C6B447000E17A2B /* detailCenterRed@2x.png in Resources */,
 				974C9CA31C6B447000E17A2B /* bow@2x.png in Resources */,
 				974C9D7A1C6B447000E17A2B /* ssomIngGreenBig.png in Resources */,
 				974C9D921C6B447000E17A2B /* ssomSelectNone.png in Resources */,
-				974C9D061C6B447000E17A2B /* iconLock@3x.png in Resources */,
 				974C9D7F1C6B447000E17A2B /* ssomIngGreenSmall@3x.png in Resources */,
 				974C9D2B1C6B447000E17A2B /* mapShadow.png in Resources */,
 				974C9CA61C6B447000E17A2B /* bowIconRed@2x.png in Resources */,
@@ -1454,6 +1468,7 @@
 				974C9D791C6B447000E17A2B /* ssomIngGreen@3x.png in Resources */,
 				974C9D1A1C6B447000E17A2B /* locationFound@3x.png in Resources */,
 				974C9D221C6B447000E17A2B /* loginTopPng@3x.png in Resources */,
+				977DBA681D239FEC00CFD98F /* GoogleService-Info.plist in Resources */,
 				974C9C7D1C6B447000E17A2B /* 1DepToggleOn@3x.png in Resources */,
 				974C9D831C6B447000E17A2B /* ssomIngRedBig.png in Resources */,
 				974C9CE31C6B447000E17A2B /* filterOn.png in Resources */,
@@ -1476,7 +1491,6 @@
 				974C9CE41C6B447000E17A2B /* filterOn@2x.png in Resources */,
 				974C9D621C6B447000E17A2B /* rectangle17.png in Resources */,
 				974C9D451C6B447000E17A2B /* oval4Fill30@2x.png in Resources */,
-				974C9D0D1C6B447000E17A2B /* iconPeople.png in Resources */,
 				974C9D881C6B447000E17A2B /* ssomIngRedPoint@3x.png in Resources */,
 				974C9D5F1C6B447000E17A2B /* profileBorderRed.png in Resources */,
 				974C9DA71C6B447000E17A2B /* treshIcon.png in Resources */,
@@ -1522,10 +1536,8 @@
 				974C9DB41C6B447000E17A2B /* writeLine@2x.png in Resources */,
 				974C9CF11C6B447000E17A2B /* heartGreen@3x.png in Resources */,
 				974C9D461C6B447000E17A2B /* oval4Fill30@3x.png in Resources */,
-				974C9D071C6B447000E17A2B /* iconMail.png in Resources */,
 				974C9CBA1C6B447000E17A2B /* chatGuideline.png in Resources */,
 				974C9DA91C6B447000E17A2B /* treshIcon@3x.png in Resources */,
-				974C9D0E1C6B447000E17A2B /* iconPeople@2x.png in Resources */,
 				974C9C861C6B447000E17A2B /* acceptButtonGreen.png in Resources */,
 				974C9D211C6B447000E17A2B /* loginTopPng@2x.png in Resources */,
 				974C9C971C6B447000E17A2B /* bgBot50@2x.png in Resources */,
@@ -1544,18 +1556,17 @@
 				974C9D431C6B447000E17A2B /* myBtn@3x.png in Resources */,
 				974C9D891C6B447000E17A2B /* ssomIngRedSmall.png in Resources */,
 				974C9DA31C6B447000E17A2B /* tostBg.png in Resources */,
+				9787ACE21CFD37AC001CF18C /* Menu.storyboard in Resources */,
 				974C9D3C1C6B447000E17A2B /* minigreen@3x.png in Resources */,
 				974C9CE81C6B447000E17A2B /* filterPopup@3x.png in Resources */,
 				974C9CE11C6B447000E17A2B /* filterOff@2x.png in Resources */,
 				974C9CE71C6B447000E17A2B /* filterPopup@2x.png in Resources */,
 				974C9D551C6B447000E17A2B /* photoShadow@3x.png in Resources */,
-				974C9D091C6B447000E17A2B /* iconMail@3x.png in Resources */,
 				974C9CCA1C6B447000E17A2B /* closeBtn@2x.png in Resources */,
 				974C9D341C6B447000E17A2B /* message@3x.png in Resources */,
 				974C9D4C1C6B447000E17A2B /* pageRight@3x.png in Resources */,
 				974C9D281C6B447000E17A2B /* manu.png in Resources */,
 				974C9DAC1C6B447000E17A2B /* unreadCount@2x.png in Resources */,
-				974C9DA11C6B447000E17A2B /* topPng@2x.png in Resources */,
 				974C9D8E1C6B447000E17A2B /* ssomLogoStyle01@3x.png in Resources */,
 				974C9CEF1C6B447000E17A2B /* heartGreen.png in Resources */,
 				974C9C7B1C6B447000E17A2B /* 1DepToggleOn.png in Resources */,
@@ -1575,7 +1586,6 @@
 				974C9D311C6B447000E17A2B /* message_red.png in Resources */,
 				974C9D931C6B447000E17A2B /* ssomSelectNone@2x.png in Resources */,
 				974C9D971C6B447000E17A2B /* ssomSelectNone2@3x.png in Resources */,
-				974C9D031C6B447000E17A2B /* iconCreatHeart@3x.png in Resources */,
 				974C9D001C6B447000E17A2B /* iconBook@3x.png in Resources */,
 				974291051BF25F7000609974 /* SSListTableViewCell.xib in Resources */,
 				974C9D291C6B447000E17A2B /* manu@2x.png in Resources */,
@@ -1606,35 +1616,78 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4AA9A0ED5B3C4F8E8844E875 /* Copy Pods Resources */ = {
+		1BC46915E707D77B5252CF08 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ssom/Pods-Ssom-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		82A47EC02E2C0BBAFC2DF625 /* Embed Pods Frameworks */ = {
+		435F803D4A5394C876199BBC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48A841453F40386A94CFEBAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BA7F3A24E27AB3382D2A663 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ssom/Pods-Ssom-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		977DBA6E1D23A2A900CFD98F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=$HOME/ssomiOS/Ssom/ServiceAccount.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:637685103442:ios:7770db6eafd745c5\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
 		};
 		97F2FBC91C705202003CE93C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1649,14 +1702,59 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 46aaa188a2d4300b0c9713c01b4d9f907cb78d59 c8ff05f35b5a2ef1d6df1cdd4f0a6642402335b1adea67372893f9c341e48bed";
 		};
-		E9CC34B73AB66214555A792A /* Check Pods Manifest.lock */ = {
+		9DDD3F6F3A21C26D42D37463 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ssom/Pods-Ssom-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B61B203170BA291F39493D29 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BD62FD0FE188E7C799FE0354 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D071140FE898179AFDDD675C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1672,15 +1770,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				97830FF31C57DAD9008BD6DC /* SSAlertController.swift in Sources */,
+				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
+				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,
 				97C526531C7F60E100484F03 /* SSViewModel.swift in Sources */,
 				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
+				9787ACE41CFDF26F001CF18C /* SSMenuViewController.swift in Sources */,
 				9742910D1BF25FC600609974 /* SSListTableViewCell.swift in Sources */,
 				9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */,
 				97DE88931C426AC70043B8E2 /* SSMainViewModel.swift in Sources */,
 				978DDB7B1CCBE68B00567169 /* SSChatCoachmarkView.swift in Sources */,
+				9741C9C61D1565EA00DD090F /* SSDrawerStyler.swift in Sources */,
 				9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */,
+				9787ACE81CFE7B0B001CF18C /* SSMenuHeadView.swift in Sources */,
 				97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */,
-				97343E2A1BE65AB300A9D39D /* MainViewController.swift in Sources */,
+				97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */,
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */,
 				9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */,
@@ -1690,15 +1793,18 @@
 				97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */,
 				973003E81C15ED9F00734D8D /* SSFilterViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
+				977DBA721D2A5C2900CFD98F /* SSMasterViewController.swift in Sources */,
 				974C9DBA1C6B5A5800E17A2B /* SSDetailView.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97DE8A341C4B802F0043B8E2 /* SSWriteViewModel.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
 				974C9B2E1C5C444C00E17A2B /* SSSignInViewController.swift in Sources */,
 				97A6BFF61CCA866C00DA06D2 /* SSChatListViewController.swift in Sources */,
+				9787ACEA1CFE7B28001CF18C /* SSMenuTableViewCell.swift in Sources */,
 				973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */,
 				97A6BFF81CCA868C00DA06D2 /* SSChatViewController.swift in Sources */,
 				979A4A031BF4525A00FAFB21 /* Define.swift in Sources */,
+				977DBA741D2B82A400CFD98F /* SSScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1828,7 +1934,7 @@
 		};
 		97343E4D1BE65AB300A9D39D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 565A5D72859E053601B56633 /* Pods-Ssom.debug.xcconfig */;
+			baseConfigurationReference = 17B5A0F7539C097E36A6A996 /* Pods-Ssom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1866,7 +1972,7 @@
 		};
 		97343E4E1BE65AB300A9D39D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C3D8493CF1921016C670E5B /* Pods-Ssom.release.xcconfig */;
+			baseConfigurationReference = FD4D8E1A551570798BFECFB8 /* Pods-Ssom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1903,6 +2009,7 @@
 		};
 		97343E501BE65AB300A9D39D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59A89FB784ADD1A0FC7ECA40 /* Pods-SsomTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SsomTests/Info.plist;
@@ -1915,6 +2022,7 @@
 		};
 		97343E511BE65AB300A9D39D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SsomTests/Info.plist;
@@ -1927,6 +2035,7 @@
 		};
 		97343E531BE65AB300A9D39D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB8D63EF44684737B7FDD792 /* Pods-SsomUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SsomUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1939,6 +2048,7 @@
 		};
 		97343E541BE65AB300A9D39D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SsomUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

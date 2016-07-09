@@ -10,20 +10,30 @@ import UIKit
 import GoogleMaps
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-//    var drawerController: 
+    var drawerController: SSDrawerViewController?
 
+//    init() {
+//        self.drawerController = SSDrawerViewController(
+//
+//        super.init()
+//    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         Fabric.sharedSDK().debug = true
 
+        FIRApp.configure()
+
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
+
+
 
         (self.window!.rootViewController as! UINavigationController).navigationBar.barTintColor = UIColor.whiteColor()
 

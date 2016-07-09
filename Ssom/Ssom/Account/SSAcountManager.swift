@@ -11,6 +11,18 @@ import UIKit
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
 
+    func openSignIn(willPresentViewController: UIViewController, completion: ((finish:Bool) -> Void)?) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let vc = storyBoard.instantiateInitialViewController()
+        vc?.modalPresentationStyle = .OverFullScreen
+
+        if completion != nil {
+            completion!(finish: true)
+        }
+
+        willPresentViewController.presentViewController(vc!, animated: true, completion: nil)
+    }
+
     func doSignIn(userId: String, password: String, vc:UIViewController, completion: (() -> Void?)?) -> Void {
         SSNetworkAPIClient.postLogin(userId: userId, password: password) { error in
             if error != nil {

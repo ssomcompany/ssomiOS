@@ -9,9 +9,9 @@
 import UIKit
 
 protocol SSDetailViewDelegate {
-    func closeDetailView();
-    func openSignIn(completion: ((finish:Bool) -> Void)?);
-    func doSsom(ssomType: SSType);
+    func closeDetailView()
+    func openSignIn(completion: ((finish:Bool) -> Void)?)
+    func doSsom(ssomType: SSType)
 }
 
 class SSDetailView: UIView {
@@ -26,13 +26,15 @@ class SSDetailView: UIView {
     @IBOutlet var textViewDescription: UITextView!
     @IBOutlet var btnSsom: UIButton!
     @IBOutlet var btnCancel: UIButton!
-    @IBOutlet var imgPageLeft: UIImageView!
-    @IBOutlet var imgPageRight: UIImageView!
 
     var delegate: SSDetailViewDelegate!
     var ssomType: SSType!
 
     var viewModel: SSViewModel!
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,15 +65,11 @@ class SSDetailView: UIView {
 
         if self.ssomType == .SSOM {
             self.imgHeart.image = UIImage(named: "heartGreen")
-            self.imgPageLeft.image = UIImage(named: "pageLeftGreen")
-            self.imgPageRight.image = UIImage(named: "pageRightGreen")
             self.viewSsomDescription.backgroundColor = UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1)
             self.lbSsom.text = "내가 쏨"
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonGreen"), forState: .Normal)
         } else {
             self.imgHeart.image = UIImage(named: "heartRed")
-            self.imgPageLeft.image = UIImage(named: "pageLeft")
-            self.imgPageRight.image = UIImage(named: "pageRight")
             self.viewSsomDescription.backgroundColor = UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
             self.lbSsom.text = "니가 쏴"
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonRed"), forState: .Normal)

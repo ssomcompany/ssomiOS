@@ -6,24 +6,24 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="121" width="600" height="479"/>
+                                <rect key="frame" x="0.0" y="57" width="600" height="479"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
-                                <rect key="frame" x="0.0" y="64" width="300" height="57"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="a5y-GR-sZy"/>
@@ -41,13 +41,13 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
-                                <rect key="frame" x="0.0" y="118" width="300" height="3"/>
+                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="gbp-RT-CCp"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
-                                <rect key="frame" x="300" y="64" width="300" height="57"/>
+                                <rect key="frame" x="300" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="c0P-JR-R29"/>
@@ -65,19 +65,19 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
-                                <rect key="frame" x="300" y="118" width="300" height="3"/>
+                                <rect key="frame" x="300" y="54" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="DQn-p5-ckN"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
-                                <rect key="frame" x="0.0" y="121" width="600" height="76"/>
+                                <rect key="frame" x="0.0" y="57" width="600" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k0-s1-1ct" userLabel="Bottom Info View">
-                                <rect key="frame" x="23" y="509" width="423" height="69"/>
+                                <rect key="frame" x="23" y="445" width="423" height="69"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filterBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="rv6-Ko-JfB" userLabel="Bg Image View">
                                         <rect key="frame" x="1" y="0.0" width="422" height="69"/>
@@ -117,7 +117,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCj-wE-maY">
-                                <rect key="frame" x="501" y="500" width="86" height="86"/>
+                                <rect key="frame" x="501" y="436" width="86" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="Ewd-U3-6Go"/>
                                     <constraint firstAttribute="width" constant="86" id="Yqs-7F-crB"/>
@@ -132,7 +132,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
-                                <rect key="frame" x="23" y="144" width="51" height="51"/>
+                                <rect key="frame" x="23" y="80" width="51" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="UAU-je-txb"/>
                                     <constraint firstAttribute="height" constant="51" id="hxu-l1-4zl"/>
@@ -194,9 +194,6 @@
                                 <segment title="List"/>
                             </segments>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="j6y-F4-SAC" kind="show" identifier="SSListViewSegue" animates="NO" id="QHo-7y-82v"/>
-                            </connections>
                         </segmentedControl>
                         <rightBarButtonItems>
                             <barButtonItem title="chat" id="QR1-pF-28b"/>
@@ -230,11 +227,11 @@
                         <viewControllerLayoutGuide type="bottom" id="iLn-76-4kV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hHc-Mm-TP3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
-                                <rect key="frame" x="0.0" y="121" width="600" height="479"/>
+                                <rect key="frame" x="0.0" y="57" width="600" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="j6y-F4-SAC" id="ekK-6e-cSP"/>
@@ -242,7 +239,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-Da-teJ" userLabel="I Pay Button">
-                                <rect key="frame" x="0.0" y="64" width="300" height="57"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="QHL-ku-ewb"/>
@@ -261,13 +258,13 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLP-u4-evS" userLabel="I Pay Button Line View">
-                                <rect key="frame" x="0.0" y="118" width="300" height="3"/>
+                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="rzX-wf-1Y7"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-m4-vLX" userLabel="You Pay Button">
-                                <rect key="frame" x="300" y="64" width="300" height="57"/>
+                                <rect key="frame" x="300" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="bKv-a2-aKU"/>
@@ -286,13 +283,13 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="MFJ-b2-VZo" userLabel="You Pay Button Line View">
-                                <rect key="frame" x="300" y="118" width="300" height="3"/>
+                                <rect key="frame" x="300" y="54" width="300" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="tmc-pC-geC"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
-                                <rect key="frame" x="23" y="508" width="424" height="69"/>
+                                <rect key="frame" x="23" y="444" width="424" height="69"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filterBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="58Y-zs-7JZ" userLabel="Bg Image View">
                                         <rect key="frame" x="1" y="0.0" width="423" height="68"/>
@@ -332,7 +329,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-Xv-XcV">
-                                <rect key="frame" x="501" y="500" width="86" height="86"/>
+                                <rect key="frame" x="501" y="436" width="86" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="HCQ-TT-LYF"/>
                                     <constraint firstAttribute="width" constant="86" id="Ljk-SR-mtS"/>
@@ -419,7 +416,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
-                                <rect key="frame" x="0.0" y="64" width="414" height="209"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoMapbg" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-Bg-Hra" userLabel="Profile Bg Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
@@ -528,7 +525,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 나이는 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Leading Text Label">
-                                <rect key="frame" x="69" y="290" width="73" height="17"/>
+                                <rect key="frame" x="69" y="226" width="73" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="u9S-wu-oW2"/>
                                 </constraints>
@@ -537,13 +534,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
-                                <rect key="frame" x="142" y="290" width="62.5" height="18"/>
+                                <rect key="frame" x="142" y="226" width="62.5" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
-                                <rect key="frame" x="204" y="290" width="43" height="17"/>
+                                <rect key="frame" x="204" y="226" width="43" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="kqz-o9-1BP"/>
                                 </constraints>
@@ -552,7 +549,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
-                                <rect key="frame" x="0.0" y="314" width="414" height="43"/>
+                                <rect key="frame" x="0.0" y="250" width="414" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-SN-Qwf" userLabel="Age Button1">
                                         <rect key="frame" x="1" y="1" width="102.5" height="41"/>
@@ -637,13 +634,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
-                                <rect key="frame" x="69" y="372" width="7" height="18"/>
+                                <rect key="frame" x="69" y="308" width="7" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
-                                <rect key="frame" x="76" y="372" width="128.5" height="17"/>
+                                <rect key="frame" x="76" y="308" width="128.5" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="bTY-ct-QT1"/>
                                 </constraints>
@@ -652,7 +649,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
-                                <rect key="frame" x="0.0" y="396" width="414" height="43"/>
+                                <rect key="frame" x="0.0" y="332" width="414" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-hH-yT4" userLabel="People Button1">
                                         <rect key="frame" x="1" y="1" width="102.5" height="41"/>
@@ -737,7 +734,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한마디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yy-Wf-yzs">
-                                <rect key="frame" x="68" y="462" width="26" height="18"/>
+                                <rect key="frame" x="68" y="398" width="26" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="1hk-6y-FJH"/>
                                     <constraint firstAttribute="width" constant="26" id="1tv-Kc-Joe"/>
@@ -747,7 +744,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-Tn-LzI">
-                                <rect key="frame" x="68" y="491" width="276" height="89"/>
+                                <rect key="frame" x="68" y="427" width="276" height="89"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89" id="PGl-m9-afc"/>
@@ -757,13 +754,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 마디를 작성해보세요! 센스 있는 메뉴선택, 멘트가 뜨거운 쏨의 첫 걸음 입니다. : )" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
-                                <rect key="frame" x="68" y="503" width="215" height="64.5"/>
+                                <rect key="frame" x="68" y="439" width="215" height="64.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-sx-d3O">
-                                <rect key="frame" x="68" y="586" width="276" height="1"/>
+                                <rect key="frame" x="68" y="522" width="276" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="wbz-2q-EyB"/>
                                 </constraints>
@@ -882,12 +879,81 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="AH8-HF-7eE"/>
+                        <segue destination="scD-c4-l1x" kind="relationship" relationship="rootViewController" id="AdR-ld-dVi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ce7-Yc-I3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="253" y="451"/>
+            <point key="canvasLocation" x="-315" y="677"/>
+        </scene>
+        <!--Master View Controller-->
+        <scene sceneID="wYh-dT-jDC">
+            <objects>
+                <viewController id="scD-c4-l1x" customClass="SSMasterViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DQ2-32-bqB"/>
+                        <viewControllerLayoutGuide type="bottom" id="MqD-Hr-YRD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bx0-I7-TaW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iet-2Y-aRS" userLabel="Map Container View">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="embed" identifier="SSMapViewSegue" id="ymv-nY-Vrx"/>
+                                </connections>
+                            </containerView>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvk-oq-itq" userLabel="List Container View">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <segue destination="j6y-F4-SAC" kind="embed" identifier="SSListViewSegue" id="4Qm-gh-L9K"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iet-2Y-aRS" firstAttribute="top" secondItem="DQ2-32-bqB" secondAttribute="bottom" id="Ie4-UJ-h9V"/>
+                            <constraint firstItem="MqD-Hr-YRD" firstAttribute="top" secondItem="iet-2Y-aRS" secondAttribute="bottom" id="KzM-dk-Fv6"/>
+                            <constraint firstItem="MqD-Hr-YRD" firstAttribute="top" secondItem="dvk-oq-itq" secondAttribute="bottom" id="Xbo-GJ-as0"/>
+                            <constraint firstAttribute="trailing" secondItem="dvk-oq-itq" secondAttribute="trailing" id="ZOe-cK-NxN"/>
+                            <constraint firstItem="dvk-oq-itq" firstAttribute="top" secondItem="DQ2-32-bqB" secondAttribute="bottom" id="ZUb-qd-ysa"/>
+                            <constraint firstAttribute="trailing" secondItem="iet-2Y-aRS" secondAttribute="trailing" id="gmB-1i-gHt"/>
+                            <constraint firstItem="dvk-oq-itq" firstAttribute="leading" secondItem="bx0-I7-TaW" secondAttribute="leading" id="jxC-hu-ZG1"/>
+                            <constraint firstItem="iet-2Y-aRS" firstAttribute="leading" secondItem="bx0-I7-TaW" secondAttribute="leading" id="zi9-VL-5HD"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CmB-K7-6Sm">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="C9b-Hi-3uS" userLabel="Menu"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="09n-6W-TdW">
+                            <rect key="frame" x="212.5" y="7" width="175" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="MAP"/>
+                                <segment title="List"/>
+                            </segments>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="switchView:" destination="scD-c4-l1x" eventType="valueChanged" id="oD6-1c-pYX"/>
+                            </connections>
+                        </segmentedControl>
+                        <rightBarButtonItems>
+                            <barButtonItem title="chat" id="EPu-44-Zjt"/>
+                            <barButtonItem title="heart" id="U8h-QL-Bpj" userLabel="heart"/>
+                        </rightBarButtonItems>
+                        <connections>
+                            <outlet property="titleView" destination="09n-6W-TdW" id="P30-9B-Ze0"/>
+                        </connections>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="listView" destination="dvk-oq-itq" id="LdC-kU-3OG"/>
+                        <outlet property="mapView" destination="iet-2Y-aRS" id="EEi-E6-a7i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Rt-U2-K19" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="539" y="712"/>
         </scene>
     </scenes>
     <resources>

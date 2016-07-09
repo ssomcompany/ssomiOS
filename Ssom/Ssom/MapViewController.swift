@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MapViewController.swift
 //  Ssom
 //
 //  Created by DongSoo Lee on 2015. 11. 1..
@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSDetailViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
@@ -21,14 +21,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     
     var locationManager: CLLocationManager!
     var datas: [SSViewModel]
+    var datasForSsom: [SSViewModel]
+    var datasForSsoseyo: [SSViewModel]
 
     var filterView: SSFilterView!
-    var detailView: SSDetailView!
-
-    var barButtonItems: SSNavigationBarItems!
+    var scrollDetailView: SSScrollView!
 
     init() {
         self.datas = []
+        self.datasForSsom = []
+        self.datasForSsoseyo = []
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -45,6 +47,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     required init?(coder aDecoder: NSCoder) {
         self.datas = []
+        self.datasForSsom = []
+        self.datasForSsoseyo = []
 
         super.init(coder: aDecoder)
     }
@@ -52,8 +56,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     func initView() {
 
         initMapView()
-
-        loadingData()
     }
 
     func initMapView() {
@@ -97,59 +99,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.setNavigationBarView()
-    }
-
-    func setNavigationBarView() {
-        var naviTitleViewFrame:CGRect = self.navigationItem.titleView!.frame
-        naviTitleViewFrame = CGRectMake(naviTitleViewFrame.origin.x, naviTitleViewFrame.origin.y
-                                        , naviTitleViewFrame.size.width, 38)
-        self.navigationItem.titleView!.frame = naviTitleViewFrame
-
-        let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1DepToggleOn.png"))
-        titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
-        self.navigationItem.titleView!.addSubview(titleBackgroundView)
-
-        let btnNavi1: UIButton = UIButton(frame: CGRectMake(0, 0, 97, 38))
-        btnNavi1.setTitle("MAP", forState: .Normal)
-        btnNavi1.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        btnNavi1.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
-        btnNavi1.selected = true
-        self.navigationItem.titleView!.addSubview(btnNavi1)
-
-        let btnNavi2: UIButton = UIButton(frame: CGRectMake(175-97, 0, 97, 38))
-        btnNavi2.setTitle("LIST", forState: .Normal)
-        btnNavi2.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
-        btnNavi2.selected = false
-        self.navigationItem.titleView!.addSubview(btnNavi2)
-
-        if #available(iOS 8.2, *) {
-            btnNavi1.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
-            btnNavi2.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
-        } else {
-            // Fallback on earlier versions
-            btnNavi1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-            btnNavi2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-        }
-
-        self.navigationItem.leftBarButtonItem?.title = ""
-        self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
-
-        var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
-        if rightBarButtonItems.count == 2 {
-            self.barButtonItems = SSNavigationBarItems()
-
-            let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
-            barButtonSpacer.width = 20
-
-            barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
-            let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
-
-            barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
-            let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
-
-            self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
-        }
+        self.loadingData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -159,13 +109,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-    }
-
-    func tapChat() {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController")
-
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func showMarkers() {
@@ -179,15 +122,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             print("position is \(latitude), \(longitude)")
 
             let sellString: String = data.ssomType.rawValue
-            var isSell = false;
-            if sellString == SSType.SSOM.rawValue {
-                isSell = true
-            } else {
-                isSell = false
-            }
+            let isSell = sellString == SSType.SSOM.rawValue
 
             if self.btnIPay.selected {
                 if isSell {
+                    self.datasForSsom.append(data)
                     if let imageUrl:String = data.imageUrl {
                         self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
                     } else {
@@ -198,6 +137,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
 
             if self.btnYouPay.selected {
                 if !isSell {
+                    self.datasForSsoseyo.append(data)
                     if let imageUrl:String = data.imageUrl {
                         self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
                     } else {
@@ -234,7 +174,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     @IBAction func tapMyLocationButton(sender: AnyObject) {
-        showCurrentLocation()
+        self.showCurrentLocation()
     }
 
     @IBAction func tapFilter(sender: AnyObject) {
@@ -315,20 +255,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
 
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        self.detailView = UIView.loadFromNibNamed("SSDetailView") as! SSDetailView
-        self.detailView.frame = UIScreen.mainScreen().bounds
-        self.detailView.delegate = self
-        
+        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
+        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
+        self.scrollDetailView.delegate = self
+
         if self.btnIPay.selected {
-            self.detailView.changeTheme(.SSOM)
+            self.scrollDetailView.ssomType = .SSOM
+            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: marker.userData as? SSViewModel)
+            self.scrollDetailView.changeTheme(.SSOM)
         }
         if self.btnYouPay.selected {
-            self.detailView.changeTheme(.SSOSEYO)
+            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: marker.userData as? SSViewModel)
+            self.scrollDetailView.changeTheme(.SSOSEYO)
         }
-        self.detailView.configureWithViewModel(marker.userData as! SSViewModel)
 
         self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.view.addSubview(self.detailView)
+        self.navigationController?.view.addSubview(self.scrollDetailView)
 
         return true
     }
@@ -379,18 +322,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
         // apply filter value to get the ssom list
     }
 
-// MARK: - SSDetailViewDelegate
-    func closeDetailView() {
+// MARK: - SSScrollViewDelegate
+    func closeScrollView() {
         self.navigationController?.navigationBar.barStyle = .Default
-        self.detailView.removeFromSuperview()
+        self.scrollDetailView.removeFromSuperview()
     }
 
     func openSignIn(completion: ((finish:Bool) -> Void)?) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
-        let vc = storyBoard.instantiateInitialViewController()
-        vc?.modalPresentationStyle = .OverFullScreen
-
-        self.presentViewController(vc!, animated: true, completion: nil)
+        SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
     func doSsom(ssomType: SSType) {

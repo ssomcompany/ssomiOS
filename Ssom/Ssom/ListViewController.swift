@@ -57,6 +57,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func initView() {
+        self.needReload = false
+
         if self.mainViewModel.isSell {
             self.tapIPayButton(self.btnIPay);
         } else {
@@ -232,7 +234,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         cell.memberInfoLabel.text = memberInfoString
 
-        if let distance = model.distance {
+        if let distance = model.distance where distance != 0 {
             cell.distanceLabel.text = Util.getDistanceString(distance)
         } else {
             let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)

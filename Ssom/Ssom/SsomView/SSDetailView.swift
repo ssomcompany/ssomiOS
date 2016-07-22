@@ -58,6 +58,7 @@ class SSDetailView: UIView {
         let ageArea: SSAgeAreaType = Util.getAgeArea(self.viewModel.minAge)
         self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount)")
         self.textViewDescription.text = self.viewModel.content
+        self.lbDistance.text = "나와의 거리 \(Util.getDistanceString(self.viewModel.distance))"
     }
 
     func changeTheme(ssomType: SSType) {

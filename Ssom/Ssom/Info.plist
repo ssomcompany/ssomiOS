@@ -64,7 +64,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Because I need to know where you are</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Menu</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

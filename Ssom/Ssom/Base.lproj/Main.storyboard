@@ -869,7 +869,7 @@
         <!--Navigation Controller-->
         <scene sceneID="nA5-GL-cQs">
             <objects>
-                <navigationController id="dAM-Ki-GQ0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MasterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAM-Ki-GQ0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -889,7 +889,7 @@
         <!--Master View Controller-->
         <scene sceneID="wYh-dT-jDC">
             <objects>
-                <viewController id="scD-c4-l1x" customClass="SSMasterViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MasterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="scD-c4-l1x" customClass="SSMasterViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DQ2-32-bqB"/>
                         <viewControllerLayoutGuide type="bottom" id="MqD-Hr-YRD"/>

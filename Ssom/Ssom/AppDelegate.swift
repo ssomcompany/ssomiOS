@@ -13,16 +13,10 @@ import Crashlytics
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDelegate {
 
     var window: UIWindow?
     var drawerController: SSDrawerViewController?
-
-//    init() {
-//        self.drawerController = SSDrawerViewController(
-//
-//        super.init()
-//    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,9 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
+        self.drawerController = self.window!.rootViewController as? SSDrawerViewController
+        self.drawerController?.delegate = self
+        self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler()], forDirection: SSDrawerDirection.Left)
 
+        let menuViewController: SSMenuViewController = (self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as? SSMenuViewController)!
+        menuViewController.drawerViewController = self.drawerController
+        self.drawerController?.setDrawerViewController(menuViewController, forDirection: SSDrawerDirection.Left)
 
-        (self.window!.rootViewController as! UINavigationController).navigationBar.barTintColor = UIColor.whiteColor()
+        // Transition to the first view controller
+        menuViewController.transitionToViewController()
+
+        self.window?.rootViewController = self.drawerController
+        self.window?.makeKeyAndVisible()
 
         return true
     }
@@ -62,6 +66,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+// MARK: - SSDrawerViewControllerDelegate
+
+    func drawerViewController(drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
+        print("Drawer view controller may update to state `\(paneState)` for direction `\(direction)`")
+    }
+
+    func drawerViewController(drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
+        print("Drawer view controller did update to state `\(paneState)` for direction `\(direction)`")
+    }
 
 }
 

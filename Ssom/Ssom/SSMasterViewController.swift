@@ -60,8 +60,11 @@ class SSMasterViewController: UIViewController {
             self.segButton2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
         }
 
-        self.navigationItem.leftBarButtonItem?.title = ""
-        self.navigationItem.leftBarButtonItem?.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
+        let leftBarButtonItem: UIBarButtonItem = self.navigationItem.leftBarButtonItem!
+        leftBarButtonItem.title = ""
+        leftBarButtonItem.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRectMake(0, 0, 21, 14))
+        leftBarButtonItem.target = self
+        leftBarButtonItem.action = #selector(tapMenu)
 
         var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
         if rightBarButtonItems.count == 2 {
@@ -94,6 +97,12 @@ class SSMasterViewController: UIViewController {
             let nowLocation: CLLocationCoordinate2D = mapVC.mainView.camera.target
             listVC.mainViewModel = SSMainViewModel(datas: mapVC.datas, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
             listVC.initView()
+        }
+    }
+
+    func tapMenu() {
+        if let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.drawerController?.setMainState(.Open, inDirection: .Left, animated: true, allowUserInterruption: true, completion: nil)
         }
     }
 

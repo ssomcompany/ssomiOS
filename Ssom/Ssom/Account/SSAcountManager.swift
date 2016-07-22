@@ -43,6 +43,10 @@ class SSAccountManager {
         }
     }
 
+    func doSignOut(completion: (() -> Void)?) -> Void {
+        
+    }
+
     func isAuthorized() -> Bool {
         if SSNetworkContext.sharedInstance.getSharedAttribute("token") != nil {
             return true

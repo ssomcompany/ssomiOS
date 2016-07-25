@@ -14,6 +14,12 @@ class SSNetworkContext {
 
     static let sharedInstance = SSNetworkContext()
 
+    func getSharedAttribute(key: String) -> AnyObject? {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+
+        return defaults.objectForKey(key)
+    }
+
     func saveSharedAttribute(value: AnyObject, forKey: String) {
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(value, forKey: forKey)
@@ -30,9 +36,10 @@ class SSNetworkContext {
         defaults.synchronize()
     }
 
-    func getSharedAttribute(key: String) -> AnyObject? {
+    func deleteSharedAttribute(key: String) {
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(key)
 
-        return defaults.objectForKey(key)
+        defaults.synchronize()
     }
 }

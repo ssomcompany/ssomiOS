@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSMenuViewController: UITableViewController {
+class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
     @IBOutlet var menuTableView: UITableView!
 
     weak var drawerViewController: SSDrawerViewController?
@@ -64,6 +64,7 @@ class SSMenuViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let view: SSMenuHeadView = (tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader") as? SSMenuHeadView) {
+            view.delegate = self
             view.configView()
             return view
         }
@@ -73,5 +74,14 @@ class SSMenuViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+// MARK: - SSMenuHeadViewDelegate
+    func callSignOut(completion: ((finish: Bool) -> Void)?) {
+        SSAccountManager.sharedInstance.doSignOut(self, completion: completion)
+    }
+
+    func openSignIn(completion: ((finish: Bool) -> Void)?) {
+        SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 }

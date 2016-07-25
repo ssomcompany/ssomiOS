@@ -20,6 +20,8 @@ class SSSignInViewController: UIViewController {
     @IBOutlet var viewPasswordBottomLine: UIImageView!
     @IBOutlet var btnSignIn: UIButton!
 
+    var completion: ((finish: Bool) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,8 +76,18 @@ class SSSignInViewController: UIViewController {
     }
 
     @IBAction func tapSignInButton(sender: AnyObject) {
-        SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) {
-            self.tapClose(nil)
+        SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) { [weak self] (finish) in
+            if let wself = self {
+                wself.tapClose(nil)
+
+                guard let completionBlock = wself.completion else {
+                    return nil
+                }
+
+                completionBlock(finish: finish)
+            }
+
+            return nil
         }
     }
     

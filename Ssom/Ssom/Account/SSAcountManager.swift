@@ -13,38 +13,50 @@ class SSAccountManager {
 
     func openSignIn(willPresentViewController: UIViewController, completion: ((finish:Bool) -> Void)?) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
-        let vc = storyBoard.instantiateInitialViewController()
-        vc?.modalPresentationStyle = .OverFullScreen
+        if let vc = storyBoard.instantiateInitialViewController() as? UINavigationController {
+            vc.modalPresentationStyle = .OverFullScreen
 
-        if completion != nil {
-            completion!(finish: true)
+            if let signInViewController: SSSignInViewController = vc.topViewController as? SSSignInViewController {
+                signInViewController.completion = completion
+            }
+
+            willPresentViewController.presentViewController(vc, animated: true, completion: nil)
         }
-
-        willPresentViewController.presentViewController(vc!, animated: true, completion: nil)
     }
 
-    func doSignIn(userId: String, password: String, vc:UIViewController, completion: (() -> Void?)?) -> Void {
+    func doSignIn(userId: String, password: String, vc:UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
         SSNetworkAPIClient.postLogin(userId: userId, password: password) { error in
             if error != nil {
                 print(error?.localizedDescription)
 
                 SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: vc, completion: { (alertAction) in
-                    guard let _ = completion!() else {
+                    guard let _ = completion!(finish: false) else {
                         return
                     }
                 })
             } else {
                 SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : userId])
 
-                guard let _ = completion!() else {
+                guard let _ = completion!(finish: true) else {
                     return
                 }
             }
         }
     }
 
-    func doSignOut(completion: (() -> Void)?) -> Void {
-        
+    func doSignOut(vc: UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
+
+        SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: vc, button1Completion: { (action) in
+            print("button1!!")
+            }) { (action) in
+                print("button2!!")
+                SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
+                SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+
+                guard let _ = completion!(finish: true) else {
+                    return
+                }
+        }
     }
 
     func isAuthorized() -> Bool {

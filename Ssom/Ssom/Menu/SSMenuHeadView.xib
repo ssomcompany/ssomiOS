@@ -46,6 +46,9 @@
                             <state key="normal" title="로그아웃">
                                 <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="tapSignOut:" destination="iN0-l3-epB" eventType="touchUpInside" id="EOE-FG-xOU"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNoti" translatesAutoresizingMaskIntoConstraints="NO" id="S9I-Iu-dSe">
                             <rect key="frame" x="15" y="140.5" width="16" height="18"/>

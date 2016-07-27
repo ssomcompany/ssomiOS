@@ -57,7 +57,12 @@ class SSChatViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 150, 44))
-        naviTitleView.font = UIFont.systemFontOfSize(18)
+        if #available(iOS 8.2, *) {
+            naviTitleView.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+        } else {
+            // Fallback on earlier versions
+            naviTitleView.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        }
         naviTitleView.textAlignment = .Center
         naviTitleView.text = "Chat"
         naviTitleView.sizeToFit()

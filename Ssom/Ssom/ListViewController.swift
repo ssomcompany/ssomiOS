@@ -194,31 +194,27 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
         }
 
+        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+        cell.profileImageView!.image = maskOfProfileImage
+
         if let imageUrl = model.imageUrl {
             if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                 print("imageUrl is \(imageUrl)")
 
                 cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
                     , placeholderImage: nil
-                    , completed: { [unowned self] (image, error, cacheType, url) -> Void in
+                    , completed: { (image, error, cacheType, url) -> Void in
 
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
+                        if error != nil {
+                        } else {
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
-                        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
-
-                        cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                            cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                        }
                     })
                 
                 cell.profilImageUrl = imageUrl
-            } else {
-                let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
-
-                cell.profileImageView!.image = maskOfProfileImage
             }
-        } else {
-            let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
-
-            cell.profileImageView!.image = maskOfProfileImage
         }
 
         var memberInfoString:String = "";

@@ -44,6 +44,18 @@ class SSChatListViewController : UIViewController {
 
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
+        let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 200, 44))
+        if #available(iOS 8.2, *) {
+            naviTitleView.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+        } else {
+            // Fallback on earlier versions
+            naviTitleView.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        }
+        naviTitleView.textAlignment = .Center
+        naviTitleView.text = "Chat list"
+        naviTitleView.sizeToFit()
+        self.navigationItem.titleView = naviTitleView;
+
         var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
 
         let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)

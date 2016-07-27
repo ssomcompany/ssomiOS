@@ -92,6 +92,10 @@ extension UIView {
         return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as? UIView
     }
 
+    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, owner: AnyObject) -> UIView? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(owner, options: nil)[0] as? UIView
+    }
+
     class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, className: AnyClass) -> UIView? {
         let loadedViews = UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)
         for loadedView in loadedViews {

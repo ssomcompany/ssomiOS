@@ -6,9 +6,15 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSMenuHeadView" customModule="Ssom" customModuleProvider="target">
+            <connections>
+                <outlet property="btnSignOut" destination="vSe-m3-y88" id="SAM-AC-QOm"/>
+                <outlet property="lbUserId" destination="vuc-Mg-qGx" id="bHJ-2i-Zbx"/>
+                <outlet property="view" destination="iN0-l3-epB" id="fl3-I4-gz1"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSMenuHeadView" customModule="Ssom" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -34,7 +40,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzR-40-Rw3">
                             <rect key="frame" x="16" y="16" width="507" height="89.5"/>
                             <connections>
-                                <action selector="tapMenuUser:" destination="iN0-l3-epB" eventType="touchUpInside" id="93P-tm-axW"/>
+                                <action selector="tapMenuUser:" destination="-1" eventType="touchUpInside" id="Nte-B3-BE1"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSe-m3-y88">
@@ -47,7 +53,7 @@
                                 <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="tapSignOut:" destination="iN0-l3-epB" eventType="touchUpInside" id="EOE-FG-xOU"/>
+                                <action selector="tapSignOut:" destination="-1" eventType="touchUpInside" id="j4n-7S-lLq"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNoti" translatesAutoresizingMaskIntoConstraints="NO" id="S9I-Iu-dSe">
@@ -66,7 +72,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqi-Fp-l6D">
                             <rect key="frame" x="15" y="105" width="585" height="89"/>
                             <connections>
-                                <action selector="tapMenuPush:" destination="iN0-l3-epB" eventType="touchUpInside" id="SVh-8X-Yrz"/>
+                                <action selector="tapMenuPush:" destination="-1" eventType="touchUpInside" id="OFO-BM-L4b"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCreatHeart" translatesAutoresizingMaskIntoConstraints="NO" id="EF2-oD-79s">
@@ -85,7 +91,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtG-b8-s2n">
                             <rect key="frame" x="15" y="194.5" width="585" height="89.5"/>
                             <connections>
-                                <action selector="tapMenuHeart:" destination="iN0-l3-epB" eventType="touchUpInside" id="uDn-UH-lK0"/>
+                                <action selector="tapMenuHeart:" destination="-1" eventType="touchUpInside" id="W9F-Vy-SkT"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4A-IC-ogZ">
@@ -147,10 +153,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <connections>
-                <outlet property="btnSignOut" destination="vSe-m3-y88" id="AOt-M6-cnK"/>
-                <outlet property="lbUserId" destination="vuc-Mg-qGx" id="Xut-DH-QOw"/>
-            </connections>
         </view>
     </objects>
     <resources>

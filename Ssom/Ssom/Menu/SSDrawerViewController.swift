@@ -521,9 +521,12 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.drawerView.frame = self.view.bounds
-        self.mainView.frame = self.view.bounds
+        self.drawerView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.drawerView)
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
+
+        self.mainView.frame = self.view.bounds
         self.view.addSubview(self.mainView)
 
         self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
@@ -652,11 +655,25 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             if let newVC = newViewController {
                 newVC.willMoveToParentViewController(self)
                 newVC.beginAppearanceTransition(true, animated: false)
+
                 self.addChildViewController(newVC)
                 containerView.addSubview(newVC.view)
                 newVC.view.translatesAutoresizingMaskIntoConstraints = false
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+                var metrics: [String: CGFloat] = ["left": 0, "right": 0]
+                switch self.currentDrawerDirection {
+                case SSDrawerDirection.Left:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                case SSDrawerDirection.Right:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                case SSDrawerDirection.Horizontal:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                default:
+                    break
+                }
+                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
                 containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+
                 newVC.didMoveToParentViewController(self)
                 newVC.endAppearanceTransition()
 
@@ -691,11 +708,25 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 existingVC.didMoveToParentViewController(nil)
                 existingVC.endAppearanceTransition()
                 newVC.beginAppearanceTransition(true, animated: false)
+
                 self.addChildViewController(newVC)
                 containerView.addSubview(newVC.view)
                 newVC.view.translatesAutoresizingMaskIntoConstraints = false
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+                var metrics: [String: CGFloat] = ["left": 0, "right": 0]
+                switch self.currentDrawerDirection {
+                case SSDrawerDirection.Left:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                case SSDrawerDirection.Right:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                case SSDrawerDirection.Horizontal:
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                default:
+                    break
+                }
+                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
                 containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+
                 newVC.didMoveToParentViewController(self)
                 newVC.endAppearanceTransition()
 

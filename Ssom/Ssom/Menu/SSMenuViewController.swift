@@ -22,8 +22,6 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 
         self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.registerNib(UINib(nibName: "SSMenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
-        self.menuTableView.rowHeight = UITableViewAutomaticDimension
-        self.menuTableView.sectionHeaderHeight = UITableViewAutomaticDimension
 
         self.edgesForExtendedLayout = UIRectEdge.None
     }
@@ -41,12 +39,20 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
         return 3
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (495 / 736)
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
     }
 
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (56 / 736)
+        return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
+    }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.height * (495.0 / 736.0)
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -63,13 +69,17 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let view: SSMenuHeadView = (tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader") as? SSMenuHeadView) {
-            view.delegate = self
-            view.configView()
-            return view
-        }
+        let view: SSMenuHeadView = SSMenuHeadView(reuseIdentifier: "MenuHeader")
+        view.delegate = self
+        view.configView()
 
-        return nil
+//        if let view: SSMenuHeadView = (tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader") as? SSMenuHeadView) {
+//            view.delegate = self
+//            view.configView()
+//            return view
+//        }
+
+        return view
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

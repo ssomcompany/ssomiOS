@@ -14,17 +14,36 @@ protocol SSMenuHeadViewDelegate {
 }
 
 class SSMenuHeadView: UITableViewHeaderFooterView {
+    @IBOutlet var view: UIView!
     @IBOutlet var lbUserId: UILabel!
     @IBOutlet var btnSignOut: UIButton!
 
     var delegate: SSMenuHeadViewDelegate?
 
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+
+        self.loadFromNib()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+
+        self.loadFromNib()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+
+    func loadFromNib() {
+
+        if let contentView = UIView.loadFromNibNamed("SSMenuHeadView", bundle: nil, owner: self) {
+            self.contentView.addSubview(contentView)
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+        }
     }
 
     func configView() -> Void {

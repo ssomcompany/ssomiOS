@@ -17,7 +17,11 @@ enum SSGender : String {
 public let acceptableStatusCodes: Range<Int> = 200..<300
 
 public class SSNetworkAPIClient {
+
     class func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
         Alamofire.request(.GET, SSNetworkContext.serverUrlPrefixt+"posts")
         .responseJSON { response in
 
@@ -39,6 +43,8 @@ public class SSNetworkAPIClient {
 
                 completion(viewModels: nil, error: response.result.error)
             }
+
+            indicator.hideIndicator()
         }
     }
 
@@ -51,6 +57,9 @@ public class SSNetworkAPIClient {
                                            "imageUrl": (model.profilePhotoUrl?.absoluteString)!,
                                            "minAge": model.ageType.rawValue,
                                            "userCount": model.peopleCountType.rawValue]
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
 
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt+"posts",
@@ -73,11 +82,16 @@ public class SSNetworkAPIClient {
                 } else {
                     completion(error: response.result.error)
                 }
+
+                indicator.hideIndicator()
             }
     }
 
     class func getFile(token: String, fileId: String, completion: (error: NSError?) -> Void) {
         let imagePath = fileId
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
 
         Alamofire.request(.GET,
                           SSNetworkContext.serverUrlPrefixt+"file/images/\(imagePath)",
@@ -92,11 +106,16 @@ public class SSNetworkAPIClient {
             } else {
                 completion(error: response.result.error)
             }
+
+            indicator.hideIndicator()
         }
 
     }
 
     class func postFile(token: String, fileExt: String, fileName: String, fileData: NSData, completion: (photoURLPath: String?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
         Alamofire.upload(.POST,
                          SSNetworkContext.serverUrlPrefixt+"file/upload",
                          headers: ["Authorization": "JWT " + token],
@@ -125,6 +144,8 @@ public class SSNetworkAPIClient {
 
 //                                completion(error: error)
                             }
+
+                            indicator.hideIndicator()
         })
     }
 
@@ -132,6 +153,9 @@ public class SSNetworkAPIClient {
         let plainString = "\(email):\(password)" as NSString
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = plainData?.base64EncodedStringWithOptions([])
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
 
         // Basic Auth
         Alamofire.request(.POST,
@@ -173,11 +197,16 @@ public class SSNetworkAPIClient {
 
                     completion(error: response.result.error!)
                 }
+
+                indicator.hideIndicator()
         }
 
     }
 
     class func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: (error: NSError?) -> Void ) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt + "users",
             parameters: ["email":email, "password":password, "nickName":nickName!, "gender":gender!.rawValue],
@@ -193,6 +222,8 @@ public class SSNetworkAPIClient {
 
                     completion(error: response.result.error)
                 }
+
+                indicator.hideIndicator()
         }
     }
 }

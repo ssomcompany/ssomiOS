@@ -39,7 +39,13 @@ extension UIImage {
         CGContextClosePath(context)
         CGContextClip(context)
 
-        CGContextScaleCTM(context, scaleFactorX, scaleFactorY)
+        if scaleFactorX > scaleFactorY {
+            CGContextScaleCTM(context, scaleFactorX, scaleFactorX)
+        } else if scaleFactorX < scaleFactorY {
+            CGContextScaleCTM(context, scaleFactorY, scaleFactorY)
+        } else {
+            CGContextScaleCTM(context, scaleFactorX, scaleFactorY)
+        }
 
         let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
         image.drawInRect(myRect)

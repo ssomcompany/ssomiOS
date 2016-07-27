@@ -48,14 +48,15 @@ class SSAccountManager {
 
         SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: vc, button1Completion: { (action) in
             print("button1!!")
+
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+
+            guard let _ = completion!(finish: true) else {
+                return
+            }
             }) { (action) in
                 print("button2!!")
-                SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
-
-                guard let _ = completion!(finish: true) else {
-                    return
-                }
         }
     }
 

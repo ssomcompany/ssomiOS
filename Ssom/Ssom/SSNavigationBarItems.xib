@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcn-oA-gic">
-                    <rect key="frame" x="0.0" y="0.0" width="27" height="24"/>
+                    <rect key="frame" x="0.0" y="0.0" width="27" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-ZA-jvE">
                     <rect key="frame" x="0.0" y="4" width="27" height="17"/>
@@ -50,7 +50,7 @@
                 <constraint firstAttribute="trailing" secondItem="ls5-ZA-jvE" secondAttribute="trailing" id="4nE-a3-M7Q"/>
                 <constraint firstItem="tcn-oA-gic" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6ky-dS-Y9I"/>
                 <constraint firstItem="ls5-ZA-jvE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8PL-Nt-Co3"/>
-                <constraint firstItem="169-wf-BeN" firstAttribute="top" secondItem="tcn-oA-gic" secondAttribute="bottom" constant="5" id="C77-bK-KMI"/>
+                <constraint firstItem="169-wf-BeN" firstAttribute="top" secondItem="tcn-oA-gic" secondAttribute="bottom" constant="4" id="C77-bK-KMI"/>
                 <constraint firstItem="tcn-oA-gic" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CzZ-6U-JIt"/>
                 <constraint firstItem="ls5-ZA-jvE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="F7f-l2-Dhc"/>
                 <constraint firstItem="iIy-ck-co3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N2U-MF-tOr"/>
@@ -121,7 +121,6 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Yic-qO-3ps" secondAttribute="bottom" id="9bT-FL-6XK"/>
                 <constraint firstAttribute="trailing" secondItem="Yic-qO-3ps" secondAttribute="trailing" id="QaM-zv-HbA"/>

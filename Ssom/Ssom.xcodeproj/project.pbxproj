@@ -315,6 +315,7 @@
 		97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */; };
 		97A6BFF61CCA866C00DA06D2 /* SSChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF51CCA866C00DA06D2 /* SSChatListViewController.swift */; };
 		97A6BFF81CCA868C00DA06D2 /* SSChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */; };
+		97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1661D488FA700B5EBD2 /* SSIndicatorView.swift */; };
 		97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526571C9DA16400484F03 /* pageLeftGreen.png */; };
 		97C526641C9DA16500484F03 /* pageLeftGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */; };
 		97C526651C9DA16500484F03 /* pageLeftGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */; };
@@ -675,6 +676,7 @@
 		97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSAcountManager.swift; path = Ssom/Account/SSAcountManager.swift; sourceTree = "<group>"; };
 		97A6BFF51CCA866C00DA06D2 /* SSChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatListViewController.swift; path = Chat/SSChatListViewController.swift; sourceTree = "<group>"; };
 		97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatViewController.swift; path = Chat/SSChatViewController.swift; sourceTree = "<group>"; };
+		97B2D1661D488FA700B5EBD2 /* SSIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSIndicatorView.swift; path = Ssom/Common/SSIndicatorView.swift; sourceTree = "<group>"; };
 		97C526571C9DA16400484F03 /* pageLeftGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageLeftGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen.png; sourceTree = "<group>"; };
 		97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@2x.png"; sourceTree = "<group>"; };
 		97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@3x.png"; sourceTree = "<group>"; };
@@ -1187,6 +1189,7 @@
 				979A4A001BF4525A00FAFB21 /* Define.swift */,
 				979A4A021BF4525A00FAFB21 /* Util.swift */,
 				97830FF21C57DAD9008BD6DC /* SSAlertController.swift */,
+				97B2D1661D488FA700B5EBD2 /* SSIndicatorView.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1764,6 +1767,7 @@
 				9764D9DF1D35FF6400BBE4C6 /* SSFilterViewModel.swift in Sources */,
 				97830FF31C57DAD9008BD6DC /* SSAlertController.swift in Sources */,
 				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
+				97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */,
 				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,
 				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
 				9787ACE41CFDF26F001CF18C /* SSMenuViewController.swift in Sources */,

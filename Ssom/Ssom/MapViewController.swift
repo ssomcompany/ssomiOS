@@ -159,12 +159,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             Alamofire.request(.GET, imageUrl)
                 .responseData { (response) -> Void in
 
-                    if let profileImage: UIImage = UIImage(data: response.data!)! {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
+                    marker.icon = maskOfProfileImage
 
-                        marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                    } else {
-                        marker.icon = maskOfProfileImage
+                    if let data = response.data {
+                        if let profileImage: UIImage = UIImage(data: data) {
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
+
+                            marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                        }
                     }
             }
         } else {

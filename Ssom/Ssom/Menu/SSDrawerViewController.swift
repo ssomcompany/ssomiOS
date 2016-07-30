@@ -396,9 +396,9 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     var panePanGestureRecognizer: UIPanGestureRecognizer?
     var paneTapGestureRecognizer: UITapGestureRecognizer?
 
-    ///-------------------------------------
-    /// @name Configuring Dynamics Behaviors
-    ///-------------------------------------
+    // -------------------------------------
+    //  @name Configuring Dynamics Behaviors
+    // -------------------------------------
 
     /**
      The magnitude of the gravity vector that affects the pane view.
@@ -434,9 +434,9 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
      */
     var bounceMagnitude: CGFloat
 
-    ///--------------------------
-    ///@name Configuring Gestures
-    ///--------------------------
+    // --------------------------
+    // @name Configuring Gestures
+    // --------------------------
 
     /**
      Whether the only pans that can open the drawer should be those that originate from the screen's edges.
@@ -1481,10 +1481,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
+    private var panStartLocation: CGPoint = CGPointZero
+    private var paneVelocity: CGFloat = 0
+    private var panDirection: SSDrawerDirection = SSDrawerDirection.None
+
     func panePanned(gesture: UIPanGestureRecognizer) -> Void {
-        var panStartLocation: CGPoint = CGPointZero
-        var paneVelocity: CGFloat = 0
-        var panDirection: SSDrawerDirection = SSDrawerDirection.None
 
         switch gesture.state {
         case UIGestureRecognizerState.Began:

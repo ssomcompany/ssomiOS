@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dAM-Ki-GQ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -490,7 +490,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" constant="33.299999999999997" id="16A-A8-0FD"/>
+                                    <constraint firstItem="Bpd-P8-zgt" firstAttribute="leading" secondItem="w4W-pw-n2I" secondAttribute="leading" constant="33" id="16A-A8-0FD"/>
                                     <constraint firstItem="HT6-Gk-hiB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w4W-pw-n2I" secondAttribute="top" constant="5" id="AjQ-AM-dwr"/>
                                     <constraint firstItem="23d-05-cuL" firstAttribute="top" secondItem="Bpd-P8-zgt" secondAttribute="top" constant="9" id="BAk-cL-oeU"/>
                                     <constraint firstAttribute="bottom" secondItem="pF2-h3-AGe" secondAttribute="bottom" constant="17.100000000000001" id="CMa-f4-iuX"/>
@@ -536,7 +536,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
                                 <rect key="frame" x="142" y="226" width="62.5" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
@@ -549,10 +549,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
-                                <rect key="frame" x="0.0" y="250" width="414" height="43"/>
+                                <rect key="frame" x="70" y="250" width="274" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-SN-Qwf" userLabel="Age Button1">
-                                        <rect key="frame" x="1" y="1" width="102.5" height="41"/>
+                                        <rect key="frame" x="1" y="1" width="67.5" height="41"/>
                                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -567,7 +567,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egP-i1-2wh" userLabel="Age Button2">
-                                        <rect key="frame" x="104" y="1" width="102.5" height="41"/>
+                                        <rect key="frame" x="69" y="1" width="67.5" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -582,7 +582,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-Md-B2c" userLabel="Age Button3">
-                                        <rect key="frame" x="208" y="1" width="102" height="41"/>
+                                        <rect key="frame" x="138" y="1" width="67" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -597,7 +597,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="js8-Ld-NN5" userLabel="Age Button4">
-                                        <rect key="frame" x="311" y="1" width="102" height="41"/>
+                                        <rect key="frame" x="206" y="1" width="67" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -636,7 +636,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
                                 <rect key="frame" x="69" y="308" width="7" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
@@ -649,10 +649,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
-                                <rect key="frame" x="0.0" y="332" width="414" height="43"/>
+                                <rect key="frame" x="70" y="332" width="274" height="43"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-hH-yT4" userLabel="People Button1">
-                                        <rect key="frame" x="1" y="1" width="102.5" height="41"/>
+                                        <rect key="frame" x="1" y="1" width="67.5" height="41"/>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -667,7 +667,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pk-cD-fEN" userLabel="People Button2">
-                                        <rect key="frame" x="104" y="1" width="102" height="41"/>
+                                        <rect key="frame" x="69" y="1" width="67" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -682,7 +682,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6l-XD-moD" userLabel="People Button3">
-                                        <rect key="frame" x="207" y="1" width="102" height="41"/>
+                                        <rect key="frame" x="137" y="1" width="67" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -697,7 +697,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1M-Rt-P8A" userLabel="People Button4">
-                                        <rect key="frame" x="310" y="1" width="102.5" height="41"/>
+                                        <rect key="frame" x="205" y="1" width="67.5" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -803,15 +803,15 @@
                             <constraint firstItem="l93-S8-Q3c" firstAttribute="width" secondItem="zJ2-h7-Pzq" secondAttribute="width" id="DhS-db-qlU"/>
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="46.399999999999999" id="Ek5-Gz-P5a"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="68" id="HEA-eK-imn"/>
-                            <constraint firstAttribute="trailing" secondItem="j1p-3P-eLe" secondAttribute="trailing" id="K9t-Qq-b8t"/>
+                            <constraint firstAttribute="trailing" secondItem="j1p-3P-eLe" secondAttribute="trailing" constant="70" id="K9t-Qq-b8t"/>
                             <constraint firstItem="886-fy-T46" firstAttribute="top" secondItem="zJ2-h7-Pzq" secondAttribute="bottom" constant="24" id="LGa-7z-fVo"/>
-                            <constraint firstAttribute="trailing" secondItem="1gQ-Ct-aeF" secondAttribute="trailing" id="MEQ-Jp-WpF"/>
+                            <constraint firstAttribute="trailing" secondItem="1gQ-Ct-aeF" secondAttribute="trailing" constant="70" id="MEQ-Jp-WpF"/>
                             <constraint firstItem="w3U-71-a8X" firstAttribute="centerY" secondItem="qpN-Tn-LzI" secondAttribute="centerY" id="MvN-7t-CT7"/>
                             <constraint firstAttribute="trailing" secondItem="BVx-sx-d3O" secondAttribute="trailing" constant="70" id="OLW-2V-3LW"/>
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BVx-sx-d3O" secondAttribute="bottom" constant="21" id="OV9-6i-T7n"/>
                             <constraint firstAttribute="trailing" secondItem="l93-S8-Q3c" secondAttribute="trailing" constant="46.899999999999999" id="P3h-gA-hAL"/>
                             <constraint firstItem="l93-S8-Q3c" firstAttribute="leading" secondItem="zJ2-h7-Pzq" secondAttribute="trailing" constant="9" id="Qzu-Wy-GDS"/>
-                            <constraint firstItem="j1p-3P-eLe" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="SDC-jb-65P"/>
+                            <constraint firstItem="j1p-3P-eLe" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="70" id="SDC-jb-65P"/>
                             <constraint firstItem="miY-9s-Jb3" firstAttribute="leading" secondItem="Ea0-FR-tNQ" secondAttribute="trailing" id="TNB-do-UUw"/>
                             <constraint firstItem="w4W-pw-n2I" firstAttribute="top" secondItem="Dtw-3W-zIC" secondAttribute="bottom" id="U2P-Pj-taN"/>
                             <constraint firstAttribute="trailing" secondItem="w4W-pw-n2I" secondAttribute="trailing" id="V5W-mt-D8W"/>
@@ -825,7 +825,7 @@
                             <constraint firstItem="0HF-h6-nXu" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="69" id="hAj-xg-kac"/>
                             <constraint firstItem="886-fy-T46" firstAttribute="top" secondItem="l93-S8-Q3c" secondAttribute="bottom" constant="24" id="l3u-vs-Uu6"/>
                             <constraint firstItem="0Yy-Wf-yzs" firstAttribute="top" secondItem="1gQ-Ct-aeF" secondAttribute="bottom" constant="23" id="r1J-Ba-1ky"/>
-                            <constraint firstItem="1gQ-Ct-aeF" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="r5n-1b-UbU"/>
+                            <constraint firstItem="1gQ-Ct-aeF" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" constant="70" id="r5n-1b-UbU"/>
                             <constraint firstItem="miY-9s-Jb3" firstAttribute="top" secondItem="7iO-Re-L2o" secondAttribute="top" id="rcT-LY-KrW"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="top" secondItem="0Yy-Wf-yzs" secondAttribute="bottom" constant="11" id="se8-ab-Y1M"/>
                             <constraint firstItem="w4W-pw-n2I" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="t0T-1t-J6z"/>
@@ -844,6 +844,7 @@
                         <outlet property="btnYouPay" destination="gKC-ov-S6Q" id="DWd-de-QaM"/>
                         <outlet property="constHeightIPayButton" destination="yMc-z8-m4D" id="B0T-NJ-mET"/>
                         <outlet property="constHeightYouPayButton" destination="bjN-fe-4dj" id="dhh-dk-mhl"/>
+                        <outlet property="constProfileViewTopToSuper" destination="U2P-Pj-taN" id="XdB-iR-Xgb"/>
                         <outlet property="constWidthIPayButton" destination="p3z-cL-JJE" id="xlL-p0-do5"/>
                         <outlet property="constWidthYouPayButton" destination="rVF-x5-qDP" id="ufM-Xu-qLU"/>
                         <outlet property="imgDefaultProfile" destination="lNy-3P-WDp" id="hYK-Aj-5UU"/>
@@ -979,6 +980,6 @@
         <image name="writePhotoArea.png" width="239" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f3i-A6-4bp"/>
+        <segue reference="8it-yK-IlM"/>
     </inferredMetricsTieBreakers>
 </document>

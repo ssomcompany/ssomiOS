@@ -21,6 +21,7 @@ public class SSViewModel {
     var ssomType: SSType
     var userId: String
     var userCount: Int!
+    var createdDatetime: NSDate
 
     init() {
         self.category = ""
@@ -35,6 +36,7 @@ public class SSViewModel {
         self.ssomType = .SSOM
         self.userId = ""
         self.userCount = 0
+        self.createdDatetime = NSDate()
     }
 
     init(modelDict:[String: AnyObject!]) {
@@ -76,6 +78,12 @@ public class SSViewModel {
             self.userCount = userCount
         } else {
             self.userCount = 0
+        }
+
+        if let createdDatetime = modelDict["postId"] as? Int {
+            self.createdDatetime = NSDate(timeIntervalSinceNow: NSTimeInterval(createdDatetime))
+        } else {
+            self.createdDatetime = NSDate()
         }
     }
 }

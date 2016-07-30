@@ -14,6 +14,7 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
     var barButtonItems: SSNavigationBarItems!
 
     @IBOutlet var profileView: UIView!
+    @IBOutlet var constProfileViewTopToSuper: NSLayoutConstraint!
     @IBOutlet var imgDefaultProfile: UIImageView!
     @IBOutlet var imgPhotoGradation: UIImageView!
     @IBOutlet var imgProfile: UIImageView!
@@ -71,6 +72,10 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
         super.init(coder: aDecoder)
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,6 +91,14 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         self.textView.delegate = self;
+
+        self.registerForKeyboardNotifications()
+    }
+
+    func registerForKeyboardNotifications() -> Void {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func tapBack() {
@@ -254,6 +267,9 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
                 self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
             }
 
+            self.lbAge.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.lbPeopleCount.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+
             self.constWidthIPayButton.constant = self.maxWidthPayButton
             self.constHeightIPayButton.constant = self.maxHeightPayButton
             self.constWidthYouPayButton.constant = self.minWidthPayButton
@@ -272,6 +288,9 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
                 self.btnIPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
                 self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
             }
+
+            self.lbAge.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.lbPeopleCount.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
 
             self.constWidthIPayButton.constant = self.minWidthPayButton
             self.constHeightIPayButton.constant = self.minHeightPayButton
@@ -390,7 +409,8 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
                     self.pickedImageExtension = "jpeg"
                     self.pickedImageData = UIImageJPEGRepresentation(pickedImage, 1.0)
                 default:
-                    print("")
+                    print("unable to upload!!")
+                    break
                 }
 
                 break
@@ -399,5 +419,19 @@ class SSWriteViewController: UIViewController, UITextViewDelegate
         self.pickedImageName = pickedImageURL.lastPathComponent
 
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+// MARK: - Keyboard show & hide event
+    func keyboardWillShow(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.constProfileViewTopToSuper.constant = -self.profileView.bounds.size.height
+            }
+        }
+    }
+
+    func keyboardWillHide(notification: NSNotification) -> Void {
+        self.constProfileViewTopToSuper.constant = 0
     }
 }

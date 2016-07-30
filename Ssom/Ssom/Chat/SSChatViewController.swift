@@ -8,13 +8,17 @@
 
 import UIKit
 
-class SSChatViewController: UIViewController {
+class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var viewChatCoachmark: SSChatCoachmarkView!
     @IBOutlet var tableViewChat: UITableView!
     @IBOutlet var viewInputBar: UIView!
+    @IBOutlet var tfInput: UITextField!
+    @IBOutlet var constInputBarBottomToSuper: NSLayoutConstraint!
 
     var barButtonItems: SSNavigationBarItems!
+
+    var messages: [SSChatViewModel] = [SSChatViewModel]()
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -78,7 +82,19 @@ class SSChatViewController: UIViewController {
     }
 
     func initView() {
+        self.tableViewChat.registerNib(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
+
+        (self.tableViewChat as UIScrollView).delegate = self
+
+        self.registerForKeyboardNotifications()
+
         self.showCoachmarkView()
+    }
+
+    func registerForKeyboardNotifications() -> Void {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func tapBack() {
@@ -87,5 +103,51 @@ class SSChatViewController: UIViewController {
 
     func tapHeart() {
         print("tapped heart!!")
+    }
+
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            if touch.view !== self.tfInput {
+                self.tfInput.resignFirstResponder()
+            }
+        }
+    }
+
+// MARK: - UIScrollViewDelegate
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if self.tfInput.isFirstResponder() {
+            self.tfInput.resignFirstResponder()
+        }
+    }
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messages.count == 0 ? 1 : self.messages.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
+            // FIXME: need to change the ssom type
+            cell.configView(SSType.SSOSEYO)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell")
+
+            return cell!
+        }
+    }
+
+// MARK: - Keyboard show & hide event
+    func keyboardWillShow(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
+            }
+        }
+    }
+
+    func keyboardWillHide(notification: NSNotification) -> Void {
+        self.constInputBarBottomToSuper.constant = 0
     }
 }

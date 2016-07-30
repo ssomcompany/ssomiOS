@@ -49,15 +49,26 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell")
-
-        self.edgesForExtendedLayout = UIRectEdge.None
-
         self.initView()
     }
 
     func initView() {
+
+        ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell")
+
+        self.edgesForExtendedLayout = UIRectEdge.None
+
         self.needReload = false
+
+        self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+        self.btnIPay.layer.shadowOffset = CGSizeMake(0, 2)
+        self.btnIPay.layer.shadowRadius = 1
+        self.btnIPay.layer.shadowOpacity = 1
+
+        self.btnYouPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+        self.btnYouPay.layer.shadowOffset = CGSizeMake(0, 2)
+        self.btnYouPay.layer.shadowRadius = 1
+        self.btnYouPay.layer.shadowOpacity = 1
 
         if self.mainViewModel.isSell {
             self.tapIPayButton(self.btnIPay);
@@ -201,7 +212,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                 print("imageUrl is \(imageUrl)")
 
-                cell.profileImageView!.sd_setImageWithURL(NSURL(string: imageUrl)
+                cell.profileImageView?.sd_setImageWithURL(NSURL(string: imageUrl)
                     , placeholderImage: nil
                     , completed: { (image, error, cacheType, url) -> Void in
 
@@ -237,6 +248,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: model.latitude, longitude: model.longitude)
 
             let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
+            model.distance = distance
 
             cell.distanceLabel.text = Util.getDistanceString(distance)
         }

@@ -321,6 +321,10 @@
 		97B2D16D1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */; };
 		97B2D16F1D48A4D600B5EBD2 /* SSChatMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */; };
 		97B2D1711D48A51B00B5EBD2 /* SSChatListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */; };
+		97B2D1731D4A219A00B5EBD2 /* SSChatroomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1721D4A219A00B5EBD2 /* SSChatroomViewModel.swift */; };
+		97B2D1751D4A21AC00B5EBD2 /* SSChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1741D4A21AC00B5EBD2 /* SSChatViewModel.swift */; };
+		97B2D1771D4B48AC00B5EBD2 /* SSChatListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1761D4B48AC00B5EBD2 /* SSChatListTableCell.swift */; };
+		97B2D1791D4B535A00B5EBD2 /* SSChatStartingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1781D4B535A00B5EBD2 /* SSChatStartingTableCell.swift */; };
 		97C526631C9DA16500484F03 /* pageLeftGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526571C9DA16400484F03 /* pageLeftGreen.png */; };
 		97C526641C9DA16500484F03 /* pageLeftGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */; };
 		97C526651C9DA16500484F03 /* pageLeftGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */; };
@@ -687,6 +691,10 @@
 		97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatStartingTableCell.xib; path = Chat/SSChatStartingTableCell.xib; sourceTree = "<group>"; };
 		97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatMessageView.xib; path = Chat/SSChatMessageView.xib; sourceTree = "<group>"; };
 		97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatListTableCell.xib; path = Chat/SSChatListTableCell.xib; sourceTree = "<group>"; };
+		97B2D1721D4A219A00B5EBD2 /* SSChatroomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatroomViewModel.swift; path = ViewModel/SSChatroomViewModel.swift; sourceTree = "<group>"; };
+		97B2D1741D4A21AC00B5EBD2 /* SSChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatViewModel.swift; path = ViewModel/SSChatViewModel.swift; sourceTree = "<group>"; };
+		97B2D1761D4B48AC00B5EBD2 /* SSChatListTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatListTableCell.swift; path = Chat/SSChatListTableCell.swift; sourceTree = "<group>"; };
+		97B2D1781D4B535A00B5EBD2 /* SSChatStartingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatStartingTableCell.swift; path = Chat/SSChatStartingTableCell.swift; sourceTree = "<group>"; };
 		97C526571C9DA16400484F03 /* pageLeftGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pageLeftGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen.png; sourceTree = "<group>"; };
 		97C526581C9DA16400484F03 /* pageLeftGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@2x.png"; sourceTree = "<group>"; };
 		97C526591C9DA16400484F03 /* pageLeftGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pageLeftGreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/pageLeftGreen@3x.png"; sourceTree = "<group>"; };
@@ -1143,6 +1151,8 @@
 				9764D9DC1D35FF6400BBE4C6 /* SSMainViewModel.swift */,
 				9764D9DD1D35FF6400BBE4C6 /* SSViewModel.swift */,
 				9764D9DE1D35FF6400BBE4C6 /* SSWriteViewModel.swift */,
+				97B2D1721D4A219A00B5EBD2 /* SSChatroomViewModel.swift */,
+				97B2D1741D4A21AC00B5EBD2 /* SSChatViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1184,11 +1194,13 @@
 			children = (
 				978DDB761CCBDD8700567169 /* SSChat.xcassets */,
 				978DDB741CCBD57700567169 /* SSChatStoryboard.storyboard */,
-				97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */,
-				97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */,
-				97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */,
 				97A6BFF51CCA866C00DA06D2 /* SSChatListViewController.swift */,
 				97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */,
+				97B2D1761D4B48AC00B5EBD2 /* SSChatListTableCell.swift */,
+				97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */,
+				97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */,
+				97B2D1781D4B535A00B5EBD2 /* SSChatStartingTableCell.swift */,
+				97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */,
 				978DDB7A1CCBE68B00567169 /* SSChatCoachmarkView.swift */,
 				978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */,
 				97B2D1681D489F1A00B5EBD2 /* SSChatCompletionView.xib */,
@@ -1786,6 +1798,7 @@
 			files = (
 				9764D9DF1D35FF6400BBE4C6 /* SSFilterViewModel.swift in Sources */,
 				97830FF31C57DAD9008BD6DC /* SSAlertController.swift in Sources */,
+				97B2D1751D4A21AC00B5EBD2 /* SSChatViewModel.swift in Sources */,
 				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
 				97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */,
 				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,
@@ -1793,9 +1806,11 @@
 				9787ACE41CFDF26F001CF18C /* SSMenuViewController.swift in Sources */,
 				9742910D1BF25FC600609974 /* SSListTableViewCell.swift in Sources */,
 				9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */,
+				97B2D1731D4A219A00B5EBD2 /* SSChatroomViewModel.swift in Sources */,
 				978DDB7B1CCBE68B00567169 /* SSChatCoachmarkView.swift in Sources */,
 				9741C9C61D1565EA00DD090F /* SSDrawerStyler.swift in Sources */,
 				9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */,
+				97B2D1771D4B48AC00B5EBD2 /* SSChatListTableCell.swift in Sources */,
 				9787ACE81CFE7B0B001CF18C /* SSMenuHeadView.swift in Sources */,
 				97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */,
@@ -1821,6 +1836,7 @@
 				97A6BFF81CCA868C00DA06D2 /* SSChatViewController.swift in Sources */,
 				979A4A031BF4525A00FAFB21 /* Define.swift in Sources */,
 				977DBA741D2B82A400CFD98F /* SSScrollView.swift in Sources */,
+				97B2D1791D4B535A00B5EBD2 /* SSChatStartingTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

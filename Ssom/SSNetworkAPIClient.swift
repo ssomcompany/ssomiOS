@@ -16,9 +16,9 @@ enum SSGender : String {
 
 public let acceptableStatusCodes: Range<Int> = 200..<300
 
-public class SSNetworkAPIClient {
+public struct SSNetworkAPIClient {
 
-    class func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
+    static func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
@@ -32,7 +32,7 @@ public class SSNetworkAPIClient {
                 var datas: Array = [SSViewModel]()
 
                 for rawData in rawDatas {
-                    let viewModel: SSViewModel = SSViewModel.init(modelDict: rawData)
+                    let viewModel: SSViewModel = SSViewModel(modelDict: rawData)
 
                     datas.append(viewModel)
                 }
@@ -48,7 +48,7 @@ public class SSNetworkAPIClient {
         }
     }
 
-    class func postPost(token: String, model: SSWriteViewModel, completion: (error: NSError?) -> Void) {
+    static func postPost(token: String, model: SSWriteViewModel, completion: (error: NSError?) -> Void) {
         let params: [String: AnyObject] = ["userId": "\(model.userId)",
                                            "content": model.content.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!,
                                            "ssomType": model.ssomType.rawValue,
@@ -87,7 +87,7 @@ public class SSNetworkAPIClient {
             }
     }
 
-    class func getFile(token: String, fileId: String, completion: (error: NSError?) -> Void) {
+    static func getFile(token: String, fileId: String, completion: (error: NSError?) -> Void) {
         let imagePath = fileId
 
         let indicator: SSIndicatorView = SSIndicatorView()
@@ -112,7 +112,7 @@ public class SSNetworkAPIClient {
 
     }
 
-    class func postFile(token: String, fileExt: String, fileName: String, fileData: NSData, completion: (photoURLPath: String?, error: NSError?) -> Void) {
+    static func postFile(token: String, fileExt: String, fileName: String, fileData: NSData, completion: (photoURLPath: String?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
@@ -126,6 +126,7 @@ public class SSNetworkAPIClient {
                          encodingCompletion: { (encodingResult) in
                             switch encodingResult {
                             case .Success(let req, _, _):
+                                // TODO: 현재 에러 메세지가 HTML로 내려오고 있는 경우가 있음(ex: 파일 업로드 허용 용량 초과)
                                 req.responseJSON(completionHandler: { (response) in
 
                                     if response.result.isSuccess {
@@ -138,18 +139,20 @@ public class SSNetworkAPIClient {
                                     } else {
                                         completion(photoURLPath: nil, error: response.result.error)
                                     }
+
+                                    indicator.hideIndicator()
                                 })
                             case .Failure(let error):
                                 print(error)
 
+                                indicator.hideIndicator()
+
 //                                completion(error: error)
                             }
-
-                            indicator.hideIndicator()
         })
     }
 
-    class func postLogin(userId email:String, password:String, completion: (error:NSError?) -> Void ) {
+    static func postLogin(userId email:String, password:String, completion: (error:NSError?) -> Void ) {
         let plainString = "\(email):\(password)" as NSString
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = plainData?.base64EncodedStringWithOptions([])
@@ -203,7 +206,7 @@ public class SSNetworkAPIClient {
 
     }
 
-    class func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: (error: NSError?) -> Void ) {
+    static func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: (error: NSError?) -> Void ) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
@@ -224,6 +227,38 @@ public class SSNetworkAPIClient {
                 }
 
                 indicator.hideIndicator()
+        }
+    }
+
+    static func getChatroomList(token: String, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
+        Alamofire.request(.GET,
+                          SSNetworkContext.serverUrlPrefixt+"chatroom",
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawDatas = response.result.value as? [[String: AnyObject]] {
+                    var datas: [SSChatroomViewModel] = [SSChatroomViewModel]()
+
+                    for rawData: [String: AnyObject] in rawDatas {
+                        let model: SSChatroomViewModel = SSChatroomViewModel(modelDict: rawData)
+                        datas.append(model)
+                    }
+
+                    completion(datas: datas, error: nil)
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NoDataFound", code: 800, userInfo: nil)
+
+                    completion(datas: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(datas: nil, error: response.result.error)
+            }
         }
     }
 }

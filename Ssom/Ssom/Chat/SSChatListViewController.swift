@@ -8,9 +8,13 @@
 
 import UIKit
 
-class SSChatListViewController : UIViewController {
+class SSChatListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet var chatListTableView: UITableView!
 
     var barButtonItems: SSNavigationBarItems!
+
+    var datas: [SSChatroomViewModel] = [SSChatroomViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,10 +72,69 @@ class SSChatListViewController : UIViewController {
     }
 
     func initView() {
+        self.chatListTableView.registerNib(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
+
+        self.edgesForExtendedLayout = UIRectEdge.None
+
+        self.loadData()
     }
 
     func tapBack() {
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
+
+    func loadData() {
+        if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
+            SSNetworkAPIClient.getChatroomList(token, completion: { (models, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+
+                } else {
+                    if let datas = models {
+                        self.datas = datas
+
+                        self.chatListTableView.reloadData()
+                    }
+                }
+            })
+        }
+    }
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.datas.count
+    }
+
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 85
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let cell: SSChatListTableCell = tableView.dequeueReusableCellWithIdentifier("chatListCell", forIndexPath: indexPath) as? SSChatListTableCell {
+            cell.configView()
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? SSChatListTableCell
+
+            return cell!
+        }
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
 }

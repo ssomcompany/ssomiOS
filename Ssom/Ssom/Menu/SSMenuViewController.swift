@@ -57,7 +57,7 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        if let cell: SSMenuTableViewCell = (tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as? SSMenuTableViewCell)! {
+        if let cell: SSMenuTableViewCell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as? SSMenuTableViewCell {
             cell.configCell(SSMenuType(rawValue: indexPath.row)!)
             return cell
         } else {

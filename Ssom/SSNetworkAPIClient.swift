@@ -206,6 +206,36 @@ public struct SSNetworkAPIClient {
 
     }
 
+    static func getUser(token: String, email: String, completion: (model: SSUserModel?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.GET,
+            SSNetworkContext.serverUrlPrefixt + "users/\(email)",
+            encoding: .JSON,
+            headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            if response.result.isSuccess {
+                print("getUser result : \(response.result.value)")
+
+                if let rawData = response.result.value as? [String: AnyObject] {
+                    let userModel = SSUserModel(modelDict: rawData)
+
+                    completion(model: userModel, error: nil)
+                } else {
+                    let error: NSError = NSError(domain: "com.ssom.error.NoUserData", code: 700, userInfo: nil)
+
+                    completion(model: nil, error: error)
+                }
+            } else {
+                completion(model: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
     static func postUser(email:String, password:String, nickName:String? = "None", gender:SSGender? = .SSGenderFemale, completion: (error: NSError?) -> Void ) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()

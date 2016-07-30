@@ -15,8 +15,8 @@ public class SSViewModel {
     var latitude: Double
     var longitude: Double
     var distance: Int!
-    var maxAge: Int!
-    var minAge: Int!
+    var maxAge: Int
+    var minAge: Int
     var postId: String
     var ssomType: SSType
     var userId: String

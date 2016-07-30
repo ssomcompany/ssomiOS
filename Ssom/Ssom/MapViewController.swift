@@ -115,11 +115,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         mainView.clear()
 
+        var index: Int = 0;
         for data in self.datas {
             let latitude: Double = data.latitude 
             let longitude: Double = data.longitude 
 
             print("position is \(latitude), \(longitude)")
+
+            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+
+            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+
+            let dataWithDistance: SSViewModel = data
+            dataWithDistance.distance = distance
+            self.datas[index] = dataWithDistance
+            
+            index += 1
 
             let sellString: String = data.ssomType.rawValue
             let isSell = sellString == SSType.SSOM.rawValue

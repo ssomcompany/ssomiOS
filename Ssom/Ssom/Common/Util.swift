@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import CoreLocation
 
-public class Util {
-    class func convertScreenSize(isWidth:Bool, size:Float, fromWidth:CGFloat, fromHeight:CGFloat) -> CGFloat {
+public struct Util {
+    static func convertScreenSize(isWidth:Bool, size:Float, fromWidth:CGFloat, fromHeight:CGFloat) -> CGFloat {
 
         let bounds: CGRect = UIScreen.mainScreen().bounds;
 
@@ -23,14 +23,38 @@ public class Util {
         
     }
 
-    class func convertScreenCGSize(size:CGSize, fromWidth:CGFloat, fromHeight:CGFloat) -> CGSize {
+    static func convertScreenCGSize(size:CGSize, fromWidth:CGFloat, fromHeight:CGFloat) -> CGSize {
         let width:CGFloat = convertScreenSize(true, size: Float(size.width), fromWidth: fromWidth, fromHeight: fromHeight)
         let height:CGFloat = convertScreenSize(false, size: Float(size.height), fromWidth: fromWidth, fromHeight: fromHeight)
 
         return CGSizeMake(width, height)
     }
 
-    class func getDistanceString(distance: Int) -> String {
+    static func getDateString(date: NSDate) -> String {
+        let nowDate: NSDate = NSDate()
+
+        let userCalendar = NSCalendar.currentCalendar()
+        let calendarComponents: NSCalendarUnit = [.Year, .Day]
+        let dateDifference = userCalendar.components(calendarComponents, fromDate: date, toDate: nowDate, options: [])
+        let dateComponents = userCalendar.components(calendarComponents, fromDate: date)
+        let nowDateComponents = userCalendar.components(calendarComponents, fromDate: nowDate)
+
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        if dateDifference.day == 0 {
+            dateFormatter.dateFormat = "hh:mm"
+            return dateFormatter.stringFromDate(date)
+        } else {
+            if dateComponents.year == nowDateComponents.year {
+                dateFormatter.dateFormat = "MM월 dd일"
+                return dateFormatter.stringFromDate(date)
+            } else {
+                dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                return dateFormatter.stringFromDate(date)
+            }
+        }
+    }
+
+    static func getDistanceString(distance: Int) -> String {
         if distance > 1000 {
             let kilometerOfDistance: Double = Double(distance)/1000
 
@@ -40,7 +64,7 @@ public class Util {
         }
     }
 
-    class func getDistance(locationFrom locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
+    static func getDistance(locationFrom locationFrom: CLLocationCoordinate2D, locationTo: CLLocationCoordinate2D) -> Double {
 
         let location1: CLLocation = CLLocation(latitude: locationFrom.latitude, longitude: locationFrom.longitude)
         let location2: CLLocation = CLLocation(latitude: locationTo.latitude, longitude: locationTo.longitude)
@@ -48,7 +72,7 @@ public class Util {
         return location2.distanceFromLocation(location1)
     }
 
-    class func getAgeArea(age: Int) -> SSAgeType {
+    static func getAgeArea(age: Int) -> SSAgeType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }
@@ -61,7 +85,7 @@ public class Util {
         return .Age30
     }
 
-    class func getAgeArea(age: Int) -> SSAgeAreaType {
+    static func getAgeArea(age: Int) -> SSAgeAreaType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }
@@ -74,7 +98,7 @@ public class Util {
         return .Age30
     }
 
-    class func isValidEmail(testStr:String) -> Bool {
+    static func isValidEmail(testStr:String) -> Bool {
 
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 
@@ -84,26 +108,5 @@ public class Util {
 
         return result
         
-    }
-}
-
-extension UIView {
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> UIView? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as? UIView
-    }
-
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, owner: AnyObject) -> UIView? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(owner, options: nil)[0] as? UIView
-    }
-
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, className: AnyClass) -> UIView? {
-        let loadedViews = UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)
-        for loadedView in loadedViews {
-            if loadedView.dynamicType === className {
-                return loadedView as? UIView
-            }
-        }
-
-        return nil
     }
 }

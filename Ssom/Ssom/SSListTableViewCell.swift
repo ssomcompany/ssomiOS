@@ -25,6 +25,8 @@ class SSListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        self.selectionStyle = .None
     }
 
     @IBAction func tapProfileImage(sender: AnyObject) {

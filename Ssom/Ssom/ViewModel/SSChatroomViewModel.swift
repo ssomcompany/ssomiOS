@@ -13,14 +13,14 @@ public struct SSChatroomViewModel {
     var ownerUserId: String             // ownerId
     var participantUserId: String       // participantId
     var createdDateTime: NSDate         // createdTimestamp
-    var ssomType: SSType                // ssomType
+    var ssomViewModel: SSViewModel
 
     init() {
         self.chatroomId = ""
         self.ownerUserId = ""
         self.participantUserId = ""
         self.createdDateTime = NSDate()
-        self.ssomType = SSType.SSOM
+        self.ssomViewModel = SSViewModel()
     }
 
     init(modelDict: [String: AnyObject]) {
@@ -48,10 +48,6 @@ public struct SSChatroomViewModel {
             self.createdDateTime = NSDate()
         }
 
-        if let ssomType = modelDict["ssomType"] as? String {
-            self.ssomType = SSType(rawValue: ssomType)!
-        } else {
-            self.ssomType = .SSOM
-        }
+        self.ssomViewModel = SSViewModel(modelDict: modelDict)
     }
 }

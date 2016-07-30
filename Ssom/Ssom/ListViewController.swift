@@ -216,7 +216,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     , placeholderImage: nil
                     , completed: { (image, error, cacheType, url) -> Void in
 
-                        if error != nil {
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                         } else {
                             let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
 
@@ -229,10 +232,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         var memberInfoString:String = "";
-        if let minAge = model.minAge {
-            let ageArea: SSAgeAreaType = Util.getAgeArea(minAge)
-            memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
-        }
+        let ageArea: SSAgeAreaType = Util.getAgeArea(model.minAge)
+        memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
 //        if let maxAge = model.maxAge {
 //            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
 //        }

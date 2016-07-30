@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
-class SSChatListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SSChatListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, SSChatListTableCellDelegate, CLLocationManagerDelegate, SSPhotoViewDelegate {
+
+    var locationManager: CLLocationManager!
+    var nowLocationCoordinate2D: CLLocationCoordinate2D!
+
+    var profileImageView: SSPhotoView?
 
     @IBOutlet var chatListTableView: UITableView!
 
@@ -76,7 +82,13 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
 
         self.edgesForExtendedLayout = UIRectEdge.None
 
-        self.loadData()
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+        if (CLLocationManager.locationServicesEnabled()) {
+            self.locationManager.startUpdatingLocation()
+        }
     }
 
     func tapBack() {
@@ -93,9 +105,12 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
 
                 } else {
                     if let datas = models {
+
                         self.datas = datas
 
                         self.chatListTableView.reloadData()
+
+                        self.chatListTableView.setContentOffset(CGPointMake(0, -500), animated: false)
                     }
                 }
             })
@@ -117,10 +132,13 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let cell: SSChatListTableCell = tableView.dequeueReusableCellWithIdentifier("chatListCell", forIndexPath: indexPath) as? SSChatListTableCell {
-            cell.configView()
+            cell.delegate = self
+            cell.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? SSChatListTableCell
+            cell!.delegate = self
+            cell!.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
 
             return cell!
         }
@@ -129,12 +147,81 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let cell: SSChatListTableCell = tableView.cellForRowAtIndexPath(indexPath) as? SSChatListTableCell {
+            if cell.isCellOpened {
+                cell.closeCell(true)
+            } else {
+                if cell.isCellClosed {
+                    let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                    let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+// MARK: - SSChatListTableCellDelegate
+    func deleteCell(cell: UITableViewCell) {
+        if let indexPath: NSIndexPath = self.chatListTableView.indexPathForCell(cell) {
+            self.datas.removeAtIndex(indexPath.row)
+            self.chatListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+
+// MARK: - CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.nowLocationCoordinate2D = locations.last!.coordinate
+
+        self.locationManager.stopUpdatingLocation()
+
+        self.loadData()
+    }
+
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        self.locationManager.stopUpdatingLocation()
+        print(error)
+
+        self.nowLocationCoordinate2D = CLLocationCoordinate2DMake(0.0, 0.0)
+
+        self.loadData()
+    }
+
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        var shouldIAllow = false
+
+        switch status {
+        case CLAuthorizationStatus.Restricted:
+            print("Restricted Access to location!!")
+        case .Denied:
+            print("User denied access to location!!")
+        case .NotDetermined:
+            print("Status not determined!!")
+            self.locationManager.requestWhenInUseAuthorization()
+        default:
+            print("Allowed to location access!!")
+            shouldIAllow = true
+        }
+
+        if (shouldIAllow == true) {
+            self.locationManager.startUpdatingLocation()
+        }
+    }
+
+// MARK:- SSChatListTableCellDelegate
+    func tapProfileImage(imageUrl: String) {
+        self.navigationController?.navigationBarHidden = true;
+
+        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
+        self.profileImageView!.delegate = self
+
+        self.view.addSubview(self.profileImageView!)
+    }
+
+// MARK:- SSPhotoViewDelegate
+    func tapClose() {
+        self.navigationController?.navigationBarHidden = false;
+
+        self.profileImageView!.removeFromSuperview()
     }
 }

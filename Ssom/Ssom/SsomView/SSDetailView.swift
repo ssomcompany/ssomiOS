@@ -86,31 +86,20 @@ class SSDetailView: UIView {
     }
 
     @IBAction func tapSsom(sender: AnyObject) {
-        if SSAccountManager.sharedInstance.isAuthorized() {
-            if let userId = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
-                let token = SSNetworkContext.sharedInstance.getSharedAttribute("token") as! String
-                SSNetworkAPIClient.getUser(token, email: userId, completion: { (model, error) in
-                    if let err = error {
-                        print(err.localizedDescription)
+        if SSAccountManager.sharedInstance.isAuthorized {
+            if let userModel = SSAccountManager.sharedInstance.userModel {
+                if userModel.userId == self.viewModel.userId {
+                    SSAlertController.showAlertConfirm(title: "", message: "내가 등록한 쏨입니다!", completion: nil)
+                } else {
 
-                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
-                    } else {
-                        if let m = model {
-                            if m.userId == self.viewModel.userId {
-                                SSAlertController.showAlertConfirm(title: "", message: "내가 등록한 쏨입니다!", completion: nil)
-                            } else {
+                    guard let _ = self.delegate?.doSsom(self.ssomType) else {
+                        NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
 
-                                guard let _ = self.delegate?.doSsom(self.ssomType) else {
-                                    NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
-
-                                    return
-                                }
-                                
-                                self.tapClose(nil)
-                            }
-                        }
+                        return
                     }
-                })
+
+                    self.tapClose(nil)
+                }
             }
         } else {
             guard let _ = self.delegate?.openSignIn(nil) else {

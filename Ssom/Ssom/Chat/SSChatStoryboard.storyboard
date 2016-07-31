@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Chat List View Controller-->
@@ -57,6 +58,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-P0-Lst">
+                                <rect key="frame" x="0.0" y="20" width="600" height="69"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상대방에게 만남을 신청했어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
+                                        <rect key="frame" x="35" y="24" width="205" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-iO-YnA">
+                                        <rect key="frame" x="379" y="7.5" width="207" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="요청취소" backgroundImage="cancelButtonRed.png"/>
+                                        <connections>
+                                            <action selector="tapRequest:" destination="tih-SM-SIo" eventType="touchUpInside" id="X4k-Cq-T36"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="1B4-T1-diq"/>
+                                    <constraint firstItem="7I9-42-WCS" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="2JE-ln-R0d"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ppc-iO-YnA" secondAttribute="trailing" constant="14" id="LSN-ur-DNC"/>
+                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="width" secondItem="B2p-P0-Lst" secondAttribute="width" multiplier="143:414" id="c2r-pQ-4ku"/>
+                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="gsC-2z-cLL"/>
+                                    <constraint firstItem="7I9-42-WCS" firstAttribute="leading" secondItem="B2p-P0-Lst" secondAttribute="leading" constant="35" id="p7F-ln-Na0"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-5O-J26">
+                                <rect key="frame" x="0.0" y="20" width="600" height="526"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="tih-SM-SIo" id="nUf-TZ-5r7"/>
+                                    <outlet property="delegate" destination="tih-SM-SIo" id="eQ2-oi-VMs"/>
+                                </connections>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ew7-iN-Spu">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <subviews>
@@ -68,15 +105,18 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQr-Vv-DQ7">
-                                        <rect key="frame" x="538" y="3" width="47" height="47"/>
+                                        <rect key="frame" x="543" y="3" width="47" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="gVH-YG-l7j"/>
                                             <constraint firstAttribute="width" constant="47" id="tl1-7E-4Ki"/>
                                         </constraints>
                                         <state key="normal" image="chat_btn_send"/>
+                                        <connections>
+                                            <action selector="tapSendMessage:" destination="tih-SM-SIo" eventType="touchUpInside" id="fvR-Mg-cYv"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메시지를 입력하세요..." textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="BQ6-fu-HdD">
-                                        <rect key="frame" x="27" y="0.0" width="496" height="54"/>
+                                        <rect key="frame" x="27" y="0.0" width="506" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -90,20 +130,12 @@
                                     <constraint firstItem="BQ6-fu-HdD" firstAttribute="centerY" secondItem="Ew7-iN-Spu" secondAttribute="centerY" id="Txi-HG-6vJ"/>
                                     <constraint firstItem="BQ6-fu-HdD" firstAttribute="top" secondItem="Ew7-iN-Spu" secondAttribute="top" id="Ve4-21-lGA"/>
                                     <constraint firstItem="BQ6-fu-HdD" firstAttribute="leading" secondItem="Ew7-iN-Spu" secondAttribute="leading" constant="27" id="a2C-kV-pkh"/>
-                                    <constraint firstItem="CQr-Vv-DQ7" firstAttribute="leading" secondItem="BQ6-fu-HdD" secondAttribute="trailing" constant="15" id="gCF-J4-mB0"/>
+                                    <constraint firstItem="CQr-Vv-DQ7" firstAttribute="leading" secondItem="BQ6-fu-HdD" secondAttribute="trailing" constant="10" id="gCF-J4-mB0"/>
                                     <constraint firstItem="0k8-PW-NIG" firstAttribute="top" secondItem="Ew7-iN-Spu" secondAttribute="top" id="kkG-Kk-4Ko"/>
-                                    <constraint firstAttribute="trailing" secondItem="CQr-Vv-DQ7" secondAttribute="trailing" constant="15" id="lE8-xB-pZm"/>
+                                    <constraint firstAttribute="trailing" secondItem="CQr-Vv-DQ7" secondAttribute="trailing" constant="10" id="lE8-xB-pZm"/>
                                     <constraint firstItem="0k8-PW-NIG" firstAttribute="leading" secondItem="Ew7-iN-Spu" secondAttribute="leading" id="mJm-iE-HKx"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-5O-J26">
-                                <rect key="frame" x="0.0" y="20" width="600" height="526"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="tih-SM-SIo" id="nUf-TZ-5r7"/>
-                                    <outlet property="delegate" destination="tih-SM-SIo" id="eQ2-oi-VMs"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -113,14 +145,28 @@
                             <constraint firstItem="Pp4-5O-J26" firstAttribute="top" secondItem="cdy-RK-2cG" secondAttribute="bottom" id="PZC-yI-YhI"/>
                             <constraint firstItem="Ew7-iN-Spu" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="UCc-VB-kDt"/>
                             <constraint firstItem="Ew7-iN-Spu" firstAttribute="top" secondItem="Pp4-5O-J26" secondAttribute="bottom" id="Ww1-pI-Cuq"/>
+                            <constraint firstItem="B2p-P0-Lst" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="Yus-ox-DpL"/>
                             <constraint firstAttribute="bottom" secondItem="Ew7-iN-Spu" secondAttribute="bottom" id="dwb-ND-Czw"/>
+                            <constraint firstItem="B2p-P0-Lst" firstAttribute="top" secondItem="cdy-RK-2cG" secondAttribute="bottom" id="kCx-Ni-2sC"/>
+                            <constraint firstAttribute="trailing" secondItem="B2p-P0-Lst" secondAttribute="trailing" id="y9f-01-gqh"/>
+                            <constraint firstItem="Pp4-5O-J26" firstAttribute="top" secondItem="B2p-P0-Lst" secondAttribute="bottom" id="z7g-kh-NXL"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="z7g-kh-NXL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="btnRequestMeet" destination="Ppc-iO-YnA" id="gtc-Wr-qPE"/>
                         <outlet property="constInputBarBottomToSuper" destination="dwb-ND-Czw" id="Fzv-Qy-MJM"/>
+                        <outlet property="constTableViewChatTopToSuper" destination="PZC-yI-YhI" id="Hp6-Ls-6Z1"/>
+                        <outlet property="constTableViewChatTopToViewRequest" destination="z7g-kh-NXL" id="f5i-DI-nQt"/>
+                        <outlet property="lbRequestMeet" destination="7I9-42-WCS" id="DPq-VW-oK2"/>
                         <outlet property="tableViewChat" destination="Pp4-5O-J26" id="sHW-am-ayz"/>
                         <outlet property="tfInput" destination="BQ6-fu-HdD" id="N9u-EL-hhY"/>
                         <outlet property="viewInputBar" destination="Ew7-iN-Spu" id="qrk-d2-mBn"/>
+                        <outlet property="viewRequest" destination="B2p-P0-Lst" id="1bk-MT-lgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1m-eg-yyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -147,6 +193,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancelButtonRed.png" width="148" height="54"/>
         <image name="chat_btn_send" width="23" height="23"/>
     </resources>
 </document>

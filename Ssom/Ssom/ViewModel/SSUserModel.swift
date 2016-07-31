@@ -47,4 +47,15 @@ public struct SSUserModel {
             self.nickName = ""
         }
     }
+
+    func toDictionary() -> [String: AnyObject] {
+        var dict: [String: AnyObject] = [String: AnyObject]()
+
+        dict["email"] = self.email
+        dict["gender"] = self.gender
+        dict["id"] = self.userId
+        dict["nickname"] = self.nickName
+
+        return dict
+    }
 }

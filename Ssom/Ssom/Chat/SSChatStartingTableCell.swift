@@ -17,10 +17,10 @@ class SSChatStartingTableCell: UITableViewCell {
 
     func configView(ssomType: SSType) {
         switch ssomType {
+        case .SSOM:
+            lbColored.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1)
         case .SSOSEYO:
             lbColored.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1)
-        default:
-            break
         }
     }
 }

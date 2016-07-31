@@ -109,8 +109,6 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
                         self.datas = datas
 
                         self.chatListTableView.reloadData()
-
-                        self.chatListTableView.setContentOffset(CGPointMake(0, -500), animated: false)
                     }
                 }
             })
@@ -154,6 +152,10 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
                 if cell.isCellClosed {
                     let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
                     let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+                    if let model: SSChatroomViewModel = self.datas[indexPath.row] {
+                        vc.chatRoomId = model.chatroomId
+                        vc.ssomType = model.ssomViewModel.ssomType
+                    }
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

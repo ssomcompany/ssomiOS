@@ -24,8 +24,8 @@ public struct SSChatroomViewModel {
     }
 
     init(modelDict: [String: AnyObject]) {
-        if let chatroomId = modelDict["id"] as? Int {
-            self.chatroomId = String(chatroomId)
+        if let chatroomId = modelDict["id"] as? String {
+            self.chatroomId = chatroomId
         } else {
             self.chatroomId = ""
         }

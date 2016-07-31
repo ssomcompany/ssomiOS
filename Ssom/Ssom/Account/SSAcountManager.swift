@@ -11,6 +11,38 @@ import UIKit
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
 
+    var isAuthorized: Bool {
+        if let _ = SSNetworkContext.sharedInstance.getSharedAttribute("token") {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    var sessionToken: String? {
+        if let token = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
+            return token
+        } else {
+            return nil
+        }
+    }
+
+    var email: String? {
+        if let savedEmail = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
+            return savedEmail
+        } else {
+            return nil
+        }
+    }
+
+    var userModel: SSUserModel? {
+        if let savedUserModel = SSNetworkContext.sharedInstance.getSharedAttribute("userModel") as? [String: AnyObject] {
+            return SSUserModel(modelDict: savedUserModel)
+        } else {
+            return nil
+        }
+    }
+
     func openSignIn(willPresentViewController: UIViewController, completion: ((finish:Bool) -> Void)?) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
         if let vc = storyBoard.instantiateInitialViewController() as? UINavigationController {
@@ -26,10 +58,10 @@ class SSAccountManager {
 
     func doSignIn(userId: String, password: String, vc:UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
         SSNetworkAPIClient.postLogin(userId: userId, password: password) { error in
-            if error != nil {
+            if let err = error {
                 print(error?.localizedDescription)
 
-                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: vc, completion: { (alertAction) in
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
                     guard let _ = completion!(finish: false) else {
                         return
                     }
@@ -57,14 +89,6 @@ class SSAccountManager {
             }
             }) { (action) in
                 print("button2!!")
-        }
-    }
-
-    func isAuthorized() -> Bool {
-        if SSNetworkContext.sharedInstance.getSharedAttribute("token") != nil {
-            return true
-        } else {
-            return false
         }
     }
 }

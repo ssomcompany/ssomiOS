@@ -47,7 +47,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     func configView() -> Void {
-        if SSAccountManager.sharedInstance.isAuthorized() {
+        if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String
 
@@ -71,7 +71,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     @IBAction func tapMenuUser(sender: AnyObject) {
-        if SSAccountManager.sharedInstance.isAuthorized() {
+        if SSAccountManager.sharedInstance.isAuthorized {
 
         } else {
             guard let _ = self.delegate?.openSignIn({ [weak self] (finish) in

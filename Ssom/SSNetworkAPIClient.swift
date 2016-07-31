@@ -18,6 +18,7 @@ public let acceptableStatusCodes: Range<Int> = 200..<300
 
 public struct SSNetworkAPIClient {
 
+// MARK: - Post
     static func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
@@ -87,6 +88,7 @@ public struct SSNetworkAPIClient {
             }
     }
 
+// MARK: - File
     static func getFile(token: String, fileId: String, completion: (error: NSError?) -> Void) {
         let imagePath = fileId
 
@@ -152,6 +154,7 @@ public struct SSNetworkAPIClient {
         })
     }
 
+// MARK: - User & Session
     static func postLogin(userId email:String, password:String, completion: (error:NSError?) -> Void ) {
         let plainString = "\(email):\(password)" as NSString
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -171,11 +174,24 @@ public struct SSNetworkAPIClient {
                     print("Response JSON : \(response.result.value)")
 
                     if let value: [String: AnyObject] = response.result.value as? [String: AnyObject] {
-                        let token = value["token"]
-                        if token != nil {
-                            SSNetworkContext.sharedInstance.saveSharedAttribute(token!, forKey: "token")
+
+                        if let token = value["token"] as? String {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
 
                             completion(error: nil)
+
+                            SSNetworkAPIClient.getUser(token, email: email, completion: { (model, error) in
+                                if let err = error {
+                                    print(err.localizedDescription)
+
+                                    SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                                } else {
+                                    if let m = model {
+                                        SSNetworkContext.sharedInstance.saveSharedAttribute(m.toDictionary(), forKey: "userModel")
+                                    }
+                                }
+                            })
+
                         } else {
 
                             let errorResult = value["error"]
@@ -260,7 +276,11 @@ public struct SSNetworkAPIClient {
         }
     }
 
+// MARK: - Chat
     static func getChatroomList(token: String, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
         Alamofire.request(.GET,
                           SSNetworkContext.serverUrlPrefixt+"chatroom",
                           encoding: .JSON,
@@ -280,7 +300,7 @@ public struct SSNetworkAPIClient {
 
                     completion(datas: datas, error: nil)
                 } else {
-                    let error = NSError(domain: "com.ssom.error.NoDataFound", code: 800, userInfo: nil)
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatRooms", code: 801, userInfo: nil)
 
                     completion(datas: nil, error: error)
                 }
@@ -289,6 +309,78 @@ public struct SSNetworkAPIClient {
 
                 completion(datas: nil, error: response.result.error)
             }
+
+            indicator.hideIndicator()
+        }
+    }
+
+    static func getChatMessages(token: String, chatroomId: String, completion: (datas: [SSChatViewModel]?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.GET,
+            SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)/chats",
+            encoding: .JSON,
+            headers: ["Authorization": "JWT " + token])
+            .responseJSON { (response) in
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawDatas = response.result.value as? [[String: AnyObject]] {
+                        var datas: [SSChatViewModel] = [SSChatViewModel]()
+
+//                        for rawData: [String: AnyObject] in rawDatas {
+//                            let model: SSChatViewModel = SSChatViewModel(modelDict: rawData)
+//                            datas.append(model)
+//                        }
+
+                        completion(datas: datas, error: nil)
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 802, userInfo: nil)
+
+                        completion(datas: nil, error: error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+                    
+                    completion(datas: nil, error: response.result.error)
+                }
+                
+                indicator.hideIndicator()
+        }
+    }
+
+    static func postChatMessage(token: String, chatroomId: String, message: String, completion: (datas: SSChatViewModel?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.POST,
+            SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)/chats",
+            encoding: .JSON,
+            parameters: ["msg": message],
+            headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawDatas = response.result.value as? [String: AnyObject] {
+                    let datas: SSChatViewModel = SSChatViewModel(modelDict: rawDatas)
+
+                    completion(datas: datas, error: nil)
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 802, userInfo: nil)
+
+                    completion(datas: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(datas: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
         }
     }
 }

@@ -11,13 +11,23 @@ import UIKit
 class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var viewChatCoachmark: SSChatCoachmarkView!
+
     @IBOutlet var tableViewChat: UITableView!
+    @IBOutlet var constTableViewChatTopToSuper: NSLayoutConstraint!
+    @IBOutlet var constTableViewChatTopToViewRequest: NSLayoutConstraint!
+
     @IBOutlet var viewInputBar: UIView!
     @IBOutlet var tfInput: UITextField!
     @IBOutlet var constInputBarBottomToSuper: NSLayoutConstraint!
 
+    @IBOutlet var viewRequest: UIView!
+    @IBOutlet var lbRequestMeet: UILabel!
+    @IBOutlet var btnRequestMeet: UIButton!
+
     var barButtonItems: SSNavigationBarItems!
 
+    var chatRoomId: String?
+    var ssomType: SSType = .SSOM
     var messages: [SSChatViewModel] = [SSChatViewModel]()
 
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +99,26 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.registerForKeyboardNotifications()
 
         self.showCoachmarkView()
+
+        self.loadData()
+    }
+
+    func loadData() {
+        if let token = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
+            if let roomId = self.chatRoomId {
+                SSNetworkAPIClient.getChatMessages(token, chatroomId: roomId, completion: { [unowned self] (datas, error) in
+                    if let err = error {
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                    } else {
+                        if let messages = datas {
+                            self.messages = messages
+
+                            self.tableViewChat.reloadData()
+                        }
+                    }
+                })
+            }
+        }
     }
 
     func registerForKeyboardNotifications() -> Void {
@@ -103,6 +133,50 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func tapHeart() {
         print("tapped heart!!")
+
+        SSAlertController.alertTwoButton(title: "만남", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
+
+            UIView.animateWithDuration(0.5, animations: {
+                self.constTableViewChatTopToSuper.active = false
+                self.constTableViewChatTopToViewRequest.active = true
+
+                self.view.layoutIfNeeded()
+            })
+            }) { (action) in
+                //
+        }
+    }
+
+    @IBAction func tapRequest(sender: AnyObject) {
+        SSAlertController.alertTwoButton(title: "알림", message: "만남 취소 시 하트 1개가 소모됩니다.\n만남을 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
+
+            UIView.animateWithDuration(0.5, animations: {
+                self.constTableViewChatTopToViewRequest.active = false
+                self.constTableViewChatTopToSuper.active = true
+
+                self.view.layoutIfNeeded()
+            })
+            }) { (action) in
+                //
+        }
+    }
+    
+    @IBAction func tapSendMessage(sender: AnyObject) {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.postChatMessage(token, chatroomId: self.chatRoomId!, message: self.tfInput.text!, completion: { (datas, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                } else {
+                    if let newDatas = datas {
+                        self.messages.append(newDatas)
+
+                        self.tableViewChat.reloadData()
+                    }
+                }
+            })
+        }
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -122,19 +196,22 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count == 0 ? 1 : self.messages.count
+        return self.messages.count == 0 ? 1 : self.messages.count + 1
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
-            // FIXME: need to change the ssom type
-            cell.configView(SSType.SSOSEYO)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell")
+//        if indexPath.row == 0 {
+            if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
+                cell.configView(self.ssomType)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell")
 
-            return cell!
-        }
+                return cell!
+            }
+//        } else {
+//
+//        }
     }
 
 // MARK: - Keyboard show & hide event
@@ -142,12 +219,20 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let info = notification.userInfo {
             if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
 
-                self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
+                UIView.animateWithDuration(0.5, animations: {
+                    self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
+
+                    self.view.layoutIfNeeded()
+                })
             }
         }
     }
 
     func keyboardWillHide(notification: NSNotification) -> Void {
-        self.constInputBarBottomToSuper.constant = 0
+        UIView.animateWithDuration(0.5) {
+            self.constInputBarBottomToSuper.constant = 0
+
+            self.view.layoutIfNeeded()
+        }
     }
 }

@@ -28,6 +28,7 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var chatRoomId: String?
     var ssomType: SSType = .SSOM
+    var partnerImageUrl: String?
     var messages: [SSChatViewModel] = [SSChatViewModel]()
 
     required init?(coder aDecoder: NSCoder) {
@@ -93,6 +94,7 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func initView() {
         self.tableViewChat.registerNib(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
+        self.tableViewChat.registerNib(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
 
         (self.tableViewChat as UIScrollView).delegate = self
 
@@ -112,6 +114,10 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     } else {
                         if let messages = datas {
                             self.messages = messages
+
+                            if self.messages.count > 0 {
+
+                            }
 
                             self.tableViewChat.reloadData()
                         }
@@ -163,19 +169,25 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func tapSendMessage(sender: AnyObject) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
-            SSNetworkAPIClient.postChatMessage(token, chatroomId: self.chatRoomId!, message: self.tfInput.text!, completion: { (datas, error) in
-                if let err = error {
-                    print(err.localizedDescription)
-
-                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                } else {
-                    if let newDatas = datas {
-                        self.messages.append(newDatas)
-
-                        self.tableViewChat.reloadData()
-                    }
+            if let message = self.tfInput.text {
+                var lastTimestamp = Int(NSDate().timeIntervalSince1970)
+                if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
+                    lastTimestamp = Int(timestamp)
                 }
-            })
+                SSNetworkAPIClient.postChatMessage(token, chatroomId: self.chatRoomId!, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                    } else {
+                        if let newDatas = datas {
+                            self.messages.append(newDatas)
+
+                            self.tableViewChat.reloadData()
+                        }
+                    }
+                })
+            }
         }
     }
 
@@ -199,19 +211,40 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return self.messages.count == 0 ? 1 : self.messages.count + 1
     }
 
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return indexPath.row == 0 ? 46 : 61
+    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        if indexPath.row == 0 {
+        if indexPath.row == 0 {
             if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
                 cell.configView(self.ssomType)
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell")
+                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatStartingTableCell
+                cell!.configView(self.ssomType)
+                return cell!
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as? SSChatMessageTableCell {
+                cell.ssomType = self.ssomType
+                cell.partnerImageUrl = self.partnerImageUrl
+                cell.configView(self.messages[indexPath.row-1])
+
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatMessageTableCell
+                cell!.ssomType = self.ssomType
+                cell!.partnerImageUrl = self.partnerImageUrl
+                cell!.configView(self.messages[indexPath.row-1])
 
                 return cell!
             }
-//        } else {
-//
-//        }
+        }
     }
 
 // MARK: - Keyboard show & hide event
@@ -223,6 +256,8 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
 
                     self.view.layoutIfNeeded()
+
+                    self.tableViewChat.scrollToRowAtIndexPath(NSIndexPath(forRow: self.messages.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                 })
             }
         }

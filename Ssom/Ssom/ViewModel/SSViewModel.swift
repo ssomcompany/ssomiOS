@@ -9,7 +9,7 @@
 import Foundation
 
 public class SSViewModel {
-    var category: String
+    var category: String!
     var content: String!
     var imageUrl: String!
     var latitude: Double
@@ -40,8 +40,12 @@ public class SSViewModel {
     }
 
     init(modelDict:[String: AnyObject!]) {
-        self.category   = modelDict["category"] as! String
-        self.content    = String.encodeSpaceCharacter(modelDict["content"] as! String).stringByRemovingPercentEncoding
+        if let category = modelDict["category"] as? String {
+            self.category = category
+        }
+        if let content = modelDict["content"] as? String {
+            self.content  = String.encodeSpaceCharacter(content).stringByRemovingPercentEncoding
+        }
         if let imageUrl = modelDict["imageUrl"] as? String {
             self.imageUrl = imageUrl
         }
@@ -70,18 +74,29 @@ public class SSViewModel {
         } else {
             self.minAge = 0
         }
-        self.postId     = modelDict["postId"] as! String
-        let ssomType = modelDict["ssomType"] as! String
-        self.ssomType   = SSType(rawValue: ssomType)!
-        self.userId     = modelDict["userId"] as! String
+        if let postId = modelDict["postId"] as? String {
+            self.postId = postId
+        } else {
+            self.postId = ""
+        }
+        if let ssomType = modelDict["ssomType"] as? String {
+            self.ssomType = SSType(rawValue: ssomType)!
+        } else {
+            self.ssomType = .SSOM
+        }
+        if let userId = modelDict["userId"] as? String {
+            self.userId = userId
+        } else {
+            self.userId = ""
+        }
         if let userCount: Int = modelDict["userCount"] as? Int {
             self.userCount = userCount
         } else {
             self.userCount = 0
         }
 
-        if let createdDatetime = modelDict["postId"] as? Int {
-            self.createdDatetime = NSDate(timeIntervalSinceNow: NSTimeInterval(createdDatetime))
+        if let createdDatetime = modelDict["createdTimestamp"] as? Int {
+            self.createdDatetime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDatetime)/1000.0)
         } else {
             self.createdDatetime = NSDate()
         }

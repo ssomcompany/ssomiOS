@@ -11,7 +11,7 @@ import UIKit
 protocol SSDetailViewDelegate {
     func closeDetailView()
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
 }
 
 class SSDetailView: UIView {
@@ -92,7 +92,7 @@ class SSDetailView: UIView {
                     SSAlertController.showAlertConfirm(title: "", message: "내가 등록한 쏨입니다!", completion: nil)
                 } else {
 
-                    guard let _ = self.delegate?.doSsom(self.ssomType) else {
+                    guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl) else {
                         NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
 
                         return

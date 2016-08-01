@@ -40,15 +40,18 @@ public struct Util {
         let nowDateComponents = userCalendar.components(calendarComponents, fromDate: nowDate)
 
         let dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "kr_KR")
+        dateFormatter.AMSymbol = "오전"
+        dateFormatter.PMSymbol = "오후"
         if dateDifference.day == 0 {
-            dateFormatter.dateFormat = "hh:mm"
+            dateFormatter.dateFormat = "a h:mm"
             return dateFormatter.stringFromDate(date)
         } else {
             if dateComponents.year == nowDateComponents.year {
-                dateFormatter.dateFormat = "MM월 dd일"
+                dateFormatter.dateFormat = "M월 d일"
                 return dateFormatter.stringFromDate(date)
             } else {
-                dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                dateFormatter.dateFormat = "yyyy년 M월 d일"
                 return dateFormatter.stringFromDate(date)
             }
         }

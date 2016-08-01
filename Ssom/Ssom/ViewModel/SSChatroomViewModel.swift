@@ -13,6 +13,7 @@ public struct SSChatroomViewModel {
     var ownerUserId: String             // ownerId
     var participantUserId: String       // participantId
     var createdDateTime: NSDate         // createdTimestamp
+    var unreadCount: Int
     var ssomViewModel: SSViewModel
 
     init() {
@@ -20,6 +21,7 @@ public struct SSChatroomViewModel {
         self.ownerUserId = ""
         self.participantUserId = ""
         self.createdDateTime = NSDate()
+        self.unreadCount = 0
         self.ssomViewModel = SSViewModel()
     }
 
@@ -27,7 +29,11 @@ public struct SSChatroomViewModel {
         if let chatroomId = modelDict["id"] as? String {
             self.chatroomId = chatroomId
         } else {
-            self.chatroomId = ""
+            if let chatroomId = modelDict["id"] as? Int {
+                self.chatroomId = String(chatroomId)
+            } else {
+                self.chatroomId = ""
+            }
         }
 
         if let ownerUserId = modelDict["ownerId"] as? String {
@@ -46,6 +52,12 @@ public struct SSChatroomViewModel {
             self.createdDateTime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDateTime)/1000.0)
         } else {
             self.createdDateTime = NSDate()
+        }
+
+        if let unreadCount = modelDict["unreadCount"] as? Int {
+            self.unreadCount = unreadCount
+        } else {
+            self.unreadCount = 0
         }
 
         self.ssomViewModel = SSViewModel(modelDict: modelDict)

@@ -155,6 +155,7 @@ class SSChatListViewController : UIViewController, UITableViewDelegate, UITableV
                     if let model: SSChatroomViewModel = self.datas[indexPath.row] {
                         vc.chatRoomId = model.chatroomId
                         vc.ssomType = model.ssomViewModel.ssomType
+                        vc.partnerImageUrl = model.ssomViewModel.imageUrl
                     }
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

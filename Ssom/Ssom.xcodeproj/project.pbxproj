@@ -287,6 +287,7 @@
 		974C9DBE1C6B5B8B00E17A2B /* SSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */; };
 		976031BB1D4CBFB3004B7392 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */; };
 		976031BD1D4D0AFD004B7392 /* SSUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976031BC1D4D0AFD004B7392 /* SSUserModel.swift */; };
+		976031BF1D4E3BBA004B7392 /* SSChatMessageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976031BE1D4E3BBA004B7392 /* SSChatMessageTableCell.swift */; };
 		9764D9DF1D35FF6400BBE4C6 /* SSFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D9DB1D35FF6400BBE4C6 /* SSFilterViewModel.swift */; };
 		9764D9E01D35FF6400BBE4C6 /* SSMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D9DC1D35FF6400BBE4C6 /* SSMainViewModel.swift */; };
 		9764D9E11D35FF6400BBE4C6 /* SSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D9DD1D35FF6400BBE4C6 /* SSViewModel.swift */; };
@@ -321,7 +322,7 @@
 		97B2D1691D489F1A00B5EBD2 /* SSChatCompletionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D1681D489F1A00B5EBD2 /* SSChatCompletionView.xib */; };
 		97B2D16B1D48A15100B5EBD2 /* SSChatMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16A1D48A15100B5EBD2 /* SSChatMapView.xib */; };
 		97B2D16D1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */; };
-		97B2D16F1D48A4D600B5EBD2 /* SSChatMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */; };
+		97B2D16F1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D16E1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib */; };
 		97B2D1711D48A51B00B5EBD2 /* SSChatListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */; };
 		97B2D1731D4A219A00B5EBD2 /* SSChatroomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1721D4A219A00B5EBD2 /* SSChatroomViewModel.swift */; };
 		97B2D1751D4A21AC00B5EBD2 /* SSChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1741D4A21AC00B5EBD2 /* SSChatViewModel.swift */; };
@@ -652,6 +653,7 @@
 		974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSDetailView.xib; path = SsomView/SSDetailView.xib; sourceTree = "<group>"; };
 		976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Nib.swift"; path = "Ssom/3rdLib/UIView+Nib.swift"; sourceTree = "<group>"; };
 		976031BC1D4D0AFD004B7392 /* SSUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSUserModel.swift; path = ViewModel/SSUserModel.swift; sourceTree = "<group>"; };
+		976031BE1D4E3BBA004B7392 /* SSChatMessageTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatMessageTableCell.swift; path = Chat/SSChatMessageTableCell.swift; sourceTree = "<group>"; };
 		9764D9DB1D35FF6400BBE4C6 /* SSFilterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSFilterViewModel.swift; path = ViewModel/SSFilterViewModel.swift; sourceTree = "<group>"; };
 		9764D9DC1D35FF6400BBE4C6 /* SSMainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMainViewModel.swift; path = ViewModel/SSMainViewModel.swift; sourceTree = "<group>"; };
 		9764D9DD1D35FF6400BBE4C6 /* SSViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSViewModel.swift; path = ViewModel/SSViewModel.swift; sourceTree = "<group>"; };
@@ -687,7 +689,7 @@
 		97B2D1681D489F1A00B5EBD2 /* SSChatCompletionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatCompletionView.xib; path = Chat/SSChatCompletionView.xib; sourceTree = "<group>"; };
 		97B2D16A1D48A15100B5EBD2 /* SSChatMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatMapView.xib; path = Chat/SSChatMapView.xib; sourceTree = "<group>"; };
 		97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatStartingTableCell.xib; path = Chat/SSChatStartingTableCell.xib; sourceTree = "<group>"; };
-		97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatMessageView.xib; path = Chat/SSChatMessageView.xib; sourceTree = "<group>"; };
+		97B2D16E1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatMessageTableCell.xib; path = Chat/SSChatMessageTableCell.xib; sourceTree = "<group>"; };
 		97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatListTableCell.xib; path = Chat/SSChatListTableCell.xib; sourceTree = "<group>"; };
 		97B2D1721D4A219A00B5EBD2 /* SSChatroomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatroomViewModel.swift; path = ViewModel/SSChatroomViewModel.swift; sourceTree = "<group>"; };
 		97B2D1741D4A21AC00B5EBD2 /* SSChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatViewModel.swift; path = ViewModel/SSChatViewModel.swift; sourceTree = "<group>"; };
@@ -1065,8 +1067,8 @@
 				973003441BFCE06400734D8D /* SSPhotoView.xib */,
 				973003421BFCDF0500734D8D /* SSPhotoView.swift */,
 				973003481C0B4F4D00734D8D /* SSWriteViewController.swift */,
-				974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */,
 				977DBA731D2B82A400CFD98F /* SSScrollView.swift */,
+				974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */,
 				974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */,
 				9730034A1C0F38EB00734D8D /* SSFilterView.swift */,
 				9730034C1C1091E700734D8D /* SSFilterView.xib */,
@@ -1187,7 +1189,8 @@
 				97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */,
 				97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */,
 				97B2D1781D4B535A00B5EBD2 /* SSChatStartingTableCell.swift */,
-				97B2D16E1D48A4D600B5EBD2 /* SSChatMessageView.xib */,
+				97B2D16E1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib */,
+				976031BE1D4E3BBA004B7392 /* SSChatMessageTableCell.swift */,
 				978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */,
 				978DDB7A1CCBE68B00567169 /* SSChatCoachmarkView.swift */,
 				97B2D1681D489F1A00B5EBD2 /* SSChatCompletionView.xib */,
@@ -1599,7 +1602,7 @@
 				974C9CC61C6B447000E17A2B /* chatNotiBg@3x.png in Resources */,
 				974C9C9E1C6B447000E17A2B /* bigGreen@3x.png in Resources */,
 				97B2D1691D489F1A00B5EBD2 /* SSChatCompletionView.xib in Resources */,
-				97B2D16F1D48A4D600B5EBD2 /* SSChatMessageView.xib in Resources */,
+				97B2D16F1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib in Resources */,
 				974C9D581C6B447000E17A2B /* pointWriteLine@2x.png in Resources */,
 				974C9DA81C6B447000E17A2B /* treshIcon@2x.png in Resources */,
 				974C9DBC1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard in Resources */,
@@ -1784,6 +1787,7 @@
 				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
 				97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */,
 				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,
+				976031BF1D4E3BBA004B7392 /* SSChatMessageTableCell.swift in Sources */,
 				9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */,
 				9787ACE41CFDF26F001CF18C /* SSMenuViewController.swift in Sources */,
 				9742910D1BF25FC600609974 /* SSListTableViewCell.swift in Sources */,

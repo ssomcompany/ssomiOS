@@ -346,10 +346,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
-    func doSsom(ssomType: SSType) {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            if postId != "" {
+                SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
+
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                    } else {
+                        if let createdChatroomId = chatroomId {
+                            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                            let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+                            vc.ssomType = ssomType
+                            vc.chatRoomId = createdChatroomId
+                            vc.partnerImageUrl = partnerImageUrl
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                })
+            }
+        }
     }
 }
 

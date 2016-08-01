@@ -90,6 +90,8 @@ class SSChatListTableCell: UITableViewCell {
         }
         self.lbSsomAgePeople.text = memberInfoString
 
+        self.lbNewMessageCount.text = "\(model.unreadCount)"
+
         if let distance = model.ssomViewModel.distance where distance != 0 {
             self.lbDistance.text = Util.getDistanceString(distance)
         } else {

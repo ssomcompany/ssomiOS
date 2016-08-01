@@ -254,6 +254,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.distanceLabel.text = Util.getDistanceString(distance)
         }
 
+        cell.updatedTimeLabel.text = Util.getDateString(model.createdDatetime)
+
         cell.delegate = self
 
         return cell;
@@ -306,9 +308,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
-    func doSsom(ssomType: SSType) {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
         let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
         let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+        vc.ssomType = ssomType
+        vc.partnerImageUrl = partnerImageUrl
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

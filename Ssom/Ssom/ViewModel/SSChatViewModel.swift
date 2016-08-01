@@ -8,17 +8,24 @@
 
 import Foundation
 
+enum SSChatMessageType: String {
+    case NORMAL = "NORMAL"
+    case UNKNOWN = "UNKNOWN"
+}
+
 public struct SSChatViewModel {
     var fromUserId: String
     var toUserId: String
     var message: String
     var messageDateTime: NSDate
+    var messageType: SSChatMessageType
 
     init() {
         self.fromUserId = ""
         self.toUserId = ""
         self.message = ""
         self.messageDateTime = NSDate()
+        self.messageType = .NORMAL
     }
 
     init(modelDict: [String: AnyObject]) {
@@ -34,7 +41,7 @@ public struct SSChatViewModel {
             self.toUserId = ""
         }
 
-        if let message = modelDict["message"] as? String {
+        if let message = modelDict["msg"] as? String {
             self.message = message
         } else {
             self.message = ""
@@ -44,6 +51,12 @@ public struct SSChatViewModel {
             self.messageDateTime = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp)/1000.0)
         } else {
             self.messageDateTime = NSDate()
+        }
+
+        if let messageType = modelDict["msgType"] as? String {
+            self.messageType = SSChatMessageType(rawValue: messageType)!
+        } else {
+            self.messageType = .UNKNOWN
         }
     }
 }

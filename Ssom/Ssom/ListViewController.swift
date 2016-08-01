@@ -241,6 +241,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
         }
         cell.memberInfoLabel.text = memberInfoString
+        cell.memberInfoLabel.textColor = self.mainViewModel.isSell ? UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1) : UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
 
         if let distance = model.distance where distance != 0 {
             cell.distanceLabel.text = Util.getDistanceString(distance)

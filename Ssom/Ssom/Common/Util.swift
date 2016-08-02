@@ -43,7 +43,7 @@ public struct Util {
         dateFormatter.locale = NSLocale(localeIdentifier: "kr_KR")
         dateFormatter.AMSymbol = "오전"
         dateFormatter.PMSymbol = "오후"
-        if dateDifference.day == 0 {
+        if dateDifference.day == nowDateComponents.day {
             dateFormatter.dateFormat = "a h:mm"
             return dateFormatter.stringFromDate(date)
         } else {

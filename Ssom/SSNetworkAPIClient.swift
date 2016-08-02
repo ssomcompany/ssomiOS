@@ -76,7 +76,7 @@ public struct SSNetworkAPIClient {
                         completion(error: nil)
                     } else {
                         let failureReason = "Response status code was unacceptable: \(response.response!.statusCode)"
-                        let err: NSError = Error.errorWithCode(.StatusCodeValidationFailed, failureReason: failureReason)
+                        let err: NSError = NSError(domain: "com.ssom.error.UnacceptableStatusCode", code: 401, userInfo: [NSLocalizedDescriptionKey: failureReason])
 
                         completion(error: err)
                     }
@@ -240,7 +240,7 @@ public struct SSNetworkAPIClient {
 
                     completion(model: userModel, error: nil)
                 } else {
-                    let error: NSError = NSError(domain: "com.ssom.error.NoUserData", code: 700, userInfo: nil)
+                    let error: NSError = NSError(domain: "com.ssom.error.NoUserData", code: 701, userInfo: nil)
 
                     completion(model: nil, error: error)
                 }
@@ -355,22 +355,44 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
 
+                print("request is : \(response.request)")
+
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    if let rawDatas = response.result.value as? [[String: AnyObject]] {
-                        var datas: [SSChatViewModel] = [SSChatViewModel]()
+                    if let rawDatas = response.result.value as? [String: AnyObject] {
 
-                        for rawData: [String: AnyObject] in rawDatas {
-                            let model: SSChatViewModel = SSChatViewModel(modelDict: rawData)
-                            datas.append(model)
+                        if rawDatas.keys.contains("err") {
+                            var errorCode = 501
+                            if let err = rawDatas["err"] as? Int {
+                                errorCode = err
+                            }
+                            let error = NSError(domain: "com.ssom.error.ServeError.ListChatMessages", code: errorCode, userInfo: [NSLocalizedDescriptionKey: rawDatas["result"] as! String])
+
+                            completion(datas: nil, error: error)
+                        } else {
+                            let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 803, userInfo: nil)
+
+                            completion(datas: nil, error: error)
                         }
 
-                        completion(datas: datas, error: nil)
                     } else {
-                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 802, userInfo: nil)
 
-                        completion(datas: nil, error: error)
+                        if let rawDatas = response.result.value as? [[String: AnyObject]] {
+                            var datas: [SSChatViewModel] = [SSChatViewModel]()
+
+                            for rawData: [String: AnyObject] in rawDatas {
+                                let model: SSChatViewModel = SSChatViewModel(modelDict: rawData)
+                                datas.append(model)
+                            }
+
+                            completion(datas: datas, error: nil)
+                        } else {
+                            let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 803, userInfo: nil)
+                            
+                            completion(datas: nil, error: error)
+                        }
+
                     }
                 } else {
                     print("Response Error : \(response.result.error)")
@@ -399,7 +421,7 @@ public struct SSNetworkAPIClient {
                 if let rawDatas = response.result.value as? [String: AnyObject] {
 
                     if rawDatas.keys.contains("err") {
-                        var errorCode = 500
+                        var errorCode = 501
                         if let err = rawDatas["err"] as? Int {
                             errorCode = err
                         }
@@ -412,7 +434,7 @@ public struct SSNetworkAPIClient {
                         completion(datas: datas, error: nil)
                     }
                 } else {
-                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 802, userInfo: nil)
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 804, userInfo: nil)
 
                     completion(datas: nil, error: error)
                 }

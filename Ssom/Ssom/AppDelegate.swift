@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
     var window: UIWindow?
     var drawerController: SSDrawerViewController?
+    var isDrawable: Bool = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -76,5 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         print("Drawer view controller did update to state `\(paneState)` for direction `\(direction)`")
     }
 
+    func drawerViewController(drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+        return self.isDrawable
+    }
 }
 

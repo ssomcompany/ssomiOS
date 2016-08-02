@@ -88,6 +88,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -310,10 +314,26 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
-        vc.ssomType = ssomType
-        vc.partnerImageUrl = partnerImageUrl
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            if postId != "" {
+                SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
+
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                    } else {
+                        if let createdChatroomId = chatroomId {
+                            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                            let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
+                            vc.ssomType = ssomType
+                            vc.chatRoomId = createdChatroomId
+                            vc.partnerImageUrl = partnerImageUrl
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                })
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSWriteViewController: UIViewController, UITextViewDelegate
+class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var barButtonItems: SSNavigationBarItems!

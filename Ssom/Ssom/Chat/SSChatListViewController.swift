@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class SSChatListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, SSChatListTableCellDelegate, CLLocationManagerDelegate, SSPhotoViewDelegate {
+class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UITableViewDataSource, SSChatListTableCellDelegate, CLLocationManagerDelegate, SSPhotoViewDelegate {
 
     var locationManager: CLLocationManager!
     var nowLocationCoordinate2D: CLLocationCoordinate2D!

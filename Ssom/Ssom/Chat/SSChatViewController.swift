@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var viewChatCoachmark: SSChatCoachmarkView!
 
@@ -100,8 +100,6 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         self.registerForKeyboardNotifications()
 
-        self.showCoachmarkView()
-
         self.loadData()
     }
 
@@ -116,7 +114,9 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.messages = messages
 
                             if self.messages.count > 0 {
-
+                                
+                            } else {
+                                self.showCoachmarkView()
                             }
 
                             self.tableViewChat.reloadData()
@@ -174,19 +174,22 @@ class SSChatViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
                     lastTimestamp = Int(timestamp)
                 }
-                SSNetworkAPIClient.postChatMessage(token, chatroomId: self.chatRoomId!, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
-                    if let err = error {
-                        print(err.localizedDescription)
 
-                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                    } else {
-                        if let newDatas = datas {
-                            self.messages.append(newDatas)
+                if let roomId = self.chatRoomId {
+                    SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
+                        if let err = error {
+                            print(err.localizedDescription)
 
-                            self.tableViewChat.reloadData()
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        } else {
+                            if let newDatas = datas {
+                                self.messages.append(newDatas)
+
+                                self.tableViewChat.reloadData()
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
         }
     }

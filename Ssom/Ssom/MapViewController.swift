@@ -99,6 +99,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         self.loadingData()
     }
 
@@ -243,11 +247,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
 // MARK: - GMSMapViewDelegate
-    func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
+
+    func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {
         locationManager.stopUpdatingLocation()
     }
 
-    func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
+    func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
         print("now finished to move the map camera! : \(position)")
 
         var index: Int = 0;
@@ -268,7 +273,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
 
-    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.mainScreen().bounds
         self.scrollDetailView.delegate = self

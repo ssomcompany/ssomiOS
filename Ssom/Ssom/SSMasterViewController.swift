@@ -22,6 +22,10 @@ class SSMasterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         self.setNavigationBarView()
     }
 

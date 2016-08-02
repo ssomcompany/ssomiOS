@@ -35,7 +35,7 @@ public struct Util {
 
         let userCalendar = NSCalendar.currentCalendar()
         let calendarComponents: NSCalendarUnit = [.Year, .Day]
-        let dateDifference = userCalendar.components(calendarComponents, fromDate: date, toDate: nowDate, options: [])
+//        let dateDifference = userCalendar.components(calendarComponents, fromDate: date, toDate: nowDate, options: [])
         let dateComponents = userCalendar.components(calendarComponents, fromDate: date)
         let nowDateComponents = userCalendar.components(calendarComponents, fromDate: nowDate)
 
@@ -43,7 +43,7 @@ public struct Util {
         dateFormatter.locale = NSLocale(localeIdentifier: "kr_KR")
         dateFormatter.AMSymbol = "오전"
         dateFormatter.PMSymbol = "오후"
-        if dateDifference.day == nowDateComponents.day {
+        if dateComponents.day == nowDateComponents.day {
             dateFormatter.dateFormat = "a h:mm"
             return dateFormatter.stringFromDate(date)
         } else {

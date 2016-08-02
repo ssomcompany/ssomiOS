@@ -82,14 +82,16 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k0-s1-1ct" userLabel="Bottom Info View">
-                                <rect key="frame" x="23" y="445" width="423" height="69"/>
+                                <rect key="frame" x="23" y="444" width="423" height="69"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filterBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="rv6-Ko-JfB" userLabel="Bg Image View">
+                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-ru-cnK">
                                         <rect key="frame" x="1" y="0.0" width="422" height="69"/>
-                                    </imageView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQd-kY-OEr" userLabel="Filter Button">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="69" id="G5y-Bj-qYw"/>
                                             <constraint firstAttribute="width" constant="69" id="o1B-tn-ukP"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -99,7 +101,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초, 2명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Om7-AB-KOj">
-                                        <rect key="frame" x="90" y="0.0" width="303" height="69"/>
+                                        <rect key="frame" x="90" y="24" width="303" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -107,18 +109,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="rv6-Ko-JfB" secondAttribute="trailing" id="44i-KG-PbJ"/>
-                                    <constraint firstItem="rv6-Ko-JfB" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" constant="1" id="7yw-tq-7pP"/>
                                     <constraint firstAttribute="bottom" secondItem="SQd-kY-OEr" secondAttribute="bottom" id="99r-Dp-af4"/>
-                                    <constraint firstAttribute="bottom" secondItem="Om7-AB-KOj" secondAttribute="bottom" id="9DQ-MG-ijC"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pu5-ru-cnK" secondAttribute="bottom" id="JHf-RW-Qm7"/>
+                                    <constraint firstItem="Om7-AB-KOj" firstAttribute="centerY" secondItem="SQd-kY-OEr" secondAttribute="centerY" id="KLZ-VQ-4Fl"/>
                                     <constraint firstItem="SQd-kY-OEr" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" id="MZT-ih-RWG"/>
-                                    <constraint firstItem="SQd-kY-OEr" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="aEt-OO-el3"/>
+                                    <constraint firstItem="Pu5-ru-cnK" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="Zck-of-CeJ"/>
                                     <constraint firstAttribute="height" constant="69" id="afY-dF-BxM"/>
                                     <constraint firstItem="Om7-AB-KOj" firstAttribute="leading" secondItem="SQd-kY-OEr" secondAttribute="trailing" constant="21" id="kj2-Z8-il9"/>
+                                    <constraint firstItem="Pu5-ru-cnK" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" constant="1" id="kvu-tk-2sb"/>
                                     <constraint firstAttribute="trailing" secondItem="Om7-AB-KOj" secondAttribute="trailing" constant="30" id="nmB-ZH-lIz"/>
-                                    <constraint firstAttribute="bottom" secondItem="rv6-Ko-JfB" secondAttribute="bottom" id="oJK-jc-7T0"/>
-                                    <constraint firstItem="Om7-AB-KOj" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="uUM-9P-Ynt"/>
-                                    <constraint firstItem="rv6-Ko-JfB" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="yMQ-Ai-KWW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pu5-ru-cnK" secondAttribute="trailing" id="u1C-SL-CMF"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCj-wE-maY">
@@ -133,7 +133,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="f3i-A6-4bp"/>
+                                    <action selector="tapWriteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oQe-YD-Yus"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
@@ -161,7 +161,7 @@
                             <constraint firstItem="puq-gM-UxI" firstAttribute="bottom" secondItem="Y4K-Nh-GA4" secondAttribute="bottom" id="5pN-Ss-kD6"/>
                             <constraint firstItem="puq-gM-UxI" firstAttribute="leading" secondItem="VC7-ei-KcX" secondAttribute="trailing" id="6aJ-zk-nYm"/>
                             <constraint firstItem="VC7-ei-KcX" firstAttribute="bottom" secondItem="F59-tD-qIQ" secondAttribute="bottom" id="AFl-np-557"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="bottom" constant="22" id="Ay6-7D-5kX"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="bottom" constant="23" id="Ay6-7D-5kX"/>
                             <constraint firstItem="puq-gM-UxI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BUB-9t-wde"/>
                             <constraint firstItem="Y4K-Nh-GA4" firstAttribute="width" secondItem="puq-gM-UxI" secondAttribute="width" id="FHy-Vq-2v6"/>
                             <constraint firstItem="2ul-5f-kgq" firstAttribute="top" secondItem="VC7-ei-KcX" secondAttribute="bottom" id="Fgr-4o-IOg"/>
@@ -215,12 +215,18 @@
                     <connections>
                         <outlet property="btnIPay" destination="VC7-ei-KcX" id="ZSa-sa-OCM"/>
                         <outlet property="btnYouPay" destination="puq-gM-UxI" id="V1F-Ej-WZH"/>
+                        <outlet property="constBottomInfoViewHeight" destination="afY-dF-BxM" id="oTC-5c-P26"/>
+                        <outlet property="constBottomInfoViewTrailingToSuper" destination="zgg-BX-9nu" id="Lkc-Ml-V3i"/>
                         <outlet property="imageIPayButtonLineView" destination="F59-tD-qIQ" id="Aec-Y3-wYL"/>
                         <outlet property="imageYouPayButtonLineView" destination="Y4K-Nh-GA4" id="VoP-kC-mth"/>
+                        <outlet property="lbFilteredAgePeople" destination="Om7-AB-KOj" id="rm2-vL-6Mt"/>
                         <outlet property="mainView" destination="TOk-Md-hmy" id="aGJ-vw-d5K"/>
                         <outlet property="myLocationButton" destination="1Me-Mu-v0q" id="SSr-Eg-NK7"/>
                         <outlet property="navigationItem" destination="JzG-2m-bAY" id="iDJ-wG-R6L"/>
+                        <outlet property="viewBottomInfo" destination="3k0-s1-1ct" id="TJE-qL-He7"/>
+                        <outlet property="viewFilterBackground" destination="Pu5-ru-cnK" id="4O7-QZ-LCm"/>
                         <outlet property="writeButton" destination="aCj-wE-maY" id="dyw-E3-jIZ"/>
+                        <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="CUJ-52-fKz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -300,12 +306,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
                                 <rect key="frame" x="23" y="444" width="424" height="69"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filterBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="58Y-zs-7JZ" userLabel="Bg Image View">
+                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-aR-jK1">
                                         <rect key="frame" x="1" y="0.0" width="423" height="68"/>
-                                    </imageView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFS-Jw-YTg" userLabel="Filter Button">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="69" id="UyD-Dv-fDx"/>
                                             <constraint firstAttribute="width" constant="69" id="pNy-1G-bUB"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -315,7 +323,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초, 2명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNy-b2-vKz">
-                                        <rect key="frame" x="90" y="0.0" width="304" height="69"/>
+                                        <rect key="frame" x="90" y="24" width="304" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -324,16 +332,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="vNy-b2-vKz" secondAttribute="trailing" constant="30" id="17Y-cu-uTd"/>
-                                    <constraint firstAttribute="trailing" secondItem="58Y-zs-7JZ" secondAttribute="trailing" id="7mb-zx-fXi"/>
-                                    <constraint firstAttribute="bottom" secondItem="vNy-b2-vKz" secondAttribute="bottom" id="GyY-Fh-F3E"/>
-                                    <constraint firstItem="tFS-Jw-YTg" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="Kwe-q2-dGa"/>
-                                    <constraint firstAttribute="bottom" secondItem="58Y-zs-7JZ" secondAttribute="bottom" constant="1" id="MN9-Dg-IRp"/>
-                                    <constraint firstAttribute="bottom" secondItem="tFS-Jw-YTg" secondAttribute="bottom" id="MW8-5c-GaZ"/>
-                                    <constraint firstItem="58Y-zs-7JZ" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="NhH-OG-Ogj"/>
+                                    <constraint firstAttribute="bottom" secondItem="sOY-aR-jK1" secondAttribute="bottom" constant="1" id="6Mx-ns-upr"/>
+                                    <constraint firstItem="sOY-aR-jK1" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="9Pr-vj-vmm"/>
+                                    <constraint firstAttribute="bottom" secondItem="tFS-Jw-YTg" secondAttribute="bottom" id="Dwz-BT-lMm"/>
+                                    <constraint firstItem="sOY-aR-jK1" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" constant="1" id="SPy-xQ-J7b"/>
                                     <constraint firstItem="vNy-b2-vKz" firstAttribute="leading" secondItem="tFS-Jw-YTg" secondAttribute="trailing" constant="21" id="Vja-U8-cPD"/>
                                     <constraint firstItem="tFS-Jw-YTg" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" id="cIH-0S-vxE"/>
-                                    <constraint firstItem="vNy-b2-vKz" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="fNN-Ft-BKg"/>
-                                    <constraint firstItem="58Y-zs-7JZ" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" constant="1" id="tcK-Wq-8vW"/>
+                                    <constraint firstAttribute="trailing" secondItem="sOY-aR-jK1" secondAttribute="trailing" id="osG-mr-N9q"/>
+                                    <constraint firstItem="vNy-b2-vKz" firstAttribute="centerY" secondItem="tFS-Jw-YTg" secondAttribute="centerY" id="so0-hb-lsK"/>
                                     <constraint firstAttribute="height" constant="69" id="thr-AE-rmh"/>
                                 </constraints>
                             </view>
@@ -349,7 +355,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="8it-yK-IlM"/>
+                                    <action selector="tapWriteButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="IgM-ha-4lA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -401,10 +407,16 @@
                     <connections>
                         <outlet property="bottomInfoView" destination="4cE-r7-rmG" id="8hI-al-d6l"/>
                         <outlet property="btnIPay" destination="OM2-Da-teJ" id="JsT-p4-qgJ"/>
+                        <outlet property="btnWrite" destination="6oW-Xv-XcV" id="9hG-yZ-94B"/>
                         <outlet property="btnYouPay" destination="hYp-m4-vLX" id="Sjq-gE-zbw"/>
+                        <outlet property="constBottomInfoViewHeight" destination="thr-AE-rmh" id="D6T-K2-meq"/>
+                        <outlet property="constBottomInfoViewTrailingToSuper" destination="eBs-9R-XZG" id="NtA-lo-nSm"/>
                         <outlet property="iPayButtonBottomLineView" destination="qLP-u4-evS" id="qbG-Dz-ees"/>
+                        <outlet property="lbFilteredAgePeople" destination="vNy-b2-vKz" id="IuN-Oy-XaF"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
+                        <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
                         <outlet property="youPayButtonBottomLineView" destination="MFJ-b2-VZo" id="FtP-0C-Xjf"/>
+                        <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qE-7b-7m6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -972,7 +984,6 @@
         <image name="acceptButtonGreen.png" width="241" height="87"/>
         <image name="buttonCancel.png" width="137" height="49"/>
         <image name="camera.png" width="26" height="24"/>
-        <image name="filterBg.png" width="235" height="68"/>
         <image name="heartWhite" width="30" height="27"/>
         <image name="locationFound.png" width="55" height="55"/>
         <image name="mapShadow.png" width="621" height="115"/>
@@ -989,6 +1000,6 @@
         <image name="writePhotoArea.png" width="239" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f3i-A6-4bp"/>
+        <segue reference="R5c-a2-BYk"/>
     </inferredMetricsTieBreakers>
 </document>

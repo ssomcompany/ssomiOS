@@ -13,6 +13,12 @@ import SDWebImage
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var bottomInfoView: UIView!
+    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
+    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
+    @IBOutlet var viewFilterBackground: UIView!
+    @IBOutlet var lbFilteredAgePeople: UILabel!
+
+    @IBOutlet var btnWrite: UIButton!
 
     @IBOutlet var btnIPay: UIButton!
     @IBOutlet var iPayButtonBottomLineView: UIImageView!
@@ -54,11 +60,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func initView() {
 
+        self.needReload = false
+
         ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell")
 
         self.edgesForExtendedLayout = UIRectEdge.None
 
-        self.needReload = false
+        self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.height / 2
 
         self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
         self.btnIPay.layer.shadowOffset = CGSizeMake(0, 2)
@@ -92,6 +100,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+
+        self.btnWrite.transform = CGAffineTransformIdentity
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -131,9 +141,44 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func tapFilterButton(sender: AnyObject) {
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
-        self.filterView.frame = self.view.bounds
         self.filterView.delegate = self
+        self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
+        self.filterView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+
+        self.constBottomInfoViewHeight.constant = 283.0
+        self.constBottomInfoViewTrailingToSuper.constant = 64.0
+
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+
+            self.bottomInfoView.layoutIfNeeded()
+
+            self.lbFilteredAgePeople.alpha = 0.2
+            self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
+
+            self.filterView.alpha = 1.0
+
+        }) { (finish) in
+            
+            self.constBottomInfoViewHeight.constant = 69.0
+            self.constBottomInfoViewTrailingToSuper.constant = 154.0
+
+            self.lbFilteredAgePeople.alpha = 1.0
+            self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        }
+    }
+
+    @IBAction func tapWriteButton(sender: AnyObject) {
+
+        let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+
+        UIView.animateWithDuration(0.3, animations: {
+            self.btnWrite.transform = transform
+            }) { (finish) in
+                self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+        }
     }
 
 // MARK: private

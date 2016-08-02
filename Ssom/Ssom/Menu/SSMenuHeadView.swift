@@ -85,6 +85,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     @IBAction func tapMenuPush(sender: AnyObject) {
+        SSAlertController.showAlertConfirm(title: "Info", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
     }
 
     @IBAction func tapMenuHeart(sender: AnyObject) {

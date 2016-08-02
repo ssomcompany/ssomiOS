@@ -30,4 +30,8 @@ xcuserdata
 Podfile.lock
 *.xctimeline
 
+## AppCode
+.idea/
+
+## Cocoapods
 Ssom/Pods/

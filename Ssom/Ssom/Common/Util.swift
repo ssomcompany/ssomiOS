@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import SDWebImage
 
 public struct Util {
     static func convertScreenSize(isWidth:Bool, size:Float, fromWidth:CGFloat, fromHeight:CGFloat) -> CGFloat {
@@ -111,5 +112,24 @@ public struct Util {
 
         return result
         
+    }
+
+    enum SSByteUnit: UInt {
+        case Giga = 0, Mega, Kilo, Byte
+    }
+
+    static func getImageCacheSize(option: SSByteUnit) -> String {
+        let size: UInt = SDImageCache.sharedImageCache().getSize()
+
+        switch option {
+        case .Giga:
+            return String(format: "%.2f GB", (Double(size) / 1024.0 / 1024.0 / 1024.0))
+        case .Mega:
+            return String(format: "%.2f MB", (Double(size) / 1024.0 / 1024.0))
+        case .Kilo:
+            return String(format: "%.2f kB", (Double(size) / 1024.0))
+        case .Byte:
+            return "\(Double(size)) bytes"
+        }
     }
 }

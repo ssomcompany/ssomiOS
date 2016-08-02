@@ -26,6 +26,8 @@ public struct SSNetworkAPIClient {
         Alamofire.request(.GET, SSNetworkContext.serverUrlPrefixt+"posts")
         .responseJSON { response in
 
+            print("request is : \(response.request)")
+
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
 
@@ -69,6 +71,8 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
 
+                print("request is : \(response.request)")
+
                 if response.result.isSuccess {
                     if acceptableStatusCodes.contains(response.response!.statusCode) {
                         print("postPost result : \(response.result.value)")
@@ -100,6 +104,8 @@ public struct SSNetworkAPIClient {
                           encoding: .JSON,
                           headers: ["Authorization": "JWT " + token])
         .responseData { (response) in
+
+            print("request is : \(response.request)")
 
             if response.result.isSuccess {
                 print("getFile result : \(response.result.value)")
@@ -170,6 +176,8 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "Basic " + base64String!])
             .responseJSON { response in
 
+                print("request is : \(response.request)")
+
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
@@ -232,6 +240,8 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
+            print("request is : \(response.request)")
+
             if response.result.isSuccess {
                 print("getUser result : \(response.result.value)")
 
@@ -262,6 +272,8 @@ public struct SSNetworkAPIClient {
             encoding: .JSON)
             .responseJSON { (response) in
 
+                print("request is : \(response.request)")
+
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
@@ -286,6 +298,8 @@ public struct SSNetworkAPIClient {
                           encoding: .JSON,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
+
+            print("request is : \(response.request)")
 
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
@@ -325,23 +339,25 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-                if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+            print("request is : \(response.request)")
 
-                    if let chatroomId = response.result.value as? String {
-                        completion(chatroomId: chatroomId, error: nil)
-                    } else {
-                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
 
-                        completion(chatroomId: nil, error: error)
-                    }
+                if let chatroomId = response.result.value as? String {
+                    completion(chatroomId: chatroomId, error: nil)
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
 
-                    completion(chatroomId: nil, error: response.result.error)
+                    completion(chatroomId: nil, error: error)
                 }
-                
-                indicator.hideIndicator()
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(chatroomId: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
         }
     }
 
@@ -414,6 +430,8 @@ public struct SSNetworkAPIClient {
             parameters: ["msg": message, "lastTimestamp": lastTimestamp],
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
+
+            print("request is : \(response.request)")
 
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")

@@ -55,6 +55,11 @@ class SSChatListTableCell: UITableViewCell {
         self.selectionStyle = .None
 
         self.viewCountBackground.layer.cornerRadius = self.viewCountBackground.bounds.size.height / 2
+
+        self.viewBackground.layer.shadowColor = UIColor(white: 0.0, alpha: 0.5).CGColor
+        self.viewBackground.layer.shadowRadius = 1.0
+        self.viewBackground.layer.shadowOffset = CGSizeMake(2, 0)
+        self.viewBackground.layer.shadowOpacity = 1.0
     }
 
     func configView(model: SSChatroomViewModel, withCoordinate coordinate: CLLocationCoordinate2D) {

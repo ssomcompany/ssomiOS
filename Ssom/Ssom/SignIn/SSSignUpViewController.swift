@@ -11,9 +11,12 @@ import UIKit
 let kPasswordMinLength = 4
 
 class SSSignUpViewController: UIViewController {
+    @IBOutlet var viewBackground: UIView!
+
     @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
     @IBOutlet var viewEmailBottomLine: UIImageView!
+    @IBOutlet var btnWarningDuplicatedEmail: UIButton!
 
     @IBOutlet var lbPassword: UILabel!
     @IBOutlet var tfPassword: UITextField!
@@ -22,6 +25,7 @@ class SSSignUpViewController: UIViewController {
     @IBOutlet var lbConfirmPassword: UILabel!
     @IBOutlet var tfConfirmPassword: UITextField!
     @IBOutlet var viewConfirmPasswordBottomLine: UIImageView!
+    @IBOutlet var btnWarningWrongConfirmPassword: UIButton!
 
     @IBOutlet var btnSignUp: UIButton!
 
@@ -33,6 +37,18 @@ class SSSignUpViewController: UIViewController {
 
     func initView() {
         self.navigationController?.navigationBarHidden = true
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.viewBackground.hidden = true
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.viewBackground.hidden = false
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -76,11 +92,15 @@ class SSSignUpViewController: UIViewController {
         }
 
         if let confirmPassword:String = tfConfirmPassword.text! {
+            self.btnWarningWrongConfirmPassword.hidden = true
             if confirmPassword.characters.count < kPasswordMinLength {
                 isSuccessToValidate = isSuccessToValidate && false
-            }
-            if confirmPassword != password {
-                isSuccessToValidate = isSuccessToValidate && false
+            } else {
+                if confirmPassword != password {
+                    isSuccessToValidate = isSuccessToValidate && false
+
+                    self.btnWarningWrongConfirmPassword.hidden = false
+                }
             }
         }
 
@@ -94,11 +114,17 @@ class SSSignUpViewController: UIViewController {
     }
 
     @IBAction func tapSignUp(sender: AnyObject) {
-        SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { (error) in
-            if error != nil {
-                print(error?.localizedDescription)
+        self.btnWarningDuplicatedEmail.hidden = true
 
-                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+        SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                if err.code == SSNetworkError.ErrorDuplicatedData.rawValue {
+                    self.btnWarningDuplicatedEmail.hidden = false
+                } else {
+                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                }
             } else {
                 self.tapClose(nil)
             }

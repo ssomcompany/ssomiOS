@@ -277,7 +277,35 @@ public struct SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    completion(error: nil)
+                    if let rawDatas = response.result.value as? [String: AnyObject] {
+
+                        if rawDatas.keys.contains("err") {
+                            var errorCode = 501
+                            var errorDescription = rawDatas["result"] as! String
+                            if let err = rawDatas["err"] as? Int {
+                                errorCode = err
+                            } else {
+                                if let errName = rawDatas["err"] as? String {
+                                    if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
+                                        errorCode = errorInfo.0
+                                        errorDescription = errorInfo.1
+                                    } else {
+                                        errorDescription = errName
+                                    }
+                                }
+                            }
+                            let error = NSError(domain: "com.ssom.error.ServeError.SignUp", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+                            completion(error: error)
+                        } else {
+                            completion(error: nil)
+                        }
+                        
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.SignUp", code: 805, userInfo: nil)
+
+                        completion(error: error)
+                    }
                 } else {
                     print("Response Error : \(response.result.error)")
 
@@ -380,10 +408,15 @@ public struct SSNetworkAPIClient {
 
                         if rawDatas.keys.contains("err") {
                             var errorCode = 501
+                            var errorDescription = rawDatas["result"] as! String
                             if let err = rawDatas["err"] as? Int {
                                 errorCode = err
+                            } else {
+                                if let errDescription = rawDatas["err"] as? String {
+                                    errorDescription = errDescription
+                                }
                             }
-                            let error = NSError(domain: "com.ssom.error.ServeError.ListChatMessages", code: errorCode, userInfo: [NSLocalizedDescriptionKey: rawDatas["result"] as! String])
+                            let error = NSError(domain: "com.ssom.error.ServeError.ListChatMessages", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
 
                             completion(datas: nil, error: error)
                         } else {

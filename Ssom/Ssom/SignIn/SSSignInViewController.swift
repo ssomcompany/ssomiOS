@@ -30,6 +30,18 @@ class SSSignInViewController: UIViewController {
 
     func initView() {
         self.navigationController?.navigationBar.hidden = true
+
+        self.viewBackground.hidden = true
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.viewBackground.hidden = false
     }
 
     func validateInput() -> Bool {

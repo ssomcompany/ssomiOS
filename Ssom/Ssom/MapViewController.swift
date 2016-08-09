@@ -63,6 +63,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
 
+        self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+        self.btnIPay.layer.shadowOffset = CGSizeMake(0, 2)
+        self.btnIPay.layer.shadowRadius = 1
+        self.btnIPay.layer.shadowOpacity = 1
+
+        self.btnYouPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+        self.btnYouPay.layer.shadowOffset = CGSizeMake(0, 2)
+        self.btnYouPay.layer.shadowRadius = 1
+        self.btnYouPay.layer.shadowOpacity = 1
+
         self.initMapView()
     }
 

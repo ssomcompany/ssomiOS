@@ -53,8 +53,12 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
             self.btnSignOut.hidden = false
         } else {
+            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+            let loginString = NSAttributedString(string: "로그인", attributes: stringAttributes)
+
             self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
-            self.lbUserId.text = "로그인"
+//            self.lbUserId.text = "로그인"
+            self.lbUserId.attributedText = loginString
 
             self.btnSignOut.hidden = true
         }

@@ -35,8 +35,8 @@ public struct Util {
         let nowDate: NSDate = NSDate()
 
         let userCalendar = NSCalendar.currentCalendar()
-        let calendarComponents: NSCalendarUnit = [.Year, .Day]
-//        let dateDifference = userCalendar.components(calendarComponents, fromDate: date, toDate: nowDate, options: [])
+        let calendarComponents: NSCalendarUnit = [.Year, .Day, .Minute]
+        let dateDifference = userCalendar.components(calendarComponents, fromDate: date, toDate: nowDate, options: [])
         let dateComponents = userCalendar.components(calendarComponents, fromDate: date)
         let nowDateComponents = userCalendar.components(calendarComponents, fromDate: nowDate)
 
@@ -45,8 +45,12 @@ public struct Util {
         dateFormatter.AMSymbol = "오전"
         dateFormatter.PMSymbol = "오후"
         if dateComponents.day == nowDateComponents.day {
-            dateFormatter.dateFormat = "a h:mm"
-            return dateFormatter.stringFromDate(date)
+            if dateDifference.minute <= 1 {
+                return "방금 전"
+            } else {
+                dateFormatter.dateFormat = "a h:mm"
+                return dateFormatter.stringFromDate(date)
+            }
         } else {
             if dateComponents.year == nowDateComponents.year {
                 dateFormatter.dateFormat = "M월 d일"
@@ -62,7 +66,7 @@ public struct Util {
         if distance > 1000 {
             let kilometerOfDistance: Double = Double(distance)/1000
 
-            return "\(kilometerOfDistance)km";
+            return String(format: "%.2fkm", kilometerOfDistance)
         } else {
             return "\(distance)m";
         }

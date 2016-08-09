@@ -14,6 +14,7 @@ let SSPaneViewVelocityThreshold: CGFloat = 5.0
 let SSPaneViewVelocityMultiplier: CGFloat = 5.0
 let SSPaneViewScreenEdgeThreshold: CGFloat = 24.0; // After testing Apple's `UIScreenEdgePanGestureRecognizer` this seems to be the closest value to create an equivalent effect.
 let SSPaneStatePositionValidityEpsilon: CGFloat = 2.0
+let SSMainCoverViewMaxAlpha: CGFloat = 0.2
 
 /**
  To respond to the updates to `paneState` for an instance of `MSDynamicsDrawerViewController`, configure a custom class to adopt the `MSDynamicsDrawerViewControllerDelegate` protocol and set it as the `delegate` object.
@@ -250,6 +251,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
      The user can slide the `paneView` in any of the directions defined in `possibleDrawerDirection` to reveal the drawer view controller underneath. The frame of the `paneView` is frequently updated by internal dynamics and user gestures.
      */
     var mainView: UIView
+    var mainCoverView: UIView
     /**
      The drawer view contains the currently visible drawer view controller's view.
 
@@ -275,7 +277,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     /**
      The pane view controller is the primary view controller, displayed centered and covering the drawer view controllers.
 
-     @see setPaneViewController:animated:completion:
+     @see setMainViewController:animated:completion:
      @see paneState
      */
     var _mainViewController: UIViewController? = nil
@@ -467,6 +469,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.possibleDrawerDirection = SSDrawerDirection.None
 
         self.mainView = UIView()
+        self.mainCoverView = UIView()
         self.drawerView = UIView()
 
         self.gravityMagnitude = 2.0
@@ -496,6 +499,8 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         self.mainView = UIView()
         self.mainView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.mainCoverView = UIView()
+        self.mainCoverView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         self.drawerView = UIView()
         self.drawerView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
 
@@ -528,6 +533,10 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         self.mainView.frame = self.view.bounds
         self.view.addSubview(self.mainView)
+
+        self.mainCoverView.frame = self.view.bounds
+        self.mainCoverView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        self.mainCoverView.alpha = 0.0
 
         self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
         self.dynamicAnimator?.delegate = self
@@ -572,6 +581,8 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.mainView.addGestureRecognizer(self.paneTapGestureRecognizer!)
     }
 
+
+// MARK: - Main(Pane) View Controller
     /**
      Sets the `paneViewController` with an animated transition.
 
@@ -625,7 +636,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             }
 
             if self.mainViewSlideOffAnimationEnabled {
-
+                self.setMainState(.OpenWide, animated: animated, allowUserInterruption: false, completion: transitionToNewMainViewController)
             } else {
                 transitionToNewMainViewController()
             }
@@ -764,64 +775,6 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         // Replace existing drawer view controller
         else if drawerViewController != nil && existingDrawerViewController != nil {
             self.drawerViewControllers[direction] = drawerViewController
-        }
-    }
-
-// MARK: - Pane View Controller
-
-    func setPaneViewController(paneViewController: UIViewController, animated: Bool, completion: (()->Void)?) {
-        if !animated {
-            self.mainViewController = paneViewController
-            guard let _ = completion?() else {
-                return
-            }
-
-            return
-        }
-
-        if self.mainViewController != paneViewController {
-            self.mainViewController?.willMoveToParentViewController(nil)
-            self.mainViewController?.beginAppearanceTransition(false, animated: false)
-            let transitionToNewPaneViewController: ()->Void = { [unowned self] in
-                paneViewController.willMoveToParentViewController(self)
-                self.mainViewController?.view.removeFromSuperview()
-                self.mainViewController?.removeFromParentViewController()
-                self.mainViewController?.didMoveToParentViewController(nil)
-                self.mainViewController?.endAppearanceTransition()
-                self.addChildViewController(paneViewController)
-                paneViewController.view.frame = self.mainView.bounds
-                paneViewController.beginAppearanceTransition(true, animated: animated)
-                self.mainViewController = paneViewController
-                // Force redraw of the new pane view (drastically smoothes animation)
-                self.mainView.setNeedsDisplay()
-                CATransaction.flush()
-                self.setNeedsStatusBarAppearanceUpdate()
-                // After drawing has finished, set new pane view controller view and close
-                dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                    self?.mainViewController = paneViewController
-                    self?.setMainState(.Closed, animated: animated, allowUserInterruption: true, completion: { [weak self] in
-                        paneViewController.didMoveToParentViewController(self)
-                        paneViewController.endAppearanceTransition()
-                        guard let _ = completion else {
-                            return
-                        }
-                    })
-                })
-            }
-
-            if self.mainViewSlideOffAnimationEnabled {
-                self.setMainState(.OpenWide, animated: animated, allowUserInterruption: false, completion: transitionToNewPaneViewController)
-            } else {
-                transitionToNewPaneViewController()
-            }
-        }
-        // If trying to set to the currently visible pane view controller, just close
-        else {
-            self.setMainState(.Closed, animated: animated, allowUserInterruption: true, completion: {
-                guard let _ = completion else {
-                    return
-                }
-            })
         }
     }
 
@@ -1534,17 +1487,22 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 gesture.enabled = true
                 return
             }
+
             // At this point, panning is able to move the pane independently from the dynamic animator, so remove all behaviors to prevent conflicting frames
             self.dynamicAnimator?.removeAllBehaviors()
+
             // Update the pane frame based on the pan gesture
             var paneViewFrameBounded: Bool = false
             self.mainView.frame = self.paneViewFrameForPanWithStartLocation(panStartLocation, currentLocation: currentPanLocation, bounded: &paneViewFrameBounded)
+
             // Update the pane velocity based on the pan gesture
             let currentPaneVelocity: CGFloat = self.velocityForPanWithStartLocation(panStartLocation, currentLocation: currentPanLocation)
+
             // If the pane view is bounded or the determined velocity is 0, don't update it
             if !paneViewFrameBounded && (currentPaneVelocity != 0.0) {
                 paneVelocity = currentPaneVelocity
             }
+
             // If the drawer is being swiped into the closed state, set the direciton to none and the state to closed since the user is manually doing so
             if self.currentDrawerDirection != SSDrawerDirection.None &&
                 currentPanDirection != SSDrawerDirection.None &&

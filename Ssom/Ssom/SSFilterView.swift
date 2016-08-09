@@ -34,10 +34,16 @@ class SSFilterView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.addGestureRecognizer(tapGesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.addGestureRecognizer(tapGesture)
     }
 
     override func awakeFromNib() {
@@ -48,7 +54,15 @@ class SSFilterView: UIView {
         self.filterMainView.layer.cornerRadius = self.btnClose.frame.height/2
     }
 
-    @IBAction func tapCloseButton(sender: AnyObject) {
+    func handleTap(gesture: UITapGestureRecognizer) {
+        if let _ = self.filterMainView.hitTest(gesture.locationInView(self.filterMainView), withEvent: nil) {
+
+        } else {
+            self.tapCloseButton(nil)
+        }
+    }
+
+    @IBAction func tapCloseButton(sender: AnyObject?) {
         if self.delegate?.respondsToSelector(#selector(SSFilterViewDelegate.closeFilterView)) != nil {
             self.delegate?.closeFilterView()
         }

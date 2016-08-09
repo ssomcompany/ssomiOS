@@ -18,6 +18,7 @@
 		973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973003481C0B4F4D00734D8D /* SSWriteViewController.swift */; };
 		9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730034A1C0F38EB00734D8D /* SSFilterView.swift */; };
 		9730034D1C1091E700734D8D /* SSFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9730034C1C1091E700734D8D /* SSFilterView.xib */; };
+		9730C9D11D5229BB0042B9FD /* SSError.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9730C9D01D5229BB0042B9FD /* SSError.plist */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MapViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -373,6 +374,7 @@
 		973003481C0B4F4D00734D8D /* SSWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSWriteViewController.swift; sourceTree = "<group>"; };
 		9730034A1C0F38EB00734D8D /* SSFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSFilterView.swift; sourceTree = "<group>"; };
 		9730034C1C1091E700734D8D /* SSFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFilterView.xib; sourceTree = "<group>"; };
+		9730C9D01D5229BB0042B9FD /* SSError.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SSError.plist; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 				9730033A1BF84F1500734D8D /* SSNetworkContext.swift */,
 				9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */,
 				9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */,
+				9730C9D01D5229BB0042B9FD /* SSError.plist */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1054,10 +1057,10 @@
 				977DBA731D2B82A400CFD98F /* SSScrollView.swift */,
 				974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */,
 				974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */,
-				9730034A1C0F38EB00734D8D /* SSFilterView.swift */,
 				9730034C1C1091E700734D8D /* SSFilterView.xib */,
-				97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */,
+				9730034A1C0F38EB00734D8D /* SSFilterView.swift */,
 				9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */,
+				97830FF01C524957008BD6DC /* SSNavigationBarItems.swift */,
 			);
 			name = "Ssom UI";
 			path = Ssom;
@@ -1355,6 +1358,7 @@
 				974C9D161C6B447000E17A2B /* line@3x.png in Resources */,
 				974C9D661C6B447000E17A2B /* send@2x.png in Resources */,
 				974C9CC41C6B447000E17A2B /* chatNotiBg.png in Resources */,
+				9730C9D11D5229BB0042B9FD /* SSError.plist in Resources */,
 				974C9CEA1C6B447000E17A2B /* filterW@2x.png in Resources */,
 				974C9D8B1C6B447000E17A2B /* ssomIngRedSmall@3x.png in Resources */,
 				974C9D4E1C6B447000E17A2B /* pathGuideHeart@2x.png in Resources */,

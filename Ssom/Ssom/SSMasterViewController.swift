@@ -9,6 +9,9 @@
 import UIKit
 import GoogleMaps
 
+let kMapButtonTitle: String = "MAP"
+let kListButtonTitle: String = "LIST"
+
 class SSMasterViewController: UIViewController {
 
     var barButtonItems: SSNavigationBarItems!
@@ -17,6 +20,9 @@ class SSMasterViewController: UIViewController {
 
     @IBOutlet var mapView: UIView!
     @IBOutlet var listView: UIView!
+
+    var buttonBackgroundView: UIImageView!
+    var lbButtonTitle: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,29 +45,48 @@ class SSMasterViewController: UIViewController {
         titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
         self.navigationItem.titleView!.addSubview(titleBackgroundView)
 
+        self.buttonBackgroundView = UIImageView(image: UIImage(named: "1DepToggleOff.png"))
+        self.buttonBackgroundView.frame = CGRectMake(0, 0, 97, 38)
+        self.navigationItem.titleView!.addSubview(self.buttonBackgroundView)
+
+        self.lbButtonTitle = UILabel()
+        self.lbButtonTitle.text = kMapButtonTitle
+        self.lbButtonTitle.textColor = UIColor.whiteColor()
+        self.buttonBackgroundView.addSubview(self.lbButtonTitle)
+
+        self.lbButtonTitle.translatesAutoresizingMaskIntoConstraints = false
+        self.buttonBackgroundView.addConstraint(NSLayoutConstraint(item: self.buttonBackgroundView, attribute: .CenterX, relatedBy: .Equal, toItem: self.lbButtonTitle, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
+        self.buttonBackgroundView.addConstraint(NSLayoutConstraint(item: self.buttonBackgroundView, attribute: .CenterY, relatedBy: .Equal, toItem: self.lbButtonTitle, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+
         self.segButton1 = UIButton(frame: CGRectMake(0, 0, 97, 38))
-        self.segButton1.setTitle("MAP", forState: .Normal)
+        self.segButton1.setTitle(kMapButtonTitle, forState: .Normal)
         self.segButton1.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
-        self.segButton1.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        self.segButton1.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
+        self.segButton1.setTitleColor(UIColor.clearColor(), forState: .Selected)
+//        self.segButton1.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+//        self.segButton1.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
         self.segButton1.selected = true
         self.navigationItem.titleView!.addSubview(self.segButton1)
 
         self.segButton2 = UIButton(frame: CGRectMake(CGFloat(175-97), 0, 97, 38))
-        self.segButton2.setTitle("LIST", forState: .Normal)
+        self.segButton2.setTitle(kListButtonTitle, forState: .Normal)
         self.segButton2.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
-        self.segButton2.setTitleColor(UIColor.whiteColor(), forState: .Selected)
-        self.segButton2.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
+        self.segButton2.setTitleColor(UIColor.clearColor(), forState: .Selected)
+//        self.segButton2.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+//        self.segButton2.setBackgroundImage(UIImage(named: "1DepToggleOff.png"), forState: .Selected)
         self.segButton2.selected = false
         self.navigationItem.titleView!.addSubview(self.segButton2)
 
         if #available(iOS 8.2, *) {
             self.segButton1.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
             self.segButton2.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+
+            self.lbButtonTitle.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
             self.segButton1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
             self.segButton2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+
+            self.lbButtonTitle.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
         }
 
         let leftBarButtonItem: UIBarButtonItem = self.navigationItem.leftBarButtonItem!
@@ -88,19 +113,35 @@ class SSMasterViewController: UIViewController {
     }
 
     @IBAction func switchView(sender: AnyObject) {
+        var originX: CGFloat = 0.0
+        var buttonTitle: String = kMapButtonTitle
+        if self.buttonBackgroundView.frame.origin.x == 0 {
+            originX = 175-97
+            buttonTitle = kListButtonTitle
+        } else {
+            originX = 0
+        }
+
+        self.lbButtonTitle.text = buttonTitle
+
         self.segButton1.selected = !self.segButton1.selected
         self.segButton2.selected = !self.segButton2.selected
 
-        self.mapView.hidden = !self.segButton1.selected
-        self.listView.hidden = !self.segButton2.selected
+        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.buttonBackgroundView.frame.origin.x = originX
+        }) { (finish) in
 
-        if !self.listView.hidden {
-            let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
-            let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
+            self.mapView.hidden = !self.segButton1.selected
+            self.listView.hidden = !self.segButton2.selected
 
-            let nowLocation: CLLocationCoordinate2D = mapVC.mainView.camera.target
-            listVC.mainViewModel = SSMainViewModel(datas: mapVC.datas, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
-            listVC.initView()
+            if !self.listView.hidden {
+                let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
+                let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
+
+                let nowLocation: CLLocationCoordinate2D = mapVC.mainView.camera.target
+                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datas, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.initView()
+            }
         }
     }
 

@@ -197,7 +197,9 @@
                     <navigationItem key="navigationItem" id="eUP-Gk-0m9"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="btnFindPassword" destination="zDa-VK-PBV" id="tuw-gg-yll"/>
                         <outlet property="btnSignIn" destination="Lig-Au-fEj" id="ovJ-cJ-vhY"/>
+                        <outlet property="btnSignUp" destination="ylA-ey-b3o" id="jNI-Uo-W9I"/>
                         <outlet property="lbEmail" destination="uu6-jK-UC0" id="ccT-Zc-R6D"/>
                         <outlet property="lbPassword" destination="ute-j3-yBO" id="QEq-51-3n8"/>
                         <outlet property="tfEmail" destination="Wfe-lR-JPp" id="bsn-2R-fBd"/>

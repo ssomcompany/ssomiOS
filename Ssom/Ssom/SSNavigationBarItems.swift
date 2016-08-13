@@ -31,15 +31,66 @@ class SSNavigationBarItems : UIView
     @IBOutlet var btnBack: UIButton!
     @IBOutlet var lbBackButtonTitle: UILabel!
 
+    @IBOutlet var meetRequestButtonView: UIView!
+    @IBOutlet var imgViewMeetRequest: UIImageView!
+    @IBOutlet var btnMeetRequest: UIButton!
+
     var delegate: SSNavigationBarItemsDelegate!
+
+    var animated: Bool = false
 
     init() {
         super.init(frame: CGRectZero)
         
         NSBundle.mainBundle().loadNibNamed("SSNavigationBarItems", owner: self, options: nil)
+
+        self.btnHeartBar.addTarget(self, action: #selector(self.tapDownHeart), forControlEvents: UIControlEvents.TouchDown)
+        self.btnHeartBar.addTarget(self, action: #selector(self.cancelTapHeart), forControlEvents: UIControlEvents.TouchCancel)
+
+        self.btnMessageBar.addTarget(self, action: #selector(self.tapDownMessage), forControlEvents: UIControlEvents.TouchDown)
+        self.btnMessageBar.addTarget(self, action: #selector(self.cancelTapMessage), forControlEvents: UIControlEvents.TouchCancel)
+
+        self.btnMeetRequest.addTarget(self, action: #selector(self.tapDownMeetRequest), forControlEvents: UIControlEvents.TouchDown)
+        self.btnMeetRequest.addTarget(self, action: #selector(self.cancelTapMeetRequest), forControlEvents: UIControlEvents.TouchCancel)
+    }
+
+    convenience init(animated: Bool) {
+        self.init()
+
+        self.animated = animated
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    func tapDownHeart() {
+        if self.animated {
+            self.imgViewHeart.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }
+    }
+
+    func cancelTapHeart() {
+        self.imgViewHeart.transform = CGAffineTransformIdentity
+    }
+
+    func tapDownMessage() {
+        if self.animated {
+            self.imgViewMessage.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }
+    }
+
+    func cancelTapMessage() {
+        self.imgViewMessage.transform = CGAffineTransformIdentity
+    }
+
+    func tapDownMeetRequest() {
+        if self.animated {
+            self.imgViewMeetRequest.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }
+    }
+
+    func cancelTapMeetRequest() {
+        self.imgViewMeetRequest.transform = CGAffineTransformIdentity
     }
 }

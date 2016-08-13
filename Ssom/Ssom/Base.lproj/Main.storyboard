@@ -405,7 +405,6 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomInfoView" destination="4cE-r7-rmG" id="8hI-al-d6l"/>
                         <outlet property="btnIPay" destination="OM2-Da-teJ" id="JsT-p4-qgJ"/>
                         <outlet property="btnWrite" destination="6oW-Xv-XcV" id="9hG-yZ-94B"/>
                         <outlet property="btnYouPay" destination="hYp-m4-vLX" id="Sjq-gE-zbw"/>
@@ -414,6 +413,7 @@
                         <outlet property="iPayButtonBottomLineView" destination="qLP-u4-evS" id="qbG-Dz-ees"/>
                         <outlet property="lbFilteredAgePeople" destination="vNy-b2-vKz" id="IuN-Oy-XaF"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
+                        <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
                         <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
                         <outlet property="youPayButtonBottomLineView" destination="MFJ-b2-VZo" id="FtP-0C-Xjf"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>

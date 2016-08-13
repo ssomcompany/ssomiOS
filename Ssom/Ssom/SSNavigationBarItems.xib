@@ -10,14 +10,17 @@
                 <outlet property="backBarButtonView" destination="bUy-qz-A2O" id="IIr-nw-1Lu"/>
                 <outlet property="btnBack" destination="DOE-Tp-R0t" id="4eX-fr-NHr"/>
                 <outlet property="btnHeartBar" destination="iIy-ck-co3" id="Ytu-7B-xoj"/>
+                <outlet property="btnMeetRequest" destination="n4K-cw-3pf" id="naM-jK-cBF"/>
                 <outlet property="btnMessageBar" destination="TSt-lB-147" id="TzT-Cw-zn0"/>
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
                 <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
+                <outlet property="imgViewMeetRequest" destination="PxP-UG-XIa" id="CUc-lW-eG9"/>
                 <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>
                 <outlet property="lbBackButtonTitle" destination="Yic-qO-3ps" id="peR-xh-yby"/>
                 <outlet property="lbHeartCount" destination="ls5-ZA-jvE" id="qdJ-aM-hDn"/>
                 <outlet property="lbRechargeTime" destination="169-wf-BeN" id="3IU-6V-cA8"/>
                 <outlet property="lbUnreadMessageCount" destination="q8r-VF-cXe" id="bt1-cb-blt"/>
+                <outlet property="meetRequestButtonView" destination="uCE-qo-zMC" id="TwO-a1-FSj"/>
                 <outlet property="messageBarButtonView" destination="Csa-t4-AK1" id="atz-yt-TPe"/>
             </connections>
         </placeholder>
@@ -26,7 +29,7 @@
             <rect key="frame" x="0.0" y="0.0" width="29" height="41"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcn-oA-gic">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcn-oA-gic">
                     <rect key="frame" x="0.0" y="0.0" width="29" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-ZA-jvE">
@@ -35,7 +38,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="169-wf-BeN">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="169-wf-BeN">
                     <rect key="frame" x="0.0" y="29" width="29" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
@@ -144,10 +147,51 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="603.25" y="376"/>
         </view>
+        <view contentMode="scaleToFill" id="uCE-qo-zMC" userLabel="MeetRequestButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="105" height="35"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meetButtonRed" translatesAutoresizingMaskIntoConstraints="NO" id="PxP-UG-XIa">
+                    <rect key="frame" x="0.0" y="0.0" width="105" height="35"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heartWhite" translatesAutoresizingMaskIntoConstraints="NO" id="NZP-jm-BXT">
+                    <rect key="frame" x="10" y="8" width="22" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="PQD-2D-elZ"/>
+                        <constraint firstAttribute="height" constant="19" id="pD6-l1-JcU"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4K-cw-3pf">
+                    <rect key="frame" x="0.0" y="0.0" width="105" height="35"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <state key="normal" title="        만남요청">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="n4K-cw-3pf" firstAttribute="leading" secondItem="uCE-qo-zMC" secondAttribute="leading" id="0Jm-qb-vY1"/>
+                <constraint firstItem="PxP-UG-XIa" firstAttribute="leading" secondItem="uCE-qo-zMC" secondAttribute="leading" id="1Vr-9n-JiX"/>
+                <constraint firstAttribute="bottom" secondItem="n4K-cw-3pf" secondAttribute="bottom" id="5nf-cY-71R"/>
+                <constraint firstAttribute="trailing" secondItem="PxP-UG-XIa" secondAttribute="trailing" id="6xF-8T-axa"/>
+                <constraint firstItem="PxP-UG-XIa" firstAttribute="top" secondItem="uCE-qo-zMC" secondAttribute="top" id="FFU-zj-6Mh"/>
+                <constraint firstItem="NZP-jm-BXT" firstAttribute="centerY" secondItem="uCE-qo-zMC" secondAttribute="centerY" id="XPp-JC-Sln"/>
+                <constraint firstItem="NZP-jm-BXT" firstAttribute="leading" secondItem="uCE-qo-zMC" secondAttribute="leading" constant="10" id="n18-jb-fF1"/>
+                <constraint firstAttribute="trailing" secondItem="n4K-cw-3pf" secondAttribute="trailing" id="qcX-vr-qyt"/>
+                <constraint firstItem="n4K-cw-3pf" firstAttribute="top" secondItem="uCE-qo-zMC" secondAttribute="top" id="uqx-7c-tv3"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="364.5" y="286.5"/>
+        </view>
     </objects>
     <resources>
         <image name="backIcon.png" width="18" height="18"/>
         <image name="heart.png" width="37" height="32"/>
+        <image name="heartWhite" width="30" height="27"/>
+        <image name="meetButtonRed" width="104" height="35"/>
         <image name="message.png" width="41" height="41"/>
     </resources>
 </document>

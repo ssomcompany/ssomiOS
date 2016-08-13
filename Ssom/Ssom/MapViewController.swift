@@ -61,6 +61,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func initView() {
 
+        self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
+        self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
+
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
 
         self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
@@ -74,6 +77,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.btnYouPay.layer.shadowOpacity = 1
 
         self.initMapView()
+
+        self.closeFilterView()
+        self.closeScrollView()
     }
 
     func initMapView() {
@@ -90,20 +96,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         mainView.delegate = self
     }
 
-    func showCurrentLocation() {
-        locationManager.startUpdatingLocation()
-    }
-
     func loadingData() {
         SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
-            if let models = viewModels {
-                self.datas = models
-                print("result is : \(self.datas)")
+            if let err = error {
+                print("error is : \(err.localizedDescription)")
 
-                self.showMarkers()
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+
             } else {
-                print("error is : \(error?.localizedDescription)")
+                if let models = viewModels {
+                    self.datas = models
+                    print("result is : \(self.datas)")
+
+                    self.showMarkers()
+                }
             }
+
+            self.showOpenAnimation()
         }
     }
 
@@ -121,9 +130,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             appDelegate.isDrawable = true
         }
 
-        self.writeButton.transform = CGAffineTransformIdentity
-
         self.loadingData()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
+        self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,8 +149,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    func showOpenAnimation() {
+
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
+
+            self.viewBottomInfo.transform = CGAffineTransformIdentity
+            self.writeButton.transform = CGAffineTransformIdentity
+        }) { (finish) in
+            //
+        }
+    }
+
+    func showCurrentLocation() {
+        locationManager.startUpdatingLocation()
     }
 
     func showMarkers() {
@@ -387,7 +416,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
 // MARK: - SSFilterViewDelegate
     func closeFilterView() {
-        self.filterView.removeFromSuperview()
+        if let view = self.filterView {
+            view.removeFromSuperview()
+        }
     }
 
     func applyFilter(filterViewModel: SSFilterViewModel) {
@@ -398,8 +429,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView() {
-        self.navigationController?.navigationBar.barStyle = .Default
-        self.scrollDetailView.removeFromSuperview()
+        if let view = self.scrollDetailView {
+            self.navigationController?.navigationBar.barStyle = .Default
+            view.removeFromSuperview()
+        }
     }
 
     func openSignIn(completion: ((finish:Bool) -> Void)?) {

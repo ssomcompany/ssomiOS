@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import FirebaseAuth
 
 enum SSGender : String {
     case SSGenderMale = "Male"
@@ -188,6 +189,16 @@ public struct SSNetworkAPIClient {
 
                             completion(error: nil)
 
+                            if let auth = FIRAuth.auth() {
+                                auth.signInWithEmail(email, password: password, completion: { (user, error) in
+                                    if let err = error {
+                                        print("Firebase Sign in is failed!! : \(err)")
+                                    } else {
+                                        print("Firebase Sign in succeeds!! : \(user)")
+                                    }
+                                })
+                            }
+
                             SSNetworkAPIClient.getUser(token, email: email, completion: { (model, error) in
                                 if let err = error {
                                     print(err.localizedDescription)
@@ -298,6 +309,15 @@ public struct SSNetworkAPIClient {
 
                             completion(error: error)
                         } else {
+                            if let auth = FIRAuth.auth() {
+                                auth.createUserWithEmail(email, password: password, completion: { (user, error) in
+                                    if let err = error {
+                                        print("Firebase Sign Up is failed!! : " + err.localizedDescription)
+                                    } else {
+                                        print("Firebase Sign Up is succeeded!! : \(user)")
+                                    }
+                                })
+                            }
                             completion(error: nil)
                         }
                         

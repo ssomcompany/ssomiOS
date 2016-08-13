@@ -64,7 +64,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func setNavigationBarView() {
 
-        self.barButtonItems = SSNavigationBarItems()
+        self.barButtonItems = SSNavigationBarItems(animated: true)
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
@@ -86,10 +86,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
         barButtonSpacer.width = -10
 
-        barButtonItems.btnHeartBar.addTarget(self, action: #selector(tapHeart), forControlEvents: UIControlEvents.TouchUpInside)
-        let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
+        self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapMeetRequest), forControlEvents: UIControlEvents.TouchUpInside)
+        let meetRequestButton = UIBarButtonItem(customView: barButtonItems.meetRequestButtonView!)
 
-        self.navigationItem.rightBarButtonItems = [heartBarButton, barButtonSpacer]
+        self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
     }
 
     func initView() {
@@ -137,32 +137,42 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.navigationController?.popViewControllerAnimated(true)
     }
 
-    func tapHeart() {
-        print("tapped heart!!")
+    func tapMeetRequest() {
+        print("tapped meet request!!")
 
-        SSAlertController.alertTwoButton(title: "만남", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
+        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
+            self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+        }) { (finish) in
+            SSAlertController.alertTwoButton(title: "만남", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
 
-            UIView.animateWithDuration(0.5, animations: {
+                //            self.constTableViewChatTopToSuper.constant = 69
                 self.constTableViewChatTopToSuper.active = false
                 self.constTableViewChatTopToViewRequest.active = true
 
-                self.view.layoutIfNeeded()
-            })
+                UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                    self.view.layoutIfNeeded()
+                    }, completion: { (finish) in
+                        //
+                })
             }) { (action) in
                 //
+            }
         }
     }
 
     @IBAction func tapRequest(sender: AnyObject) {
         SSAlertController.alertTwoButton(title: "알림", message: "만남 취소 시 하트 1개가 소모됩니다.\n만남을 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
 
-            UIView.animateWithDuration(0.5, animations: {
-                self.constTableViewChatTopToViewRequest.active = false
-                self.constTableViewChatTopToSuper.active = true
+//            self.constTableViewChatTopToSuper.constant = 0
+            self.constTableViewChatTopToViewRequest.active = false
+            self.constTableViewChatTopToSuper.active = true
 
+            UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
                 self.view.layoutIfNeeded()
+                }, completion: { (finish) in
+                    //
             })
-            }) { (action) in
+        }) { (action) in
                 //
         }
     }

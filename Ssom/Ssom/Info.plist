@@ -63,6 +63,10 @@
 	<string>Because I always want to know where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Because I need to know where you are</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Menu</string>
 	<key>UIRequiredDeviceCapabilities</key>

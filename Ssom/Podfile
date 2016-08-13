@@ -12,7 +12,11 @@ target 'Ssom' do
  pod 'KeychainAccess'
  pod 'Firebase'
  pod 'Firebase/Crash'
+ pod 'Firebase/Auth'
+ pod 'Firebase/Core'
+ pod 'Firebase/Messaging'
  pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+ pod 'OneSignal'
 end
 
 target 'SsomTests' do

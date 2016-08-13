@@ -97,15 +97,15 @@ class SSMasterViewController: UIViewController {
 
         var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
         if rightBarButtonItems.count == 2 {
-            self.barButtonItems = SSNavigationBarItems()
+            self.barButtonItems = SSNavigationBarItems(animated: true)
 
             let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
             barButtonSpacer.width = 20
 
-            barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
+            self.barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
             let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
 
-            barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
+            self.barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
             let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
             self.navigationItem.rightBarButtonItems = [messageBarButton, barButtonSpacer, heartBarButton]
@@ -127,8 +127,13 @@ class SSMasterViewController: UIViewController {
         self.segButton1.selected = !self.segButton1.selected
         self.segButton2.selected = !self.segButton2.selected
 
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.buttonBackgroundView.frame.origin.x = originX
+        UIView.animateWithDuration(0.3,
+                                   delay: 0.0,
+                                   usingSpringWithDamping: 0.7,
+                                   initialSpringVelocity: 0.5,
+                                   options: .CurveEaseOut,
+                                   animations: {
+                                    self.buttonBackgroundView.frame.origin.x = originX
         }) { (finish) in
 
             self.mapView.hidden = !self.segButton1.selected
@@ -152,9 +157,13 @@ class SSMasterViewController: UIViewController {
     }
 
     func tapChat() {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveLinear, animations: { 
+            self.barButtonItems.imgViewMessage.transform = CGAffineTransformIdentity
+        }) { (finish) in
+            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+            let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
 
-        self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

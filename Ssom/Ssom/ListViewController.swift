@@ -12,7 +12,7 @@ import SDWebImage
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
-    @IBOutlet var bottomInfoView: UIView!
+    @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
     @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     @IBOutlet var viewFilterBackground: UIView!
@@ -83,15 +83,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             self.tapYouPayButton(self.btnYouPay);
         }
+
+        self.closeFilterView()
+        self.closeScrollView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -100,8 +99,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
-        self.btnWrite.transform = CGAffineTransformIdentity
+        self.showOpenAnimation()
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
+        self.btnWrite.transform = CGAffineTransformMakeTranslation(0, 200)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -111,6 +121,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             vc.writeViewModel.myLatitude = self.mainViewModel.nowLatitude
             vc.writeViewModel.myLongitude = self.mainViewModel.nowLongitude
+        }
+    }
+
+    func showOpenAnimation() {
+
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
+
+            self.viewBottomInfo.transform = CGAffineTransformIdentity
+            self.btnWrite.transform = CGAffineTransformIdentity
+        }) { (finish) in
+            //
         }
     }
 
@@ -153,7 +174,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.bottomInfoView.layoutIfNeeded()
+            self.viewBottomInfo.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -338,7 +359,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK: - SSFilterViewDelegate
     func closeFilterView() {
-        self.filterView.removeFromSuperview()
+        if let view = self.filterView {
+            view.removeFromSuperview()
+        }
     }
 
     func applyFilter(filterViewModel: SSFilterViewModel) {
@@ -350,8 +373,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView() {
-        self.navigationController?.navigationBar.barStyle = .Default
-        self.scrollDetailView.removeFromSuperview()
+        if let view = self.scrollDetailView {
+            self.navigationController?.navigationBar.barStyle = .Default
+            view.removeFromSuperview()
+        }
     }
 
     func openSignIn(completion: ((finish:Bool) -> Void)?) {

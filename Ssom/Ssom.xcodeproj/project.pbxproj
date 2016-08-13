@@ -1291,6 +1291,14 @@
 					97343E231BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 3V2J2EZE5D;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					97343E371BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;

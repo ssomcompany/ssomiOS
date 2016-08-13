@@ -19,6 +19,8 @@ class SSSignInViewController: UIViewController {
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var viewPasswordBottomLine: UIImageView!
     @IBOutlet var btnSignIn: UIButton!
+    @IBOutlet var btnFindPassword: UIButton!
+    @IBOutlet var btnSignUp: UIButton!
 
     var completion: ((finish: Bool) -> Void)?
 
@@ -32,6 +34,22 @@ class SSSignInViewController: UIViewController {
         self.navigationController?.navigationBar.hidden = true
 
         self.viewBackground.hidden = true
+
+        self.btnSignIn.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnSignIn.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnSignIn.layer.shadowRadius = 1.0
+        self.btnSignIn.layer.shadowOpacity = 1.0
+
+        self.btnFindPassword.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnFindPassword.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFindPassword.layer.shadowRadius = 1.0
+        self.btnFindPassword.layer.shadowOpacity = 1.0
+
+        self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnSignUp.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnSignUp.layer.shadowRadius = 1.0
+        self.btnSignUp.layer.shadowOpacity = 1.0
+
     }
 
     override func viewWillAppear(animated: Bool) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
@@ -41,6 +42,14 @@ class SSAccountManager {
         } else {
             return nil
         }
+    }
+
+    var userInFIB: FIRUser? {
+        if let auth = FIRAuth.auth() {
+            return auth.currentUser
+        }
+
+        return nil
     }
 
     func openSignIn(willPresentViewController: UIViewController, completion: ((finish:Bool) -> Void)?) {

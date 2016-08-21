@@ -308,6 +308,7 @@
 		978DDB771CCBDD8700567169 /* SSChat.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB761CCBDD8700567169 /* SSChat.xcassets */; };
 		978DDB791CCBE13200567169 /* SSChatCoachmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */; };
 		978DDB7B1CCBE68B00567169 /* SSChatCoachmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978DDB7A1CCBE68B00567169 /* SSChatCoachmarkView.swift */; };
+		9799746C1D63022A00F511D7 /* SSChatCoachmarkLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9799746B1D63022A00F511D7 /* SSChatCoachmarkLineView.swift */; };
 		979A4A031BF4525A00FAFB21 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A001BF4525A00FAFB21 /* Define.swift */; };
 		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
 		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
@@ -670,6 +671,7 @@
 		978DDB761CCBDD8700567169 /* SSChat.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = SSChat.xcassets; path = Chat/SSChat.xcassets; sourceTree = "<group>"; };
 		978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatCoachmarkView.xib; path = Chat/SSChatCoachmarkView.xib; sourceTree = "<group>"; };
 		978DDB7A1CCBE68B00567169 /* SSChatCoachmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatCoachmarkView.swift; path = Chat/SSChatCoachmarkView.swift; sourceTree = "<group>"; };
+		9799746B1D63022A00F511D7 /* SSChatCoachmarkLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatCoachmarkLineView.swift; path = Chat/SSChatCoachmarkLineView.swift; sourceTree = "<group>"; };
 		979A4A001BF4525A00FAFB21 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Define.swift; path = Ssom/Common/Define.swift; sourceTree = "<group>"; };
 		979A4A011BF4525A00FAFB21 /* ObjcBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcBridge.h; path = Ssom/Common/ObjcBridge.h; sourceTree = "<group>"; };
 		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
@@ -1180,6 +1182,7 @@
 				976031BE1D4E3BBA004B7392 /* SSChatMessageTableCell.swift */,
 				978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */,
 				978DDB7A1CCBE68B00567169 /* SSChatCoachmarkView.swift */,
+				9799746B1D63022A00F511D7 /* SSChatCoachmarkLineView.swift */,
 				97B2D1681D489F1A00B5EBD2 /* SSChatCompletionView.xib */,
 				97B2D16A1D48A15100B5EBD2 /* SSChatMapView.xib */,
 			);
@@ -1681,14 +1684,14 @@
 		};
 		977DBA6E1D23A2A900CFD98F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=$HOME/ssomiOS/Ssom/ServiceAccount.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:637685103442:ios:7770db6eafd745c5\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
 		};
@@ -1806,6 +1809,7 @@
 				9764D9E01D35FF6400BBE4C6 /* SSMainViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
 				977DBA721D2A5C2900CFD98F /* SSMasterViewController.swift in Sources */,
+				9799746C1D63022A00F511D7 /* SSChatCoachmarkLineView.swift in Sources */,
 				974C9DBA1C6B5A5800E17A2B /* SSDetailView.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,

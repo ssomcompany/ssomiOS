@@ -102,7 +102,7 @@ class SSMasterViewController: UIViewController {
             let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
             barButtonSpacer.width = 20
 
-            self.barButtonItems.btnHeartBar.addTarget(rightBarButtonItems[1].target, action: rightBarButtonItems[1].action, forControlEvents: UIControlEvents.TouchUpInside)
+            self.barButtonItems.btnHeartBar.addTarget(self, action: #selector(tapHeart), forControlEvents: UIControlEvents.TouchUpInside)
             let heartBarButton = UIBarButtonItem(customView: barButtonItems.heartBarButtonView!)
 
             self.barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), forControlEvents: UIControlEvents.TouchUpInside)
@@ -153,6 +153,14 @@ class SSMasterViewController: UIViewController {
     func tapMenu() {
         if let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.drawerController?.setMainState(.Open, inDirection: .Left, animated: true, allowUserInterruption: true, completion: nil)
+        }
+    }
+
+    func tapHeart() {
+        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
+            self.barButtonItems.imgViewHeart.transform = CGAffineTransformIdentity
+            }) { (finish) in
+                //
         }
     }
 

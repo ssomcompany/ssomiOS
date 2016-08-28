@@ -209,8 +209,8 @@ class SSChatListTableCell: UITableViewCell {
 
     @IBAction func tapDeleteChat(sender: AnyObject) {
         SSAlertController.showAlertTwoButton(title: "알림",
-                                             message: "대화 삭제 시 쏨이 종료됩니다.\n정말 삭제하시겠어요?",
-                                             button1Title: "삭제하기",
+                                             message: "끝낸 쏨은 되돌릴 수 없어요...\n쏨을 정말로 끝내시겠어요?",
+                                             button1Title: "끝내기",
                                              button2Title: "취소",
                                              button1Completion: { [unowned self] (action) in
                                                 guard let _ = self.delegate?.deleteCell(self) else {

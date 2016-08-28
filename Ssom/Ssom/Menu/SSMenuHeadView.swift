@@ -10,15 +10,15 @@ import UIKit
 
 protocol SSMenuHeadViewDelegate {
     func openSignIn(completion: ((finish: Bool)-> Void)?)
-    func callSignOut(completion: ((finish: Bool)-> Void)?)
 }
 
 class SSMenuHeadView: UITableViewHeaderFooterView {
     @IBOutlet var view: UIView!
     @IBOutlet var lbUserId: UILabel!
-    @IBOutlet var btnSignOut: UIButton!
 
     var delegate: SSMenuHeadViewDelegate?
+
+    var blockLogin: (() -> Void)!
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -28,8 +28,6 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
-        self.loadFromNib()
     }
 
     override func awakeFromNib() {
@@ -50,8 +48,6 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
         if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String
-
-            self.btnSignOut.hidden = false
         } else {
             let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
             let loginString = NSAttributedString(string: "로그인", attributes: stringAttributes)
@@ -59,18 +55,6 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
             self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
 //            self.lbUserId.text = "로그인"
             self.lbUserId.attributedText = loginString
-
-            self.btnSignOut.hidden = true
-        }
-    }
-
-    @IBAction func tapSignOut(sender: AnyObject) {
-        guard let _ = self.delegate?.callSignOut({ [weak self] (finish) in
-            if finish {
-                self?.configView()
-            }
-        }) else {
-            return
         }
     }
 
@@ -80,7 +64,11 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
         } else {
             guard let _ = self.delegate?.openSignIn({ [weak self] (finish) in
                 if finish {
-                    self?.configView()
+                    guard let _ = self?.blockLogin else {
+                        return
+                    }
+
+                    self?.blockLogin()
                 }
             }) else {
                 return

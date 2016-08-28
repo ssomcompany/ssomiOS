@@ -328,6 +328,8 @@
 		97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266C1C9F090400484F03 /* UIImage+Crop.swift */; };
 		97C5266F1C9F091200484F03 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266E1C9F091200484F03 /* String+Util.swift */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
+		97E21D451D69D619004E3EBC /* SSMenuBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */; };
+		97E21D471D69D6A8004E3EBC /* SSMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */; };
 		BD6B77F5410EB4B139461F16 /* Pods_SsomTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -693,6 +695,8 @@
 		97C5266E1C9F091200484F03 /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Util.swift"; path = "Ssom/3rdLib/String+Util.swift"; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97DE88941C4561FE0043B8E2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuBottomView.xib; path = Menu/SSMenuBottomView.xib; sourceTree = "<group>"; };
+		97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuBottomView.swift; path = Menu/SSMenuBottomView.swift; sourceTree = "<group>"; };
 		A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ssom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1153,6 +1157,8 @@
 				9787ACE71CFE7B0B001CF18C /* SSMenuHeadView.swift */,
 				9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */,
 				9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */,
+				97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */,
+				97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */,
 				9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */,
 				9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */,
 			);
@@ -1399,6 +1405,7 @@
 				974C9D331C6B447000E17A2B /* message@2x.png in Resources */,
 				974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */,
 				974C9C911C6B447000E17A2B /* backIcon.png in Resources */,
+				97E21D451D69D619004E3EBC /* SSMenuBottomView.xib in Resources */,
 				974C9D361C6B447000E17A2B /* messageRed@2x.png in Resources */,
 				974C9C781C6B447000E17A2B /* 1DepToggleOff.png in Resources */,
 				974C9D5C1C6B447000E17A2B /* profileBorderGreen.png in Resources */,
@@ -1779,6 +1786,7 @@
 				97830FF31C57DAD9008BD6DC /* SSAlertController.swift in Sources */,
 				97B2D1751D4A21AC00B5EBD2 /* SSChatViewModel.swift in Sources */,
 				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
+				97E21D471D69D6A8004E3EBC /* SSMenuBottomView.swift in Sources */,
 				97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */,
 				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,
 				976031BF1D4E3BBA004B7392 /* SSChatMessageTableCell.swift in Sources */,
@@ -1964,7 +1972,7 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleMaps\"/**",
 				);
 				INFOPLIST_FILE = Ssom/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -2001,7 +2009,7 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleMaps\"/**",
 				);
 				INFOPLIST_FILE = Ssom/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",

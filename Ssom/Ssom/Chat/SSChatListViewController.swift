@@ -155,6 +155,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                     if let model: SSChatroomViewModel = self.datas[indexPath.row] {
                         vc.chatRoomId = model.chatroomId
                         vc.ssomType = model.ssomViewModel.ssomType
+                        vc.postId = model.ssomViewModel.postId
                         vc.partnerImageUrl = model.ssomViewModel.imageUrl
 
                         vc.ssomLatitude = model.ssomViewModel.latitude

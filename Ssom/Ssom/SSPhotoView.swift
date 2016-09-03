@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import SDWebImage
 
 @objc protocol SSPhotoViewDelegate: NSObjectProtocol {
     optional func tapClose() -> Void
@@ -41,9 +41,10 @@ class SSPhotoView: UIView {
 
         self.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
 
-        Alamofire.request(.GET, imageUrl)
-            .response { (request, response, data, error) -> Void in
-                self.imageView.image = UIImage(data: data!)
+        self.imageView.sd_setImageWithURL(NSURL(string: imageUrl)) { (image, error, cacheType, imageURL) in
+            if error != nil {
+                SSAlertController.showAlertConfirm(title: "Error", message: error.localizedDescription, completion: nil)
+            }
         }
     }
 

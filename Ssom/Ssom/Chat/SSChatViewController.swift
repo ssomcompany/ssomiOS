@@ -30,6 +30,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     var chatRoomId: String?
     var ssomType: SSType = .SSOM
+    var postId: String?
     var partnerImageUrl: String?
 
     var ssomLatitude: Double = 0
@@ -171,20 +172,38 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             }) { (finish) in
                 SSAlertController.alertTwoButton(title: "만남 요청", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
 
-                    self.barButtonItems.changeMeetRequest(&self.isRequestedToMeet)
+                    guard let token = SSAccountManager.sharedInstance.sessionToken, let postId = self.postId else {
+                        return
+                    }
 
-//                    self.constTableViewChatTopToSuper.constant = 69
-                    self.constTableViewChatTopToSuper.active = false
-                    self.constTableViewChatTopToViewRequest.active = true
+//                    if postId.characters.count > 0 {
 
-                    self.constViewRequestHeight.constant = 44
+                        SSNetworkAPIClient.postMeetRequest(token, postId: postId, completion: { [weak self] (data, error) in
+//                            if let err = error {
+//                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+//                            } else {
+                                if let wself = self {
 
-                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                        self.view.layoutIfNeeded()
-                        self.viewNotificationToStartMeet.alpha = 1.0
-                        }, completion: { (finish) in
-                            //
-                    })
+                                    wself.barButtonItems.changeMeetRequest(&wself.isRequestedToMeet)
+
+//                                    wself.constTableViewChatTopToSuper.constant = 69
+                                    wself.constTableViewChatTopToSuper.active = false
+                                    wself.constTableViewChatTopToViewRequest.active = true
+
+                                    wself.constViewRequestHeight.constant = 44
+
+                                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                                        wself.view.layoutIfNeeded()
+                                        wself.viewNotificationToStartMeet.alpha = 1.0
+                                        }, completion: { (finish) in
+                                            //
+                                    })
+                                }
+//                            }
+                            })
+//                    } else {
+//                        SSAlertController.alertConfirm(title: "Error", message: "쏨 정보를 알 수 없습니다!", vc: self, completion: nil)
+//                    }
                 }) { (action) in
                     //
                 }
@@ -215,58 +234,75 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 //
         })
     }
+    @IBAction func tapDownShowMap(sender: AnyObject) {
+        self.btnShowMap.transform = CGAffineTransformMakeScale(0.9, 0.9)
+    }
 
     @IBAction func tapShowMap(sender: AnyObject) {
-        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
+            self.btnShowMap.transform = CGAffineTransformIdentity
+            }) { (finish) in
 
-        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatMapViewController") as! SSChatMapViewController
-        let chatMapDict: [String: AnyObject?] = ["partnerImageUrl": self.partnerImageUrl,
-                                                 "partnerLatitude": self.ssomLatitude,
-                                                 "partnerLongitude": self.ssomLongitude,
-                                                 "ssomType": self.ssomType.rawValue]
-        vc.data = SSChatMapViewModel(modelDict: chatMapDict)
-        vc.blockCancelToMeet = { [weak self] in
-            if let wself = self {
-                wself.cancelMeetRequest()
-            }
+                let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+
+                let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatMapViewController") as! SSChatMapViewController
+                let chatMapDict: [String: AnyObject?] = ["partnerImageUrl": self.partnerImageUrl,
+                                                         "partnerLatitude": self.ssomLatitude,
+                                                         "partnerLongitude": self.ssomLongitude,
+                                                         "ssomType": self.ssomType.rawValue]
+                vc.data = SSChatMapViewModel(modelDict: chatMapDict)
+                vc.blockCancelToMeet = { [weak self] in
+                    if let wself = self {
+                        wself.cancelMeetRequest()
+                    }
+                }
+                
+                self.navigationController?.pushViewController(vc, animated: true)
         }
-
-        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func tapDownSendMessage(sender: AnyObject) {
+        self.btnSendMessage.transform = CGAffineTransformMakeScale(0.9, 0.9)
     }
     
     @IBAction func tapSendMessage(sender: AnyObject?) {
-        if let token = SSAccountManager.sharedInstance.sessionToken {
-            guard let message = self.tfInput.text else {
-                return
-            }
+        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
+            self.btnSendMessage.transform = CGAffineTransformIdentity
+            }) { (finish) in
 
-            if message.characters.count > 0 {
-                var lastTimestamp = Int(NSDate().timeIntervalSince1970)
-                if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
-                    lastTimestamp = Int(timestamp)
-                }
+                if let token = SSAccountManager.sharedInstance.sessionToken {
+                    guard let message = self.tfInput.text else {
+                        return
+                    }
 
-                if let roomId = self.chatRoomId {
-                    SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
-                        if let err = error {
-                            print(err.localizedDescription)
-
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                        } else {
-                            if let newDatas = datas {
-                                self.tfInput.text = ""
-
-                                self.messages = newDatas
-
-                                self.tableViewChat.reloadData()
-
-                                let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
-                                self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
-                            }
+                    if message.characters.count > 0 {
+                        var lastTimestamp = Int(NSDate().timeIntervalSince1970)
+                        if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
+                            lastTimestamp = Int(timestamp)
                         }
-                    })
+
+                        if let roomId = self.chatRoomId {
+                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
+                                if let err = error {
+                                    print(err.localizedDescription)
+
+                                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                                } else {
+                                    if let newDatas = datas {
+                                        self.tfInput.text = ""
+
+                                        self.messages = newDatas
+
+                                        self.tableViewChat.reloadData()
+
+                                        let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
+                                        self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+                                    }
+                                }
+                            })
+                        }
+                    }
                 }
-            }
         }
     }
 

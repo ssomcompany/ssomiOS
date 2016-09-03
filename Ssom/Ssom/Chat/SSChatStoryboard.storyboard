@@ -84,6 +84,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" image="meetBtn"/>
                                         <connections>
+                                            <action selector="tapDownShowMap:" destination="tih-SM-SIo" eventType="touchDown" id="JdT-lc-q07"/>
                                             <action selector="tapShowMap:" destination="tih-SM-SIo" eventType="touchUpInside" id="Nm0-Lt-eSZ"/>
                                         </connections>
                                     </button>
@@ -116,6 +117,7 @@
                                         </constraints>
                                         <state key="normal" image="chat_btn_send"/>
                                         <connections>
+                                            <action selector="tapDownSendMessage:" destination="tih-SM-SIo" eventType="touchDown" id="LVf-Or-hyV"/>
                                             <action selector="tapSendMessage:" destination="tih-SM-SIo" eventType="touchUpInside" id="fvR-Mg-cYv"/>
                                         </connections>
                                     </button>

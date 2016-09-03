@@ -8,9 +8,9 @@
 
 import UIKit
 import GoogleMaps
-import Alamofire
+import SDWebImage
 
-class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
 
     @IBOutlet var mapView: GMSMapView!
     @IBOutlet var lbDistance: UILabel!
@@ -55,10 +55,13 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
         self.barButtonItems = SSNavigationBarItems(animated: true)
 
-//        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
-//        self.barButtonItems.lbBackButtonTitle.text = ""
-//
-//        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.lbBackButtonTitle.text = "채팅으로 돌아가기"
+        var backButtonFrame = self.barButtonItems.backBarButtonView.frame
+        backButtonFrame.size.width = 165
+        self.barButtonItems.backBarButtonView.frame = backButtonFrame
+
+        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
 //        let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 150, 44))
 //        if #available(iOS 8.2, *) {
@@ -91,19 +94,16 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
         if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            Alamofire.request(.GET, imageUrl)
-                .responseData { (response) -> Void in
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
 
-                    marker.icon = maskOfProfileImage
+                marker.icon = maskOfProfileImage
 
-                    if let data = response.data {
-                        if let profileImage: UIImage = UIImage(data: data) {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
+                if image != nil {
+                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 51.6, 51.6))
 
-                            marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                        }
-                    }
-            }
+                    marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                }
+            })
         } else {
             marker.icon = maskOfProfileImage
         }
@@ -111,14 +111,6 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
     func tapBack() {
-        guard let block = self.blockCancelToMeet else {
-            self.navigationController?.popViewControllerAnimated(true)
-
-            return
-        }
-
-        block()
-
         self.navigationController?.popViewControllerAnimated(true)
     }
 
@@ -129,6 +121,13 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
             self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
         }) { (finish) in
             SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소하시겠어요?\n취소시 채팅방으로 돌아갑니다.", vc: self, button1Title: "만남 취소", button2Title: "닫기", button1Completion: { (action) in
+
+                guard let block = self.blockCancelToMeet else {
+                    self.tapBack()
+                    return
+                }
+
+                block()
 
                 self.tapBack()
 
@@ -147,15 +146,7 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
     func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
         print("now finished to move the map camera! : \(position)")
 
-        let latitude: Double = self.data.partnerLatitude
-        let longitude: Double = self.data.partnerLongitude
-
-        let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let nowLocation: CLLocationCoordinate2D = self.mapView.camera.target
-
-        let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
-
-        self.lbDistance.text = Util.getDistanceString(distance)
+        locationManager.startUpdatingLocation()
     }
 
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
@@ -169,11 +160,25 @@ class SSChatMapViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.animateToCameraPosition(camera)
 
         locationManager.stopUpdatingLocation()
+
+        // caculate the distance from partner to me
+        let latitude: Double = self.data.partnerLatitude
+        let longitude: Double = self.data.partnerLongitude
+
+        let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let nowLocation: CLLocationCoordinate2D = camera.target
+
+        let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+
+        self.lbDistance.text = Util.getDistanceString(distance)
     }
 
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         locationManager.stopUpdatingLocation()
+
         print(error)
+        
+        self.lbDistance.text = "알 수 없음"
     }
 
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

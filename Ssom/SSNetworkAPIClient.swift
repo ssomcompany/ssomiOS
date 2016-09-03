@@ -565,4 +565,35 @@ public struct SSNetworkAPIClient {
             indicator.hideIndicator()
         }
     }
+
+    static func postMeetRequest(token: String, postId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.POST,
+                          SSNetworkContext.serverUrlPrefixt+"request",
+                          encoding: .JSON,
+                          parameters: ["postId": postId],
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawDatas = response.result.value as? [String: AnyObject] {
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatMessages", code: 803, userInfo: nil)
+
+                    completion(data: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(data: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
 }

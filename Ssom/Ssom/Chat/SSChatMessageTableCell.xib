@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -89,7 +90,9 @@
                     <constraint firstAttribute="bottom" secondItem="JzW-d7-fu0" secondAttribute="bottom" constant="1" id="Tb6-Jd-yZG"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="top" secondItem="Kfx-YD-rO7" secondAttribute="top" id="V1C-FZ-sBD"/>
                     <constraint firstAttribute="trailing" secondItem="hr3-OD-uVx" secondAttribute="trailing" constant="8" id="WBh-Oh-FGx"/>
+                    <constraint firstItem="hr3-OD-uVx" firstAttribute="width" relation="lessThanOrEqual" secondItem="Wcs-FJ-Ny3" secondAttribute="width" multiplier="314:414" id="dQ1-7K-P0v"/>
                     <constraint firstItem="JzW-d7-fu0" firstAttribute="leading" secondItem="hr3-OD-uVx" secondAttribute="leading" constant="12" id="faX-DL-B6Q"/>
+                    <constraint firstItem="k0C-5H-mcP" firstAttribute="width" relation="lessThanOrEqual" secondItem="Wcs-FJ-Ny3" secondAttribute="width" multiplier="312:414" id="keH-2v-To9"/>
                     <constraint firstItem="gy1-aS-bnd" firstAttribute="leading" secondItem="k0C-5H-mcP" secondAttribute="leading" constant="12" id="s8T-Qj-C3m"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="leading" secondItem="Wcs-FJ-Ny3" secondAttribute="leading" constant="60" id="tJO-sf-z9H"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="height" secondItem="Kfx-YD-rO7" secondAttribute="height" id="tkO-tA-b7T"/>

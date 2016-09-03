@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
 
     var viewChatCoachmark: SSChatCoachmarkView!
 
@@ -17,19 +17,27 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     @IBOutlet var constTableViewChatTopToViewRequest: NSLayoutConstraint!
 
     @IBOutlet var viewInputBar: UIView!
-    @IBOutlet var tfInput: UITextField!
     @IBOutlet var constInputBarBottomToSuper: NSLayoutConstraint!
+    @IBOutlet var tfInput: UITextField!
+    @IBOutlet var btnSendMessage: UIButton!
 
-    @IBOutlet var viewRequest: UIView!
-    @IBOutlet var lbRequestMeet: UILabel!
-    @IBOutlet var btnRequestMeet: UIButton!
+    @IBOutlet var viewNotificationToStartMeet: UIView!
+    @IBOutlet var constViewRequestHeight: NSLayoutConstraint!
+    @IBOutlet var lbNotificationToStartMeet: UILabel!
+    @IBOutlet var btnShowMap: UIButton!
 
     var barButtonItems: SSNavigationBarItems!
 
     var chatRoomId: String?
     var ssomType: SSType = .SSOM
     var partnerImageUrl: String?
+
+    var ssomLatitude: Double = 0
+    var ssomLongitude: Double = 0
+
     var messages: [SSChatViewModel] = [SSChatViewModel]()
+
+    var isRequestedToMeet: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,6 +50,14 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.setNavigationBarView()
 
         self.initView()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if self.tfInput.isFirstResponder() {
+            self.tfInput.resignFirstResponder()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,6 +116,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.registerForKeyboardNotifications()
 
+        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).CGColor
+        self.viewNotificationToStartMeet.layer.shadowOffset = CGSizeMake(0, 2)
+        self.viewNotificationToStartMeet.layer.shadowRadius = 1
+        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
+
         self.loadData()
     }
 
@@ -120,6 +141,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                             }
 
                             self.tableViewChat.reloadData()
+
+                            let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
+                            self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
                         }
                     }
                 })
@@ -140,46 +164,83 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     func tapMeetRequest() {
         print("tapped meet request!!")
 
-        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
-            self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
-        }) { (finish) in
-            SSAlertController.alertTwoButton(title: "만남", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
+        if !self.isRequestedToMeet {
 
-                //            self.constTableViewChatTopToSuper.constant = 69
-                self.constTableViewChatTopToSuper.active = false
-                self.constTableViewChatTopToViewRequest.active = true
+            UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+            }) { (finish) in
+                SSAlertController.alertTwoButton(title: "만남 요청", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
 
-                UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                    self.view.layoutIfNeeded()
-                    }, completion: { (finish) in
-                        //
-                })
-            }) { (action) in
-                //
+                    self.barButtonItems.changeMeetRequest(&self.isRequestedToMeet)
+
+//                    self.constTableViewChatTopToSuper.constant = 69
+                    self.constTableViewChatTopToSuper.active = false
+                    self.constTableViewChatTopToViewRequest.active = true
+
+                    self.constViewRequestHeight.constant = 44
+
+                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                        self.view.layoutIfNeeded()
+                        self.viewNotificationToStartMeet.alpha = 1.0
+                        }, completion: { (finish) in
+                            //
+                    })
+                }) { (action) in
+                    //
+                }
             }
-        }
-    }
 
-    @IBAction func tapRequest(sender: AnyObject) {
-        SSAlertController.alertTwoButton(title: "알림", message: "만남 취소 시 하트 1개가 소모됩니다.\n만남을 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
-
-//            self.constTableViewChatTopToSuper.constant = 0
-            self.constTableViewChatTopToViewRequest.active = false
-            self.constTableViewChatTopToSuper.active = true
-
-            UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                self.view.layoutIfNeeded()
-                }, completion: { (finish) in
+        } else {
+            SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
+                    self.cancelMeetRequest()
+                }, button2Completion: { (action) in
                     //
             })
-        }) { (action) in
-                //
         }
     }
+
+    func cancelMeetRequest() {
+        self.barButtonItems.changeMeetRequest(&self.isRequestedToMeet)
+
+        //            self.constTableViewChatTopToSuper.constant = 0
+        self.constTableViewChatTopToViewRequest.active = false
+        self.constTableViewChatTopToSuper.active = true
+
+        self.constViewRequestHeight.constant = 0
+
+        UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+            self.view.layoutIfNeeded()
+            self.viewNotificationToStartMeet.alpha = 0.0
+            }, completion: { (finish) in
+                //
+        })
+    }
+
+    @IBAction func tapShowMap(sender: AnyObject) {
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+
+        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatMapViewController") as! SSChatMapViewController
+        let chatMapDict: [String: AnyObject?] = ["partnerImageUrl": self.partnerImageUrl,
+                                                 "partnerLatitude": self.ssomLatitude,
+                                                 "partnerLongitude": self.ssomLongitude,
+                                                 "ssomType": self.ssomType.rawValue]
+        vc.data = SSChatMapViewModel(modelDict: chatMapDict)
+        vc.blockCancelToMeet = { [weak self] in
+            if let wself = self {
+                wself.cancelMeetRequest()
+            }
+        }
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
-    @IBAction func tapSendMessage(sender: AnyObject) {
+    @IBAction func tapSendMessage(sender: AnyObject?) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
-            if let message = self.tfInput.text {
+            guard let message = self.tfInput.text else {
+                return
+            }
+
+            if message.characters.count > 0 {
                 var lastTimestamp = Int(NSDate().timeIntervalSince1970)
                 if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
                     lastTimestamp = Int(timestamp)
@@ -193,9 +254,14 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                             SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                         } else {
                             if let newDatas = datas {
-                                self.messages.append(newDatas)
+                                self.tfInput.text = ""
+
+                                self.messages = newDatas
 
                                 self.tableViewChat.reloadData()
+
+                                let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
+                                self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
                             }
                         }
                     })
@@ -258,6 +324,18 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 return cell!
             }
         }
+    }
+
+// MARK: - UITextFieldDelegate
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return true;
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField.text?.characters.count > 0 {
+            self.tapSendMessage(nil)
+        }
+        return true;
     }
 
 // MARK: - Keyboard show & hide event

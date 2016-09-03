@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -15,6 +15,7 @@
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
                 <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
                 <outlet property="imgViewMeetRequest" destination="PxP-UG-XIa" id="CUc-lW-eG9"/>
+                <outlet property="imgViewMeetRequestHeart" destination="NZP-jm-BXT" id="82q-xK-Z8J"/>
                 <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>
                 <outlet property="lbBackButtonTitle" destination="Yic-qO-3ps" id="peR-xh-yby"/>
                 <outlet property="lbHeartCount" destination="ls5-ZA-jvE" id="qdJ-aM-hDn"/>

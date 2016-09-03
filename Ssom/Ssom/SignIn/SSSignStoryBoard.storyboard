@@ -91,7 +91,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="tapSignUpButton:" destination="fHF-ph-zYB" eventType="touchUpInside" id="cnR-bF-9Nz"/>
                                             <segue destination="BYc-3N-njc" kind="popoverPresentation" popoverAnchorView="ylA-ey-b3o" id="ajX-L7-zs4">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>

@@ -156,6 +156,9 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                         vc.chatRoomId = model.chatroomId
                         vc.ssomType = model.ssomViewModel.ssomType
                         vc.partnerImageUrl = model.ssomViewModel.imageUrl
+
+                        vc.ssomLatitude = model.ssomViewModel.latitude
+                        vc.ssomLongitude = model.ssomViewModel.longitude
                     }
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

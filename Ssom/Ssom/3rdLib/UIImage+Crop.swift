@@ -41,14 +41,20 @@ extension UIImage {
 
         if scaleFactorX > scaleFactorY {
             CGContextScaleCTM(context, scaleFactorX, scaleFactorX)
+
+            let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
+            image.drawInRect(myRect)
         } else if scaleFactorX < scaleFactorY {
             CGContextScaleCTM(context, scaleFactorY, scaleFactorY)
+
+            let myRect: CGRect = CGRectMake((image.size.height - image.size.width) / 2.0, 0, image.size.width, image.size.height)
+            image.drawInRect(myRect)
         } else {
             CGContextScaleCTM(context, scaleFactorX, scaleFactorY)
-        }
 
-        let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
-        image.drawInRect(myRect)
+            let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
+            image.drawInRect(myRect)
+        }
 
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

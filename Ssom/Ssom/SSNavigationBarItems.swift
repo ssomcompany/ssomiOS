@@ -34,6 +34,7 @@ class SSNavigationBarItems : UIView
     @IBOutlet var meetRequestButtonView: UIView!
     @IBOutlet var imgViewMeetRequest: UIImageView!
     @IBOutlet var btnMeetRequest: UIButton!
+    @IBOutlet var imgViewMeetRequestHeart: UIImageView!
 
     var delegate: SSNavigationBarItemsDelegate!
 
@@ -92,5 +93,21 @@ class SSNavigationBarItems : UIView
 
     func cancelTapMeetRequest() {
         self.imgViewMeetRequest.transform = CGAffineTransformIdentity
+    }
+
+    func changeMeetRequest(inout isRequestedToMeet: Bool) {
+        if isRequestedToMeet {
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
+            self.btnMeetRequest.setTitle("        만남요청", forState: UIControlState.Normal)
+            self.imgViewMeetRequestHeart.hidden = false
+        } else {
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+            self.btnMeetRequest.setTitle("만남 취소", forState: UIControlState.Normal)
+            self.imgViewMeetRequestHeart.hidden = true
+        }
+
+        isRequestedToMeet = !isRequestedToMeet
     }
 }

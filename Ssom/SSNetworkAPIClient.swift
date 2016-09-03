@@ -392,13 +392,41 @@ public struct SSNetworkAPIClient {
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
 
-                if let chatroomId = response.result.value as? String {
-                    completion(chatroomId: chatroomId, error: nil)
+                if let rawDatas = response.result.value as? [String: AnyObject] {
+
+                    if rawDatas.keys.contains("err") {
+                        var errorCode = 501
+                        var errorDescription = rawDatas["result"] as! String
+                        if let err = rawDatas["err"] as? Int {
+                            errorCode = err
+                        } else {
+                            if let errName = rawDatas["err"] as? String {
+                                if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
+                                    errorCode = errorInfo.0
+                                    errorDescription = errorInfo.1
+                                } else {
+                                    errorDescription = errName
+                                }
+                            }
+                        }
+                        let error = NSError(domain: "com.ssom.error.ServeError.PostChatRoom", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+                        completion(chatroomId: nil, error: error)
+                    } else {
+                        if let chatroomId = rawDatas["chatroomId"] as? Int {
+                            completion(chatroomId: String(chatroomId), error: nil)
+                        } else {
+                            let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
+
+                            completion(chatroomId: nil, error: error)
+                        }
+                    }
                 } else {
                     let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
 
                     completion(chatroomId: nil, error: error)
                 }
+
             } else {
                 print("Response Error : \(response.result.error)")
 
@@ -473,14 +501,14 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postChatMessage(token: String, chatroomId: String, message: String, lastTimestamp: Int, completion: (datas: SSChatViewModel?, error: NSError?) -> Void) {
+    static func postChatMessage(token: String, chatroomId: String, message: String, lastTimestamp: Int, completion: (datas: [SSChatViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
         Alamofire.request(.POST,
-            SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)/chats",
+            SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)/chats?lastTimestamp=\(lastTimestamp)",
             encoding: .JSON,
-            parameters: ["msg": message, "lastTimestamp": lastTimestamp],
+            parameters: ["msg": message],
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
@@ -493,21 +521,40 @@ public struct SSNetworkAPIClient {
 
                     if rawDatas.keys.contains("err") {
                         var errorCode = 501
+                        var errorDescription = rawDatas["result"] as! String
                         if let err = rawDatas["err"] as? Int {
                             errorCode = err
+                        } else {
+                            if let errDescription = rawDatas["err"] as? String {
+                                errorDescription = errDescription
+                            }
                         }
-                        let error = NSError(domain: "com.ssom.error.ServeError.ListChatMessages", code: errorCode, userInfo: [NSLocalizedDescriptionKey: rawDatas["result"] as! String])
+                        let error = NSError(domain: "com.ssom.error.ServeError.PostChatMessages", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
 
                         completion(datas: nil, error: error)
                     } else {
-                        let datas: SSChatViewModel = SSChatViewModel(modelDict: rawDatas)
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatMessages", code: 803, userInfo: nil)
+
+                        completion(datas: nil, error: error)
+                    }
+
+                } else {
+
+                    if let rawDatas = response.result.value as? [[String: AnyObject]] {
+                        var datas: [SSChatViewModel] = [SSChatViewModel]()
+
+                        for rawData: [String: AnyObject] in rawDatas {
+                            let model: SSChatViewModel = SSChatViewModel(modelDict: rawData)
+                            datas.append(model)
+                        }
 
                         completion(datas: datas, error: nil)
-                    }
-                } else {
-                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatMessages", code: 804, userInfo: nil)
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatMessages", code: 803, userInfo: nil)
 
-                    completion(datas: nil, error: error)
+                        completion(datas: nil, error: error)
+                    }
+                    
                 }
             } else {
                 print("Response Error : \(response.result.error)")

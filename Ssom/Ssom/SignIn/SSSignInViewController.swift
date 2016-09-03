@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSSignInViewController: UIViewController {
+class SSSignInViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var viewSignIn: UIView!
@@ -105,7 +105,7 @@ class SSSignInViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func tapSignInButton(sender: AnyObject) {
+    @IBAction func tapSignInButton(sender: AnyObject?) {
         SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) { [weak self] (finish) in
             if let wself = self {
                 wself.tapClose(nil)
@@ -122,9 +122,6 @@ class SSSignInViewController: UIViewController {
     }
     
     @IBAction func tapFindPasswordButton(sender: AnyObject) {
-    }
-
-    @IBAction func tapSignUpButton(sender: AnyObject) {
     }
 
     @IBAction func editingDidBeginEmail(sender: AnyObject) {
@@ -151,4 +148,12 @@ class SSSignInViewController: UIViewController {
         self.validateInput()
     }
 
+// MARK:- UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === self.tfPassword && self.btnSignIn.enabled {
+            self.tapSignInButton(nil)
+        }
+
+        return true;
+    }
 }

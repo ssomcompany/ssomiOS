@@ -38,15 +38,15 @@ class SSMasterViewController: UIViewController {
     func setNavigationBarView() {
         var naviTitleViewFrame:CGRect = self.navigationItem.titleView!.frame
         naviTitleViewFrame = CGRectMake(naviTitleViewFrame.origin.x, naviTitleViewFrame.origin.y
-            , naviTitleViewFrame.size.width, 38)
+            , naviTitleViewFrame.size.width, CGFloatWithScreenRatio(38, axis: Axis.Y, criteria: .IPhone6Plus))
         self.navigationItem.titleView!.frame = naviTitleViewFrame
 
         let titleBackgroundView: UIImageView = UIImageView(image: UIImage(named: "1DepToggleOn.png"))
-        titleBackgroundView.frame = CGRectMake(0, 0, 175, 38)
+        titleBackgroundView.frame = CGRectMakeWithScreenRatio(0, 0, 175, 38, criteria: .IPhone6Plus)
         self.navigationItem.titleView!.addSubview(titleBackgroundView)
 
         self.buttonBackgroundView = UIImageView(image: UIImage(named: "1DepToggleOff.png"))
-        self.buttonBackgroundView.frame = CGRectMake(0, 0, 97, 38)
+        self.buttonBackgroundView.frame = CGRectMakeWithScreenRatio(0, 0, 97, 38, criteria: .IPhone6Plus)
         self.navigationItem.titleView!.addSubview(self.buttonBackgroundView)
 
         self.lbButtonTitle = UILabel()
@@ -58,7 +58,7 @@ class SSMasterViewController: UIViewController {
         self.buttonBackgroundView.addConstraint(NSLayoutConstraint(item: self.buttonBackgroundView, attribute: .CenterX, relatedBy: .Equal, toItem: self.lbButtonTitle, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
         self.buttonBackgroundView.addConstraint(NSLayoutConstraint(item: self.buttonBackgroundView, attribute: .CenterY, relatedBy: .Equal, toItem: self.lbButtonTitle, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
 
-        self.segButton1 = UIButton(frame: CGRectMake(0, 0, 97, 38))
+        self.segButton1 = UIButton(frame: CGRectMakeWithScreenRatio(0, 0, 97, 38, criteria: .IPhone6Plus))
         self.segButton1.setTitle(kMapButtonTitle, forState: .Normal)
         self.segButton1.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
         self.segButton1.setTitleColor(UIColor.clearColor(), forState: .Selected)
@@ -67,7 +67,7 @@ class SSMasterViewController: UIViewController {
         self.segButton1.selected = true
         self.navigationItem.titleView!.addSubview(self.segButton1)
 
-        self.segButton2 = UIButton(frame: CGRectMake(CGFloat(175-97), 0, 97, 38))
+        self.segButton2 = UIButton(frame: CGRectMakeWithScreenRatio(CGFloat(175-97), 0, 97, 38, criteria: .IPhone6Plus))
         self.segButton2.setTitle(kListButtonTitle, forState: .Normal)
         self.segButton2.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1), forState: .Normal)
         self.segButton2.setTitleColor(UIColor.clearColor(), forState: .Selected)
@@ -95,7 +95,7 @@ class SSMasterViewController: UIViewController {
         leftBarButtonItem.target = self
         leftBarButtonItem.action = #selector(tapMenu)
 
-        var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
+        let rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
         if rightBarButtonItems.count == 2 {
             self.barButtonItems = SSNavigationBarItems(animated: true)
 
@@ -116,7 +116,7 @@ class SSMasterViewController: UIViewController {
         var originX: CGFloat = 0.0
         var buttonTitle: String = kMapButtonTitle
         if self.buttonBackgroundView.frame.origin.x == 0 {
-            originX = 175-97
+            originX = CGFloatWithScreenRatio(175-97, axis: Axis.X, criteria: .IPhone6Plus)
             buttonTitle = kListButtonTitle
         } else {
             originX = 0

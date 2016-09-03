@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NXQ-A8-Jsy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NXQ-A8-Jsy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -58,34 +59,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-P0-Lst">
-                                <rect key="frame" x="0.0" y="20" width="600" height="69"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상대방에게 만남을 신청했어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
-                                        <rect key="frame" x="35" y="24" width="205" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-iO-YnA">
-                                        <rect key="frame" x="379" y="7.5" width="207" height="54"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="요청취소" backgroundImage="cancelButtonRed.png"/>
-                                        <connections>
-                                            <action selector="tapRequest:" destination="tih-SM-SIo" eventType="touchUpInside" id="X4k-Cq-T36"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="1B4-T1-diq"/>
-                                    <constraint firstItem="7I9-42-WCS" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="2JE-ln-R0d"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ppc-iO-YnA" secondAttribute="trailing" constant="14" id="LSN-ur-DNC"/>
-                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="width" secondItem="B2p-P0-Lst" secondAttribute="width" multiplier="143:414" id="c2r-pQ-4ku"/>
-                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="gsC-2z-cLL"/>
-                                    <constraint firstItem="7I9-42-WCS" firstAttribute="leading" secondItem="B2p-P0-Lst" secondAttribute="leading" constant="35" id="p7F-ln-Na0"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-5O-J26">
                                 <rect key="frame" x="0.0" y="20" width="600" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,6 +67,37 @@
                                     <outlet property="delegate" destination="tih-SM-SIo" id="eQ2-oi-VMs"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-P0-Lst">
+                                <rect key="frame" x="0.0" y="20" width="600" height="0.0"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨과의 만남이 시작되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
+                                        <rect key="frame" x="35" y="-10.5" width="190.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-iO-YnA">
+                                        <rect key="frame" x="439.5" y="-28" width="150.5" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ppc-iO-YnA" secondAttribute="height" multiplier="148:54" id="o1b-TE-FxD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" image="meetBtn"/>
+                                        <connections>
+                                            <action selector="tapShowMap:" destination="tih-SM-SIo" eventType="touchUpInside" id="Nm0-Lt-eSZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="1B4-T1-diq"/>
+                                    <constraint firstItem="7I9-42-WCS" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="2JE-ln-R0d"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ppc-iO-YnA" secondAttribute="trailing" constant="10" id="LSN-ur-DNC"/>
+                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="width" secondItem="B2p-P0-Lst" secondAttribute="width" multiplier="104:414" id="c2r-pQ-4ku"/>
+                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="gsC-2z-cLL"/>
+                                    <constraint firstItem="7I9-42-WCS" firstAttribute="leading" secondItem="B2p-P0-Lst" secondAttribute="leading" constant="35" id="p7F-ln-Na0"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ew7-iN-Spu">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <subviews>
@@ -118,7 +122,10 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메시지를 입력하세요..." textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="BQ6-fu-HdD">
                                         <rect key="frame" x="27" y="0.0" width="506" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="tih-SM-SIo" id="Xrv-Jy-9Cl"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,20 +165,90 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="btnRequestMeet" destination="Ppc-iO-YnA" id="gtc-Wr-qPE"/>
+                        <outlet property="btnSendMessage" destination="CQr-Vv-DQ7" id="Bf3-a3-ml0"/>
+                        <outlet property="btnShowMap" destination="Ppc-iO-YnA" id="6aQ-vH-otc"/>
                         <outlet property="constInputBarBottomToSuper" destination="dwb-ND-Czw" id="Fzv-Qy-MJM"/>
                         <outlet property="constTableViewChatTopToSuper" destination="PZC-yI-YhI" id="Hp6-Ls-6Z1"/>
                         <outlet property="constTableViewChatTopToViewRequest" destination="z7g-kh-NXL" id="f5i-DI-nQt"/>
-                        <outlet property="lbRequestMeet" destination="7I9-42-WCS" id="DPq-VW-oK2"/>
+                        <outlet property="constViewRequestHeight" destination="1B4-T1-diq" id="tSn-4b-Cly"/>
+                        <outlet property="lbNotificationToStartMeet" destination="7I9-42-WCS" id="7Ch-Ha-561"/>
                         <outlet property="tableViewChat" destination="Pp4-5O-J26" id="sHW-am-ayz"/>
                         <outlet property="tfInput" destination="BQ6-fu-HdD" id="N9u-EL-hhY"/>
                         <outlet property="viewInputBar" destination="Ew7-iN-Spu" id="qrk-d2-mBn"/>
-                        <outlet property="viewRequest" destination="B2p-P0-Lst" id="1bk-MT-lgA"/>
+                        <outlet property="viewNotificationToStartMeet" destination="B2p-P0-Lst" id="Xq9-0C-2FV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1m-eg-yyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2039" y="1230"/>
+        </scene>
+        <!--Chat Map View Controller-->
+        <scene sceneID="gK3-fj-KAv">
+            <objects>
+                <viewController storyboardIdentifier="chatMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QFy-do-evc" customClass="SSChatMapViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XUp-Yq-J9U"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wkz-kK-9Uj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nam-g1-muY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTj-3E-PXU" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow" translatesAutoresizingMaskIntoConstraints="NO" id="jrD-ff-a7l">
+                                <rect key="frame" x="0.0" y="20" width="600" height="76"/>
+                            </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFn-Eq-eLK">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨과의 거리," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esW-Zo-PV2">
+                                        <rect key="frame" x="212" y="14" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJw-mF-lC4">
+                                        <rect key="frame" x="310" y="11" width="34" height="27.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="MJw-mF-lC4" firstAttribute="centerY" secondItem="esW-Zo-PV2" secondAttribute="centerY" id="5Bm-Id-bCV"/>
+                                    <constraint firstItem="MJw-mF-lC4" firstAttribute="leading" secondItem="esW-Zo-PV2" secondAttribute="trailing" constant="10" id="DFt-GW-BVo"/>
+                                    <constraint firstItem="esW-Zo-PV2" firstAttribute="centerX" secondItem="hFn-Eq-eLK" secondAttribute="centerX" constant="-44" id="FAr-1Q-4L4"/>
+                                    <constraint firstItem="esW-Zo-PV2" firstAttribute="centerY" secondItem="hFn-Eq-eLK" secondAttribute="centerY" id="mk5-HE-TJx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wkz-kK-9Uj" firstAttribute="top" secondItem="aTj-3E-PXU" secondAttribute="bottom" id="Btb-oc-FbY"/>
+                            <constraint firstItem="aTj-3E-PXU" firstAttribute="leading" secondItem="nam-g1-muY" secondAttribute="leading" id="GAB-zF-6i9"/>
+                            <constraint firstAttribute="trailing" secondItem="aTj-3E-PXU" secondAttribute="trailing" id="Src-Yb-kud"/>
+                            <constraint firstAttribute="trailing" secondItem="hFn-Eq-eLK" secondAttribute="trailing" id="fo5-xt-ECx"/>
+                            <constraint firstItem="aTj-3E-PXU" firstAttribute="top" secondItem="XUp-Yq-J9U" secondAttribute="bottom" id="jRv-Sz-uTY"/>
+                            <constraint firstItem="jrD-ff-a7l" firstAttribute="leading" secondItem="aTj-3E-PXU" secondAttribute="leading" id="l7o-iU-4Pr"/>
+                            <constraint firstItem="jrD-ff-a7l" firstAttribute="top" secondItem="aTj-3E-PXU" secondAttribute="top" id="m1c-sg-t33"/>
+                            <constraint firstItem="Wkz-kK-9Uj" firstAttribute="top" secondItem="hFn-Eq-eLK" secondAttribute="bottom" id="qjV-c4-STO"/>
+                            <constraint firstItem="hFn-Eq-eLK" firstAttribute="height" secondItem="nam-g1-muY" secondAttribute="height" multiplier="60:736" id="wwK-6x-oUo"/>
+                            <constraint firstItem="hFn-Eq-eLK" firstAttribute="leading" secondItem="nam-g1-muY" secondAttribute="leading" id="xkp-Fa-h6c"/>
+                            <constraint firstItem="jrD-ff-a7l" firstAttribute="trailing" secondItem="aTj-3E-PXU" secondAttribute="trailing" id="ysg-6x-RED"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lbDistance" destination="MJw-mF-lC4" id="eHT-JZ-U9A"/>
+                        <outlet property="mapView" destination="aTj-3E-PXU" id="TbF-Lw-zoj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJb-bT-M1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2748" y="1225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z94-kF-Pu2">
@@ -193,7 +270,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cancelButtonRed.png" width="148" height="54"/>
         <image name="chat_btn_send" width="23" height="23"/>
+        <image name="mapShadow" width="410" height="76"/>
+        <image name="meetBtn" width="148" height="54"/>
     </resources>
 </document>

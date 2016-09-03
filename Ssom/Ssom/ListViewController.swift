@@ -26,9 +26,39 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var youPayButtonBottomLineView: UIImageView!
 
     var mainViewModel: SSMainViewModel
+    lazy var _datasOfFilteredSsom: [SSViewModel] = []
+    var datas: [SSViewModel] {
+        get {
+            return self._datasOfFilteredSsom
+        }
+        set {
+            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+                var filteredData = [SSViewModel]()
+
+                for model: SSViewModel in newValue {
+                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        filteredData.append(model)
+                    } else {
+                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                            filteredData.append(model)
+                        }
+                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                            filteredData.append(model)
+                        }
+                    }
+                }
+
+                self._datasOfFilteredSsom = filteredData
+            } else {
+                self._datasOfFilteredSsom = newValue
+            }
+        }
+    }
+
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
+    var filterModel: SSFilterViewModel!
     var scrollDetailView: SSScrollView!
 
     var needReload: Bool = false
@@ -49,6 +79,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.init()
 
         self.mainViewModel = SSMainViewModel(datas: datas, isSell: isSell)
+        self.datas = self.mainViewModel.datas
     }
 
     override func viewDidLoad() {
@@ -209,6 +240,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
                 if let models = viewModels {
                     self.mainViewModel.datas = models
+                    self._datasOfFilteredSsom = models
                     print("result is : \(self.mainViewModel.datas)")
 
                     self.filterData()
@@ -242,6 +274,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         self.mainViewModel.datas = tempDatas
+        self.datas = tempDatas
 
         self.ssomListTableView.reloadData()
     }
@@ -268,7 +301,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
 
-        let model:SSViewModel = mainViewModel.datas[indexPath.row]
+        let model:SSViewModel = datas[indexPath.row]
         if let content = model.content {
             print("content is \(content.stringByRemovingPercentEncoding)")
 
@@ -333,7 +366,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainViewModel.datas.count;
+        return datas.count;
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -341,15 +374,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.scrollDetailView.frame = UIScreen.mainScreen().bounds
         self.scrollDetailView.delegate = self
 
-        let model = self.mainViewModel.datas[indexPath.row]
+        let model = self.datas[indexPath.row]
         if self.btnIPay.selected {
             self.scrollDetailView.ssomType = .SSOM
-            self.scrollDetailView.configureWithDatas(self.mainViewModel.datas, currentViewModel: model)
+            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
             self.scrollDetailView.changeTheme(.SSOM)
         }
         if self.btnYouPay.selected {
             self.scrollDetailView.ssomType = .SSOSEYO
-            self.scrollDetailView.configureWithDatas(self.mainViewModel.datas, currentViewModel: model)
+            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
             self.scrollDetailView.changeTheme(.SSOSEYO)
         }
 
@@ -368,7 +401,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.filterView.removeFromSuperview()
 
         // apply filter value to get the ssom list
+        self.filterModel = filterViewModel
+        self.datas = self.mainViewModel.datas
         self.ssomListTableView .reloadData()
+        
+        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

@@ -164,9 +164,18 @@ class SSFilterView: UIView {
         self.filter3PeopleButton.backgroundColor = UIColor.whiteColor()
         self.filter4PeopleButton.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
     }
+    @IBAction func tapFilterInitialize(sender: AnyObject) {
+        let filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeAll, peopleCount: .All)
+
+        guard let _ = self.delegate?.applyFilter(filterValue) else {
+            NSLog("%@", "This SSFilterView isn't implemented applyFilter function")
+
+            return
+        }
+    }
 
     @IBAction func tapApplyButton(sender: AnyObject) {
-        let filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeEarly20, personCount: 0)
+        let filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeEarly20, peopleCount: .OnePerson)
         if self.filter20beginAgeButton.selected {
             filterValue.ageType = .AgeEarly20
         } else if self.filter20middleAgeButton.selected {
@@ -179,13 +188,13 @@ class SSFilterView: UIView {
 
         // how many people
         if self.filter1PersonButton.selected {
-            filterValue.personCount = SSPeopleCountType.OnePerson.rawValue
+            filterValue.peopleCountType = .OnePerson
         } else if self.filter2PeopleButton.selected {
-            filterValue.personCount = SSPeopleCountType.TwoPeople.rawValue
+            filterValue.peopleCountType = .TwoPeople
         } else if self.filter3PeopleButton.selected {
-            filterValue.personCount = SSPeopleCountType.ThreePeople.rawValue
+            filterValue.peopleCountType = .ThreePeople
         } else if self.filter4PeopleButton.selected {
-            filterValue.personCount = SSPeopleCountType.OverFourPeople.rawValue
+            filterValue.peopleCountType = .OverFourPeople
         }
 
         guard let _ = self.delegate?.applyFilter(filterValue) else {

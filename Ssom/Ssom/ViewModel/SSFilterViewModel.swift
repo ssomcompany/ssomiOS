@@ -9,12 +9,12 @@
 import Foundation
 
 @objc public class SSFilterViewModel: NSObject {
-    var ageType: SSAgeType
+    var ageType: SSAgeAreaType
 
-    var personCount: Int = 0
+    var peopleCountType: SSPeopleCountStringType
 
-    init(ageType: SSAgeType, personCount: Int) {
+    init(ageType: SSAgeAreaType, peopleCount: SSPeopleCountStringType) {
         self.ageType = ageType
-        self.personCount = personCount
+        self.peopleCountType = peopleCount
     }
 }

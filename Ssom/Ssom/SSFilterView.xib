@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -217,9 +217,9 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-n4-Vsg" userLabel="Cancel Button">
-                            <rect key="frame" x="326" y="226" width="70" height="34"/>
+                            <rect key="frame" x="333" y="226" width="63" height="34"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="70" id="dkl-fE-WnU"/>
+                                <constraint firstAttribute="width" constant="63" id="dkl-fE-WnU"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                             <state key="normal" title="      취소">
@@ -239,6 +239,14 @@
                                 <action selector="tapApplyButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="q7y-r5-Twe"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-8R-tgd">
+                            <rect key="frame" x="282" y="226" width="47" height="34"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                            <state key="normal" title="초기화"/>
+                            <connections>
+                                <action selector="tapFilterInitialize:" destination="iN0-l3-epB" eventType="touchUpInside" id="tRJ-vc-bYt"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -247,6 +255,7 @@
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="B6u-eJ-uyB"/>
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="top" secondItem="HHI-JE-2OX" secondAttribute="bottom" constant="21" id="BqB-tJ-mE0"/>
                         <constraint firstAttribute="height" constant="283" id="MgH-tJ-onF"/>
+                        <constraint firstItem="B0P-n4-Vsg" firstAttribute="leading" secondItem="3F4-8R-tgd" secondAttribute="trailing" constant="4" id="Q6I-lR-yDS"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="Rfl-8k-CNq"/>
                         <constraint firstAttribute="trailing" secondItem="jOa-gb-If4" secondAttribute="trailing" constant="28" id="UUt-hO-Fsc"/>
                         <constraint firstAttribute="trailing" secondItem="rBP-xd-zDR" secondAttribute="trailing" constant="40" id="VEY-31-hhc"/>
@@ -264,6 +273,7 @@
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="bottom" constant="15" id="u6X-VY-QnU"/>
                         <constraint firstAttribute="trailing" secondItem="HHI-JE-2OX" secondAttribute="trailing" constant="38" id="uBa-X9-1zw"/>
                         <constraint firstAttribute="bottom" secondItem="B0P-n4-Vsg" secondAttribute="bottom" constant="23" id="wRN-gd-eHX"/>
+                        <constraint firstItem="B0P-n4-Vsg" firstAttribute="centerY" secondItem="3F4-8R-tgd" secondAttribute="centerY" id="xAT-hA-NOD"/>
                     </constraints>
                 </view>
             </subviews>

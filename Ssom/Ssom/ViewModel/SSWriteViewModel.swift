@@ -10,6 +10,7 @@ import Foundation
 
 enum SSAgeType: Int
 {
+    case AgeAll = 0
     case AgeEarly20 = 20
     case AgeMiddle20 = 24
     case AgeLate20 = 27
@@ -18,18 +19,59 @@ enum SSAgeType: Int
 
 enum SSAgeAreaType: String
 {
+    case AgeAll = "전체"
     case AgeEarly20 = "20대 초반"
     case AgeMiddle20 = "20대 중반"
     case AgeLate20 = "20대 후반"
     case Age30 = "30대"
+
+    func toInt() -> Int {
+        switch self {
+        case AgeAll:
+            return 0
+        case AgeEarly20:
+            return 20
+        case AgeMiddle20:
+            return 24
+        case AgeLate20:
+            return 27
+        case Age30:
+            return 30
+        }
+    }
 }
 
 enum SSPeopleCountType: Int
 {
+    case All = 0
     case OnePerson = 1
     case TwoPeople
     case ThreePeople
     case OverFourPeople
+}
+
+enum SSPeopleCountStringType: String
+{
+    case All = "전체"
+    case OnePerson = "1명"
+    case TwoPeople = "2명"
+    case ThreePeople = "3명"
+    case OverFourPeople = "4명 이상"
+
+    func toInt() -> Int {
+        switch self {
+        case All:
+            return 0
+        case OnePerson:
+            return 1
+        case TwoPeople:
+            return 2
+        case ThreePeople:
+            return 3
+        case OverFourPeople:
+            return 4
+        }
+    }
 }
 
 public struct SSWriteViewModel

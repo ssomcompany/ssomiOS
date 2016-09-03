@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-import Alamofire
+import SDWebImage
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var mainView: GMSMapView!
@@ -26,15 +26,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     
     var locationManager: CLLocationManager!
-    var datas: [SSViewModel]
+    var currentLocation: CLLocationCoordinate2D!
+
+    var datasOfAllSsom: [SSViewModel]
+    lazy var _datasOfFilteredSsom: [SSViewModel] = []
+    var datas: [SSViewModel] {
+        get {
+            return self._datasOfFilteredSsom
+        }
+        set {
+            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+                var filteredData = [SSViewModel]()
+
+                for model: SSViewModel in newValue {
+                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        filteredData.append(model)
+                    } else {
+                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                            filteredData.append(model)
+                        }
+                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                            filteredData.append(model)
+                        }
+                    }
+                }
+
+                self._datasOfFilteredSsom = filteredData
+            } else {
+                self._datasOfFilteredSsom = newValue
+            }
+        }
+    }
     var datasForSsom: [SSViewModel]
     var datasForSsoseyo: [SSViewModel]
 
     var filterView: SSFilterView!
+    var filterModel: SSFilterViewModel!
     var scrollDetailView: SSScrollView!
 
     init() {
-        self.datas = []
+        self.datasOfAllSsom = []
         self.datasForSsom = []
         self.datasForSsoseyo = []
 
@@ -47,12 +78,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         for data in datas {
             let viewModel = SSViewModel.init(modelDict: data)
 
-            self.datas.append(viewModel)
+            self.datasOfAllSsom.append(viewModel)
         }
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.datas = []
+        self.datasOfAllSsom = []
         self.datasForSsom = []
         self.datasForSsoseyo = []
 
@@ -105,8 +136,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
             } else {
                 if let models = viewModels {
+                    self.datasOfAllSsom = models
                     self.datas = models
-                    print("result is : \(self.datas)")
+                    print("result is : \(self.datasOfAllSsom)")
 
                     self.showMarkers()
                 }
@@ -167,6 +199,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     func showMarkers() {
 
         mainView.clear()
+        self.datasForSsom = []
+        self.datasForSsoseyo = []
 
         var index: Int = 0;
         for data in self.datas {
@@ -176,7 +210,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             print("position is \(latitude), \(longitude)")
 
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+            let nowLocation: CLLocationCoordinate2D = self.currentLocation != nil ? self.currentLocation : mainView.camera.target
 
             let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
@@ -221,19 +255,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
         if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            Alamofire.request(.GET, imageUrl)
-                .responseData { (response) -> Void in
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
+                marker.icon = maskOfProfileImage
 
-                    marker.icon = maskOfProfileImage
+                if image != nil {
+                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 51.6, 51.6))
 
-                    if let data = response.data {
-                        if let profileImage: UIImage = UIImage(data: data) {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(profileImage, frame: CGRectMake(0, 0, 51.6, 51.6))
-
-                            marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                        }
-                    }
-            }
+                    marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                }
+            })
         } else {
             marker.icon = maskOfProfileImage
         }
@@ -310,14 +340,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if (segue.identifier == "SSListViewSegue") {
             let vc: ListViewController = segue.destinationViewController as! ListViewController
 
-            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
-            vc.mainViewModel = SSMainViewModel(datas: self.datas, isSell: self.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+            let nowLocation: CLLocationCoordinate2D = self.currentLocation
+            vc.mainViewModel = SSMainViewModel(datas: self.datasOfAllSsom, isSell: self.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
         }
 
         if (segue.identifier == "SSWriteViewSegueFromMain") {
             let vc: SSWriteViewController = segue.destinationViewController as! SSWriteViewController
 
-            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+            let nowLocation: CLLocationCoordinate2D = self.currentLocation
             vc.writeViewModel.myLatitude = nowLocation.latitude
             vc.writeViewModel.myLongitude = nowLocation.longitude
         }
@@ -338,23 +368,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
         print("now finished to move the map camera! : \(position)")
-
-        var index: Int = 0;
-        for data in self.datas {
-            let latitude: Double = data.latitude
-            let longitude: Double = data.longitude
-
-            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
-
-            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
-
-            let dataWithDistance: SSViewModel = data
-            dataWithDistance.distance = distance
-            self.datas[index] = dataWithDistance
-            
-            index += 1
-        }
     }
 
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
@@ -383,7 +396,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
 
+        self.currentLocation = camera.target
         mainView.animateToCameraPosition(camera)
+
+        var index: Int = 0;
+        for data in self.datasOfAllSsom {
+            let latitude: Double = data.latitude
+            let longitude: Double = data.longitude
+
+            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let nowLocation: CLLocationCoordinate2D = camera.target
+
+            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+
+            let dataWithDistance: SSViewModel = data
+            dataWithDistance.distance = distance
+            self.datasOfAllSsom[index] = dataWithDistance
+
+            index += 1
+        }
 
         locationManager.stopUpdatingLocation()
     }
@@ -425,6 +456,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.filterView.removeFromSuperview()
 
         // apply filter value to get the ssom list
+        self.filterModel = filterViewModel
+        self.datas = self.datasOfAllSsom
+        self.showMarkers()
+
+        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

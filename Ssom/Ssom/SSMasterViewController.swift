@@ -143,8 +143,8 @@ class SSMasterViewController: UIViewController {
                 let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
                 let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
 
-                let nowLocation: CLLocationCoordinate2D = mapVC.mainView.camera.target
-                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datas, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation
+                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
                 listVC.initView()
             }
         }

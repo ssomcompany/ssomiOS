@@ -91,7 +91,9 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
+        let borderOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
+        let coverOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "ssomIngGreen" : "ssomIngRed")!, frame: CGRectMake(0, 0, 56.2, 56.2))
+        let maskOfProfileImage: UIImage = UIImage.mergeImages(firstImage: coverOfProfileImage, secondImage: borderOfProfileImage, x: 0, y: 0)
 
         if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
             SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
@@ -155,22 +157,32 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
     // MARK: - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
-
-        mapView.animateToCameraPosition(camera)
-
-        locationManager.stopUpdatingLocation()
 
         // caculate the distance from partner to me
         let latitude: Double = self.data.partnerLatitude
         let longitude: Double = self.data.partnerLongitude
 
         let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let nowLocation: CLLocationCoordinate2D = camera.target
+        let nowLocation: CLLocationCoordinate2D = locations.last!.coordinate
+
+        self.setMarker(nil, isSell: self.data.ssomType != .SSOM, nowLocation.latitude, nowLocation.longitude, imageUrl: nil)
 
         let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
         self.lbDistance.text = Util.getDistanceString(distance)
+
+        let middleLocation = CLLocationCoordinate2D(latitude: (latitude + nowLocation.latitude) / 2.0, longitude: (longitude + nowLocation.longitude) / 2.0)
+//        let camera: GMSCameraPosition = GMSCameraPosition(target: middleLocation, zoom: 15, bearing: 0, viewingAngle: 0)
+//        mapView.animateToCameraPosition(camera)
+
+        var mapBounds = GMSCoordinateBounds()
+        mapBounds = mapBounds.includingCoordinate(tempLocation)
+        mapBounds = mapBounds.includingCoordinate(middleLocation)
+        mapBounds = mapBounds.includingCoordinate(nowLocation)
+        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(mapBounds, withPadding: 50.0))
+
+        locationManager.stopUpdatingLocation()
+
     }
 
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

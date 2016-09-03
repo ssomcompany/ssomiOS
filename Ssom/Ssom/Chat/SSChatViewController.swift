@@ -176,12 +176,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         return
                     }
 
-//                    if postId.characters.count > 0 {
+                    if postId.characters.count > 0 {
 
                         SSNetworkAPIClient.postMeetRequest(token, postId: postId, completion: { [weak self] (data, error) in
-//                            if let err = error {
-//                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
-//                            } else {
+                            if let err = error {
+                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                            } else {
                                 if let wself = self {
 
                                     wself.barButtonItems.changeMeetRequest(&wself.isRequestedToMeet)
@@ -199,11 +199,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                             //
                                     })
                                 }
-//                            }
+                            }
                             })
-//                    } else {
-//                        SSAlertController.alertConfirm(title: "Error", message: "쏨 정보를 알 수 없습니다!", vc: self, completion: nil)
-//                    }
+                    } else {
+                        SSAlertController.alertConfirm(title: "Error", message: "쏨 정보를 알 수 없습니다!", vc: self, completion: nil)
+                    }
                 }) { (action) in
                     //
                 }

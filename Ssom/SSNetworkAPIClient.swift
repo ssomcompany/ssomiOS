@@ -582,6 +582,7 @@ public struct SSNetworkAPIClient {
                 print("Response JSON : \(response.result.value)")
 
                 if let rawDatas = response.result.value as? [String: AnyObject] {
+                    completion(data: nil, error: nil)
                 } else {
                     let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatMessages", code: 803, userInfo: nil)
 

@@ -14,6 +14,7 @@ public struct SSChatroomViewModel {
     var participantUserId: String       // participantId
     var createdDateTime: NSDate         // createdTimestamp
     var unreadCount: Int
+    var lastMessage: String             // lastMsg
     var ssomViewModel: SSViewModel
 
     init() {
@@ -22,6 +23,7 @@ public struct SSChatroomViewModel {
         self.participantUserId = ""
         self.createdDateTime = NSDate()
         self.unreadCount = 0
+        self.lastMessage = ""
         self.ssomViewModel = SSViewModel()
     }
 
@@ -58,6 +60,12 @@ public struct SSChatroomViewModel {
             self.unreadCount = unreadCount
         } else {
             self.unreadCount = 0
+        }
+
+        if let lastMessage = modelDict["lastMsg"] as? String {
+            self.lastMessage = lastMessage
+        } else {
+            self.lastMessage = ""
         }
 
         self.ssomViewModel = SSViewModel(modelDict: modelDict)

@@ -172,13 +172,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             }) { (finish) in
                 SSAlertController.alertTwoButton(title: "만남 요청", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
 
-                    guard let token = SSAccountManager.sharedInstance.sessionToken, let postId = self.postId else {
+                    guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
                         return
                     }
 
-                    if postId.characters.count > 0 {
+                    if chatRoomId.characters.count > 0 {
 
-                        SSNetworkAPIClient.postMeetRequest(token, postId: postId, completion: { [weak self] (data, error) in
+                        SSNetworkAPIClient.postMeetRequest(token, chatRoomId: chatRoomId, completion: { [weak self] (data, error) in
                             if let err = error {
                                 SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                             } else {

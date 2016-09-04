@@ -22,6 +22,8 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
     var blockCancelToMeet: (() -> Void)?
 
+    var myMarker: GMSMarker!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +33,10 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
     }
 
     func initView() {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
+
         self.initMapView()
 
         let dataObject = SSModelToObjectConverter<SSChatMapViewModel>(value: self.data)
@@ -86,7 +92,15 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
     }
 
-    func setMarker(data: AnyObject?, isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
+    func applicationDidEnterBackground(sender: NSNotification?) {
+        self.locationManager.stopUpdatingLocation()
+    }
+
+    func applicationWillEnterForeground(sender: NSNotification?) {
+        self.locationManager.startUpdatingLocation()
+    }
+
+    func setMarker(data: AnyObject?, isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) -> GMSMarker {
         let marker = GMSMarker()
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
@@ -110,6 +124,8 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
             marker.icon = maskOfProfileImage
         }
         marker.map = self.mapView
+
+        return marker
     }
 
     func tapBack() {
@@ -165,7 +181,10 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let nowLocation: CLLocationCoordinate2D = locations.last!.coordinate
 
-        self.setMarker(nil, isSell: self.data.ssomType != .SSOM, nowLocation.latitude, nowLocation.longitude, imageUrl: nil)
+        if self.myMarker != nil {
+            self.myMarker.map = nil
+        }
+        self.myMarker = self.setMarker(nil, isSell: self.data.ssomType != .SSOM, nowLocation.latitude, nowLocation.longitude, imageUrl: nil)
 
         let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 

@@ -15,7 +15,7 @@ enum SSScrollViewDirection: Int {
 }
 
 protocol SSScrollViewDelegate {
-    func closeScrollView()
+    func closeScrollView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
     func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
 }
@@ -216,8 +216,8 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
 // MARK:- SSDetailViewDelegate
 
-    func closeDetailView() {
-        guard let _ = self.delegate?.closeScrollView() else {
+    func closeDetailView(needToReload: Bool) {
+        guard let _ = self.delegate?.closeScrollView(needToReload) else {
             return
         }
     }

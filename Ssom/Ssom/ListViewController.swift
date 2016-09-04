@@ -116,7 +116,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         self.closeFilterView()
-        self.closeScrollView()
+        self.closeScrollView(false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -409,10 +409,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK: - SSScrollViewDelegate
-    func closeScrollView() {
+    func closeScrollView(needToReload: Bool) {
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
+
+            if needToReload {
+                self.loadingData()
+            }
         }
     }
 

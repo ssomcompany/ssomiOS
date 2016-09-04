@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SSDetailViewDelegate {
-    func closeDetailView()
+    func closeDetailView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
     func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
 }
@@ -31,6 +31,10 @@ class SSDetailView: UIView {
     var ssomType: SSType!
 
     var viewModel: SSViewModel!
+
+    var isMySsom: Bool = false
+
+    var needToReload: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,6 +63,17 @@ class SSDetailView: UIView {
         self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount)")
         self.textViewDescription.text = self.viewModel.content
         self.lbDistance.text = "나와의 거리 \(Util.getDistanceString(self.viewModel.distance))"
+
+        if SSAccountManager.sharedInstance.isAuthorized {
+            if let userModel = SSAccountManager.sharedInstance.userModel {
+                self.isMySsom = userModel.userId == self.viewModel.userId
+            }
+        }
+
+        if self.isMySsom {
+            self.btnSsom.setTitle("삭제", forState: UIControlState.Normal)
+            self.btnSsom.setImage(nil, forState: UIControlState.Normal)
+        }
     }
 
     func changeTheme(ssomType: SSType) {
@@ -80,7 +95,7 @@ class SSDetailView: UIView {
     }
     
     @IBAction func tapClose(sender: AnyObject?) {
-        guard let _ = self.delegate?.closeDetailView() else {
+        guard let _ = self.delegate?.closeDetailView(self.needToReload) else {
             NSLog("%@", "This SSDetailView's delegate isn't implemented closeDetailView function")
 
             return
@@ -89,19 +104,28 @@ class SSDetailView: UIView {
 
     @IBAction func tapSsom(sender: AnyObject) {
         if SSAccountManager.sharedInstance.isAuthorized {
-            if let userModel = SSAccountManager.sharedInstance.userModel {
-                if userModel.userId == self.viewModel.userId {
-                    SSAlertController.showAlertConfirm(title: "", message: "내가 등록한 쏨입니다!", completion: nil)
-                } else {
-
-                    guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl) else {
-                        NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
-
-                        return
-                    }
-
-                    self.tapClose(nil)
+            if self.isMySsom {
+                if let token = SSAccountManager.sharedInstance.sessionToken {
+                    SSNetworkAPIClient.deletePost(token, postId: self.viewModel.postId, completion: { (error) in
+                        if let err = error {
+                            SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                        } else {
+                            SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
+                                self.needToReload = true
+                                self.tapClose(nil)
+                            })
+                        }
+                    })
                 }
+            } else {
+
+                guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl) else {
+                    NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
+
+                    return
+                }
+
+                self.tapClose(nil)
             }
         } else {
             guard let _ = self.delegate?.openSignIn(nil) else {

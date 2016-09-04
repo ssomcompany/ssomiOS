@@ -110,7 +110,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.initMapView()
 
         self.closeFilterView()
-        self.closeScrollView()
+        self.closeScrollView(false)
     }
 
     func initMapView() {
@@ -464,10 +464,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
 // MARK: - SSScrollViewDelegate
-    func closeScrollView() {
+    func closeScrollView(needToReload: Bool) {
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
+
+            if needToReload {
+                self.loadingData()
+            }
         }
     }
 

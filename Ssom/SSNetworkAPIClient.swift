@@ -93,6 +93,39 @@ public struct SSNetworkAPIClient {
             }
     }
 
+    static func deletePost(token: String, postId: String, completion: (error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.DELETE,
+                          SSNetworkContext.serverUrlPrefixt+"posts/\(postId)",
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                if acceptableStatusCodes.contains(response.response!.statusCode) {
+                    print("postPost result : \(response.result.value)")
+
+                    completion(error: nil)
+                } else {
+                    let failureReason = "Response status code was unacceptable: \(response.response!.statusCode)"
+                    let err: NSError = NSError(domain: "com.ssom.error.UnacceptableStatusCode", code: 401, userInfo: [NSLocalizedDescriptionKey: failureReason])
+
+                    completion(error: err)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+                
+                completion(error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
 // MARK: - File
     static func getFile(token: String, fileId: String, completion: (error: NSError?) -> Void) {
         let imagePath = fileId
@@ -566,14 +599,14 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postMeetRequest(token: String, postId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+    static func postMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
         Alamofire.request(.POST,
                           SSNetworkContext.serverUrlPrefixt+"request",
                           encoding: .JSON,
-                          parameters: ["postId": postId],
+                          parameters: ["chatroomId": chatRoomId],
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
             print("request is : \(response.request)")
@@ -596,5 +629,13 @@ public struct SSNetworkAPIClient {
 
             indicator.hideIndicator()
         }
+    }
+
+    static func putMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+
+    }
+
+    static func deleteMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+
     }
 }

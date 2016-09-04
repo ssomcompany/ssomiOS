@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -25,10 +25,18 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="oRr-8s-7IA" secondAttribute="trailing" id="0eh-yC-OcS"/>
+                        <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="gMn-nV-LbX" secondAttribute="width" multiplier="3:1" id="9v6-Eo-9d8"/>
                         <constraint firstItem="oRr-8s-7IA" firstAttribute="leading" secondItem="gMn-nV-LbX" secondAttribute="leading" id="Eb1-Qw-Orr"/>
                         <constraint firstAttribute="bottom" secondItem="oRr-8s-7IA" secondAttribute="bottom" id="JAK-aH-M8k"/>
                         <constraint firstItem="oRr-8s-7IA" firstAttribute="top" secondItem="gMn-nV-LbX" secondAttribute="top" id="RlC-3Z-C1E"/>
+                        <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="gMn-nV-LbX" secondAttribute="width" id="dvI-jQ-lmd"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9v6-Eo-9d8"/>
+                            <exclude reference="dvI-jQ-lmd"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -51,6 +59,8 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="constContentViewToScrollViewWidthRatio" destination="9v6-Eo-9d8" id="s6e-lN-62U"/>
+                <outlet property="constContentViewToScrollViewWidthRatioMin" destination="dvI-jQ-lmd" id="fDQ-gC-N0j"/>
                 <outlet property="constContentViewWidth" destination="fab-QL-f1t" id="qHL-z5-NLR"/>
                 <outlet property="constContentViewWidthMin" destination="YtW-4f-nDO" id="A3H-Kq-hKM"/>
                 <outlet property="contentView" destination="oRr-8s-7IA" id="0YD-hh-cbb"/>

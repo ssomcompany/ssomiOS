@@ -186,9 +186,6 @@
 		974C9D3D1C6B447000E17A2B /* minired.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF91C6B446F00E17A2B /* minired.png */; };
 		974C9D3E1C6B447000E17A2B /* minired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BFA1C6B446F00E17A2B /* minired@2x.png */; };
 		974C9D3F1C6B447000E17A2B /* minired@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BFB1C6B446F00E17A2B /* minired@3x.png */; };
-		974C9D411C6B447000E17A2B /* myBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BFD1C6B446F00E17A2B /* myBtn.png */; };
-		974C9D421C6B447000E17A2B /* myBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BFE1C6B446F00E17A2B /* myBtn@2x.png */; };
-		974C9D431C6B447000E17A2B /* myBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BFF1C6B446F00E17A2B /* myBtn@3x.png */; };
 		974C9D441C6B447000E17A2B /* oval4Fill30.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C001C6B446F00E17A2B /* oval4Fill30.png */; };
 		974C9D451C6B447000E17A2B /* oval4Fill30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C011C6B446F00E17A2B /* oval4Fill30@2x.png */; };
 		974C9D461C6B447000E17A2B /* oval4Fill30@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C021C6B446F00E17A2B /* oval4Fill30@3x.png */; };
@@ -553,9 +550,6 @@
 		974C9BF91C6B446F00E17A2B /* minired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = minired.png; path = ../../../Ssom/Ssom/Ssom/Resource/minired.png; sourceTree = "<group>"; };
 		974C9BFA1C6B446F00E17A2B /* minired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minired@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/minired@2x.png"; sourceTree = "<group>"; };
 		974C9BFB1C6B446F00E17A2B /* minired@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minired@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/minired@3x.png"; sourceTree = "<group>"; };
-		974C9BFD1C6B446F00E17A2B /* myBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myBtn.png; path = ../../../Ssom/Ssom/Ssom/Resource/myBtn.png; sourceTree = "<group>"; };
-		974C9BFE1C6B446F00E17A2B /* myBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "myBtn@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/myBtn@2x.png"; sourceTree = "<group>"; };
-		974C9BFF1C6B446F00E17A2B /* myBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "myBtn@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/myBtn@3x.png"; sourceTree = "<group>"; };
 		974C9C001C6B446F00E17A2B /* oval4Fill30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oval4Fill30.png; path = ../../../Ssom/Ssom/Ssom/Resource/oval4Fill30.png; sourceTree = "<group>"; };
 		974C9C011C6B446F00E17A2B /* oval4Fill30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "oval4Fill30@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/oval4Fill30@2x.png"; sourceTree = "<group>"; };
 		974C9C021C6B446F00E17A2B /* oval4Fill30@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "oval4Fill30@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/oval4Fill30@3x.png"; sourceTree = "<group>"; };
@@ -920,9 +914,6 @@
 				974C9BF91C6B446F00E17A2B /* minired.png */,
 				974C9BFA1C6B446F00E17A2B /* minired@2x.png */,
 				974C9BFB1C6B446F00E17A2B /* minired@3x.png */,
-				974C9BFD1C6B446F00E17A2B /* myBtn.png */,
-				974C9BFE1C6B446F00E17A2B /* myBtn@2x.png */,
-				974C9BFF1C6B446F00E17A2B /* myBtn@3x.png */,
 				974C9C001C6B446F00E17A2B /* oval4Fill30.png */,
 				974C9C011C6B446F00E17A2B /* oval4Fill30@2x.png */,
 				974C9C021C6B446F00E17A2B /* oval4Fill30@3x.png */,
@@ -1535,7 +1526,6 @@
 				974C9D1E1C6B447000E17A2B /* loginBtn@2x.png in Resources */,
 				974C9CE21C6B447000E17A2B /* filterOff@3x.png in Resources */,
 				9764D9E41D36017B00BBE4C6 /* SSMenuTableViewCell.xib in Resources */,
-				974C9D411C6B447000E17A2B /* myBtn.png in Resources */,
 				974C9C8A1C6B447000E17A2B /* acceptButtonRed@2x.png in Resources */,
 				974C9CF71C6B447000E17A2B /* heartWhite@3x.png in Resources */,
 				974C9C7F1C6B447000E17A2B /* 2DepToggleGreen.png in Resources */,
@@ -1562,7 +1552,6 @@
 				974C9D211C6B447000E17A2B /* loginTopPng@2x.png in Resources */,
 				974C9C971C6B447000E17A2B /* bgBot50@2x.png in Resources */,
 				974C9DB61C6B447000E17A2B /* writePhotoArea.png in Resources */,
-				974C9D421C6B447000E17A2B /* myBtn@2x.png in Resources */,
 				974C9D941C6B447000E17A2B /* ssomSelectNone@3x.png in Resources */,
 				974C9D991C6B447000E17A2B /* ssomSelectRed@2x.png in Resources */,
 				974C9D4D1C6B447000E17A2B /* pathGuideHeart.png in Resources */,
@@ -1571,7 +1560,6 @@
 				974C9CD11C6B447000E17A2B /* detailCenterGreen@3x.png in Resources */,
 				974C9D861C6B447000E17A2B /* ssomIngRedPoint.png in Resources */,
 				974C9CA21C6B447000E17A2B /* bow.png in Resources */,
-				974C9D431C6B447000E17A2B /* myBtn@3x.png in Resources */,
 				974C9D891C6B447000E17A2B /* ssomIngRedSmall.png in Resources */,
 				974C9DA31C6B447000E17A2B /* tostBg.png in Resources */,
 				9787ACE21CFD37AC001CF18C /* Menu.storyboard in Resources */,

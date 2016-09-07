@@ -60,6 +60,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var datasForSsom: [SSViewModel]
     var datasForSsoseyo: [SSViewModel]
 
+    var isAlreadyWrittenMySsom: Bool = false
+
     var filterView: SSFilterView!
     var filterModel: SSFilterViewModel!
     var scrollDetailView: SSScrollView!
@@ -183,6 +185,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func showOpenAnimation() {
 
+        if self.isAlreadyWrittenMySsom {
+            self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+            self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
+        }
+
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
             self.viewBottomInfo.transform = CGAffineTransformIdentity
@@ -204,6 +211,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         var index: Int = 0;
         for data in self.datas {
+            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+                if loginedUserId == data.userId {
+                    self.isAlreadyWrittenMySsom = true
+                } else {
+                    self.isAlreadyWrittenMySsom = false
+                }
+            }
+
             let latitude: Double = data.latitude 
             let longitude: Double = data.longitude 
 
@@ -347,7 +362,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if (segue.identifier == "SSWriteViewSegueFromMain") {
             let vc: SSWriteViewController = segue.destinationViewController as! SSWriteViewController
 
-            let nowLocation: CLLocationCoordinate2D = self.currentLocation
+            let nowLocation: CLLocationCoordinate2D = self.currentLocation != nil ? self.currentLocation : self.mainView.camera.target
             vc.writeViewModel.myLatitude = nowLocation.latitude
             vc.writeViewModel.myLongitude = nowLocation.longitude
         }

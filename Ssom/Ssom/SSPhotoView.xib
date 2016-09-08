@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSPhotoView" customModule="Ssom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP9-q1-9DO">
+                    <rect key="frame" x="116" y="503" width="368" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="dLX-B4-OXl"/>
+                    </constraints>
+                    <state key="normal" title="Close" backgroundImage="closeBtn.png"/>
+                    <connections>
+                        <action selector="tapClose:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ov0-tK-Avn"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-U8-cjQ">
+                    <rect key="frame" x="0.0" y="120" width="600" height="348"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dd2-oO-UJV" userLabel="Status Bar BGView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="NBR-ui-NDy"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="dd2-oO-UJV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Fm-AJ-kdp"/>
+                <constraint firstAttribute="trailing" secondItem="dd2-oO-UJV" secondAttribute="trailing" id="7Wk-ts-scf"/>
+                <constraint firstAttribute="bottom" secondItem="vP9-q1-9DO" secondAttribute="bottom" constant="35" id="Fw9-IX-ZM9"/>
+                <constraint firstItem="vP9-q1-9DO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="JBT-rM-kk4"/>
+                <constraint firstItem="dd2-oO-UJV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rg1-vY-00c"/>
+                <constraint firstItem="vP9-q1-9DO" firstAttribute="top" secondItem="4Cv-U8-cjQ" secondAttribute="bottom" constant="35" id="W2d-NY-hV6"/>
+                <constraint firstAttribute="trailing" secondItem="vP9-q1-9DO" secondAttribute="trailing" constant="116" id="d9l-hK-JxL"/>
+                <constraint firstAttribute="trailing" secondItem="4Cv-U8-cjQ" secondAttribute="trailing" id="fef-YO-CPP"/>
+                <constraint firstItem="4Cv-U8-cjQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qbx-hf-6Tn"/>
+                <constraint firstItem="4Cv-U8-cjQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="120" id="vxq-H7-Gwv"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <connections>
+                <outlet property="closeButton" destination="vP9-q1-9DO" id="oBi-PX-mZb"/>
+                <outlet property="imageView" destination="4Cv-U8-cjQ" id="44s-X8-rgP"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="closeBtn.png" width="185" height="67"/>
+    </resources>
+</document>

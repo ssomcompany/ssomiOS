@@ -19,7 +19,7 @@ let SSMainCoverViewMaxAlpha: CGFloat = 0.2
 /**
  To respond to the updates to `paneState` for an instance of `MSDynamicsDrawerViewController`, configure a custom class to adopt the `MSDynamicsDrawerViewControllerDelegate` protocol and set it as the `delegate` object.
  */
-protocol SSDrawerViewControllerDelegate {
+protocol SSDrawerViewControllerDelegate: class {
     /**
      Informs the delegate that the drawer view controller will attempt to update to a pane state in the specified direction.
 
@@ -268,7 +268,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
      The dynamics drawer view controller informs its delegate of changes to the state of the drawer view controller. For more information about the methods you can implement in your delegate, `MSDynamicsDrawerViewControllerDelegate`.
      */
-    var delegate: SSDrawerViewControllerDelegate?
+    weak var delegate: SSDrawerViewControllerDelegate?
 
     //------------------------------------------
     // @name Managing the Child View Controllers

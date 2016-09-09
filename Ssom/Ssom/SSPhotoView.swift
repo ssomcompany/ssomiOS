@@ -16,7 +16,7 @@ import SDWebImage
 class SSPhotoView: UIView {
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var imageView: UIImageView!
-    var delegate: SSPhotoViewDelegate?
+    weak var delegate: SSPhotoViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -61,6 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var datasForSsoseyo: [SSViewModel]
 
     var isAlreadyWrittenMySsom: Bool = false
+    var mySsom: SSViewModel!
 
     var filterView: SSFilterView!
     var filterModel: SSFilterViewModel!
@@ -187,7 +188,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         if self.isAlreadyWrittenMySsom {
             self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
-            self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
         }
 
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
@@ -214,6 +214,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
                 if loginedUserId == data.userId {
                     self.isAlreadyWrittenMySsom = true
+                    self.mySsom = data
                 } else {
                     self.isAlreadyWrittenMySsom = false
                 }
@@ -341,12 +342,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     @IBAction func tapWriteButton(sender: AnyObject) {
 
-        let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+        if self.isAlreadyWrittenMySsom {
+            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.writeButton.bounds.width / 2.0)
+            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
 
-        UIView.animateWithDuration(0.3, animations: {
-            self.writeButton.transform = transform
-        }) { (finish) in
-            self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
+                self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
+                }, completion: { (finish) in
+                    self.openDetailView(self.mySsom)
+                    self.writeButton.layer.transform = CATransform3DIdentity
+            })
+        } else {
+            let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+
+            UIView.animateWithDuration(0.3, animations: {
+                self.writeButton.transform = transform
+            }) { (finish) in
+                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+            }
         }
     }
 
@@ -375,6 +388,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         seg.selectedSegmentIndex = 0
     }
 
+    func openDetailView(model: SSViewModel) {
+        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
+        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
+        self.scrollDetailView.delegate = self
+
+        if self.btnIPay.selected {
+            self.scrollDetailView.ssomType = .SSOM
+            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOM)
+        }
+        if self.btnYouPay.selected {
+            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOSEYO)
+        }
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.view.addSubview(self.scrollDetailView)
+    }
+
 // MARK: - GMSMapViewDelegate
 
     func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {
@@ -386,23 +419,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
-        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
-        self.scrollDetailView.delegate = self
-
-        if self.btnIPay.selected {
-            self.scrollDetailView.ssomType = .SSOM
-            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: marker.userData as? SSViewModel)
-            self.scrollDetailView.changeTheme(.SSOM)
+        if let model = marker.userData as? SSViewModel {
+            self.openDetailView(model)
         }
-        if self.btnYouPay.selected {
-            self.scrollDetailView.ssomType = .SSOSEYO
-            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: marker.userData as? SSViewModel)
-            self.scrollDetailView.changeTheme(.SSOSEYO)
-        }
-
-        self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.view.addSubview(self.scrollDetailView)
 
         return true
     }
@@ -494,7 +513,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if postId != "" {
                 SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
@@ -510,6 +529,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                             vc.ssomType = ssomType
                             vc.chatRoomId = createdChatroomId
                             vc.partnerImageUrl = partnerImageUrl
+
+                            vc.ssomLatitude = ssomLatitude
+                            vc.ssomLongitude = ssomLongitude
+                            
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }

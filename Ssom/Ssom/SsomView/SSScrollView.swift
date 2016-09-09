@@ -14,10 +14,10 @@ enum SSScrollViewDirection: Int {
     case Right
 }
 
-protocol SSScrollViewDelegate {
+protocol SSScrollViewDelegate: class {
     func closeScrollView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
 }
 
 class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
@@ -29,7 +29,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
     @IBOutlet var constContentViewToScrollViewWidthRatio: NSLayoutConstraint!
     @IBOutlet var constContentViewToScrollViewWidthRatioMin: NSLayoutConstraint!
 
-    var delegate: SSScrollViewDelegate?
+    weak var delegate: SSScrollViewDelegate?
     private var datas: [SSViewModel]?
     var ssomType: SSType?
 
@@ -228,8 +228,8 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         }
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
-        guard let _ = self.delegate?.doSsom(ssomType, postId: postId, partnerImageUrl: partnerImageUrl) else {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
+        guard let _ = self.delegate?.doSsom(ssomType, postId: postId, partnerImageUrl: partnerImageUrl, ssomLatitude: ssomLatitude, ssomLongitude: ssomLongitude) else {
             return
         }
     }

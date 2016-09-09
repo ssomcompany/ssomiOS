@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-protocol SSChatListTableCellDelegate {
+protocol SSChatListTableCellDelegate: class {
     func deleteCell(cell: UITableViewCell)
     func tapProfileImage(imageUrl: String)
 }
@@ -30,7 +30,7 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var lbDistance: UILabel!
     @IBOutlet var lbCreatedDate: UILabel!
 
-    var delegate: SSChatListTableCellDelegate?
+    weak var delegate: SSChatListTableCellDelegate?
     var profilImageUrl: String?
 
     var isCellOpened: Bool {

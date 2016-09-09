@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol SSDetailViewDelegate {
+protocol SSDetailViewDelegate: class {
     func closeDetailView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
 }
 
 class SSDetailView: UIView {
@@ -27,7 +27,7 @@ class SSDetailView: UIView {
     @IBOutlet var btnSsom: UIButton!
     @IBOutlet var btnCancel: UIButton!
 
-    var delegate: SSDetailViewDelegate!
+    weak var delegate: SSDetailViewDelegate!
     var ssomType: SSType!
 
     var viewModel: SSViewModel!
@@ -119,7 +119,7 @@ class SSDetailView: UIView {
                 }
             } else {
 
-                guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl) else {
+                guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl, ssomLatitude: self.viewModel.latitude, ssomLongitude: self.viewModel.longitude) else {
                     NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
 
                     return

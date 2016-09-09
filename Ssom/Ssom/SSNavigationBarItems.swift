@@ -36,7 +36,7 @@ class SSNavigationBarItems : UIView
     @IBOutlet var btnMeetRequest: UIButton!
     @IBOutlet var imgViewMeetRequestHeart: UIImageView!
 
-    var delegate: SSNavigationBarItemsDelegate!
+    weak var delegate: SSNavigationBarItemsDelegate!
 
     var animated: Bool = false
 

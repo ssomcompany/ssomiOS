@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
         // OneSignal
-        let signal = OneSignal(launchOptions: launchOptions, appId: PreDefine.OneSignalKey)
+        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey)
 
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController

@@ -424,7 +424,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if postId != "" {
                 SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
@@ -440,6 +440,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             vc.ssomType = ssomType
                             vc.chatRoomId = createdChatroomId
                             vc.partnerImageUrl = partnerImageUrl
+
+                            vc.ssomLatitude = ssomLatitude
+                            vc.ssomLongitude = ssomLongitude
+
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SSMenuHeadViewDelegate {
+protocol SSMenuHeadViewDelegate: class {
     func openSignIn(completion: ((finish: Bool)-> Void)?)
 }
 
@@ -16,7 +16,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     @IBOutlet var view: UIView!
     @IBOutlet var lbUserId: UILabel!
 
-    var delegate: SSMenuHeadViewDelegate?
+    weak var delegate: SSMenuHeadViewDelegate?
 
     var blockLogin: (() -> Void)!
 

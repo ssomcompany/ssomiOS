@@ -30,7 +30,7 @@ class SSFilterView: UIView {
 
     @IBOutlet var btnClose: UIButton!
 
-    var delegate: SSFilterViewDelegate?
+    weak var delegate: SSFilterViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -20,7 +20,7 @@ class SSListTableViewCell: UITableViewCell {
     @IBOutlet var distanceLabel: UILabel!
     @IBOutlet var imageTapButton: UIButton!
 
-    var delegate: SSListTableViewCellDelegate?
+    weak var delegate: SSListTableViewCellDelegate?
     var profilImageUrl: String?
 
     override func awakeFromNib() {

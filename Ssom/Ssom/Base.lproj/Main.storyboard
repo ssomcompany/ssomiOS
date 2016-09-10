@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="57" width="600" height="479"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Grf-fV-pHB">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Grf-fV-pHB">
                                 <rect key="frame" x="0.0" y="57" width="35" height="479"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -45,12 +45,6 @@
                                     <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hR3-hZ-JGs"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="F59-tD-qIQ" userLabel="I Pay Button Line View">
-                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="gbp-RT-CCp"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
                                 <rect key="frame" x="300" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,12 +63,13 @@
                                     <action selector="tapYouPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2nP-id-IzE"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-Nh-GA4" userLabel="You Pay Button Line View">
-                                <rect key="frame" x="300" y="54" width="300" height="3"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REB-B3-KMj">
+                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
+                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="DQn-p5-ckN"/>
+                                    <constraint firstAttribute="height" constant="3" id="An0-nF-6AW"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
                                 <rect key="frame" x="0.0" y="57" width="600" height="76"/>
                                 <constraints>
@@ -151,31 +146,27 @@
                         <constraints>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="top" secondItem="puq-gM-UxI" secondAttribute="bottom" id="3XK-AA-Gg6"/>
                             <constraint firstAttribute="trailing" secondItem="puq-gM-UxI" secondAttribute="trailing" id="4vs-KF-zT6"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="width" secondItem="F59-tD-qIQ" secondAttribute="width" id="4ym-hB-1jg"/>
                             <constraint firstItem="VC7-ei-KcX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="5Mz-wL-A3s"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="bottom" secondItem="Y4K-Nh-GA4" secondAttribute="bottom" id="5pN-Ss-kD6"/>
                             <constraint firstItem="puq-gM-UxI" firstAttribute="leading" secondItem="VC7-ei-KcX" secondAttribute="trailing" id="6aJ-zk-nYm"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="bottom" secondItem="F59-tD-qIQ" secondAttribute="bottom" id="AFl-np-557"/>
+                            <constraint firstItem="REB-B3-KMj" firstAttribute="leading" secondItem="VC7-ei-KcX" secondAttribute="leading" id="7v2-Ef-Qbc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="bottom" constant="23" id="Ay6-7D-5kX"/>
                             <constraint firstItem="puq-gM-UxI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BUB-9t-wde"/>
-                            <constraint firstItem="Y4K-Nh-GA4" firstAttribute="width" secondItem="puq-gM-UxI" secondAttribute="width" id="FHy-Vq-2v6"/>
                             <constraint firstItem="2ul-5f-kgq" firstAttribute="top" secondItem="VC7-ei-KcX" secondAttribute="bottom" id="Fgr-4o-IOg"/>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IHi-Ee-4jy"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="leading" secondItem="F59-tD-qIQ" secondAttribute="leading" id="M1y-53-QgR"/>
                             <constraint firstItem="2ul-5f-kgq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="V5U-h0-Y49"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Grf-fV-pHB" secondAttribute="bottom" id="aqb-IJ-DBn"/>
                             <constraint firstAttribute="trailing" secondItem="TOk-Md-hmy" secondAttribute="trailing" id="bNm-mO-izV"/>
                             <constraint firstItem="puq-gM-UxI" firstAttribute="width" secondItem="VC7-ei-KcX" secondAttribute="width" id="cPg-TH-oVZ"/>
                             <constraint firstItem="VC7-ei-KcX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dE9-kc-Dll"/>
+                            <constraint firstItem="REB-B3-KMj" firstAttribute="bottom" secondItem="VC7-ei-KcX" secondAttribute="bottom" id="dKK-iP-S24"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TOk-Md-hmy" secondAttribute="bottom" id="eAY-sy-q0v"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="23" id="eM5-Fb-GdN"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="width" secondItem="TOk-Md-hmy" secondAttribute="width" multiplier="24:414" id="hQU-Jv-aYA"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="VC7-ei-KcX" secondAttribute="bottom" constant="23" id="hlG-uj-tkM"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="trailing" secondItem="Y4K-Nh-GA4" secondAttribute="trailing" id="hnC-gR-5SU"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lhs-GT-3Oj"/>
                             <constraint firstAttribute="trailing" secondItem="aCj-wE-maY" secondAttribute="trailing" constant="23" id="piM-CJ-3vt"/>
                             <constraint firstItem="3k0-s1-1ct" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="23" id="u2G-vD-sBZ"/>
-                            <constraint firstItem="Grf-fV-pHB" firstAttribute="top" secondItem="F59-tD-qIQ" secondAttribute="bottom" id="vaW-pt-x1A"/>
+                            <constraint firstItem="REB-B3-KMj" firstAttribute="width" secondItem="VC7-ei-KcX" secondAttribute="width" id="uKj-Hb-DqJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aCj-wE-maY" secondAttribute="bottom" constant="20" id="vxQ-Zw-VZV"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="x0S-cE-bND"/>
                             <constraint firstAttribute="trailing" secondItem="2ul-5f-kgq" secondAttribute="trailing" id="x2m-zs-evF"/>
@@ -212,14 +203,14 @@
                         <outlet property="btnYouPay" destination="puq-gM-UxI" id="V1F-Ej-WZH"/>
                         <outlet property="constBottomInfoViewHeight" destination="afY-dF-BxM" id="oTC-5c-P26"/>
                         <outlet property="constBottomInfoViewTrailingToSuper" destination="zgg-BX-9nu" id="Lkc-Ml-V3i"/>
-                        <outlet property="imageIPayButtonLineView" destination="F59-tD-qIQ" id="Aec-Y3-wYL"/>
-                        <outlet property="imageYouPayButtonLineView" destination="Y4K-Nh-GA4" id="VoP-kC-mth"/>
+                        <outlet property="constViewPayButtonLineLeadingToButtonIPay" destination="7v2-Ef-Qbc" id="kTQ-XV-TNq"/>
                         <outlet property="lbFilteredAgePeople" destination="Om7-AB-KOj" id="rm2-vL-6Mt"/>
                         <outlet property="mainView" destination="TOk-Md-hmy" id="aGJ-vw-d5K"/>
                         <outlet property="myLocationButton" destination="1Me-Mu-v0q" id="SSr-Eg-NK7"/>
                         <outlet property="navigationItem" destination="JzG-2m-bAY" id="iDJ-wG-R6L"/>
                         <outlet property="viewBottomInfo" destination="3k0-s1-1ct" id="TJE-qL-He7"/>
                         <outlet property="viewFilterBackground" destination="Pu5-ru-cnK" id="4O7-QZ-LCm"/>
+                        <outlet property="viewPayButtonLine" destination="REB-B3-KMj" id="7Zi-Rx-4Me"/>
                         <outlet property="writeButton" destination="aCj-wE-maY" id="dyw-E3-jIZ"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="CUJ-52-fKz"/>
                     </connections>
@@ -267,12 +258,6 @@
                                     <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKq-fa-mdY"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLP-u4-evS" userLabel="I Pay Button Line View">
-                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="rzX-wf-1Y7"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-m4-vLX" userLabel="You Pay Button">
                                 <rect key="frame" x="300" y="0.0" width="300" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,12 +277,13 @@
                                     <action selector="tapYouPayButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="fXD-Eb-tyM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DepToggleRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="MFJ-b2-VZo" userLabel="You Pay Button Line View">
-                                <rect key="frame" x="300" y="54" width="300" height="3"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmH-tP-FXB">
+                                <rect key="frame" x="0.0" y="54" width="300" height="3"/>
+                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="tmc-pC-geC"/>
+                                    <constraint firstAttribute="height" constant="3" id="X7Y-lG-zCi"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
                                 <rect key="frame" x="23" y="444" width="424" height="69"/>
                                 <subviews>
@@ -339,7 +325,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-Xv-XcV">
-                                <rect key="frame" x="501" y="441.5" width="76" height="74"/>
+                                <rect key="frame" x="501" y="442" width="76" height="74"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="writeBtn">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,27 +338,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="23" id="3Br-So-WTx"/>
-                            <constraint firstItem="MFJ-b2-VZo" firstAttribute="width" secondItem="hYp-m4-vLX" secondAttribute="width" id="5DE-Ov-bJw"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="bottom" constant="23" id="8cd-P3-BhS"/>
                             <constraint firstItem="OM2-Da-teJ" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="B1H-7V-VWS"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="bottom" secondItem="qLP-u4-evS" secondAttribute="bottom" id="JZv-cF-nDK"/>
+                            <constraint firstItem="wmH-tP-FXB" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="leading" id="GQY-Mp-re4"/>
                             <constraint firstItem="hYp-m4-vLX" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="LdE-6x-8lG"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="bottom" id="Lrr-7r-ctf"/>
                             <constraint firstItem="6oW-Xv-XcV" firstAttribute="centerY" secondItem="4cE-r7-rmG" secondAttribute="centerY" id="Pd0-5w-sez"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="leading" secondItem="qLP-u4-evS" secondAttribute="leading" id="Pj4-VB-kXV"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="trailing" secondItem="MFJ-b2-VZo" secondAttribute="trailing" id="UZg-vZ-ScI"/>
                             <constraint firstItem="hYp-m4-vLX" firstAttribute="width" secondItem="OM2-Da-teJ" secondAttribute="width" id="VNn-1C-2Al"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="6oW-Xv-XcV" secondAttribute="bottom" constant="20" id="auv-TR-VXw"/>
                             <constraint firstItem="OM2-Da-teJ" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="bht-oi-3Rw"/>
                             <constraint firstItem="W9o-t2-VQr" firstAttribute="top" secondItem="hYp-m4-vLX" secondAttribute="bottom" id="czW-I0-1JH"/>
                             <constraint firstAttribute="trailing" secondItem="4cE-r7-rmG" secondAttribute="trailing" constant="153" id="eBs-9R-XZG"/>
                             <constraint firstItem="W9o-t2-VQr" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="fjK-f6-gdV"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="width" secondItem="qLP-u4-evS" secondAttribute="width" id="m0E-ib-VuH"/>
                             <constraint firstAttribute="trailing" secondItem="W9o-t2-VQr" secondAttribute="trailing" id="mGh-xm-IEo"/>
+                            <constraint firstItem="wmH-tP-FXB" firstAttribute="bottom" secondItem="OM2-Da-teJ" secondAttribute="bottom" id="mjb-fp-PMg"/>
                             <constraint firstAttribute="trailing" secondItem="hYp-m4-vLX" secondAttribute="trailing" id="ogN-wf-ZLy"/>
                             <constraint firstItem="hYp-m4-vLX" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="trailing" id="vch-Oj-4EI"/>
                             <constraint firstItem="4cE-r7-rmG" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" constant="23" id="wN3-Wb-nF2"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="bottom" secondItem="MFJ-b2-VZo" secondAttribute="bottom" id="zhP-NS-9Vh"/>
+                            <constraint firstItem="wmH-tP-FXB" firstAttribute="width" secondItem="OM2-Da-teJ" secondAttribute="width" id="ypa-wq-qvv"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -406,12 +389,12 @@
                         <outlet property="btnYouPay" destination="hYp-m4-vLX" id="Sjq-gE-zbw"/>
                         <outlet property="constBottomInfoViewHeight" destination="thr-AE-rmh" id="D6T-K2-meq"/>
                         <outlet property="constBottomInfoViewTrailingToSuper" destination="eBs-9R-XZG" id="NtA-lo-nSm"/>
-                        <outlet property="iPayButtonBottomLineView" destination="qLP-u4-evS" id="qbG-Dz-ees"/>
+                        <outlet property="constViewPayButtonBottomLineLeadingToButtonIPay" destination="GQY-Mp-re4" id="3QW-a4-6KW"/>
                         <outlet property="lbFilteredAgePeople" destination="vNy-b2-vKz" id="IuN-Oy-XaF"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
                         <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
                         <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
-                        <outlet property="youPayButtonBottomLineView" destination="MFJ-b2-VZo" id="FtP-0C-Xjf"/>
+                        <outlet property="viewPayButtonBottomLine" destination="wmH-tP-FXB" id="h20-dc-dDN"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>
                     </connections>
                 </viewController>
@@ -975,8 +958,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2DepToggleGreen.png" width="309" height="5"/>
-        <image name="2DepToggleRed.png" width="309" height="6"/>
         <image name="acceptButtonGreen.png" width="241" height="87"/>
         <image name="buttonCancel.png" width="137" height="49"/>
         <image name="camera.png" width="26" height="24"/>

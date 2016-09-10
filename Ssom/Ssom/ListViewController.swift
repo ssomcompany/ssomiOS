@@ -21,9 +21,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var btnWrite: UIButton!
 
     @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var iPayButtonBottomLineView: UIImageView!
+    @IBOutlet var viewPayButtonBottomLine: UIView!
+    @IBOutlet var constViewPayButtonBottomLineLeadingToButtonIPay: NSLayoutConstraint!
     @IBOutlet var btnYouPay: UIButton!
-    @IBOutlet var youPayButtonBottomLineView: UIImageView!
 
     var mainViewModel: SSMainViewModel
     lazy var _datasOfFilteredSsom: [SSViewModel] = []
@@ -183,26 +183,40 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapIPayButton(sender: AnyObject) {
 
-        self.btnIPay.selected = true;
-        self.iPayButtonBottomLineView.hidden = false;
-        self.btnYouPay.selected = false;
-        self.youPayButtonBottomLineView.hidden = true;
+        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = 0
 
-        self.mainViewModel.isSell = true;
+        UIView.animateWithDuration(0.3, animations: {
 
-        self.loadingData()
+            self.btnIPay.selected = true;
+            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.btnYouPay.selected = false;
+
+            self.view.layoutIfNeeded()
+        }) { (finish) in
+
+            self.mainViewModel.isSell = true;
+
+            self.loadingData()
+        }
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
 
-        self.btnIPay.selected = false;
-        self.iPayButtonBottomLineView.hidden = true;
-        self.btnYouPay.selected = true;
-        self.youPayButtonBottomLineView.hidden = false;
+        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
-        self.mainViewModel.isSell = false;
+        UIView.animateWithDuration(0.3, animations: {
+            
+            self.btnIPay.selected = false;
+            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.btnYouPay.selected = true;
 
-        self.loadingData()
+            self.view.layoutIfNeeded()
+        }) { (finish) in
+
+            self.mainViewModel.isSell = false;
+
+            self.loadingData()
+        }
     }
 
     @IBAction func tapFilterButton(sender: AnyObject) {

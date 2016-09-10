@@ -15,9 +15,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
     @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var imageIPayButtonLineView: UIImageView!
+    @IBOutlet var viewPayButtonLine: UIView!
+    @IBOutlet var constViewPayButtonLineLeadingToButtonIPay: NSLayoutConstraint!
     @IBOutlet var btnYouPay: UIButton!
-    @IBOutlet var imageYouPayButtonLineView: UIImageView!
 
     @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var viewFilterBackground: UIView!
@@ -333,21 +333,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     @IBAction func tapIPayButton(sender: AnyObject) {
-        self.btnIPay.selected = true
-        self.imageIPayButtonLineView.hidden = false
-        self.btnYouPay.selected = false
-        self.imageYouPayButtonLineView.hidden = true
 
-        self.showMarkers()
+        self.constViewPayButtonLineLeadingToButtonIPay.constant = 0
+
+        UIView.animateWithDuration(0.3, animations: {
+
+            self.btnIPay.selected = true
+            self.viewPayButtonLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.view.layoutIfNeeded()
+            self.btnYouPay.selected = false
+        }) { (finish) in
+            self.showMarkers()
+        }
+
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
-        self.btnYouPay.selected = true
-        self.imageIPayButtonLineView.hidden = true
-        self.btnIPay.selected = false
-        self.imageYouPayButtonLineView.hidden = false
 
-        self.showMarkers()
+        self.constViewPayButtonLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
+
+        UIView.animateWithDuration(0.3, animations: {
+
+            self.btnYouPay.selected = true
+            self.viewPayButtonLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.view.layoutIfNeeded()
+            self.btnIPay.selected = false
+        }) { (finish) in
+            self.showMarkers()
+        }
+
     }
 
     @IBAction func tapWriteButton(sender: AnyObject) {
@@ -514,7 +528,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             view.removeFromSuperview()
 
             if needToReload {
-                self.loadingData()
+                self.initView()
             }
         }
     }

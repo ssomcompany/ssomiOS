@@ -251,7 +251,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             UIView.animateWithDuration(0.3, animations: {
                 self.btnWrite.transform = transform
             }) { (finish) in
-                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+                self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
             }
         }
     }

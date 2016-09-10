@@ -114,6 +114,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.closeFilterView()
         self.closeScrollView(false)
+
+        self.loadingData()
     }
 
     func initMapView() {
@@ -154,8 +156,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.initView()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -165,7 +165,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             appDelegate.isDrawable = true
         }
 
-        self.loadingData()
+        self.initView()
     }
 
     override func viewDidAppear(animated: Bool) {

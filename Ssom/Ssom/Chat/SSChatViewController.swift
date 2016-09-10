@@ -244,20 +244,33 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func cancelMeetRequest() {
-        self.barButtonItems.changeMeetRequest(&self.isRequestedToMeet)
+        guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
+            return
+        }
 
-        //            self.constTableViewChatTopToSuper.constant = 0
-        self.constTableViewChatTopToViewRequest.active = false
-        self.constTableViewChatTopToSuper.active = true
+        SSNetworkAPIClient.deleteMeetRequest(token, chatRoomId: chatRoomId) { [weak self] (data, error) in
+            if let err = error {
+                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+            } else {
+                if let wself = self {
+                    wself.barButtonItems.changeMeetRequest(&wself.isRequestedToMeet)
 
-        self.constViewRequestHeight.constant = 0
+//                    self.constTableViewChatTopToSuper.constant = 0
+                    wself.constTableViewChatTopToViewRequest.active = false
+                    wself.constTableViewChatTopToSuper.active = true
 
-        UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-            self.view.layoutIfNeeded()
-            self.viewNotificationToStartMeet.alpha = 0.0
-            }, completion: { (finish) in
-                //
-        })
+                    wself.constViewRequestHeight.constant = 0
+
+                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                        wself.view.layoutIfNeeded()
+                        wself.viewNotificationToStartMeet.alpha = 0.0
+                    }, completion: { (finish) in
+                            //
+                    })
+
+                }
+            }
+        }
     }
     @IBAction func tapDownShowMap(sender: AnyObject) {
         self.btnShowMap.transform = CGAffineTransformMakeScale(0.9, 0.9)

@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController
         self.drawerController?.delegate = self
-        self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler()], forDirection: SSDrawerDirection.Left)
+        self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler(), SSDrawerShadowStyler.styler()], forDirection: SSDrawerDirection.Left)
 
         let menuViewController: SSMenuViewController = (self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as? SSMenuViewController)!
         menuViewController.drawerViewController = self.drawerController

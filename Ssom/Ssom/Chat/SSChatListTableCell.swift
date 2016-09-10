@@ -116,8 +116,8 @@ class SSChatListTableCell: UITableViewCell {
         self.lbCreatedDate.text = Util.getDateString(model.createdDateTime)
     }
 
-    var panStartPoint: CGPoint = CGPointZero
-    var startingRightLayoutConstraintConstant: CGFloat = 0.0
+    private var panStartPoint: CGPoint = CGPointZero
+    private var startingRightLayoutConstraintConstant: CGFloat = 0.0
 
     func panCell(gesture: UIPanGestureRecognizer) {
         switch gesture.state {

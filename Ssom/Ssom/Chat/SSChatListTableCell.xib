@@ -14,6 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlH-8W-qCz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
+                        <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlc-QC-6Z4">
                         <rect key="frame" x="240" y="0.0" width="80" height="84.5"/>
                         <subviews>
@@ -153,9 +157,13 @@
                     <constraint firstItem="s8C-9M-pFG" firstAttribute="leading" secondItem="rlc-QC-6Z4" secondAttribute="leading" id="4YN-Pc-2oD"/>
                     <constraint firstItem="s8C-9M-pFG" firstAttribute="bottom" secondItem="rlc-QC-6Z4" secondAttribute="bottom" id="DTY-OM-fce"/>
                     <constraint firstItem="8Yd-OH-nmp" firstAttribute="top" secondItem="g9G-WL-dvY" secondAttribute="top" id="JGf-Dg-tvJ"/>
+                    <constraint firstAttribute="bottom" secondItem="dlH-8W-qCz" secondAttribute="bottom" id="T6c-nb-hKZ"/>
+                    <constraint firstItem="dlH-8W-qCz" firstAttribute="leading" secondItem="g9G-WL-dvY" secondAttribute="leading" id="WeS-sd-0Ge"/>
                     <constraint firstAttribute="bottom" secondItem="s8C-9M-pFG" secondAttribute="bottom" id="a4f-qQ-r3J"/>
                     <constraint firstAttribute="trailing" secondItem="s8C-9M-pFG" secondAttribute="trailing" id="aAA-y9-qoz"/>
                     <constraint firstAttribute="trailing" secondItem="8Yd-OH-nmp" secondAttribute="trailing" id="nuj-ru-LYa"/>
+                    <constraint firstAttribute="trailing" secondItem="dlH-8W-qCz" secondAttribute="trailing" id="o4S-EC-3bQ"/>
+                    <constraint firstItem="dlH-8W-qCz" firstAttribute="top" secondItem="g9G-WL-dvY" secondAttribute="top" id="oNa-Wc-PeT"/>
                     <constraint firstItem="8Yd-OH-nmp" firstAttribute="leading" secondItem="g9G-WL-dvY" secondAttribute="leading" id="wqb-Mf-69C"/>
                     <constraint firstItem="s8C-9M-pFG" firstAttribute="top" secondItem="rlc-QC-6Z4" secondAttribute="top" id="y9P-s1-Pv0"/>
                 </constraints>

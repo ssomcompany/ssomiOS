@@ -423,9 +423,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = self.datas[indexPath.row]
+        if let cell: SSListTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as? SSListTableViewCell {
+            if cell.isCellOpened {
+                cell.closeCell(true)
+            } else {
+                if cell.isCellClosed {
 
-        self.openDetailView(model)
+                    let model = self.datas[indexPath.row]
+
+                    self.openDetailView(model)
+
+                }
+            }
+        }
     }
 
 // MARK: - SSFilterViewDelegate
@@ -487,6 +497,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 })
             }
+        }
+    }
+
+// MARK: - SSListTableViewCellDelegate
+    func deleteCell(cell: UITableViewCell) {
+        if let indexPath: NSIndexPath = self.ssomListTableView.indexPathForCell(cell) {
+            self.datas.removeAtIndex(indexPath.row)
+            self.ssomListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
 }

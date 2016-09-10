@@ -85,6 +85,19 @@ class SSNavigationBarItems : UIView
         self.imgViewMessage.transform = CGAffineTransformIdentity
     }
 
+    func changeMessageCount(count: Int) {
+        if count > 0 {
+            self.imgViewMessage.image = UIImage(named: "messageRed")
+            self.lbUnreadMessageCount.text = "\(count)"
+            
+            self.imgViewMessage.hidden = false
+            self.lbUnreadMessageCount.hidden = false
+        } else {
+            self.imgViewMessage.hidden = true
+            self.lbUnreadMessageCount.hidden = true
+        }
+    }
+
     func tapDownMeetRequest() {
         if self.animated {
             self.imgViewMeetRequest.transform = CGAffineTransformMakeScale(0.9, 0.9)

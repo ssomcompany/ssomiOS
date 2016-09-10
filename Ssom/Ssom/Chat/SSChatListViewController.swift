@@ -22,13 +22,20 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
     var datas: [SSChatroomViewModel] = [SSChatroomViewModel]()
 
+    var unreadCount: Int {
+        var count: Int = 0
+        for data: SSChatroomViewModel in datas {
+            count = count + data.unreadCount
+        }
+
+        return count
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         self.setNavigationBarView()
-
-        self.initView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +50,8 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        self.initView()
     }
 
     func setNavigationBarView() {
@@ -71,10 +80,16 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
         barButtonSpacer.width = 20
 
-        barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
         let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
         self.navigationItem.rightBarButtonItems = [messageBarButton]
+
+        self.setChattingCount(0)
+    }
+
+    func setChattingCount(count: Int) {
+        self.barButtonItems.changeMessageCount(count)
     }
 
     func initView() {
@@ -107,6 +122,8 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                     if let datas = models {
 
                         self.datas = datas
+
+                        self.setChattingCount(self.unreadCount)
 
                         self.chatListTableView.reloadData()
                     }

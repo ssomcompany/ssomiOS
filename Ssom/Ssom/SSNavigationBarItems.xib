@@ -75,7 +75,7 @@
             <rect key="frame" x="0.0" y="0.0" width="27" height="41"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message.png" translatesAutoresizingMaskIntoConstraints="NO" id="IjY-co-gUF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" translatesAutoresizingMaskIntoConstraints="NO" id="IjY-co-gUF">
                     <rect key="frame" x="0.0" y="0.0" width="27" height="27"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8r-VF-cXe">
@@ -193,6 +193,6 @@
         <image name="heart.png" width="37" height="32"/>
         <image name="heartWhite" width="30" height="27"/>
         <image name="meetButtonRed" width="104" height="35"/>
-        <image name="message.png" width="41" height="41"/>
+        <image name="message" width="27" height="27"/>
     </resources>
 </document>

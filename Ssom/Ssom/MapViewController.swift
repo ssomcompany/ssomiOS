@@ -216,7 +216,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.isAlreadyWrittenMySsom = true
                     self.mySsom = data
                 } else {
-                    self.isAlreadyWrittenMySsom = false
+                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
                 }
             }
 
@@ -343,7 +343,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func tapWriteButton(sender: AnyObject) {
 
         if self.isAlreadyWrittenMySsom {
-            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.writeButton.bounds.width / 2.0)
+            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.writeButton.bounds.width * 2)
             let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
 
             UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {

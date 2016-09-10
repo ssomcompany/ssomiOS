@@ -55,6 +55,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    var isAlreadyWrittenMySsom: Bool = false
+    var mySsom: SSViewModel!
+
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
@@ -115,6 +118,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tapYouPayButton(self.btnYouPay);
         }
 
+        if self.isAlreadyWrittenMySsom {
+            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        }
+
         self.closeFilterView()
         self.closeScrollView(false)
     }
@@ -157,6 +164,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func showOpenAnimation() {
 
+        if self.isAlreadyWrittenMySsom {
+            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        }
+        
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
             self.viewBottomInfo.transform = CGAffineTransformIdentity
@@ -224,12 +235,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapWriteButton(sender: AnyObject) {
 
-        let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+        if self.isAlreadyWrittenMySsom {
+            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.btnWrite.bounds.width * 2)
+            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
 
-        UIView.animateWithDuration(0.3, animations: {
-            self.btnWrite.transform = transform
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
+                self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
+                }, completion: { (finish) in
+                    self.openDetailView(self.mySsom)
+                    self.btnWrite.layer.transform = CATransform3DIdentity
+            })
+        } else {
+            let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+
+            UIView.animateWithDuration(0.3, animations: {
+                self.btnWrite.transform = transform
             }) { (finish) in
-                self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+            }
         }
     }
 
@@ -271,12 +294,42 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             if ssomString == ssomType.rawValue {
                 tempDatas.append(data)
             }
+
+            // check if my ssom exists
+            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+                if loginedUserId == data.userId {
+                    self.isAlreadyWrittenMySsom = true
+                    self.mySsom = data
+                } else {
+                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
+                }
+            }
         }
 
         self.mainViewModel.datas = tempDatas
         self.datas = tempDatas
 
         self.ssomListTableView.reloadData()
+    }
+
+    func openDetailView(model: SSViewModel) {
+        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
+        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
+        self.scrollDetailView.delegate = self
+
+        if self.btnIPay.selected {
+            self.scrollDetailView.ssomType = .SSOM
+            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOM)
+        }
+        if self.btnYouPay.selected {
+            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOSEYO)
+        }
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.view.addSubview(self.scrollDetailView)
     }
 
 // MARK:- SSListTableViewCellDelegate
@@ -370,24 +423,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
-        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
-        self.scrollDetailView.delegate = self
-
         let model = self.datas[indexPath.row]
-        if self.btnIPay.selected {
-            self.scrollDetailView.ssomType = .SSOM
-            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOM)
-        }
-        if self.btnYouPay.selected {
-            self.scrollDetailView.ssomType = .SSOSEYO
-            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOSEYO)
-        }
 
-        self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.view.addSubview(self.scrollDetailView)
+        self.openDetailView(model)
     }
 
 // MARK: - SSFilterViewDelegate

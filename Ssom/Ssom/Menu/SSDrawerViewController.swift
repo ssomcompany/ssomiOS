@@ -62,7 +62,7 @@ extension SSDrawerViewControllerDelegate {
 
  The values can be masked in some (but not all) cases. See the parameters of individual methods to ensure compatibility with the `MSDynamicsDrawerDirection` that is being passed.
  */
-struct SSDrawerDirection: OptionSetType, Hashable {
+struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
     let rawValue: UInt
 
     /**
@@ -99,6 +99,29 @@ struct SSDrawerDirection: OptionSetType, Hashable {
     static let All = SSDrawerDirection(rawValue: UIRectEdge.All.rawValue)
 
     static let AllTypes = [None, Top, Left, Bottom, Right, Horizontal, Vertical, All]
+
+    internal var description: String {
+        switch rawValue {
+        case SSDrawerDirection.None.rawValue:
+            return "SSDrawerDirection.None"
+        case SSDrawerDirection.Top.rawValue:
+            return "SSDrawerDirection.Top"
+        case SSDrawerDirection.Left.rawValue:
+            return "SSDrawerDirection.Left"
+        case SSDrawerDirection.Bottom.rawValue:
+            return "SSDrawerDirection.Bottom"
+        case SSDrawerDirection.Right.rawValue:
+            return "SSDrawerDirection.Right"
+        case SSDrawerDirection.Horizontal.rawValue:
+            return "SSDrawerDirection.Horizontal"
+        case SSDrawerDirection.Vertical.rawValue:
+            return "SSDrawerDirection.Vertical"
+        case SSDrawerDirection.All.rawValue:
+            return "SSDrawerDirection.All"
+        default:
+            return "SSDrawerDirection.None"
+        }
+    }
 
     internal var hashValue: Int {
         return Int(self.rawValue)
@@ -200,7 +223,7 @@ func !=(left: SSDrawerDirection, right: SSDrawerDirection) -> Bool {
 /**
  The possible drawer/pane visibility states of `MSDynamicsDrawerViewController`.
  */
-enum SSDrawerMainState: Int {
+enum SSDrawerMainState: Int, CustomStringConvertible {
     case None = 0
     /**
      The the drawer is entirely hidden by the pane.
@@ -216,6 +239,19 @@ enum SSDrawerMainState: Int {
     case OpenWide
 
     static let AllValues = [Closed, Open, OpenWide]
+
+    var description: String {
+        switch self {
+        case .Closed:
+            return "SSDrawerMainState.Closed"
+        case .Open:
+            return "SSDrawerMainState.Open"
+        case .OpenWide:
+            return "SSDrawerMainState.OpenWide"
+        default:
+            return "SSDrawerMainState.None"
+        }
+    }
 }
 
 func &(left: SSDrawerMainState, right: SSDrawerMainState) -> SSDrawerMainState {

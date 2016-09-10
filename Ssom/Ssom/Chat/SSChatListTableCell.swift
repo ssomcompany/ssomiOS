@@ -41,6 +41,8 @@ class SSChatListTableCell: UITableViewCell {
         return self.constViewBackgroundLeadingToSuper.constant == 0
     }
 
+    var isOwnerUser: Bool = false
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -73,17 +75,23 @@ class SSChatListTableCell: UITableViewCell {
         }
 
         if let imageUrl = model.ssomViewModel.imageUrl {
-            if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
-                    if error != nil {
-                    } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+            // check if the login user is the owner of the chatting
+            if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
+                self.isOwnerUser = true
+            } else {
+                self.isOwnerUser = false
+                if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                    self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                        if error != nil {
+                        } else {
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
 
-                        self.imgViewProfile.image = croppedProfileImage
-                    }
-                    })
+                            self.imgViewProfile.image = croppedProfileImage
+                        }
+                        })
 
-                self.profilImageUrl = imageUrl
+                    self.profilImageUrl = imageUrl
+                }
             }
         }
 

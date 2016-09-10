@@ -134,6 +134,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.tableViewChat.registerNib(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
         self.tableViewChat.registerNib(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
 
+        self.edgesForExtendedLayout = UIRectEdge.None
+
         (self.tableViewChat as UIScrollView).delegate = self
 
         self.registerForKeyboardNotifications()

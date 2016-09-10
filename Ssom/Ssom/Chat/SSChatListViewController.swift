@@ -173,7 +173,12 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                         vc.chatRoomId = model.chatroomId
                         vc.ssomType = model.ssomViewModel.ssomType
                         vc.postId = model.ssomViewModel.postId
-                        vc.partnerImageUrl = model.ssomViewModel.imageUrl
+
+                        if cell.isOwnerUser {
+
+                        } else {
+                            vc.partnerImageUrl = model.ssomViewModel.imageUrl
+                        }
 
                         vc.ssomLatitude = model.ssomViewModel.latitude
                         vc.ssomLongitude = model.ssomViewModel.longitude

@@ -16,6 +16,8 @@ class SSChatCoachmarkView: UIView {
     @IBOutlet var viewChatCoachmarkLine: SSChatCoachmarkLineView!
     @IBOutlet var imgViewUpArrow: UIImageView!
 
+    var closeBlock: (() -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -94,5 +96,11 @@ class SSChatCoachmarkView: UIView {
 
     @IBAction func tapStartChat(sender: AnyObject) {
         self.removeFromSuperview()
+
+        guard let close = self.closeBlock else {
+            return
+        }
+
+        close()
     }
 }

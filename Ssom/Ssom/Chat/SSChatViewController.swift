@@ -10,6 +10,7 @@ import UIKit
 
 class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
 
+// MARK: - properties
     var viewChatCoachmark: SSChatCoachmarkView!
 
     @IBOutlet var tableViewChat: UITableView!
@@ -40,6 +41,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     var isRequestedToMeet: Bool = false
 
+    var refreshTimer: NSTimer!
+    var isAlreadyShownCoachmark: Bool = false
+
+// MARK: - functions
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -59,6 +64,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         if self.tfInput.isFirstResponder() {
             self.tfInput.resignFirstResponder()
         }
+
+        self.refreshTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,9 +74,23 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func showCoachmarkView() {
+        if self.isAlreadyShownCoachmark {
+            return
+        }
+
+        if self.viewChatCoachmark != nil && self.viewChatCoachmark.superview != nil {
+            return
+        }
+
         self.viewChatCoachmark = UIView.loadFromNibNamed("SSChatCoachmarkView") as? SSChatCoachmarkView
+        self.viewChatCoachmark.closeBlock = { [weak self] in
+            if let wself = self {
+                wself.isAlreadyShownCoachmark = true
+            }
+        }
         if let appDelgate = UIApplication.sharedApplication().delegate as? AppDelegate {
             let keyWindow = appDelgate.window
+
             keyWindow?.addSubview(self.viewChatCoachmark)
             self.viewChatCoachmark.translatesAutoresizingMaskIntoConstraints = false;
             keyWindow?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
@@ -123,6 +144,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.viewNotificationToStartMeet.layer.shadowOpacity = 1
 
         self.loadData()
+
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
     }
 
     func loadData() {

@@ -95,6 +95,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func initView() {
 
+        self.isAlreadyWrittenMySsom = false
+        self.mySsom = nil
+
         self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
         self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
 
@@ -186,9 +189,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func showOpenAnimation() {
 
-        if self.isAlreadyWrittenMySsom {
-            self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
-        }
+        self.setMySsomButton()
 
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
@@ -196,6 +197,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             self.writeButton.transform = CGAffineTransformIdentity
         }) { (finish) in
             //
+        }
+    }
+
+    func setMySsomButton() {
+
+        if self.isAlreadyWrittenMySsom {
+            self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        } else {
+            self.writeButton.setImage(UIImage(named: "writeBtn"), forState: UIControlState.Normal)
         }
     }
 

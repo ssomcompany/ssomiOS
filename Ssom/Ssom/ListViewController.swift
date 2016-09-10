@@ -88,13 +88,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        self.initView()
     }
 
     func initView() {
 
-        self.needReload = false
+        self.isAlreadyWrittenMySsom = false
+        self.mySsom = nil
 
         ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell")
 
@@ -118,10 +117,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tapYouPayButton(self.btnYouPay);
         }
 
-        if self.isAlreadyWrittenMySsom {
-            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
-        }
-
         self.closeFilterView()
         self.closeScrollView(false)
     }
@@ -137,6 +132,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+
+        self.initView()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -164,9 +161,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func showOpenAnimation() {
 
-        if self.isAlreadyWrittenMySsom {
-            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
-        }
+        self.setMySsomButton()
         
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
@@ -174,6 +169,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.btnWrite.transform = CGAffineTransformIdentity
         }) { (finish) in
             //
+        }
+    }
+
+    func setMySsomButton() {
+
+        if self.isAlreadyWrittenMySsom {
+            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        } else {
+            self.btnWrite.setImage(UIImage(named: "writeBtn"), forState: UIControlState.Normal)
         }
     }
 
@@ -306,6 +310,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
 
+        self.setMySsomButton()
+
         self.mainViewModel.datas = tempDatas
         self.datas = tempDatas
 
@@ -355,63 +361,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
 
         let model:SSViewModel = datas[indexPath.row]
-        if let content = model.content {
-            print("content is \(content.stringByRemovingPercentEncoding)")
-
-            cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
-        }
-
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
-        cell.profileImageView!.image = maskOfProfileImage
-
-        if let imageUrl = model.imageUrl {
-            if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                print("imageUrl is \(imageUrl)")
-
-                cell.profileImageView?.sd_setImageWithURL(NSURL(string: imageUrl)
-                    , placeholderImage: nil
-                    , completed: { (image, error, cacheType, url) -> Void in
-
-                        if let err = error {
-                            print(err.localizedDescription)
-
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                        } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
-
-                            cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                        }
-                    })
-                
-                cell.profilImageUrl = imageUrl
-            }
-        }
-
-        var memberInfoString:String = "";
-        let ageArea: SSAgeAreaType = Util.getAgeArea(model.minAge)
-        memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
-//        if let maxAge = model.maxAge {
-//            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
-//        }
-        if let userCount = model.userCount {
-            memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
-        }
-        cell.memberInfoLabel.text = memberInfoString
-        cell.memberInfoLabel.textColor = self.mainViewModel.isSell ? UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1) : UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
-
-        if let distance = model.distance where distance != 0 {
-            cell.distanceLabel.text = Util.getDistanceString(distance)
-        } else {
-            let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)
-            let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: model.latitude, longitude: model.longitude)
-
-            let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
-            model.distance = distance
-
-            cell.distanceLabel.text = Util.getDistanceString(distance)
-        }
-
-        cell.updatedTimeLabel.text = Util.getDateString(model.createdDatetime)
+        cell.configView(model, isMySsom: self.mySsom === model, isSsom: self.mainViewModel.isSell, withCoordinate: CLLocationCoordinate2DMake(self.mainViewModel.nowLatitude, self.mainViewModel.nowLongitude))
 
         cell.delegate = self
 
@@ -503,8 +453,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 // MARK: - SSListTableViewCellDelegate
     func deleteCell(cell: UITableViewCell) {
         if let indexPath: NSIndexPath = self.ssomListTableView.indexPathForCell(cell) {
-            self.datas.removeAtIndex(indexPath.row)
-            self.ssomListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                let data = self.datas[indexPath.row]
+
+                SSNetworkAPIClient.deletePost(token, postId: data.postId, completion: { [weak self] (error) in
+                    if let err = error {
+                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                    } else {
+                        if let wself = self {
+                            wself.datas.removeAtIndex(indexPath.row)
+                            wself.ssomListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
+                            wself.isAlreadyWrittenMySsom = false
+                            wself.mySsom = nil
+
+                            wself.setMySsomButton()
+
+                            SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
+                                //
+                            })
+                        }
+                    }
+                })
+            }
         }
     }
 }

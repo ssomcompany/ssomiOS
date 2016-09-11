@@ -14,7 +14,7 @@ protocol SSDetailViewDelegate: class {
     func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
 }
 
-class SSDetailView: UIView {
+class SSDetailView: UIView, SSPhotoViewDelegate {
 
     @IBOutlet var viewDetail: UIView!
     @IBOutlet var imgHeart: UIImageView!
@@ -26,6 +26,8 @@ class SSDetailView: UIView {
     @IBOutlet var textViewDescription: UITextView!
     @IBOutlet var btnSsom: UIButton!
     @IBOutlet var btnCancel: UIButton!
+
+    var profilePhotoView: SSPhotoView!
 
     weak var delegate: SSDetailViewDelegate!
     var ssomType: SSType!
@@ -135,5 +137,25 @@ class SSDetailView: UIView {
             }
 
         }
+    }
+
+    @IBAction func tapProfileImage(sender: AnyObject) {
+        if self.viewModel.imageUrl != nil && self.viewModel.imageUrl.characters.count != 0 {
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate, let keyWindow = appDelegate.window else {
+                return
+            }
+
+            self.profilePhotoView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+            self.profilePhotoView.loadingImage(keyWindow.bounds, imageUrl: self.viewModel.imageUrl)
+            self.profilePhotoView.delegate = self
+
+            keyWindow.addSubview(self.profilePhotoView)
+        }
+    }
+
+// MARK:- SSPhotoViewDelegate
+    func tapPhotoViewClose() {
+        self.profilePhotoView.removeFromSuperview()
     }
 }

@@ -413,6 +413,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func openDetailView(model: SSViewModel) {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = false
+        }
+
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.mainScreen().bounds
         self.scrollDetailView.delegate = self
@@ -523,6 +527,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView(needToReload: Bool) {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()

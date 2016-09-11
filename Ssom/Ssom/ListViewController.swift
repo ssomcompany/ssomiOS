@@ -333,6 +333,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func openDetailView(model: SSViewModel) {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = false
+        }
+
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.mainScreen().bounds
         self.scrollDetailView.delegate = self
@@ -422,6 +427,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView(needToReload: Bool) {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()

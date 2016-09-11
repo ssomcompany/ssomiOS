@@ -233,8 +233,10 @@ class SSChatListTableCell: UITableViewCell {
     }
 
     @IBAction func tapShowPhoto(sender: AnyObject) {
-        guard let _ = self.delegate?.tapProfileImage(self.profilImageUrl!) else {
-            return
+        if let imageUrl = self.profilImageUrl {
+            guard let _ = self.delegate?.tapProfileImage(imageUrl) else {
+                return
+            }
         }
     }
 

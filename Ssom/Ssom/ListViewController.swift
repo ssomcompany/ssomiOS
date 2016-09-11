@@ -369,7 +369,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK:- SSPhotoViewDelegate
-    func tapClose() {
+    func tapPhotoViewClose() {
         self.navigationController?.navigationBarHidden = false;
 
         self.profileImageView!.removeFromSuperview()

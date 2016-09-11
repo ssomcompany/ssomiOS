@@ -100,9 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
 // MARK: - FirebaseMessage
     func tokenRefreshNotification(notification: NSNotification) {
-        let refreshedToken = FIRInstanceID.instanceID().token()!
-        print("InstanceID token: \(refreshedToken)")
-
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }

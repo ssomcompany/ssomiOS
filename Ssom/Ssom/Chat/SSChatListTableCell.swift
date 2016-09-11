@@ -237,4 +237,16 @@ class SSChatListTableCell: UITableViewCell {
             return
         }
     }
+
+    // MARK: - UIGestureRecognizerDelegate
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
+            if let view = gestureRecognizer.view {
+                let translation: CGPoint = panGesture.translationInView(view.superview)
+
+                return fabs(translation.x) > fabs(translation.y)
+            }
+        }
+        return true;
+    }
 }

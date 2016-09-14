@@ -20,9 +20,19 @@ protocol SSScrollViewDelegate: class {
     func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
 }
 
+class SSCustomScrollView: UIScrollView {
+    override func touchesShouldCancelInContentView(view: UIView) -> Bool {
+        if view is UIButton {
+            return true
+        }
+
+        return super.touchesShouldCancelInContentView(view)
+    }
+}
+
 class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
     @IBOutlet private var viewBackground: UIView!
-    @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var scrollView: SSCustomScrollView!
     @IBOutlet private var contentView: UIView!
     @IBOutlet var constContentViewWidth: NSLayoutConstraint!
     @IBOutlet var constContentViewWidthMin: NSLayoutConstraint!

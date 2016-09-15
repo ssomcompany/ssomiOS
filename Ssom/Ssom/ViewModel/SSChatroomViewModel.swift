@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum SSMeetRequestOptions: Int {
+    case NotRequested
+    case Cancelled
+    case Requested
+    case Received
+}
+
 public struct SSChatroomViewModel {
     var chatroomId: String              // id
     var ownerUserId: String             // ownerId
@@ -16,6 +23,7 @@ public struct SSChatroomViewModel {
     var unreadCount: Int
     var lastMessage: String             // lastMsg
     var ssomViewModel: SSViewModel
+    var meetRequestUserId: String?          // requestId
 
     init() {
         self.chatroomId = ""
@@ -69,5 +77,11 @@ public struct SSChatroomViewModel {
         }
 
         self.ssomViewModel = SSViewModel(modelDict: modelDict)
+
+        if let requestUserId = modelDict["requestId"] as? String {
+            self.meetRequestUserId = requestUserId
+        } else if let requestUserId = modelDict["reuqestId"] as? String {
+            self.meetRequestUserId = requestUserId
+        }
     }
 }

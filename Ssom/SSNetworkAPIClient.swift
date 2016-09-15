@@ -666,4 +666,36 @@ public struct SSNetworkAPIClient {
             indicator.hideIndicator()
         }
     }
+
+    static func getUnreadCount(token: String, chatRoomId: String = "chatroomId", completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.GET,
+                          SSNetworkContext.serverUrlPrefixt+"chat/\(chatRoomId)/chats/unreadCount",
+                          parameters: ["chatroomId": chatRoomId],
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawData = response.result.value as? [String: AnyObject] {
+                    completion(data: nil, error: nil)
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.GetUnreadCount", code: 806, userInfo: nil)
+
+                    completion(data: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(data: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
 }

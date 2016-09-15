@@ -58,6 +58,14 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
     private var constCurrentViewToContentView: [NSLayoutConstraint] = []
     private var constNextViewToContentView: [NSLayoutConstraint] = []
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
 

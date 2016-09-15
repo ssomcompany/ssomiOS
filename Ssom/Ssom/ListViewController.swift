@@ -196,7 +196,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             self.mainViewModel.isSell = true;
 
-            self.loadingData()
+            self.loadData()
         }
     }
 
@@ -215,7 +215,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             self.mainViewModel.isSell = false;
 
-            self.loadingData()
+            self.loadData()
         }
     }
 
@@ -275,7 +275,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK: private
-    func loadingData() {
+    func loadData() {
         if self.needReload {
 
             SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
@@ -437,7 +437,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             view.removeFromSuperview()
 
             if needToReload {
-                self.loadingData()
+                self.loadData()
             }
         }
     }

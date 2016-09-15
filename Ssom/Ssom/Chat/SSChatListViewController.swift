@@ -182,6 +182,11 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
                         vc.ssomLatitude = model.ssomViewModel.latitude
                         vc.ssomLongitude = model.ssomViewModel.longitude
+
+                        if let requestUserId = model.meetRequestUserId {
+                            vc.isRequestedToMeet = true
+                            vc.meetRequestUserId = requestUserId
+                        }
                     }
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

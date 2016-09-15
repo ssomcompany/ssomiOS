@@ -112,6 +112,24 @@ class SSMasterViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.loadData()
+    }
+
+    func loadData() {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.getUnreadCount(token, completion: { (data, error) in
+                if let err = error {
+//                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                } else {
+                    
+                }
+            })
+        }
+    }
+
     @IBAction func switchView(sender: AnyObject) {
         var originX: CGFloat = 0.0
         var buttonTitle: String = kMapButtonTitle

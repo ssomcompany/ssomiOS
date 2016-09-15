@@ -39,7 +39,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     var messages: [SSChatViewModel] = [SSChatViewModel]()
 
+    var meetRequestUserId: String?
     var isRequestedToMeet: Bool = false
+    var meetRequestStatus: SSMeetRequestOptions = .NotRequested
 
     var refreshTimer: NSTimer!
     var isAlreadyShownCoachmark: Bool = false
@@ -170,6 +172,20 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                             let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
                             self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+
+                            guard let requestUserId = self.meetRequestUserId else {
+                                self.showMeetRequest(false)
+                                return
+                            }
+                            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+                                if requestUserId == loginedUserId {
+                                    self.showMeetRequest(true, status: .Requested)
+                                } else {
+                                    self.showMeetRequest(true, status: .Received)
+                                }
+                            } else {
+                                self.showMeetRequest(false)
+                            }
                         }
                     }
                 })
@@ -208,21 +224,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                 SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                             } else {
                                 if let wself = self {
-
-                                    wself.barButtonItems.changeMeetRequest(&wself.isRequestedToMeet)
-
-//                                    wself.constTableViewChatTopToSuper.constant = 69
-                                    wself.constTableViewChatTopToSuper.active = false
-                                    wself.constTableViewChatTopToViewRequest.active = true
-
-                                    wself.constViewRequestHeight.constant = 44
-
-                                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                                        wself.view.layoutIfNeeded()
-                                        wself.viewNotificationToStartMeet.alpha = 1.0
-                                        }, completion: { (finish) in
-                                            //
-                                    })
+                                    wself.showMeetRequest(true, status: .Requested)
                                 }
                             }
                             })
@@ -243,6 +245,40 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
+    func showMeetRequest(enabled: Bool, status: SSMeetRequestOptions = .NotRequested) {
+        defer {
+            self.meetRequestStatus = status
+        }
+
+        self.barButtonItems.changeMeetRequest(status)
+
+        var alpha:CGFloat = 0.0
+        if enabled {
+
+//            self.constTableViewChatTopToSuper.constant = 69
+            self.constTableViewChatTopToSuper.active = false
+            self.constTableViewChatTopToViewRequest.active = true
+
+            self.constViewRequestHeight.constant = 44
+
+            alpha = 1.0
+        } else {
+
+//            self.constTableViewChatTopToSuper.constant = 0
+            self.constTableViewChatTopToViewRequest.active = false
+            self.constTableViewChatTopToSuper.active = true
+
+            self.constViewRequestHeight.constant = 0
+        }
+
+        UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+            self.view.layoutIfNeeded()
+            self.viewNotificationToStartMeet.alpha = alpha
+            }, completion: { (finish) in
+                //
+        })
+    }
+
     func cancelMeetRequest() {
         guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
             return
@@ -253,21 +289,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
             } else {
                 if let wself = self {
-                    wself.barButtonItems.changeMeetRequest(&wself.isRequestedToMeet)
-
-//                    self.constTableViewChatTopToSuper.constant = 0
-                    wself.constTableViewChatTopToViewRequest.active = false
-                    wself.constTableViewChatTopToSuper.active = true
-
-                    wself.constViewRequestHeight.constant = 0
-
-                    UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                        wself.view.layoutIfNeeded()
-                        wself.viewNotificationToStartMeet.alpha = 0.0
-                    }, completion: { (finish) in
-                            //
-                    })
-
+                    wself.showMeetRequest(false, status: .Cancelled)
                 }
             }
         }
@@ -287,7 +309,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 let chatMapDict: [String: AnyObject?] = ["partnerImageUrl": self.partnerImageUrl,
                                                          "partnerLatitude": self.ssomLatitude,
                                                          "partnerLongitude": self.ssomLongitude,
-                                                         "ssomType": self.ssomType.rawValue]
+                                                         "ssomType": self.ssomType.rawValue,
+                                                         "ssomMeetRequestOptions": self.meetRequestStatus.rawValue]
                 vc.data = SSChatMapViewModel(modelDict: chatMapDict)
                 vc.blockCancelToMeet = { [weak self] in
                     if let wself = self {

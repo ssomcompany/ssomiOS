@@ -85,8 +85,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         barButtonSpacer.width = -10
 
         self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapCancelToMeetRequest), forControlEvents: UIControlEvents.TouchUpInside)
-        var isRequestedToMeet: Bool = false
-        self.barButtonItems.changeMeetRequest(&isRequestedToMeet)
+        self.barButtonItems.changeMeetRequest(self.data.meetRequestedStatus)
         let meetRequestButton = UIBarButtonItem(customView: barButtonItems.meetRequestButtonView!)
 
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]

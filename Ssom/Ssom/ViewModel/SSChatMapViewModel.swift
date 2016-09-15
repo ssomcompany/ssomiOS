@@ -17,6 +17,8 @@ public struct SSChatMapViewModel {
 
     var ssomType: SSType = .SSOM
 
+    var meetRequestedStatus: SSMeetRequestOptions = .NotRequested
+
     init() {
 //        self.partnerUserModel = SSUserModel()
 //        self.partnerUserId = ""
@@ -52,6 +54,10 @@ public struct SSChatMapViewModel {
 
         if let rawSsomType = modelDict["ssomType"] as? String {
             self.ssomType = SSType(rawValue: rawSsomType)!
+        }
+
+        if let rawSSMeetRequestOptions = modelDict["ssomMeetRequestOptions"] as? Int {
+            self.meetRequestedStatus = SSMeetRequestOptions(rawValue: rawSSMeetRequestOptions)!
         }
     }
 }

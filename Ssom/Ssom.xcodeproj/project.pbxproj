@@ -1267,6 +1267,7 @@
 					97343E231BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 3V2J2EZE5D;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1278,10 +1279,12 @@
 					};
 					97343E371BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 97343E231BE65AB300A9D39D;
 					};
 					97343E421BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 97343E231BE65AB300A9D39D;
 					};
 				};
@@ -1946,6 +1949,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
+				SWIFT_VERSION = 2.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1983,6 +1987,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
+				SWIFT_VERSION = 2.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -1996,6 +2001,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ssom.app/Ssom";
 			};
 			name = Debug;
@@ -2009,6 +2015,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ssom.app/Ssom";
 			};
 			name = Release;
@@ -2021,6 +2028,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Ssom;
 				USES_XCTRUNNER = YES;
 			};
@@ -2034,6 +2042,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Ssom;
 				USES_XCTRUNNER = YES;
 			};

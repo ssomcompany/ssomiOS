@@ -21,7 +21,7 @@ extension UIImage {
         let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
         image.drawInRect(myRect)
 
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
         return newImage
@@ -56,7 +56,7 @@ extension UIImage {
             image.drawInRect(myRect)
         }
 
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
         return newImage
@@ -78,7 +78,7 @@ extension UIImage {
         firstImage.drawInRect(CGRectMake(x, y, CGFloat(firstImageWidth), CGFloat(firstImageHeight)))
         secondImage.drawInRect(CGRectMake(0, 0, CGFloat(secondImageWidth), CGFloat(secondImageHeight)))
 
-        let mergedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let mergedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
 
         return mergedImage
     }

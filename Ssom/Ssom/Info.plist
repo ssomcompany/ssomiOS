@@ -60,9 +60,11 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Because I always want to know where you are</string>
+	<string>Because Ssom always wants to know where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Because I need to know where you are</string>
+	<string>Because Ssom needs to know where you are</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Because Sssom needs your awesome photos</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

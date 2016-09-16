@@ -51,6 +51,7 @@ class SSFilterView: UIView {
 
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
 
+        self.layoutIfNeeded()
         self.filterMainView.layer.cornerRadius = self.btnClose.frame.height/2
     }
 

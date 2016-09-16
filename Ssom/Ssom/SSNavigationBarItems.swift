@@ -85,16 +85,21 @@ class SSNavigationBarItems : UIView
         self.imgViewMessage.transform = CGAffineTransformIdentity
     }
 
-    func changeMessageCount(count: Int) {
+    func changeMessageCount(count: Int, hiddenIfZero: Bool) {
         if count > 0 {
             self.imgViewMessage.image = UIImage(named: "messageRed")
             self.lbUnreadMessageCount.text = "\(count)"
-            
+
             self.imgViewMessage.hidden = false
             self.lbUnreadMessageCount.hidden = false
         } else {
-            self.imgViewMessage.hidden = true
-            self.lbUnreadMessageCount.hidden = true
+            if hiddenIfZero {
+                self.imgViewMessage.hidden = true
+                self.lbUnreadMessageCount.hidden = true
+            } else {
+                self.imgViewMessage.hidden = false
+                self.lbUnreadMessageCount.hidden = false
+            }
         }
     }
 

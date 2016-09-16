@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSMenuHeadView" customModule="Ssom" customModuleProvider="target">
@@ -18,78 +19,65 @@
             <rect key="frame" x="0.0" y="0.0" width="332" height="456"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topPng" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-vo-z12">
-                    <rect key="frame" x="0.0" y="0.0" width="332" height="239"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topPng" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-vo-z12"/>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-oA-qDQ">
-                    <rect key="frame" x="0.0" y="239" width="332" height="217"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPeople" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-JW-vxx">
-                            <rect key="frame" x="16" y="39" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="iFe-fs-MMq"/>
                                 <constraint firstAttribute="height" constant="15" id="ldP-RO-ldZ"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuc-Mg-qGx">
-                            <rect key="frame" x="46" y="16" width="42" height="61.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzR-40-Rw3">
-                            <rect key="frame" x="16" y="16" width="316" height="61.5"/>
                             <connections>
                                 <action selector="tapMenuUser:" destination="-1" eventType="touchUpInside" id="Nte-B3-BE1"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNoti" translatesAutoresizingMaskIntoConstraints="NO" id="S9I-Iu-dSe">
-                            <rect key="frame" x="15" y="99" width="16" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="16" id="QBX-Ei-4gU"/>
                                 <constraint firstAttribute="height" constant="18" id="uVX-El-Hq0"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgQ-KZ-ZyN">
-                            <rect key="frame" x="46" y="77" width="64" height="62"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqi-Fp-l6D">
-                            <rect key="frame" x="15" y="77" width="317" height="62"/>
                             <connections>
                                 <action selector="tapMenuPush:" destination="-1" eventType="touchUpInside" id="OFO-BM-L4b"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCreatHeart" translatesAutoresizingMaskIntoConstraints="NO" id="EF2-oD-79s">
-                            <rect key="frame" x="15" y="163" width="15" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="jVL-SR-hRX"/>
                                 <constraint firstAttribute="height" constant="13" id="qYW-Bm-1sy"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="하트 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xp-Oh-uh2">
-                            <rect key="frame" x="46" y="139" width="78" height="61.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtG-b8-s2n">
-                            <rect key="frame" x="15" y="139" width="317" height="61.5"/>
                             <connections>
                                 <action selector="tapMenuHeart:" destination="-1" eventType="touchUpInside" id="W9F-Vy-SkT"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4A-IC-ogZ">
-                            <rect key="frame" x="0.0" y="216" width="332" height="0.5"/>
-                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.69999999999999996" id="dlk-sr-Ipv"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="9xp-Oh-uh2" firstAttribute="bottom" secondItem="mtG-b8-s2n" secondAttribute="bottom" id="3T9-rd-J0Y"/>
                         <constraint firstItem="EF2-oD-79s" firstAttribute="leading" secondItem="mtG-b8-s2n" secondAttribute="leading" id="8dM-BM-VKH"/>
@@ -124,7 +112,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="BGA-oA-qDQ" secondAttribute="trailing" id="146-00-Xcz"/>
                 <constraint firstItem="gLa-vo-z12" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9zP-d0-3EI"/>
@@ -143,9 +131,9 @@
         </view>
     </objects>
     <resources>
-        <image name="iconCreatHeart" width="15" height="14"/>
-        <image name="iconNoti" width="16" height="18"/>
-        <image name="iconPeople" width="16" height="16"/>
-        <image name="topPng" width="328" height="236"/>
+        <image name="iconCreatHeart" width="15" height="13"/>
+        <image name="iconNoti" width="15" height="18"/>
+        <image name="iconPeople" width="15" height="15"/>
+        <image name="topPng" width="333" height="240"/>
     </resources>
 </document>

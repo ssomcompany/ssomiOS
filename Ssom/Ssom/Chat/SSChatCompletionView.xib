@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11c-dW-v1c">
-                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="DVK-fx-GiV"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <state key="normal" title="Finish"/>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomLogoStyle01.png" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-Cr-BZU">
-                    <rect key="frame" x="257" y="122" width="86" height="125"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Cb-1N-Rvb">
-                    <rect key="frame" x="334" y="274" width="51" height="51"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-na-T2i">
-                    <rect key="frame" x="271" y="292" width="58" height="16"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minired.png" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-BJ-ot1">
-                    <rect key="frame" x="331" y="272" width="56" height="67"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minigreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="som-2j-NBF">
-                    <rect key="frame" x="212" y="272" width="56" height="67"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomLogoStyle01.png" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-Cr-BZU"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Cb-1N-Rvb"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-na-T2i"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minired.png" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-BJ-ot1"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minigreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="som-2j-NBF"/>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P60-hh-S9Z">
-                    <rect key="frame" x="219" y="353" width="162" height="41"/>
                     <string key="text">만남이 성사되었습니다!
 즐거운 쏨타임 되세요 =)</string>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                    <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="sG8-4W-KuG">
-                    <rect key="frame" x="215" y="274" width="51" height="51"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="sG8-4W-KuG"/>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1Cb-1N-Rvb" firstAttribute="leading" secondItem="7bO-na-T2i" secondAttribute="trailing" constant="5" id="7Xt-LC-Jh7"/>
                 <constraint firstItem="dDw-BJ-ot1" firstAttribute="centerX" secondItem="1Cb-1N-Rvb" secondAttribute="centerX" id="8FV-vB-zMa"/>
@@ -73,11 +60,11 @@
         </view>
     </objects>
     <resources>
-        <image name="bow.png" width="58" height="16"/>
-        <image name="minigreen.png" width="56" height="67"/>
-        <image name="minired.png" width="56" height="67"/>
-        <image name="ssomIngGreen.png" width="51" height="51"/>
-        <image name="ssomIngRed.png" width="51" height="51"/>
-        <image name="ssomLogoStyle01.png" width="86" height="125"/>
+        <image name="bow.png" width="59" height="16"/>
+        <image name="minigreen.png" width="57" height="67"/>
+        <image name="minired.png" width="57" height="67"/>
+        <image name="ssomIngGreen.png" width="52" height="52"/>
+        <image name="ssomIngRed.png" width="52" height="52"/>
+        <image name="ssomLogoStyle01.png" width="87" height="126"/>
     </resources>
 </document>

@@ -89,7 +89,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
     func setChattingCount(count: Int) {
-        self.barButtonItems.changeMessageCount(count)
+        self.barButtonItems.changeMessageCount(count, hiddenIfZero: true)
     }
 
     func initView() {

@@ -124,7 +124,11 @@ class SSMasterViewController: UIViewController {
                 if let err = error {
 //                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                 } else {
-                    
+                    if let rawData = data, let unreadCount = rawData["unreadCount"] as? Int {
+                        print("unreadCount : \(unreadCount)")
+
+                        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
+                    }
                 }
             })
         }

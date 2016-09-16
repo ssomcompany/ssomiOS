@@ -101,6 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
         self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
 
+        self.viewBottomInfo.layoutIfNeeded()
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
 
         self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
@@ -307,8 +308,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
-    self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
-    self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
         self.constBottomInfoViewHeight.constant = 283.0
         self.constBottomInfoViewTrailingToSuper.constant = 64.0

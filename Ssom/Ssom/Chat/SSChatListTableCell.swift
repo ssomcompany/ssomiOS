@@ -25,7 +25,6 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var imgViewProfileBorder: UIImageView!
     @IBOutlet var lbSsomAgePeople: UILabel!
     @IBOutlet var lbLastMessage: UILabel!
-    @IBOutlet var viewCountBackground: UIView!
     @IBOutlet var lbNewMessageCount: UILabel!
     @IBOutlet var lbDistance: UILabel!
     @IBOutlet var lbCreatedDate: UILabel!
@@ -56,8 +55,6 @@ class SSChatListTableCell: UITableViewCell {
 
         self.selectionStyle = .None
 
-        self.viewCountBackground.layer.cornerRadius = self.viewCountBackground.bounds.size.height / 2
-
         self.viewBackground.layer.shadowColor = UIColor(white: 0.0, alpha: 0.5).CGColor
         self.viewBackground.layer.shadowRadius = 1.0
         self.viewBackground.layer.shadowOffset = CGSizeMake(2, 0)
@@ -68,10 +65,10 @@ class SSChatListTableCell: UITableViewCell {
         switch model.ssomViewModel.ssomType {
         case .SSOM:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.viewCountBackground.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.lbNewMessageCount.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
         case .SSOSEYO:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.viewCountBackground.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.lbNewMessageCount.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
         if let imageUrl = model.ssomViewModel.imageUrl {
@@ -107,6 +104,8 @@ class SSChatListTableCell: UITableViewCell {
             self.lbLastMessage.text = model.lastMessage
         }
 
+        self.lbNewMessageCount.layoutIfNeeded()
+        self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
         self.lbNewMessageCount.text = "\(model.unreadCount)"
 
         if let distance = model.ssomViewModel.distance where distance != 0 {

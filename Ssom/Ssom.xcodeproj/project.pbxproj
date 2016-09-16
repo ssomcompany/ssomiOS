@@ -258,9 +258,6 @@
 		974C9DAB1C6B447000E17A2B /* unreadCount.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C671C6B447000E17A2B /* unreadCount.png */; };
 		974C9DAC1C6B447000E17A2B /* unreadCount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C681C6B447000E17A2B /* unreadCount@2x.png */; };
 		974C9DAD1C6B447000E17A2B /* unreadCount@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C691C6B447000E17A2B /* unreadCount@3x.png */; };
-		974C9DB31C6B447000E17A2B /* writeLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C6F1C6B447000E17A2B /* writeLine.png */; };
-		974C9DB41C6B447000E17A2B /* writeLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C701C6B447000E17A2B /* writeLine@2x.png */; };
-		974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C711C6B447000E17A2B /* writeLine@3x.png */; };
 		974C9DB61C6B447000E17A2B /* writePhotoArea.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C721C6B447000E17A2B /* writePhotoArea.png */; };
 		974C9DB71C6B447000E17A2B /* writePhotoArea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */; };
 		974C9DB81C6B447000E17A2B /* writePhotoArea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */; };
@@ -612,9 +609,6 @@
 		974C9C671C6B447000E17A2B /* unreadCount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unreadCount.png; path = ../../../Ssom/Ssom/Ssom/Resource/unreadCount.png; sourceTree = "<group>"; };
 		974C9C681C6B447000E17A2B /* unreadCount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unreadCount@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/unreadCount@2x.png"; sourceTree = "<group>"; };
 		974C9C691C6B447000E17A2B /* unreadCount@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unreadCount@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/unreadCount@3x.png"; sourceTree = "<group>"; };
-		974C9C6F1C6B447000E17A2B /* writeLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writeLine.png; path = ../../../Ssom/Ssom/Ssom/Resource/writeLine.png; sourceTree = "<group>"; };
-		974C9C701C6B447000E17A2B /* writeLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writeLine@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writeLine@2x.png"; sourceTree = "<group>"; };
-		974C9C711C6B447000E17A2B /* writeLine@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writeLine@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writeLine@3x.png"; sourceTree = "<group>"; };
 		974C9C721C6B447000E17A2B /* writePhotoArea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writePhotoArea.png; path = ../../../Ssom/Ssom/Ssom/Resource/writePhotoArea.png; sourceTree = "<group>"; };
 		974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@2x.png"; sourceTree = "<group>"; };
 		974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@3x.png"; sourceTree = "<group>"; };
@@ -966,9 +960,6 @@
 				974C9C671C6B447000E17A2B /* unreadCount.png */,
 				974C9C681C6B447000E17A2B /* unreadCount@2x.png */,
 				974C9C691C6B447000E17A2B /* unreadCount@3x.png */,
-				974C9C6F1C6B447000E17A2B /* writeLine.png */,
-				974C9C701C6B447000E17A2B /* writeLine@2x.png */,
-				974C9C711C6B447000E17A2B /* writeLine@3x.png */,
 				974C9C721C6B447000E17A2B /* writePhotoArea.png */,
 				974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */,
 				974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */,
@@ -1368,7 +1359,6 @@
 				974C9CAE1C6B447000E17A2B /* camera@3x.png in Resources */,
 				974C9CAD1C6B447000E17A2B /* camera@2x.png in Resources */,
 				974C9C881C6B447000E17A2B /* acceptButtonGreen@3x.png in Resources */,
-				974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */,
 				974C9D2A1C6B447000E17A2B /* manu@3x.png in Resources */,
 				9787ACEC1D042926001CF18C /* Menu.xcassets in Resources */,
 				974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */,
@@ -1507,7 +1497,6 @@
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
 				97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */,
 				974C9CDD1C6B447000E17A2B /* filterBg.png in Resources */,
-				974C9DB41C6B447000E17A2B /* writeLine@2x.png in Resources */,
 				97B2D16D1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib in Resources */,
 				974C9CF11C6B447000E17A2B /* heartGreen@3x.png in Resources */,
 				974C9D461C6B447000E17A2B /* oval4Fill30@3x.png in Resources */,
@@ -1521,7 +1510,6 @@
 				974C9D991C6B447000E17A2B /* ssomSelectRed@2x.png in Resources */,
 				974C9D4D1C6B447000E17A2B /* pathGuideHeart.png in Resources */,
 				974C9D111C6B447000E17A2B /* joinBtn.png in Resources */,
-				974C9DB31C6B447000E17A2B /* writeLine.png in Resources */,
 				974C9CD11C6B447000E17A2B /* detailCenterGreen@3x.png in Resources */,
 				974C9D861C6B447000E17A2B /* ssomIngRedPoint.png in Resources */,
 				974C9CA21C6B447000E17A2B /* bow.png in Resources */,

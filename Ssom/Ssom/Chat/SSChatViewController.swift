@@ -40,7 +40,6 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     var messages: [SSChatViewModel] = [SSChatViewModel]()
 
     var meetRequestUserId: String?
-    var isRequestedToMeet: Bool = false
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested
 
     var refreshTimer: NSTimer!
@@ -142,10 +141,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.registerForKeyboardNotifications()
 
-        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).CGColor
-        self.viewNotificationToStartMeet.layer.shadowOffset = CGSizeMake(0, 2)
-        self.viewNotificationToStartMeet.layer.shadowRadius = 1
-        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
+//        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).CGColor
+//        self.viewNotificationToStartMeet.layer.shadowOffset = CGSizeMake(0, 2)
+//        self.viewNotificationToStartMeet.layer.shadowRadius = 1
+//        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
 
         self.loadData()
 
@@ -178,10 +177,14 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                 return
                             }
                             if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
-                                if requestUserId == loginedUserId {
-                                    self.showMeetRequest(true, status: .Requested)
+                                if self.meetRequestStatus == .Accepted {
+                                    self.showMeetRequest(true, status: .Accepted)
                                 } else {
-                                    self.showMeetRequest(true, status: .Received)
+                                    if requestUserId == loginedUserId {
+                                        self.showMeetRequest(true, status: .Requested)
+                                    } else {
+                                        self.showMeetRequest(true, status: .Received)
+                                    }
                                 }
                             } else {
                                 self.showMeetRequest(false)
@@ -206,8 +209,38 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     func tapMeetRequest() {
         print("tapped meet request!!")
 
-        if !self.isRequestedToMeet {
+        switch self.meetRequestStatus {
+        case .Requested, .Accepted:
+            SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
+                self.cancelMeetRequest()
+                }, button2Completion: { (action) in
+                    //
+            })
+        case .Received:
+            UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+            }) { (finish) in
+                SSAlertController.alertTwoButton(title: "만남 요청", message: "상대방이 만남을 요청했습니다!\n수락 하시겠어요?", vc: self, button1Title: "만남 수락", button2Title: "아직은 좀...", button1Completion: { (action) in
+                    guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
+                        return
+                    }
 
+                    if chatRoomId.characters.count > 0 {
+                        SSNetworkAPIClient.putMeetRequest(token, chatRoomId: chatRoomId, completion: { [weak self] (data, error) in
+                            if let err = error {
+                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                            } else {
+                                if let wself = self {
+                                    wself.showMeetRequest(true, status: .Accepted)
+                                }
+                            }
+                        })
+                    }
+                    }, button2Completion: { (action) in
+                        //
+                })
+            }
+        case .NotRequested, .Cancelled:
             UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
                 self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
             }) { (finish) in
@@ -235,13 +268,6 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     //
                 }
             }
-
-        } else {
-            SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
-                    self.cancelMeetRequest()
-                }, button2Completion: { (action) in
-                    //
-            })
         }
     }
 
@@ -259,7 +285,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             self.constTableViewChatTopToSuper.active = false
             self.constTableViewChatTopToViewRequest.active = true
 
-            self.constViewRequestHeight.constant = 44
+            self.constViewRequestHeight.constant = 43
 
             alpha = 1.0
         } else {

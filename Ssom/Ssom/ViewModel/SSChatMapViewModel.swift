@@ -56,7 +56,7 @@ public struct SSChatMapViewModel {
             self.ssomType = SSType(rawValue: rawSsomType)!
         }
 
-        if let rawSSMeetRequestOptions = modelDict["ssomMeetRequestOptions"] as? Int {
+        if let rawSSMeetRequestOptions = modelDict["ssomMeetRequestOptions"] as? String {
             self.meetRequestedStatus = SSMeetRequestOptions(rawValue: rawSSMeetRequestOptions)!
         }
     }

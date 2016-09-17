@@ -16,7 +16,6 @@
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
                 <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
                 <outlet property="imgViewMeetRequest" destination="PxP-UG-XIa" id="CUc-lW-eG9"/>
-                <outlet property="imgViewMeetRequestHeart" destination="NZP-jm-BXT" id="82q-xK-Z8J"/>
                 <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>
                 <outlet property="lbBackButtonTitle" destination="Yic-qO-3ps" id="peR-xh-yby"/>
                 <outlet property="lbHeartCount" destination="ls5-ZA-jvE" id="qdJ-aM-hDn"/>
@@ -135,19 +134,18 @@
             <point key="canvasLocation" x="603.25" y="376"/>
         </view>
         <view contentMode="scaleToFill" id="uCE-qo-zMC" userLabel="MeetRequestButtonView">
-            <rect key="frame" x="0.0" y="0.0" width="105" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meetButtonRed" translatesAutoresizingMaskIntoConstraints="NO" id="PxP-UG-XIa"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heartWhite" translatesAutoresizingMaskIntoConstraints="NO" id="NZP-jm-BXT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meetButtonRed" translatesAutoresizingMaskIntoConstraints="NO" id="PxP-UG-XIa">
                     <constraints>
-                        <constraint firstAttribute="width" constant="22" id="PQD-2D-elZ"/>
-                        <constraint firstAttribute="height" constant="19" id="pD6-l1-JcU"/>
+                        <constraint firstAttribute="height" constant="32" id="ZKk-XN-lzo"/>
+                        <constraint firstAttribute="width" constant="82" id="ciY-PU-LAi"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4K-cw-3pf">
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                    <state key="normal" title="        만남요청">
+                    <state key="normal" title="만남요청">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
@@ -158,8 +156,6 @@
                 <constraint firstAttribute="bottom" secondItem="n4K-cw-3pf" secondAttribute="bottom" id="5nf-cY-71R"/>
                 <constraint firstAttribute="trailing" secondItem="PxP-UG-XIa" secondAttribute="trailing" id="6xF-8T-axa"/>
                 <constraint firstItem="PxP-UG-XIa" firstAttribute="top" secondItem="uCE-qo-zMC" secondAttribute="top" id="FFU-zj-6Mh"/>
-                <constraint firstItem="NZP-jm-BXT" firstAttribute="centerY" secondItem="uCE-qo-zMC" secondAttribute="centerY" id="XPp-JC-Sln"/>
-                <constraint firstItem="NZP-jm-BXT" firstAttribute="leading" secondItem="uCE-qo-zMC" secondAttribute="leading" constant="10" id="n18-jb-fF1"/>
                 <constraint firstAttribute="trailing" secondItem="n4K-cw-3pf" secondAttribute="trailing" id="qcX-vr-qyt"/>
                 <constraint firstItem="n4K-cw-3pf" firstAttribute="top" secondItem="uCE-qo-zMC" secondAttribute="top" id="uqx-7c-tv3"/>
             </constraints>
@@ -173,7 +169,6 @@
     <resources>
         <image name="backIcon.png" width="18" height="18"/>
         <image name="heart.png" width="37" height="33"/>
-        <image name="heartWhite" width="30" height="27"/>
         <image name="meetButtonRed" width="105" height="36"/>
         <image name="message" width="27" height="27"/>
     </resources>

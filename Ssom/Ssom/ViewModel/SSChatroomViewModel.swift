@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum SSMeetRequestOptions: Int {
-    case NotRequested
-    case Cancelled
-    case Requested
-    case Received
+enum SSMeetRequestOptions: String {
+    case NotRequested = "NotRequested"
+    case Cancelled = "Cancelled"
+    case Requested = "Requested"
+    case Received = "request"
+    case Accepted = "approve"
 }
 
 public struct SSChatroomViewModel {
@@ -24,6 +25,7 @@ public struct SSChatroomViewModel {
     var lastMessage: String             // lastMsg
     var ssomViewModel: SSViewModel
     var meetRequestUserId: String?          // requestId
+    var meetRequestStatus: SSMeetRequestOptions = .NotRequested // status =  ['request', 'approve']
 
     init() {
         self.chatroomId = ""
@@ -80,8 +82,10 @@ public struct SSChatroomViewModel {
 
         if let requestUserId = modelDict["requestId"] as? String {
             self.meetRequestUserId = requestUserId
-        } else if let requestUserId = modelDict["reuqestId"] as? String {
-            self.meetRequestUserId = requestUserId
+        }
+
+        if let requestStatus = modelDict["status"] as? String {
+            self.meetRequestStatus = SSMeetRequestOptions(rawValue: requestStatus)!
         }
     }
 }

@@ -29,6 +29,9 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var lbDistance: UILabel!
     @IBOutlet var lbCreatedDate: UILabel!
 
+    @IBOutlet var imgIngMeet: UIImageView!
+    @IBOutlet var viewMeetRequest: UIView!
+
     weak var delegate: SSChatListTableCellDelegate?
     var profilImageUrl: String?
 
@@ -92,6 +95,40 @@ class SSChatListTableCell: UITableViewCell {
             }
         }
 
+        self.viewBackground.layoutIfNeeded()
+        self.viewMeetRequest.hidden = true
+
+        var isReceivedToRequestMeet = false
+        if let requestedUserId = model.meetRequestUserId,
+            let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            if requestedUserId != loginedUserId && model.meetRequestStatus == .Received {
+                self.viewMeetRequest.hidden = false
+                self.viewMeetRequest.layer.cornerRadius = self.viewMeetRequest.bounds.height / 2.0
+
+                isReceivedToRequestMeet = true
+
+                switch model.ssomViewModel.ssomType {
+                case .SSOM:
+                    self.viewMeetRequest.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 0.5)
+                case .SSOSEYO:
+                    self.viewMeetRequest.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 0.5)
+                }
+            }
+        }
+
+        self.imgIngMeet.hidden = true
+        let isAcceptedToMeet = model.meetRequestStatus == .Accepted
+        if isAcceptedToMeet {
+            self.imgIngMeet.hidden = false
+
+            switch model.ssomViewModel.ssomType {
+            case .SSOM:
+                self.imgIngMeet.image = UIImage(named: "ssomIngGreenSmall")
+            case .SSOSEYO:
+                self.imgIngMeet.image = UIImage(named: "ssomIngRedSmall")
+            }
+        }
+
         var memberInfoString:String = "";
         let ageArea: SSAgeAreaType = Util.getAgeArea(model.ssomViewModel.minAge)
         memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
@@ -100,8 +137,24 @@ class SSChatListTableCell: UITableViewCell {
         }
         self.lbSsomAgePeople.text = memberInfoString
 
-        if model.lastMessage.characters.count > 0 {
-            self.lbLastMessage.text = model.lastMessage
+        self.lbLastMessage.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        if isReceivedToRequestMeet {
+            switch model.ssomViewModel.ssomType {
+            case .SSOM:
+                self.lbLastMessage.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            case .SSOSEYO:
+                self.lbLastMessage.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            }
+            self.lbLastMessage.text = "만남 요청을 받았습니다!"
+        } else {
+            if isAcceptedToMeet {
+                self.lbLastMessage.textColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
+                self.lbLastMessage.text = "쏨과 만나는 중..."
+            } else {
+                if model.lastMessage.characters.count > 0 {
+                    self.lbLastMessage.text = model.lastMessage
+                }
+            }
         }
 
         self.lbNewMessageCount.layoutIfNeeded()

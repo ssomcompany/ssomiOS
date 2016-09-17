@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -68,31 +67,46 @@
                             </tableView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-P0-Lst">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨과의 만남이 시작되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="만남이 시작되었습니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-iO-YnA">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-iO-YnA">
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="Ppc-iO-YnA" secondAttribute="height" multiplier="148:54" id="o1b-TE-FxD"/>
+                                            <constraint firstAttribute="height" constant="40" id="B3t-8W-2kt"/>
+                                            <constraint firstAttribute="width" constant="109" id="fSi-z3-afg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" image="meetBtn"/>
+                                        <state key="normal" image="iconSsomMap">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content=" ">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="AppleSDGothicNeo-Bold"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="쏨 위치 보기">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="AppleSDGothicNeo-Bold"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
                                         <connections>
                                             <action selector="tapDownShowMap:" destination="tih-SM-SIo" eventType="touchDown" id="JdT-lc-q07"/>
                                             <action selector="tapShowMap:" destination="tih-SM-SIo" eventType="touchUpInside" id="Nm0-Lt-eSZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="1B4-T1-diq"/>
                                     <constraint firstItem="7I9-42-WCS" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="2JE-ln-R0d"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ppc-iO-YnA" secondAttribute="trailing" constant="10" id="LSN-ur-DNC"/>
-                                    <constraint firstItem="Ppc-iO-YnA" firstAttribute="width" secondItem="B2p-P0-Lst" secondAttribute="width" multiplier="104:414" id="c2r-pQ-4ku"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ppc-iO-YnA" secondAttribute="trailing" constant="24" id="LSN-ur-DNC"/>
                                     <constraint firstItem="Ppc-iO-YnA" firstAttribute="centerY" secondItem="B2p-P0-Lst" secondAttribute="centerY" id="gsC-2z-cLL"/>
-                                    <constraint firstItem="7I9-42-WCS" firstAttribute="leading" secondItem="B2p-P0-Lst" secondAttribute="leading" constant="35" id="p7F-ln-Na0"/>
+                                    <constraint firstItem="7I9-42-WCS" firstAttribute="leading" secondItem="B2p-P0-Lst" secondAttribute="leading" constant="20" id="p7F-ln-Na0"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ew7-iN-Spu">
@@ -243,7 +257,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NXQ-A8-Jsy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qxA-uy-RKu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qxA-uy-RKu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -259,7 +273,7 @@
     </scenes>
     <resources>
         <image name="chat_btn_send" width="23" height="23"/>
+        <image name="iconSsomMap" width="26" height="18"/>
         <image name="mapShadow" width="416" height="76"/>
-        <image name="meetBtn" width="150" height="54"/>
     </resources>
 </document>

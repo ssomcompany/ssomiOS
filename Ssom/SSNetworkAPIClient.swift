@@ -632,7 +632,35 @@ public struct SSNetworkAPIClient {
     }
 
     static func putMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
 
+        Alamofire.request(.PUT,
+                          SSNetworkContext.serverUrlPrefixt+"request",
+                          parameters: ["chatroomId": chatRoomId],
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+            .responseJSON { (response) in
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawData = response.result.value as? [String: AnyObject] {
+                        completion(data: rawData, error: nil)
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PutMeetRequest", code: 807, userInfo: nil)
+
+                        completion(data: nil, error: error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+
+                    completion(data: nil, error: response.result.error)
+                }
+                
+                indicator.hideIndicator()
+        }
     }
 
     static func deleteMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {

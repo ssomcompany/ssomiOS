@@ -51,6 +51,17 @@
                                     <constraint firstAttribute="height" constant="46" id="hXT-qm-2uO"/>
                                 </constraints>
                             </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngGreenSmall" translatesAutoresizingMaskIntoConstraints="NO" id="hZu-En-JJj"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFU-xG-R2y">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWait" translatesAutoresizingMaskIntoConstraints="NO" id="M7a-JV-ZZx"/>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.70588235294117641" blue="0.5607843137254902" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="M7a-JV-ZZx" firstAttribute="centerY" secondItem="tFU-xG-R2y" secondAttribute="centerY" id="HJi-cY-ZwH"/>
+                                    <constraint firstItem="M7a-JV-ZZx" firstAttribute="centerX" secondItem="tFU-xG-R2y" secondAttribute="centerX" id="fPe-Zm-H7Q"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBorderGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-tc-WVi"/>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvy-ad-nt4">
                                 <connections>
@@ -64,7 +75,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="두근두근, 대화가 시작되었쏨 : )" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHd-kf-ZzP">
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bq-lW-OUA">
@@ -98,10 +109,13 @@
                         <constraints>
                             <constraint firstItem="dcP-tc-WVi" firstAttribute="bottom" secondItem="sqU-iY-kTF" secondAttribute="bottom" id="0C9-o0-dO5"/>
                             <constraint firstItem="hrf-sr-uMJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IHd-kf-ZzP" secondAttribute="bottom" constant="14" id="2Yw-sV-hSS"/>
+                            <constraint firstItem="tFU-xG-R2y" firstAttribute="trailing" secondItem="sqU-iY-kTF" secondAttribute="trailing" id="5gY-2T-N8Q"/>
+                            <constraint firstItem="tFU-xG-R2y" firstAttribute="bottom" secondItem="sqU-iY-kTF" secondAttribute="bottom" id="5xa-G0-x8T"/>
                             <constraint firstItem="BhY-cc-rq5" firstAttribute="top" secondItem="sqU-iY-kTF" secondAttribute="top" id="7EB-Fo-5cY"/>
                             <constraint firstItem="JNH-GC-ZVI" firstAttribute="trailing" secondItem="vXc-FD-19o" secondAttribute="trailing" id="7mx-wx-yE1"/>
                             <constraint firstAttribute="trailing" secondItem="4bq-lW-OUA" secondAttribute="trailing" constant="20" id="8JE-Qp-0qR"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IHd-kf-ZzP" secondAttribute="trailing" constant="80" id="EX1-np-3ZM"/>
+                            <constraint firstItem="hZu-En-JJj" firstAttribute="trailing" secondItem="sqU-iY-kTF" secondAttribute="trailing" id="Fs4-qe-aHz"/>
                             <constraint firstItem="IHd-kf-ZzP" firstAttribute="leading" secondItem="BhY-cc-rq5" secondAttribute="leading" id="Idr-x1-ItC"/>
                             <constraint firstItem="fvy-ad-nt4" firstAttribute="leading" secondItem="dcP-tc-WVi" secondAttribute="leading" id="KTA-t4-iMU"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="84" id="MAT-ze-4xH"/>
@@ -110,18 +124,23 @@
                             <constraint firstItem="fvy-ad-nt4" firstAttribute="top" secondItem="dcP-tc-WVi" secondAttribute="top" id="NQt-dF-IwG"/>
                             <constraint firstItem="dcP-tc-WVi" firstAttribute="leading" secondItem="sqU-iY-kTF" secondAttribute="leading" id="SS9-II-FEf"/>
                             <constraint firstItem="vXc-FD-19o" firstAttribute="top" secondItem="JNH-GC-ZVI" secondAttribute="bottom" constant="3" id="SVj-VZ-44y"/>
+                            <constraint firstItem="hZu-En-JJj" firstAttribute="bottom" secondItem="sqU-iY-kTF" secondAttribute="bottom" id="WB9-ed-nX3"/>
                             <constraint firstItem="4bq-lW-OUA" firstAttribute="trailing" secondItem="vXc-FD-19o" secondAttribute="trailing" id="YHT-UO-5lq"/>
                             <constraint firstItem="hrf-sr-uMJ" firstAttribute="leading" secondItem="8Yd-OH-nmp" secondAttribute="leading" id="ajx-LM-gr2"/>
                             <constraint firstItem="sqU-iY-kTF" firstAttribute="top" secondItem="8Yd-OH-nmp" secondAttribute="top" constant="17" id="bfz-un-xCF"/>
                             <constraint firstItem="sqU-iY-kTF" firstAttribute="leading" secondItem="8Yd-OH-nmp" secondAttribute="leading" constant="17" id="dwp-n6-g8j"/>
                             <constraint firstItem="4bq-lW-OUA" firstAttribute="top" secondItem="8Yd-OH-nmp" secondAttribute="top" constant="12" id="gpB-JJ-47i"/>
                             <constraint firstItem="fvy-ad-nt4" firstAttribute="trailing" secondItem="dcP-tc-WVi" secondAttribute="trailing" id="h9z-Jc-5SN"/>
+                            <constraint firstItem="hZu-En-JJj" firstAttribute="leading" secondItem="sqU-iY-kTF" secondAttribute="leading" id="izQ-Oc-kUC"/>
                             <constraint firstAttribute="trailing" secondItem="hrf-sr-uMJ" secondAttribute="trailing" id="oce-zJ-tPg"/>
+                            <constraint firstItem="tFU-xG-R2y" firstAttribute="top" secondItem="sqU-iY-kTF" secondAttribute="top" id="p1S-Uv-Clc"/>
                             <constraint firstItem="JNH-GC-ZVI" firstAttribute="top" secondItem="4bq-lW-OUA" secondAttribute="bottom" constant="6" id="qw7-mf-nGM"/>
+                            <constraint firstItem="hZu-En-JJj" firstAttribute="top" secondItem="sqU-iY-kTF" secondAttribute="top" id="rh2-6s-7pS"/>
                             <constraint firstItem="IHd-kf-ZzP" firstAttribute="top" secondItem="BhY-cc-rq5" secondAttribute="bottom" constant="5" id="tEw-8r-8d9"/>
                             <constraint firstItem="dcP-tc-WVi" firstAttribute="trailing" secondItem="sqU-iY-kTF" secondAttribute="trailing" id="xpk-sW-Ito"/>
                             <constraint firstItem="fvy-ad-nt4" firstAttribute="bottom" secondItem="dcP-tc-WVi" secondAttribute="bottom" id="y6Q-He-lRg"/>
                             <constraint firstItem="BhY-cc-rq5" firstAttribute="leading" secondItem="sqU-iY-kTF" secondAttribute="trailing" constant="16" id="zIA-W2-6C5"/>
+                            <constraint firstItem="tFU-xG-R2y" firstAttribute="leading" secondItem="sqU-iY-kTF" secondAttribute="leading" id="zKY-nv-28E"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -147,6 +166,7 @@
                 <outlet property="btnChatDelete" destination="s8C-9M-pFG" id="W5E-cH-LLO"/>
                 <outlet property="constViewBackgroundLeadingToSuper" destination="un0-2t-wzK" id="kYr-IR-cge"/>
                 <outlet property="constViewBackgroundTrailingToSuper" destination="KCy-IO-g9E" id="PRP-GG-jZ1"/>
+                <outlet property="imgIngMeet" destination="hZu-En-JJj" id="1Qz-7O-5kE"/>
                 <outlet property="imgViewProfile" destination="sqU-iY-kTF" id="dai-Kt-VLO"/>
                 <outlet property="imgViewProfileBorder" destination="dcP-tc-WVi" id="wGy-yv-yxF"/>
                 <outlet property="lbCreatedDate" destination="vXc-FD-19o" id="HyG-6i-NdQ"/>
@@ -155,12 +175,15 @@
                 <outlet property="lbNewMessageCount" destination="4bq-lW-OUA" id="sIj-ae-AxY"/>
                 <outlet property="lbSsomAgePeople" destination="BhY-cc-rq5" id="jbs-YK-36E"/>
                 <outlet property="viewBackground" destination="8Yd-OH-nmp" id="JT6-m8-TQG"/>
+                <outlet property="viewMeetRequest" destination="tFU-xG-R2y" id="4DE-bB-7YT"/>
             </connections>
             <point key="canvasLocation" x="324" y="270.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="iconWait" width="23" height="28"/>
         <image name="profileBorderGreen.png" width="48" height="47"/>
+        <image name="ssomIngGreenSmall" width="46" height="46"/>
         <image name="treshIcon.png" width="11" height="14"/>
     </resources>
 </document>

@@ -34,7 +34,6 @@ class SSNavigationBarItems : UIView
     @IBOutlet var meetRequestButtonView: UIView!
     @IBOutlet var imgViewMeetRequest: UIImageView!
     @IBOutlet var btnMeetRequest: UIButton!
-    @IBOutlet var imgViewMeetRequestHeart: UIImageView!
 
     weak var delegate: SSNavigationBarItemsDelegate!
 
@@ -115,26 +114,22 @@ class SSNavigationBarItems : UIView
 
     func changeMeetRequest(status: SSMeetRequestOptions = .NotRequested) {
         switch status {
-        case .Requested:
+        case .Requested, .Accepted:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
-            self.btnMeetRequest.setTitle("만남 취소", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = true
+            self.btnMeetRequest.setTitle("만남 종료", forState: UIControlState.Normal)
         case .Received:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
             self.btnMeetRequest.setTitle("만남 수락", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = true
         case .Cancelled:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("        만남요청", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = false
+            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
         default:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("        만남요청", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = false
+            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
         }
     }
 }

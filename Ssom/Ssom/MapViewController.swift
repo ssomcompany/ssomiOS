@@ -137,24 +137,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func loadingData() {
-        SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
-            if let err = error {
-                print("error is : \(err.localizedDescription)")
+        SSNetworkAPIClient
+            .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
+                      longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,
+                      completion: { [unowned self] (viewModels, error) -> Void in
 
-                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        if let err = error {
+                            print("error is : \(err.localizedDescription)")
 
-            } else {
-                if let models = viewModels {
-                    self.datasOfAllSsom = models
-                    self.datas = models
-                    print("result is : \(self.datasOfAllSsom)")
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
 
-                    self.showMarkers()
-                }
-            }
-
-            self.showOpenAnimation()
-        }
+                        } else {
+                            if let models = viewModels {
+                                self.datasOfAllSsom = models
+                                self.datas = models
+                                print("result is : \(self.datasOfAllSsom)")
+                                
+                                self.showMarkers()
+                            }
+                        }
+                        
+                        self.showOpenAnimation()
+                })
     }
 
     override func viewDidLoad() {

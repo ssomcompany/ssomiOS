@@ -86,8 +86,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         // TODO: UUID 관리 관련해서 수정해야됨..
+        print("deviceToken : \(deviceToken)")
         let keyChain = Keychain(service: "com.ssom")
         keyChain[data: "pushDeviceToken"] = deviceToken
+
+        OneSignal.IdsAvailable { (oneSignalPlayerId, pushToken) in
+            print("playerId : \(oneSignalPlayerId), pushToken : \(pushToken)")
+        }
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {

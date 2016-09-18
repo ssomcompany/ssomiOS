@@ -349,6 +349,7 @@
 		8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests.release.xcconfig"; sourceTree = "<group>"; };
 		9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSNavigationBarItems.xib; sourceTree = "<group>"; };
+		9717EB151D8E6F8400B47718 /* Ssom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Ssom.entitlements; path = Ssom/Ssom.entitlements; sourceTree = "<group>"; };
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
 		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
@@ -363,7 +364,7 @@
 		97343E291BE65AB300A9D39D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		97343E2C1BE65AB300A9D39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97343E2E1BE65AB300A9D39D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		97343E331BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97343E331BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Ssom/Info.plist; sourceTree = "<group>"; };
 		97343E381BE65AB300A9D39D /* SsomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SsomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E3C1BE65AB300A9D39D /* SsomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsomTests.swift; sourceTree = "<group>"; };
 		97343E3E1BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -613,7 +614,7 @@
 		9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuTableViewCell.xib; path = Menu/SSMenuTableViewCell.xib; sourceTree = "<group>"; };
 		9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignUpViewController.swift; path = SignIn/SSSignUpViewController.swift; sourceTree = "<group>"; };
 		977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Float.swift"; path = "Ssom/3rdLib/CGSize+Float.swift"; sourceTree = "<group>"; };
-		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Ssom/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSMasterViewController.swift; sourceTree = "<group>"; };
 		977DBA731D2B82A400CFD98F /* SSScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSScrollView.swift; path = SsomView/SSScrollView.swift; sourceTree = "<group>"; };
@@ -985,8 +986,6 @@
 				9764D9DA1D35FF5300BBE4C6 /* ViewModel */,
 				9730034E1C10947100734D8D /* Resource */,
 				97343E2E1BE65AB300A9D39D /* Assets.xcassets */,
-				97343E331BE65AB300A9D39D /* Info.plist */,
-				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
@@ -1082,6 +1081,9 @@
 		977DBA6B1D23A22B00CFD98F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				97343E331BE65AB300A9D39D /* Info.plist */,
+				9717EB151D8E6F8400B47718 /* Ssom.entitlements */,
+				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */,
 			);
 			name = "Support Files";
@@ -1885,6 +1887,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
@@ -1924,6 +1927,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";

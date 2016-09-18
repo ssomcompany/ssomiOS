@@ -20,11 +20,18 @@ public let acceptableStatusCodes: Range<Int> = 200..<300
 public struct SSNetworkAPIClient {
 
 // MARK: - Post
-    static func getPosts(completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
+    static func getPosts(latitude latitude: Double = 0, longitude: Double = 0, completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
-        Alamofire.request(.GET, SSNetworkContext.serverUrlPrefixt+"posts")
+        var params: String! = nil
+        if !(latitude == 0 && longitude == 0) {
+            params = "?lat=\(latitude)&lng=\(longitude)"
+        }
+
+        Alamofire.request(.GET,
+            SSNetworkContext.serverUrlPrefixt+"posts"+(params != nil ? params : ""),
+            encoding: .JSON)
         .responseJSON { response in
 
             print("request is : \(response.request)")

@@ -158,17 +158,20 @@ class SSMasterViewController: UIViewController {
     @IBAction func switchView(sender: AnyObject) {
         var originX: CGFloat = 0.0
         var buttonTitle: String = kMapButtonTitle
-        if self.buttonBackgroundView.frame.origin.x == 0 {
+        if let segmentControl = self.navigationItem.titleView as? UISegmentedControl where segmentControl.selectedSegmentIndex == 1 {
             originX = CGFloatWithScreenRatio(175-97, axis: Axis.X, criteria: .IPhone6Plus)
             buttonTitle = kListButtonTitle
+
+            self.segButton1.selected = false
+            self.segButton2.selected = true
         } else {
             originX = 0
+
+            self.segButton1.selected = true
+            self.segButton2.selected = false
         }
 
         self.lbButtonTitle.text = buttonTitle
-
-        self.segButton1.selected = !self.segButton1.selected
-        self.segButton2.selected = !self.segButton2.selected
 
         UIView.animateWithDuration(0.3,
                                    delay: 0.0,

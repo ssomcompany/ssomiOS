@@ -24,6 +24,8 @@ class SSMasterViewController: UIViewController {
     var buttonBackgroundView: UIImageView!
     var lbButtonTitle: UILabel!
 
+    var unreadCount: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -128,11 +130,19 @@ class SSMasterViewController: UIViewController {
                     if let rawData = data, let unreadCount = rawData["unreadCount"] as? Int {
                         print("unreadCount : \(unreadCount)")
 
+                        self.unreadCount = unreadCount
                         self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
                     }
                 }
             })
         }
+    }
+
+    func reload(with modelDict: [String: AnyObject]) {
+//        let newMessage = SSChatViewModel(modelDict: modelDict)
+
+        self.unreadCount += 1
+        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
     }
 
     @IBAction func switchView(sender: AnyObject) {

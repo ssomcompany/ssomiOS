@@ -132,6 +132,27 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         }
     }
 
+    func reload(with modelDict: [String: AnyObject]) {
+        let newMessage = SSChatViewModel(modelDict: modelDict)
+
+        for (index, var data) in self.datas.enumerate() {
+            if data.chatroomId == newMessage.chatroomId {
+                self.datas.removeAtIndex(index)
+
+                data.unreadCount += 1
+                data.lastMessage = newMessage.message
+
+                self.datas.insert(data, atIndex: 0)
+
+                break
+            }
+        }
+
+        self.setChattingCount(self.unreadCount)
+
+        self.chatListTableView.reloadData()
+    }
+
 // MARK: - UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.datas.count

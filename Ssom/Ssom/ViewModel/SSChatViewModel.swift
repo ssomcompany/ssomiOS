@@ -14,6 +14,7 @@ enum SSChatMessageType: String {
 }
 
 public struct SSChatViewModel {
+    var chatroomId: String?
     var fromUserId: String
     var profileImageUrl: String?
     var toUserId: String
@@ -30,6 +31,14 @@ public struct SSChatViewModel {
     }
 
     init(modelDict: [String: AnyObject]) {
+        if let chatroomId = modelDict["chatroomId"] as? String {
+            self.chatroomId = chatroomId
+        } else {
+            if let chatroomId = modelDict["chatroomId"] as? Int {
+                self.chatroomId = String(chatroomId)
+            }
+        }
+
         if let fromUserId = modelDict["fromUserId"] as? String {
             self.fromUserId = fromUserId
         } else {

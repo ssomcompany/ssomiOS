@@ -40,6 +40,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
         // OneSignal
         OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey)
+        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
+            print("notification: \(notification), payload data: \(notification.payload.additionalData)")
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let keyWindow = appDelegate.window else { return }
+            guard let rootViewController = keyWindow.rootViewController else { return }
+            if rootViewController is SSDrawerViewController {
+                guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
+                if mainViewController is UINavigationController {
+                    print("Now MainViewController is : NavigationController")
+
+                    guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
+                    print("Now TopViewController is : \(topViewController)")
+                    if topViewController is SSChatViewController {
+                        // add the received message to the bottom fo the message lists
+                        (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSChatListViewController {
+                        // move up the chat room of the received message & add +1 to unread count
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSMasterViewController {
+                        // add +1 to unread count
+                        (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    }
+                } else {
+                    print("Now MainViewController is : \(mainViewController)")
+                }
+            } else {
+                print("Now view controller is : \(rootViewController)")
+            }
+
+        }, handleNotificationAction: { (openedResult) in
+            print("openedResult : \(openedResult)")
+        }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
 
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController

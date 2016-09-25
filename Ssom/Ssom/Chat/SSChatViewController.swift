@@ -67,7 +67,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             self.tfInput.resignFirstResponder()
         }
 
-        self.refreshTimer.invalidate()
+//        self.refreshTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,7 +149,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.loadData()
 
-        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
+//        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
     }
 
     func loadData() {
@@ -195,6 +195,17 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 })
             }
         }
+    }
+
+    func reload(with modelDict: [String: AnyObject]) {
+        let newMessage = SSChatViewModel(modelDict: modelDict)
+
+        self.messages.append(newMessage)
+
+        self.tableViewChat.reloadData()
+
+        let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
+        self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
     }
 
     func registerForKeyboardNotifications() -> Void {
@@ -367,8 +378,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     if message.characters.count > 0 {
                         var lastTimestamp = Int(NSDate().timeIntervalSince1970)
                         if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
-                            lastTimestamp = Int(timestamp)
+                            lastTimestamp = Int(timestamp * 1000.0)
                         }
+
+                        let nowDateTime = NSDate()
 
                         if let roomId = self.chatRoomId {
                             SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
@@ -380,7 +393,22 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                     if let newDatas = datas {
                                         self.tfInput.text = ""
 
-                                        self.messages = newDatas
+                                        if self.messages.count != 0 {
+                                            self.messages.appendContentsOf(newDatas)
+                                        } else {
+                                            self.messages = newDatas
+                                        }
+
+                                        // add my sent message on the last of the messages
+                                        if let lastMessage = self.messages.last where lastMessage.message != message && lastMessage.messageDateTime != nowDateTime {
+
+                                            var myLastMessage = SSChatViewModel()
+                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userModel!.userId
+                                            myLastMessage.message = message
+                                            myLastMessage.messageDateTime = nowDateTime
+                                            myLastMessage.profileImageUrl = self.myImageUrl
+                                            self.messages.append(myLastMessage)
+                                        }
 
                                         self.tableViewChat.reloadData()
 

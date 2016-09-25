@@ -16,6 +16,10 @@ extension CGSize {
 }
 
 public func CGRectMakeWithScreenRatio(x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, criteria: DeviceType) -> CGRect {
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+
     switch criteria {
     case .IPhone4, .IPhone4S:
         let factorWidth = UIScreen.mainScreen().bounds.width / 320.0
@@ -44,6 +48,10 @@ public enum Axis {
 }
 
 public func CGFloatWithScreenRatio(point: CGFloat, axis: Axis, criteria: DeviceType) -> CGFloat {
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        return point
+    }
+
     switch criteria {
     case .IPhone4, .IPhone4S:
         if axis == .X {

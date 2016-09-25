@@ -37,6 +37,14 @@ class SSAccountManager {
         }
     }
 
+    var profileImageUrl: String? {
+        if let imageUrl = SSNetworkContext.sharedInstance.getSharedAttribute("profileImageUrl") as? String {
+            return imageUrl
+        } else {
+            return nil
+        }
+    }
+
     var userModel: SSUserModel? {
         if let savedUserModel = SSNetworkContext.sharedInstance.getSharedAttribute("userModel") as? [String: AnyObject] {
             return SSUserModel(modelDict: savedUserModel)
@@ -102,6 +110,8 @@ class SSAccountManager {
 
             SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
 
             guard let _ = completion!(finish: true) else {
                 return

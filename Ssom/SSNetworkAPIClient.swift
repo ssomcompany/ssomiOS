@@ -21,13 +21,21 @@ public struct SSNetworkAPIClient {
 
 // MARK: - Post
     static func getPosts(latitude latitude: Double = 0, longitude: Double = 0, completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
-        let indicator: SSIndicatorView = SSIndicatorView()
-        indicator.showIndicator()
-
         var params: String! = nil
         if !(latitude == 0 && longitude == 0) {
 //            params = "?lat=\(latitude)&lng=\(longitude)"
         }
+        if let userId = SSAccountManager.sharedInstance.userModel?.userId {
+            let queryString = "userId=\(userId)"
+            if params == nil {
+                params = "?"+queryString
+            } else {
+                params = params.stringByAppendingString(queryString)
+            }
+        }
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
 
         Alamofire.request(.GET,
             SSNetworkContext.serverUrlPrefixt+"posts"+(params != nil ? params : ""),
@@ -244,6 +252,10 @@ public struct SSNetworkAPIClient {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
 
                             completion(error: nil)
+
+                            if let imageUrl = rawDatas["profileImgUrl"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                            }
 
                             if let auth = FIRAuth.auth() {
                                 auth.signInWithEmail(email, password: password, completion: { (user, error) in

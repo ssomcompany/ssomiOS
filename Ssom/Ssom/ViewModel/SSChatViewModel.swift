@@ -15,6 +15,7 @@ enum SSChatMessageType: String {
 
 public struct SSChatViewModel {
     var fromUserId: String
+    var profileImageUrl: String?
     var toUserId: String
     var message: String
     var messageDateTime: NSDate
@@ -33,6 +34,10 @@ public struct SSChatViewModel {
             self.fromUserId = fromUserId
         } else {
             self.fromUserId = ""
+        }
+
+        if let imageUrl = modelDict["profileImgUrl"] as? String {
+            self.profileImageUrl = imageUrl
         }
 
         if let toUserId = modelDict["toUserId"] as? String {

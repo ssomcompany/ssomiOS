@@ -22,6 +22,7 @@ public class SSViewModel {
     var userId: String
     var userCount: Int!
     var createdDatetime: NSDate
+    var assignedChatroomId: String?
 
     init() {
         self.category = ""
@@ -99,6 +100,14 @@ public class SSViewModel {
             self.createdDatetime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDatetime)/1000.0)
         } else {
             self.createdDatetime = NSDate()
+        }
+
+        if let chatroomId = modelDict["chatroomId"] as? String {
+            self.assignedChatroomId = chatroomId
+        } else {
+            if let chatroomId = modelDict["chatroomId"] as? Int {
+                self.assignedChatroomId = String(chatroomId)
+            }
         }
     }
 }

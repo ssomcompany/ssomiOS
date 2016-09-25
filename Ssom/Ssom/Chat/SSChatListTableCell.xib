@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -45,7 +45,7 @@
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yd-OH-nmp">
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sqU-iY-kTF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="sqU-iY-kTF">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="KCO-s1-nfG"/>
                                     <constraint firstAttribute="height" constant="46" id="hXT-qm-2uO"/>
@@ -105,7 +105,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dcP-tc-WVi" firstAttribute="bottom" secondItem="sqU-iY-kTF" secondAttribute="bottom" id="0C9-o0-dO5"/>
                             <constraint firstItem="hrf-sr-uMJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IHd-kf-ZzP" secondAttribute="bottom" constant="14" id="2Yw-sV-hSS"/>
@@ -182,6 +182,7 @@
     </objects>
     <resources>
         <image name="iconWait" width="23" height="28"/>
+        <image name="noneProfile" width="45" height="45"/>
         <image name="profileBorderGreen.png" width="48" height="47"/>
         <image name="ssomIngGreenSmall" width="46" height="46"/>
         <image name="treshIcon.png" width="11" height="14"/>

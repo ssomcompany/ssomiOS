@@ -74,30 +74,45 @@ class SSChatListTableCell: UITableViewCell {
             self.lbNewMessageCount.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
-        if let imageUrl = model.ssomViewModel.imageUrl {
-            // check if the login user is the owner of the chatting
-            if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
-                self.isOwnerUser = true
-            } else {
-                self.isOwnerUser = false
-                if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                    self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
-                        if error != nil {
-                        } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+        self.imgViewProfile.image = UIImage(named: "noneProfile")
 
-                            self.imgViewProfile.image = croppedProfileImage
-                        }
-                        })
+        // check if the login user is the owner of the chatting
+        if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
+            self.isOwnerUser = true
+            // show the participant profile image because the login user is the owner of chatting
+            if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                    if error != nil {
+                    } else {
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
 
-                    self.profilImageUrl = imageUrl
-                }
+                        self.imgViewProfile.image = croppedProfileImage
+                    }
+                    })
+
+                self.profilImageUrl = imageUrl
+            }
+        } else {
+            self.isOwnerUser = false
+            // show the owner profile image because the login user is NOT the owner of chatting
+            if let imageUrl = model.ownerImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                    if error != nil {
+                    } else {
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+
+                        self.imgViewProfile.image = croppedProfileImage
+                    }
+                    })
+
+                self.profilImageUrl = imageUrl
             }
         }
 
         self.viewBackground.layoutIfNeeded()
         self.viewMeetRequest.hidden = true
 
+        self.viewBackground.backgroundColor = UIColor.whiteColor()
         var isReceivedToRequestMeet = false
         if let requestedUserId = model.meetRequestUserId,
             let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
@@ -113,6 +128,8 @@ class SSChatListTableCell: UITableViewCell {
                 case .SSOSEYO:
                     self.viewMeetRequest.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 0.5)
                 }
+
+                self.viewBackground.backgroundColor = UIColor(red: 253.0/255.0, green: 234.0/255.0, blue: 237.0/255.0, alpha: 1.0)
             }
         }
 

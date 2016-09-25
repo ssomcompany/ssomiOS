@@ -15,6 +15,7 @@ enum SSAgeType: UInt
     case AgeMiddle20 = 25
     case AgeLate20 = 29
     case Age30 = 30
+    case Unknown = 99
 
     init(rawValue: UInt) {
         switch rawValue {
@@ -39,6 +40,7 @@ enum SSAgeAreaType: String
     case AgeMiddle20 = "20대 중반"
     case AgeLate20 = "20대 후반"
     case Age30 = "30대"
+    case Unknown = "알수없음"
 
     func toIntType() -> SSAgeType {
         switch self {
@@ -52,6 +54,8 @@ enum SSAgeAreaType: String
             return SSAgeType.AgeLate20
         case Age30:
             return SSAgeType.Age30
+        default:
+            return SSAgeType.Unknown
         }
     }
 }

@@ -72,6 +72,11 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
             }
         }
 
+        if let _ = self.viewModel.assignedChatroomId {
+            self.btnSsom.setTitle("채팅 보기", forState: UIControlState.Normal)
+            self.btnSsom.setImage(nil, forState: UIControlState.Normal)
+        }
+
         if self.isMySsom {
             self.btnSsom.setTitle("삭제", forState: UIControlState.Normal)
             self.btnSsom.setImage(nil, forState: UIControlState.Normal)

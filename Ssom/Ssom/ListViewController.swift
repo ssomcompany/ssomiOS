@@ -469,6 +469,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
                             vc.ssomType = ssomType
                             vc.chatRoomId = createdChatroomId
+                            vc.myImageUrl = SSAccountManager.sharedInstance.profileImageUrl
                             vc.partnerImageUrl = partnerImageUrl
 
                             vc.ssomLatitude = ssomLatitude

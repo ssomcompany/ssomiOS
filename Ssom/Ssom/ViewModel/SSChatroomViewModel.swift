@@ -19,12 +19,14 @@ enum SSMeetRequestOptions: String {
 public struct SSChatroomViewModel {
     var chatroomId: String              // id
     var ownerUserId: String             // ownerId
+    var ownerImageUrl: String?          // ownerImageUrl
     var participantUserId: String       // participantId
+    var participantImageUrl: String?    // participantImageUrl
     var createdDateTime: NSDate         // createdTimestamp
     var unreadCount: Int
     var lastMessage: String             // lastMsg
     var ssomViewModel: SSViewModel
-    var meetRequestUserId: String?          // requestId
+    var meetRequestUserId: String?      // requestId
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested // status =  ['request', 'approve']
 
     init() {
@@ -54,10 +56,18 @@ public struct SSChatroomViewModel {
             self.ownerUserId = ""
         }
 
+        if let imageUrl = modelDict["ownerImageUrl"] as? String {
+            self.ownerImageUrl = imageUrl
+        }
+
         if let participantUserId = modelDict["participantId"] as? String {
             self.participantUserId = participantUserId
         } else {
             self.participantUserId = ""
+        }
+
+        if let imageUrl = modelDict["participantImageUrl"] as? String {
+            self.participantImageUrl = imageUrl
         }
 
         if let createdDateTime = modelDict["createdTimestamp"] as? Int {

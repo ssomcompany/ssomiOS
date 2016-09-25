@@ -9,9 +9,10 @@
 import Foundation
 
 public struct SSChatMapViewModel {
+    var myImageUrl: String?
 //    var partnerUserModel: SSUserModel
 //    var partnerUserId: String
-    var partnerImageUrl: String!
+    var partnerImageUrl: String?
     var partnerLatitude: Double
     var partnerLongitude: Double
 
@@ -28,6 +29,10 @@ public struct SSChatMapViewModel {
     }
 
     init(modelDict: [String: AnyObject?]) {
+        if let imageUrl = modelDict["myImageUrl"] as? String {
+            self.myImageUrl = imageUrl
+        }
+
 //        self.partnerUserModel = SSUserModel(modelDict: modelDict)
 
 //        if let userId = modelDict["partnerUserId"] as? String {

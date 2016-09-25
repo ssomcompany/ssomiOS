@@ -32,6 +32,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     var chatRoomId: String?
     var ssomType: SSType = .SSOM
     var postId: String?
+    var myImageUrl: String?
     var partnerImageUrl: String?
 
     var ssomLatitude: Double = 0
@@ -332,7 +333,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
 
                 let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatMapViewController") as! SSChatMapViewController
-                let chatMapDict: [String: AnyObject?] = ["partnerImageUrl": self.partnerImageUrl,
+                let chatMapDict: [String: AnyObject?] = ["myImageUrl": self.myImageUrl,
+                                                         "partnerImageUrl": self.partnerImageUrl,
                                                          "partnerLatitude": self.ssomLatitude,
                                                          "partnerLongitude": self.ssomLongitude,
                                                          "ssomType": self.ssomType.rawValue,
@@ -434,14 +436,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         } else {
             if let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as? SSChatMessageTableCell {
                 cell.ssomType = self.ssomType
-                cell.partnerImageUrl = self.partnerImageUrl
                 cell.configView(self.messages[indexPath.row-1])
 
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatMessageTableCell
                 cell!.ssomType = self.ssomType
-                cell!.partnerImageUrl = self.partnerImageUrl
                 cell!.configView(self.messages[indexPath.row-1])
 
                 return cell!

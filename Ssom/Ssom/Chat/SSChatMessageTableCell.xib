@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -16,7 +16,7 @@
                 <frame key="frameInset" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kfx-YD-rO7">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Kfx-YD-rO7">
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="irF-tb-0EB"/>
                             <constraint firstAttribute="height" constant="46" id="rGC-jq-QQM"/>
@@ -69,29 +69,44 @@
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-6B-BLb">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="IdY-0a-CAT"/>
+                            <constraint firstAttribute="width" constant="46" id="O3a-E2-DyK"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBorderGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="GBn-9Z-KUg"/>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="width" secondItem="BHm-6B-BLb" secondAttribute="width" id="12E-ue-4gQ"/>
                     <constraint firstAttribute="bottom" secondItem="gy1-aS-bnd" secondAttribute="bottom" constant="2" id="4JT-F1-3iC"/>
+                    <constraint firstAttribute="trailing" secondItem="BHm-6B-BLb" secondAttribute="trailing" constant="6" id="5U1-Vd-AvH"/>
                     <constraint firstItem="Kfx-YD-rO7" firstAttribute="leading" secondItem="Wcs-FJ-Ny3" secondAttribute="leading" constant="6" id="8n9-KH-75W"/>
                     <constraint firstItem="JzW-d7-fu0" firstAttribute="top" secondItem="hr3-OD-uVx" secondAttribute="bottom" constant="2" id="8ud-bA-eSH"/>
+                    <constraint firstItem="BHm-6B-BLb" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" constant="2" id="AcR-e8-ag8"/>
                     <constraint firstItem="gy1-aS-bnd" firstAttribute="top" secondItem="k0C-5H-mcP" secondAttribute="bottom" constant="2" id="Ayj-An-bpd"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="centerX" secondItem="BHm-6B-BLb" secondAttribute="centerX" id="CHH-dU-o1w"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="centerY" secondItem="Kfx-YD-rO7" secondAttribute="centerY" id="Dsc-49-z7R"/>
                     <constraint firstItem="hr3-OD-uVx" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" constant="3" id="JUF-4B-UU1"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="centerX" secondItem="Kfx-YD-rO7" secondAttribute="centerX" id="Pwf-e2-ziP"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="width" secondItem="Kfx-YD-rO7" secondAttribute="width" id="Rdp-M2-yGG"/>
                     <constraint firstAttribute="bottom" secondItem="JzW-d7-fu0" secondAttribute="bottom" constant="1" id="Tb6-Jd-yZG"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="top" secondItem="Kfx-YD-rO7" secondAttribute="top" id="V1C-FZ-sBD"/>
-                    <constraint firstAttribute="trailing" secondItem="hr3-OD-uVx" secondAttribute="trailing" constant="8" id="WBh-Oh-FGx"/>
+                    <constraint firstAttribute="trailing" secondItem="hr3-OD-uVx" secondAttribute="trailing" constant="60" id="WBh-Oh-FGx"/>
                     <constraint firstItem="hr3-OD-uVx" firstAttribute="width" relation="lessThanOrEqual" secondItem="Wcs-FJ-Ny3" secondAttribute="width" multiplier="314:414" id="dQ1-7K-P0v"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="height" secondItem="BHm-6B-BLb" secondAttribute="height" id="fEV-ey-s8o"/>
                     <constraint firstItem="JzW-d7-fu0" firstAttribute="leading" secondItem="hr3-OD-uVx" secondAttribute="leading" constant="12" id="faX-DL-B6Q"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="width" relation="lessThanOrEqual" secondItem="Wcs-FJ-Ny3" secondAttribute="width" multiplier="312:414" id="keH-2v-To9"/>
                     <constraint firstItem="gy1-aS-bnd" firstAttribute="leading" secondItem="k0C-5H-mcP" secondAttribute="leading" constant="12" id="s8T-Qj-C3m"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="leading" secondItem="Wcs-FJ-Ny3" secondAttribute="leading" constant="60" id="tJO-sf-z9H"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="height" secondItem="Kfx-YD-rO7" secondAttribute="height" id="tkO-tA-b7T"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="centerY" secondItem="BHm-6B-BLb" secondAttribute="centerY" id="wsw-Dj-dYM"/>
                     <constraint firstItem="Kfx-YD-rO7" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" constant="2" id="xau-VY-PbL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgViewMyProfile" destination="BHm-6B-BLb" id="UJC-fW-d2J"/>
+                <outlet property="imgViewMyProfileBorder" destination="GBn-9Z-KUg" id="zxo-Ih-Bte"/>
                 <outlet property="imgViewPartnerProfile" destination="Kfx-YD-rO7" id="eXG-Z9-BLh"/>
                 <outlet property="imgViewPartnerProfileBorder" destination="ymb-qv-HTv" id="TxU-5W-pLt"/>
                 <outlet property="lbMyMessage" destination="aSP-M5-DlD" id="CMS-wn-oXe"/>
@@ -105,6 +120,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="noneProfile" width="45" height="45"/>
         <image name="profileBorderGreen.png" width="48" height="47"/>
     </resources>
 </document>

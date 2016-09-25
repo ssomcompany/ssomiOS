@@ -90,7 +90,10 @@ public struct Util {
         if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
             return .AgeLate20
         }
-        return .Age30
+        if age >= SSAgeType.Age30.rawValue && age < SSAgeType.Unknown.rawValue {
+            return .Age30
+        }
+        return .Unknown
     }
 
     static func getAgeArea(age: UInt) -> SSAgeAreaType {
@@ -103,7 +106,10 @@ public struct Util {
         if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
             return .AgeLate20
         }
-        return .Age30
+        if age >= SSAgeType.Age30.rawValue && age < SSAgeType.Unknown.rawValue {
+            return .Age30
+        }
+        return .Unknown
     }
 
     static func isValidEmail(testStr:String) -> Bool {

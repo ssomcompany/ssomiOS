@@ -321,6 +321,30 @@ public struct SSNetworkAPIClient {
 
     }
 
+    static func postLogout(token: String, completion: (error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.POST,
+                          SSNetworkContext.serverUrlPrefixt + "logout",
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("getUser result : \(response.result.value)")
+                
+                completion(error: nil)
+            } else {
+                completion(error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
     static func getUser(token: String, email: String, completion: (model: SSUserModel?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()

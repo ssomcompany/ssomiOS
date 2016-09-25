@@ -86,7 +86,7 @@ class SSAccountManager {
     func doSignIn(userId: String, password: String, vc:UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
         SSNetworkAPIClient.postLogin(userId: userId, password: password) { error in
             if let err = error {
-                print(error?.localizedDescription)
+                print(err.localizedDescription)
 
                 SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
                     guard let _ = completion!(finish: false) else {
@@ -106,18 +106,38 @@ class SSAccountManager {
     func doSignOut(vc: UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
 
         SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: vc, button1Completion: { (action) in
-            print("button1!!")
+            print("logout!!")
 
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+            if let token = self.sessionToken {
+                SSNetworkAPIClient.postLogout(token, completion: { (error) in
+                    if let err = error {
+                        print(err.localizedDescription)
 
-            guard let _ = completion!(finish: true) else {
-                return
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
+                            guard let _ = completion!(finish: false) else {
+                                return
+                            }
+                        })
+                    } else {
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+
+                        guard let _ = completion!(finish: true) else {
+                            return
+                        }
+                    }
+                })
+            } else {
+                SSAlertController.alertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", vc: vc, completion: { (action) in
+                    guard let _ = completion!(finish: false) else {
+                        return
+                    }
+                })
             }
             }) { (action) in
-                print("button2!!")
+                print("logout cancelled!!")
         }
     }
 }

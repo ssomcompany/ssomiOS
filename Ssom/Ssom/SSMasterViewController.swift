@@ -122,6 +122,7 @@ class SSMasterViewController: UIViewController {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             SSNetworkAPIClient.getUnreadCount(token, completion: { (data, error) in
                 if let err = error {
+                    print(err.localizedDescription)
 //                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                 } else {
                     if let rawData = data, let unreadCount = rawData["unreadCount"] as? Int {

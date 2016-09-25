@@ -99,6 +99,9 @@ class SSNavigationBarItems : UIView
                 self.imgViewMessage.hidden = false
                 self.lbUnreadMessageCount.hidden = false
             }
+
+            self.imgViewMessage.image = UIImage(named: "message")
+            self.lbUnreadMessageCount.text = "\(count)"
         }
     }
 

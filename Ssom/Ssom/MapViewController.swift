@@ -94,7 +94,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         super.init(coder: aDecoder)
     }
 
-    func initView() {
+    override func initView() {
 
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil

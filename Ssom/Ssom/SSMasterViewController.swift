@@ -120,6 +120,16 @@ class SSMasterViewController: UIViewController {
         self.loadData()
     }
 
+    override func initView() {
+        if let segmentControl = self.navigationItem.titleView as? UISegmentedControl {
+            segmentControl.selectedSegmentIndex = 0
+
+            self.switchView(segmentControl)
+
+            self.loadData()
+        }
+    }
+
     func loadData() {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             SSNetworkAPIClient.getUnreadCount(token, completion: { (data, error) in

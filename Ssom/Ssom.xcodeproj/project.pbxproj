@@ -302,6 +302,7 @@
 		97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266C1C9F090400484F03 /* UIImage+Crop.swift */; };
 		97C5266F1C9F091200484F03 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266E1C9F091200484F03 /* String+Util.swift */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
+		97DEBDB91D98430800DB51A3 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */; };
 		97E21D451D69D619004E3EBC /* SSMenuBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */; };
 		97E21D471D69D6A8004E3EBC /* SSMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */; };
 		BD6B77F5410EB4B139461F16 /* Pods_SsomTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */; };
@@ -644,6 +645,7 @@
 		97C5266E1C9F091200484F03 /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Util.swift"; path = "Ssom/3rdLib/String+Util.swift"; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97DE88941C4561FE0043B8E2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Util.swift"; path = "Ssom/3rdLib/UIViewController+Util.swift"; sourceTree = "<group>"; };
 		97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuBottomView.xib; path = Menu/SSMenuBottomView.xib; sourceTree = "<group>"; };
 		97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuBottomView.swift; path = Menu/SSMenuBottomView.swift; sourceTree = "<group>"; };
 		A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1140,6 +1142,7 @@
 				97C5266E1C9F091200484F03 /* String+Util.swift */,
 				977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */,
 				976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */,
+				97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -1713,6 +1716,7 @@
 				97C5266F1C9F091200484F03 /* String+Util.swift in Sources */,
 				97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */,
 				978410BA1D7AC41900C71C63 /* SSModelToObjectConverter.swift in Sources */,
+				97DEBDB91D98430800DB51A3 /* UIViewController+Util.swift in Sources */,
 				9764D9E11D35FF6400BBE4C6 /* SSViewModel.swift in Sources */,
 				9764D9E01D35FF6400BBE4C6 /* SSMainViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,

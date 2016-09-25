@@ -32,7 +32,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)

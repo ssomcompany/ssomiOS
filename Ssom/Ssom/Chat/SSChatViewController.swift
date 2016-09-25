@@ -132,7 +132,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
     }
 
-    func initView() {
+    override func initView() {
         self.tableViewChat.registerNib(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
         self.tableViewChat.registerNib(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
 

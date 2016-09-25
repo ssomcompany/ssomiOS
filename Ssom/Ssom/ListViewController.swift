@@ -91,7 +91,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    func initView() {
+    override func initView() {
 
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil

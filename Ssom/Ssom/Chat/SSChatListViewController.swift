@@ -92,7 +92,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.barButtonItems.changeMessageCount(count, hiddenIfZero: true)
     }
 
-    func initView() {
+    override func initView() {
         self.chatListTableView.registerNib(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
 
         self.edgesForExtendedLayout = UIRectEdge.None

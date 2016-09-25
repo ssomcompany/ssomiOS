@@ -35,7 +35,7 @@ class SSSignUpViewController: UIViewController {
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
         self.navigationController?.navigationBarHidden = true
     }
 

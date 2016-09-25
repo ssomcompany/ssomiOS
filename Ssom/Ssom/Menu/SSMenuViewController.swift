@@ -23,7 +23,7 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
 
         self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.registerNib(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
@@ -86,10 +86,11 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
         let view: SSMenuHeadView = SSMenuHeadView(reuseIdentifier: "MenuHeader")
         view.delegate = self
 
-        view.blockLogin = { [weak self] in
-            if let wSelf = self {
-                wSelf.tableView.reloadData()
-            }
+        view.blockLogin = { [weak self] (finish) in
+            guard let wself = self else { return }
+            wself.tableView.reloadData()
+
+            wself.drawerViewController?.mainViewController?.needToReload = finish
         }
 
         view.configView()
@@ -107,10 +108,12 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
         if SSAccountManager.sharedInstance.isAuthorized {
             let view: SSMenuBottomView = SSMenuBottomView(reuseIdentifier: "MenuFooter")
 
-            view.blockLogout = { [weak self] in
-                if let wSelf = self {
-                    SSAccountManager.sharedInstance.doSignOut(wSelf, completion: { (finish) -> Void? in
-                        wSelf.tableView.reloadData()
+            view.blockLogout = { [weak self] (finish) in
+                if let wself = self {
+                    SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) -> Void? in
+                        wself.tableView.reloadData()
+
+                        wself.drawerViewController?.mainViewController?.needToReload = finish
                     })
                 }
             }

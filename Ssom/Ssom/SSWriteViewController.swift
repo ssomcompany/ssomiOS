@@ -82,7 +82,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
         self.barButtonItems = SSNavigationBarItems()
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)

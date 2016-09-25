@@ -18,7 +18,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
     weak var delegate: SSMenuHeadViewDelegate?
 
-    var blockLogin: (() -> Void)!
+    var blockLogin: ((finish: Bool) -> Void)!
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -68,7 +68,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
                         return
                     }
 
-                    self?.blockLogin()
+                    self?.blockLogin(finish: finish)
                 }
             }) else {
                 return

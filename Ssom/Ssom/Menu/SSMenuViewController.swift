@@ -110,7 +110,7 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 
             view.blockLogout = { [weak self] (finish) in
                 if let wself = self {
-                    SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) -> Void? in
+                    SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) in
                         wself.tableView.reloadData()
 
                         wself.drawerViewController?.mainViewController?.needToReload = finish

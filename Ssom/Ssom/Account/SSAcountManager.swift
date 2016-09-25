@@ -103,7 +103,7 @@ class SSAccountManager {
         }
     }
 
-    func doSignOut(vc: UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
+    func doSignOut(vc: UIViewController, completion: ((finish: Bool) -> Void)?) -> Void {
 
         SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: vc, button1Completion: { (action) in
             print("logout!!")
@@ -114,9 +114,10 @@ class SSAccountManager {
                         print(err.localizedDescription)
 
                         SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
-                            guard let _ = completion!(finish: false) else {
+                            guard let block = completion else {
                                 return
                             }
+                            block(finish: false)
                         })
                     } else {
                         SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
@@ -124,16 +125,18 @@ class SSAccountManager {
                         SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
                         SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
 
-                        guard let _ = completion!(finish: true) else {
+                        guard let block = completion else {
                             return
                         }
+                        block(finish: true)
                     }
                 })
             } else {
                 SSAlertController.alertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", vc: vc, completion: { (action) in
-                    guard let _ = completion!(finish: false) else {
+                    guard let block = completion else {
                         return
                     }
+                    block(finish: false)
                 })
             }
             }) { (action) in

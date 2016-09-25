@@ -80,7 +80,7 @@ public struct Util {
         return location2.distanceFromLocation(location1)
     }
 
-    static func getAgeArea(age: Int) -> SSAgeType {
+    static func getAgeArea(age: UInt) -> SSAgeType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }
@@ -93,7 +93,7 @@ public struct Util {
         return .Age30
     }
 
-    static func getAgeArea(age: Int) -> SSAgeAreaType {
+    static func getAgeArea(age: UInt) -> SSAgeAreaType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }

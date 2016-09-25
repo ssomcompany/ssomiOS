@@ -162,13 +162,14 @@ class SSMasterViewController: UIViewController {
             self.listView.hidden = !self.segButton2.selected
 
             let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
+            let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
             if !self.listView.hidden {
-                let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
-
                 let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation != nil ? mapVC.currentLocation : mapVC.mainView.camera.target
                 listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.filterModel = mapVC.filterModel
                 listVC.initView()
             } else {
+                mapVC.filterModel = listVC.filterModel
                 mapVC.initView()
             }
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import KeychainAccess
 
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
@@ -47,6 +48,15 @@ class SSAccountManager {
     var userInFIB: FIRUser? {
         if let auth = FIRAuth.auth() {
             return auth.currentUser
+        }
+
+        return nil
+    }
+
+    var oneSignalPlayerId: String? {
+        let keyChain = Keychain(service: "com.ssom")
+        if let playerId = keyChain[string: "oneSignalPlayerID"] {
+            return playerId
         }
 
         return nil

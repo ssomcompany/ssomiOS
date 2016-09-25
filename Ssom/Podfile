@@ -15,7 +15,7 @@ target 'Ssom' do
  pod 'Firebase/Auth'
  pod 'Firebase/Core'
  pod 'Firebase/Messaging'
- pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+ pod 'Reveal-SDK', :configurations => ['Debug']
  pod 'OneSignal'
 end
 

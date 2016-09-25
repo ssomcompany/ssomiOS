@@ -27,11 +27,27 @@ public struct SSNetworkErrorHandler {
 
             if let errorInfo = errorTableMap[errorKey] {
                 return (Int(errorInfo[kSSErrorCodeKey] as! String)!, errorInfo[kSSErrorDescriptionKey] as! String)
-            } else {
+            }
+        }
+
+        return nil
+    }
+
+    func getErrorInfo(errorCode: Int) -> (Int, String)? {
+        if let errorTableFilePath: String = NSBundle.mainBundle().pathForResource(kSSErrorTable, ofType: "plist") {
+            guard let errorTableMap = NSDictionary(contentsOfFile: errorTableFilePath) else {
                 return nil
             }
-        } else {
-            return nil
+
+            for errorKey in errorTableMap.allKeys {
+                guard let errorInfo = errorTableMap[errorKey as! String] else { continue }
+
+                if Int(errorInfo[kSSErrorCodeKey] as! String)! == errorCode {
+                    return (Int(errorInfo[kSSErrorCodeKey] as! String)!, errorInfo[kSSErrorDescriptionKey] as! String)
+                }
+            }
         }
+
+        return nil
     }
 }

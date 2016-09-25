@@ -22,11 +22,17 @@ public func CGRectMakeWithScreenRatio(x: CGFloat, _ y: CGFloat, _ width: CGFloat
         let factorHeight = UIScreen.mainScreen().bounds.height / 480.0
         return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
     case .IPhone5, .IPhone5C, .IPhone5S:
-        return CGRectMake(x, y, UIScreen.mainScreen().bounds.width * width / 320.0, UIScreen.mainScreen().bounds.height * height / 568.0)
+        let factorWidth = UIScreen.mainScreen().bounds.width / 320.0
+        let factorHeight = UIScreen.mainScreen().bounds.height / 568.0
+        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
     case .IPhone6, .IPhone6S:
-        return CGRectMake(x, y, UIScreen.mainScreen().bounds.width * width / 375.0, UIScreen.mainScreen().bounds.height * height / 667.0)
+        let factorWidth = UIScreen.mainScreen().bounds.width / 375.0
+        let factorHeight = UIScreen.mainScreen().bounds.height / 667.0
+        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
     case .IPhone6Plus, .IPhone6SPlus:
-        return CGRectMake(x, y, UIScreen.mainScreen().bounds.width * width / 414.0, UIScreen.mainScreen().bounds.height * height / 736.0)
+        let factorWidth = UIScreen.mainScreen().bounds.width / 414.0
+        let factorHeight = UIScreen.mainScreen().bounds.height / 736.0
+        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
     default:
         return CGRectMake(x, y, width, height)
     }

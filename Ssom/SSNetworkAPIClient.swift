@@ -26,7 +26,7 @@ public struct SSNetworkAPIClient {
 
         var params: String! = nil
         if !(latitude == 0 && longitude == 0) {
-            params = "?lat=\(latitude)&lng=\(longitude)"
+//            params = "?lat=\(latitude)&lng=\(longitude)"
         }
 
         Alamofire.request(.GET,
@@ -207,12 +207,28 @@ public struct SSNetworkAPIClient {
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = plainData?.base64EncodedStringWithOptions([])
 
+        guard let playerId = SSAccountManager.sharedInstance.oneSignalPlayerId else {
+            var errorCode = 601
+            var errorDescription = "Unknown"
+            if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errorCode) {
+                errorCode = errorInfo.0
+                errorDescription = errorInfo.1
+            }
+
+            let error = NSError(domain: "com.ssom.error.AuthFailed.NoPushKey", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+            completion(error: error)
+
+            return
+        }
+
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
         // Basic Auth
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt+"login",
+            parameters: ["playerId": playerId],
             encoding: .JSON,
             headers: ["Authorization": "Basic " + base64String!])
             .responseJSON { response in
@@ -222,9 +238,9 @@ public struct SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    if let value: [String: AnyObject] = response.result.value as? [String: AnyObject] {
+                    if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
 
-                        if let token = value["token"] as? String {
+                        if let token = rawDatas["token"] as? String {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
 
                             completion(error: nil)
@@ -252,21 +268,33 @@ public struct SSNetworkAPIClient {
                             })
 
                         } else {
-
-                            let errorResult = value["error"]
-                            if errorResult != nil {
-                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+                            if rawDatas.keys.contains("err") {
+                                var errorCode = 601
+                                var errorDescription = rawDatas["result"] as! String
+                                if let err = rawDatas["err"] as? Int {
+                                    errorCode = err
+                                } else {
+                                    if let errName = rawDatas["err"] as? String {
+                                        if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
+                                            errorCode = errorInfo.0
+                                            errorDescription = errorInfo.1
+                                        } else {
+                                            errorDescription = errName
+                                        }
+                                    }
+                                }
+                                let error = NSError(domain: "com.ssom.error.ServeError.AuthFailed", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
 
                                 completion(error: error)
                             } else {
-                                let error: NSError = errorResult as! NSError
-                                
+                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+
                                 completion(error: error)
                             }
 
                         }
                     } else {
-                        let error: NSError = NSError(domain: "com.ssom.error.AuthFailed", code: 999, userInfo: nil)
+                        let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
 
                         completion(error: error)
                     }

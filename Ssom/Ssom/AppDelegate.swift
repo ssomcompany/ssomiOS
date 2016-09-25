@@ -90,8 +90,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         let keyChain = Keychain(service: "com.ssom")
         keyChain[data: "pushDeviceToken"] = deviceToken
 
-        OneSignal.IdsAvailable { (oneSignalPlayerId, pushToken) in
-            print("playerId : \(oneSignalPlayerId), pushToken : \(pushToken)")
+        OneSignal.IdsAvailable { (oneSignalPlayerID, pushToken) in
+            print("playerId : \(oneSignalPlayerID), pushToken : \(pushToken)")
+            keyChain[string: "oneSignalPlayerID"] = oneSignalPlayerID
         }
     }
 

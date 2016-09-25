@@ -32,17 +32,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return self._datasOfFilteredSsom
         }
         set {
-            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+            if let filterViewModel = self.filterModel where self.filterModel.ageTypes != [.AgeAll] || self.filterModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
-                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+
+                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -223,18 +224,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.delegate = self
+        if let filterViewModel = self.filterModel {
+            self.filterView.model = filterViewModel
+        }
+        self.filterView.configView()
+        
         self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
+        self.view.layoutIfNeeded()
+
         self.constBottomInfoViewHeight.constant = 283.0
         self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.viewBottomInfo.layoutIfNeeded()
+            self.view.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -420,9 +428,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // apply filter value to get the ssom list
         self.filterModel = filterViewModel
         self.datas = self.mainViewModel.datas
-        self.ssomListTableView .reloadData()
+        self.ssomListTableView.reloadData()
         
-        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
+//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

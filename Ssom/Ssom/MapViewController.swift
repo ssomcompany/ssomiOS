@@ -35,17 +35,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             return self._datasOfFilteredSsom
         }
         set {
-            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+            if let filterViewModel = self.filterModel where filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
-                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+
+                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -64,7 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var mySsom: SSViewModel!
 
     var filterView: SSFilterView!
-    var filterModel: SSFilterViewModel!
+    var filterModel: SSFilterViewModel?
     var scrollDetailView: SSScrollView!
 
     init() {
@@ -118,8 +119,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.closeFilterView()
         self.closeScrollView(false)
-
-        self.loadingData()
     }
 
     func initMapView() {
@@ -136,7 +135,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         mainView.delegate = self
     }
 
-    func loadingData() {
+    func loadingData(completion: ((finish: Bool) -> Void)?) {
         SSNetworkAPIClient
             .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
                       longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,
@@ -145,7 +144,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                         if let err = error {
                             print("error is : \(err.localizedDescription)")
 
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: { (action) in
+                                guard let block = completion else { return }
+                                block(finish: false)
+                            })
 
                         } else {
                             if let models = viewModels {
@@ -155,6 +157,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                                 
                                 self.showMarkers()
                             }
+
+                            guard let block = completion else { return }
+                            block(finish: true)
                         }
                         
                         self.showOpenAnimation()
@@ -309,18 +314,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.delegate = self
+        if let filterViewModel = self.filterModel {
+            self.filterView.model = filterViewModel
+        }
+        self.filterView.configView()
+
         self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
+        self.view.layoutIfNeeded()
+
         self.constBottomInfoViewHeight.constant = 283.0
         self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.viewBottomInfo.layoutIfNeeded()
+            self.view.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -466,21 +478,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.currentLocation = camera.target
         mainView.animateToCameraPosition(camera)
 
-        var index: Int = 0;
-        for data in self.datasOfAllSsom {
-            let latitude: Double = data.latitude
-            let longitude: Double = data.longitude
+        self.loadingData { (finish) in
+            if finish {
 
-            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let nowLocation: CLLocationCoordinate2D = camera.target
+                var index: Int = 0;
+                for data in self.datasOfAllSsom {
+                    let latitude: Double = data.latitude
+                    let longitude: Double = data.longitude
 
-            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+                    let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let nowLocation: CLLocationCoordinate2D = camera.target
 
-            let dataWithDistance: SSViewModel = data
-            dataWithDistance.distance = distance
-            self.datasOfAllSsom[index] = dataWithDistance
+                    let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
-            index += 1
+                    let dataWithDistance: SSViewModel = data
+                    dataWithDistance.distance = distance
+                    self.datasOfAllSsom[index] = dataWithDistance
+                    
+                    index += 1
+                }
+
+            }
         }
 
         locationManager.stopUpdatingLocation()
@@ -527,7 +545,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.datas = self.datasOfAllSsom
         self.showMarkers()
 
-        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
+//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

@@ -21,7 +21,7 @@
                             </constraints>
                             <state key="normal" backgroundImage="filterOn.png"/>
                             <connections>
-                                <action selector="tapCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="qMP-X8-PpX"/>
+                                <action selector="tapCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="LMX-Ug-Men"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨 탐색기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHI-JE-2OX">
@@ -46,12 +46,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tapFilter20beginAgeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ybj-9s-yTA"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57Y-uB-ZM1" userLabel="Age Button2">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57Y-uB-ZM1" userLabel="Age Button2">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="20대 중">
@@ -60,12 +57,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tap20middleAgeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="M1E-HV-Wus"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0G-oh-iLo" userLabel="Age Button3">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0G-oh-iLo" userLabel="Age Button3">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="20대 후">
@@ -74,12 +68,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tapFilter20lateAgeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="b6b-hg-3Ld"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKO-0P-omN" userLabel="Age Button4">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKO-0P-omN" userLabel="Age Button4">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="30대">
@@ -88,9 +79,6 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tapFilter30overAgeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZEy-UE-qN8"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -132,12 +120,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tap1PersonButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="AeA-9p-XM6"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62b-pi-hJ9" userLabel="People Button2">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62b-pi-hJ9" userLabel="People Button2">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="2명">
@@ -146,12 +131,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tap2PeopleButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="63b-ZA-Hls"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ7-ZI-R4n" userLabel="People Button3">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ7-ZI-R4n" userLabel="People Button3">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="3명">
@@ -160,12 +142,9 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tap3PeopleButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="4U1-5M-r36"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfS-OS-msB" userLabel="People Button4">
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfS-OS-msB" userLabel="People Button4">
+                                    <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="4명 이상">
@@ -174,9 +153,6 @@
                                     <state key="selected">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tapOver4PeopleButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="l9j-wm-Bb1"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -211,7 +187,7 @@
                                 <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="tapCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ygu-mU-oDd"/>
+                                <action selector="tapCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="mmX-z1-IrF"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
@@ -220,16 +196,37 @@
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="tapApplyButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="q7y-r5-Twe"/>
+                                <action selector="tapApplyFilter:" destination="iN0-l3-epB" eventType="touchUpInside" id="nLF-mE-SKj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-8R-tgd">
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                            <state key="normal" title="모두 선택">
-                                <color key="titleColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-8R-tgd">
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="모두">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="18"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="선택">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                             </state>
                             <connections>
-                                <action selector="tapFilterInitialize:" destination="iN0-l3-epB" eventType="touchUpInside" id="tRJ-vc-bYt"/>
+                                <action selector="tapInitializieFilter:" destination="iN0-l3-epB" eventType="touchUpInside" id="XFI-5h-3kh"/>
                             </connections>
                         </button>
                     </subviews>

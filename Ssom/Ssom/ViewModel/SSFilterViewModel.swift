@@ -8,13 +8,85 @@
 
 import Foundation
 
-@objc public class SSFilterViewModel: NSObject {
-    var ageType: SSAgeAreaType
+public struct SSFilterViewModel {
+    var ageTypes: [SSAgeAreaType]
 
-    var peopleCountType: SSPeopleCountStringType
+    var peopleCountTypes: [SSPeopleCountStringType]
+
+    init() {
+        self.ageTypes = []
+        self.peopleCountTypes = []
+    }
 
     init(ageType: SSAgeAreaType, peopleCount: SSPeopleCountStringType) {
-        self.ageType = ageType
-        self.peopleCountType = peopleCount
+        self.init()
+
+        self.ageTypes.append(ageType)
+        self.peopleCountTypes.append(peopleCount)
+    }
+
+    // MARK: Validation
+    func includedAgeAreaTypes(ageTypeRawValue: UInt) -> Bool {
+        let ageType = SSAgeType(rawValue: ageTypeRawValue)
+
+        for filterAgeAreaType in self.ageTypes {
+            if filterAgeAreaType.toIntType() == ageType {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func includedAgeAreaTypes(ageType: SSAgeType) -> Bool {
+        for filterAgeAreaType in self.ageTypes {
+            if filterAgeAreaType.toIntType() == ageType {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func includedAgeAreaTypes(ageAreaType: SSAgeAreaType) -> Bool {
+        for filterAgeAreaType in self.ageTypes {
+            if filterAgeAreaType == ageAreaType {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func includedPeopleCountStringTypes(peopleCountTypeRawValue: Int) -> Bool {
+        if let peopleCountType = SSPeopleCountType(rawValue: peopleCountTypeRawValue) {
+            for filterPeopleCountStringType in self.peopleCountTypes {
+                if filterPeopleCountStringType.toIntType() == peopleCountType {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    func includedPeopleCountStringTypes(peopleCountType: SSPeopleCountType) -> Bool {
+        for filterPeopleCountStringType in self.peopleCountTypes {
+            if filterPeopleCountStringType.toIntType() == peopleCountType {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func includedPeopleCountStringTypes(peopleCountStringType: SSPeopleCountStringType) -> Bool {
+        for filterPeopleCountStringType in self.peopleCountTypes {
+            if filterPeopleCountStringType == peopleCountStringType {
+                return true
+            }
+        }
+
+        return false
     }
 }

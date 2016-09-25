@@ -68,7 +68,9 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
             naviTitleView.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
-            naviTitleView.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+            if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
+                naviTitleView.font = font
+            }
         }
         naviTitleView.textAlignment = .Center
         naviTitleView.text = "Chat list"

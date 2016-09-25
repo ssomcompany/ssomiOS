@@ -263,8 +263,12 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                 self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
-                self.btnIPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
-                self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
+                    self.btnIPay.titleLabel?.font = font
+                }
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                    self.btnYouPay.titleLabel?.font = font
+                }
             }
 
             self.lbAge.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
@@ -285,8 +289,12 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                 self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
-                self.btnIPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-                self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                    self.btnIPay.titleLabel?.font = font
+                }
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
+                    self.btnYouPay.titleLabel?.font = font
+                }
             }
 
             self.lbAge.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)

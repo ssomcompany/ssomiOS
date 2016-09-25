@@ -85,10 +85,13 @@ class SSMasterViewController: UIViewController {
             self.lbButtonTitle.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
-            self.segButton1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-            self.segButton2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-
-            self.lbButtonTitle.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+            if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                self.segButton1.titleLabel?.font = font
+                self.lbButtonTitle.font = font
+            }
+            if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                self.segButton2.titleLabel?.font = font
+            }
         }
 
         let leftBarButtonItem: UIBarButtonItem = self.navigationItem.leftBarButtonItem!

@@ -128,6 +128,14 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSMenuTableViewCell {
+            if let url = cell.menuType.url {
+                if UIApplication.sharedApplication().canOpenURL(url) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+            }
+        }
     }
 
 // MARK: - SSMenuHeadViewDelegate

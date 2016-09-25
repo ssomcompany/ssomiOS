@@ -69,7 +69,7 @@ class SSListTableViewCell: UITableViewCell {
             }
         }
 
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSsom ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
+        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSsom ? "bigGreen" : "bigRed")!, frame: CGRectMake(0, 0, 89.2, 77.2))
         self.profileImageView!.image = maskOfProfileImage
 
         if let imageUrl = model.imageUrl {

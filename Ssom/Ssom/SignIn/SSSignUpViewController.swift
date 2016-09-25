@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kPasswordMinLength = 6
+let kPasswordMinLength = 4
 
 class SSSignUpViewController: UIViewController {
     @IBOutlet var viewBackground: UIView!

@@ -12,23 +12,51 @@ enum SSMenuType: Int {
     case Privacy = 0, Agreement, Inquiry
 
     static let AllValues = [Privacy, Agreement, Inquiry]
+
+    var url: NSURL? {
+        switch self {
+        case .Privacy:
+            return NSURL(string: "http://ssomcompany.wixsite.com/ssominfo")
+        case .Agreement:
+            return nil
+        case .Inquiry:
+            return NSURL(string: "http://www.myssom.com")
+        }
+    }
+
+    var name: String? {
+        switch  self {
+        case .Privacy:
+            return "개인 정보"
+        case .Agreement:
+            return "이용 약관"
+        case .Inquiry:
+            return "문의 하기"
+        }
+    }
+
+    var iconImage: UIImage? {
+        switch  self {
+        case .Privacy:
+            return UIImage(named: "iconLock")
+        case .Agreement:
+            return UIImage(named: "iconBook")
+        case .Inquiry:
+            return UIImage(named: "iconMail")
+        }
+    }
 }
 
 class SSMenuTableViewCell: UITableViewCell {
     @IBOutlet var imgMenuIcon: UIImageView!
     @IBOutlet var lbMenuName: UILabel!
 
+    var menuType: SSMenuType = .Privacy
+
     func configCell(menuType: SSMenuType) -> Void {
-        switch menuType {
-        case .Privacy:
-            self.imgMenuIcon.image = UIImage(named: "iconLock")
-            self.lbMenuName.text = "개인 정보"
-        case .Agreement:
-            self.imgMenuIcon.image = UIImage(named: "iconBook")
-            self.lbMenuName.text = "이용 약관"
-        case .Inquiry:
-            self.imgMenuIcon.image = UIImage(named: "iconMail")
-            self.lbMenuName.text = "문의 하기"
-        }
+        self.menuType = menuType
+
+        self.imgMenuIcon.image = self.menuType.iconImage
+        self.lbMenuName.text = self.menuType.name
     }
 }

@@ -39,12 +39,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
         // OneSignal
-        let signal = OneSignal(launchOptions: launchOptions, appId: PreDefine.OneSignalKey)
+        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey)
+        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
+            print("notification: \(notification), payload data: \(notification.payload.additionalData)")
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let keyWindow = appDelegate.window else { return }
+            guard let rootViewController = keyWindow.rootViewController else { return }
+            if rootViewController is SSDrawerViewController {
+                guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
+                if mainViewController is UINavigationController {
+                    print("Now MainViewController is : NavigationController")
+
+                    guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
+                    print("Now TopViewController is : \(topViewController)")
+                    if topViewController is SSChatViewController {
+                        // add the received message to the bottom fo the message lists
+                        (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSChatListViewController {
+                        // move up the chat room of the received message & add +1 to unread count
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSMasterViewController {
+                        // add +1 to unread count
+                        (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    }
+                } else {
+                    print("Now MainViewController is : \(mainViewController)")
+                }
+            } else {
+                print("Now view controller is : \(rootViewController)")
+            }
+
+        }, handleNotificationAction: { (openedResult) in
+            print("openedResult : \(openedResult)")
+        }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
 
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController
         self.drawerController?.delegate = self
-        self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler()], forDirection: SSDrawerDirection.Left)
+        self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler(), SSDrawerShadowStyler.styler()], forDirection: SSDrawerDirection.Left)
 
         let menuViewController: SSMenuViewController = (self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as? SSMenuViewController)!
         menuViewController.drawerViewController = self.drawerController
@@ -86,8 +119,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         // TODO: UUID 관리 관련해서 수정해야됨..
+        print("deviceToken : \(deviceToken)")
         let keyChain = Keychain(service: "com.ssom")
         keyChain[data: "pushDeviceToken"] = deviceToken
+
+        OneSignal.IdsAvailable { (oneSignalPlayerID, pushToken) in
+            print("playerId : \(oneSignalPlayerID), pushToken : \(pushToken)")
+            keyChain[string: "oneSignalPlayerID"] = oneSignalPlayerID
+        }
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -100,9 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
 // MARK: - FirebaseMessage
     func tokenRefreshNotification(notification: NSNotification) {
-        let refreshedToken = FIRInstanceID.instanceID().token()!
-        print("InstanceID token: \(refreshedToken)")
-
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }

@@ -80,7 +80,7 @@ public struct Util {
         return location2.distanceFromLocation(location1)
     }
 
-    static func getAgeArea(age: Int) -> SSAgeType {
+    static func getAgeArea(age: UInt) -> SSAgeType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }
@@ -90,10 +90,13 @@ public struct Util {
         if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
             return .AgeLate20
         }
-        return .Age30
+        if age >= SSAgeType.Age30.rawValue && age < SSAgeType.Unknown.rawValue {
+            return .Age30
+        }
+        return .Unknown
     }
 
-    static func getAgeArea(age: Int) -> SSAgeAreaType {
+    static func getAgeArea(age: UInt) -> SSAgeAreaType {
         if age >= SSAgeType.AgeEarly20.rawValue && (age < SSAgeType.AgeMiddle20.rawValue) {
             return .AgeEarly20
         }
@@ -103,7 +106,10 @@ public struct Util {
         if age >= SSAgeType.AgeLate20.rawValue && age < SSAgeType.Age30.rawValue {
             return .AgeLate20
         }
-        return .Age30
+        if age >= SSAgeType.Age30.rawValue && age < SSAgeType.Unknown.rawValue {
+            return .Age30
+        }
+        return .Unknown
     }
 
     static func isValidEmail(testStr:String) -> Bool {

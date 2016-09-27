@@ -14,12 +14,13 @@ class SSChatMessageTableCell: UITableViewCell {
     @IBOutlet var viewPartnerMessage: UIView!
     @IBOutlet var lbPartnerMessage: UILabel!
     @IBOutlet var lbPartnerMessageTime: UILabel!
+    @IBOutlet var imgViewMyProfile: UIImageView!
+    @IBOutlet var imgViewMyProfileBorder: UIImageView!
     @IBOutlet var viewMyMessage: UIView!
     @IBOutlet var lbMyMessage: UILabel!
     @IBOutlet var lbMyMessageTime: UILabel!
 
     var ssomType: SSType = .SSOM
-    var partnerImageUrl: String?
     var model: SSChatViewModel = SSChatViewModel()
 
     override func awakeFromNib() {
@@ -41,16 +42,37 @@ class SSChatMessageTableCell: UITableViewCell {
             self.viewPartnerMessage.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
+        self.imgViewPartnerProfile.image = UIImage(named: "noneProfile")
+        self.imgViewMyProfile.image = UIImage(named: "noneProfile")
+
         if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
             if model.fromUserId == loginedUserId {
                 self.showMyViews()
+
+                var profileImageUrl: String?
+                if let imageUrl = model.profileImageUrl {
+                    profileImageUrl = imageUrl
+                } else if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl {
+                    profileImageUrl = imageUrl
+                }
+
+                if let imageUrl = profileImageUrl {
+                    self.imgViewMyProfile.sd_setImageWithURL(NSURL(string: imageUrl), completed: { (image, error, _, _) in
+                        if error != nil {
+                        } else {
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPartnerProfile.bounds.size.width, self.imgViewMyProfile.bounds.size.height))
+
+                            self.imgViewMyProfile.image = croppedProfileImage
+                        }
+                    })
+                }
 
                 self.lbMyMessage.text = model.message
                 self.lbMyMessageTime.text = Util.getDateString(model.messageDateTime)
             } else {
                 self.showPartnerViews()
 
-                if let imageUrl = self.partnerImageUrl {
+                if let imageUrl = model.profileImageUrl {
                     self.imgViewPartnerProfile.sd_setImageWithURL(NSURL(string: imageUrl), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
@@ -60,6 +82,7 @@ class SSChatMessageTableCell: UITableViewCell {
                         }
                     })
                 }
+
                 self.lbPartnerMessage.text = model.message
                 self.lbPartnerMessageTime.text = Util.getDateString(model.messageDateTime)
             }
@@ -73,6 +96,8 @@ class SSChatMessageTableCell: UITableViewCell {
         self.lbPartnerMessage.hidden = true
         self.lbPartnerMessageTime.hidden = true
 
+        self.imgViewMyProfile.hidden = false
+        self.imgViewMyProfileBorder.hidden = false
         self.viewMyMessage.hidden = false
         self.lbMyMessage.hidden = false
         self.lbMyMessageTime.hidden = false
@@ -85,6 +110,8 @@ class SSChatMessageTableCell: UITableViewCell {
         self.lbPartnerMessage.hidden = false
         self.lbPartnerMessageTime.hidden = false
 
+        self.imgViewMyProfile.hidden = true
+        self.imgViewMyProfileBorder.hidden = true
         self.viewMyMessage.hidden = true
         self.lbMyMessage.hidden = true
         self.lbMyMessageTime.hidden = true

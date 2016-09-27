@@ -14,22 +14,32 @@ enum SSScrollViewDirection: Int {
     case Right
 }
 
-protocol SSScrollViewDelegate {
+protocol SSScrollViewDelegate: class {
     func closeScrollView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
+}
+
+class SSCustomScrollView: UIScrollView {
+    override func touchesShouldCancelInContentView(view: UIView) -> Bool {
+        if view is UIButton {
+            return true
+        }
+
+        return super.touchesShouldCancelInContentView(view)
+    }
 }
 
 class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
     @IBOutlet private var viewBackground: UIView!
-    @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var scrollView: SSCustomScrollView!
     @IBOutlet private var contentView: UIView!
     @IBOutlet var constContentViewWidth: NSLayoutConstraint!
     @IBOutlet var constContentViewWidthMin: NSLayoutConstraint!
     @IBOutlet var constContentViewToScrollViewWidthRatio: NSLayoutConstraint!
     @IBOutlet var constContentViewToScrollViewWidthRatioMin: NSLayoutConstraint!
 
-    var delegate: SSScrollViewDelegate?
+    weak var delegate: SSScrollViewDelegate?
     private var datas: [SSViewModel]?
     var ssomType: SSType?
 
@@ -47,6 +57,14 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
     private var constPreviousViewToContentView: [NSLayoutConstraint] = []
     private var constCurrentViewToContentView: [NSLayoutConstraint] = []
     private var constNextViewToContentView: [NSLayoutConstraint] = []
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -228,8 +246,8 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         }
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
-        guard let _ = self.delegate?.doSsom(ssomType, postId: postId, partnerImageUrl: partnerImageUrl) else {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
+        guard let _ = self.delegate?.doSsom(ssomType, postId: postId, partnerImageUrl: partnerImageUrl, ssomLatitude: ssomLatitude, ssomLongitude: ssomLongitude) else {
             return
         }
     }

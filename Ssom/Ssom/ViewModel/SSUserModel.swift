@@ -14,6 +14,7 @@ public struct SSUserModel {
     var gender: String
     var userId: String
     var nickName: String
+    var profileImageUrl: String?    // profileImgUrl
 
     init() {
         self.email = ""
@@ -45,6 +46,10 @@ public struct SSUserModel {
             self.nickName = nickName
         } else {
             self.nickName = ""
+        }
+
+        if let imageUrl = modelDict["profileImgUrl"] as? String {
+            self.profileImageUrl = imageUrl
         }
     }
 

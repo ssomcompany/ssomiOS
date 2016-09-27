@@ -30,7 +30,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate {
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
         self.navigationController?.navigationBar.hidden = true
 
         self.viewBackground.hidden = true

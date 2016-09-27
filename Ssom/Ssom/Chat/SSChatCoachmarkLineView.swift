@@ -42,6 +42,23 @@ class SSChatCoachmarkLineView: UIView {
         self.layer.masksToBounds = true
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let path = UIBezierPath(ovalInRect: CGRectMake(-bounds.width, -bounds.height, bounds.width * 2.0 - self.lineWidth / 2.0, bounds.height * 2.0 - self.lineWidth / 2.0))
+
+        self.circleLayer = CAShapeLayer()
+        self.circleLayer.path = path.bezierPathByReversingPath().CGPath
+        self.circleLayer.fillColor = UIColor.clearColor().CGColor
+        self.circleLayer.strokeColor = self.lineColor.CGColor
+        self.circleLayer.lineWidth = self.lineWidth
+
+        self.circleLayer.strokeEnd = 0.75
+
+        self.layer.addSublayer(self.circleLayer)
+        self.layer.masksToBounds = true
+    }
+
     func animateLine(duration: NSTimeInterval) {
         // define the key path to be applied the animtaion
         let animation = CABasicAnimation(keyPath: "strokeEnd")

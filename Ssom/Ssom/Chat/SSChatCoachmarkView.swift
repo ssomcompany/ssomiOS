@@ -10,11 +10,14 @@ import UIKit
 
 class SSChatCoachmarkView: UIView {
 
+    @IBOutlet var contentView: UIView!
     @IBOutlet var viewHeartRound: UIView!
     @IBOutlet var lbGuideText: UILabel!
     @IBOutlet var imgViewLineToUpArrow: UIImageView!
     @IBOutlet var viewChatCoachmarkLine: SSChatCoachmarkLineView!
     @IBOutlet var imgViewUpArrow: UIImageView!
+
+    var closeBlock: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,10 +38,12 @@ class SSChatCoachmarkView: UIView {
     }
 
     func configView() {
+        self.layoutIfNeeded()
         self.viewHeartRound.layer.cornerRadius = self.viewHeartRound.bounds.height / 2.0
     }
 
     func animateDraw(duration: NSTimeInterval) {
+        self.layoutIfNeeded()
         self.viewChatCoachmarkLine.animateLine(duration)
 
         let radius = self.imgViewUpArrow.bounds.height / 2.0
@@ -94,5 +99,11 @@ class SSChatCoachmarkView: UIView {
 
     @IBAction func tapStartChat(sender: AnyObject) {
         self.removeFromSuperview()
+
+        guard let close = self.closeBlock else {
+            return
+        }
+
+        close()
     }
 }

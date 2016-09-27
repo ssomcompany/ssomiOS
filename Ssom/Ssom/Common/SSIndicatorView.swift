@@ -11,14 +11,22 @@ import UIKit
 public struct SSIndicatorView {
     let indicatorView: UIActivityIndicatorView
     let indicatorBackgroundView: UIView
+    let indicatorRoundView: UIView
 
     init() {
         self.indicatorBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
-        self.indicatorBackgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.indicatorBackgroundView.backgroundColor = UIColor.clearColor()
+
+        self.indicatorRoundView = UIView(frame: CGRectMake(0, 0, 60, 60))
+        self.indicatorRoundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.indicatorRoundView.layer.cornerRadius = 10
+
         self.indicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 
+        self.indicatorBackgroundView.addSubview(self.indicatorRoundView)
         self.indicatorBackgroundView.addSubview(self.indicatorView)
 
+        self.indicatorRoundView.center = self.indicatorBackgroundView.center
         self.indicatorView.center = self.indicatorBackgroundView.center
     }
 

@@ -12,7 +12,7 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
 
     @IBOutlet var lbLogout: UILabel!
 
-    var blockLogout: (() -> Void)!
+    var blockLogout: ((finish: Bool) -> Void)!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +55,6 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
             return
         }
 
-        self.blockLogout()
+        self.blockLogout(finish: true)
     }
 }

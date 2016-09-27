@@ -8,14 +8,26 @@
 
 import Foundation
 
+enum SSMeetRequestOptions: String {
+    case NotRequested = "NotRequested"
+    case Cancelled = "Cancelled"
+    case Requested = "Requested"
+    case Received = "request"
+    case Accepted = "approve"
+}
+
 public struct SSChatroomViewModel {
     var chatroomId: String              // id
     var ownerUserId: String             // ownerId
+    var ownerImageUrl: String?          // ownerImageUrl
     var participantUserId: String       // participantId
+    var participantImageUrl: String?    // participantImageUrl
     var createdDateTime: NSDate         // createdTimestamp
     var unreadCount: Int
     var lastMessage: String             // lastMsg
     var ssomViewModel: SSViewModel
+    var meetRequestUserId: String?      // requestId
+    var meetRequestStatus: SSMeetRequestOptions = .NotRequested // status =  ['request', 'approve']
 
     init() {
         self.chatroomId = ""
@@ -44,10 +56,18 @@ public struct SSChatroomViewModel {
             self.ownerUserId = ""
         }
 
+        if let imageUrl = modelDict["ownerImageUrl"] as? String {
+            self.ownerImageUrl = imageUrl
+        }
+
         if let participantUserId = modelDict["participantId"] as? String {
             self.participantUserId = participantUserId
         } else {
             self.participantUserId = ""
+        }
+
+        if let imageUrl = modelDict["participantImageUrl"] as? String {
+            self.participantImageUrl = imageUrl
         }
 
         if let createdDateTime = modelDict["createdTimestamp"] as? Int {
@@ -69,5 +89,13 @@ public struct SSChatroomViewModel {
         }
 
         self.ssomViewModel = SSViewModel(modelDict: modelDict)
+
+        if let requestUserId = modelDict["requestId"] as? String {
+            self.meetRequestUserId = requestUserId
+        }
+
+        if let requestStatus = modelDict["status"] as? String {
+            self.meetRequestStatus = SSMeetRequestOptions(rawValue: requestStatus)!
+        }
     }
 }

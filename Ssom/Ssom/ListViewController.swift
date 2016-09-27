@@ -21,9 +21,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var btnWrite: UIButton!
 
     @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var iPayButtonBottomLineView: UIImageView!
+    @IBOutlet var viewPayButtonBottomLine: UIView!
+    @IBOutlet var constViewPayButtonBottomLineLeadingToButtonIPay: NSLayoutConstraint!
     @IBOutlet var btnYouPay: UIButton!
-    @IBOutlet var youPayButtonBottomLineView: UIImageView!
 
     var mainViewModel: SSMainViewModel
     lazy var _datasOfFilteredSsom: [SSViewModel] = []
@@ -32,17 +32,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return self._datasOfFilteredSsom
         }
         set {
-            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+            if let filterViewModel = self.filterModel where self.filterModel.ageTypes != [.AgeAll] || self.filterModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
-                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+
+                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -54,6 +55,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+
+    var isAlreadyWrittenMySsom: Bool = false
+    var mySsom: SSViewModel!
 
     var profileImageView: SSPhotoView?
 
@@ -85,13 +89,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        self.initView()
     }
 
-    func initView() {
+    override func initView() {
 
-        self.needReload = false
+        self.isAlreadyWrittenMySsom = false
+        self.mySsom = nil
 
         ssomListTableView.registerNib(UINib.init(nibName: "SSListTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "cell")
 
@@ -130,6 +133,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+
+        self.initView()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -157,6 +162,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func showOpenAnimation() {
 
+        self.setMySsomButton()
+        
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
             self.viewBottomInfo.transform = CGAffineTransformIdentity
@@ -166,46 +173,76 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    func setMySsomButton() {
+
+        if self.isAlreadyWrittenMySsom {
+            self.btnWrite.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        } else {
+            self.btnWrite.setImage(UIImage(named: "writeBtn"), forState: UIControlState.Normal)
+        }
+    }
+
     @IBAction func tapIPayButton(sender: AnyObject) {
 
-        self.btnIPay.selected = true;
-        self.iPayButtonBottomLineView.hidden = false;
-        self.btnYouPay.selected = false;
-        self.youPayButtonBottomLineView.hidden = true;
+        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = 0
 
-        self.mainViewModel.isSell = true;
+        UIView.animateWithDuration(0.3, animations: {
 
-        self.loadingData()
+            self.btnIPay.selected = true;
+            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.btnYouPay.selected = false;
+
+            self.view.layoutIfNeeded()
+        }) { (finish) in
+
+            self.mainViewModel.isSell = true;
+
+            self.loadData()
+        }
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
 
-        self.btnIPay.selected = false;
-        self.iPayButtonBottomLineView.hidden = true;
-        self.btnYouPay.selected = true;
-        self.youPayButtonBottomLineView.hidden = false;
+        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
-        self.mainViewModel.isSell = false;
+        UIView.animateWithDuration(0.3, animations: {
+            
+            self.btnIPay.selected = false;
+            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.btnYouPay.selected = true;
 
-        self.loadingData()
+            self.view.layoutIfNeeded()
+        }) { (finish) in
+
+            self.mainViewModel.isSell = false;
+
+            self.loadData()
+        }
     }
 
     @IBAction func tapFilterButton(sender: AnyObject) {
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.delegate = self
+        if let filterViewModel = self.filterModel {
+            self.filterView.model = filterViewModel
+        }
+        self.filterView.configView()
+        
         self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
+        self.view.layoutIfNeeded()
+
         self.constBottomInfoViewHeight.constant = 283.0
         self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.viewBottomInfo.layoutIfNeeded()
+            self.view.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -224,17 +261,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func tapWriteButton(sender: AnyObject) {
 
-        let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+        if self.isAlreadyWrittenMySsom {
+            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.btnWrite.bounds.width * 2)
+            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
 
-        UIView.animateWithDuration(0.3, animations: {
-            self.btnWrite.transform = transform
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
+                self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
+                }, completion: { (finish) in
+                    self.openDetailView(self.mySsom)
+                    self.btnWrite.layer.transform = CATransform3DIdentity
+            })
+        } else {
+            let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+
+            UIView.animateWithDuration(0.3, animations: {
+                self.btnWrite.transform = transform
             }) { (finish) in
                 self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+            }
         }
     }
 
 // MARK: private
-    func loadingData() {
+    func loadData() {
         if self.needReload {
 
             SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
@@ -271,7 +320,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             if ssomString == ssomType.rawValue {
                 tempDatas.append(data)
             }
+
+            // check if my ssom exists
+            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+                if loginedUserId == data.userId {
+                    self.isAlreadyWrittenMySsom = true
+                    self.mySsom = data
+                } else {
+                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
+                }
+            }
         }
+
+        self.setMySsomButton()
 
         self.mainViewModel.datas = tempDatas
         self.datas = tempDatas
@@ -279,102 +340,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ssomListTableView.reloadData()
     }
 
-// MARK:- SSListTableViewCellDelegate
-    func tapProfileImage(sender: AnyObject, imageUrl: String) {
-        self.navigationController?.navigationBarHidden = true;
+    func openDetailView(model: SSViewModel) {
 
-        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
-        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
-        self.profileImageView!.delegate = self
-
-        self.view.addSubview(self.profileImageView!)
-    }
-
-// MARK:- SSPhotoViewDelegate
-    func tapClose() {
-        self.navigationController?.navigationBarHidden = false;
-
-        self.profileImageView!.removeFromSuperview()
-    }
-
-// MARK:- UITableViewDelegate & UITableViewDataSource
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
-
-        let model:SSViewModel = datas[indexPath.row]
-        if let content = model.content {
-            print("content is \(content.stringByRemovingPercentEncoding)")
-
-            cell.descriptionLabel.text = content.stringByRemovingPercentEncoding
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = false
         }
 
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: self.mainViewModel.isSell ? "bigGreen.png" : "bigRed.png")!, frame: CGRectMake(0, 0, 89.2, 77.2))
-        cell.profileImageView!.image = maskOfProfileImage
-
-        if let imageUrl = model.imageUrl {
-            if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                print("imageUrl is \(imageUrl)")
-
-                cell.profileImageView?.sd_setImageWithURL(NSURL(string: imageUrl)
-                    , placeholderImage: nil
-                    , completed: { (image, error, cacheType, url) -> Void in
-
-                        if let err = error {
-                            print(err.localizedDescription)
-
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                        } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 72.2, 72.2))
-
-                            cell.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
-                        }
-                    })
-                
-                cell.profilImageUrl = imageUrl
-            }
-        }
-
-        var memberInfoString:String = "";
-        let ageArea: SSAgeAreaType = Util.getAgeArea(model.minAge)
-        memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
-//        if let maxAge = model.maxAge {
-//            memberInfoString = memberInfoString.stringByAppendingFormat("~\(maxAge)살")
-//        }
-        if let userCount = model.userCount {
-            memberInfoString = memberInfoString.stringByAppendingFormat(" \(userCount)명 있어요.")
-        }
-        cell.memberInfoLabel.text = memberInfoString
-        cell.memberInfoLabel.textColor = self.mainViewModel.isSell ? UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1) : UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
-
-        if let distance = model.distance where distance != 0 {
-            cell.distanceLabel.text = Util.getDistanceString(distance)
-        } else {
-            let nowCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude)
-            let ssomCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: model.latitude, longitude: model.longitude)
-
-            let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
-            model.distance = distance
-
-            cell.distanceLabel.text = Util.getDistanceString(distance)
-        }
-
-        cell.updatedTimeLabel.text = Util.getDateString(model.createdDatetime)
-
-        cell.delegate = self
-
-        return cell;
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count;
-    }
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.mainScreen().bounds
         self.scrollDetailView.delegate = self
 
-        let model = self.datas[indexPath.row]
         if self.btnIPay.selected {
             self.scrollDetailView.ssomType = .SSOM
             self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
@@ -390,6 +365,56 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.view.addSubview(self.scrollDetailView)
     }
 
+// MARK:- SSListTableViewCellDelegate
+    func tapProfileImage(sender: AnyObject, imageUrl: String) {
+        self.navigationController?.navigationBarHidden = true;
+
+        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
+        self.profileImageView!.delegate = self
+
+        self.view.addSubview(self.profileImageView!)
+    }
+
+// MARK:- SSPhotoViewDelegate
+    func tapPhotoViewClose() {
+        self.navigationController?.navigationBarHidden = false;
+
+        self.profileImageView!.removeFromSuperview()
+    }
+
+// MARK:- UITableViewDelegate & UITableViewDataSource
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: SSListTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SSListTableViewCell
+
+        let model:SSViewModel = datas[indexPath.row]
+        cell.configView(model, isMySsom: self.mySsom === model, isSsom: self.mainViewModel.isSell, withCoordinate: CLLocationCoordinate2DMake(self.mainViewModel.nowLatitude, self.mainViewModel.nowLongitude))
+
+        cell.delegate = self
+
+        return cell;
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return datas.count;
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell: SSListTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as? SSListTableViewCell {
+            if cell.isCellOpened {
+                cell.closeCell(true)
+            } else {
+                if cell.isCellClosed {
+
+                    let model = self.datas[indexPath.row]
+
+                    self.openDetailView(model)
+
+                }
+            }
+        }
+    }
+
 // MARK: - SSFilterViewDelegate
     func closeFilterView() {
         if let view = self.filterView {
@@ -403,19 +428,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // apply filter value to get the ssom list
         self.filterModel = filterViewModel
         self.datas = self.mainViewModel.datas
-        self.ssomListTableView .reloadData()
+        self.ssomListTableView.reloadData()
         
-        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
+//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView(needToReload: Bool) {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
 
             if needToReload {
-                self.loadingData()
+                self.loadData()
             }
         }
     }
@@ -424,7 +454,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if postId != "" {
                 SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
@@ -439,8 +469,42 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
                             vc.ssomType = ssomType
                             vc.chatRoomId = createdChatroomId
+                            vc.myImageUrl = SSAccountManager.sharedInstance.profileImageUrl
                             vc.partnerImageUrl = partnerImageUrl
+
+                            vc.ssomLatitude = ssomLatitude
+                            vc.ssomLongitude = ssomLongitude
+
                             self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+// MARK: - SSListTableViewCellDelegate
+    func deleteCell(cell: UITableViewCell) {
+        if let indexPath: NSIndexPath = self.ssomListTableView.indexPathForCell(cell) {
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                let data = self.datas[indexPath.row]
+
+                SSNetworkAPIClient.deletePost(token, postId: data.postId, completion: { [weak self] (error) in
+                    if let err = error {
+                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                    } else {
+                        if let wself = self {
+                            wself.datas.removeAtIndex(indexPath.row)
+                            wself.ssomListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
+                            wself.isAlreadyWrittenMySsom = false
+                            wself.mySsom = nil
+
+                            wself.setMySsomButton()
+
+                            SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
+                                //
+                            })
                         }
                     }
                 })

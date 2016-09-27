@@ -10,6 +10,7 @@
 		59689FF47FE2D25F01147592 /* Pods_SsomUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */; };
 		5BD8ADE7AD8C44F99C1F2136 /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */; };
 		9701C4A01C512D3900E1D3DB /* SSNavigationBarItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */; };
+		9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */; };
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
 		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
 		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
@@ -67,12 +68,6 @@
 		974C9C991C6B447000E17A2B /* bgDimChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B551C6B446F00E17A2B /* bgDimChat.png */; };
 		974C9C9A1C6B447000E17A2B /* bgDimChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B561C6B446F00E17A2B /* bgDimChat@2x.png */; };
 		974C9C9B1C6B447000E17A2B /* bgDimChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B571C6B446F00E17A2B /* bgDimChat@3x.png */; };
-		974C9C9C1C6B447000E17A2B /* bigGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B581C6B446F00E17A2B /* bigGreen.png */; };
-		974C9C9D1C6B447000E17A2B /* bigGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B591C6B446F00E17A2B /* bigGreen@2x.png */; };
-		974C9C9E1C6B447000E17A2B /* bigGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5A1C6B446F00E17A2B /* bigGreen@3x.png */; };
-		974C9C9F1C6B447000E17A2B /* bigRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5B1C6B446F00E17A2B /* bigRed.png */; };
-		974C9CA01C6B447000E17A2B /* bigRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5C1C6B446F00E17A2B /* bigRed@2x.png */; };
-		974C9CA11C6B447000E17A2B /* bigRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5D1C6B446F00E17A2B /* bigRed@3x.png */; };
 		974C9CA21C6B447000E17A2B /* bow.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5E1C6B446F00E17A2B /* bow.png */; };
 		974C9CA31C6B447000E17A2B /* bow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B5F1C6B446F00E17A2B /* bow@2x.png */; };
 		974C9CA41C6B447000E17A2B /* bow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9B601C6B446F00E17A2B /* bow@3x.png */; };
@@ -173,13 +168,6 @@
 		974C9D2E1C6B447000E17A2B /* meet_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BEA1C6B446F00E17A2B /* meet_btn.png */; };
 		974C9D2F1C6B447000E17A2B /* meet_map_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BEB1C6B446F00E17A2B /* meet_map_icon.png */; };
 		974C9D301C6B447000E17A2B /* menu_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BEC1C6B446F00E17A2B /* menu_line.png */; };
-		974C9D311C6B447000E17A2B /* message_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BED1C6B446F00E17A2B /* message_red.png */; };
-		974C9D321C6B447000E17A2B /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BEE1C6B446F00E17A2B /* message.png */; };
-		974C9D331C6B447000E17A2B /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BEF1C6B446F00E17A2B /* message@2x.png */; };
-		974C9D341C6B447000E17A2B /* message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF01C6B446F00E17A2B /* message@3x.png */; };
-		974C9D351C6B447000E17A2B /* messageRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF11C6B446F00E17A2B /* messageRed.png */; };
-		974C9D361C6B447000E17A2B /* messageRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF21C6B446F00E17A2B /* messageRed@2x.png */; };
-		974C9D371C6B447000E17A2B /* messageRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF31C6B446F00E17A2B /* messageRed@3x.png */; };
 		974C9D3A1C6B447000E17A2B /* minigreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF61C6B446F00E17A2B /* minigreen.png */; };
 		974C9D3B1C6B447000E17A2B /* minigreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF71C6B446F00E17A2B /* minigreen@2x.png */; };
 		974C9D3C1C6B447000E17A2B /* minigreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BF81C6B446F00E17A2B /* minigreen@3x.png */; };
@@ -223,9 +211,6 @@
 		974C9D7A1C6B447000E17A2B /* ssomIngGreenBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C361C6B446F00E17A2B /* ssomIngGreenBig.png */; };
 		974C9D7B1C6B447000E17A2B /* ssomIngGreenBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C371C6B446F00E17A2B /* ssomIngGreenBig@2x.png */; };
 		974C9D7C1C6B447000E17A2B /* ssomIngGreenBig@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C381C6B446F00E17A2B /* ssomIngGreenBig@3x.png */; };
-		974C9D7D1C6B447000E17A2B /* ssomIngGreenSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C391C6B446F00E17A2B /* ssomIngGreenSmall.png */; };
-		974C9D7E1C6B447000E17A2B /* ssomIngGreenSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C3A1C6B446F00E17A2B /* ssomIngGreenSmall@2x.png */; };
-		974C9D7F1C6B447000E17A2B /* ssomIngGreenSmall@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C3B1C6B446F00E17A2B /* ssomIngGreenSmall@3x.png */; };
 		974C9D801C6B447000E17A2B /* ssomIngRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C3C1C6B446F00E17A2B /* ssomIngRed.png */; };
 		974C9D811C6B447000E17A2B /* ssomIngRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C3D1C6B446F00E17A2B /* ssomIngRed@2x.png */; };
 		974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C3E1C6B446F00E17A2B /* ssomIngRed@3x.png */; };
@@ -235,9 +220,6 @@
 		974C9D861C6B447000E17A2B /* ssomIngRedPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C421C6B446F00E17A2B /* ssomIngRedPoint.png */; };
 		974C9D871C6B447000E17A2B /* ssomIngRedPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C431C6B446F00E17A2B /* ssomIngRedPoint@2x.png */; };
 		974C9D881C6B447000E17A2B /* ssomIngRedPoint@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C441C6B446F00E17A2B /* ssomIngRedPoint@3x.png */; };
-		974C9D891C6B447000E17A2B /* ssomIngRedSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C451C6B446F00E17A2B /* ssomIngRedSmall.png */; };
-		974C9D8A1C6B447000E17A2B /* ssomIngRedSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C461C6B446F00E17A2B /* ssomIngRedSmall@2x.png */; };
-		974C9D8B1C6B447000E17A2B /* ssomIngRedSmall@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C471C6B446F00E17A2B /* ssomIngRedSmall@3x.png */; };
 		974C9D8C1C6B447000E17A2B /* ssomLogoStyle01.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C481C6B446F00E17A2B /* ssomLogoStyle01.png */; };
 		974C9D8D1C6B447000E17A2B /* ssomLogoStyle01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C491C6B446F00E17A2B /* ssomLogoStyle01@2x.png */; };
 		974C9D8E1C6B447000E17A2B /* ssomLogoStyle01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C4A1C6B446F00E17A2B /* ssomLogoStyle01@3x.png */; };
@@ -265,12 +247,6 @@
 		974C9DAB1C6B447000E17A2B /* unreadCount.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C671C6B447000E17A2B /* unreadCount.png */; };
 		974C9DAC1C6B447000E17A2B /* unreadCount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C681C6B447000E17A2B /* unreadCount@2x.png */; };
 		974C9DAD1C6B447000E17A2B /* unreadCount@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C691C6B447000E17A2B /* unreadCount@3x.png */; };
-		974C9DB01C6B447000E17A2B /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C6C1C6B447000E17A2B /* write.png */; };
-		974C9DB11C6B447000E17A2B /* write@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C6D1C6B447000E17A2B /* write@2x.png */; };
-		974C9DB21C6B447000E17A2B /* write@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C6E1C6B447000E17A2B /* write@3x.png */; };
-		974C9DB31C6B447000E17A2B /* writeLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C6F1C6B447000E17A2B /* writeLine.png */; };
-		974C9DB41C6B447000E17A2B /* writeLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C701C6B447000E17A2B /* writeLine@2x.png */; };
-		974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C711C6B447000E17A2B /* writeLine@3x.png */; };
 		974C9DB61C6B447000E17A2B /* writePhotoArea.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C721C6B447000E17A2B /* writePhotoArea.png */; };
 		974C9DB71C6B447000E17A2B /* writePhotoArea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */; };
 		974C9DB81C6B447000E17A2B /* writePhotoArea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */; };
@@ -327,6 +303,7 @@
 		97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266C1C9F090400484F03 /* UIImage+Crop.swift */; };
 		97C5266F1C9F091200484F03 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5266E1C9F091200484F03 /* String+Util.swift */; };
 		97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */; };
+		97DEBDB91D98430800DB51A3 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */; };
 		97E21D451D69D619004E3EBC /* SSMenuBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */; };
 		97E21D471D69D6A8004E3EBC /* SSMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */; };
 		BD6B77F5410EB4B139461F16 /* Pods_SsomTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD498A6BF100A0C13AAAEAD /* Pods_SsomTests.framework */; };
@@ -368,6 +345,8 @@
 		8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests.release.xcconfig"; sourceTree = "<group>"; };
 		9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSNavigationBarItems.xib; sourceTree = "<group>"; };
+		9717EB151D8E6F8400B47718 /* Ssom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Ssom.entitlements; path = Ssom/Ssom.entitlements; sourceTree = "<group>"; };
+		9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSTodayPhotoViewController.swift; path = Menu/SSTodayPhotoViewController.swift; sourceTree = "<group>"; };
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
 		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
@@ -382,7 +361,7 @@
 		97343E291BE65AB300A9D39D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		97343E2C1BE65AB300A9D39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97343E2E1BE65AB300A9D39D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		97343E331BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97343E331BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Ssom/Info.plist; sourceTree = "<group>"; };
 		97343E381BE65AB300A9D39D /* SsomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SsomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E3C1BE65AB300A9D39D /* SsomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsomTests.swift; sourceTree = "<group>"; };
 		97343E3E1BE65AB300A9D39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -431,12 +410,6 @@
 		974C9B551C6B446F00E17A2B /* bgDimChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgDimChat.png; path = ../../../Ssom/Ssom/Ssom/Resource/bgDimChat.png; sourceTree = "<group>"; };
 		974C9B561C6B446F00E17A2B /* bgDimChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bgDimChat@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bgDimChat@2x.png"; sourceTree = "<group>"; };
 		974C9B571C6B446F00E17A2B /* bgDimChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bgDimChat@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bgDimChat@3x.png"; sourceTree = "<group>"; };
-		974C9B581C6B446F00E17A2B /* bigGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bigGreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/bigGreen.png; sourceTree = "<group>"; };
-		974C9B591C6B446F00E17A2B /* bigGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bigGreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bigGreen@2x.png"; sourceTree = "<group>"; };
-		974C9B5A1C6B446F00E17A2B /* bigGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bigGreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bigGreen@3x.png"; sourceTree = "<group>"; };
-		974C9B5B1C6B446F00E17A2B /* bigRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bigRed.png; path = ../../../Ssom/Ssom/Ssom/Resource/bigRed.png; sourceTree = "<group>"; };
-		974C9B5C1C6B446F00E17A2B /* bigRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bigRed@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bigRed@2x.png"; sourceTree = "<group>"; };
-		974C9B5D1C6B446F00E17A2B /* bigRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bigRed@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bigRed@3x.png"; sourceTree = "<group>"; };
 		974C9B5E1C6B446F00E17A2B /* bow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bow.png; path = ../../../Ssom/Ssom/Ssom/Resource/bow.png; sourceTree = "<group>"; };
 		974C9B5F1C6B446F00E17A2B /* bow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bow@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bow@2x.png"; sourceTree = "<group>"; };
 		974C9B601C6B446F00E17A2B /* bow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bow@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/bow@3x.png"; sourceTree = "<group>"; };
@@ -537,13 +510,6 @@
 		974C9BEA1C6B446F00E17A2B /* meet_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meet_btn.png; path = ../../../Ssom/Ssom/Ssom/Resource/meet_btn.png; sourceTree = "<group>"; };
 		974C9BEB1C6B446F00E17A2B /* meet_map_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meet_map_icon.png; path = ../../../Ssom/Ssom/Ssom/Resource/meet_map_icon.png; sourceTree = "<group>"; };
 		974C9BEC1C6B446F00E17A2B /* menu_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_line.png; path = ../../../Ssom/Ssom/Ssom/Resource/menu_line.png; sourceTree = "<group>"; };
-		974C9BED1C6B446F00E17A2B /* message_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message_red.png; path = ../../../Ssom/Ssom/Ssom/Resource/message_red.png; sourceTree = "<group>"; };
-		974C9BEE1C6B446F00E17A2B /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message.png; path = ../../../Ssom/Ssom/Ssom/Resource/message.png; sourceTree = "<group>"; };
-		974C9BEF1C6B446F00E17A2B /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "message@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/message@2x.png"; sourceTree = "<group>"; };
-		974C9BF01C6B446F00E17A2B /* message@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "message@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/message@3x.png"; sourceTree = "<group>"; };
-		974C9BF11C6B446F00E17A2B /* messageRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = messageRed.png; path = ../../../Ssom/Ssom/Ssom/Resource/messageRed.png; sourceTree = "<group>"; };
-		974C9BF21C6B446F00E17A2B /* messageRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "messageRed@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/messageRed@2x.png"; sourceTree = "<group>"; };
-		974C9BF31C6B446F00E17A2B /* messageRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "messageRed@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/messageRed@3x.png"; sourceTree = "<group>"; };
 		974C9BF61C6B446F00E17A2B /* minigreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = minigreen.png; path = ../../../Ssom/Ssom/Ssom/Resource/minigreen.png; sourceTree = "<group>"; };
 		974C9BF71C6B446F00E17A2B /* minigreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minigreen@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/minigreen@2x.png"; sourceTree = "<group>"; };
 		974C9BF81C6B446F00E17A2B /* minigreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minigreen@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/minigreen@3x.png"; sourceTree = "<group>"; };
@@ -587,9 +553,6 @@
 		974C9C361C6B446F00E17A2B /* ssomIngGreenBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomIngGreenBig.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenBig.png; sourceTree = "<group>"; };
 		974C9C371C6B446F00E17A2B /* ssomIngGreenBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngGreenBig@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenBig@2x.png"; sourceTree = "<group>"; };
 		974C9C381C6B446F00E17A2B /* ssomIngGreenBig@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngGreenBig@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenBig@3x.png"; sourceTree = "<group>"; };
-		974C9C391C6B446F00E17A2B /* ssomIngGreenSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomIngGreenSmall.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenSmall.png; sourceTree = "<group>"; };
-		974C9C3A1C6B446F00E17A2B /* ssomIngGreenSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngGreenSmall@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenSmall@2x.png"; sourceTree = "<group>"; };
-		974C9C3B1C6B446F00E17A2B /* ssomIngGreenSmall@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngGreenSmall@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngGreenSmall@3x.png"; sourceTree = "<group>"; };
 		974C9C3C1C6B446F00E17A2B /* ssomIngRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomIngRed.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomIngRed.png; sourceTree = "<group>"; };
 		974C9C3D1C6B446F00E17A2B /* ssomIngRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRed@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRed@2x.png"; sourceTree = "<group>"; };
 		974C9C3E1C6B446F00E17A2B /* ssomIngRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRed@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRed@3x.png"; sourceTree = "<group>"; };
@@ -599,9 +562,6 @@
 		974C9C421C6B446F00E17A2B /* ssomIngRedPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomIngRedPoint.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomIngRedPoint.png; sourceTree = "<group>"; };
 		974C9C431C6B446F00E17A2B /* ssomIngRedPoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRedPoint@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRedPoint@2x.png"; sourceTree = "<group>"; };
 		974C9C441C6B446F00E17A2B /* ssomIngRedPoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRedPoint@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRedPoint@3x.png"; sourceTree = "<group>"; };
-		974C9C451C6B446F00E17A2B /* ssomIngRedSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomIngRedSmall.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomIngRedSmall.png; sourceTree = "<group>"; };
-		974C9C461C6B446F00E17A2B /* ssomIngRedSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRedSmall@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRedSmall@2x.png"; sourceTree = "<group>"; };
-		974C9C471C6B446F00E17A2B /* ssomIngRedSmall@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomIngRedSmall@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomIngRedSmall@3x.png"; sourceTree = "<group>"; };
 		974C9C481C6B446F00E17A2B /* ssomLogoStyle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssomLogoStyle01.png; path = ../../../Ssom/Ssom/Ssom/Resource/ssomLogoStyle01.png; sourceTree = "<group>"; };
 		974C9C491C6B446F00E17A2B /* ssomLogoStyle01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomLogoStyle01@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomLogoStyle01@2x.png"; sourceTree = "<group>"; };
 		974C9C4A1C6B446F00E17A2B /* ssomLogoStyle01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ssomLogoStyle01@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/ssomLogoStyle01@3x.png"; sourceTree = "<group>"; };
@@ -629,12 +589,6 @@
 		974C9C671C6B447000E17A2B /* unreadCount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unreadCount.png; path = ../../../Ssom/Ssom/Ssom/Resource/unreadCount.png; sourceTree = "<group>"; };
 		974C9C681C6B447000E17A2B /* unreadCount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unreadCount@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/unreadCount@2x.png"; sourceTree = "<group>"; };
 		974C9C691C6B447000E17A2B /* unreadCount@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unreadCount@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/unreadCount@3x.png"; sourceTree = "<group>"; };
-		974C9C6C1C6B447000E17A2B /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = write.png; path = ../../../Ssom/Ssom/Ssom/Resource/write.png; sourceTree = "<group>"; };
-		974C9C6D1C6B447000E17A2B /* write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "write@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/write@2x.png"; sourceTree = "<group>"; };
-		974C9C6E1C6B447000E17A2B /* write@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "write@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/write@3x.png"; sourceTree = "<group>"; };
-		974C9C6F1C6B447000E17A2B /* writeLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writeLine.png; path = ../../../Ssom/Ssom/Ssom/Resource/writeLine.png; sourceTree = "<group>"; };
-		974C9C701C6B447000E17A2B /* writeLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writeLine@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writeLine@2x.png"; sourceTree = "<group>"; };
-		974C9C711C6B447000E17A2B /* writeLine@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writeLine@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writeLine@3x.png"; sourceTree = "<group>"; };
 		974C9C721C6B447000E17A2B /* writePhotoArea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writePhotoArea.png; path = ../../../Ssom/Ssom/Ssom/Resource/writePhotoArea.png; sourceTree = "<group>"; };
 		974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@2x.png"; sourceTree = "<group>"; };
 		974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@3x.png"; sourceTree = "<group>"; };
@@ -651,7 +605,7 @@
 		9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuTableViewCell.xib; path = Menu/SSMenuTableViewCell.xib; sourceTree = "<group>"; };
 		9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignUpViewController.swift; path = SignIn/SSSignUpViewController.swift; sourceTree = "<group>"; };
 		977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Float.swift"; path = "Ssom/3rdLib/CGSize+Float.swift"; sourceTree = "<group>"; };
-		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Ssom/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSMasterViewController.swift; sourceTree = "<group>"; };
 		977DBA731D2B82A400CFD98F /* SSScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSScrollView.swift; path = SsomView/SSScrollView.swift; sourceTree = "<group>"; };
@@ -693,6 +647,7 @@
 		97C5266E1C9F091200484F03 /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Util.swift"; path = "Ssom/3rdLib/String+Util.swift"; sourceTree = "<group>"; };
 		97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		97DE88941C4561FE0043B8E2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Util.swift"; path = "Ssom/3rdLib/UIViewController+Util.swift"; sourceTree = "<group>"; };
 		97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuBottomView.xib; path = Menu/SSMenuBottomView.xib; sourceTree = "<group>"; };
 		97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuBottomView.swift; path = Menu/SSMenuBottomView.swift; sourceTree = "<group>"; };
 		A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SsomUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -795,12 +750,6 @@
 				974C9B551C6B446F00E17A2B /* bgDimChat.png */,
 				974C9B561C6B446F00E17A2B /* bgDimChat@2x.png */,
 				974C9B571C6B446F00E17A2B /* bgDimChat@3x.png */,
-				974C9B581C6B446F00E17A2B /* bigGreen.png */,
-				974C9B591C6B446F00E17A2B /* bigGreen@2x.png */,
-				974C9B5A1C6B446F00E17A2B /* bigGreen@3x.png */,
-				974C9B5B1C6B446F00E17A2B /* bigRed.png */,
-				974C9B5C1C6B446F00E17A2B /* bigRed@2x.png */,
-				974C9B5D1C6B446F00E17A2B /* bigRed@3x.png */,
 				974C9B5E1C6B446F00E17A2B /* bow.png */,
 				974C9B5F1C6B446F00E17A2B /* bow@2x.png */,
 				974C9B601C6B446F00E17A2B /* bow@3x.png */,
@@ -901,13 +850,6 @@
 				974C9BEA1C6B446F00E17A2B /* meet_btn.png */,
 				974C9BEB1C6B446F00E17A2B /* meet_map_icon.png */,
 				974C9BEC1C6B446F00E17A2B /* menu_line.png */,
-				974C9BED1C6B446F00E17A2B /* message_red.png */,
-				974C9BEE1C6B446F00E17A2B /* message.png */,
-				974C9BEF1C6B446F00E17A2B /* message@2x.png */,
-				974C9BF01C6B446F00E17A2B /* message@3x.png */,
-				974C9BF11C6B446F00E17A2B /* messageRed.png */,
-				974C9BF21C6B446F00E17A2B /* messageRed@2x.png */,
-				974C9BF31C6B446F00E17A2B /* messageRed@3x.png */,
 				974C9BF61C6B446F00E17A2B /* minigreen.png */,
 				974C9BF71C6B446F00E17A2B /* minigreen@2x.png */,
 				974C9BF81C6B446F00E17A2B /* minigreen@3x.png */,
@@ -951,9 +893,6 @@
 				974C9C361C6B446F00E17A2B /* ssomIngGreenBig.png */,
 				974C9C371C6B446F00E17A2B /* ssomIngGreenBig@2x.png */,
 				974C9C381C6B446F00E17A2B /* ssomIngGreenBig@3x.png */,
-				974C9C391C6B446F00E17A2B /* ssomIngGreenSmall.png */,
-				974C9C3A1C6B446F00E17A2B /* ssomIngGreenSmall@2x.png */,
-				974C9C3B1C6B446F00E17A2B /* ssomIngGreenSmall@3x.png */,
 				974C9C3C1C6B446F00E17A2B /* ssomIngRed.png */,
 				974C9C3D1C6B446F00E17A2B /* ssomIngRed@2x.png */,
 				974C9C3E1C6B446F00E17A2B /* ssomIngRed@3x.png */,
@@ -963,9 +902,6 @@
 				974C9C421C6B446F00E17A2B /* ssomIngRedPoint.png */,
 				974C9C431C6B446F00E17A2B /* ssomIngRedPoint@2x.png */,
 				974C9C441C6B446F00E17A2B /* ssomIngRedPoint@3x.png */,
-				974C9C451C6B446F00E17A2B /* ssomIngRedSmall.png */,
-				974C9C461C6B446F00E17A2B /* ssomIngRedSmall@2x.png */,
-				974C9C471C6B446F00E17A2B /* ssomIngRedSmall@3x.png */,
 				974C9C481C6B446F00E17A2B /* ssomLogoStyle01.png */,
 				974C9C491C6B446F00E17A2B /* ssomLogoStyle01@2x.png */,
 				974C9C4A1C6B446F00E17A2B /* ssomLogoStyle01@3x.png */,
@@ -993,12 +929,6 @@
 				974C9C671C6B447000E17A2B /* unreadCount.png */,
 				974C9C681C6B447000E17A2B /* unreadCount@2x.png */,
 				974C9C691C6B447000E17A2B /* unreadCount@3x.png */,
-				974C9C6C1C6B447000E17A2B /* write.png */,
-				974C9C6D1C6B447000E17A2B /* write@2x.png */,
-				974C9C6E1C6B447000E17A2B /* write@3x.png */,
-				974C9C6F1C6B447000E17A2B /* writeLine.png */,
-				974C9C701C6B447000E17A2B /* writeLine@2x.png */,
-				974C9C711C6B447000E17A2B /* writeLine@3x.png */,
 				974C9C721C6B447000E17A2B /* writePhotoArea.png */,
 				974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */,
 				974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */,
@@ -1042,8 +972,6 @@
 				9764D9DA1D35FF5300BBE4C6 /* ViewModel */,
 				9730034E1C10947100734D8D /* Resource */,
 				97343E2E1BE65AB300A9D39D /* Assets.xcassets */,
-				97343E331BE65AB300A9D39D /* Info.plist */,
-				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
@@ -1139,6 +1067,9 @@
 		977DBA6B1D23A22B00CFD98F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				97343E331BE65AB300A9D39D /* Info.plist */,
+				9717EB151D8E6F8400B47718 /* Ssom.entitlements */,
+				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */,
 			);
 			name = "Support Files";
@@ -1147,6 +1078,8 @@
 		9787ACE01CFD3776001CF18C /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */,
+				9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */,
 				9787ACEB1D042926001CF18C /* Menu.xcassets */,
 				9787ACE11CFD37AC001CF18C /* Menu.storyboard */,
 				9787ACE31CFDF26F001CF18C /* SSMenuViewController.swift */,
@@ -1156,8 +1089,7 @@
 				9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */,
 				97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */,
 				97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */,
-				9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */,
-				9741C9C51D1565EA00DD090F /* SSDrawerStyler.swift */,
+				9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -1213,6 +1145,7 @@
 				97C5266E1C9F091200484F03 /* String+Util.swift */,
 				977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */,
 				976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */,
+				97DEBDB81D98430800DB51A3 /* UIViewController+Util.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -1291,12 +1224,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = SsomCompany;
 				TargetAttributes = {
 					97343E231BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 3V2J2EZE5D;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1308,10 +1242,12 @@
 					};
 					97343E371BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 97343E231BE65AB300A9D39D;
 					};
 					97343E421BE65AB300A9D39D = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 97343E231BE65AB300A9D39D;
 					};
 				};
@@ -1359,11 +1295,8 @@
 				974C9C9A1C6B447000E17A2B /* bgDimChat@2x.png in Resources */,
 				974C9CCF1C6B447000E17A2B /* detailCenterGreen.png in Resources */,
 				974C9D671C6B447000E17A2B /* send@3x.png in Resources */,
-				974C9D8A1C6B447000E17A2B /* ssomIngRedSmall@2x.png in Resources */,
-				974C9D7E1C6B447000E17A2B /* ssomIngGreenSmall@2x.png in Resources */,
 				974C9D3F1C6B447000E17A2B /* minired@3x.png in Resources */,
 				974C9D251C6B447000E17A2B /* logoDumy.png in Resources */,
-				974C9D7D1C6B447000E17A2B /* ssomIngGreenSmall.png in Resources */,
 				974C9D301C6B447000E17A2B /* menu_line.png in Resources */,
 				974C9C8E1C6B447000E17A2B /* arletIcon@2x.png in Resources */,
 				974C9D141C6B447000E17A2B /* line.png in Resources */,
@@ -1374,14 +1307,12 @@
 				974C9CC41C6B447000E17A2B /* chatNotiBg.png in Resources */,
 				9730C9D11D5229BB0042B9FD /* SSError.plist in Resources */,
 				974C9CEA1C6B447000E17A2B /* filterW@2x.png in Resources */,
-				974C9D8B1C6B447000E17A2B /* ssomIngRedSmall@3x.png in Resources */,
 				974C9D4E1C6B447000E17A2B /* pathGuideHeart@2x.png in Resources */,
 				974C9D8D1C6B447000E17A2B /* ssomLogoStyle01@2x.png in Resources */,
 				974C9D5D1C6B447000E17A2B /* profileBorderGreen@2x.png in Resources */,
 				974C9D801C6B447000E17A2B /* ssomIngRed.png in Resources */,
 				977DBA6D1D23A26A00CFD98F /* ServiceAccount.json in Resources */,
 				974C9D9F1C6B447000E17A2B /* topBar@3x.png in Resources */,
-				974C9DB11C6B447000E17A2B /* write@2x.png in Resources */,
 				974C9D9D1C6B447000E17A2B /* topBar.png in Resources */,
 				9701C4A01C512D3900E1D3DB /* SSNavigationBarItems.xib in Resources */,
 				974C9D981C6B447000E17A2B /* ssomSelectRed.png in Resources */,
@@ -1396,14 +1327,11 @@
 				974C9CAE1C6B447000E17A2B /* camera@3x.png in Resources */,
 				974C9CAD1C6B447000E17A2B /* camera@2x.png in Resources */,
 				974C9C881C6B447000E17A2B /* acceptButtonGreen@3x.png in Resources */,
-				974C9DB51C6B447000E17A2B /* writeLine@3x.png in Resources */,
 				974C9D2A1C6B447000E17A2B /* manu@3x.png in Resources */,
 				9787ACEC1D042926001CF18C /* Menu.xcassets in Resources */,
-				974C9D331C6B447000E17A2B /* message@2x.png in Resources */,
 				974C9D821C6B447000E17A2B /* ssomIngRed@3x.png in Resources */,
 				974C9C911C6B447000E17A2B /* backIcon.png in Resources */,
 				97E21D451D69D619004E3EBC /* SSMenuBottomView.xib in Resources */,
-				974C9D361C6B447000E17A2B /* messageRed@2x.png in Resources */,
 				974C9C781C6B447000E17A2B /* 1DepToggleOff.png in Resources */,
 				974C9D5C1C6B447000E17A2B /* profileBorderGreen.png in Resources */,
 				974C9DAD1C6B447000E17A2B /* unreadCount@3x.png in Resources */,
@@ -1420,10 +1348,8 @@
 				974C9CF41C6B447000E17A2B /* heartRed@3x.png in Resources */,
 				974C9D9A1C6B447000E17A2B /* ssomSelectRed@3x.png in Resources */,
 				974C9CB11C6B447000E17A2B /* cancelButtonRed@2x.png in Resources */,
-				974C9D371C6B447000E17A2B /* messageRed@3x.png in Resources */,
 				974C9CE51C6B447000E17A2B /* filterOn@3x.png in Resources */,
 				974C9D5E1C6B447000E17A2B /* profileBorderGreen@3x.png in Resources */,
-				974C9DB01C6B447000E17A2B /* write.png in Resources */,
 				974C9D271C6B447000E17A2B /* logoDumy@3x.png in Resources */,
 				974C9CF21C6B447000E17A2B /* heartRed.png in Resources */,
 				974C9D541C6B447000E17A2B /* photoShadow@2x.png in Resources */,
@@ -1439,7 +1365,6 @@
 				974C9CAC1C6B447000E17A2B /* camera.png in Resources */,
 				974C9CAB1C6B447000E17A2B /* buttonCancel@3x.png in Resources */,
 				974C9CC31C6B447000E17A2B /* chatlistLine@3x.png in Resources */,
-				974C9CA11C6B447000E17A2B /* bigRed@3x.png in Resources */,
 				974C9D961C6B447000E17A2B /* ssomSelectNone2@2x.png in Resources */,
 				974C9D3A1C6B447000E17A2B /* minigreen.png in Resources */,
 				974C9D511C6B447000E17A2B /* photoDefault@2x.png in Resources */,
@@ -1456,7 +1381,6 @@
 				974C9D631C6B447000E17A2B /* rectangle17@2x.png in Resources */,
 				974C9CC51C6B447000E17A2B /* chatNotiBg@2x.png in Resources */,
 				974C9CED1C6B447000E17A2B /* heart@2x.png in Resources */,
-				974C9C9F1C6B447000E17A2B /* bigRed.png in Resources */,
 				974C9D8F1C6B447000E17A2B /* ssomSelectGreen.png in Resources */,
 				974C9C841C6B447000E17A2B /* 2DepToggleRed@3x.png in Resources */,
 				974C9C831C6B447000E17A2B /* 2DepToggleRed@2x.png in Resources */,
@@ -1468,7 +1392,6 @@
 				974C9CA31C6B447000E17A2B /* bow@2x.png in Resources */,
 				974C9D7A1C6B447000E17A2B /* ssomIngGreenBig.png in Resources */,
 				974C9D921C6B447000E17A2B /* ssomSelectNone.png in Resources */,
-				974C9D7F1C6B447000E17A2B /* ssomIngGreenSmall@3x.png in Resources */,
 				974C9D2B1C6B447000E17A2B /* mapShadow.png in Resources */,
 				974C9CA61C6B447000E17A2B /* bowIconRed@2x.png in Resources */,
 				974C9D691C6B447000E17A2B /* signupTopPng.png in Resources */,
@@ -1497,7 +1420,6 @@
 				974C9CF51C6B447000E17A2B /* heartWhite.png in Resources */,
 				974C9D7C1C6B447000E17A2B /* ssomIngGreenBig@3x.png in Resources */,
 				974C9C931C6B447000E17A2B /* backIcon@3x.png in Resources */,
-				974C9C9C1C6B447000E17A2B /* bigGreen.png in Resources */,
 				974C9CB91C6B447000E17A2B /* chatDelete@3x.png in Resources */,
 				974C9CE41C6B447000E17A2B /* filterOn@2x.png in Resources */,
 				974C9D621C6B447000E17A2B /* rectangle17.png in Resources */,
@@ -1508,7 +1430,6 @@
 				974C9C8D1C6B447000E17A2B /* arletIcon.png in Resources */,
 				974C9D811C6B447000E17A2B /* ssomIngRed@2x.png in Resources */,
 				974C9DAB1C6B447000E17A2B /* unreadCount.png in Resources */,
-				974C9DB21C6B447000E17A2B /* write@3x.png in Resources */,
 				974C9CDC1C6B447000E17A2B /* filterB@3x.png in Resources */,
 				974C9D3E1C6B447000E17A2B /* minired@2x.png in Resources */,
 				974C9DA51C6B447000E17A2B /* tostBg@3x.png in Resources */,
@@ -1516,8 +1437,6 @@
 				974C9C791C6B447000E17A2B /* 1DepToggleOff@2x.png in Resources */,
 				974C9CB81C6B447000E17A2B /* chatDelete@2x.png in Resources */,
 				974C9D611C6B447000E17A2B /* profileBorderRed@3x.png in Resources */,
-				974C9C9D1C6B447000E17A2B /* bigGreen@2x.png in Resources */,
-				974C9D321C6B447000E17A2B /* message.png in Resources */,
 				974C9D771C6B447000E17A2B /* ssomIngGreen.png in Resources */,
 				974C9C961C6B447000E17A2B /* bgBot50.png in Resources */,
 				974C9CDF1C6B447000E17A2B /* filterBg@3x.png in Resources */,
@@ -1532,7 +1451,6 @@
 				974C9CEE1C6B447000E17A2B /* heart@3x.png in Resources */,
 				974C9D651C6B447000E17A2B /* send.png in Resources */,
 				974C9C9B1C6B447000E17A2B /* bgDimChat@3x.png in Resources */,
-				974C9D351C6B447000E17A2B /* messageRed.png in Resources */,
 				974C9D151C6B447000E17A2B /* line@2x.png in Resources */,
 				974C9CCB1C6B447000E17A2B /* closeBtn@3x.png in Resources */,
 				974C9D911C6B447000E17A2B /* ssomSelectGreen@3x.png in Resources */,
@@ -1542,7 +1460,6 @@
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
 				97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */,
 				974C9CDD1C6B447000E17A2B /* filterBg.png in Resources */,
-				974C9DB41C6B447000E17A2B /* writeLine@2x.png in Resources */,
 				97B2D16D1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib in Resources */,
 				974C9CF11C6B447000E17A2B /* heartGreen@3x.png in Resources */,
 				974C9D461C6B447000E17A2B /* oval4Fill30@3x.png in Resources */,
@@ -1556,11 +1473,9 @@
 				974C9D991C6B447000E17A2B /* ssomSelectRed@2x.png in Resources */,
 				974C9D4D1C6B447000E17A2B /* pathGuideHeart.png in Resources */,
 				974C9D111C6B447000E17A2B /* joinBtn.png in Resources */,
-				974C9DB31C6B447000E17A2B /* writeLine.png in Resources */,
 				974C9CD11C6B447000E17A2B /* detailCenterGreen@3x.png in Resources */,
 				974C9D861C6B447000E17A2B /* ssomIngRedPoint.png in Resources */,
 				974C9CA21C6B447000E17A2B /* bow.png in Resources */,
-				974C9D891C6B447000E17A2B /* ssomIngRedSmall.png in Resources */,
 				974C9DA31C6B447000E17A2B /* tostBg.png in Resources */,
 				9787ACE21CFD37AC001CF18C /* Menu.storyboard in Resources */,
 				974C9D3C1C6B447000E17A2B /* minigreen@3x.png in Resources */,
@@ -1569,7 +1484,6 @@
 				974C9CE71C6B447000E17A2B /* filterPopup@2x.png in Resources */,
 				974C9D551C6B447000E17A2B /* photoShadow@3x.png in Resources */,
 				974C9CCA1C6B447000E17A2B /* closeBtn@2x.png in Resources */,
-				974C9D341C6B447000E17A2B /* message@3x.png in Resources */,
 				974C9D281C6B447000E17A2B /* manu.png in Resources */,
 				974C9DAC1C6B447000E17A2B /* unreadCount@2x.png in Resources */,
 				974C9D8E1C6B447000E17A2B /* ssomLogoStyle01@3x.png in Resources */,
@@ -1583,18 +1497,15 @@
 				974C9C811C6B447000E17A2B /* 2DepToggleGreen@3x.png in Resources */,
 				974C9D131C6B447000E17A2B /* joinBtn@3x.png in Resources */,
 				974C9D571C6B447000E17A2B /* pointWriteLine.png in Resources */,
-				974C9CA01C6B447000E17A2B /* bigRed@2x.png in Resources */,
 				974C9D641C6B447000E17A2B /* rectangle17@3x.png in Resources */,
 				974C9CC21C6B447000E17A2B /* chatlistLine@2x.png in Resources */,
 				974C9CE61C6B447000E17A2B /* filterPopup.png in Resources */,
 				974C9CEC1C6B447000E17A2B /* heart.png in Resources */,
-				974C9D311C6B447000E17A2B /* message_red.png in Resources */,
 				974C9D931C6B447000E17A2B /* ssomSelectNone@2x.png in Resources */,
 				974C9D971C6B447000E17A2B /* ssomSelectNone2@3x.png in Resources */,
 				974291051BF25F7000609974 /* SSListTableViewCell.xib in Resources */,
 				974C9D291C6B447000E17A2B /* manu@2x.png in Resources */,
 				974C9CC61C6B447000E17A2B /* chatNotiBg@3x.png in Resources */,
-				974C9C9E1C6B447000E17A2B /* bigGreen@3x.png in Resources */,
 				97B2D1691D489F1A00B5EBD2 /* SSChatCompletionView.xib in Resources */,
 				97B2D16F1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib in Resources */,
 				974C9D581C6B447000E17A2B /* pointWriteLine@2x.png in Resources */,
@@ -1797,6 +1708,7 @@
 				9787ACE81CFE7B0B001CF18C /* SSMenuHeadView.swift in Sources */,
 				97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */,
+				9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */,
 				9764D9E21D35FF6400BBE4C6 /* SSWriteViewModel.swift in Sources */,
 				979A4A041BF4525A00FAFB21 /* Util.swift in Sources */,
 				976031BB1D4CBFB3004B7392 /* UIView+Nib.swift in Sources */,
@@ -1808,6 +1720,7 @@
 				97C5266F1C9F091200484F03 /* String+Util.swift in Sources */,
 				97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */,
 				978410BA1D7AC41900C71C63 /* SSModelToObjectConverter.swift in Sources */,
+				97DEBDB91D98430800DB51A3 /* UIViewController+Util.swift in Sources */,
 				9764D9E11D35FF6400BBE4C6 /* SSViewModel.swift in Sources */,
 				9764D9E01D35FF6400BBE4C6 /* SSMainViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
@@ -1884,8 +1797,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1928,8 +1843,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1948,6 +1865,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1956,11 +1874,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B5A0F7539C097E36A6A996 /* Pods-Ssom.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1986,6 +1905,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1994,10 +1915,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD4D8E1A551570798BFECFB8 /* Pods-Ssom.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2023,6 +1945,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -2036,6 +1960,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ssom.app/Ssom";
 			};
 			name = Debug;
@@ -2049,6 +1974,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ssom.app/Ssom";
 			};
 			name = Release;
@@ -2061,6 +1987,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Ssom;
 				USES_XCTRUNNER = YES;
 			};
@@ -2074,6 +2001,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom.SsomUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Ssom;
 				USES_XCTRUNNER = YES;
 			};

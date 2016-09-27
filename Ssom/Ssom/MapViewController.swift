@@ -15,9 +15,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
     @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var imageIPayButtonLineView: UIImageView!
+    @IBOutlet var viewPayButtonLine: UIView!
+    @IBOutlet var constViewPayButtonLineLeadingToButtonIPay: NSLayoutConstraint!
     @IBOutlet var btnYouPay: UIButton!
-    @IBOutlet var imageYouPayButtonLineView: UIImageView!
 
     @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var viewFilterBackground: UIView!
@@ -35,17 +35,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             return self._datasOfFilteredSsom
         }
         set {
-            if self.filterModel != nil && self.filterModel.ageType != .AgeAll && self.filterModel.peopleCountType != .All {
+            if let filterViewModel = self.filterModel where filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
-                    if model.minAge == self.filterModel.ageType.toInt() && model.userCount == self.filterModel.peopleCountType.toInt() {
+
+                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if self.filterModel.ageType == .AgeAll && model.userCount == self.filterModel.peopleCountType.toInt() {
+                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if model.minAge == self.filterModel.ageType.toInt() && self.filterModel.peopleCountType == .All {
+                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -61,9 +62,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var datasForSsoseyo: [SSViewModel]
 
     var isAlreadyWrittenMySsom: Bool = false
+    var mySsom: SSViewModel!
 
     var filterView: SSFilterView!
-    var filterModel: SSFilterViewModel!
+    var filterModel: SSFilterViewModel?
     var scrollDetailView: SSScrollView!
 
     init() {
@@ -92,11 +94,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         super.init(coder: aDecoder)
     }
 
-    func initView() {
+    override func initView() {
+
+        self.isAlreadyWrittenMySsom = false
+        self.mySsom = nil
 
         self.viewBottomInfo.transform = CGAffineTransformMakeTranslation(0, 200)
         self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
 
+        self.viewBottomInfo.layoutIfNeeded()
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
 
         self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
@@ -129,32 +135,40 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         mainView.delegate = self
     }
 
-    func loadingData() {
-        SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
-            if let err = error {
-                print("error is : \(err.localizedDescription)")
+    func loadingData(completion: ((finish: Bool) -> Void)?) {
+        SSNetworkAPIClient
+            .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
+                      longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,
+                      completion: { [unowned self] (viewModels, error) -> Void in
 
-                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        if let err = error {
+                            print("error is : \(err.localizedDescription)")
 
-            } else {
-                if let models = viewModels {
-                    self.datasOfAllSsom = models
-                    self.datas = models
-                    print("result is : \(self.datasOfAllSsom)")
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: { (action) in
+                                guard let block = completion else { return }
+                                block(finish: false)
+                            })
 
-                    self.showMarkers()
-                }
-            }
+                        } else {
+                            if let models = viewModels {
+                                self.datasOfAllSsom = models
+                                self.datas = models
+                                print("result is : \(self.datasOfAllSsom)")
+                                
+                                self.showMarkers()
+                            }
 
-            self.showOpenAnimation()
-        }
+                            guard let block = completion else { return }
+                            block(finish: true)
+                        }
+                        
+                        self.showOpenAnimation()
+                })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.initView()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -164,7 +178,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             appDelegate.isDrawable = true
         }
 
-        self.loadingData()
+        self.initView()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -185,10 +199,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func showOpenAnimation() {
 
-        if self.isAlreadyWrittenMySsom {
-            self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
-            self.writeButton.transform = CGAffineTransformMakeTranslation(0, 200)
-        }
+        self.setMySsomButton()
 
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
 
@@ -196,6 +207,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             self.writeButton.transform = CGAffineTransformIdentity
         }) { (finish) in
             //
+        }
+    }
+
+    func setMySsomButton() {
+
+        if self.isAlreadyWrittenMySsom {
+            self.writeButton.setImage(UIImage(named: "myBtn"), forState: UIControlState.Normal)
+        } else {
+            self.writeButton.setImage(UIImage(named: "writeBtn"), forState: UIControlState.Normal)
         }
     }
 
@@ -214,8 +234,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
                 if loginedUserId == data.userId {
                     self.isAlreadyWrittenMySsom = true
+                    self.mySsom = data
                 } else {
-                    self.isAlreadyWrittenMySsom = false
+                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
                 }
             }
 
@@ -293,18 +314,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.delegate = self
+        if let filterViewModel = self.filterModel {
+            self.filterView.model = filterViewModel
+        }
+        self.filterView.configView()
+
         self.filterView.alpha = 0.0
         self.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
-    self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
-    self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+
+        self.view.layoutIfNeeded()
 
         self.constBottomInfoViewHeight.constant = 283.0
         self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.viewBottomInfo.layoutIfNeeded()
+            self.view.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -322,31 +350,57 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     @IBAction func tapIPayButton(sender: AnyObject) {
-        self.btnIPay.selected = true
-        self.imageIPayButtonLineView.hidden = false
-        self.btnYouPay.selected = false
-        self.imageYouPayButtonLineView.hidden = true
 
-        self.showMarkers()
+        self.constViewPayButtonLineLeadingToButtonIPay.constant = 0
+
+        UIView.animateWithDuration(0.3, animations: {
+
+            self.btnIPay.selected = true
+            self.viewPayButtonLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.view.layoutIfNeeded()
+            self.btnYouPay.selected = false
+        }) { (finish) in
+            self.showMarkers()
+        }
+
     }
 
     @IBAction func tapYouPayButton(sender: AnyObject) {
-        self.btnYouPay.selected = true
-        self.imageIPayButtonLineView.hidden = true
-        self.btnIPay.selected = false
-        self.imageYouPayButtonLineView.hidden = false
 
-        self.showMarkers()
+        self.constViewPayButtonLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
+
+        UIView.animateWithDuration(0.3, animations: {
+
+            self.btnYouPay.selected = true
+            self.viewPayButtonLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.view.layoutIfNeeded()
+            self.btnIPay.selected = false
+        }) { (finish) in
+            self.showMarkers()
+        }
+
     }
 
     @IBAction func tapWriteButton(sender: AnyObject) {
 
-        let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+        if self.isAlreadyWrittenMySsom {
+            let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.writeButton.bounds.width * 2)
+            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
 
-        UIView.animateWithDuration(0.3, animations: {
-            self.writeButton.transform = transform
-        }) { (finish) in
-            self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
+                self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
+                }, completion: { (finish) in
+                    self.openDetailView(self.mySsom)
+                    self.writeButton.layer.transform = CATransform3DIdentity
+            })
+        } else {
+            let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
+
+            UIView.animateWithDuration(0.3, animations: {
+                self.writeButton.transform = transform
+            }) { (finish) in
+                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+            }
         }
     }
 
@@ -375,6 +429,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         seg.selectedSegmentIndex = 0
     }
 
+    func openDetailView(model: SSViewModel) {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = false
+        }
+
+        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
+        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
+        self.scrollDetailView.delegate = self
+
+        if self.btnIPay.selected {
+            self.scrollDetailView.ssomType = .SSOM
+            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOM)
+        }
+        if self.btnYouPay.selected {
+            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
+            self.scrollDetailView.changeTheme(.SSOSEYO)
+        }
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.view.addSubview(self.scrollDetailView)
+    }
+
 // MARK: - GMSMapViewDelegate
 
     func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {
@@ -386,23 +464,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-        self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
-        self.scrollDetailView.frame = UIScreen.mainScreen().bounds
-        self.scrollDetailView.delegate = self
-
-        if self.btnIPay.selected {
-            self.scrollDetailView.ssomType = .SSOM
-            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: marker.userData as? SSViewModel)
-            self.scrollDetailView.changeTheme(.SSOM)
+        if let model = marker.userData as? SSViewModel {
+            self.openDetailView(model)
         }
-        if self.btnYouPay.selected {
-            self.scrollDetailView.ssomType = .SSOSEYO
-            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: marker.userData as? SSViewModel)
-            self.scrollDetailView.changeTheme(.SSOSEYO)
-        }
-
-        self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.view.addSubview(self.scrollDetailView)
 
         return true
     }
@@ -414,21 +478,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.currentLocation = camera.target
         mainView.animateToCameraPosition(camera)
 
-        var index: Int = 0;
-        for data in self.datasOfAllSsom {
-            let latitude: Double = data.latitude
-            let longitude: Double = data.longitude
+        self.loadingData { (finish) in
+            if finish {
 
-            let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let nowLocation: CLLocationCoordinate2D = camera.target
+                var index: Int = 0;
+                for data in self.datasOfAllSsom {
+                    let latitude: Double = data.latitude
+                    let longitude: Double = data.longitude
 
-            let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+                    let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let nowLocation: CLLocationCoordinate2D = camera.target
 
-            let dataWithDistance: SSViewModel = data
-            dataWithDistance.distance = distance
-            self.datasOfAllSsom[index] = dataWithDistance
+                    let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
 
-            index += 1
+                    let dataWithDistance: SSViewModel = data
+                    dataWithDistance.distance = distance
+                    self.datasOfAllSsom[index] = dataWithDistance
+                    
+                    index += 1
+                }
+
+            }
         }
 
         locationManager.stopUpdatingLocation()
@@ -475,17 +545,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.datas = self.datasOfAllSsom
         self.showMarkers()
 
-        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
+//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate
     func closeScrollView(needToReload: Bool) {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.isDrawable = true
+        }
+
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
 
             if needToReload {
-                self.loadingData()
+                self.initView()
             }
         }
     }
@@ -494,7 +569,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?) {
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if postId != "" {
                 SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
@@ -510,6 +585,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                             vc.ssomType = ssomType
                             vc.chatRoomId = createdChatroomId
                             vc.partnerImageUrl = partnerImageUrl
+
+                            vc.ssomLatitude = ssomLatitude
+                            vc.ssomLongitude = ssomLongitude
+                            
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }

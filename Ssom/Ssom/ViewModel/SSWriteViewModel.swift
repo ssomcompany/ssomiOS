@@ -8,13 +8,29 @@
 
 import Foundation
 
-enum SSAgeType: Int
+enum SSAgeType: UInt
 {
     case AgeAll = 0
     case AgeEarly20 = 20
-    case AgeMiddle20 = 24
-    case AgeLate20 = 27
+    case AgeMiddle20 = 25
+    case AgeLate20 = 29
     case Age30 = 30
+    case Unknown = 99
+
+    init(rawValue: UInt) {
+        switch rawValue {
+        case 0:
+            self = .AgeAll
+        case 20..<25:
+            self = .AgeEarly20
+        case 25..<29:
+            self = .AgeMiddle20
+        case 29..<30:
+            self = .AgeLate20
+        default:
+            self = .Age30
+        }
+    }
 }
 
 enum SSAgeAreaType: String
@@ -24,19 +40,22 @@ enum SSAgeAreaType: String
     case AgeMiddle20 = "20대 중반"
     case AgeLate20 = "20대 후반"
     case Age30 = "30대"
+    case Unknown = "알수없음"
 
-    func toInt() -> Int {
+    func toIntType() -> SSAgeType {
         switch self {
         case AgeAll:
-            return 0
+            return SSAgeType.AgeAll
         case AgeEarly20:
-            return 20
+            return SSAgeType.AgeEarly20
         case AgeMiddle20:
-            return 24
+            return SSAgeType.AgeMiddle20
         case AgeLate20:
-            return 27
+            return SSAgeType.AgeLate20
         case Age30:
-            return 30
+            return SSAgeType.Age30
+        default:
+            return SSAgeType.Unknown
         }
     }
 }
@@ -58,18 +77,18 @@ enum SSPeopleCountStringType: String
     case ThreePeople = "3명"
     case OverFourPeople = "4명 이상"
 
-    func toInt() -> Int {
+    func toIntType() -> SSPeopleCountType {
         switch self {
         case All:
-            return 0
+            return SSPeopleCountType.All
         case OnePerson:
-            return 1
+            return SSPeopleCountType.OnePerson
         case TwoPeople:
-            return 2
+            return SSPeopleCountType.TwoPeople
         case ThreePeople:
-            return 3
+            return SSPeopleCountType.ThreePeople
         case OverFourPeople:
-            return 4
+            return SSPeopleCountType.OverFourPeople
         }
     }
 }

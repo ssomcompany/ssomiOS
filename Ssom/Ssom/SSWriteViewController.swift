@@ -82,7 +82,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
         self.barButtonItems = SSNavigationBarItems()
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
@@ -102,7 +102,15 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
     func tapBack() {
-        self.navigationController?.popViewControllerAnimated(true)
+        if self.pickedImageData != nil || self.writeViewModel.content.characters.count != 0 {
+            SSAlertController.alertTwoButton(title: "알림", message: "쏨 등록이 완료되지 않았어요.\n작성했던 내용을 삭제 하시겠어요?", vc: self, button1Title: "삭제하기", button1Completion: { (action) in
+                self.navigationController?.popViewControllerAnimated(true)
+            }, button2Completion: { (action) in
+                //
+            })
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     @IBAction func tapAgeButton1(sender: AnyObject) {
@@ -263,8 +271,12 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                 self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
-                self.btnIPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
-                self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
+                    self.btnIPay.titleLabel?.font = font
+                }
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                    self.btnYouPay.titleLabel?.font = font
+                }
             }
 
             self.lbAge.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
@@ -285,8 +297,12 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                 self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
-                self.btnIPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-                self.btnYouPay.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                    self.btnIPay.titleLabel?.font = font
+                }
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
+                    self.btnYouPay.titleLabel?.font = font
+                }
             }
 
             self.lbAge.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
@@ -328,26 +344,30 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             print("SSWrite is : \(self.writeViewModel)")
 
-            SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { (photoURLPath, error) in
-                if error != nil {
-                    print(error?.localizedDescription)
+            if self.pickedImageData == nil {
+                SSAlertController.alertConfirm(title: "Error", message: "사진 등록은 필수입니다!", vc: self, completion: nil)
+            } else {
+                SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { (photoURLPath, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
 
-                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
-                } else {
-                    self.writeViewModel.profilePhotoUrl = NSURL(string: photoURLPath!)
-                    SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [unowned self] (error) in
-                        if error != nil {
-                            print(error?.localizedDescription)
+                        SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+                    } else {
+                        self.writeViewModel.profilePhotoUrl = NSURL(string: photoURLPath!)
+                        SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [unowned self] (error) in
+                            if error != nil {
+                                print(error?.localizedDescription)
 
-                            SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: { (action) in
-//                                self.navigationController!.popViewControllerAnimated(true)
-                            })
-                        } else {
-                            self.navigationController!.popViewControllerAnimated(true)
-                        }
+                                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: { (action) in
+//                                    self.navigationController!.popViewControllerAnimated(true)
+                                })
+                            } else {
+                                self.navigationController!.popViewControllerAnimated(true)
+                            }
                         })
-                }
-            })
+                    }
+                })
+            }
         } else {
             self.openSignIn(nil)
         }
@@ -358,7 +378,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
     @IBAction func tapCloseButton(sender: AnyObject) {
-        self.navigationController!.popViewControllerAnimated(true)
+        self.tapBack()
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

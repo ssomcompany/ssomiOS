@@ -9,13 +9,16 @@
 import Foundation
 
 public struct SSChatMapViewModel {
+    var myImageUrl: String?
 //    var partnerUserModel: SSUserModel
 //    var partnerUserId: String
-    var partnerImageUrl: String!
+    var partnerImageUrl: String?
     var partnerLatitude: Double
     var partnerLongitude: Double
 
     var ssomType: SSType = .SSOM
+
+    var meetRequestedStatus: SSMeetRequestOptions = .NotRequested
 
     init() {
 //        self.partnerUserModel = SSUserModel()
@@ -26,6 +29,10 @@ public struct SSChatMapViewModel {
     }
 
     init(modelDict: [String: AnyObject?]) {
+        if let imageUrl = modelDict["myImageUrl"] as? String {
+            self.myImageUrl = imageUrl
+        }
+
 //        self.partnerUserModel = SSUserModel(modelDict: modelDict)
 
 //        if let userId = modelDict["partnerUserId"] as? String {
@@ -52,6 +59,10 @@ public struct SSChatMapViewModel {
 
         if let rawSsomType = modelDict["ssomType"] as? String {
             self.ssomType = SSType(rawValue: rawSsomType)!
+        }
+
+        if let rawSSMeetRequestOptions = modelDict["ssomMeetRequestOptions"] as? String {
+            self.meetRequestedStatus = SSMeetRequestOptions(rawValue: rawSSMeetRequestOptions)!
         }
     }
 }

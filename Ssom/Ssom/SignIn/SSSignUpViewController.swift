@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kPasswordMinLength = 6
+let kPasswordMinLength = 4
 
 class SSSignUpViewController: UIViewController {
     @IBOutlet var viewBackground: UIView!
@@ -35,7 +35,7 @@ class SSSignUpViewController: UIViewController {
         self.initView()
     }
 
-    func initView() {
+    override func initView() {
         self.navigationController?.navigationBarHidden = true
     }
 

@@ -10,13 +10,13 @@ import UIKit
 import SDWebImage
 
 @objc protocol SSPhotoViewDelegate: NSObjectProtocol {
-    optional func tapClose() -> Void
+    optional func tapPhotoViewClose() -> Void
 }
 
 class SSPhotoView: UIView {
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var imageView: UIImageView!
-    var delegate: SSPhotoViewDelegate?
+    weak var delegate: SSPhotoViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,8 +49,8 @@ class SSPhotoView: UIView {
     }
 
     @IBAction func tapClose(sender: UIButton) {
-        if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapClose))) {
-            self.delegate!.tapClose!()
+        if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapPhotoViewClose))) {
+            self.delegate!.tapPhotoViewClose!()
         }
     }
 }

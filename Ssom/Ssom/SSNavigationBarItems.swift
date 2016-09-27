@@ -34,9 +34,8 @@ class SSNavigationBarItems : UIView
     @IBOutlet var meetRequestButtonView: UIView!
     @IBOutlet var imgViewMeetRequest: UIImageView!
     @IBOutlet var btnMeetRequest: UIButton!
-    @IBOutlet var imgViewMeetRequestHeart: UIImageView!
 
-    var delegate: SSNavigationBarItemsDelegate!
+    weak var delegate: SSNavigationBarItemsDelegate!
 
     var animated: Bool = false
 
@@ -85,6 +84,27 @@ class SSNavigationBarItems : UIView
         self.imgViewMessage.transform = CGAffineTransformIdentity
     }
 
+    func changeMessageCount(count: Int, hiddenIfZero: Bool) {
+        if count > 0 {
+            self.imgViewMessage.image = UIImage(named: "messageRed")
+            self.lbUnreadMessageCount.text = "\(count)"
+
+            self.imgViewMessage.hidden = false
+            self.lbUnreadMessageCount.hidden = false
+        } else {
+            if hiddenIfZero {
+                self.imgViewMessage.hidden = true
+                self.lbUnreadMessageCount.hidden = true
+            } else {
+                self.imgViewMessage.hidden = false
+                self.lbUnreadMessageCount.hidden = false
+            }
+
+            self.imgViewMessage.image = UIImage(named: "message")
+            self.lbUnreadMessageCount.text = "\(count)"
+        }
+    }
+
     func tapDownMeetRequest() {
         if self.animated {
             self.imgViewMeetRequest.transform = CGAffineTransformMakeScale(0.9, 0.9)
@@ -95,19 +115,24 @@ class SSNavigationBarItems : UIView
         self.imgViewMeetRequest.transform = CGAffineTransformIdentity
     }
 
-    func changeMeetRequest(inout isRequestedToMeet: Bool) {
-        if isRequestedToMeet {
-            self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("        만남요청", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = false
-        } else {
+    func changeMeetRequest(status: SSMeetRequestOptions = .NotRequested) {
+        switch status {
+        case .Requested, .Accepted:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
-            self.btnMeetRequest.setTitle("만남 취소", forState: UIControlState.Normal)
-            self.imgViewMeetRequestHeart.hidden = true
+            self.btnMeetRequest.setTitle("만남 종료", forState: UIControlState.Normal)
+        case .Received:
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+            self.btnMeetRequest.setTitle("만남 수락", forState: UIControlState.Normal)
+        case .Cancelled:
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
+            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
+        default:
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
+            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
         }
-
-        isRequestedToMeet = !isRequestedToMeet
     }
 }

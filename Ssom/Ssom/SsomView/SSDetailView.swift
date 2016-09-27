@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol SSDetailViewDelegate {
+protocol SSDetailViewDelegate: class {
     func closeDetailView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?)
+    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
 }
 
-class SSDetailView: UIView {
+class SSDetailView: UIView, SSPhotoViewDelegate {
 
     @IBOutlet var viewDetail: UIView!
     @IBOutlet var imgHeart: UIImageView!
@@ -27,7 +27,9 @@ class SSDetailView: UIView {
     @IBOutlet var btnSsom: UIButton!
     @IBOutlet var btnCancel: UIButton!
 
-    var delegate: SSDetailViewDelegate!
+    var profilePhotoView: SSPhotoView!
+
+    weak var delegate: SSDetailViewDelegate!
     var ssomType: SSType!
 
     var viewModel: SSViewModel!
@@ -68,6 +70,11 @@ class SSDetailView: UIView {
             if let userModel = SSAccountManager.sharedInstance.userModel {
                 self.isMySsom = userModel.userId == self.viewModel.userId
             }
+        }
+
+        if let _ = self.viewModel.assignedChatroomId {
+            self.btnSsom.setTitle("채팅 보기", forState: UIControlState.Normal)
+            self.btnSsom.setImage(nil, forState: UIControlState.Normal)
         }
 
         if self.isMySsom {
@@ -119,7 +126,7 @@ class SSDetailView: UIView {
                 }
             } else {
 
-                guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl) else {
+                guard let _ = self.delegate?.doSsom(self.ssomType, postId: self.viewModel.postId, partnerImageUrl: self.viewModel.imageUrl, ssomLatitude: self.viewModel.latitude, ssomLongitude: self.viewModel.longitude) else {
                     NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
 
                     return
@@ -135,5 +142,25 @@ class SSDetailView: UIView {
             }
 
         }
+    }
+
+    @IBAction func tapProfileImage(sender: AnyObject) {
+        if self.viewModel.imageUrl != nil && self.viewModel.imageUrl.characters.count != 0 {
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate, let keyWindow = appDelegate.window else {
+                return
+            }
+
+            self.profilePhotoView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+            self.profilePhotoView.loadingImage(keyWindow.bounds, imageUrl: self.viewModel.imageUrl)
+            self.profilePhotoView.delegate = self
+
+            keyWindow.addSubview(self.profilePhotoView)
+        }
+    }
+
+// MARK:- SSPhotoViewDelegate
+    func tapPhotoViewClose() {
+        self.profilePhotoView.removeFromSuperview()
     }
 }

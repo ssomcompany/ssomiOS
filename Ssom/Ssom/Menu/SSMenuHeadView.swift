@@ -8,17 +8,24 @@
 
 import UIKit
 
-protocol SSMenuHeadViewDelegate {
+protocol SSMenuHeadViewDelegate: class {
     func openSignIn(completion: ((finish: Bool)-> Void)?)
+    func showProfilePhoto()
 }
 
 class SSMenuHeadView: UITableViewHeaderFooterView {
     @IBOutlet var view: UIView!
     @IBOutlet var lbUserId: UILabel!
+    @IBOutlet var btnLogin: UIButton!
+    @IBOutlet var imgViewPhotoBorder: UIImageView!
+    @IBOutlet var imgViewPhoto: UIImageView!
+    @IBOutlet var btnPhoto: UIButton!
 
-    var delegate: SSMenuHeadViewDelegate?
+    weak var delegate: SSMenuHeadViewDelegate?
 
-    var blockLogin: (() -> Void)!
+    var blockLogin: ((finish: Bool) -> Void)?
+
+    var blockLogout: ((finish: Bool) -> Void)?
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -45,39 +52,85 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     func configView() -> Void {
+        var loginButtonStringAttributes = [String: AnyObject]()
+        if let currentLoginButtonAttributedText = self.btnLogin.titleLabel?.attributedText {
+            currentLoginButtonAttributedText.enumerateAttributesInRange(NSRange(location: 0, length: currentLoginButtonAttributedText.length), options: NSAttributedStringEnumerationOptions(rawValue: 0), usingBlock: { (attr, _, _) in
+                loginButtonStringAttributes = attr
+                print("\(attr)")
+            })
+        }
+
         if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String
+
+            self.btnPhoto.hidden = false
+            if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                    if error != nil {
+                    } else {
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPhoto.bounds.size.width, self.imgViewPhoto.bounds.size.height))
+
+                        self.imgViewPhoto.image = croppedProfileImage
+                    }
+                })
+                self.imgViewPhoto.hidden = false
+            }
+
+            let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
         } else {
             let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
-            let loginString = NSAttributedString(string: "로그인", attributes: stringAttributes)
+            let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
+
+            self.btnPhoto.hidden = true
+            self.imgViewPhoto.hidden = true
+
+            let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
 
             self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
-//            self.lbUserId.text = "로그인"
             self.lbUserId.attributedText = loginString
         }
     }
 
-    @IBAction func tapMenuUser(sender: AnyObject) {
-        if SSAccountManager.sharedInstance.isAuthorized {
+    @IBAction func tapPhoto(sender: AnyObject) {
+        guard let _ = self.delegate?.showProfilePhoto() else {
+            return
+        }
+    }
 
+    @IBAction func tapLogin(sender: AnyObject) {
+        if SSAccountManager.sharedInstance.isAuthorized {
+            guard let block = self.blockLogout else {
+                return
+            }
+
+            block(finish: true)
         } else {
             guard let _ = self.delegate?.openSignIn({ [weak self] (finish) in
                 if finish {
-                    guard let _ = self?.blockLogin else {
+                    guard let block = self?.blockLogin else {
                         return
                     }
 
-                    self?.blockLogin()
+                    block(finish: finish)
                 }
-            }) else {
-                return
+                }) else {
+                    return
             }
         }
     }
 
     @IBAction func tapMenuPush(sender: AnyObject) {
-        SSAlertController.showAlertConfirm(title: "Info", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
+//        SSAlertController.showAlertConfirm(title: "Info", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
+
+        if let url = SSMenuType.Inquiry.url {
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+
     }
 
     @IBAction func tapMenuHeart(sender: AnyObject) {

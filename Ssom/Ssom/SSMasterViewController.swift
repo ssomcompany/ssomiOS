@@ -24,6 +24,8 @@ class SSMasterViewController: UIViewController {
     var buttonBackgroundView: UIImageView!
     var lbButtonTitle: UILabel!
 
+    var unreadCount: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -83,10 +85,13 @@ class SSMasterViewController: UIViewController {
             self.lbButtonTitle.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
-            self.segButton1.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-            self.segButton2.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-
-            self.lbButtonTitle.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
+            if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                self.segButton1.titleLabel?.font = font
+                self.lbButtonTitle.font = font
+            }
+            if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
+                self.segButton2.titleLabel?.font = font
+            }
         }
 
         let leftBarButtonItem: UIBarButtonItem = self.navigationItem.leftBarButtonItem!
@@ -112,20 +117,64 @@ class SSMasterViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.loadData()
+    }
+
+    override func initView() {
+        if let segmentControl = self.navigationItem.titleView as? UISegmentedControl {
+            segmentControl.selectedSegmentIndex = 0
+
+            self.switchView(segmentControl)
+
+            self.loadData()
+        }
+    }
+
+    func loadData() {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.getUnreadCount(token, completion: { (data, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+//                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                } else {
+                    if let rawData = data, let unreadCount = rawData["unreadCount"] as? Int {
+                        print("unreadCount : \(unreadCount)")
+
+                        self.unreadCount = unreadCount
+                        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
+                    }
+                }
+            })
+        }
+    }
+
+    func reload(with modelDict: [String: AnyObject]) {
+//        let newMessage = SSChatViewModel(modelDict: modelDict)
+
+        self.unreadCount += 1
+        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
+    }
+
     @IBAction func switchView(sender: AnyObject) {
         var originX: CGFloat = 0.0
         var buttonTitle: String = kMapButtonTitle
-        if self.buttonBackgroundView.frame.origin.x == 0 {
+        if let segmentControl = self.navigationItem.titleView as? UISegmentedControl where segmentControl.selectedSegmentIndex == 1 {
             originX = CGFloatWithScreenRatio(175-97, axis: Axis.X, criteria: .IPhone6Plus)
             buttonTitle = kListButtonTitle
+
+            self.segButton1.selected = false
+            self.segButton2.selected = true
         } else {
             originX = 0
+
+            self.segButton1.selected = true
+            self.segButton2.selected = false
         }
 
         self.lbButtonTitle.text = buttonTitle
-
-        self.segButton1.selected = !self.segButton1.selected
-        self.segButton2.selected = !self.segButton2.selected
 
         UIView.animateWithDuration(0.3,
                                    delay: 0.0,
@@ -139,13 +188,16 @@ class SSMasterViewController: UIViewController {
             self.mapView.hidden = !self.segButton1.selected
             self.listView.hidden = !self.segButton2.selected
 
+            let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
+            let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
             if !self.listView.hidden {
-                let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
-                let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
-
                 let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation != nil ? mapVC.currentLocation : mapVC.mainView.camera.target
                 listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.selected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.filterModel = mapVC.filterModel
                 listVC.initView()
+            } else {
+                mapVC.filterModel = listVC.filterModel
+                mapVC.initView()
             }
         }
     }

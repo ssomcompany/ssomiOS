@@ -9,8 +9,8 @@
 import UIKit
 import CoreLocation
 
-protocol SSChatListTableCellDelegate {
-    func deleteCell(cell: UITableViewCell)
+protocol SSChatListTableCellDelegate: class {
+    func deleteCell(cell: SSChatListTableCell)
     func tapProfileImage(imageUrl: String)
 }
 
@@ -25,12 +25,16 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var imgViewProfileBorder: UIImageView!
     @IBOutlet var lbSsomAgePeople: UILabel!
     @IBOutlet var lbLastMessage: UILabel!
-    @IBOutlet var viewCountBackground: UIView!
     @IBOutlet var lbNewMessageCount: UILabel!
     @IBOutlet var lbDistance: UILabel!
     @IBOutlet var lbCreatedDate: UILabel!
 
-    var delegate: SSChatListTableCellDelegate?
+    @IBOutlet var imgIngMeet: UIImageView!
+    @IBOutlet var viewMeetRequest: UIView!
+
+    var model: SSChatroomViewModel!
+
+    weak var delegate: SSChatListTableCellDelegate?
     var profilImageUrl: String?
 
     var isCellOpened: Bool {
@@ -40,6 +44,8 @@ class SSChatListTableCell: UITableViewCell {
     var isCellClosed: Bool {
         return self.constViewBackgroundLeadingToSuper.constant == 0
     }
+
+    var isOwnerUser: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,8 +60,6 @@ class SSChatListTableCell: UITableViewCell {
 
         self.selectionStyle = .None
 
-        self.viewCountBackground.layer.cornerRadius = self.viewCountBackground.bounds.size.height / 2
-
         self.viewBackground.layer.shadowColor = UIColor(white: 0.0, alpha: 0.5).CGColor
         self.viewBackground.layer.shadowRadius = 1.0
         self.viewBackground.layer.shadowOffset = CGSizeMake(2, 0)
@@ -63,17 +67,39 @@ class SSChatListTableCell: UITableViewCell {
     }
 
     func configView(model: SSChatroomViewModel, withCoordinate coordinate: CLLocationCoordinate2D) {
+        self.model = model
+
         switch model.ssomViewModel.ssomType {
         case .SSOM:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.viewCountBackground.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            self.lbNewMessageCount.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
         case .SSOSEYO:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.viewCountBackground.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            self.lbNewMessageCount.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
-        if let imageUrl = model.ssomViewModel.imageUrl {
-            if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+        self.imgViewProfile.image = UIImage(named: "noneProfile")
+
+        // check if the login user is the owner of the chatting
+        if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
+            self.isOwnerUser = true
+            // show the participant profile image because the login user is the owner of chatting
+            if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                    if error != nil {
+                    } else {
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+
+                        self.imgViewProfile.image = croppedProfileImage
+                    }
+                    })
+
+                self.profilImageUrl = imageUrl
+            }
+        } else {
+            self.isOwnerUser = false
+            // show the owner profile image because the login user is NOT the owner of chatting
+            if let imageUrl = model.ownerImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                 self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
                     if error != nil {
                     } else {
@@ -87,6 +113,43 @@ class SSChatListTableCell: UITableViewCell {
             }
         }
 
+        self.viewBackground.layoutIfNeeded()
+        self.viewMeetRequest.hidden = true
+
+        self.viewBackground.backgroundColor = UIColor.whiteColor()
+        var isReceivedToRequestMeet = false
+        if let requestedUserId = model.meetRequestUserId,
+            let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            if requestedUserId != loginedUserId && model.meetRequestStatus == .Received {
+                self.viewMeetRequest.hidden = false
+                self.viewMeetRequest.layer.cornerRadius = self.viewMeetRequest.bounds.height / 2.0
+
+                isReceivedToRequestMeet = true
+
+                switch model.ssomViewModel.ssomType {
+                case .SSOM:
+                    self.viewMeetRequest.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 0.5)
+                case .SSOSEYO:
+                    self.viewMeetRequest.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 0.5)
+                }
+
+                self.viewBackground.backgroundColor = UIColor(red: 253.0/255.0, green: 234.0/255.0, blue: 237.0/255.0, alpha: 1.0)
+            }
+        }
+
+        self.imgIngMeet.hidden = true
+        let isAcceptedToMeet = model.meetRequestStatus == .Accepted
+        if isAcceptedToMeet {
+            self.imgIngMeet.hidden = false
+
+            switch model.ssomViewModel.ssomType {
+            case .SSOM:
+                self.imgIngMeet.image = UIImage(named: "ssomIngGreenSmall")
+            case .SSOSEYO:
+                self.imgIngMeet.image = UIImage(named: "ssomIngRedSmall")
+            }
+        }
+
         var memberInfoString:String = "";
         let ageArea: SSAgeAreaType = Util.getAgeArea(model.ssomViewModel.minAge)
         memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
@@ -95,10 +158,28 @@ class SSChatListTableCell: UITableViewCell {
         }
         self.lbSsomAgePeople.text = memberInfoString
 
-        if model.lastMessage.characters.count > 0 {
-            self.lbLastMessage.text = model.lastMessage
+        self.lbLastMessage.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        if isReceivedToRequestMeet {
+            switch model.ssomViewModel.ssomType {
+            case .SSOM:
+                self.lbLastMessage.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
+            case .SSOSEYO:
+                self.lbLastMessage.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            }
+            self.lbLastMessage.text = "만남 요청을 받았습니다!"
+        } else {
+            if isAcceptedToMeet {
+                self.lbLastMessage.textColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
+                self.lbLastMessage.text = "쏨과 만나는 중..."
+            } else {
+                if model.lastMessage.characters.count > 0 {
+                    self.lbLastMessage.text = model.lastMessage
+                }
+            }
         }
 
+        self.lbNewMessageCount.layoutIfNeeded()
+        self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
         self.lbNewMessageCount.text = "\(model.unreadCount)"
 
         if let distance = model.ssomViewModel.distance where distance != 0 {
@@ -116,8 +197,8 @@ class SSChatListTableCell: UITableViewCell {
         self.lbCreatedDate.text = Util.getDateString(model.createdDateTime)
     }
 
-    var panStartPoint: CGPoint = CGPointZero
-    var startingRightLayoutConstraintConstant: CGFloat = 0.0
+    private var panStartPoint: CGPoint = CGPointZero
+    private var startingRightLayoutConstraintConstant: CGFloat = 0.0
 
     func panCell(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
@@ -225,8 +306,22 @@ class SSChatListTableCell: UITableViewCell {
     }
 
     @IBAction func tapShowPhoto(sender: AnyObject) {
-        guard let _ = self.delegate?.tapProfileImage(self.profilImageUrl!) else {
-            return
+        if let imageUrl = self.profilImageUrl {
+            guard let _ = self.delegate?.tapProfileImage(imageUrl) else {
+                return
+            }
         }
+    }
+
+    // MARK: - UIGestureRecognizerDelegate
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
+            if let view = gestureRecognizer.view {
+                let translation: CGPoint = panGesture.translationInView(view.superview)
+
+                return fabs(translation.x) > fabs(translation.y)
+            }
+        }
+        return true;
     }
 }

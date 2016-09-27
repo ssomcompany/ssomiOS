@@ -15,13 +15,14 @@ public class SSViewModel {
     var latitude: Double
     var longitude: Double
     var distance: Int!
-    var maxAge: Int
-    var minAge: Int
+    var maxAge: UInt
+    var minAge: UInt
     var postId: String
     var ssomType: SSType
     var userId: String
     var userCount: Int!
     var createdDatetime: NSDate
+    var assignedChatroomId: String?
 
     init() {
         self.category = ""
@@ -64,12 +65,12 @@ public class SSViewModel {
         } else {
             self.distance = 0
         }
-        if let maxAge: Int = modelDict["maxAge"] as? Int {
+        if let maxAge: UInt = modelDict["maxAge"] as? UInt {
             self.maxAge = maxAge
         } else {
             self.maxAge = 0
         }
-        if let minAge: Int = modelDict["minAge"] as? Int {
+        if let minAge: UInt = modelDict["minAge"] as? UInt {
             self.minAge = minAge
         } else {
             self.minAge = 0
@@ -99,6 +100,14 @@ public class SSViewModel {
             self.createdDatetime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDatetime)/1000.0)
         } else {
             self.createdDatetime = NSDate()
+        }
+
+        if let chatroomId = modelDict["chatroomId"] as? String {
+            self.assignedChatroomId = chatroomId
+        } else {
+            if let chatroomId = modelDict["chatroomId"] as? Int {
+                self.assignedChatroomId = String(chatroomId)
+            }
         }
     }
 }

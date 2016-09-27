@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>need playerId</key>
+	<dict>
+		<key>errorCode</key>
+		<string>601</string>
+		<key>description</key>
+		<string>푸쉬 전송을 위한 키가 등록되지 않았습니다. 관리자에게 문의 부탁드립니다.</string>
+	</dict>
 	<key>ER_DUP_ENTRY</key>
 	<dict>
 		<key>errorCode</key>

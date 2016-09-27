@@ -220,10 +220,21 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
 // MARK: - SSChatListTableCellDelegate
-    func deleteCell(cell: UITableViewCell) {
-        if let indexPath: NSIndexPath = self.chatListTableView.indexPathForCell(cell) {
-            self.datas.removeAtIndex(indexPath.row)
-            self.chatListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+    func deleteCell(cell: SSChatListTableCell) {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            if let model: SSChatroomViewModel = cell.model {
+                SSNetworkAPIClient.deleteChatroom(token, chatroomId: model.chatroomId, completion: { (data, error) in
+                    if let err = error {
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: { (action) in
+                            //
+                        })
+                    }
+                })
+                if let indexPath: NSIndexPath = self.chatListTableView.indexPathForCell(cell) {
+                    self.datas.removeAtIndex(indexPath.row)
+                    self.chatListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                }
+            }
         }
     }
 

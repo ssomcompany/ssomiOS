@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 protocol SSChatListTableCellDelegate: class {
-    func deleteCell(cell: UITableViewCell)
+    func deleteCell(cell: SSChatListTableCell)
     func tapProfileImage(imageUrl: String)
 }
 
@@ -31,6 +31,8 @@ class SSChatListTableCell: UITableViewCell {
 
     @IBOutlet var imgIngMeet: UIImageView!
     @IBOutlet var viewMeetRequest: UIView!
+
+    var model: SSChatroomViewModel!
 
     weak var delegate: SSChatListTableCellDelegate?
     var profilImageUrl: String?
@@ -65,6 +67,8 @@ class SSChatListTableCell: UITableViewCell {
     }
 
     func configView(model: SSChatroomViewModel, withCoordinate coordinate: CLLocationCoordinate2D) {
+        self.model = model
+
         switch model.ssomViewModel.ssomType {
         case .SSOM:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")

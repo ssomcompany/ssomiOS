@@ -345,7 +345,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     var _mainState: SSDrawerMainState
     var mainState: SSDrawerMainState {
         get {
-            return self.mainState
+            return self._mainState
         }
         set {
             self.setMainState(newValue, animated: false, allowUserInterruption: false, completion: nil)
@@ -1170,7 +1170,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         if self.mainState != paneState {
             self.willChangeValueForKey("mainState")
-            self.mainState = paneState
+            self._mainState = paneState
             if (self.mainState & (SSDrawerMainState.Open | SSDrawerMainState.OpenWide)) != .None {
                 guard let _ = self.delegate?.drawerViewController(self, didUpdateToPaneState: paneState, forDirection: self.currentDrawerDirection) else {
                     return

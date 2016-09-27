@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
+class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var menuTableView: UITableView!
 
     weak var drawerViewController: SSDrawerViewController?
@@ -24,6 +24,7 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
     }
 
     override func initView() {
+        
 
         self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.registerNib(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
@@ -41,35 +42,35 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
     }
 
 // MARK: - UITableViweDelegate & UITableViewDataSource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (456.0 / 736.0)
+    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.height * (366.0 / 736.0)
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
+//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//
+//    func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+//        return UIScreen.mainScreen().bounds.size.height * (69.0 / 736.0)
+//    }
 
-    override func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (69.0 / 736.0)
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         if let cell: SSMenuTableViewCell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as? SSMenuTableViewCell {
             cell.configCell(SSMenuType(rawValue: indexPath.row)!)
@@ -82,15 +83,24 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 
     }
 
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view: SSMenuHeadView = SSMenuHeadView(reuseIdentifier: "MenuHeader")
         view.delegate = self
 
         view.blockLogin = { [weak self] (finish) in
             guard let wself = self else { return }
-            wself.tableView.reloadData()
+            wself.menuTableView.reloadData()
 
             wself.drawerViewController?.mainViewController?.needToReload = finish
+        }
+        
+        view.blockLogout = { [weak self] (finish) in
+            guard let wself = self else { return }
+            SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) in
+                wself.menuTableView.reloadData()
+
+                wself.drawerViewController?.mainViewController?.needToReload = finish
+            })
         }
 
         view.configView()
@@ -104,32 +114,32 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
         return view
     }
 
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if SSAccountManager.sharedInstance.isAuthorized {
-            let view: SSMenuBottomView = SSMenuBottomView(reuseIdentifier: "MenuFooter")
+//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if SSAccountManager.sharedInstance.isAuthorized {
+//            let view: SSMenuBottomView = SSMenuBottomView(reuseIdentifier: "MenuFooter")
+//
+//            view.blockLogout = { [weak self] (finish) in
+//                if let wself = self {
+//                    SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) in
+//                        wself.tableView.reloadData()
+//
+//                        wself.drawerViewController?.mainViewController?.needToReload = finish
+//                    })
+//                }
+//            }
+//
+//            view.configView()
+//
+//            return view
+//        } else {
+//            let view = UIView()
+//            view.backgroundColor = UIColor.whiteColor()
+//
+//            return view
+//        }
+//    }
 
-            view.blockLogout = { [weak self] (finish) in
-                if let wself = self {
-                    SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) in
-                        wself.tableView.reloadData()
-
-                        wself.drawerViewController?.mainViewController?.needToReload = finish
-                    })
-                }
-            }
-
-            view.configView()
-
-            return view
-        } else {
-            let view = UIView()
-            view.backgroundColor = UIColor.whiteColor()
-
-            return view
-        }
-    }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSMenuTableViewCell {
@@ -144,5 +154,11 @@ class SSMenuViewController: UITableViewController, SSMenuHeadViewDelegate {
 // MARK: - SSMenuHeadViewDelegate
     func openSignIn(completion: ((finish: Bool) -> Void)?) {
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
+    }
+
+    func showProfilePhoto() {
+//        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoViewController")
+//        self.presentViewController(vc, animated: true, completion: nil)
     }
 }

@@ -373,11 +373,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             }) { (finish) in
 
                 if let token = SSAccountManager.sharedInstance.sessionToken {
-                    guard let message = self.tfInput.text else {
+                    guard let messageText = self.tfInput.text else {
                         return
                     }
 
-                    if message.characters.count > 0 {
+                    if messageText.characters.count > 0 {
                         var lastTimestamp = Int(NSDate().timeIntervalSince1970)
                         if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
                             lastTimestamp = Int(timestamp * 1000.0)
@@ -386,7 +386,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         let nowDateTime = NSDate()
 
                         if let roomId = self.chatRoomId {
-                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: message, lastTimestamp: lastTimestamp, completion: { (datas, error) in
+                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { (datas, error) in
                                 if let err = error {
                                     print(err.localizedDescription)
 
@@ -402,11 +402,19 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                         }
 
                                         // add my sent message on the last of the messages
-                                        if let lastMessage = self.messages.last where lastMessage.message != message && lastMessage.messageDateTime != nowDateTime {
-
+                                        if let lastMessage = self.messages.last where lastMessage.message != messageText && lastMessage.messageDateTime != nowDateTime {
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userModel!.userId
-                                            myLastMessage.message = message
+                                            myLastMessage.message = messageText
+                                            myLastMessage.messageDateTime = nowDateTime
+                                            myLastMessage.profileImageUrl = self.myImageUrl
+                                            self.messages.append(myLastMessage)
+                                        }
+
+                                        if self.messages.count == 0 {
+                                            var myLastMessage = SSChatViewModel()
+                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userModel!.userId
+                                            myLastMessage.message = messageText
                                             myLastMessage.messageDateTime = nowDateTime
                                             myLastMessage.profileImageUrl = self.myImageUrl
                                             self.messages.append(myLastMessage)

@@ -75,7 +75,7 @@
                             <constraint firstAttribute="width" constant="46" id="O3a-E2-DyK"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBorderGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="GBn-9Z-KUg"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maskGray" translatesAutoresizingMaskIntoConstraints="NO" id="GBn-9Z-KUg"/>
                 </subviews>
                 <constraints>
                     <constraint firstItem="GBn-9Z-KUg" firstAttribute="width" secondItem="BHm-6B-BLb" secondAttribute="width" id="12E-ue-4gQ"/>
@@ -120,6 +120,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="maskGray" width="49" height="49"/>
         <image name="noneProfile" width="45" height="45"/>
         <image name="profileBorderGreen.png" width="48" height="47"/>
     </resources>

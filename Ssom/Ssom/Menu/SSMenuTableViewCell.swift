@@ -18,7 +18,7 @@ enum SSMenuType: Int {
         case .Privacy:
             return NSURL(string: "http://ssomcompany.wixsite.com/ssominfo")
         case .Agreement:
-            return nil
+            return NSURL(string: "http://ssomcompany.wixsite.com/termsandconditions")
         case .Inquiry:
             return NSURL(string: "http://www.myssom.com")
         }
@@ -27,7 +27,7 @@ enum SSMenuType: Int {
     var name: String? {
         switch  self {
         case .Privacy:
-            return "개인 정보"
+            return "개인 정보 처리 방침"
         case .Agreement:
             return "이용 약관"
         case .Inquiry:

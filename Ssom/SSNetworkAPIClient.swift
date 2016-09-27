@@ -466,7 +466,7 @@ public struct SSNetworkAPIClient {
 
                     completion(datas: datas, error: nil)
                 } else {
-                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatRooms", code: 801, userInfo: nil)
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatRooms", code: 811, userInfo: nil)
 
                     completion(datas: nil, error: error)
                 }
@@ -520,13 +520,13 @@ public struct SSNetworkAPIClient {
                         if let chatroomId = rawDatas["chatroomId"] as? Int {
                             completion(chatroomId: String(chatroomId), error: nil)
                         } else {
-                            let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
+                            let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 812, userInfo: nil)
 
                             completion(chatroomId: nil, error: error)
                         }
                     }
                 } else {
-                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 802, userInfo: nil)
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 812, userInfo: nil)
 
                     completion(chatroomId: nil, error: error)
                 }
@@ -535,6 +535,38 @@ public struct SSNetworkAPIClient {
                 print("Response Error : \(response.result.error)")
 
                 completion(chatroomId: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
+    static func deleteChatroom(token: String, chatroomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.DELETE,
+                          SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)",
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let _ = response.result.value as? [String: AnyObject] {
+                    completion(data: nil, error: nil)
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.DeleteChatroom", code: 813, userInfo: nil)
+
+                    completion(data: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(data: nil, error: response.result.error)
             }
 
             indicator.hideIndicator()
@@ -685,7 +717,7 @@ public struct SSNetworkAPIClient {
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
 
-                if let rawDatas = response.result.value as? [String: AnyObject] {
+                if let _ = response.result.value as? [String: AnyObject] {
                     completion(data: nil, error: nil)
                 } else {
                     let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostMeetRequest", code: 804, userInfo: nil)
@@ -749,7 +781,7 @@ public struct SSNetworkAPIClient {
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
 
-                if let rawData = response.result.value as? [String: AnyObject] {
+                if let _ = response.result.value as? [String: AnyObject] {
                     completion(data: nil, error: nil)
                 } else {
                     let error = NSError(domain: "com.ssom.error.NotJSONDataFound.DeleteMeetRequest", code: 805, userInfo: nil)

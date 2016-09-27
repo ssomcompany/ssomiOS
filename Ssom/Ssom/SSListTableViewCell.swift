@@ -58,15 +58,15 @@ class SSListTableViewCell: UITableViewCell {
             self.descriptionLabel.text = content.stringByRemovingPercentEncoding
         }
 
+        if self.panGesture != nil {
+            self.contentView.removeGestureRecognizer(self.panGesture)
+            self.panGesture = nil
+        }
+
         if isMySsom {
             self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCell))
             self.panGesture.delegate = self
             self.contentView.addGestureRecognizer(self.panGesture)
-        } else {
-            if self.panGesture != nil {
-                self.contentView.removeGestureRecognizer(self.panGesture)
-                self.panGesture = nil
-            }
         }
 
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSsom ? "bigGreen" : "bigRed")!, frame: CGRectMake(0, 0, 89.2, 77.2))

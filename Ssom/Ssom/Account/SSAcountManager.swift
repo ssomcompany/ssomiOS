@@ -70,7 +70,7 @@ class SSAccountManager {
         return nil
     }
 
-    func openSignIn(willPresentViewController: UIViewController, completion: ((finish:Bool) -> Void)?) {
+    func openSignIn(willPresentViewController: UIViewController?, completion: ((finish:Bool) -> Void)?) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
         if let vc = storyBoard.instantiateInitialViewController() as? UINavigationController {
             vc.modalPresentationStyle = .OverFullScreen
@@ -79,20 +79,30 @@ class SSAccountManager {
                 signInViewController.completion = completion
             }
 
-            willPresentViewController.presentViewController(vc, animated: true, completion: nil)
+            if let presentVC = willPresentViewController {
+                presentVC.presentViewController(vc, animated: true, completion: nil)
+            }
         }
     }
 
-    func doSignIn(userId: String, password: String, vc:UIViewController, completion: ((finish: Bool) -> Void?)?) -> Void {
+    func doSignIn(userId: String, password: String, vc:UIViewController?, completion: ((finish: Bool) -> Void?)?) -> Void {
         SSNetworkAPIClient.postLogin(userId: userId, password: password) { error in
             if let err = error {
                 print(err.localizedDescription)
 
-                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
-                    guard let _ = completion!(finish: false) else {
-                        return
-                    }
-                })
+                if let viewController = vc {
+                    SSAlertController.alertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", vc: viewController, completion: { (alertAction) in
+                        guard let _ = completion!(finish: false) else {
+                            return
+                        }
+                    })
+                } else {
+                    SSAlertController.showAlertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", completion: { (action) in
+                        guard let _ = completion!(finish: false) else {
+                            return
+                        }
+                    })
+                }
             } else {
                 SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : userId])
 
@@ -103,44 +113,120 @@ class SSAccountManager {
         }
     }
 
-    func doSignOut(vc: UIViewController, completion: ((finish: Bool) -> Void)?) -> Void {
+    func doSignOut(vc: UIViewController?, completion: ((finish: Bool) -> Void)?) -> Void {
 
-        SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: vc, button1Completion: { (action) in
-            print("logout!!")
+        if let viewController = vc {
+            SSAlertController.alertTwoButton(title: "", message: "로그아웃 하시겠습니까?", vc: viewController, button1Completion: { (action) in
+                print("logout!!")
 
-            if let token = self.sessionToken {
-                SSNetworkAPIClient.postLogout(token, completion: { (error) in
-                    if let err = error {
-                        print(err.localizedDescription)
+                if let token = self.sessionToken {
+                    SSNetworkAPIClient.postLogout(token, completion: { (error) in
+                        if let err = error {
+                            print(err.localizedDescription)
 
-                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: vc, completion: { (alertAction) in
+                            if let viewController = vc {
+                                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: viewController, completion: { (alertAction) in
+                                    guard let block = completion else {
+                                        return
+                                    }
+                                    block(finish: false)
+                                })
+                            } else {
+                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: { (alertAction) in
+                                    guard let block = completion else {
+                                        return
+                                    }
+                                    block(finish: false)
+                                })
+                            }
+                        } else {
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+
+                            guard let block = completion else {
+                                return
+                            }
+                            block(finish: true)
+                        }
+                    })
+                } else {
+                    if let viewController = vc {
+                        SSAlertController.alertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", vc: viewController, completion: { (action) in
                             guard let block = completion else {
                                 return
                             }
                             block(finish: false)
                         })
                     } else {
-                        SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                        SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
-                        SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
-                        SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
-
-                        guard let block = completion else {
-                            return
-                        }
-                        block(finish: true)
+                        SSAlertController.showAlertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", completion: { (action) in
+                            guard let block = completion else {
+                                return
+                            }
+                            block(finish: false)
+                        })
                     }
-                })
-            } else {
-                SSAlertController.alertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", vc: vc, completion: { (action) in
-                    guard let block = completion else {
-                        return
-                    }
-                    block(finish: false)
-                })
-            }
+                }
             }) { (action) in
                 print("logout cancelled!!")
+            }
+        } else {
+            SSAlertController.showAlertTwoButton(title: "", message: "로그아웃 하시겠습니까?", button1Completion: { (action) in
+                print("logout!!")
+
+                if let token = self.sessionToken {
+                    SSNetworkAPIClient.postLogout(token, completion: { (error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            if let viewController = vc {
+                                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: viewController, completion: { (alertAction) in
+                                    guard let block = completion else {
+                                        return
+                                    }
+                                    block(finish: false)
+                                })
+                            } else {
+                                SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: { (alertAction) in
+                                    guard let block = completion else {
+                                        return
+                                    }
+                                    block(finish: false)
+                                })
+                            }
+                        } else {
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+
+                            guard let block = completion else {
+                                return
+                            }
+                            block(finish: true)
+                        }
+                    })
+                } else {
+                    if let viewController = vc {
+                        SSAlertController.alertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", vc: viewController, completion: { (action) in
+                            guard let block = completion else {
+                                return
+                            }
+                            block(finish: false)
+                        })
+                    } else {
+                        SSAlertController.showAlertConfirm(title: "Error", message: "로그인 상태가 아닙니다!", completion: { (action) in
+                            guard let block = completion else {
+                                return
+                            }
+                            block(finish: false)
+                        })
+                    }
+                }
+            }) { (action) in
+                print("logout cancelled!!")
+            }
         }
     }
 }

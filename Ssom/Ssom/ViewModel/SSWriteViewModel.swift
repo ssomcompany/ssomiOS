@@ -36,9 +36,9 @@ enum SSAgeType: UInt
 enum SSAgeAreaType: String
 {
     case AgeAll = "전체"
-    case AgeEarly20 = "20대 초반"
-    case AgeMiddle20 = "20대 중반"
-    case AgeLate20 = "20대 후반"
+    case AgeEarly20 = "20대 초"
+    case AgeMiddle20 = "20대 중"
+    case AgeLate20 = "20대 후"
     case Age30 = "30대"
     case Unknown = "알수없음"
 

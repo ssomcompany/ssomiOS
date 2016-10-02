@@ -13,8 +13,8 @@ import SDWebImage
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var viewBottomInfo: UIView!
-    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
-    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
+//    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
+//    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     @IBOutlet var viewFilterBackground: UIView!
     @IBOutlet var lbFilteredAgePeople: UILabel!
 
@@ -235,14 +235,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
-        self.view.layoutIfNeeded()
+//        self.view.layoutIfNeeded()
 
-        self.constBottomInfoViewHeight.constant = 283.0
-        self.constBottomInfoViewTrailingToSuper.constant = 64.0
+//        self.constBottomInfoViewHeight.constant = 283.0
+//        self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.view.layoutIfNeeded()
+//            self.view.layoutIfNeeded()
 
             self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -251,8 +251,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         }) { (finish) in
             
-            self.constBottomInfoViewHeight.constant = 69.0
-            self.constBottomInfoViewTrailingToSuper.constant = 154.0
+//            self.constBottomInfoViewHeight.constant = 69.0
+//            self.constBottomInfoViewTrailingToSuper.constant = 154.0
 
             self.lbFilteredAgePeople.alpha = 1.0
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)

@@ -37,12 +37,15 @@ extension UIButton {
 class SSFilterView: UIView {
     @IBOutlet var filterMainView: UIView!
 
+    @IBOutlet var constLbAgeTop: NSLayoutConstraint!
+
     @IBOutlet var filter20beginAgeButton: UIButton!
     @IBOutlet var filter20middleAgeButton: UIButton!
     @IBOutlet var filter20lateAgeButton: UIButton!
     @IBOutlet var filter30overAgeButton: UIButton!
 
     @IBOutlet var peopleLabel: UILabel!
+    @IBOutlet var constPeopleLabelTop: NSLayoutConstraint!
 
     @IBOutlet var filter1PersonButton: UIButton!
     @IBOutlet var filter2PeopleButton: UIButton!
@@ -74,8 +77,13 @@ class SSFilterView: UIView {
 
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
 
+        if UIScreen.mainScreen().bounds.width <= 320 {
+            self.constLbAgeTop.constant = self.constLbAgeTop.constant / 2
+            self.constPeopleLabelTop.constant = self.constPeopleLabelTop.constant / 2
+        }
+
         self.layoutIfNeeded()
-        self.filterMainView.layer.cornerRadius = self.btnClose.frame.height/2
+        self.filterMainView.layer.cornerRadius = 25
 
         self.filter20beginAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.filter20middleAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)

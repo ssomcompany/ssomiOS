@@ -152,9 +152,6 @@
 		974C9D1D1C6B447000E17A2B /* loginBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BD91C6B446F00E17A2B /* loginBtn.png */; };
 		974C9D1E1C6B447000E17A2B /* loginBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDA1C6B446F00E17A2B /* loginBtn@2x.png */; };
 		974C9D1F1C6B447000E17A2B /* loginBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDB1C6B446F00E17A2B /* loginBtn@3x.png */; };
-		974C9D201C6B447000E17A2B /* loginTopPng.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDC1C6B446F00E17A2B /* loginTopPng.png */; };
-		974C9D211C6B447000E17A2B /* loginTopPng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDD1C6B446F00E17A2B /* loginTopPng@2x.png */; };
-		974C9D221C6B447000E17A2B /* loginTopPng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDE1C6B446F00E17A2B /* loginTopPng@3x.png */; };
 		974C9D231C6B447000E17A2B /* logo_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BDF1C6B446F00E17A2B /* logo_bg.png */; };
 		974C9D251C6B447000E17A2B /* logoDumy.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BE11C6B446F00E17A2B /* logoDumy.png */; };
 		974C9D261C6B447000E17A2B /* logoDumy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9BE21C6B446F00E17A2B /* logoDumy@2x.png */; };
@@ -251,7 +248,7 @@
 		974C9DB71C6B447000E17A2B /* writePhotoArea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */; };
 		974C9DB81C6B447000E17A2B /* writePhotoArea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */; };
 		974C9DBA1C6B5A5800E17A2B /* SSDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */; };
-		974C9DBC1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBB1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard */; };
+		974C9DBC1C6B5B7E00E17A2B /* SSSign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBB1C6B5B7E00E17A2B /* SSSign.storyboard */; };
 		974C9DBE1C6B5B8B00E17A2B /* SSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */; };
 		976031BB1D4CBFB3004B7392 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */; };
 		976031BD1D4D0AFD004B7392 /* SSUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976031BC1D4D0AFD004B7392 /* SSUserModel.swift */; };
@@ -494,9 +491,6 @@
 		974C9BD91C6B446F00E17A2B /* loginBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loginBtn.png; path = ../../../Ssom/Ssom/Ssom/Resource/loginBtn.png; sourceTree = "<group>"; };
 		974C9BDA1C6B446F00E17A2B /* loginBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginBtn@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/loginBtn@2x.png"; sourceTree = "<group>"; };
 		974C9BDB1C6B446F00E17A2B /* loginBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginBtn@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/loginBtn@3x.png"; sourceTree = "<group>"; };
-		974C9BDC1C6B446F00E17A2B /* loginTopPng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loginTopPng.png; path = ../../../Ssom/Ssom/Ssom/Resource/loginTopPng.png; sourceTree = "<group>"; };
-		974C9BDD1C6B446F00E17A2B /* loginTopPng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginTopPng@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/loginTopPng@2x.png"; sourceTree = "<group>"; };
-		974C9BDE1C6B446F00E17A2B /* loginTopPng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginTopPng@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/loginTopPng@3x.png"; sourceTree = "<group>"; };
 		974C9BDF1C6B446F00E17A2B /* logo_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_bg.png; path = ../../../Ssom/Ssom/Ssom/Resource/logo_bg.png; sourceTree = "<group>"; };
 		974C9BE11C6B446F00E17A2B /* logoDumy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logoDumy.png; path = ../../../Ssom/Ssom/Ssom/Resource/logoDumy.png; sourceTree = "<group>"; };
 		974C9BE21C6B446F00E17A2B /* logoDumy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logoDumy@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/logoDumy@2x.png"; sourceTree = "<group>"; };
@@ -593,7 +587,7 @@
 		974C9C731C6B447000E17A2B /* writePhotoArea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@2x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@2x.png"; sourceTree = "<group>"; };
 		974C9C741C6B447000E17A2B /* writePhotoArea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writePhotoArea@3x.png"; path = "../../../Ssom/Ssom/Ssom/Resource/writePhotoArea@3x.png"; sourceTree = "<group>"; };
 		974C9DB91C6B5A5800E17A2B /* SSDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSDetailView.swift; path = SsomView/SSDetailView.swift; sourceTree = "<group>"; };
-		974C9DBB1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SSSignStoryBoard.storyboard; path = SignIn/SSSignStoryBoard.storyboard; sourceTree = "<group>"; };
+		974C9DBB1C6B5B7E00E17A2B /* SSSign.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SSSign.storyboard; path = SignIn/SSSign.storyboard; sourceTree = "<group>"; };
 		974C9DBD1C6B5B8B00E17A2B /* SSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSDetailView.xib; path = SsomView/SSDetailView.xib; sourceTree = "<group>"; };
 		976031BA1D4CBFB3004B7392 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Nib.swift"; path = "Ssom/3rdLib/UIView+Nib.swift"; sourceTree = "<group>"; };
 		976031BC1D4D0AFD004B7392 /* SSUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSUserModel.swift; path = ViewModel/SSUserModel.swift; sourceTree = "<group>"; };
@@ -834,9 +828,6 @@
 				974C9BD91C6B446F00E17A2B /* loginBtn.png */,
 				974C9BDA1C6B446F00E17A2B /* loginBtn@2x.png */,
 				974C9BDB1C6B446F00E17A2B /* loginBtn@3x.png */,
-				974C9BDC1C6B446F00E17A2B /* loginTopPng.png */,
-				974C9BDD1C6B446F00E17A2B /* loginTopPng@2x.png */,
-				974C9BDE1C6B446F00E17A2B /* loginTopPng@3x.png */,
 				974C9BDF1C6B446F00E17A2B /* logo_bg.png */,
 				974C9BE11C6B446F00E17A2B /* logoDumy.png */,
 				974C9BE21C6B446F00E17A2B /* logoDumy@2x.png */,
@@ -1041,7 +1032,7 @@
 		974C9B2C1C5C43F200E17A2B /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				974C9DBB1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard */,
+				974C9DBB1C6B5B7E00E17A2B /* SSSign.storyboard */,
 				9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */,
 				974C9B2D1C5C444C00E17A2B /* SSSignInViewController.swift */,
 			);
@@ -1281,7 +1272,6 @@
 				974C9C921C6B447000E17A2B /* backIcon@2x.png in Resources */,
 				974C9CF31C6B447000E17A2B /* heartRed@2x.png in Resources */,
 				974C9D2F1C6B447000E17A2B /* meet_map_icon.png in Resources */,
-				974C9D201C6B447000E17A2B /* loginTopPng.png in Resources */,
 				974C9D7B1C6B447000E17A2B /* ssomIngGreenBig@2x.png in Resources */,
 				974C9DB71C6B447000E17A2B /* writePhotoArea@2x.png in Resources */,
 				974C9D6A1C6B447000E17A2B /* signupTopPng@2x.png in Resources */,
@@ -1401,7 +1391,6 @@
 				974C9D501C6B447000E17A2B /* photoDefault.png in Resources */,
 				974C9D791C6B447000E17A2B /* ssomIngGreen@3x.png in Resources */,
 				974C9D1A1C6B447000E17A2B /* locationFound@3x.png in Resources */,
-				974C9D221C6B447000E17A2B /* loginTopPng@3x.png in Resources */,
 				977DBA681D239FEC00CFD98F /* GoogleService-Info.plist in Resources */,
 				974C9C7D1C6B447000E17A2B /* 1DepToggleOn@3x.png in Resources */,
 				974C9D831C6B447000E17A2B /* ssomIngRedBig.png in Resources */,
@@ -1466,7 +1455,6 @@
 				974C9CBA1C6B447000E17A2B /* chatGuideline.png in Resources */,
 				974C9DA91C6B447000E17A2B /* treshIcon@3x.png in Resources */,
 				974C9C861C6B447000E17A2B /* acceptButtonGreen.png in Resources */,
-				974C9D211C6B447000E17A2B /* loginTopPng@2x.png in Resources */,
 				974C9C971C6B447000E17A2B /* bgBot50@2x.png in Resources */,
 				974C9DB61C6B447000E17A2B /* writePhotoArea.png in Resources */,
 				974C9D941C6B447000E17A2B /* ssomSelectNone@3x.png in Resources */,
@@ -1510,7 +1498,7 @@
 				97B2D16F1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib in Resources */,
 				974C9D581C6B447000E17A2B /* pointWriteLine@2x.png in Resources */,
 				974C9DA81C6B447000E17A2B /* treshIcon@2x.png in Resources */,
-				974C9DBC1C6B5B7E00E17A2B /* SSSignStoryBoard.storyboard in Resources */,
+				974C9DBC1C6B5B7E00E17A2B /* SSSign.storyboard in Resources */,
 				974C9CCC1C6B447000E17A2B /* closeWhite.png in Resources */,
 				974C9CB01C6B447000E17A2B /* cancelButtonRed.png in Resources */,
 			);
@@ -1874,7 +1862,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B5A0F7539C097E36A6A996 /* Pods-Ssom.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;
@@ -1915,7 +1903,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD4D8E1A551570798BFECFB8 /* Pods-Ssom.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Ssom/Ssom.entitlements;

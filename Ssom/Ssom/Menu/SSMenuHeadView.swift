@@ -134,5 +134,6 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     @IBAction func tapMenuHeart(sender: AnyObject) {
+        SSAlertController.showAlertConfirm(title: "Info", message: "준비 중입니다.", completion: nil)
     }
 }

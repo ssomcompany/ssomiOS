@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -96,6 +97,7 @@
                             <constraint firstItem="2Xq-QM-OnV" firstAttribute="leading" secondItem="YLt-9p-bNI" secondAttribute="leading" constant="21" id="LbC-mD-r9F"/>
                             <constraint firstAttribute="trailing" secondItem="eXW-6Z-5cd" secondAttribute="trailing" id="V6t-9K-3x1"/>
                             <constraint firstItem="5G7-6s-2iE" firstAttribute="top" secondItem="i1O-ZM-gOU" secondAttribute="bottom" constant="7" id="Yh4-eH-aDx"/>
+                            <constraint firstItem="2Xq-QM-OnV" firstAttribute="width" secondItem="YLt-9p-bNI" secondAttribute="width" multiplier="92:414" id="aOp-2r-VGB"/>
                             <constraint firstAttribute="trailing" secondItem="i1O-ZM-gOU" secondAttribute="trailing" constant="20" id="bi2-Yb-lBF"/>
                             <constraint firstItem="i1O-ZM-gOU" firstAttribute="top" secondItem="YLt-9p-bNI" secondAttribute="top" constant="8" id="dUU-tC-4NB"/>
                             <constraint firstAttribute="bottom" secondItem="eXW-6Z-5cd" secondAttribute="bottom" id="dZz-PZ-ZjI"/>

@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +16,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP9-q1-9DO">
                     <constraints>
-                        <constraint firstAttribute="height" constant="62" id="dLX-B4-OXl"/>
+                        <constraint firstAttribute="width" secondItem="vP9-q1-9DO" secondAttribute="height" multiplier="143:62" id="mrE-wu-U4s"/>
                     </constraints>
                     <state key="normal" title="Close" backgroundImage="closeBtn.png"/>
                     <connections>
@@ -31,13 +33,13 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="vP9-q1-9DO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4IZ-us-VK4"/>
                 <constraint firstItem="dd2-oO-UJV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Fm-AJ-kdp"/>
                 <constraint firstAttribute="trailing" secondItem="dd2-oO-UJV" secondAttribute="trailing" id="7Wk-ts-scf"/>
                 <constraint firstAttribute="bottom" secondItem="vP9-q1-9DO" secondAttribute="bottom" constant="35" id="Fw9-IX-ZM9"/>
-                <constraint firstItem="vP9-q1-9DO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="JBT-rM-kk4"/>
                 <constraint firstItem="dd2-oO-UJV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rg1-vY-00c"/>
                 <constraint firstItem="vP9-q1-9DO" firstAttribute="top" secondItem="4Cv-U8-cjQ" secondAttribute="bottom" constant="35" id="W2d-NY-hV6"/>
-                <constraint firstAttribute="trailing" secondItem="vP9-q1-9DO" secondAttribute="trailing" constant="116" id="d9l-hK-JxL"/>
+                <constraint firstItem="vP9-q1-9DO" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="62:667" id="fJ6-J7-oHC"/>
                 <constraint firstAttribute="trailing" secondItem="4Cv-U8-cjQ" secondAttribute="trailing" id="fef-YO-CPP"/>
                 <constraint firstItem="4Cv-U8-cjQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qbx-hf-6Tn"/>
                 <constraint firstItem="4Cv-U8-cjQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="120" id="vxq-H7-Gwv"/>

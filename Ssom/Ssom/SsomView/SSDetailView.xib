@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -148,8 +149,7 @@
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr5-x1-Gdx">
                             <constraints>
-                                <constraint firstAttribute="width" constant="137" id="COo-05-5kt"/>
-                                <constraint firstAttribute="height" constant="54" id="xV8-lh-g7g"/>
+                                <constraint firstAttribute="width" secondItem="Qr5-x1-Gdx" secondAttribute="height" multiplier="137:54" id="n5Z-h0-hMj"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <state key="normal" title=" 쏨 타기" image="heartWhite" backgroundImage="acceptButtonRed.png">
@@ -162,8 +162,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oa1-4A-wjc">
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="137" id="DAF-fS-8uT"/>
-                                <constraint firstAttribute="height" constant="48" id="k5G-n0-gY2"/>
+                                <constraint firstAttribute="width" secondItem="oa1-4A-wjc" secondAttribute="height" multiplier="137:48" id="TzU-Da-Yqm"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <state key="normal" title="닫기">
@@ -181,10 +180,12 @@
                         <constraint firstItem="Hfz-79-n9V" firstAttribute="top" secondItem="IBW-Oa-4Ph" secondAttribute="bottom" constant="16" id="7Rw-hB-InF"/>
                         <constraint firstItem="Hfz-79-n9V" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" constant="44" id="89w-pT-EWm"/>
                         <constraint firstAttribute="trailing" secondItem="hjU-yT-QU9" secondAttribute="trailing" id="Ab4-8m-5w5"/>
+                        <constraint firstItem="oa1-4A-wjc" firstAttribute="width" secondItem="m0K-bU-mUK" secondAttribute="width" multiplier="137:375" id="CA2-gG-gQQ"/>
                         <constraint firstItem="hjU-yT-QU9" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" id="Fhm-oJ-wSs"/>
                         <constraint firstAttribute="trailing" secondItem="y9i-sf-ICn" secondAttribute="trailing" id="JFJ-cJ-iuu"/>
                         <constraint firstItem="KSR-GK-pT3" firstAttribute="leading" secondItem="y9i-sf-ICn" secondAttribute="leading" id="JZZ-zl-ir1"/>
                         <constraint firstAttribute="trailing" secondItem="Hfz-79-n9V" secondAttribute="trailing" constant="44" id="LUR-QZ-Xbl"/>
+                        <constraint firstItem="Qr5-x1-Gdx" firstAttribute="width" secondItem="m0K-bU-mUK" secondAttribute="width" multiplier="137:375" id="NBa-ca-Zpf"/>
                         <constraint firstAttribute="bottom" secondItem="oa1-4A-wjc" secondAttribute="bottom" constant="22" id="QJ3-Fe-SDX"/>
                         <constraint firstItem="oa1-4A-wjc" firstAttribute="top" secondItem="Hfz-79-n9V" secondAttribute="bottom" constant="16" id="TlD-ez-dm0"/>
                         <constraint firstItem="KSR-GK-pT3" firstAttribute="bottom" secondItem="y9i-sf-ICn" secondAttribute="bottom" id="iNS-Cl-N4f"/>
@@ -193,7 +194,7 @@
                         <constraint firstAttribute="trailing" secondItem="Qr5-x1-Gdx" secondAttribute="trailing" constant="15" id="mSY-3Y-7ow"/>
                         <constraint firstItem="KSR-GK-pT3" firstAttribute="trailing" secondItem="y9i-sf-ICn" secondAttribute="trailing" id="n95-QQ-zet"/>
                         <constraint firstItem="oa1-4A-wjc" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" constant="15" id="piM-q2-re7"/>
-                        <constraint firstAttribute="bottom" secondItem="Qr5-x1-Gdx" secondAttribute="bottom" constant="17" id="vId-l5-Vqh"/>
+                        <constraint firstAttribute="bottom" secondItem="Qr5-x1-Gdx" secondAttribute="bottom" constant="18" id="vId-l5-Vqh"/>
                         <constraint firstItem="lls-X1-RNP" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" constant="44" id="vWt-GE-BZj"/>
                         <constraint firstItem="y9i-sf-ICn" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" id="wgp-Vp-Pn2"/>
                         <constraint firstAttribute="centerY" secondItem="y9i-sf-ICn" secondAttribute="bottom" multiplier="1.2" id="z7S-9Z-BPL"/>

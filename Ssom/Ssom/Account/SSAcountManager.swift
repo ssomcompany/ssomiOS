@@ -71,7 +71,7 @@ class SSAccountManager {
     }
 
     func openSignIn(willPresentViewController: UIViewController?, completion: ((finish:Bool) -> Void)?) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSign", bundle: nil)
         if let vc = storyBoard.instantiateInitialViewController() as? UINavigationController {
             vc.modalPresentationStyle = .OverFullScreen
 
@@ -91,13 +91,20 @@ class SSAccountManager {
                 print(err.localizedDescription)
 
                 if let viewController = vc {
-                    SSAlertController.alertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", vc: viewController, completion: { (alertAction) in
+                    SSAlertController.alertConfirm(
+                        title: "Error",
+                        message: err.code == 601 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        vc: viewController,
+                        completion: { (alertAction) in
                         guard let _ = completion!(finish: false) else {
                             return
                         }
                     })
                 } else {
-                    SSAlertController.showAlertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", completion: { (action) in
+                    SSAlertController.showAlertConfirm(
+                        title: "Error",
+                        message: err.code == 601 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        completion: { (action) in
                         guard let _ = completion!(finish: false) else {
                             return
                         }

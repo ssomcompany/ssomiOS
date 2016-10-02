@@ -63,7 +63,9 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
 
         let ageArea: SSAgeAreaType = Util.getAgeArea(self.viewModel.minAge)
         self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount)")
+
         self.textViewDescription.text = self.viewModel.content
+
         self.lbDistance.text = "나와의 거리 \(Util.getDistanceString(self.viewModel.distance))"
 
         if SSAccountManager.sharedInstance.isAuthorized {

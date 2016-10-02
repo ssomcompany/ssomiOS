@@ -12,6 +12,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var scrollView: SSCustomScrollView!
+    @IBOutlet var constScrollViewBottomToSuper: NSLayoutConstraint!
     @IBOutlet var viewSignIn: UIView!
     @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
@@ -24,6 +25,8 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     @IBOutlet var btnSignUp: UIButton!
 
     var completion: ((finish: Bool) -> Void)?
+
+    var defaultScrollContentHeight: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +54,14 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.btnSignUp.layer.shadowRadius = 1.0
         self.btnSignUp.layer.shadowOpacity = 1.0
 
+        self.registerForKeyboardNotifications()
+
+    }
+
+    func registerForKeyboardNotifications() -> Void {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -61,6 +72,8 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         super.viewDidAppear(animated)
 
         self.viewBackground.hidden = false
+
+        self.defaultScrollContentHeight = self.scrollView.contentSize.height
     }
 
     func validateInput() -> Bool {
@@ -123,6 +136,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
     
     @IBAction func tapFindPasswordButton(sender: AnyObject) {
+        SSAlertController.alertConfirm(title: "Info", message: "아직 지원되지 않는 기능입니다.", vc: self, completion: nil)
     }
 
     @IBAction func editingDidBeginEmail(sender: AnyObject) {
@@ -163,12 +177,24 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
 
 // MARK:- UIScrollView
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if self.tfEmail.isFirstResponder() {
-            self.tfEmail.resignFirstResponder()
+
+// MARK: - Keyboard show & hide event
+    func keyboardWillShow(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight+keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+                self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+            }
         }
-        if self.tfPassword.isFirstResponder() {
-            self.tfPassword.resignFirstResponder()
+    }
+
+    func keyboardWillHide(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
+            }
         }
     }
 }

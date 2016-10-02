@@ -210,6 +210,7 @@
                         <outlet property="btnFindPassword" destination="zDa-VK-PBV" id="tuw-gg-yll"/>
                         <outlet property="btnSignIn" destination="Lig-Au-fEj" id="ovJ-cJ-vhY"/>
                         <outlet property="btnSignUp" destination="ylA-ey-b3o" id="jNI-Uo-W9I"/>
+                        <outlet property="constScrollViewBottomToSuper" destination="sDZ-OT-HRa" id="ZhF-GC-gP0"/>
                         <outlet property="lbEmail" destination="uu6-jK-UC0" id="ccT-Zc-R6D"/>
                         <outlet property="lbPassword" destination="ute-j3-yBO" id="QEq-51-3n8"/>
                         <outlet property="scrollView" destination="DbE-1l-VkR" id="AQ7-r9-22u"/>
@@ -240,176 +241,191 @@
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUC-OS-gdx">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-au-W6Z">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpD-oZ-vmH" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-Qd-7ni">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-au-W6Z">
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signupTopPng.png" translatesAutoresizingMaskIntoConstraints="NO" id="3qY-na-xMv"/>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨을 가입하고 새로운 만남을 시작해보세요 =)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLQ-ih-3xF">
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-Qd-7ni">
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signupTopPng.png" translatesAutoresizingMaskIntoConstraints="NO" id="3qY-na-xMv"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨을 가입하고 새로운 만남을 시작해보세요 =)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLQ-ih-3xF">
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="kLQ-ih-3xF" secondAttribute="trailing" id="2Ou-5g-ERs"/>
+                                                    <constraint firstItem="3qY-na-xMv" firstAttribute="leading" secondItem="eoH-Qd-7ni" secondAttribute="leading" id="7ed-b1-6wR"/>
+                                                    <constraint firstItem="3qY-na-xMv" firstAttribute="centerX" secondItem="eoH-Qd-7ni" secondAttribute="centerX" id="7yR-VN-IdV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3qY-na-xMv" secondAttribute="bottom" id="MHu-cB-CSh"/>
+                                                    <constraint firstItem="3qY-na-xMv" firstAttribute="top" secondItem="eoH-Qd-7ni" secondAttribute="top" id="OpG-ha-lk2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3qY-na-xMv" secondAttribute="trailing" id="Rs0-DY-Y17"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kLQ-ih-3xF" secondAttribute="bottom" multiplier="1.1:1" id="cwS-7D-XYg"/>
+                                                    <constraint firstItem="kLQ-ih-3xF" firstAttribute="leading" secondItem="eoH-Qd-7ni" secondAttribute="leading" id="nTp-hz-lXP"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-Rm-MaG">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="dNs-Rm-MaG" secondAttribute="height" multiplier="43:10" id="G1W-gK-gv9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="가입하기" backgroundImage="loginBtn.png">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tapSignUp:" destination="Zim-wO-bXh" eventType="touchUpInside" id="r3z-hs-BA3"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT0-B0-XAW">
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일 주소를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgJ-kX-SUx">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="3EF-bN-23c"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="editingChangedEmail:" destination="Zim-wO-bXh" eventType="editingChanged" id="1SW-Tu-oBg"/>
+                                                    <action selector="editingDidBeginEmail:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="Xfh-Kc-BEc"/>
+                                                    <action selector="editingDidEndEmail:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="6BZ-DA-x2J"/>
+                                                    <outlet property="delegate" destination="Zim-wO-bXh" id="lE8-yI-XOk"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-Ly-2cN"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIr-8e-YOK">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                <state key="normal" title=" 이미 사용중인 이메일 주소입니다." image="arletIcon">
+                                                    <color key="titleColor" red="0.90196078431372551" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="disabled" image="arletIcon"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-Ch-SDr">
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-4n-6Qd">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="Fzq-GM-Bjt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <action selector="editingChangedPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="dwQ-pW-8JY"/>
+                                                    <action selector="editingDidBeginPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="PhL-Xo-POj"/>
+                                                    <action selector="editingDidEndPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="ws8-bT-au3"/>
+                                                    <outlet property="delegate" destination="Zim-wO-bXh" id="gPR-lH-EJQ"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dz-D4-EEw">
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NxU-Mb-n3B">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="dIH-6X-wvQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <action selector="editingChangedConfirmPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="lKJ-3k-gO7"/>
+                                                    <action selector="editingDidBeginConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="huu-Ny-Y7e"/>
+                                                    <action selector="editingDidEndConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="X17-3p-eiH"/>
+                                                    <outlet property="delegate" destination="Zim-wO-bXh" id="Wak-U0-NIC"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="liV-BA-Zhr"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhR-zc-8TF">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                <state key="normal" title=" 입력한 비밀 번호가 다릅니다." image="arletIcon">
+                                                    <color key="titleColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="disabled" image="arletIcon"/>
+                                            </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="kLQ-ih-3xF" secondAttribute="trailing" id="2Ou-5g-ERs"/>
-                                            <constraint firstItem="3qY-na-xMv" firstAttribute="leading" secondItem="eoH-Qd-7ni" secondAttribute="leading" id="7ed-b1-6wR"/>
-                                            <constraint firstItem="3qY-na-xMv" firstAttribute="centerX" secondItem="eoH-Qd-7ni" secondAttribute="centerX" id="7yR-VN-IdV"/>
-                                            <constraint firstAttribute="bottom" secondItem="3qY-na-xMv" secondAttribute="bottom" id="MHu-cB-CSh"/>
-                                            <constraint firstItem="3qY-na-xMv" firstAttribute="top" secondItem="eoH-Qd-7ni" secondAttribute="top" id="OpG-ha-lk2"/>
-                                            <constraint firstAttribute="trailing" secondItem="3qY-na-xMv" secondAttribute="trailing" id="Rs0-DY-Y17"/>
-                                            <constraint firstAttribute="bottom" secondItem="kLQ-ih-3xF" secondAttribute="bottom" multiplier="1.1:1" id="cwS-7D-XYg"/>
-                                            <constraint firstItem="kLQ-ih-3xF" firstAttribute="leading" secondItem="eoH-Qd-7ni" secondAttribute="leading" id="nTp-hz-lXP"/>
+                                            <constraint firstItem="eoH-Qd-7ni" firstAttribute="height" secondItem="MAE-au-W6Z" secondAttribute="height" multiplier="0.37" id="13S-g7-ull"/>
+                                            <constraint firstItem="Wjn-Ch-SDr" firstAttribute="top" secondItem="fp5-Ly-2cN" secondAttribute="bottom" constant="30" id="64u-9f-qwg"/>
+                                            <constraint firstItem="VT0-B0-XAW" firstAttribute="top" secondItem="eoH-Qd-7ni" secondAttribute="bottom" constant="19" id="6L6-wK-EGP"/>
+                                            <constraint firstItem="Mjc-4n-6Qd" firstAttribute="centerY" secondItem="Wjn-Ch-SDr" secondAttribute="centerY" id="7R0-Zf-DUh"/>
+                                            <constraint firstItem="nhR-zc-8TF" firstAttribute="leading" secondItem="NxU-Mb-n3B" secondAttribute="leading" id="7aO-7a-Jd9"/>
+                                            <constraint firstItem="fp5-Ly-2cN" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="7cf-7a-1zi"/>
+                                            <constraint firstItem="VT0-B0-XAW" firstAttribute="centerY" secondItem="cgJ-kX-SUx" secondAttribute="centerY" id="9rO-oX-eZi"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mjc-4n-6Qd" secondAttribute="trailing" constant="30" id="CIq-TJ-25n"/>
+                                            <constraint firstAttribute="trailing" secondItem="fp5-Ly-2cN" secondAttribute="trailing" constant="30" id="E3j-XQ-bre"/>
+                                            <constraint firstAttribute="trailing" secondItem="NxU-Mb-n3B" secondAttribute="trailing" constant="30" id="FJy-9g-mIf"/>
+                                            <constraint firstItem="8dz-D4-EEw" firstAttribute="top" secondItem="tQ5-Qt-3bu" secondAttribute="bottom" constant="30" id="GJW-Mm-VnH"/>
+                                            <constraint firstItem="fp5-Ly-2cN" firstAttribute="top" secondItem="cgJ-kX-SUx" secondAttribute="bottom" id="HgS-sg-2vu"/>
+                                            <constraint firstItem="eIr-8e-YOK" firstAttribute="top" secondItem="fp5-Ly-2cN" secondAttribute="bottom" constant="2" id="JIA-QQ-ZHM"/>
+                                            <constraint firstItem="dNs-Rm-MaG" firstAttribute="width" secondItem="MAE-au-W6Z" secondAttribute="width" multiplier="172:362" id="JrI-RH-Pd4"/>
+                                            <constraint firstItem="liV-BA-Zhr" firstAttribute="top" secondItem="NxU-Mb-n3B" secondAttribute="bottom" id="LYM-r8-uzQ"/>
+                                            <constraint firstItem="8dz-D4-EEw" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="Ocd-fx-sio"/>
+                                            <constraint firstItem="eIr-8e-YOK" firstAttribute="leading" secondItem="cgJ-kX-SUx" secondAttribute="leading" id="T7Z-0h-vVX"/>
+                                            <constraint firstItem="cgJ-kX-SUx" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="UrJ-W8-F1H"/>
+                                            <constraint firstAttribute="trailing" secondItem="eoH-Qd-7ni" secondAttribute="trailing" id="Vkv-bb-VfY"/>
+                                            <constraint firstItem="tQ5-Qt-3bu" firstAttribute="top" secondItem="Mjc-4n-6Qd" secondAttribute="bottom" id="Vs0-wD-u7Z"/>
+                                            <constraint firstItem="dNs-Rm-MaG" firstAttribute="centerX" secondItem="MAE-au-W6Z" secondAttribute="centerX" id="Xkf-tC-d01"/>
+                                            <constraint firstAttribute="trailing" secondItem="tQ5-Qt-3bu" secondAttribute="trailing" constant="30" id="aJD-ja-dNd"/>
+                                            <constraint firstItem="eoH-Qd-7ni" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="top" id="cP7-Su-9Zr"/>
+                                            <constraint firstAttribute="trailing" secondItem="liV-BA-Zhr" secondAttribute="trailing" constant="30" id="cs5-w5-4aM"/>
+                                            <constraint firstItem="tQ5-Qt-3bu" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="d0v-My-upc"/>
+                                            <constraint firstItem="NxU-Mb-n3B" firstAttribute="centerY" secondItem="8dz-D4-EEw" secondAttribute="centerY" id="ege-au-z9B"/>
+                                            <constraint firstItem="Wjn-Ch-SDr" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="iVJ-ye-fME"/>
+                                            <constraint firstItem="nhR-zc-8TF" firstAttribute="top" secondItem="liV-BA-Zhr" secondAttribute="bottom" constant="2" id="j0h-FN-mpy"/>
+                                            <constraint firstItem="eoH-Qd-7ni" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" id="kbL-DJ-HdL"/>
+                                            <constraint firstItem="Mjc-4n-6Qd" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="nSV-zb-kFM"/>
+                                            <constraint firstItem="VT0-B0-XAW" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="qDH-on-vpP"/>
+                                            <constraint firstItem="liV-BA-Zhr" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="qDL-V2-XoB"/>
+                                            <constraint firstAttribute="bottom" secondItem="dNs-Rm-MaG" secondAttribute="bottom" multiplier="1.06:1" id="sNO-Zu-mUC"/>
+                                            <constraint firstItem="NxU-Mb-n3B" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="txD-RN-0v0"/>
+                                            <constraint firstAttribute="trailing" secondItem="cgJ-kX-SUx" secondAttribute="trailing" constant="30" id="u6Y-x3-7Nf"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-Rm-MaG">
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-0X-uXG">
+                                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="dNs-Rm-MaG" secondAttribute="height" multiplier="43:10" id="G1W-gK-gv9"/>
+                                            <constraint firstAttribute="width" secondItem="bAS-0X-uXG" secondAttribute="height" multiplier="10:11" id="Ljy-BT-bFH"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="가입하기" backgroundImage="loginBtn.png">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" image="closeWhite"/>
                                         <connections>
-                                            <action selector="tapSignUp:" destination="Zim-wO-bXh" eventType="touchUpInside" id="r3z-hs-BA3"/>
+                                            <action selector="tapClose:" destination="Zim-wO-bXh" eventType="touchUpInside" id="ZCr-f2-AmD"/>
                                         </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT0-B0-XAW">
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일 주소를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgJ-kX-SUx">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="3EF-bN-23c"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="editingChangedEmail:" destination="Zim-wO-bXh" eventType="editingChanged" id="1SW-Tu-oBg"/>
-                                            <action selector="editingDidBeginEmail:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="Xfh-Kc-BEc"/>
-                                            <action selector="editingDidEndEmail:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="6BZ-DA-x2J"/>
-                                            <outlet property="delegate" destination="Zim-wO-bXh" id="lE8-yI-XOk"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-Ly-2cN"/>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIr-8e-YOK">
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
-                                        <state key="normal" title=" 이미 사용중인 이메일 주소입니다." image="arletIcon">
-                                            <color key="titleColor" red="0.90196078431372551" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="disabled" image="arletIcon"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-Ch-SDr">
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-4n-6Qd">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="Fzq-GM-Bjt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                        <connections>
-                                            <action selector="editingChangedPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="dwQ-pW-8JY"/>
-                                            <action selector="editingDidBeginPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="PhL-Xo-POj"/>
-                                            <action selector="editingDidEndPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="ws8-bT-au3"/>
-                                            <outlet property="delegate" destination="Zim-wO-bXh" id="gPR-lH-EJQ"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu"/>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dz-D4-EEw">
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NxU-Mb-n3B">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="dIH-6X-wvQ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                        <connections>
-                                            <action selector="editingChangedConfirmPassword:" destination="Zim-wO-bXh" eventType="editingChanged" id="lKJ-3k-gO7"/>
-                                            <action selector="editingDidBeginConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidBegin" id="huu-Ny-Y7e"/>
-                                            <action selector="editingDidEndConfirmPassword:" destination="Zim-wO-bXh" eventType="editingDidEnd" id="X17-3p-eiH"/>
-                                            <outlet property="delegate" destination="Zim-wO-bXh" id="Wak-U0-NIC"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="liV-BA-Zhr"/>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhR-zc-8TF">
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
-                                        <state key="normal" title=" 입력한 비밀 번호가 다릅니다." image="arletIcon">
-                                            <color key="titleColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="disabled" image="arletIcon"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="eoH-Qd-7ni" firstAttribute="height" secondItem="MAE-au-W6Z" secondAttribute="height" multiplier="0.37" id="13S-g7-ull"/>
-                                    <constraint firstItem="Wjn-Ch-SDr" firstAttribute="top" secondItem="fp5-Ly-2cN" secondAttribute="bottom" constant="30" id="64u-9f-qwg"/>
-                                    <constraint firstItem="VT0-B0-XAW" firstAttribute="top" secondItem="eoH-Qd-7ni" secondAttribute="bottom" constant="19" id="6L6-wK-EGP"/>
-                                    <constraint firstItem="Mjc-4n-6Qd" firstAttribute="centerY" secondItem="Wjn-Ch-SDr" secondAttribute="centerY" id="7R0-Zf-DUh"/>
-                                    <constraint firstItem="nhR-zc-8TF" firstAttribute="leading" secondItem="NxU-Mb-n3B" secondAttribute="leading" id="7aO-7a-Jd9"/>
-                                    <constraint firstItem="fp5-Ly-2cN" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="7cf-7a-1zi"/>
-                                    <constraint firstItem="VT0-B0-XAW" firstAttribute="centerY" secondItem="cgJ-kX-SUx" secondAttribute="centerY" id="9rO-oX-eZi"/>
-                                    <constraint firstAttribute="trailing" secondItem="Mjc-4n-6Qd" secondAttribute="trailing" constant="30" id="CIq-TJ-25n"/>
-                                    <constraint firstAttribute="trailing" secondItem="fp5-Ly-2cN" secondAttribute="trailing" constant="30" id="E3j-XQ-bre"/>
-                                    <constraint firstAttribute="trailing" secondItem="NxU-Mb-n3B" secondAttribute="trailing" constant="30" id="FJy-9g-mIf"/>
-                                    <constraint firstItem="8dz-D4-EEw" firstAttribute="top" secondItem="tQ5-Qt-3bu" secondAttribute="bottom" constant="30" id="GJW-Mm-VnH"/>
-                                    <constraint firstItem="fp5-Ly-2cN" firstAttribute="top" secondItem="cgJ-kX-SUx" secondAttribute="bottom" id="HgS-sg-2vu"/>
-                                    <constraint firstItem="eIr-8e-YOK" firstAttribute="top" secondItem="fp5-Ly-2cN" secondAttribute="bottom" constant="2" id="JIA-QQ-ZHM"/>
-                                    <constraint firstItem="dNs-Rm-MaG" firstAttribute="width" secondItem="MAE-au-W6Z" secondAttribute="width" multiplier="172:362" id="JrI-RH-Pd4"/>
-                                    <constraint firstItem="liV-BA-Zhr" firstAttribute="top" secondItem="NxU-Mb-n3B" secondAttribute="bottom" id="LYM-r8-uzQ"/>
-                                    <constraint firstItem="8dz-D4-EEw" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="Ocd-fx-sio"/>
-                                    <constraint firstItem="eIr-8e-YOK" firstAttribute="leading" secondItem="cgJ-kX-SUx" secondAttribute="leading" id="T7Z-0h-vVX"/>
-                                    <constraint firstItem="cgJ-kX-SUx" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="UrJ-W8-F1H"/>
-                                    <constraint firstAttribute="trailing" secondItem="eoH-Qd-7ni" secondAttribute="trailing" id="Vkv-bb-VfY"/>
-                                    <constraint firstItem="tQ5-Qt-3bu" firstAttribute="top" secondItem="Mjc-4n-6Qd" secondAttribute="bottom" id="Vs0-wD-u7Z"/>
-                                    <constraint firstItem="dNs-Rm-MaG" firstAttribute="centerX" secondItem="MAE-au-W6Z" secondAttribute="centerX" id="Xkf-tC-d01"/>
-                                    <constraint firstAttribute="trailing" secondItem="tQ5-Qt-3bu" secondAttribute="trailing" constant="30" id="aJD-ja-dNd"/>
-                                    <constraint firstItem="eoH-Qd-7ni" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="top" id="cP7-Su-9Zr"/>
-                                    <constraint firstAttribute="trailing" secondItem="liV-BA-Zhr" secondAttribute="trailing" constant="30" id="cs5-w5-4aM"/>
-                                    <constraint firstItem="tQ5-Qt-3bu" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="d0v-My-upc"/>
-                                    <constraint firstItem="NxU-Mb-n3B" firstAttribute="centerY" secondItem="8dz-D4-EEw" secondAttribute="centerY" id="ege-au-z9B"/>
-                                    <constraint firstItem="Wjn-Ch-SDr" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="iVJ-ye-fME"/>
-                                    <constraint firstItem="nhR-zc-8TF" firstAttribute="top" secondItem="liV-BA-Zhr" secondAttribute="bottom" constant="2" id="j0h-FN-mpy"/>
-                                    <constraint firstItem="eoH-Qd-7ni" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" id="kbL-DJ-HdL"/>
-                                    <constraint firstItem="Mjc-4n-6Qd" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="nSV-zb-kFM"/>
-                                    <constraint firstItem="VT0-B0-XAW" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="qDH-on-vpP"/>
-                                    <constraint firstItem="liV-BA-Zhr" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="qDL-V2-XoB"/>
-                                    <constraint firstAttribute="bottom" secondItem="dNs-Rm-MaG" secondAttribute="bottom" multiplier="1.06:1" id="sNO-Zu-mUC"/>
-                                    <constraint firstItem="NxU-Mb-n3B" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="txD-RN-0v0"/>
-                                    <constraint firstAttribute="trailing" secondItem="cgJ-kX-SUx" secondAttribute="trailing" constant="30" id="u6Y-x3-7Nf"/>
+                                    <constraint firstItem="MAE-au-W6Z" firstAttribute="top" secondItem="jpD-oZ-vmH" secondAttribute="top" id="0kp-JW-3mH"/>
+                                    <constraint firstItem="MAE-au-W6Z" firstAttribute="width" secondItem="jpD-oZ-vmH" secondAttribute="width" id="793-sL-hAd"/>
+                                    <constraint firstItem="MAE-au-W6Z" firstAttribute="height" secondItem="jpD-oZ-vmH" secondAttribute="height" id="RjG-VD-6kC"/>
+                                    <constraint firstAttribute="bottom" secondItem="MAE-au-W6Z" secondAttribute="bottom" id="acQ-P2-wor"/>
+                                    <constraint firstAttribute="trailing" secondItem="MAE-au-W6Z" secondAttribute="trailing" id="gWf-7X-mDT"/>
+                                    <constraint firstItem="bAS-0X-uXG" firstAttribute="width" secondItem="MAE-au-W6Z" secondAttribute="width" multiplier="41:362" id="jji-Dc-rIP"/>
+                                    <constraint firstItem="MAE-au-W6Z" firstAttribute="leading" secondItem="jpD-oZ-vmH" secondAttribute="leading" id="pdb-1h-5HM"/>
+                                    <constraint firstItem="bAS-0X-uXG" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="top" id="uhp-ga-Gdi"/>
+                                    <constraint firstItem="bAS-0X-uXG" firstAttribute="trailing" secondItem="MAE-au-W6Z" secondAttribute="trailing" id="yRb-eJ-g99"/>
                                 </constraints>
-                            </view>
-                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-0X-uXG">
-                                <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="bAS-0X-uXG" secondAttribute="height" multiplier="10:11" id="Ljy-BT-bFH"/>
-                                </constraints>
-                                <state key="normal" image="closeWhite"/>
                                 <connections>
-                                    <action selector="tapClose:" destination="Zim-wO-bXh" eventType="touchUpInside" id="ZCr-f2-AmD"/>
+                                    <outlet property="delegate" destination="Zim-wO-bXh" id="BIv-vV-S3Z"/>
                                 </connections>
-                            </button>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MAE-au-W6Z" firstAttribute="centerX" secondItem="2YK-vR-DHK" secondAttribute="centerX" id="2AZ-0T-oHt"/>
                             <constraint firstItem="16W-Yt-27t" firstAttribute="top" secondItem="sUC-OS-gdx" secondAttribute="bottom" id="CDA-dC-Of7"/>
-                            <constraint firstItem="bAS-0X-uXG" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="top" id="EUy-dP-unJ"/>
-                            <constraint firstItem="bAS-0X-uXG" firstAttribute="trailing" secondItem="MAE-au-W6Z" secondAttribute="trailing" id="Hmu-BQ-dLT"/>
-                            <constraint firstItem="16W-Yt-27t" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="bottom" constant="80" id="OpW-mr-MNp"/>
-                            <constraint firstItem="bAS-0X-uXG" firstAttribute="width" secondItem="MAE-au-W6Z" secondAttribute="width" multiplier="68:603" id="Rq6-CR-vZQ"/>
+                            <constraint firstItem="jpD-oZ-vmH" firstAttribute="width" secondItem="2YK-vR-DHK" secondAttribute="width" multiplier="362:414" id="MrA-dQ-Uso"/>
                             <constraint firstItem="sUC-OS-gdx" firstAttribute="top" secondItem="2YK-vR-DHK" secondAttribute="top" id="YXm-AN-Zsa"/>
+                            <constraint firstItem="16W-Yt-27t" firstAttribute="top" secondItem="jpD-oZ-vmH" secondAttribute="bottom" constant="80" id="cw5-zF-ehL"/>
+                            <constraint firstItem="jpD-oZ-vmH" firstAttribute="centerX" secondItem="2YK-vR-DHK" secondAttribute="centerX" id="guD-4q-YfO"/>
                             <constraint firstAttribute="trailing" secondItem="sUC-OS-gdx" secondAttribute="trailing" id="i8U-QH-MgQ"/>
                             <constraint firstItem="sUC-OS-gdx" firstAttribute="leading" secondItem="2YK-vR-DHK" secondAttribute="leading" id="iCy-Z4-ybk"/>
-                            <constraint firstItem="MAE-au-W6Z" firstAttribute="top" secondItem="2YK-vR-DHK" secondAttribute="top" constant="53" id="lWs-wJ-Khu"/>
-                            <constraint firstItem="MAE-au-W6Z" firstAttribute="width" secondItem="2YK-vR-DHK" secondAttribute="width" multiplier="362:414" id="spu-TD-XUc"/>
+                            <constraint firstItem="jpD-oZ-vmH" firstAttribute="top" secondItem="2YK-vR-DHK" secondAttribute="top" constant="53" id="kWW-Kv-Pke"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mdN-OK-ZW9"/>
@@ -418,9 +434,11 @@
                         <outlet property="btnSignUp" destination="dNs-Rm-MaG" id="B17-9K-4X5"/>
                         <outlet property="btnWarningDuplicatedEmail" destination="eIr-8e-YOK" id="dhO-IW-T18"/>
                         <outlet property="btnWarningWrongConfirmPassword" destination="nhR-zc-8TF" id="EwQ-Vs-SNe"/>
+                        <outlet property="constScrollViewBottomToSuper" destination="cw5-zF-ehL" id="Snw-3l-L44"/>
                         <outlet property="lbConfirmPassword" destination="8dz-D4-EEw" id="1gD-Ml-j7f"/>
                         <outlet property="lbEmail" destination="VT0-B0-XAW" id="znD-G8-uUQ"/>
                         <outlet property="lbPassword" destination="Wjn-Ch-SDr" id="PZZ-K5-8Wj"/>
+                        <outlet property="scrollView" destination="jpD-oZ-vmH" id="0iX-jK-mzr"/>
                         <outlet property="tfConfirmPassword" destination="NxU-Mb-n3B" id="Se0-9r-Yjr"/>
                         <outlet property="tfEmail" destination="cgJ-kX-SUx" id="Ru6-aB-Hqy"/>
                         <outlet property="tfPassword" destination="Mjc-4n-6Qd" id="RBy-Uu-2bJ"/>

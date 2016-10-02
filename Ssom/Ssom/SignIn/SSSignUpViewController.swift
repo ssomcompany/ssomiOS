@@ -12,6 +12,8 @@ let kPasswordMinLength = 4
 
 class SSSignUpViewController: UIViewController {
     @IBOutlet var viewBackground: UIView!
+    @IBOutlet var scrollView: SSCustomScrollView!
+    @IBOutlet var constScrollViewBottomToSuper: NSLayoutConstraint!
 
     @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
@@ -29,6 +31,8 @@ class SSSignUpViewController: UIViewController {
 
     @IBOutlet var btnSignUp: UIButton!
 
+    var defaultScrollContentHeight: CGFloat = 0.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +41,15 @@ class SSSignUpViewController: UIViewController {
 
     override func initView() {
         self.navigationController?.navigationBarHidden = true
+
+        self.registerForKeyboardNotifications()
+
+    }
+
+    func registerForKeyboardNotifications() -> Void {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -49,6 +62,8 @@ class SSSignUpViewController: UIViewController {
         super.viewDidAppear(animated)
 
         self.viewBackground.hidden = false
+
+        self.defaultScrollContentHeight = self.scrollView.contentSize.height
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -166,5 +181,27 @@ class SSSignUpViewController: UIViewController {
     }
     @IBAction func editingChangedConfirmPassword(sender: AnyObject) {
         self.validateInput()
+    }
+
+    // MARK:- UIScrollView
+
+    // MARK: - Keyboard show & hide event
+    func keyboardWillShow(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight+keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+                self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+            }
+        }
+    }
+
+    func keyboardWillHide(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
+            }
+        }
     }
 }

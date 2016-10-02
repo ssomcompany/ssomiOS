@@ -280,13 +280,13 @@ public struct SSNetworkAPIClient {
                             })
 
                         } else {
-                            if rawDatas.keys.contains("err") {
-                                var errorCode = 601
-                                var errorDescription = rawDatas["result"] as! String
-                                if let err = rawDatas["err"] as? Int {
+                            let errorHandleBlock: (errorParamName: String, datas: [String: AnyObject]) -> Void = { (name, datas) in
+                                var errorCode = 999
+                                var errorDescription = datas["result"] as! String
+                                if let err = rawDatas[name] as? Int {
                                     errorCode = err
                                 } else {
-                                    if let errName = rawDatas["err"] as? String {
+                                    if let errName = datas["msg"] as? String {
                                         if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
                                             errorCode = errorInfo.0
                                             errorDescription = errorInfo.1
@@ -298,7 +298,14 @@ public struct SSNetworkAPIClient {
                                 let error = NSError(domain: "com.ssom.error.ServeError.AuthFailed", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
 
                                 completion(error: error)
-                            } else {
+                            }
+
+                            if rawDatas.keys.contains("err") {
+                                errorHandleBlock(errorParamName: "err", datas: rawDatas)
+                            } else if rawDatas.keys.contains("error") {
+                                errorHandleBlock(errorParamName: "error", datas: rawDatas)
+                            }
+                            else {
                                 let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
 
                                 completion(error: error)

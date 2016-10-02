@@ -93,7 +93,7 @@ class SSAccountManager {
                 if let viewController = vc {
                     SSAlertController.alertConfirm(
                         title: "Error",
-                        message: err.code == 601 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
                         vc: viewController,
                         completion: { (alertAction) in
                         guard let _ = completion!(finish: false) else {
@@ -103,7 +103,7 @@ class SSAccountManager {
                 } else {
                     SSAlertController.showAlertConfirm(
                         title: "Error",
-                        message: err.code == 601 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
                         completion: { (action) in
                         guard let _ = completion!(finish: false) else {
                             return

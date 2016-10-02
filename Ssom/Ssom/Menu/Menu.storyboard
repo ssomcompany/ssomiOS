@@ -405,7 +405,11 @@ Cg
                                     <outlet property="delegate" destination="bRL-Hd-9P4" id="vve-Kq-nWl"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Dqr-kE-YUq"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Dqr-kE-YUq">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Dqr-kE-YUq" secondAttribute="height" multiplier="71:59" id="9g7-bX-Q4m"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -415,6 +419,7 @@ Cg
                             <constraint firstItem="YWo-Hi-QwD" firstAttribute="top" secondItem="Dqr-kE-YUq" secondAttribute="bottom" constant="32" id="Ymh-mZ-b8o"/>
                             <constraint firstItem="Dqr-kE-YUq" firstAttribute="top" secondItem="eWs-ch-lLP" secondAttribute="bottom" constant="32" id="fl3-lZ-dkC"/>
                             <constraint firstAttribute="trailing" secondItem="eWs-ch-lLP" secondAttribute="trailing" id="qWo-RE-qV9"/>
+                            <constraint firstItem="Dqr-kE-YUq" firstAttribute="width" secondItem="h3U-l6-O31" secondAttribute="width" multiplier="71:414" id="xYw-Ab-D1b"/>
                         </constraints>
                     </view>
                     <connections>

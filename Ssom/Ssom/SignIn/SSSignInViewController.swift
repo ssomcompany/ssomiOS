@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SSSignInViewController: UIViewController, UITextFieldDelegate {
+class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     @IBOutlet var viewBackground: UIView!
+    @IBOutlet var scrollView: SSCustomScrollView!
     @IBOutlet var viewSignIn: UIView!
     @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
@@ -150,10 +151,24 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate {
 
 // MARK:- UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === self.tfEmail {
+            self.tfEmail.resignFirstResponder()
+            self.tfPassword.becomeFirstResponder()
+        }
         if textField === self.tfPassword && self.btnSignIn.enabled {
             self.tapSignInButton(nil)
         }
 
         return true;
+    }
+
+// MARK:- UIScrollView
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if self.tfEmail.isFirstResponder() {
+            self.tfEmail.resignFirstResponder()
+        }
+        if self.tfPassword.isFirstResponder() {
+            self.tfPassword.resignFirstResponder()
+        }
     }
 }

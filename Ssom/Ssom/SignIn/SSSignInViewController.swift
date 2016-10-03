@@ -28,6 +28,10 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
     var defaultScrollContentHeight: CGFloat = 0.0
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

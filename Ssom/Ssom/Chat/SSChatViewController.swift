@@ -50,6 +50,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -44,11 +44,22 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     @IBOutlet var peopleButton4: UIButton!
 
     @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var constWidthIPayButton: NSLayoutConstraint!
-    @IBOutlet var constHeightIPayButton: NSLayoutConstraint!
+    @IBOutlet var constBtnIPayWidthRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnIPayAspectRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnIPayMinWidthRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnIPayMinAspectRatio: NSLayoutConstraint!
+
+//    @IBOutlet var constWidthIPayButton: NSLayoutConstraint!
+//    @IBOutlet var constHeightIPayButton: NSLayoutConstraint!
+
     @IBOutlet var btnYouPay: UIButton!
-    @IBOutlet var constWidthYouPayButton: NSLayoutConstraint!
-    @IBOutlet var constHeightYouPayButton: NSLayoutConstraint!
+    @IBOutlet var constBtnYouPayWidthRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnYouPayAspectRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnYouPayMinWidthRatio: NSLayoutConstraint!
+    @IBOutlet var constBtnYouPayMinAspectRatio: NSLayoutConstraint!
+
+//    @IBOutlet var constWidthYouPayButton: NSLayoutConstraint!
+//    @IBOutlet var constHeightYouPayButton: NSLayoutConstraint!
 
     @IBOutlet var btnRegister: UIButton!
 
@@ -91,6 +102,10 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         self.textView.delegate = self;
+
+        if UIScreen.mainScreen().bounds.width == 320 {
+            self.textGuideLabel.font = UIFont.systemFontOfSize(13)
+        }
 
         self.registerForKeyboardNotifications()
     }
@@ -282,10 +297,17 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             self.lbAge.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
             self.lbPeopleCount.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
 
-            self.constWidthIPayButton.constant = self.maxWidthPayButton
-            self.constHeightIPayButton.constant = self.maxHeightPayButton
-            self.constWidthYouPayButton.constant = self.minWidthPayButton
-            self.constHeightYouPayButton.constant = self.minHeightPayButton
+            self.constBtnIPayWidthRatio.active = true
+            self.constBtnIPayAspectRatio.active = true
+
+            self.constBtnIPayMinWidthRatio.active = false
+            self.constBtnIPayMinAspectRatio.active = false
+
+            self.constBtnYouPayWidthRatio.active = true
+            self.constBtnYouPayAspectRatio.active = true
+
+            self.constBtnYouPayMinWidthRatio.active = false
+            self.constBtnYouPayMinAspectRatio.active = false
         } else {
 
             self.btnIPay.selected = false
@@ -308,14 +330,22 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             self.lbAge.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
             self.lbPeopleCount.textColor = UIColor(red: 237.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
 
-            self.constWidthIPayButton.constant = self.minWidthPayButton
-            self.constHeightIPayButton.constant = self.minHeightPayButton
-            self.constWidthYouPayButton.constant = self.maxWidthPayButton
-            self.constHeightYouPayButton.constant = self.maxHeightPayButton
+            self.constBtnIPayWidthRatio.active = false
+            self.constBtnIPayAspectRatio.active = false
+
+            self.constBtnIPayMinWidthRatio.active = true
+            self.constBtnIPayMinAspectRatio.active = true
+
+            self.constBtnYouPayWidthRatio.active = false
+            self.constBtnYouPayAspectRatio.active = false
+
+            self.constBtnYouPayMinWidthRatio.active = true
+            self.constBtnYouPayMinAspectRatio.active = true
         }
 
         self.btnIPay.layoutIfNeeded()
         self.btnYouPay.layoutIfNeeded()
+        self.profileView.layoutIfNeeded()
     }
 
     @IBAction func tapIPayButton(sender: AnyObject) {

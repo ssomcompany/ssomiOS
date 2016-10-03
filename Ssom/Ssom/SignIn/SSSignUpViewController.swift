@@ -46,6 +46,10 @@ class SSSignUpViewController: UIViewController {
 
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     func registerForKeyboardNotifications() -> Void {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)

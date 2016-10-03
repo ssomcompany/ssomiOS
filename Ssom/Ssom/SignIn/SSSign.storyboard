@@ -457,7 +457,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d2E-s4-SBf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oLU-n4-dWZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oLU-n4-dWZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -475,7 +475,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BYc-3N-njc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="szn-kn-mBU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="szn-kn-mBU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

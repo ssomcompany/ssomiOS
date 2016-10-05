@@ -469,6 +469,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.pickedImageName = pickedImageURL.lastPathComponent
 
         picker.dismissViewControllerAnimated(true, completion: nil)
+
+        self.btnRegister.enabled = true
     }
 
 // MARK: - Keyboard show & hide event

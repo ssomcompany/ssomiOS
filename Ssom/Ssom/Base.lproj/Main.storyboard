@@ -724,7 +724,7 @@
                                     <constraint firstAttribute="height" constant="1" id="wbz-2q-EyB"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l93-S8-Q3c" userLabel="Register Button">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l93-S8-Q3c" userLabel="Register Button">
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="l93-S8-Q3c" secondAttribute="height" multiplier="155:53" id="Kr1-74-ReU"/>
                                 </constraints>
@@ -830,7 +830,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MasterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAM-Ki-GQ0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -884,7 +884,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="C9b-Hi-3uS" userLabel="Menu"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="09n-6W-TdW">
-                            <rect key="frame" x="76" y="7" width="166" height="30"/>
+                            <rect key="frame" x="124" y="7" width="166" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="MAP"/>

@@ -157,8 +157,8 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
     }
 
     func showProfilePhoto() {
-//        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoViewController")
-//        self.presentViewController(vc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoNaviController")
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 }

@@ -10,6 +10,8 @@
 		59689FF47FE2D25F01147592 /* Pods_SsomUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A530854B527325AE2DBAC0BA /* Pods_SsomUITests.framework */; };
 		5BD8ADE7AD8C44F99C1F2136 /* Pods_Ssom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23054E5C0B43CA6939A6F01 /* Pods_Ssom.framework */; };
 		9701C4A01C512D3900E1D3DB /* SSNavigationBarItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */; };
+		9703C6241DABC0EA00469BEE /* SSHeartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703C6231DABC0EA00469BEE /* SSHeartViewController.swift */; };
+		9703C6261DB12B6600469BEE /* SSHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */; };
 		9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */; };
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
 		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
@@ -343,6 +345,8 @@
 		8CDE69CC28D9C3FF9CE4C101 /* Pods-SsomUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90F446BB7B078EDE71DA3C2B /* Pods-SsomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SsomTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests.release.xcconfig"; sourceTree = "<group>"; };
 		9701C49F1C512D3900E1D3DB /* SSNavigationBarItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSNavigationBarItems.xib; sourceTree = "<group>"; };
+		9703C6231DABC0EA00469BEE /* SSHeartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHeartViewController.swift; path = Menu/SSHeartViewController.swift; sourceTree = "<group>"; };
+		9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHeartTableViewCell.swift; path = Menu/SSHeartTableViewCell.swift; sourceTree = "<group>"; };
 		9717EB151D8E6F8400B47718 /* Ssom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Ssom.entitlements; path = Ssom/Ssom.entitlements; sourceTree = "<group>"; };
 		9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSTodayPhotoViewController.swift; path = Menu/SSTodayPhotoViewController.swift; sourceTree = "<group>"; };
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
@@ -1083,6 +1087,8 @@
 				97E21D441D69D619004E3EBC /* SSMenuBottomView.xib */,
 				97E21D461D69D6A8004E3EBC /* SSMenuBottomView.swift */,
 				9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */,
+				9703C6231DABC0EA00469BEE /* SSHeartViewController.swift */,
+				9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -1699,6 +1705,7 @@
 				97803B921D50B8440042B86A /* SSDetailViewController.swift in Sources */,
 				9787ACE81CFE7B0B001CF18C /* SSMenuHeadView.swift in Sources */,
 				97C5266D1C9F090400484F03 /* UIImage+Crop.swift in Sources */,
+				9703C6261DB12B6600469BEE /* SSHeartTableViewCell.swift in Sources */,
 				97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */,
 				9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */,
 				9764D9E21D35FF6400BBE4C6 /* SSWriteViewModel.swift in Sources */,
@@ -1722,6 +1729,7 @@
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,
 				97D5A3CB1BEBB23500F3DDFB /* ListViewController.swift in Sources */,
 				974C9B2E1C5C444C00E17A2B /* SSSignInViewController.swift in Sources */,
+				9703C6241DABC0EA00469BEE /* SSHeartViewController.swift in Sources */,
 				97A6BFF61CCA866C00DA06D2 /* SSChatListViewController.swift in Sources */,
 				9787ACEA1CFE7B28001CF18C /* SSMenuTableViewCell.swift in Sources */,
 				973003491C0B4F4D00734D8D /* SSWriteViewController.swift in Sources */,

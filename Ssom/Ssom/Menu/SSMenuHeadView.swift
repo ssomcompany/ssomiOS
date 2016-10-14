@@ -134,6 +134,27 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     @IBAction func tapMenuHeart(sender: AnyObject) {
-        SSAlertController.showAlertConfirm(title: "Info", message: "준비 중입니다.", completion: nil)
+
+        if SSAccountManager.sharedInstance.isAuthorized {
+
+            let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
+            if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                presentedViewController.presentViewController(vc, animated: true, completion: nil)
+            }
+
+        } else {
+            guard let _ = self.delegate?.openSignIn({ [weak self] (finish) in
+                if finish {
+                    guard let block = self?.blockLogin else {
+                        return
+                    }
+
+                    block(finish: finish)
+                }
+                }) else {
+                    return
+            }
+        }
     }
 }

@@ -116,8 +116,14 @@ class SSNavigationBarItems : UIView
     }
 
     func changeMeetRequest(status: SSMeetRequestOptions = .NotRequested) {
+        self.cancelTapMeetRequest()
+
         switch status {
-        case .Requested, .Accepted:
+        case .Requested:
+            self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+            self.btnMeetRequest.setTitle("요청 취소", forState: UIControlState.Normal)
+        case .Accepted:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
             self.btnMeetRequest.setTitle("만남 종료", forState: UIControlState.Normal)
@@ -128,11 +134,11 @@ class SSNavigationBarItems : UIView
         case .Cancelled:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
+            self.btnMeetRequest.setTitle("만남 요청", forState: UIControlState.Normal)
         default:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("만남요청", forState: UIControlState.Normal)
+            self.btnMeetRequest.setTitle("만남 요청", forState: UIControlState.Normal)
         }
     }
 }

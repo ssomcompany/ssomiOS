@@ -188,9 +188,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                     self.showMeetRequest(true, status: .Accepted)
                                 } else {
                                     if requestUserId == loginedUserId {
-                                        self.showMeetRequest(true, status: .Requested)
+                                        self.showMeetRequest(false, status: .Requested)
                                     } else {
-                                        self.showMeetRequest(true, status: .Received)
+                                        self.showMeetRequest(false, status: .Received)
                                     }
                                 }
                             } else {
@@ -275,7 +275,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                 SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                             } else {
                                 if let wself = self {
-                                    wself.showMeetRequest(true, status: .Requested)
+                                    wself.showMeetRequest(false, status: .Requested)
                                 }
                             }
                             })

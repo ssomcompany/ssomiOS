@@ -20,6 +20,15 @@ enum SSType : String {
             return "한턱 쏠 사람을 찾아보세요!\n사진, 멘트에 매력이 넘칠수록\n멋진 쏨을 만날 확률이 높아집니다!"
         }
     }
+
+    var shortTitle: String {
+        switch self {
+        case .SSOM:
+            return "내가 쏠게요!"
+        case .SSOSEYO:
+            return "쏘실 분 찾아요!"
+        }
+    }
 }
 
 public struct SSMainViewModel {

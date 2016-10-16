@@ -91,13 +91,13 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         if self.ssomType == .SSOM {
             self.imgHeart.image = UIImage(named: "heartGreen")
             self.viewSsomDescription.backgroundColor = UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1)
-            self.lbSsom.text = "내가 쏨"
+            self.lbSsom.text = self.ssomType.shortTitle
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonGreen"), forState: .Normal)
             self.lbAge.textColor = UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1)
         } else {
             self.imgHeart.image = UIImage(named: "heartRed")
             self.viewSsomDescription.backgroundColor = UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
-            self.lbSsom.text = "니가 쏴"
+            self.lbSsom.text = self.ssomType.shortTitle
             self.btnSsom.setBackgroundImage(UIImage(named: "acceptButtonRed"), forState: .Normal)
             self.lbAge.textColor = UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
         }

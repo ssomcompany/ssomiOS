@@ -712,7 +712,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 마디를 작성해보세요! 센스 있는 메뉴선택, 멘트가 뜨거운 쏨의 첫 걸음 입니다 : )" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
+                                <string key="text">오늘은 내가 쏜다!
+쏘고 싶은 메뉴와 센스 있는 멘트를
+적어보세요. 좋은 쏨을 만날 확률이
+훨씬 높아 집니다. : )</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -828,7 +832,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MasterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAM-Ki-GQ0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

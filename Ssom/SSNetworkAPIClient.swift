@@ -447,6 +447,32 @@ public struct SSNetworkAPIClient {
         }
     }
 
+    static func deleteUserProfileImage(token: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.DELETE,
+                          SSNetworkContext.serverUrlPrefixt+"profileImgUrl",
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                completion(data: nil, error: nil)
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(data: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
 // MARK: - Chat
     static func getChatroomList(token: String, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()

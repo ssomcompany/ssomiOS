@@ -158,7 +158,17 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 
     func showProfilePhoto() {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoNaviController")
-        self.presentViewController(vc, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoNaviController") as? UINavigationController
+        if let topViewController = vc?.topViewController as? SSTodayPhotoViewController {
+            topViewController.photoSaveCompletion = { [weak self] in
+                if let wself = self {
+                    if let headerView = wself.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                        headerView.showProfileImage()
+                    }
+                }
+            }
+        }
+
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
 }

@@ -22,6 +22,8 @@ class SSHeartTableViewCell: UITableViewCell {
     @IBOutlet var lbSalePercent: UILabel!
     @IBOutlet var lbSale: UILabel!
 
+    var heartGood: SSHeartGoods!
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -39,11 +41,13 @@ class SSHeartTableViewCell: UITableViewCell {
         if UIScreen.mainScreen().bounds.width <= 320 {
             self.constLbHeartCountPrefixCentorY.constant = 3
         } else {
-            self.constLbHeartCountPrefixCentorY.constant = -3
+            self.constLbHeartCountPrefixCentorY.constant = -1
         }
     }
 
-    func configView(heartGood: SSHeartGoods) {
+    func configView(heartGood: SSHeartGoods, priceWithTax: String) {
+
+        self.heartGood = heartGood
 
         self.viewBoundary.layer.borderColor = heartGood.boundaryColor.CGColor
         self.imgViewPackageLabel.hidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
@@ -52,7 +56,7 @@ class SSHeartTableViewCell: UITableViewCell {
         self.lbPackage.text = heartGood.tagName
         self.imgViewHeartType.image = heartGood.iconImage
         self.lbHeartCount.text = "\(heartGood.heartCount)"
-        self.lbHeartPrice.text = heartGood.price
+        self.lbHeartPrice.text = priceWithTax
         self.imgViewSaleIcon.image = heartGood.saleIconImage
         self.lbSalePercent.text = heartGood.sale
         self.lbSale.hidden = heartGood == .heart2Package

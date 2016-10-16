@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import StoreKit
 
 enum SSHeartGoods: Int {
     case heart2Package
     case heart8Package
     case heart17Package
     case heart28Package
+
+    static var AllProductIDs: Array<String> {
+        return ["ssom2HeartPackage", "ssom8HeartPackage", "ssom17HeartPackage", "ssom28HeartPackage"]
+    }
+
+    var productID: String {
+        return SSHeartGoods.AllProductIDs[self.rawValue]
+    }
 
     var heartCount: Int {
         switch self {
@@ -137,8 +146,12 @@ enum SSHeartGoods: Int {
     }
 }
 
-class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPaymentTransactionObserver, SKProductsRequestDelegate {
 
+    @IBOutlet var heartTableView: UITableView!
+    var products: [SKProduct]!
+
+    var indicator: SSIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,19 +160,36 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func initView() {
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+
+        if SKPaymentQueue.canMakePayments() {
+            let request = SKProductsRequest(productIdentifiers: Set(SSHeartGoods.AllProductIDs))
+            request.delegate = self
+
+            self.indicator = SSIndicatorView()
+            self.indicator.showIndicator()
+
+            request.start()
+        } else {
+            SSAlertController.alertConfirm(title: "Error", message: "설정>일반>차단 메뉴에서 인앱결제를 활성화해주십시요!", vc: self, completion: nil)
+        }
+    }
+
+    deinit {
+        SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
     }
 
     @IBAction func tapNaviClose(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func tapClose(sender: AnyObject) {
+    @IBAction func tapClose(sender: AnyObject?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     // MARK:- UITableViewDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.products == nil ? 0 : self.products.count
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -174,7 +204,16 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         let cell = tableView.dequeueReusableCellWithIdentifier("heartTableViewCell", forIndexPath: indexPath) as! SSHeartTableViewCell
 
-        cell.configView(SSHeartGoods(rawValue: indexPath.row)!)
+        let heartGood = SSHeartGoods(rawValue: indexPath.row)!
+        var priceWithTax: String = "$"
+        for product in self.products {
+            if product.productIdentifier == heartGood.productID {
+                priceWithTax.appendContentsOf("\(product.price)")
+                break
+            }
+        }
+        cell.configView(SSHeartGoods(rawValue: indexPath.row)!, priceWithTax: priceWithTax)
+        cell.selectionStyle = .None
 
         return cell
     }
@@ -183,5 +222,42 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         // purchase
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSHeartTableViewCell {
+            for product in self.products {
+                if product.productIdentifier == cell.heartGood.productID {
+                    let payment = SKPayment(product: product)
+                    SKPaymentQueue.defaultQueue().addPayment(payment)
+                    break
+                }
+            }
+        }
+    }
+
+    // MARK:- SKProductsRequestDelegate
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        self.products = response.products
+
+        if self.products.count != 0 {
+            self.heartTableView.reloadData()
+        } else {
+            SSAlertController.alertConfirm(title: "Error", message: "유효한 상품이 없습니다!\n관리자에게 문의바랍니다.", vc: self, completion: nil)
+        }
+
+        self.indicator.hideIndicator()
+    }
+
+    // MARK:- SKPaymentTransactionObserver
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case SKPaymentTransactionState.Purchased:
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                self.tapClose(nil)
+            case SKPaymentTransactionState.Failed:
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+            default:
+                break
+            }
+        }
     }
 }

@@ -8,11 +8,19 @@
 
 import UIKit
 
-class SSTodayPhotoViewController: UIViewController {
+class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var imgViewPhoto: UIImageView!
 
     @IBOutlet var constBtnCancelTopMin: NSLayoutConstraint!
     @IBOutlet var constBtnSaveBottomToSuper: NSLayoutConstraint!
+
+    @IBOutlet var btnSave: UIButton!
+
+    var pickedImageExtension: String!
+    var pickedImageName: String!
+    var pickedImageData: NSData!
+
+    var photoSaveCompletion: (()-> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +51,35 @@ class SSTodayPhotoViewController: UIViewController {
     }
 
     @IBAction func tapPhotoLibrary(sender: AnyObject) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.allowsEditing = true
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
 
     @IBAction func tapCamera(sender: AnyObject) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .Camera
+        imagePickerController.allowsEditing = true
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
 
     @IBAction func tapDeletePhoto(sender: AnyObject) {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.deleteUserProfileImage(token, completion: { [weak self] (data, error) in
+                if let wself = self {
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                    } else {
+                        wself.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                }
+            })
+        }
     }
 
     @IBAction func tapNaviClose(sender: AnyObject) {
@@ -60,6 +91,76 @@ class SSTodayPhotoViewController: UIViewController {
     }
 
     @IBAction func tapSubmit(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { [weak self] (photoURLPath, error) in
+                if let wself = self {
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                    } else {
+                        if let imageUrl = photoURLPath {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+
+                            guard let completion = wself.photoSaveCompletion else { return }
+                            completion()
+                        }
+                    }
+
+                    wself.dismissViewControllerAnimated(true, completion: nil)
+                }
+            })
+        }
+    }
+
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+
+        let pickedImage: UIImage!
+        // photo library
+        if let pickedImageURL: NSURL = editingInfo![UIImagePickerControllerReferenceURL] as? NSURL {
+            let pickedImageURLQueryParams: Array = pickedImageURL.query!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "=&"))
+            pickedImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
+
+            var isExt: Bool = false;
+            for queryParam: String in pickedImageURLQueryParams {
+                if queryParam == "ext" {
+                    isExt = true
+                    continue
+                }
+                if isExt {
+                    switch queryParam {
+                    case "PNG":
+                        self.pickedImageExtension = "png"
+                        self.pickedImageData = UIImagePNGRepresentation(pickedImage)
+                    case "JPG", "JPEG":
+                        self.pickedImageExtension = "jpeg"
+                        self.pickedImageData = UIImageJPEGRepresentation(pickedImage, 1.0)
+                    default:
+                        print("unable to upload!!")
+                        break
+                    }
+
+                    break
+                }
+            }
+            self.pickedImageName = pickedImageURL.lastPathComponent
+        } else {
+            pickedImage = image
+
+            self.pickedImageExtension = "png"
+            self.pickedImageName = "camera.png"
+            self.pickedImageData = UIImagePNGRepresentation(pickedImage)
+        }
+
+        picker.dismissViewControllerAnimated(true, completion: { [weak self] in
+            if let wself = self {
+                let croppedProfileImage: UIImage = UIImage.cropInCircle(pickedImage, frame: CGRectMake(0, 0, wself.imgViewPhoto.bounds.size.width, wself.imgViewPhoto.bounds.size.height))
+
+                wself.imgViewPhoto.image = croppedProfileImage
+            }
+        })
+
+        self.btnSave.enabled = true
     }
 }

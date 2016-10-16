@@ -297,7 +297,7 @@ Cg
                                     <action selector="tapCancel:" destination="qFA-Mp-FGI" eventType="touchUpInside" id="LDb-sx-4Vm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfC-w8-NZf">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfC-w8-NZf">
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bfC-w8-NZf" secondAttribute="height" multiplier="155:53" id="C5a-Q5-p9P"/>
                                 </constraints>
@@ -394,6 +394,7 @@ Cg
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnSave" destination="bfC-w8-NZf" id="KIB-uN-zaf"/>
                         <outlet property="constBtnCancelTopMin" destination="vaX-q8-skg" id="bzz-xC-5BL"/>
                         <outlet property="constBtnSaveBottomToSuper" destination="fZt-oe-HDC" id="fjZ-Jp-IwK"/>
                         <outlet property="imgViewPhoto" destination="1eM-zf-eiq" id="scV-bA-5mS"/>
@@ -421,16 +422,16 @@ Cg
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="heartTableViewCell" id="RVW-md-3HX" customClass="SSHeartTableViewCell" customModule="Ssom" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="344" height="96"/>
+                                        <rect key="frame" x="0.0" y="1" width="357" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RVW-md-3HX" id="ov4-rL-tqU">
-                                            <frame key="frameInset" width="344" height="96"/>
+                                            <frame key="frameInset" width="357" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARq-Ly-19C">
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ARq-Ly-19C" secondAttribute="height" multiplier="331:81" id="6z4-jg-8b1"/>
+                                                        <constraint firstAttribute="width" secondItem="ARq-Ly-19C" secondAttribute="height" multiplier="344:81" id="6z4-jg-8b1"/>
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenRibSmall" translatesAutoresizingMaskIntoConstraints="NO" id="HGi-Wf-BGx">
@@ -479,7 +480,7 @@ Cg
                                                 <constraint firstItem="2l4-uM-oJW" firstAttribute="top" secondItem="i1C-Hq-PJX" secondAttribute="bottom" constant="3.5527136788005009e-15" id="Fjd-Of-QoV"/>
                                                 <constraint firstItem="2l4-uM-oJW" firstAttribute="centerY" secondItem="ARq-Ly-19C" secondAttribute="centerY" id="GaI-xd-1LP"/>
                                                 <constraint firstItem="HGi-Wf-BGx" firstAttribute="top" secondItem="ov4-rL-tqU" secondAttribute="top" id="ILw-BX-pIM"/>
-                                                <constraint firstItem="vGb-vc-nfw" firstAttribute="centerY" secondItem="8ds-SN-kXW" secondAttribute="centerY" constant="-2" id="KCL-EV-VtT"/>
+                                                <constraint firstItem="vGb-vc-nfw" firstAttribute="centerY" secondItem="8ds-SN-kXW" secondAttribute="centerY" constant="-1" id="KCL-EV-VtT"/>
                                                 <constraint firstItem="8ds-SN-kXW" firstAttribute="leading" secondItem="ov4-rL-tqU" secondAttribute="leading" constant="30" id="L14-B7-XoV"/>
                                                 <constraint firstItem="ARq-Ly-19C" firstAttribute="top" secondItem="ov4-rL-tqU" secondAttribute="top" id="MaP-Ez-ssF"/>
                                                 <constraint firstItem="2l4-uM-oJW" firstAttribute="leading" secondItem="Rs5-oQ-NNy" secondAttribute="trailing" constant="8" id="MaR-hw-HdS"/>
@@ -530,9 +531,9 @@ Cg
                             <constraint firstItem="hoW-cx-PaM" firstAttribute="top" secondItem="6mJ-aC-xPt" secondAttribute="bottom" constant="26" id="B2F-8j-E02"/>
                             <constraint firstItem="3xf-ov-S49" firstAttribute="top" secondItem="hoW-cx-PaM" secondAttribute="bottom" constant="25" id="H0Y-ud-EAD"/>
                             <constraint firstItem="pHH-ki-ey7" firstAttribute="top" secondItem="3xf-ov-S49" secondAttribute="bottom" constant="26" id="SZZ-Q6-yqk"/>
-                            <constraint firstItem="3xf-ov-S49" firstAttribute="width" secondItem="Fsn-uu-oZJ" secondAttribute="width" multiplier="344:414" id="rPU-D3-E6H"/>
+                            <constraint firstItem="3xf-ov-S49" firstAttribute="width" secondItem="Fsn-uu-oZJ" secondAttribute="width" multiplier="357:414" id="rPU-D3-E6H"/>
                             <constraint firstItem="6JP-ai-GwD" firstAttribute="leading" secondItem="hoW-cx-PaM" secondAttribute="trailing" constant="-10" id="ud3-r4-lCA"/>
-                            <constraint firstItem="3xf-ov-S49" firstAttribute="centerX" secondItem="Fsn-uu-oZJ" secondAttribute="centerX" id="wrZ-Ff-GUT"/>
+                            <constraint firstItem="3xf-ov-S49" firstAttribute="centerX" secondItem="Fsn-uu-oZJ" secondAttribute="centerX" constant="-5" id="wrZ-Ff-GUT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="하트 만들기" id="ciu-Cg-L5b">
@@ -543,6 +544,9 @@ Cg
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="heartTableView" destination="3xf-ov-S49" id="Zda-gw-ZqI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5l0-a9-9rg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

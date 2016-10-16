@@ -64,6 +64,24 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String
 
+            let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
+        } else {
+            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+            let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
+
+            let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
+
+            self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
+            self.lbUserId.attributedText = loginString
+        }
+
+        self.showProfileImage()
+    }
+
+    func showProfileImage() {
+        if SSAccountManager.sharedInstance.isAuthorized {
             self.btnPhoto.hidden = false
             if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                 self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
@@ -73,24 +91,12 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
                         self.imgViewPhoto.image = croppedProfileImage
                     }
-                })
+                    })
                 self.imgViewPhoto.hidden = false
             }
-
-            let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
         } else {
-            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
-            let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
-
             self.btnPhoto.hidden = true
             self.imgViewPhoto.hidden = true
-
-            let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
-
-            self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
-            self.lbUserId.attributedText = loginString
         }
     }
 

@@ -59,6 +59,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Because Ssom needs your awesome photos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Because Ssom always wants to know where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

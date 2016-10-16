@@ -14,6 +14,7 @@
 		9703C6261DB12B6600469BEE /* SSHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */; };
 		9703C6281DB205C400469BEE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9703C6271DB205C400469BEE /* StoreKit.framework */; };
 		9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */; };
+		972C87071DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */; };
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
 		9730033D1BF84F9900734D8D /* SSNetworkAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */; };
 		9730033F1BF84FAE00734D8D /* SSNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */; };
@@ -352,6 +353,7 @@
 		9703C6291DB2064600469BEE /* Ssom_development.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = Ssom_development.entitlements; path = Ssom/Ssom_development.entitlements; sourceTree = "<group>"; };
 		9717EB151D8E6F8400B47718 /* Ssom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Ssom.entitlements; path = Ssom/Ssom.entitlements; sourceTree = "<group>"; };
 		9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSTodayPhotoViewController.swift; path = Menu/SSTodayPhotoViewController.swift; sourceTree = "<group>"; };
+		972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SsomFirebaseRemoteConfigDefaults.plist; path = Ssom/SsomFirebaseRemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		9730033A1BF84F1500734D8D /* SSNetworkContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkContext.swift; sourceTree = "<group>"; };
 		9730033C1BF84F9900734D8D /* SSNetworkAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkAPIClient.swift; sourceTree = "<group>"; };
 		9730033E1BF84FAE00734D8D /* SSNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNetworkErrorHandler.swift; sourceTree = "<group>"; };
@@ -1074,6 +1076,7 @@
 				9703C6291DB2064600469BEE /* Ssom_development.entitlements */,
 				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
 				977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */,
+				972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -1497,6 +1500,7 @@
 				974C9C7B1C6B447000E17A2B /* 1DepToggleOn.png in Resources */,
 				974C9D591C6B447000E17A2B /* pointWriteLine@3x.png in Resources */,
 				974C9C8B1C6B447000E17A2B /* acceptButtonRed@3x.png in Resources */,
+				972C87071DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist in Resources */,
 				974C9CBC1C6B447000E17A2B /* chatGuideline@3x.png in Resources */,
 				974C9D1F1C6B447000E17A2B /* loginBtn@3x.png in Resources */,
 				974C9D601C6B447000E17A2B /* profileBorderRed@2x.png in Resources */,

@@ -7,15 +7,21 @@ target 'Ssom' do
  pod 'GoogleMaps'
  pod 'Alamofire'
  pod 'SDWebImage'
+
  pod 'Fabric'
  pod 'Crashlytics'
+
  pod 'KeychainAccess', '~> 2.4'
+
  pod 'Firebase'
  pod 'Firebase/Crash'
  pod 'Firebase/Auth'
  pod 'Firebase/Core'
  pod 'Firebase/Messaging'
+ pod 'Firebase/RemoteConfig'
+
  pod 'Reveal-SDK', :configurations => ['Debug']
+
  pod 'OneSignal'
 end
 

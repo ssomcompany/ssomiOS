@@ -100,16 +100,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
                 SSAlertController.showAlertConfirm(title: "Error", message: "버전 체크에 실패하였습니다!", completion: nil)
             } else {
-                if let bundleVersion = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as? String, let currentVersion = version {
-                    print("Current App Version is : %@", bundleVersion)
+                if let bundleVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String, let currentVersion = version {
+                    print("Current App Version is : ", bundleVersion)
 
-                    if Double(bundleVersion) > Double(currentVersion) {
+                    if Double(bundleVersion.stringByReplacingOccurrencesOfString(".", withString: "")) < Double(currentVersion.stringByReplacingOccurrencesOfString(".", withString: "")) {
                         SSAlertController.showAlertTwoButton(title: "Info",
                             message: "새로운 업데이트가 있습니다.\n 업데이트 후 이용하실 수 있습니다 =)",
                             button1Title: "업데이트",
                             button2Title: "종료",
                             button1Completion: { (action) in
-                                UIApplication.sharedApplication().openURL(NSURL(string: "itms://itunes.apple.com/app/bars/id1083356262")!)
+                                UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/bars/id1083356262")!)
                                 exit(0)
                             },
                             button2Completion: { (action) in

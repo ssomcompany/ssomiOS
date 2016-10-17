@@ -58,7 +58,9 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
     func configureWithViewModel(viewModel: SSViewModel) {
         self.viewModel = viewModel;
 
-        self.imgProfile.sd_setImageWithURL(NSURL(string: self.viewModel.imageUrl), placeholderImage: nil) { (image, error, cacheType, url) -> Void in
+        if let imageUrl = self.viewModel.imageUrl {
+            self.imgProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil) { (image, error, cacheType, url) -> Void in
+            }
         }
 
         let ageArea: SSAgeAreaType = Util.getAgeArea(self.viewModel.minAge)

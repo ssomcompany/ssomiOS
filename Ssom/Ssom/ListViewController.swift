@@ -182,7 +182,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    @IBAction func tapIPayButton(sender: AnyObject) {
+    @IBAction func tapIPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = 0
 
@@ -201,7 +201,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    @IBAction func tapYouPayButton(sender: AnyObject) {
+    @IBAction func tapYouPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
@@ -268,8 +268,28 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
                 self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    self.openDetailView(self.mySsom)
-                    self.btnWrite.layer.transform = CATransform3DIdentity
+                    if self.btnIPay.selected && self.mySsom.ssomType != .SSOM {
+                        self.tapYouPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.btnWrite.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else if self.btnYouPay.selected && self.mySsom.ssomType != .SSOSEYO {
+                        self.tapIPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.btnWrite.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else {
+                        self.openDetailView(self.mySsom)
+                        self.btnWrite.layer.transform = CATransform3DIdentity
+                    }
             })
         } else {
             let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
@@ -283,6 +303,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK: private
+    var loadCompletionBlock: (() -> Void)?
+
     func loadData() {
         if self.needReload {
 
@@ -338,6 +360,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.datas = tempDatas
 
         self.ssomListTableView.reloadData()
+
+        guard let completion = self.loadCompletionBlock else { return }
+        completion()
     }
 
     func openDetailView(model: SSViewModel) {
@@ -443,6 +468,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
+
+            self.loadCompletionBlock = nil
 
             if needToReload {
                 self.loadData()

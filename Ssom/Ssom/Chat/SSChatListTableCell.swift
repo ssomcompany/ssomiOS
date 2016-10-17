@@ -181,6 +181,11 @@ class SSChatListTableCell: UITableViewCell {
         self.lbNewMessageCount.layoutIfNeeded()
         self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
         self.lbNewMessageCount.text = "\(model.unreadCount)"
+        if model.unreadCount == 0 {
+            self.lbNewMessageCount.hidden = true
+        } else {
+            self.lbNewMessageCount.hidden = false
+        }
 
         if let distance = model.ssomViewModel.distance where distance != 0 {
             self.lbDistance.text = Util.getDistanceString(distance)

@@ -223,6 +223,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         locationManager.startUpdatingLocation()
     }
 
+    var loadCompletionBlock: (() -> Void)?
+
     func showMarkers() {
 
         mainView.clear()
@@ -281,6 +283,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
             }
         }
+
+        guard let completion = self.loadCompletionBlock else { return }
+        completion()
     }
 
     func setMarker(data: SSViewModel,_ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
@@ -349,7 +354,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
 
-    @IBAction func tapIPayButton(sender: AnyObject) {
+    @IBAction func tapIPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonLineLeadingToButtonIPay.constant = 0
 
@@ -365,7 +370,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     }
 
-    @IBAction func tapYouPayButton(sender: AnyObject) {
+    @IBAction func tapYouPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
@@ -390,8 +395,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
                 self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    self.openDetailView(self.mySsom)
-                    self.writeButton.layer.transform = CATransform3DIdentity
+                    if self.btnIPay.selected && self.mySsom.ssomType != .SSOM {
+                        self.tapYouPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.writeButton.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else if self.btnYouPay.selected && self.mySsom.ssomType != .SSOSEYO {
+                        self.tapIPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.writeButton.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else {
+                        self.openDetailView(self.mySsom)
+                        self.writeButton.layer.transform = CATransform3DIdentity
+                    }
             })
         } else {
             let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
@@ -558,6 +583,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
+
+            self.loadCompletionBlock = nil
 
             if needToReload {
                 self.initView()

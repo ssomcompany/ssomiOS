@@ -337,6 +337,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             ssomType = .SSOSEYO
         }
 
+        self.isAlreadyWrittenMySsom = false
+
         for data: SSViewModel in self.mainViewModel.datas {
             let ssomString = data.ssomType.rawValue
             if ssomString == ssomType.rawValue {

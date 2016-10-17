@@ -81,6 +81,9 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     func showProfileImage() {
+        self.btnPhoto.hidden = true
+        self.imgViewPhoto.hidden = true
+
         if SSAccountManager.sharedInstance.isAuthorized {
             self.btnPhoto.hidden = false
             if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
@@ -94,9 +97,6 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
                     })
                 self.imgViewPhoto.hidden = false
             }
-        } else {
-            self.btnPhoto.hidden = true
-            self.imgViewPhoto.hidden = true
         }
     }
 

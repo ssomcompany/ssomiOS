@@ -67,18 +67,30 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     @IBAction func tapDeletePhoto(sender: AnyObject) {
-        if let token = SSAccountManager.sharedInstance.sessionToken {
-            SSNetworkAPIClient.deleteUserProfileImage(token, completion: { [weak self] (data, error) in
-                if let wself = self {
-                    if let err = error {
-                        print(err.localizedDescription)
+        SSAlertController.alertTwoButton(title: "Info", message: "정말로 오늘의 사진을 삭제하시겠습니까?", vc: self, button1Completion: { (action) in
 
-                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
-                    } else {
-                        wself.dismissViewControllerAnimated(true, completion: nil)
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                SSNetworkAPIClient.deleteUserProfileImage(token, completion: { [weak self] (data, error) in
+                    if let wself = self {
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                        } else {
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+
+                            if let completion = wself.photoSaveCompletion {
+                                completion()
+                            }
+
+                            wself.dismissViewControllerAnimated(true, completion: nil)
+                        }
                     }
-                }
-            })
+                    })
+            }
+
+        }) { (action) in
+
         }
     }
 
@@ -102,12 +114,13 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
                         if let imageUrl = photoURLPath {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
 
-                            guard let completion = wself.photoSaveCompletion else { return }
-                            completion()
+                            if let completion = wself.photoSaveCompletion {
+                                completion()
+                            }
                         }
-                    }
 
-                    wself.dismissViewControllerAnimated(true, completion: nil)
+                        wself.dismissViewControllerAnimated(true, completion: nil)
+                    }
                 }
             })
         }

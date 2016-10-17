@@ -100,6 +100,8 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
                 wself.menuTableView.reloadData()
 
                 wself.drawerViewController?.mainViewController?.needToReload = finish
+
+
             })
         }
 

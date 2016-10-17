@@ -19,6 +19,37 @@ public let acceptableStatusCodes: Range<Int> = 200..<300
 
 public struct SSNetworkAPIClient {
 
+// MARK: - Common
+    static func getVersion(completion: (version: String?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.GET,
+                          SSNetworkContext.serverUrlPrefixt+"version/ios",
+                          encoding: .JSON)
+        .responseJSON { (response) in
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawData = response.result.value as? [String: String] {
+                    completion(version: rawData["version"], error: nil)
+                } else {
+                    let error: NSError = NSError(domain: "com.ssom.error.VersionCheckFailed.Unknown", code: 999, userInfo: nil)
+
+                    completion(version: nil, error: error)
+                }
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(version: nil, error: response.result.error)
+            }
+
+            indicator.hideIndicator()
+        }
+    }
+
 // MARK: - Post
     static func getPosts(latitude latitude: Double = 0, longitude: Double = 0, completion: (viewModels: [SSViewModel]?, error: NSError?) -> Void) {
         var params: String! = nil

@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import KeychainAccess
+import FBSDKLoginKit
 
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
@@ -120,6 +121,41 @@ class SSAccountManager {
         }
     }
 
+    func doSignIn(withFBSDKAccessToken token: String, email: String, vc:UIViewController?, completion: ((finish: Bool) -> Void?)?) -> Void {
+        SSNetworkAPIClient.postLogin(withFBSDKAccessToken: token, email: email) { error in
+            if let err = error {
+                print(err.localizedDescription)
+
+                if let viewController = vc {
+                    SSAlertController.alertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        vc: viewController,
+                        completion: { (alertAction) in
+                            guard let _ = completion!(finish: false) else {
+                                return
+                            }
+                    })
+                } else {
+                    SSAlertController.showAlertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        completion: { (action) in
+                            guard let _ = completion!(finish: false) else {
+                                return
+                            }
+                    })
+                }
+            } else {
+                SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : email])
+
+                guard let _ = completion!(finish: true) else {
+                    return
+                }
+            }
+        }
+    }
+
     func doSignOut(vc: UIViewController?, completion: ((finish: Bool) -> Void)?) -> Void {
 
         if let viewController = vc {
@@ -151,6 +187,10 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+
+                            if let _ = FBSDKAccessToken.currentAccessToken() {
+                                FBSDKLoginManager().logOut()
+                            }
 
                             guard let block = completion else {
                                 return
@@ -207,6 +247,10 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+
+                            if let _ = FBSDKAccessToken.currentAccessToken() {
+                                FBSDKLoginManager().logOut()
+                            }
 
                             guard let block = completion else {
                                 return

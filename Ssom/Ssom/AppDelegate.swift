@@ -13,6 +13,7 @@ import Crashlytics
 import Firebase
 import FirebaseMessaging
 import KeychainAccess
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDelegate {
@@ -74,6 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
             print("openedResult : \(openedResult)")
         }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
 
+        // Facebook
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController
         self.drawerController?.delegate = self
@@ -111,10 +115,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
+
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 let kPasswordMinLength = 4
 
@@ -30,6 +31,7 @@ class SSSignUpViewController: UIViewController {
     @IBOutlet var btnWarningWrongConfirmPassword: UIButton!
 
     @IBOutlet var btnSignUp: UIButton!
+    @IBOutlet var btnFBSignUp: FBSDKLoginButton!
 
     var defaultScrollContentHeight: CGFloat = 0.0
 
@@ -44,6 +46,11 @@ class SSSignUpViewController: UIViewController {
 
         self.registerForKeyboardNotifications()
 
+        self.btnFBSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnFBSignUp.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFBSignUp.layer.shadowRadius = 1.0
+        self.btnFBSignUp.layer.shadowOpacity = 1.0
+        self.btnFBSignUp.clipsToBounds = true
     }
 
     deinit {

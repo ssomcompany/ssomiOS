@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
-class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, FBSDKLoginButtonDelegate {
 
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var scrollView: SSCustomScrollView!
@@ -21,6 +22,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var viewPasswordBottomLine: UIImageView!
     @IBOutlet var btnSignIn: UIButton!
+    @IBOutlet var btnFBLogin: FBSDKLoginButton!
     @IBOutlet var btnFindPassword: UIButton!
     @IBOutlet var btnSignUp: UIButton!
 
@@ -52,6 +54,14 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.btnFindPassword.layer.shadowOffset = CGSizeMake(0, 1)
         self.btnFindPassword.layer.shadowRadius = 1.0
         self.btnFindPassword.layer.shadowOpacity = 1.0
+
+        self.btnFBLogin.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnFBLogin.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFBLogin.layer.shadowRadius = 1.0
+        self.btnFBLogin.layer.shadowOpacity = 1.0
+        self.btnFBLogin.clipsToBounds = true
+        self.btnFBLogin.delegate = self
+        self.btnFBLogin.readPermissions = ["public_profile", "email"]
 
         self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
         self.btnSignUp.layer.shadowOffset = CGSizeMake(0, 1)
@@ -200,5 +210,44 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
             }
         }
+    }
+
+// MARK:- FBSDKLoginButtonDelegate
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("%@", #function)
+
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"]).startWithCompletionHandler { (connection, resultOfQuery, error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+            } else {
+                print("%@", resultOfQuery)
+
+                if let res = resultOfQuery as? [String: String] {
+
+                    SSAccountManager.sharedInstance.doSignIn(withFBSDKAccessToken: result.token.tokenString, email: res["email"]!, vc: self, completion: { [weak self] (finish) in
+                        if let wself = self {
+                            if finish {
+                                wself.tapClose(nil)
+
+                                guard let completionBlock = wself.completion else {
+                                    return nil
+                                }
+                                completionBlock(finish: finish)
+                            } else {
+                                FBSDKLoginManager().logOut()
+                            }
+                        }
+                        
+                        return nil
+                    })
+                }
+            }
+        }
+    }
+
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("%@", #function)
     }
 }

@@ -20,6 +20,11 @@ target 'Ssom' do
  pod 'Firebase/Messaging'
  pod 'Firebase/RemoteConfig'
 
+ pod 'Bolts'
+ pod 'FBSDKCoreKit'
+ pod 'FBSDKShareKit'
+ pod 'FBSDKLoginKit' 
+
  pod 'Reveal-SDK', :configurations => ['Debug']
 
  pod 'OneSignal'

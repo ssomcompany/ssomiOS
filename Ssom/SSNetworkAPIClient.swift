@@ -327,6 +327,120 @@ public struct SSNetworkAPIClient {
         }
 
     }
+    static func postLogin(withFBSDKAccessToken token: String, email: String, completion: (error:NSError?) -> Void ) {
+
+        guard let playerId = SSAccountManager.sharedInstance.oneSignalPlayerId else {
+            var errorCode = 601
+            var errorDescription = "Unknown"
+            if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errorCode) {
+                errorCode = errorInfo.0
+                errorDescription = errorInfo.1
+            }
+
+            let error = NSError(domain: "com.ssom.error.AuthFailed.NoPushKey", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+            completion(error: error)
+
+            return
+        }
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        // Basic Auth
+        Alamofire.request(.POST,
+            SSNetworkContext.serverUrlPrefixt+"facebook",
+            parameters: ["playerId": playerId],
+            encoding: .JSON,
+            headers: ["Authorization": "Bearer " + token])
+            .responseJSON { response in
+
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
+
+                        if let token = rawDatas["token"] as? String {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
+
+                            completion(error: nil)
+
+                            if let imageUrl = rawDatas["profileImgUrl"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                            }
+
+                            if let auth = FIRAuth.auth() {
+                                auth.signInWithEmail(email, password: "facebook", completion: { (user, error) in
+                                    if let err = error {
+                                        print("Firebase Sign-in is failed!! : \(err)")
+                                    } else {
+                                        print("Firebase Sign-in succeeds!! : \(user)")
+                                    }
+                                })
+                            }
+
+                            SSNetworkAPIClient.getUser(token, email: email, completion: { (model, error) in
+                                if let err = error {
+                                    print(err.localizedDescription)
+
+                                    SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                                } else {
+                                    if let m = model {
+                                        SSNetworkContext.sharedInstance.saveSharedAttribute(m.toDictionary(), forKey: "userModel")
+                                    }
+                                }
+                            })
+
+                        } else {
+                            let errorHandleBlock: (errorParamName: String, datas: [String: AnyObject]) -> Void = { (name, datas) in
+                                var errorCode = 999
+                                var errorDescription = datas["result"] as! String
+                                if let err = rawDatas[name] as? Int {
+                                    errorCode = err
+                                } else {
+                                    if let errName = datas["msg"] as? String {
+                                        if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
+                                            errorCode = errorInfo.0
+                                            errorDescription = errorInfo.1
+                                        } else {
+                                            errorDescription = errName
+                                        }
+                                    }
+                                }
+                                let error = NSError(domain: "com.ssom.error.ServeError.AuthFailed", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+                                completion(error: error)
+                            }
+
+                            if rawDatas.keys.contains("err") {
+                                errorHandleBlock(errorParamName: "err", datas: rawDatas)
+                            } else if rawDatas.keys.contains("error") {
+                                errorHandleBlock(errorParamName: "error", datas: rawDatas)
+                            }
+                            else {
+                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+
+                                completion(error: error)
+                            }
+
+                        }
+                    } else {
+                        let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+                        
+                        completion(error: error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+                    
+                    completion(error: response.result.error!)
+                }
+                
+                indicator.hideIndicator()
+        }
+        
+    }
 
     static func postLogout(token: String, completion: (error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
@@ -452,7 +566,7 @@ public struct SSNetworkAPIClient {
         indicator.showIndicator()
 
         Alamofire.request(.DELETE,
-                          SSNetworkContext.serverUrlPrefixt+"profileImgUrl",
+                          SSNetworkContext.serverUrlPrefixt+"users/profileImgUrl",
                           encoding: .JSON,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in

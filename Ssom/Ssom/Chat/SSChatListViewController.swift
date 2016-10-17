@@ -141,8 +141,14 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
             if data.chatroomId == newMessage.chatroomId {
                 self.datas.removeAtIndex(index)
 
-                data.unreadCount += 1
-                data.lastMessage = newMessage.message
+                if newMessage.messageType == .Request {
+                    data.meetRequestStatus = .Received
+                } else if newMessage.messageType == .Cancel {
+                    data.meetRequestStatus = .Cancelled
+                } else {
+                    data.unreadCount += 1
+                    data.lastMessage = newMessage.message
+                }
 
                 self.datas.insert(data, atIndex: 0)
 

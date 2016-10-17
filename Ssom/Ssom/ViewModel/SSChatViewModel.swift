@@ -9,8 +9,11 @@
 import Foundation
 
 enum SSChatMessageType: String {
-    case NORMAL = "NORMAL"
-    case UNKNOWN = "UNKNOWN"
+    case Normal = "NORMAL"
+    case Request = "request"
+    case Approve = "approve"
+    case Cancel = "cancel"
+    case Unknown = "UNKNOWN"
 }
 
 public struct SSChatViewModel {
@@ -27,7 +30,7 @@ public struct SSChatViewModel {
         self.toUserId = ""
         self.message = ""
         self.messageDateTime = NSDate()
-        self.messageType = .NORMAL
+        self.messageType = .Normal
     }
 
     init(modelDict: [String: AnyObject]) {
@@ -36,11 +39,15 @@ public struct SSChatViewModel {
         } else {
             if let chatroomId = modelDict["chatroomId"] as? Int {
                 self.chatroomId = String(chatroomId)
+            } else if let id = modelDict["id"] as? Int {
+                self.chatroomId = String(id)
             }
         }
 
         if let fromUserId = modelDict["fromUserId"] as? String {
             self.fromUserId = fromUserId
+        } else if let userId = modelDict["userId"] as? String {
+            self.fromUserId = userId
         } else {
             self.fromUserId = ""
         }
@@ -69,8 +76,12 @@ public struct SSChatViewModel {
 
         if let messageType = modelDict["msgType"] as? String {
             self.messageType = SSChatMessageType(rawValue: messageType)!
+        } else if let messageType = modelDict["status"] as? String {
+            self.messageType = SSChatMessageType(rawValue: messageType)!
+        } else if let _ = modelDict["deletedTimestamp"] {
+            self.messageType = .Cancel
         } else {
-            self.messageType = .UNKNOWN
+            self.messageType = .Unknown
         }
     }
 }

@@ -206,7 +206,16 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     func reload(with modelDict: [String: AnyObject]) {
         let newMessage = SSChatViewModel(modelDict: modelDict)
 
-        self.messages.append(newMessage)
+        switch newMessage.messageType {
+        case .Normal:
+            self.messages.append(newMessage)
+        case .Request:
+            self.showMeetRequest(false, status: .Received)
+        case .Approve:
+            self.showMeetRequest(true, status: .Accepted)
+        default:
+            break
+        }
 
         self.tableViewChat.reloadData()
 
@@ -221,14 +230,32 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func tapBack() {
-        self.navigationController?.popViewControllerAnimated(true)
+        if self.meetRequestStatus == .Accepted {
+            SSAlertController.alertTwoButton(title: "Info",
+                                             message: "만남 중에는 채팅방을 나갈 수 없습니다.\n만남을 종료하고 나가시겠습니까?",
+                                             vc: self,
+                                             button1Completion: { (action) in
+                                                self.cancelMeetRequest()
+                                                self.navigationController?.popViewControllerAnimated(true)
+                }, button2Completion: { (action) in
+                    //
+            })
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     func tapMeetRequest() {
         print("tapped meet request!!")
 
         switch self.meetRequestStatus {
-        case .Requested, .Accepted:
+        case .Requested:
+            SSAlertController.alertTwoButton(title: "알림", message: "만남 요청을 취소 하시겠어요?", vc: self, button1Title: "요청취소", button2Title: "닫기", button1Completion: { (action) in
+                self.cancelMeetRequest()
+                }, button2Completion: { (action) in
+                    //
+            })
+        case .Accepted:
             SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
                 self.cancelMeetRequest()
                 }, button2Completion: { (action) in

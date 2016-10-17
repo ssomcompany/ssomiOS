@@ -45,7 +45,7 @@ class SSHeartTableViewCell: UITableViewCell {
         }
     }
 
-    func configView(heartGood: SSHeartGoods, priceWithTax: String) {
+    func configView(heartGood: SSHeartGoods, priceWithTax: String, heartCount: String) {
 
         self.heartGood = heartGood
 
@@ -55,7 +55,7 @@ class SSHeartTableViewCell: UITableViewCell {
         self.lbPackage.hidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
         self.lbPackage.text = heartGood.tagName
         self.imgViewHeartType.image = heartGood.iconImage
-        self.lbHeartCount.text = "\(heartGood.heartCount)"
+        self.lbHeartCount.text = heartCount
         self.lbHeartPrice.text = priceWithTax
         self.imgViewSaleIcon.image = heartGood.saleIconImage
         self.lbSalePercent.text = heartGood.sale

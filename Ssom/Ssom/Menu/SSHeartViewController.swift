@@ -23,19 +23,6 @@ enum SSHeartGoods: Int {
         return SSHeartGoods.AllProductIDs[self.rawValue]
     }
 
-    var heartCount: Int {
-        switch self {
-        case .heart2Package:
-            return 2
-        case .heart8Package:
-            return 8
-        case .heart17Package:
-            return 17
-        case .heart28Package:
-            return 28
-        }
-    }
-
     var isEconomyPackage: Bool {
         switch self {
         case .heart8Package:
@@ -77,19 +64,6 @@ enum SSHeartGoods: Int {
             return nil
         case .heart28Package:
             return "인기"
-        }
-    }
-
-    var price: String {
-        switch self {
-        case .heart2Package:
-            return "$ 3.99"
-        case .heart8Package:
-            return "$ 12.99"
-        case .heart17Package:
-            return "$ 23.99"
-        case .heart28Package:
-            return "$ 32.99"
         }
     }
 
@@ -206,13 +180,15 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         let heartGood = SSHeartGoods(rawValue: indexPath.row)!
         var priceWithTax: String = "$"
+        var heartCount: String = ""
         for product in self.products {
             if product.productIdentifier == heartGood.productID {
                 priceWithTax.appendContentsOf("\(product.price)")
+                heartCount = product.localizedTitle.stringByReplacingOccurrencesOfString("하트", withString: "")
                 break
             }
         }
-        cell.configView(SSHeartGoods(rawValue: indexPath.row)!, priceWithTax: priceWithTax)
+        cell.configView(SSHeartGoods(rawValue: indexPath.row)!, priceWithTax: priceWithTax, heartCount: heartCount)
         cell.selectionStyle = .None
 
         return cell

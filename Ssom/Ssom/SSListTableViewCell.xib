@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jN3-Xd-2ok" id="57r-fi-ckc">
-                <frame key="frameInset" width="414" height="93"/>
+                <frame key="frameInset" width="414" height="93.666666666666671"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8X-Va-9Lw">
@@ -69,8 +69,8 @@
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Z0A-Ua-y3D" secondAttribute="trailing" id="32t-KD-qqY"/>
                                     <constraint firstItem="fMB-B2-YMI" firstAttribute="leading" secondItem="i1O-ZM-gOU" secondAttribute="leading" id="8R1-zg-bUi"/>
-                                    <constraint firstAttribute="bottom" secondItem="UK6-lH-Fzb" secondAttribute="bottom" id="Ie5-iz-xaJ"/>
                                     <constraint firstAttribute="bottom" secondItem="fMB-B2-YMI" secondAttribute="bottom" id="Vd6-yC-K1S"/>
                                     <constraint firstAttribute="bottom" secondItem="Z0A-Ua-y3D" secondAttribute="bottom" id="beC-vc-qlf"/>
                                     <constraint firstItem="Z0A-Ua-y3D" firstAttribute="top" secondItem="i1O-ZM-gOU" secondAttribute="top" id="hE3-g5-i2z"/>
@@ -79,6 +79,11 @@
                                     <constraint firstAttribute="trailing" secondItem="UK6-lH-Fzb" secondAttribute="trailing" id="wiQ-84-f1v"/>
                                     <constraint firstItem="Z0A-Ua-y3D" firstAttribute="leading" secondItem="fMB-B2-YMI" secondAttribute="trailing" constant="9" id="x1Z-u8-evz"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="32t-KD-qqY"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
                                 <constraints>
@@ -132,6 +137,9 @@
                 <outlet property="btnDeleteSsom" destination="pcm-Lq-W8w" id="HXR-d0-Jgm"/>
                 <outlet property="constCellViewLeadingToSuper" destination="CRX-gH-1HJ" id="Qua-rd-Wlr"/>
                 <outlet property="constCellViewTrailingToSuper" destination="F2K-I8-AWi" id="uvS-fp-wlt"/>
+                <outlet property="constDistanceLabelTopToSuper" destination="inM-6g-cbz" id="3Vf-po-IfV"/>
+                <outlet property="constUpdatedTimeLabelLeadingToMemberInfoLabel" destination="x1Z-u8-evz" id="5Gs-f7-Lvg"/>
+                <outlet property="constUpdatedTimeLableTrailingToSuper" destination="32t-KD-qqY" id="Vjy-u8-jAc"/>
                 <outlet property="descriptionLabel" destination="5G7-6s-2iE" id="7Jm-qY-NqQ"/>
                 <outlet property="distanceLabel" destination="UK6-lH-Fzb" id="Y0c-Bd-PIK"/>
                 <outlet property="imageTapButton" destination="hR0-BV-lOa" id="0fC-vt-Wk2"/>

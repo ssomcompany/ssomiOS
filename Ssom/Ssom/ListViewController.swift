@@ -491,10 +491,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
+    func doSsom(ssomType: SSType, model: SSViewModel) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
-            if postId != "" {
-                SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
+            if model.postId != "" {
+                SSNetworkAPIClient.postChatroom(token, postId: model.postId, completion: { (chatroomId, error) in
 
                     if let err = error {
                         print(err.localizedDescription)
@@ -505,12 +505,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
                             let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
                             vc.ssomType = ssomType
+                            vc.ageArea = Util.getAgeArea(model.minAge)
+                            if let userCount = model.userCount {
+                                vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
+                            }
                             vc.chatRoomId = createdChatroomId
                             vc.myImageUrl = SSAccountManager.sharedInstance.profileImageUrl
-                            vc.partnerImageUrl = partnerImageUrl
+                            vc.partnerImageUrl = model.imageUrl
 
-                            vc.ssomLatitude = ssomLatitude
-                            vc.ssomLongitude = ssomLongitude
+                            vc.ssomLatitude = model.latitude
+                            vc.ssomLongitude = model.longitude
+
+                            vc.meetRequestUserId = model.meetRequestUserId
+                            vc.meetRequestStatus = model.meetRequestStatus
 
                             self.navigationController?.pushViewController(vc, animated: true)
                         }

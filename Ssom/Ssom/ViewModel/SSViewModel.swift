@@ -23,6 +23,7 @@ public class SSViewModel {
     var userCount: Int!
     var createdDatetime: NSDate
     var assignedChatroomId: String?
+    var meetRequestUserId: String?
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested
 
     init() {
@@ -111,6 +112,9 @@ public class SSViewModel {
             }
         }
 
+        if let requestUserId = modelDict["fromUserId"] as? String {
+            self.meetRequestUserId = requestUserId
+        }
         if let requestStatus = modelDict["status"] as? String {
             self.meetRequestStatus = SSMeetRequestOptions(rawValue: requestStatus)!
         }

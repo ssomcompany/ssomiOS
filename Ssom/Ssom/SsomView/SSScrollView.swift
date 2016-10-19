@@ -17,7 +17,7 @@ enum SSScrollViewDirection: Int {
 protocol SSScrollViewDelegate: class {
     func closeScrollView(needToReload: Bool)
     func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double)
+    func doSsom(ssomType: SSType, model: SSViewModel)
 }
 
 class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
@@ -236,8 +236,8 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         }
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
-        guard let _ = self.delegate?.doSsom(ssomType, postId: postId, partnerImageUrl: partnerImageUrl, ssomLatitude: ssomLatitude, ssomLongitude: ssomLongitude) else {
+    func doSsom(ssomType: SSType, model: SSViewModel) {
+        guard let _ = self.delegate?.doSsom(ssomType, model: model) else {
             return
         }
     }

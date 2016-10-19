@@ -18,8 +18,11 @@ class SSListTableViewCell: UITableViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var updatedTimeLabel: UILabel!
+    @IBOutlet var constUpdatedTimeLabelLeadingToMemberInfoLabel: NSLayoutConstraint!
+    @IBOutlet var constUpdatedTimeLableTrailingToSuper: NSLayoutConstraint!
     @IBOutlet var memberInfoLabel: UILabel!
     @IBOutlet var distanceLabel: UILabel!
+    @IBOutlet var constDistanceLabelTopToSuper: NSLayoutConstraint!
     @IBOutlet var imageTapButton: UIButton!
     
     @IBOutlet var viewCell: UIView!
@@ -49,6 +52,16 @@ class SSListTableViewCell: UITableViewCell {
         self.viewCell.layer.shadowRadius = 1.0
         self.viewCell.layer.shadowOffset = CGSizeMake(2, 0)
         self.viewCell.layer.shadowOpacity = 1.0
+    }
+
+    override func layoutSubviews() {
+        if UIScreen.mainScreen().bounds.width == 320.0 {
+            self.constUpdatedTimeLabelLeadingToMemberInfoLabel.active = false
+            self.constUpdatedTimeLableTrailingToSuper.active = true
+            self.constDistanceLabelTopToSuper.constant = 10
+        }
+
+        super.layoutSubviews()
     }
 
     func configView(model: SSViewModel, isMySsom: Bool, isSsom: Bool, withCoordinate coordinate: CLLocationCoordinate2D) {
@@ -89,7 +102,7 @@ class SSListTableViewCell: UITableViewCell {
 
                             self.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
 
-                            if model.meetRequestStatus == .Received {
+                            if model.meetRequestStatus == .Accepted {
                                 if isSsom {
                                     self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngGreenBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
 

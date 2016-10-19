@@ -16,7 +16,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
 //    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     @IBOutlet var viewFilterBackground: UIView!
-    @IBOutlet var lbFilteredAgePeople: UILabel!
 
     @IBOutlet var btnWrite: UIButton!
 
@@ -244,7 +243,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 //            self.view.layoutIfNeeded()
 
-            self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
 
             self.filterView.alpha = 1.0
@@ -254,7 +252,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            self.constBottomInfoViewHeight.constant = 69.0
 //            self.constBottomInfoViewTrailingToSuper.constant = 154.0
 
-            self.lbFilteredAgePeople.alpha = 1.0
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)
         }
     }
@@ -456,8 +453,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.filterModel = filterViewModel
         self.datas = self.mainViewModel.datas
         self.ssomListTableView.reloadData()
-        
-//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

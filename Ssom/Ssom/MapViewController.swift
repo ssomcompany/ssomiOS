@@ -21,7 +21,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var viewFilterBackground: UIView!
-    @IBOutlet var lbFilteredAgePeople: UILabel!
 //    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
 //    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     
@@ -339,7 +338,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
 //            self.view.layoutIfNeeded()
 
-            self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
 
             self.filterView.alpha = 1.0
@@ -349,7 +347,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 //            self.constBottomInfoViewHeight.constant = 69.0
 //            self.constBottomInfoViewTrailingToSuper.constant = 154.0
 
-            self.lbFilteredAgePeople.alpha = 1.0
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)
         }
     }
@@ -569,8 +566,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.filterModel = filterViewModel
         self.datas = self.datasOfAllSsom
         self.showMarkers()
-
-//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate

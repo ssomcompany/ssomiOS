@@ -81,23 +81,15 @@
                                             <action selector="tapFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X0t-yz-3KL"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체, 전체" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Om7-AB-KOj">
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="SQd-kY-OEr" secondAttribute="bottom" id="99r-Dp-af4"/>
                                     <constraint firstAttribute="bottom" secondItem="Pu5-ru-cnK" secondAttribute="bottom" id="JHf-RW-Qm7"/>
-                                    <constraint firstItem="Om7-AB-KOj" firstAttribute="centerY" secondItem="SQd-kY-OEr" secondAttribute="centerY" id="KLZ-VQ-4Fl"/>
                                     <constraint firstItem="SQd-kY-OEr" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" id="MZT-ih-RWG"/>
-                                    <constraint firstAttribute="width" secondItem="3k0-s1-1ct" secondAttribute="height" multiplier="66:23" id="NbU-Jf-YoZ"/>
+                                    <constraint firstAttribute="width" secondItem="3k0-s1-1ct" secondAttribute="height" multiplier="1:1" id="NbU-Jf-YoZ"/>
                                     <constraint firstItem="Pu5-ru-cnK" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="Zck-of-CeJ"/>
-                                    <constraint firstItem="Om7-AB-KOj" firstAttribute="leading" secondItem="SQd-kY-OEr" secondAttribute="trailing" constant="21" id="kj2-Z8-il9"/>
                                     <constraint firstItem="Pu5-ru-cnK" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" constant="1" id="kvu-tk-2sb"/>
                                     <constraint firstItem="SQd-kY-OEr" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="mnz-OZ-cp2"/>
-                                    <constraint firstAttribute="trailing" secondItem="Om7-AB-KOj" secondAttribute="trailing" constant="30" id="nmB-ZH-lIz"/>
                                     <constraint firstAttribute="trailing" secondItem="Pu5-ru-cnK" secondAttribute="trailing" id="u1C-SL-CMF"/>
                                 </constraints>
                             </view>
@@ -192,7 +184,6 @@
                         <outlet property="btnIPay" destination="VC7-ei-KcX" id="ZSa-sa-OCM"/>
                         <outlet property="btnYouPay" destination="puq-gM-UxI" id="V1F-Ej-WZH"/>
                         <outlet property="constViewPayButtonLineLeadingToButtonIPay" destination="7v2-Ef-Qbc" id="kTQ-XV-TNq"/>
-                        <outlet property="lbFilteredAgePeople" destination="Om7-AB-KOj" id="rm2-vL-6Mt"/>
                         <outlet property="mainView" destination="TOk-Md-hmy" id="aGJ-vw-d5K"/>
                         <outlet property="myLocationButton" destination="1Me-Mu-v0q" id="SSr-Eg-NK7"/>
                         <outlet property="navigationItem" destination="JzG-2m-bAY" id="iDJ-wG-R6L"/>
@@ -280,24 +271,16 @@
                                             <action selector="tapFilterButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="EqO-L6-0ta"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체, 전체" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNy-b2-vKz">
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vNy-b2-vKz" secondAttribute="trailing" constant="30" id="17Y-cu-uTd"/>
                                     <constraint firstAttribute="bottom" secondItem="sOY-aR-jK1" secondAttribute="bottom" constant="1" id="6Mx-ns-upr"/>
                                     <constraint firstItem="sOY-aR-jK1" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="9Pr-vj-vmm"/>
                                     <constraint firstAttribute="bottom" secondItem="tFS-Jw-YTg" secondAttribute="bottom" id="Dwz-BT-lMm"/>
-                                    <constraint firstAttribute="width" secondItem="4cE-r7-rmG" secondAttribute="height" multiplier="199:69" id="RdM-mG-4hH"/>
+                                    <constraint firstAttribute="width" secondItem="4cE-r7-rmG" secondAttribute="height" multiplier="1:1" id="RdM-mG-4hH"/>
                                     <constraint firstItem="sOY-aR-jK1" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" constant="1" id="SPy-xQ-J7b"/>
-                                    <constraint firstItem="vNy-b2-vKz" firstAttribute="leading" secondItem="tFS-Jw-YTg" secondAttribute="trailing" constant="21" id="Vja-U8-cPD"/>
                                     <constraint firstItem="tFS-Jw-YTg" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" id="cIH-0S-vxE"/>
                                     <constraint firstAttribute="trailing" secondItem="sOY-aR-jK1" secondAttribute="trailing" id="osG-mr-N9q"/>
-                                    <constraint firstItem="vNy-b2-vKz" firstAttribute="centerY" secondItem="tFS-Jw-YTg" secondAttribute="centerY" id="so0-hb-lsK"/>
                                     <constraint firstItem="tFS-Jw-YTg" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="wSv-3w-kEX"/>
                                 </constraints>
                             </view>
@@ -374,7 +357,6 @@
                         <outlet property="btnWrite" destination="6oW-Xv-XcV" id="9hG-yZ-94B"/>
                         <outlet property="btnYouPay" destination="hYp-m4-vLX" id="Sjq-gE-zbw"/>
                         <outlet property="constViewPayButtonBottomLineLeadingToButtonIPay" destination="GQY-Mp-re4" id="3QW-a4-6KW"/>
-                        <outlet property="lbFilteredAgePeople" destination="vNy-b2-vKz" id="IuN-Oy-XaF"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
                         <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
                         <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
@@ -832,7 +814,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MasterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAM-Ki-GQ0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -935,6 +917,6 @@
         <image name="writePhotoArea.png" width="241" height="201"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CUJ-52-fKz"/>
+        <segue reference="R5c-a2-BYk"/>
     </inferredMetricsTieBreakers>
 </document>

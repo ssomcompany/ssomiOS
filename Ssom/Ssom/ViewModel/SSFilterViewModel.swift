@@ -30,7 +30,7 @@ public struct SSFilterViewModel {
         let ageType = SSAgeType(rawValue: ageTypeRawValue)
 
         for filterAgeAreaType in self.ageTypes {
-            if filterAgeAreaType.toIntType() == ageType {
+            if filterAgeAreaType.toInt() == ageType {
                 return true
             }
         }
@@ -40,7 +40,7 @@ public struct SSFilterViewModel {
 
     func includedAgeAreaTypes(ageType: SSAgeType) -> Bool {
         for filterAgeAreaType in self.ageTypes {
-            if filterAgeAreaType.toIntType() == ageType {
+            if filterAgeAreaType.toInt() == ageType {
                 return true
             }
         }
@@ -61,7 +61,7 @@ public struct SSFilterViewModel {
     func includedPeopleCountStringTypes(peopleCountTypeRawValue: Int) -> Bool {
         if let peopleCountType = SSPeopleCountType(rawValue: peopleCountTypeRawValue) {
             for filterPeopleCountStringType in self.peopleCountTypes {
-                if filterPeopleCountStringType.toIntType() == peopleCountType {
+                if filterPeopleCountStringType.toInt() == peopleCountType {
                     return true
                 }
             }
@@ -72,7 +72,7 @@ public struct SSFilterViewModel {
 
     func includedPeopleCountStringTypes(peopleCountType: SSPeopleCountType) -> Bool {
         for filterPeopleCountStringType in self.peopleCountTypes {
-            if filterPeopleCountStringType.toIntType() == peopleCountType {
+            if filterPeopleCountStringType.toInt() == peopleCountType {
                 return true
             }
         }

@@ -30,6 +30,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     var barButtonItems: SSNavigationBarItems!
 
     var chatRoomId: String?
+    var ageArea: SSAgeAreaType = .Unknown
+    var peopleCount: SSPeopleCountStringType = .All
     var ssomType: SSType = .SSOM
     var postId: String?
     var myImageUrl: String?
@@ -112,6 +114,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
+        var backButtonFrame = self.barButtonItems.backBarButtonView.frame
+        backButtonFrame.size.width = 60
+        self.barButtonItems.backBarButtonView.frame = backButtonFrame
 
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
@@ -129,6 +134,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         naviTitleView.sizeToFit()
         self.navigationItem.titleView = naviTitleView;
 
+        self.showChatInfoOnNavigation()
+
         let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
         barButtonSpacer.width = -10
 
@@ -136,6 +143,36 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         let meetRequestButton = UIBarButtonItem(customView: barButtonItems.meetRequestButtonView!)
 
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
+    }
+
+    func showChatInfoOnNavigation() {
+        if let naviTitleView = self.navigationItem.titleView as? UILabel {
+            let peopleCount = self.peopleCount == .All ? "" : ", \(self.peopleCount.rawValue)"
+
+            let titleAttributedString = NSMutableAttributedString(string: "Chat \(self.ageArea.rawValue)\(peopleCount)")
+
+            if #available(iOS 8.2, *) {
+                let firstAttributesDict = [NSFontAttributeName: UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)]
+                let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
+                                            NSFontAttributeName: UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)]
+                titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
+                titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
+            } else {
+                // Fallback on earlier versions
+                if let font = UIFont(name: "HelveticaNeue-Medium", size: 18) {
+                    let firstAttributesDict = [NSFontAttributeName: font]
+                    titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
+                }
+                if let font = UIFont(name: "HelveticaNeue-Medium", size: 13) {
+                    let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
+                                                NSFontAttributeName: font]
+                    titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
+                }
+            }
+
+            naviTitleView.attributedText = titleAttributedString
+            naviTitleView.sizeToFit()
+        }
     }
 
     override func initView() {

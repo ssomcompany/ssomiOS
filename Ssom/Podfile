@@ -8,6 +8,8 @@ target 'Ssom' do
  pod 'Alamofire'
  pod 'SDWebImage'
 
+ pod 'Toast-Swift', '~> 1.4.0'
+
  pod 'Fabric'
  pod 'Crashlytics'
 

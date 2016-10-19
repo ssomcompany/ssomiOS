@@ -60,6 +60,9 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
+        var backButtonFrame = self.barButtonItems.backBarButtonView.frame
+        backButtonFrame.size.width = 60
+        self.barButtonItems.backBarButtonView.frame = backButtonFrame
 
         self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
@@ -127,6 +130,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
                         self.setChattingCount(self.unreadCount)
 
+                        self.showChatroomCountOnNavigation()
                         self.chatListTableView.reloadData()
                     }
                 }
@@ -159,6 +163,13 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.setChattingCount(self.unreadCount)
 
         self.chatListTableView.reloadData()
+    }
+
+    func showChatroomCountOnNavigation() {
+        if let naviTitleView = self.navigationItem.titleView as? UILabel {
+            naviTitleView.text = "Chat list (\(self.datas.count))"
+            naviTitleView.sizeToFit()
+        }
     }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
@@ -202,6 +213,10 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                         vc.chatRoomId = model.chatroomId
                         vc.ssomType = model.ssomViewModel.ssomType
                         vc.postId = model.ssomViewModel.postId
+                        vc.ageArea = Util.getAgeArea(model.ssomViewModel.minAge)
+                        if let userCount = model.ssomViewModel.userCount {
+                            vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
+                        }
 
                         if cell.isOwnerUser {
                             vc.myImageUrl = model.ownerImageUrl
@@ -239,6 +254,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                 if let indexPath: NSIndexPath = self.chatListTableView.indexPathForCell(cell) {
                     self.datas.removeAtIndex(indexPath.row)
                     self.chatListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self.showChatroomCountOnNavigation()
                 }
             }
         }

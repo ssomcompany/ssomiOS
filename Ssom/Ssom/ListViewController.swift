@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import SDWebImage
+import Toast_Swift
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
@@ -463,6 +464,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.filterModel = filterViewModel
         self.datas = self.mainViewModel.datas
         self.ssomListTableView.reloadData()
+
+        self.view.makeToast("쏨 필터가 적용 되었습니다 =)", duration: 2.0, position: .Top)
     }
 
 // MARK: - SSScrollViewDelegate

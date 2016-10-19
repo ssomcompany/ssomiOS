@@ -291,7 +291,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         completion()
     }
 
-    func setMarker(data: SSViewModel,_ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
+    func setMarker(data: SSViewModel, _ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
         let marker = GMSMarker()
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
@@ -306,6 +306,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 51.6, 51.6))
 
                     marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+
+                    if data.meetRequestStatus == .Received {
+                        if isSell {
+                            marker.icon = UIImage.mergeImages(firstImage: marker.icon!, secondImage: UIImage(named: "ssomIngGreen")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                        } else {
+                            marker.icon = UIImage.mergeImages(firstImage: marker.icon!, secondImage: UIImage(named: "ssomIngRed")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                        }
+                    }
                 }
             })
         } else {

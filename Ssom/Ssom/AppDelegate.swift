@@ -73,6 +73,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
         }, handleNotificationAction: { (openedResult) in
             print("openedResult : \(openedResult)")
+
+            guard let notification = openedResult.notification else { return }
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let keyWindow = appDelegate.window else { return }
+            guard let rootViewController = keyWindow.rootViewController else { return }
+            if rootViewController is SSDrawerViewController {
+                guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
+                if mainViewController is UINavigationController {
+                    print("Now MainViewController is : NavigationController")
+
+                    guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
+                    print("Now TopViewController is : \(topViewController)")
+                    if topViewController is SSChatViewController {
+                        // add the received message to the bottom fo the message lists
+                        (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSChatListViewController {
+                        // move up the chat room of the received message & add +1 to unread count
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSMasterViewController {
+                        // add +1 to unread count
+                        (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    }
+                } else {
+                    print("Now MainViewController is : \(mainViewController)")
+                }
+            } else {
+                print("Now view controller is : \(rootViewController)")
+            }
         }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
 
         // Facebook

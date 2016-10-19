@@ -153,9 +153,8 @@ class SSMasterViewController: UIViewController {
 
     func reload(with modelDict: [String: AnyObject]) {
 //        let newMessage = SSChatViewModel(modelDict: modelDict)
-
-        self.unreadCount += 1
-        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
+        
+        self.loadData()
     }
 
     @IBAction func switchView(sender: AnyObject) {

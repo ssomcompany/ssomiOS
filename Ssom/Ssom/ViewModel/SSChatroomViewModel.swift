@@ -70,7 +70,7 @@ public struct SSChatroomViewModel {
             self.participantImageUrl = imageUrl
         }
 
-        if let createdDateTime = modelDict["createdTimestamp"] as? Int {
+        if let createdDateTime = modelDict["lastTimestamp"] as? Int {
             self.createdDateTime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDateTime)/1000.0)
         } else {
             self.createdDateTime = NSDate()

@@ -81,7 +81,7 @@ public struct SSChatViewModel {
         } else if let _ = modelDict["deletedTimestamp"] {
             self.messageType = .Cancel
         } else {
-            self.messageType = .Unknown
+            self.messageType = .Normal
         }
     }
 }

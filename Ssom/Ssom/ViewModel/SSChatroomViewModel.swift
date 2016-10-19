@@ -46,7 +46,13 @@ public struct SSChatroomViewModel {
             if let chatroomId = modelDict["id"] as? Int {
                 self.chatroomId = String(chatroomId)
             } else {
-                self.chatroomId = ""
+                if let chatroomId = modelDict["chatroomId"] as? String {
+                    self.chatroomId = chatroomId
+                } else if let chatroomId = modelDict["chatroomId"] as? Int {
+                    self.chatroomId = String(chatroomId)
+                } else {
+                    self.chatroomId = ""
+                }
             }
         }
 
@@ -92,10 +98,16 @@ public struct SSChatroomViewModel {
 
         if let requestUserId = modelDict["requestId"] as? String {
             self.meetRequestUserId = requestUserId
+        } else if let fromUserId = modelDict["fromUserId"] as? String {
+            self.meetRequestUserId = fromUserId
+        } else if let userId = modelDict["userId"] as? String {
+            self.meetRequestUserId = userId
         }
 
         if let requestStatus = modelDict["status"] as? String {
             self.meetRequestStatus = SSMeetRequestOptions(rawValue: requestStatus)!
+        } else if let _ = modelDict["deletedTimestamp"] {
+            self.meetRequestStatus = .Cancelled
         }
     }
 }

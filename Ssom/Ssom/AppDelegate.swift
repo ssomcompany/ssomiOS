@@ -223,6 +223,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
     func drawerViewController(drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
         print("Drawer view controller may update to state `\(paneState)` for direction `\(direction)`")
+
+        if paneState == .Open {
+            if let menuViewController = drawerViewController.drawerViewController as? SSMenuViewController {
+                if let headerView = menuViewController.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                    headerView.configView()
+                }
+            }
+        }
     }
 
     func drawerViewController(drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {

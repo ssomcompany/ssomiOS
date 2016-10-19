@@ -294,7 +294,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             UIView.animateWithDuration(0.3, animations: {
                 self.btnWrite.transform = transform
             }) { (finish) in
-                self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+                if SSAccountManager.sharedInstance.isAuthorized {
+                    self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+                } else {
+                    SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                        if finish {
+                            self.performSegueWithIdentifier("SSWriteViewSegueFromList", sender: nil)
+                        } else {
+                            self.showOpenAnimation()
+                        }
+                    })
+                }
             }
         }
     }
@@ -343,7 +353,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
 
             // check if my ssom exists
-            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
                 if loginedUserId == data.userId {
                     self.isAlreadyWrittenMySsom = true
                     self.mySsom = data

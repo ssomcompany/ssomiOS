@@ -138,30 +138,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         SSNetworkAPIClient
             .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
                       longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,
-                      completion: { [unowned self] (viewModels, error) -> Void in
+                      completion: { [weak self] (viewModels, error) -> Void in
+
+                        guard let wself = self else { return }
 
                         if let err = error {
                             print("error is : \(err.localizedDescription)")
 
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: { (action) in
+                            wself.showOpenAnimation()
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: { (action) in
                                 guard let block = completion else { return }
                                 block(finish: false)
                             })
 
                         } else {
                             if let models = viewModels {
-                                self.datasOfAllSsom = models
-                                self.datas = models
-                                print("result is : \(self.datasOfAllSsom)")
+                                wself.datasOfAllSsom = models
+                                wself.datas = models
+                                print("result is : \(wself.datasOfAllSsom)")
                                 
-                                self.showMarkers()
+                                wself.showMarkers()
                             }
+
+                            wself.showOpenAnimation()
 
                             guard let block = completion else { return }
                             block(finish: true)
                         }
-                        
-                        self.showOpenAnimation()
                 })
     }
 
@@ -232,7 +236,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         var index: Int = 0;
         for data in self.datas {
-            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
                 if loginedUserId == data.userId {
                     self.isAlreadyWrittenMySsom = true
                     self.mySsom = data
@@ -421,7 +425,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animateWithDuration(0.3, animations: {
                 self.writeButton.transform = transform
             }) { (finish) in
-                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+                if SSAccountManager.sharedInstance.isAuthorized {
+                    self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+                } else {
+                    SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                        if finish {
+                            self.loadingData(nil)
+                        } else {
+                            self.showOpenAnimation()
+                        }
+                    })
+                }
             }
         }
     }
@@ -519,7 +533,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     
                     index += 1
                 }
-
             }
         }
 

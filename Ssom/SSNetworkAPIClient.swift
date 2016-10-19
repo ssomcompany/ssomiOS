@@ -56,7 +56,7 @@ public struct SSNetworkAPIClient {
         if !(latitude == 0 && longitude == 0) {
 //            params = "?lat=\(latitude)&lng=\(longitude)"
         }
-        if let userId = SSAccountManager.sharedInstance.userModel?.userId {
+        if let userId = SSAccountManager.sharedInstance.userUUID {
             let queryString = "userId=\(userId)"
             if params == nil {
                 params = "?"+queryString
@@ -281,6 +281,9 @@ public struct SSNetworkAPIClient {
 
                         if let token = rawDatas["token"] as? String {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
+                            if let userUUID = rawDatas["userId"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(userUUID, forKey: "userId")
+                            }
 
                             completion(error: nil)
 
@@ -395,6 +398,9 @@ public struct SSNetworkAPIClient {
 
                         if let token = rawDatas["token"] as? String {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
+                            if let userUUID = rawDatas["userId"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(userUUID, forKey: "userId")
+                            }
 
                             completion(error: nil)
 

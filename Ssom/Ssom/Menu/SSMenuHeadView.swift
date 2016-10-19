@@ -62,7 +62,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
         if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
-            self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String
+            self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String
 
             let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
             self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)

@@ -45,7 +45,7 @@ class SSChatMessageTableCell: UITableViewCell {
         self.imgViewPartnerProfile.image = UIImage(named: "noneProfile")
         self.imgViewMyProfile.image = UIImage(named: "noneProfile")
 
-        if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+        if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
             if model.fromUserId == loginedUserId {
                 self.showMyViews()
 

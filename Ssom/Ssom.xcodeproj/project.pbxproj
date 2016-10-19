@@ -290,7 +290,7 @@
 		979A4A041BF4525A00FAFB21 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A021BF4525A00FAFB21 /* Util.swift */; };
 		979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */; };
 		979D76171DA11F700055B3EE /* SSCustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D76161DA11F700055B3EE /* SSCustomScrollView.swift */; };
-		97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */; };
+		97A6BFF41CCA81A500DA06D2 /* SSAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF31CCA81A500DA06D2 /* SSAccountManager.swift */; };
 		97A6BFF61CCA866C00DA06D2 /* SSChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF51CCA866C00DA06D2 /* SSChatListViewController.swift */; };
 		97A6BFF81CCA868C00DA06D2 /* SSChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */; };
 		97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2D1661D488FA700B5EBD2 /* SSIndicatorView.swift */; };
@@ -636,7 +636,7 @@
 		979A4A021BF4525A00FAFB21 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Ssom/Common/Util.swift; sourceTree = "<group>"; };
 		979A4A051BF4527400FAFB21 /* UIDevice+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Util.swift"; path = "Ssom/3rdLib/UIDevice+Util.swift"; sourceTree = "<group>"; };
 		979D76161DA11F700055B3EE /* SSCustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSCustomScrollView.swift; path = Ssom/3rdLib/SSCustomScrollView.swift; sourceTree = "<group>"; };
-		97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSAcountManager.swift; path = Ssom/Account/SSAcountManager.swift; sourceTree = "<group>"; };
+		97A6BFF31CCA81A500DA06D2 /* SSAccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSAccountManager.swift; path = Ssom/Account/SSAccountManager.swift; sourceTree = "<group>"; };
 		97A6BFF51CCA866C00DA06D2 /* SSChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatListViewController.swift; path = Chat/SSChatListViewController.swift; sourceTree = "<group>"; };
 		97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatViewController.swift; path = Chat/SSChatViewController.swift; sourceTree = "<group>"; };
 		97B2D1661D488FA700B5EBD2 /* SSIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSIndicatorView.swift; path = Ssom/Common/SSIndicatorView.swift; sourceTree = "<group>"; };
@@ -1105,7 +1105,7 @@
 		97A6BFF21CCA812500DA06D2 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				97A6BFF31CCA81A500DA06D2 /* SSAcountManager.swift */,
+				97A6BFF31CCA81A500DA06D2 /* SSAccountManager.swift */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -1730,7 +1730,7 @@
 				973003431BFCDF0500734D8D /* SSPhotoView.swift in Sources */,
 				9773F95B1CB14E20008E79FE /* SSSignUpViewController.swift in Sources */,
 				97C5266F1C9F091200484F03 /* String+Util.swift in Sources */,
-				97A6BFF41CCA81A500DA06D2 /* SSAcountManager.swift in Sources */,
+				97A6BFF41CCA81A500DA06D2 /* SSAccountManager.swift in Sources */,
 				978410BA1D7AC41900C71C63 /* SSModelToObjectConverter.swift in Sources */,
 				97DEBDB91D98430800DB51A3 /* UIViewController+Util.swift in Sources */,
 				9764D9E11D35FF6400BBE4C6 /* SSViewModel.swift in Sources */,

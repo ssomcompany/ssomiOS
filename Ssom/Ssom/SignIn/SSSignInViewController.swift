@@ -130,20 +130,22 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
 
     @IBAction func tapClose(sender: AnyObject?) {
+        self.close(isSignedIn: false)
+    }
+
+    func close(isSignedIn isSignedIn: Bool) {
+        guard let completionBlock = self.completion else { return }
+
+        completionBlock(finish: isSignedIn)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func tapSignInButton(sender: AnyObject?) {
         SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) { [weak self] (finish) in
-            if let wself = self {
-                wself.tapClose(nil)
+            guard let wself = self else { return nil }
 
-                guard let completionBlock = wself.completion else {
-                    return nil
-                }
-
-                completionBlock(finish: finish)
-            }
+            wself.close(isSignedIn: finish)
 
             return nil
         }

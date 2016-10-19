@@ -72,16 +72,14 @@ class SSChatListTableCell: UITableViewCell {
         switch model.ssomViewModel.ssomType {
         case .SSOM:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.lbNewMessageCount.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
         case .SSOSEYO:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.lbNewMessageCount.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
         self.imgViewProfile.image = UIImage(named: "noneProfile")
 
         // check if the login user is the owner of the chatting
-        if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
+        if model.ownerUserId == SSAccountManager.sharedInstance.userUUID {
             self.isOwnerUser = true
             // show the participant profile image because the login user is the owner of chatting
             if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
@@ -119,7 +117,7 @@ class SSChatListTableCell: UITableViewCell {
         self.viewBackground.backgroundColor = UIColor.whiteColor()
         var isReceivedToRequestMeet = false
         if let requestedUserId = model.meetRequestUserId,
-            let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            let loginedUserId = SSAccountManager.sharedInstance.userUUID {
             if requestedUserId != loginedUserId && model.meetRequestStatus == .Received {
                 self.viewMeetRequest.hidden = false
                 self.viewMeetRequest.layer.cornerRadius = self.viewMeetRequest.bounds.height / 2.0
@@ -154,7 +152,9 @@ class SSChatListTableCell: UITableViewCell {
         let ageArea: SSAgeAreaType = Util.getAgeArea(model.ssomViewModel.minAge)
         memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
         if let userCount = model.ssomViewModel.userCount {
-            memberInfoString = memberInfoString.stringByAppendingFormat(", \(userCount)명 있어요.")
+            if userCount != 0 {
+                memberInfoString = memberInfoString.stringByAppendingFormat(", \(userCount)명 있어요.")
+            }
         }
         self.lbSsomAgePeople.text = memberInfoString
 

@@ -1,5 +1,5 @@
 //
-//  SSAcountManager.swift
+//  SSAccountManager.swift
 //  Ssom
 //
 //  Created by DongSoo Lee on 2016. 4. 23..
@@ -31,7 +31,7 @@ class SSAccountManager {
     }
 
     var email: String? {
-        if let savedEmail = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
+        if let savedEmail = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String {
             return savedEmail
         } else {
             return nil
@@ -41,6 +41,14 @@ class SSAccountManager {
     var profileImageUrl: String? {
         if let imageUrl = SSNetworkContext.sharedInstance.getSharedAttribute("profileImageUrl") as? String {
             return imageUrl
+        } else {
+            return nil
+        }
+    }
+
+    var userUUID: String? {
+        if let savedUserId = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
+            return savedUserId
         } else {
             return nil
         }
@@ -112,7 +120,7 @@ class SSAccountManager {
                     })
                 }
             } else {
-                SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : userId])
+                SSNetworkContext.sharedInstance.saveSharedAttributes(["email" : userId])
 
                 guard let _ = completion!(finish: true) else {
                     return
@@ -147,7 +155,7 @@ class SSAccountManager {
                     })
                 }
             } else {
-                SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : email])
+                SSNetworkContext.sharedInstance.saveSharedAttributes(["email" : email])
 
                 guard let _ = completion!(finish: true) else {
                     return
@@ -184,8 +192,9 @@ class SSAccountManager {
                             }
                         } else {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("email")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {
@@ -244,8 +253,9 @@ class SSAccountManager {
                             }
                         } else {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("email")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {

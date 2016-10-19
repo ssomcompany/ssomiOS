@@ -40,7 +40,7 @@ enum SSAgeAreaType: String
     case AgeMiddle20 = "20대 중"
     case AgeLate20 = "20대 후"
     case Age30 = "30대"
-    case Unknown = "알수없음"
+    case Unknown = "정보가 없어요..."
 
     func toIntType() -> SSAgeType {
         switch self {

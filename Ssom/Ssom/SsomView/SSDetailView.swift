@@ -71,8 +71,8 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         self.lbDistance.text = "나와의 거리 \(Util.getDistanceString(self.viewModel.distance))"
 
         if SSAccountManager.sharedInstance.isAuthorized {
-            if let userModel = SSAccountManager.sharedInstance.userModel {
-                self.isMySsom = userModel.userId == self.viewModel.userId
+            if let userId = SSAccountManager.sharedInstance.userUUID {
+                self.isMySsom = userId == self.viewModel.userId
             }
         }
 

@@ -24,7 +24,6 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
     }
 
     override func initView() {
-        
 
         self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.registerNib(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")

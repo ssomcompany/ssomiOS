@@ -192,7 +192,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                 self.showMeetRequest(false)
                                 return
                             }
-                            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+                            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
                                 if self.meetRequestStatus == .Accepted {
                                     self.showMeetRequest(true, status: .Accepted)
                                 } else {
@@ -447,7 +447,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                         // add my sent message on the last of the messages
                                         if let lastMessage = wself.messages.last where lastMessage.message != messageText && lastMessage.messageDateTime != nowDateTime {
                                             var myLastMessage = SSChatViewModel()
-                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userModel!.userId
+                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
                                             myLastMessage.messageDateTime = nowDateTime
                                             myLastMessage.profileImageUrl = wself.myImageUrl
@@ -456,7 +456,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                                         if wself.messages.count == 0 {
                                             var myLastMessage = SSChatViewModel()
-                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userModel!.userId
+                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
                                             myLastMessage.messageDateTime = nowDateTime
                                             myLastMessage.profileImageUrl = wself.myImageUrl

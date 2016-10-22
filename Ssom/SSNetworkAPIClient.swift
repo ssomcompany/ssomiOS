@@ -641,8 +641,7 @@ public struct SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    if let rawDatas = response.result.value as? [[String: AnyObject]] {
-                    }
+                    completion(data: nil, error: nil)
                 } else {
                     print("Response Error : \(response.result.error)")
 

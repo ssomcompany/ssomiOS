@@ -15,6 +15,7 @@
                 <outlet property="btnMeetRequest" destination="n4K-cw-3pf" id="naM-jK-cBF"/>
                 <outlet property="btnMessageBar" destination="TSt-lB-147" id="TzT-Cw-zn0"/>
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
+                <outlet property="imgTopPlus" destination="0gU-i4-1gd" id="nR7-Q9-YEf"/>
                 <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
                 <outlet property="imgViewMeetRequest" destination="PxP-UG-XIa" id="CUc-lW-eG9"/>
                 <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>

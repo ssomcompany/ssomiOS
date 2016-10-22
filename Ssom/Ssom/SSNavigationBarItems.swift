@@ -18,6 +18,7 @@ class SSNavigationBarItems : UIView
 {
     @IBOutlet var heartBarButtonView: UIView!
     @IBOutlet var imgViewHeart: UIImageView!
+    @IBOutlet var imgTopPlus: UIImageView!
     @IBOutlet var lbHeartCount: UILabel!
     @IBOutlet var lbRechargeTime: UILabel!
     @IBOutlet var btnHeartBar: UIButton!
@@ -72,6 +73,18 @@ class SSNavigationBarItems : UIView
 
     func cancelTapHeart() {
         self.imgViewHeart.transform = CGAffineTransformIdentity
+    }
+
+    func changeHeartCount(count: Int) {
+        if count < SSDefaultHeartCount {
+            self.lbHeartCount.text = "\(count)"
+            self.imgViewHeart.image = UIImage(named: "topHeartGray")
+            self.imgTopPlus.image = UIImage(named: "topPlusGray")
+        } else if count >= SSDefaultHeartCount {
+            self.lbHeartCount.text = "\(count)"
+            self.imgViewHeart.image = UIImage(named: "topHeartShop")
+            self.imgTopPlus.image = UIImage(named: "topPlus")
+        }
     }
 
     func tapDownMessage() {

@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
@@ -207,7 +207,7 @@
                         <viewControllerLayoutGuide type="bottom" id="iLn-76-4kV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hHc-Mm-TP3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
@@ -378,7 +378,7 @@
                         <viewControllerLayoutGuide type="bottom" id="886-fy-T46"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n3k-wc-hNq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
@@ -732,6 +732,11 @@
                                     <action selector="tapCloseButton:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="VWP-y1-7D0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프라이버시를 위해 등록한 글은 아침 9시 자동삭제되요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXj-YE-d2r">
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -745,6 +750,7 @@
                             <constraint firstItem="BVx-sx-d3O" firstAttribute="leading" secondItem="qpN-Tn-LzI" secondAttribute="leading" id="8xB-ie-5wE"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="leading" secondItem="1gQ-Ct-aeF" secondAttribute="leading" id="DCd-VR-azm"/>
                             <constraint firstItem="1gQ-Ct-aeF" firstAttribute="width" secondItem="n3k-wc-hNq" secondAttribute="width" multiplier="274:414" id="DGd-tR-qJG"/>
+                            <constraint firstItem="TXj-YE-d2r" firstAttribute="top" secondItem="BVx-sx-d3O" secondAttribute="bottom" constant="1" id="H9u-Q4-JqD"/>
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="width" secondItem="n3k-wc-hNq" secondAttribute="width" multiplier="155:414" id="IWv-S8-UK4"/>
                             <constraint firstItem="886-fy-T46" firstAttribute="top" secondItem="zJ2-h7-Pzq" secondAttribute="bottom" multiplier="1.04:1" id="LGa-7z-fVo"/>
                             <constraint firstItem="w3U-71-a8X" firstAttribute="centerY" secondItem="qpN-Tn-LzI" secondAttribute="centerY" id="MvN-7t-CT7"/>
@@ -766,6 +772,7 @@
                             <constraint firstItem="zJ2-h7-Pzq" firstAttribute="centerX" secondItem="n3k-wc-hNq" secondAttribute="centerX" multiplier="1:1.6" id="ke5-Pf-mXy"/>
                             <constraint firstItem="886-fy-T46" firstAttribute="top" secondItem="l93-S8-Q3c" secondAttribute="bottom" multiplier="1.04:1" id="l3u-vs-Uu6"/>
                             <constraint firstItem="miY-9s-Jb3" firstAttribute="top" secondItem="7iO-Re-L2o" secondAttribute="top" id="rcT-LY-KrW"/>
+                            <constraint firstItem="TXj-YE-d2r" firstAttribute="centerX" secondItem="n3k-wc-hNq" secondAttribute="centerX" id="riA-ej-fRo"/>
                             <constraint firstItem="w4W-pw-n2I" firstAttribute="leading" secondItem="n3k-wc-hNq" secondAttribute="leading" id="t0T-1t-J6z"/>
                             <constraint firstItem="qpN-Tn-LzI" firstAttribute="trailing" secondItem="1gQ-Ct-aeF" secondAttribute="trailing" id="tPU-FH-2Ib"/>
                             <constraint firstItem="1gQ-Ct-aeF" firstAttribute="top" secondItem="h7x-sc-hgh" secondAttribute="bottom" constant="7" id="ulp-9M-Rba"/>
@@ -838,7 +845,7 @@
                         <viewControllerLayoutGuide type="bottom" id="MqD-Hr-YRD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bx0-I7-TaW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iet-2Y-aRS" userLabel="Map Container View">
@@ -868,7 +875,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="C9b-Hi-3uS" userLabel="Menu"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="09n-6W-TdW">
-                            <rect key="frame" x="124" y="7" width="166" height="30"/>
+                            <rect key="frame" x="76" y="7" width="166" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="MAP"/>
@@ -899,22 +906,22 @@
     </scenes>
     <resources>
         <image name="acceptButtonGreen.png" width="241" height="87"/>
-        <image name="buttonCancel.png" width="138" height="49"/>
-        <image name="camera.png" width="26" height="24"/>
+        <image name="buttonCancel.png" width="139" height="50"/>
+        <image name="camera.png" width="27" height="24"/>
         <image name="heartWhite" width="30" height="27"/>
         <image name="locationFound.png" width="55" height="55"/>
         <image name="mapShadow.png" width="621" height="114"/>
         <image name="oval4Fill30.png" width="62" height="62"/>
-        <image name="photoDefault.png" width="182" height="105"/>
-        <image name="photoMapbg" width="480" height="233"/>
-        <image name="photoShadow.png" width="224" height="40"/>
+        <image name="photoDefault.png" width="183" height="106"/>
+        <image name="photoMapbg" width="482" height="234"/>
+        <image name="photoShadow.png" width="226" height="40"/>
         <image name="ssomSelectGreen.png" width="138" height="126"/>
         <image name="ssomSelectNone.png" width="102" height="92"/>
         <image name="ssomSelectNone2.png" width="105" height="91"/>
-        <image name="ssomSelectRed.png" width="91" height="83"/>
+        <image name="ssomSelectRed.png" width="91" height="84"/>
         <image name="writeBtn" width="76" height="75"/>
-        <image name="writeLine" width="276" height="1"/>
-        <image name="writePhotoArea.png" width="241" height="201"/>
+        <image name="writeLine" width="277" height="1"/>
+        <image name="writePhotoArea.png" width="243" height="202"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="R5c-a2-BYk"/>

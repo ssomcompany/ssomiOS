@@ -142,4 +142,17 @@ public struct Util {
             return "\(Double(size)) bytes"
         }
     }
+
+    static func getFBLoginButtonTitle(button: UIButton) -> String? {
+        
+        if button.parentViewController is SSSignInViewController {
+            return "로그인"
+        }
+
+        if button.parentViewController is SSSignUpViewController {
+            return "가입하기"
+        }
+
+        return nil
+    }
 }

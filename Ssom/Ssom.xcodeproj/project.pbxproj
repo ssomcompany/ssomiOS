@@ -258,7 +258,6 @@
 		9764D9E41D36017B00BBE4C6 /* SSMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */; };
 		9773F95B1CB14E20008E79FE /* SSSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */; };
 		977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */; };
-		977DBA681D239FEC00CFD98F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */; };
 		977DBA6D1D23A26A00CFD98F /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */; };
 		977DBA721D2A5C2900CFD98F /* SSMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */; };
 		977DBA741D2B82A400CFD98F /* SSScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA731D2B82A400CFD98F /* SSScrollView.swift */; };
@@ -275,6 +274,7 @@
 		9787ACEA1CFE7B28001CF18C /* SSMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */; };
 		9787ACEC1D042926001CF18C /* Menu.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9787ACEB1D042926001CF18C /* Menu.xcassets */; };
 		9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */; };
+		978AFDD51DBBDB8C00F965EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978AFDD41DBBDB8C00F965EE /* GoogleService-Info.plist */; };
 		978DDB751CCBD57700567169 /* SSChatStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB741CCBD57700567169 /* SSChatStoryboard.storyboard */; };
 		978DDB771CCBDD8700567169 /* SSChat.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB761CCBDD8700567169 /* SSChat.xcassets */; };
 		978DDB791CCBE13200567169 /* SSChatCoachmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */; };
@@ -597,7 +597,6 @@
 		9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuTableViewCell.xib; path = Menu/SSMenuTableViewCell.xib; sourceTree = "<group>"; };
 		9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignUpViewController.swift; path = SignIn/SSSignUpViewController.swift; sourceTree = "<group>"; };
 		977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Float.swift"; path = "Ssom/3rdLib/CGSize+Float.swift"; sourceTree = "<group>"; };
-		977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Ssom/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSMasterViewController.swift; sourceTree = "<group>"; };
 		977DBA731D2B82A400CFD98F /* SSScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSScrollView.swift; path = SsomView/SSScrollView.swift; sourceTree = "<group>"; };
@@ -614,6 +613,7 @@
 		9787ACE91CFE7B28001CF18C /* SSMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSMenuTableViewCell.swift; path = Menu/SSMenuTableViewCell.swift; sourceTree = "<group>"; };
 		9787ACEB1D042926001CF18C /* Menu.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Menu.xcassets; path = Menu/Menu.xcassets; sourceTree = "<group>"; };
 		9787ACED1D0452EE001CF18C /* SSDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSDrawerViewController.swift; path = Menu/SSDrawerViewController.swift; sourceTree = "<group>"; };
+		978AFDD41DBBDB8C00F965EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		978DDB741CCBD57700567169 /* SSChatStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SSChatStoryboard.storyboard; path = Chat/SSChatStoryboard.storyboard; sourceTree = "<group>"; };
 		978DDB761CCBDD8700567169 /* SSChat.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = SSChat.xcassets; path = Chat/SSChat.xcassets; sourceTree = "<group>"; };
 		978DDB781CCBE13200567169 /* SSChatCoachmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSChatCoachmarkView.xib; path = Chat/SSChatCoachmarkView.xib; sourceTree = "<group>"; };
@@ -1056,7 +1056,7 @@
 				97343E331BE65AB300A9D39D /* Info.plist */,
 				9717EB151D8E6F8400B47718 /* Ssom.entitlements */,
 				9703C6291DB2064600469BEE /* Ssom_development.entitlements */,
-				977DBA671D239FEC00CFD98F /* GoogleService-Info.plist */,
+				978AFDD41DBBDB8C00F965EE /* GoogleService-Info.plist */,
 				977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */,
 				972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */,
 			);
@@ -1197,6 +1197,7 @@
 				97343E401BE65AB300A9D39D /* Frameworks */,
 				97343E411BE65AB300A9D39D /* Resources */,
 				435F803D4A5394C876199BBC /* [CP] Copy Pods Resources */,
+				50F6A6673DC9793C5F2D18E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1390,13 +1391,13 @@
 				974C9D501C6B447000E17A2B /* photoDefault.png in Resources */,
 				974C9D791C6B447000E17A2B /* ssomIngGreen@3x.png in Resources */,
 				974C9D1A1C6B447000E17A2B /* locationFound@3x.png in Resources */,
-				977DBA681D239FEC00CFD98F /* GoogleService-Info.plist in Resources */,
 				974C9C7D1C6B447000E17A2B /* 1DepToggleOn@3x.png in Resources */,
 				974C9CE31C6B447000E17A2B /* filterOn.png in Resources */,
 				974C9CA91C6B447000E17A2B /* buttonCancel.png in Resources */,
 				974C9D3D1C6B447000E17A2B /* minired.png in Resources */,
 				974C9D8C1C6B447000E17A2B /* ssomLogoStyle01.png in Resources */,
 				974C9C8F1C6B447000E17A2B /* arletIcon@3x.png in Resources */,
+				978AFDD51DBBDB8C00F965EE /* GoogleService-Info.plist in Resources */,
 				974C9C801C6B447000E17A2B /* 2DepToggleGreen@2x.png in Resources */,
 				974C9CEB1C6B447000E17A2B /* filterW@3x.png in Resources */,
 				974C9CB21C6B447000E17A2B /* cancelButtonRed@3x.png in Resources */,
@@ -1531,7 +1532,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		435F803D4A5394C876199BBC /* [CP] Copy Pods Resources */ = {
@@ -1562,6 +1563,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SsomTests/Pods-SsomTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50F6A6673DC9793C5F2D18E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SsomUITests/Pods-SsomUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5BA7F3A24E27AB3382D2A663 /* [CP] Embed Pods Frameworks */ = {
@@ -1632,7 +1648,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BD62FD0FE188E7C799FE0354 /* [CP] Copy Pods Resources */ = {
@@ -1662,7 +1678,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

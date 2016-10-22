@@ -9,6 +9,14 @@
 import UIKit
 import FBSDKLoginKit
 
+extension FBSDKLoginButton {
+    override public func layoutSubviews() {
+        self.setTitle(Util.getFBLoginButtonTitle(self), forState: .Normal)
+
+        super.layoutSubviews()
+    }
+}
+
 class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, FBSDKLoginButtonDelegate {
 
     @IBOutlet var viewBackground: UIView!
@@ -61,7 +69,8 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.btnFBLogin.layer.shadowOpacity = 1.0
         self.btnFBLogin.clipsToBounds = true
         self.btnFBLogin.delegate = self
-        self.btnFBLogin.setTitle("로그인", forState: UIControlState.Normal)
+        self.btnFBLogin.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
+        self.btnFBLogin.setTitle("로그아웃", forState: UIControlState.Selected)
         self.btnFBLogin.readPermissions = ["public_profile", "email"]
 
         self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor

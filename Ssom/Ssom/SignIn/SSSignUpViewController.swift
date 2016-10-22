@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 let kPasswordMinLength = 4
 
-class SSSignUpViewController: UIViewController {
+class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var scrollView: SSCustomScrollView!
     @IBOutlet var constScrollViewBottomToSuper: NSLayoutConstraint!
@@ -51,6 +51,9 @@ class SSSignUpViewController: UIViewController {
         self.btnFBSignUp.layer.shadowRadius = 1.0
         self.btnFBSignUp.layer.shadowOpacity = 1.0
         self.btnFBSignUp.clipsToBounds = true
+        self.btnFBSignUp.delegate = self
+        self.btnFBSignUp.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
+        self.btnFBSignUp.readPermissions = ["public_profile", "email"]
     }
 
     deinit {
@@ -214,5 +217,46 @@ class SSSignUpViewController: UIViewController {
                 self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
             }
         }
+    }
+
+    // MARK:- FBSDKLoginButtonDelegate
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("%@", #function)
+
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"]).startWithCompletionHandler { (connection, resultOfQuery, error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+            } else {
+                print("%@", resultOfQuery)
+
+                if let res = resultOfQuery as? [String: String] {
+
+                    self.btnWarningDuplicatedEmail.hidden = true
+
+                    SSNetworkAPIClient.postUser(res["email"]!, password: "facebook") { (error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+                            
+                            if err.code == SSNetworkError.ErrorDuplicatedData.rawValue {
+                                self.btnWarningDuplicatedEmail.hidden = false
+                            } else {
+                                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                            }
+                        } else {
+                            self.tapClose(nil)
+                        }
+
+                        // 가입 후 로그인 하기 때문에..
+                        FBSDKLoginManager().logOut()
+                    }
+                }
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("%@", #function)
     }
 }

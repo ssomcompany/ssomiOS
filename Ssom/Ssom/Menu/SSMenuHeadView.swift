@@ -16,6 +16,7 @@ protocol SSMenuHeadViewDelegate: class {
 class SSMenuHeadView: UITableViewHeaderFooterView {
     @IBOutlet var view: UIView!
     @IBOutlet var lbUserId: UILabel!
+    @IBOutlet var btnUserId: UIButton!
     @IBOutlet var btnLogin: UIButton!
     @IBOutlet var imgViewPhotoBorder: UIImageView!
     @IBOutlet var imgViewPhoto: UIImageView!
@@ -60,12 +61,16 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
             })
         }
 
+        self.btnUserId.addTarget(self, action: #selector(tapLogin(_:)), forControlEvents: .TouchUpInside)
+
         if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String
 
             let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
             self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
+
+            self.btnUserId.enabled = false
         } else {
             let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
             let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
@@ -75,6 +80,8 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
             self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
             self.lbUserId.attributedText = loginString
+
+            self.btnUserId.enabled = true
         }
 
         self.showProfileImage()
@@ -129,7 +136,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     @IBAction func tapMenuPush(sender: AnyObject) {
-//        SSAlertController.showAlertConfirm(title: "Info", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
+//        SSAlertController.showAlertConfirm(title: "알림", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
 
         if let url = SSMenuType.Inquiry.url {
             if UIApplication.sharedApplication().canOpenURL(url) {

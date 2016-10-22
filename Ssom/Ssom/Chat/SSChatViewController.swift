@@ -277,7 +277,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func tapBack() {
         if self.meetRequestStatus == .Accepted {
-            SSAlertController.alertTwoButton(title: "Info",
+            SSAlertController.alertTwoButton(title: "알림",
                                              message: "만남 중에는 채팅방을 나갈 수 없습니다.\n만남을 종료하고 나가시겠습니까?",
                                              vc: self,
                                              button1Completion: { (action) in

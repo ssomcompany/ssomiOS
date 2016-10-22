@@ -61,6 +61,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.btnFBLogin.layer.shadowOpacity = 1.0
         self.btnFBLogin.clipsToBounds = true
         self.btnFBLogin.delegate = self
+        self.btnFBLogin.setTitle("로그인", forState: UIControlState.Normal)
         self.btnFBLogin.readPermissions = ["public_profile", "email"]
 
         self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
@@ -155,7 +156,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
     
     @IBAction func tapFindPasswordButton(sender: AnyObject) {
-        SSAlertController.alertConfirm(title: "Info", message: "아직 지원되지 않는 기능입니다.", vc: self, completion: nil)
+        SSAlertController.alertConfirm(title: "알림", message: "아직 지원되지 않는 기능입니다.", vc: self, completion: nil)
     }
 
     @IBAction func editingDidBeginEmail(sender: AnyObject) {

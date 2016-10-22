@@ -135,6 +135,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func loadingData(completion: ((finish: Bool) -> Void)?) {
+        print(#function)
+
         SSNetworkAPIClient
             .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
                       longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,

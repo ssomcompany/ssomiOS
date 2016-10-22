@@ -42,7 +42,7 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 
 // MARK: - UITableViweDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -148,6 +148,8 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     UIApplication.sharedApplication().openURL(url)
                 }
+            } else if cell.menuType == .Withdraw {
+                SSAlertController.alertConfirm(title: "알림", message: "쏨 서비스에 가입된 메일로\n탈퇴신청 메일을 아래 주소로 보내주세요.\nssomcompany@gmail.com", vc: self, completion: nil)
             }
         }
     }

@@ -67,7 +67,7 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     @IBAction func tapDeletePhoto(sender: AnyObject) {
-        SSAlertController.alertTwoButton(title: "Info", message: "정말로 오늘의 사진을 삭제하시겠습니까?", vc: self, button1Completion: { (action) in
+        SSAlertController.alertTwoButton(title: "알림", message: "정말로 오늘의 사진을 삭제하시겠습니까?", vc: self, button1Completion: { (action) in
 
             if let token = SSAccountManager.sharedInstance.sessionToken {
                 SSNetworkAPIClient.deleteUserProfileImage(token, completion: { [weak self] (data, error) in

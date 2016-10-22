@@ -667,7 +667,9 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 self.setNeedsStatusBarAppearanceUpdate()
 
                 dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                    self?.mainViewController = mainViewController
+                    guard let wself = self else { return }
+
+                    wself.mainViewController = mainViewController
                 })
             }
 

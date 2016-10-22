@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     print("Current App Version is : ", bundleVersion)
 
                     if Double(bundleVersion.stringByReplacingOccurrencesOfString(".", withString: "")) < Double(currentVersion.stringByReplacingOccurrencesOfString(".", withString: "")) {
-                        SSAlertController.showAlertTwoButton(title: "Info",
+                        SSAlertController.showAlertTwoButton(title: "알림",
                             message: "새로운 업데이트가 있습니다.\n 업데이트 후 이용하실 수 있습니다 =)",
                             button1Title: "업데이트",
                             button2Title: "종료",

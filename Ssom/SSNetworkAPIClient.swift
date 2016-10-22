@@ -21,6 +21,8 @@ public struct SSNetworkAPIClient {
 
 // MARK: - Common
     static func getVersion(completion: (version: String?, error: NSError?) -> Void) {
+        print(#function)
+
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 

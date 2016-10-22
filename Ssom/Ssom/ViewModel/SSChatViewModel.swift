@@ -10,6 +10,7 @@ import Foundation
 
 enum SSChatMessageType: String {
     case Normal = "NORMAL"
+    case System = "SYSTEM"
     case Request = "request"
     case Approve = "approve"
     case Cancel = "cancel"

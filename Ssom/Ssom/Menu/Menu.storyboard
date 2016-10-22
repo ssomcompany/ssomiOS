@@ -431,7 +431,7 @@ Cg
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARq-Ly-19C">
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ARq-Ly-19C" secondAttribute="height" multiplier="344:81" id="6z4-jg-8b1"/>
+                                                        <constraint firstAttribute="width" secondItem="ARq-Ly-19C" secondAttribute="height" multiplier="344:81" id="Bib-hw-sRa"/>
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenRibSmall" translatesAutoresizingMaskIntoConstraints="NO" id="HGi-Wf-BGx">
@@ -498,9 +498,9 @@ Cg
                                                 <constraint firstItem="hmU-3D-AZh" firstAttribute="top" secondItem="2l4-uM-oJW" secondAttribute="top" constant="2" id="jtl-Zw-epD"/>
                                                 <constraint firstItem="2l4-uM-oJW" firstAttribute="centerX" secondItem="hmU-3D-AZh" secondAttribute="centerX" id="lBL-jB-kK0"/>
                                                 <constraint firstItem="ARq-Ly-19C" firstAttribute="leading" secondItem="ov4-rL-tqU" secondAttribute="leading" constant="13" id="loF-vj-UNS"/>
-                                                <constraint firstAttribute="bottom" secondItem="ARq-Ly-19C" secondAttribute="bottom" constant="15" id="m5d-qw-pHh"/>
                                                 <constraint firstItem="Eh5-Uv-UuW" firstAttribute="leading" secondItem="vGb-vc-nfw" secondAttribute="trailing" id="vkM-a6-hOm"/>
                                                 <constraint firstItem="zPY-Q9-9ou" firstAttribute="centerX" secondItem="HGi-Wf-BGx" secondAttribute="centerX" constant="2" id="wVI-Yo-c3T"/>
+                                                <constraint firstAttribute="bottom" secondItem="ARq-Ly-19C" secondAttribute="bottom" constant="15" id="x7e-Vu-zAM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -601,7 +601,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="TodayPhotoNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sCp-bE-o3d" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Q7-76-UnS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Q7-76-UnS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -624,7 +624,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="HeartNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J6i-fC-qW8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zj7-ly-MBw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zj7-ly-MBw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

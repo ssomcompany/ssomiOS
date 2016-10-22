@@ -15,7 +15,7 @@ enum SSHeartGoods: Int {
     case heart17Package
     case heart28Package
 
-    static var AllProductIDs: Array<String> {
+    static var AllProductIDs: [String] {
         return ["ssom2HeartPackage", "ssom8HeartPackage", "ssom17HeartPackage", "ssom28HeartPackage"]
     }
 
@@ -127,6 +127,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var indicator: SSIndicatorView!
 
+    var purchasedProduct: SKProduct?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -201,7 +203,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSHeartTableViewCell {
             for product in self.products {
                 if product.productIdentifier == cell.heartGood.productID {
-                    let payment = SKPayment(product: product)
+                    self.purchasedProduct = product
+                    let payment = SKPayment(product: self.purchasedProduct!)
                     SKPaymentQueue.defaultQueue().addPayment(payment)
                     break
                 }
@@ -227,6 +230,18 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         for transaction in transactions {
             switch transaction.transactionState {
             case SKPaymentTransactionState.Purchased:
+                if let token = SSAccountManager.sharedInstance.sessionToken {
+                    let purchasedHeartCount: Int = Int(self.purchasedProduct!.localizedTitle.stringByReplacingOccurrencesOfString("하트", withString: ""))!
+                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: purchasedHeartCount, completion: { (data, error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        } else {
+
+                        }
+                    })
+                }
                 SKPaymentQueue.defaultQueue().finishTransaction(transaction)
                 self.tapClose(nil)
             case SKPaymentTransactionState.Failed:

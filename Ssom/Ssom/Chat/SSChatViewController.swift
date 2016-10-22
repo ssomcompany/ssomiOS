@@ -159,11 +159,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
             } else {
                 // Fallback on earlier versions
-                if let font = UIFont(name: "HelveticaNeue-Medium", size: 18) {
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
                     let firstAttributesDict = [NSFontAttributeName: font]
                     titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 }
-                if let font = UIFont(name: "HelveticaNeue-Medium", size: 13) {
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
                     let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
                                                 NSFontAttributeName: font]
                     titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))

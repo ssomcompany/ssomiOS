@@ -624,6 +624,33 @@ public struct SSNetworkAPIClient {
         }
     }
 
+    static func postPurchaseHearts(token: String, purchasedHeartCount: Int, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.POST,
+                          SSNetworkContext.serverUrlPrefixt+"users/hearts",
+                          parameters: ["count" : purchasedHeartCount],
+                          encoding: .JSON,
+                          headers: ["Authorization": "JWT " + token])
+            .responseJSON { (response) in
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawDatas = response.result.value as? [[String: AnyObject]] {
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+
+                    completion(data: nil, error: response.result.error)
+                }
+
+                indicator.hideIndicator()
+        }
+    }
+
 // MARK: - Chat
     static func getChatroomList(token: String, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
@@ -846,6 +873,13 @@ public struct SSNetworkAPIClient {
                             errorCode = err
                         } else {
                             if let errDescription = rawDatas["err"] as? String {
+                                if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errDescription) {
+                                    errorCode = errorInfo.0
+                                    errorDescription = errorInfo.1
+                                } else {
+                                    errorDescription = errDescription
+                                }
+                            } else if let errDescription = rawDatas["msg"] as? String {
                                 errorDescription = errDescription
                             }
                         }

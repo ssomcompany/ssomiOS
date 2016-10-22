@@ -134,10 +134,13 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
 
     func close(isSignedIn isSignedIn: Bool) {
-        guard let completionBlock = self.completion else { return }
+        guard let completionBlock = self.completion else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
 
         completionBlock(finish: isSignedIn)
-        
+
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

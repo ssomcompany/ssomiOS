@@ -18,3 +18,5 @@ enum SSInternalNotification: String {
 }
 
 let SSDefaultHeartCount = 2
+let SSDefaultHeartRechargeTimeInterval: NSTimeInterval = 4*60*60
+let SSDefaultHeartRechargeHour: Int = Int(SSDefaultHeartRechargeTimeInterval/60/60)

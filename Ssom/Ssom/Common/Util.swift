@@ -62,6 +62,16 @@ public struct Util {
         }
     }
 
+    static func getTimeIntervalString(from fromDate: NSDate, to toDate: NSDate = NSDate(), format: String = "HH:mm") -> String {
+
+        let userCalendar = NSCalendar.currentCalendar()
+        let calendarComponents: NSCalendarUnit = [.Hour, .Minute, .Second]
+        let expiredDate = NSDate(timeInterval: SSDefaultHeartRechargeTimeInterval, sinceDate: fromDate)
+        let expiredDateDifference = userCalendar.components(calendarComponents, fromDate: toDate, toDate: expiredDate, options: [])
+
+        return  "\(String(format: "%02d", expiredDateDifference.hour)):\(String(format: "%02d" ,expiredDateDifference.minute))"
+    }
+
     static func getDistanceString(distance: Int) -> String {
         if distance > 1000 {
             let kilometerOfDistance: Double = Double(distance)/1000

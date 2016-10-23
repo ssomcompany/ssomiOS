@@ -197,6 +197,7 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {
                                 FBSDKLoginManager().logOut()
@@ -259,6 +260,7 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {
                                 FBSDKLoginManager().logOut()

@@ -129,14 +129,24 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
                     })
                 }
             } else {
+                if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int where heartsCount > 0 {
 
-                guard let _ = self.delegate?.doSsom(self.ssomType, model: self.viewModel) else {
-                    NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
+                    guard let _ = self.delegate?.doSsom(self.ssomType, model: self.viewModel) else {
+                        NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
 
-                    return
+                        return
+                    }
+                    
+                    self.tapClose(nil)
+                } else {
+                    SSAlertController.showAlertConfirm(title: "Error", message: "쏨 타기 위한 하트 갯수가 부족합니다.\n하트를 충전해주시기 바랍니다.", completion: { (action) in
+                        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
+                        if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                            presentedViewController.presentViewController(vc, animated: true, completion: nil)
+                        }
+                    })
                 }
-
-                self.tapClose(nil)
             }
         } else {
             guard let _ = self.delegate?.openSignIn(nil) else {

@@ -98,6 +98,8 @@ class SSNavigationBarItems : UIView
             } else {
                 self.stopHeartRechageTimer()
             }
+        } else {
+            self.stopHeartRechageTimer()
         }
     }
 
@@ -132,7 +134,7 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    var heartRechareTimer: NSTimer!
+    var heartRechargeTimer: NSTimer!
 
     func startHeartRechargeTimer(needRestart: Bool = false) {
         print(#function)
@@ -153,17 +155,20 @@ class SSNavigationBarItems : UIView
             }
         }
 
-        self.heartRechareTimer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+        self.heartRechargeTimer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
     }
 
     func stopHeartRechageTimer(needToSave: Bool = false) {
         print(#function)
 
-        if let timer = self.heartRechareTimer {
+        if let timer = self.heartRechargeTimer {
             timer.invalidate()
+            self.heartRechargeTimer = nil
 
             SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
         }
+
+        self.lbRechargeTime.text = "00:00"
 
         if needToSave {
             // 타이머 값 서버에 저장
@@ -209,6 +214,8 @@ class SSNavigationBarItems : UIView
                     })
                 }
             }
+        } else {
+            sender?.invalidate()
         }
     }
 

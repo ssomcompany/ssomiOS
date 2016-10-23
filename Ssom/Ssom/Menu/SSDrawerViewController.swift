@@ -322,9 +322,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             return self._mainViewController
         }
         set {
-            self.replaceViewController(self._mainViewController, withViewController: newValue, inContainerView: self.mainView) { [unowned self] in
-                self._mainViewController = newValue
-                self.setNeedsStatusBarAppearanceUpdate()
+            self.replaceViewController(self._mainViewController, withViewController: newValue, inContainerView: self.mainView) { [weak self] in
+                guard let wself = self else { return }
+
+                wself._mainViewController = newValue
+                wself.setNeedsStatusBarAppearanceUpdate()
             }
         }
     }
@@ -410,8 +412,10 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             return self._drawerViewController
         }
         set {
-            self.replaceViewController(self._drawerViewController, withViewController: newValue, inContainerView: self.drawerView) { [unowned self] in
-                self._drawerViewController = newValue
+            self.replaceViewController(self._drawerViewController, withViewController: newValue, inContainerView: self.drawerView) { [weak self] in
+                guard let wself = self else { return }
+
+                wself._drawerViewController = newValue
             }
         }
     }
@@ -582,17 +586,23 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.mainPushBehavior = UIPushBehavior(items: [self.mainView], mode: .Instantaneous)
         self.mainElasticityBehavior = UIDynamicItemBehavior(items: [self.mainView])
 
-        self.mainGravityBehavior?.action = { [unowned self] in
-            self.didUpdateDynamicAnimatorAction()
+        self.mainGravityBehavior?.action = { [weak self] in
+            guard let wself = self else { return }
+
+            wself.didUpdateDynamicAnimatorAction()
         }
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ [unowned self] (transitionCoordinatorContext) in
-            self.animatingRotation = true
-            }) { [unowned self] (transitionCoordinatorContext) in
-                self.animatingRotation = false
-                self.updateStylers()
+        coordinator.animateAlongsideTransition({ [weak self] (transitionCoordinatorContext) in
+            guard let wself = self else { return }
+
+            wself.animatingRotation = true
+            }) { [weak self] (transitionCoordinatorContext) in
+                guard let wself = self else { return }
+
+                wself.animatingRotation = false
+                wself.updateStylers()
         }
 
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
@@ -666,11 +676,12 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
                 self.setNeedsStatusBarAppearanceUpdate()
 
-                dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                    guard let wself = self else { return }
-
-                    wself.mainViewController = mainViewController
-                })
+                self.mainViewController = mainViewController
+//                dispatch_async(dispatch_get_main_queue(), { [weak self] in
+//                    guard let wself = self else { return }
+//
+//                    wself.mainViewController = mainViewController
+//                })
             }
 
             if self.mainViewSlideOffAnimationEnabled {
@@ -949,41 +960,44 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 // MARK: - Stylers
 
     func addStyler(styler: SSDrawerStyler, forDirection direction: SSDrawerDirection) -> Void {
-        SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [unowned self] (maskedValue) in
+        SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [weak self] (maskedValue) in
+            guard let wself = self else { return }
             
-            if self.stylers[maskedValue] == nil {
-                self.stylers[maskedValue] = NSMutableSet()
+            if wself.stylers[maskedValue] == nil {
+                wself.stylers[maskedValue] = NSMutableSet()
             }
 
-            if let stylersSet: NSMutableSet = self.stylers[maskedValue] as? NSMutableSet {
+            if let stylersSet: NSMutableSet = wself.stylers[maskedValue] as? NSMutableSet {
                 stylersSet.addObject(styler)
 
                 var existsInCurrentStylers: Bool = false
-                for currentStylersSet: NSSet in self.stylers.values {
+                for currentStylersSet: NSSet in wself.stylers.values {
                     existsInCurrentStylers = currentStylersSet.containsObject(styler)
                 }
 
                 if existsInCurrentStylers {
-                    styler.stylerWasAddedToDrawerViewController(self, forDirection: direction)
+                    styler.stylerWasAddedToDrawerViewController(wself, forDirection: direction)
                 }
             }
         }
     }
 
     func removeStyler(styler: SSDrawerStyler, forDirection: SSDrawerDirection) -> Void {
-        SSDrawerDirection.drawerDirectionActionForMaskedValues(forDirection) { [unowned self] (maskedValue) in
-            if let stylersSet: NSMutableSet = self.stylers[maskedValue] as? NSMutableSet {
+        SSDrawerDirection.drawerDirectionActionForMaskedValues(forDirection) { [weak self] (maskedValue) in
+            guard let wself = self else { return }
+
+            if let stylersSet: NSMutableSet = wself.stylers[maskedValue] as? NSMutableSet {
                 stylersSet.removeObject(styler)
 
                 var containedCount: Int = 0
-                for currentStylersSet: NSSet in self.stylers.values {
+                for currentStylersSet: NSSet in wself.stylers.values {
                     if currentStylersSet.containsObject(styler) {
                         containedCount += 1
                     }
                 }
 
                 if containedCount == 0 {
-                    styler.stylerWasRemovedFromDrawerViewController(self, forDirection: forDirection)
+                    styler.stylerWasRemovedFromDrawerViewController(wself, forDirection: forDirection)
                 }
             }
         }
@@ -1256,8 +1270,10 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
     func setRevealWidth(revealWidth: CGFloat, forDirection direction:SSDrawerDirection) -> Void {
         assert(self.mainState == SSDrawerMainState.Closed, "Only able to update the reveal width while the pane view is closed")
-        SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [unowned self] (maskedValue) in
-            self.revealWidth[maskedValue] = revealWidth
+        SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [weak self] (maskedValue) in
+            guard let wself = self else { return }
+
+            wself.revealWidth[maskedValue] = revealWidth
         }
     }
 
@@ -1601,13 +1617,15 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             var shouldReceiveTouch: Bool = true
 
             // Enumerate the view's superviews, checking for a touch-forwarding class
-            touch.view?.superviewHierarchyAction({ [unowned self] (view) in
+            touch.view?.superviewHierarchyAction({ [weak self] (view) in
+                guard let wself = self else { return }
+
                 // Only enumerate while still receiving the touch
                 if !shouldReceiveTouch {
                     return
                 }
                 // If the touch was in a touch forwarding view, don't handle the gesture
-                self.touchForwardingClasses.enumerateObjectsUsingBlock({ (touchForwardingClass, stop) in
+                wself.touchForwardingClasses.enumerateObjectsUsingBlock({ (touchForwardingClass, stop) in
                     if view.isKindOfClass(touchForwardingClass as! AnyClass) {
                         shouldReceiveTouch = false
                         stop.memory = true

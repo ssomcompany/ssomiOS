@@ -388,15 +388,17 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                         SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
                     } else {
                         self.writeViewModel.profilePhotoUrl = NSURL(string: photoURLPath!)
-                        SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [unowned self] (error) in
+                        SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [weak self] (error) in
+                            guard let wself = self else { return }
+
                             if error != nil {
                                 print(error?.localizedDescription)
 
-                                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: { (action) in
+                                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: wself, completion: { (action) in
 //                                    self.navigationController!.popViewControllerAnimated(true)
                                 })
                             } else {
-                                self.navigationController!.popViewControllerAnimated(true)
+                                wself.navigationController!.popViewControllerAnimated(true)
                             }
                         })
                     }

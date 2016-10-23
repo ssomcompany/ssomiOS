@@ -316,13 +316,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadData() {
         if self.needReload {
 
-            SSNetworkAPIClient.getPosts { [unowned self] (viewModels, error) -> Void in
-                if let models = viewModels {
-                    self.mainViewModel.datas = models
-                    self._datasOfFilteredSsom = models
-                    print("result is : \(self.mainViewModel.datas)")
+            SSNetworkAPIClient.getPosts { [weak self] (viewModels, error) -> Void in
+                guard let wself = self else { return }
 
-                    self.filterData()
+                if let models = viewModels {
+                    wself.mainViewModel.datas = models
+                    wself._datasOfFilteredSsom = models
+                    print("result is : \(wself.mainViewModel.datas)")
+
+                    wself.filterData()
                 } else {
                     print("error is : \(error?.localizedDescription)")
                 }

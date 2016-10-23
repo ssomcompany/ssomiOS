@@ -250,8 +250,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             let latitude: Double = data.latitude 
             let longitude: Double = data.longitude 
 
-            print("position is \(latitude), \(longitude)")
-
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let nowLocation: CLLocationCoordinate2D = self.currentLocation != nil ? self.currentLocation : mainView.camera.target
 

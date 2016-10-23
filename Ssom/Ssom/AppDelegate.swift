@@ -40,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
         // OneSignal
-        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey)
         OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
             print("notification: \(notification), payload data: \(notification.payload.additionalData)")
 

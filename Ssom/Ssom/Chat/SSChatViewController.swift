@@ -207,40 +207,42 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     func loadData() {
         if let token = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
             if let roomId = self.chatRoomId {
-                SSNetworkAPIClient.getChatMessages(token, chatroomId: roomId, completion: { [unowned self] (datas, error) in
+                SSNetworkAPIClient.getChatMessages(token, chatroomId: roomId, completion: { [weak self] (datas, error) in
+                    guard let wself = self else { return }
+
                     if let err = error {
-                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
                     } else {
                         if let messages = datas {
-                            self.messages = messages
+                            wself.messages = messages
 
-                            if self.messages.count > 0 {
+                            if wself.messages.count > 0 {
                                 
                             } else {
-                                self.showCoachmarkView()
+                                wself.showCoachmarkView()
                             }
 
-                            self.tableViewChat.reloadData()
+                            wself.tableViewChat.reloadData()
 
-                            let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
-                            self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+                            let scrollOffset = wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height
+                            wself.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
 
-                            guard let requestUserId = self.meetRequestUserId else {
-                                self.showMeetRequest(false)
+                            guard let requestUserId = wself.meetRequestUserId else {
+                                wself.showMeetRequest(false)
                                 return
                             }
                             if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
-                                if self.meetRequestStatus == .Accepted {
-                                    self.showMeetRequest(true, status: .Accepted)
+                                if wself.meetRequestStatus == .Accepted {
+                                    wself.showMeetRequest(true, status: .Accepted)
                                 } else {
                                     if requestUserId == loginedUserId {
-                                        self.showMeetRequest(false, status: .Requested)
+                                        wself.showMeetRequest(false, status: .Requested)
                                     } else {
-                                        self.showMeetRequest(false, status: .Received)
+                                        wself.showMeetRequest(false, status: .Received)
                                     }
                                 }
                             } else {
-                                self.showMeetRequest(false)
+                                wself.showMeetRequest(false)
                             }
                         }
                     }

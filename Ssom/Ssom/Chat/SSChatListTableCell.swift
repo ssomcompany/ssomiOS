@@ -83,14 +83,16 @@ class SSChatListTableCell: UITableViewCell {
             self.isOwnerUser = true
             // show the participant profile image because the login user is the owner of chatting
             if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                    guard let wself = self else { return }
+
                     if error != nil {
                     } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, wself.imgViewProfile.bounds.size.width, wself.imgViewProfile.bounds.size.height))
 
-                        self.imgViewProfile.image = croppedProfileImage
+                        wself.imgViewProfile.image = croppedProfileImage
                     }
-                    })
+                })
 
                 self.profilImageUrl = imageUrl
             }
@@ -98,14 +100,16 @@ class SSChatListTableCell: UITableViewCell {
             self.isOwnerUser = false
             // show the owner profile image because the login user is NOT the owner of chatting
             if let imageUrl = model.ownerImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                    guard let wself = self else { return }
+
                     if error != nil {
                     } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, wself.imgViewProfile.bounds.size.width, wself.imgViewProfile.bounds.size.height))
 
-                        self.imgViewProfile.image = croppedProfileImage
+                        wself.imgViewProfile.image = croppedProfileImage
                     }
-                    })
+                })
 
                 self.profilImageUrl = imageUrl
             }
@@ -302,8 +306,10 @@ class SSChatListTableCell: UITableViewCell {
                                              message: "끝낸 쏨은 되돌릴 수 없어요...\n쏨을 정말로 끝내시겠어요?",
                                              button1Title: "끝내기",
                                              button2Title: "취소",
-                                             button1Completion: { [unowned self] (action) in
-                                                guard let _ = self.delegate?.deleteCell(self) else {
+                                             button1Completion: { [weak self] (action) in
+                                                guard let wself = self else { return }
+
+                                                guard let _ = wself.delegate?.deleteCell(wself) else {
                                                     return
                                                 }
             }) { (action) in

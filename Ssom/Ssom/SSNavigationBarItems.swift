@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UICountingLabel
 
 @objc protocol SSNavigationBarItemsDelegate : NSObjectProtocol
 {
@@ -19,7 +20,7 @@ class SSNavigationBarItems : UIView
     @IBOutlet var heartBarButtonView: UIView!
     @IBOutlet var imgViewHeart: UIImageView!
     @IBOutlet var imgTopPlus: UIImageView!
-    @IBOutlet var lbHeartCount: UILabel!
+    @IBOutlet var lbHeartCount: UICountingLabel!
     @IBOutlet var lbRechargeTime: UILabel!
     @IBOutlet var btnHeartBar: UIButton!
 
@@ -53,6 +54,9 @@ class SSNavigationBarItems : UIView
 
         self.btnMeetRequest.addTarget(self, action: #selector(self.tapDownMeetRequest), forControlEvents: UIControlEvents.TouchDown)
         self.btnMeetRequest.addTarget(self, action: #selector(self.cancelTapMeetRequest), forControlEvents: UIControlEvents.TouchCancel)
+
+        self.lbHeartCount.format = "%d"
+        self.lbHeartCount.method = UILabelCountingMethod.Linear
     }
 
     convenience init(animated: Bool) {
@@ -76,12 +80,14 @@ class SSNavigationBarItems : UIView
     }
 
     func changeHeartCount(count: Int) {
+        let countNow = Int(self.lbHeartCount.text!)!
+        self.lbHeartCount.countFrom(CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
+//            self.lbHeartCount.text = "\(count)"
+
         if count < SSDefaultHeartCount {
-            self.lbHeartCount.text = "\(count)"
             self.imgViewHeart.image = UIImage(named: "topHeartGray")
             self.imgTopPlus.image = UIImage(named: "topPlusGray")
         } else if count >= SSDefaultHeartCount {
-            self.lbHeartCount.text = "\(count)"
             self.imgViewHeart.image = UIImage(named: "topHeartShop")
             self.imgTopPlus.image = UIImage(named: "topPlus")
         }
@@ -116,6 +122,20 @@ class SSNavigationBarItems : UIView
             self.imgViewMessage.image = UIImage(named: "message")
             self.lbUnreadMessageCount.text = "\(count)"
         }
+    }
+
+    var heartRechareTimer: NSTimer!
+
+    func startHeartRechargeTimer() {
+        self.heartRechareTimer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(changeHeartRechargerTimer), userInfo: nil, repeats: true)
+    }
+
+    func stopHeartRechageTimer() {
+        self.heartRechareTimer.invalidate()
+    }
+
+    func changeHeartRechargerTimer() {
+
     }
 
     func tapDownMeetRequest() {

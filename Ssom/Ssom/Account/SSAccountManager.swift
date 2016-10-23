@@ -196,6 +196,7 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {
                                 FBSDKLoginManager().logOut()
@@ -257,6 +258,7 @@ class SSAccountManager {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
 
                             if let _ = FBSDKAccessToken.currentAccessToken() {
                                 FBSDKLoginManager().logOut()

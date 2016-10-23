@@ -38,7 +38,7 @@
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topPlus" translatesAutoresizingMaskIntoConstraints="NO" id="0gU-i4-1gd"/>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-ZA-jvE">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-ZA-jvE" customClass="UICountingLabel">
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -52,13 +52,12 @@
             </subviews>
             <constraints>
                 <constraint firstItem="169-wf-BeN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4fQ-ES-Txs"/>
-                <constraint firstAttribute="trailing" secondItem="ls5-ZA-jvE" secondAttribute="trailing" id="4nE-a3-M7Q"/>
                 <constraint firstItem="tcn-oA-gic" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6ky-dS-Y9I"/>
-                <constraint firstItem="ls5-ZA-jvE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8PL-Nt-Co3"/>
                 <constraint firstItem="169-wf-BeN" firstAttribute="top" secondItem="tcn-oA-gic" secondAttribute="bottom" id="C77-bK-KMI"/>
                 <constraint firstItem="tcn-oA-gic" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CzZ-6U-JIt"/>
                 <constraint firstItem="ls5-ZA-jvE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="F7f-l2-Dhc"/>
                 <constraint firstItem="iIy-ck-co3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N2U-MF-tOr"/>
+                <constraint firstItem="ls5-ZA-jvE" firstAttribute="centerX" secondItem="tcn-oA-gic" secondAttribute="centerX" id="TVg-aF-c6e"/>
                 <constraint firstItem="0gU-i4-1gd" firstAttribute="top" secondItem="tcn-oA-gic" secondAttribute="top" constant="2" id="aTc-He-KLQ"/>
                 <constraint firstAttribute="bottom" secondItem="iIy-ck-co3" secondAttribute="bottom" id="dZd-sq-T2Q"/>
                 <constraint firstAttribute="trailing" secondItem="169-wf-BeN" secondAttribute="trailing" id="sd9-2N-8Zs"/>

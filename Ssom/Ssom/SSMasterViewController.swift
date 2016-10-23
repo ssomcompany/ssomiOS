@@ -41,8 +41,8 @@ class SSMasterViewController: UIViewController {
             guard let wself = self else { return }
 
             if let userInfo = notification.userInfo {
-                if let purchasedHeartCount = userInfo["purchasedHeartCount"] as? Int {
-                    wself.barButtonItems.changeHeartCount(purchasedHeartCount)
+                if let heartsCount = userInfo["heartsCount"] as? Int {
+                    wself.barButtonItems.changeHeartCount(heartsCount)
                 }
             }
         }
@@ -163,6 +163,13 @@ class SSMasterViewController: UIViewController {
                     }
                 }
             })
+        }
+
+        // heart count
+        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+            self.barButtonItems.changeHeartCount(heartsCount)
+        } else {
+            self.barButtonItems.changeHeartCount(0)
         }
     }
 

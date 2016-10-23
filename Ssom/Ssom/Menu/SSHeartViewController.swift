@@ -232,14 +232,15 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
             case SKPaymentTransactionState.Purchased:
                 if let token = SSAccountManager.sharedInstance.sessionToken {
                     let purchasedHeartCount: Int = Int(self.purchasedProduct!.localizedTitle.stringByReplacingOccurrencesOfString("하트", withString: ""))!
-                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: purchasedHeartCount, completion: { (data, error) in
-//                        if let err = error {
-//                            print(err.localizedDescription)
-//
-//                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-//                        } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName(SSInternalNotification.PurchasedHeart.rawValue, object: nil, userInfo: ["purchasedHeartCount" : purchasedHeartCount])
-//                        }
+                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: purchasedHeartCount, completion: { (heartsCount, error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        } else {
+                            NSNotificationCenter.defaultCenter().postNotificationName(SSInternalNotification.PurchasedHeart.rawValue, object: nil, userInfo: ["purchasedHeartCount": purchasedHeartCount,
+                                "heartsCount": heartsCount])
+                        }
                     })
                 }
                 SKPaymentQueue.defaultQueue().finishTransaction(transaction)

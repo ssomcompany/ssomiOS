@@ -286,6 +286,9 @@ public struct SSNetworkAPIClient {
                             if let userUUID = rawDatas["userId"] as? String {
                                 SSNetworkContext.sharedInstance.saveSharedAttribute(userUUID, forKey: "userId")
                             }
+                            if let heartsCount = rawDatas["hearts"] as? Int {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
+                            }
 
                             completion(error: nil)
 
@@ -402,6 +405,9 @@ public struct SSNetworkAPIClient {
                             SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
                             if let userUUID = rawDatas["userId"] as? String {
                                 SSNetworkContext.sharedInstance.saveSharedAttribute(userUUID, forKey: "userId")
+                            }
+                            if let heartsCount = rawDatas["hearts"] as? Int {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
                             }
 
                             completion(error: nil)
@@ -626,7 +632,7 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postPurchaseHearts(token: String, purchasedHeartCount: Int, completion: (data: AnyObject?, error: NSError?) -> Void) {
+    static func postPurchaseHearts(token: String, purchasedHeartCount: Int, completion: (heartsCount: Int, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
@@ -641,11 +647,22 @@ public struct SSNetworkAPIClient {
                 if response.result.isSuccess {
                     print("Response JSON : \(response.result.value)")
 
-                    completion(data: nil, error: nil)
+                    if let rawDatas = response.result.value as? [String: AnyObject] {
+                        if let heartsCount = rawDatas["heartsCount"] as? Int {
+
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
+
+                            completion(heartsCount: heartsCount, error: nil)
+                        }
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PurchaseHearts", code: 814, userInfo: nil)
+
+                        completion(heartsCount: 0, error: error)
+                    }
                 } else {
                     print("Response Error : \(response.result.error)")
 
-                    completion(data: nil, error: response.result.error)
+                    completion(heartsCount: 0, error: response.result.error)
                 }
 
                 indicator.hideIndicator()
@@ -760,6 +777,10 @@ public struct SSNetworkAPIClient {
                             let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 812, userInfo: nil)
 
                             completion(chatroomId: nil, error: error)
+                        }
+
+                        if let heartsCount = rawDatas["hearts"] as? Int {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
                         }
                     }
                 } else {

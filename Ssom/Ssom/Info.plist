@@ -21,14 +21,16 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1428691513826625</string>
+				<string>fb1763683483869831</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20</string>
+	<string>21</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -44,7 +46,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1428691513826625</string>
+	<string>1763683483869831</string>
 	<key>FacebookDisplayName</key>
 	<string>Ssom</string>
 	<key>LSApplicationQueriesSchemes</key>

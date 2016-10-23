@@ -139,12 +139,14 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
                     
                     self.tapClose(nil)
                 } else {
-                    SSAlertController.showAlertConfirm(title: "Error", message: "쏨 타기 위한 하트 갯수가 부족합니다.\n하트를 충전해주시기 바랍니다.", completion: { (action) in
+                    SSAlertController.showAlertTwoButton(title: "Error", message: "쏨 타기 위한 하트 갯수가 부족합니다.\n하트를 충전하시겠습니까?", button1Completion: { (action) in
                         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
                         let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
                         if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
                             presentedViewController.presentViewController(vc, animated: true, completion: nil)
                         }
+                    }, button2Completion: { (action) in
+                        //
                     })
                 }
             }

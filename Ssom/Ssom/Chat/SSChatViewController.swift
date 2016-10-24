@@ -554,17 +554,29 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 return cell!
             }
         } else {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as? SSChatMessageTableCell {
-                cell.ssomType = self.ssomType
-                cell.configView(self.messages[indexPath.row-1])
-
-                return cell
+            let chatModel = self.messages[indexPath.row-1]
+            if chatModel.messageType == .System {
+                if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
+                    cell.configView(self.ssomType, model: chatModel)
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatStartingTableCell
+                    cell!.configView(self.ssomType)
+                    return cell!
+                }
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatMessageTableCell
-                cell!.ssomType = self.ssomType
-                cell!.configView(self.messages[indexPath.row-1])
+                if let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as? SSChatMessageTableCell {
+                    cell.ssomType = self.ssomType
+                    cell.configView(chatModel)
 
-                return cell!
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatMessageTableCell
+                    cell!.ssomType = self.ssomType
+                    cell!.configView(chatModel)
+                    
+                    return cell!
+                }
             }
         }
     }

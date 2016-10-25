@@ -17,16 +17,17 @@ enum SSMeetRequestOptions: String {
 }
 
 public struct SSChatroomViewModel {
-    var chatroomId: String              // id
-    var ownerUserId: String             // ownerId
-    var ownerImageUrl: String?          // ownerImageUrl
-    var participantUserId: String       // participantId
-    var participantImageUrl: String?    // participantImageUrl
-    var createdDateTime: NSDate         // createdTimestamp
+    var chatroomId: String                  // id
+    var ownerUserId: String                 // ownerId
+    var ownerImageUrl: String?              // ownerImageUrl
+    var participantUserId: String           // participantId
+    var participantImageUrl: String?        // participantImageUrl
+    var createdDateTime: NSDate             // createdTimestamp
     var unreadCount: Int
-    var lastMessage: String             // lastMsg
+    var lastMessage: String                 // lastMsg
+    var lastMessageType: SSChatMessageType  // lastMsgType
     var ssomViewModel: SSViewModel
-    var meetRequestUserId: String?      // requestId
+    var meetRequestUserId: String?          // requestId
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested // status =  ['request', 'approve']
 
     init() {
@@ -36,6 +37,7 @@ public struct SSChatroomViewModel {
         self.createdDateTime = NSDate()
         self.unreadCount = 0
         self.lastMessage = ""
+        self.lastMessageType = .Normal
         self.ssomViewModel = SSViewModel()
     }
 
@@ -92,6 +94,12 @@ public struct SSChatroomViewModel {
             self.lastMessage = lastMessage
         } else {
             self.lastMessage = ""
+        }
+
+        if let lastMessageType = modelDict["lastMsgType"] as? String {
+            self.lastMessageType = SSChatMessageType(rawValue: lastMessageType)!
+        } else {
+            self.lastMessageType = .Normal
         }
 
         self.ssomViewModel = SSViewModel(modelDict: modelDict)

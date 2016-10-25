@@ -178,6 +178,14 @@ class SSChatListTableCell: UITableViewCell {
             } else {
                 if model.lastMessage.characters.count > 0 {
                     self.lbLastMessage.text = model.lastMessage
+
+                    if model.lastMessageType == .System {
+                        if model.lastMessage == "out" {
+                            self.lbLastMessage.text = "쏨이 끝났어요, 다른 상대를∙∙∙(T_T)"
+                        } else if model.lastMessage == "request" {
+                            self.lbLastMessage.text = "만남 요청을 받았습니다!"
+                        }
+                    }
                 }
             }
         }

@@ -69,4 +69,13 @@ class SSHeartTableViewCell: UITableViewCell {
             self.lbHeartCount.font = UIFont.boldSystemFontOfSize(41)
         }
     }
+
+    func showTapAnimation() {
+        self.viewBoundary.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .CurveEaseInOut, animations: { 
+            self.viewBoundary.transform = CGAffineTransformIdentity
+            }) { (finish) in
+                //
+        }
+    }
 }

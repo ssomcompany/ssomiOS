@@ -201,6 +201,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         // purchase
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSHeartTableViewCell {
+            cell.showTapAnimation()
+
             for product in self.products {
                 if product.productIdentifier == cell.heartGood.productID {
                     self.purchasedProduct = product

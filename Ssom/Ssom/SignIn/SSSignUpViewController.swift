@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-let kPasswordMinLength = 4
+let kPasswordMinLength = 6
 
 class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet var viewBackground: UIView!

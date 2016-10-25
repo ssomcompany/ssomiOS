@@ -203,6 +203,9 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSHeartTableViewCell {
             cell.showTapAnimation()
 
+            self.indicator = SSIndicatorView()
+            self.indicator.showIndicator()
+
             for product in self.products {
                 if product.productIdentifier == cell.heartGood.productID {
                     self.purchasedProduct = product
@@ -229,6 +232,9 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     // MARK:- SKPaymentTransactionObserver
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+
+        self.indicator.hideIndicator()
+
         for transaction in transactions {
             switch transaction.transactionState {
             case SKPaymentTransactionState.Purchased:

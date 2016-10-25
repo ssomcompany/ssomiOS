@@ -143,15 +143,15 @@ class SSNavigationBarItems : UIView
             let now = NSDate()
             SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
-            self.lbRechargeTime.text = Util.getTimeIntervalString(from: now)
+            self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
         } else {
             if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? NSDate {
-                self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
+                self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate).0
             } else {
                 let now = NSDate()
                 SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
-                self.lbRechargeTime.text = Util.getTimeIntervalString(from: now)
+                self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
             }
         }
 
@@ -184,9 +184,10 @@ class SSNavigationBarItems : UIView
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "HH:mm"
 
-            self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
+            let timeIntervalString = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
+            self.lbRechargeTime.text = timeIntervalString.0
 
-            if self.lbRechargeTime.text == "00:00" {
+            if timeIntervalString.1 <= 0 && timeIntervalString.2 <= 0 {
                 // 하트 1개 구매 처리
                 if let token = SSAccountManager.sharedInstance.sessionToken {
 

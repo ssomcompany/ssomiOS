@@ -30,12 +30,13 @@
                     <constraint firstItem="2Yj-WF-s5x" firstAttribute="centerY" secondItem="Jkv-Lu-qjN" secondAttribute="centerY" id="3Ds-KZ-BG5"/>
                     <constraint firstAttribute="bottom" secondItem="Jkv-Lu-qjN" secondAttribute="bottom" constant="14.5" id="6nI-HA-aja"/>
                     <constraint firstItem="Jkv-Lu-qjN" firstAttribute="top" secondItem="CYn-sp-gU1" secondAttribute="top" constant="15" id="BYO-WL-0Hd"/>
+                    <constraint firstItem="Jkv-Lu-qjN" firstAttribute="centerX" secondItem="CYn-sp-gU1" secondAttribute="centerX" constant="-48" id="Lep-XB-Gnl"/>
                     <constraint firstItem="2Yj-WF-s5x" firstAttribute="leading" secondItem="Jkv-Lu-qjN" secondAttribute="trailing" id="VW2-xm-Iv1"/>
-                    <constraint firstItem="2Yj-WF-s5x" firstAttribute="centerX" secondItem="CYn-sp-gU1" secondAttribute="centerX" constant="40" id="Z8w-v6-7SZ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="constLbColoredCenterXToSuper" destination="Lep-XB-Gnl" id="iAJ-Su-Lcg"/>
                 <outlet property="lbColored" destination="Jkv-Lu-qjN" id="DXZ-o9-qeF"/>
                 <outlet property="lbDetailMessage" destination="2Yj-WF-s5x" id="GEy-xb-U51"/>
             </connections>

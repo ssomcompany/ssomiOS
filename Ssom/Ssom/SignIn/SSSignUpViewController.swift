@@ -24,6 +24,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet var lbPassword: UILabel!
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var viewPasswordBottomLine: UIImageView!
+    @IBOutlet var btnWarningDefault6CharactersPassword: UIButton!
 
     @IBOutlet var lbConfirmPassword: UILabel!
     @IBOutlet var tfConfirmPassword: UITextField!
@@ -142,7 +143,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func tapSignUp(sender: AnyObject) {
+    @IBAction func tapSignUp(sender: AnyObject?) {
         self.btnWarningDuplicatedEmail.hidden = true
 
         SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { (error) in
@@ -195,6 +196,22 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     @IBAction func editingChangedConfirmPassword(sender: AnyObject) {
         self.validateInput()
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === self.tfEmail {
+            self.tfEmail.resignFirstResponder()
+            self.tfPassword.becomeFirstResponder()
+        }
+        if textField === self.tfPassword {
+            self.tfPassword.resignFirstResponder()
+            self.tfConfirmPassword.becomeFirstResponder()
+        }
+        if textField === self.tfConfirmPassword && self.btnSignUp.enabled {
+            self.tapSignUp(nil)
+        }
+
+        return true;
     }
 
     // MARK:- UIScrollView

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d2E-s4-SBf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d2E-s4-SBf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aZL-91-W92"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M9k-f7-XGk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOb-1V-AoB">
@@ -249,7 +249,7 @@
                         <viewControllerLayoutGuide type="bottom" id="16W-Yt-27t"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2YK-vR-DHK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUC-OS-gdx">
@@ -337,6 +337,13 @@
                                                 </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8y-Ej-GqT">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                <state key="normal" title=" 6자리 이상 입력 해주세요." image="arletIcon">
+                                                    <color key="titleColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="disabled" image="arletIcon"/>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dz-D4-EEw">
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -389,6 +396,7 @@
                                             <constraint firstItem="8dz-D4-EEw" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="Ocd-fx-sio"/>
                                             <constraint firstItem="eIr-8e-YOK" firstAttribute="leading" secondItem="cgJ-kX-SUx" secondAttribute="leading" id="T7Z-0h-vVX"/>
                                             <constraint firstItem="cgJ-kX-SUx" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="UrJ-W8-F1H"/>
+                                            <constraint firstItem="e8y-Ej-GqT" firstAttribute="leading" secondItem="Mjc-4n-6Qd" secondAttribute="leading" id="VAH-JC-odc"/>
                                             <constraint firstAttribute="trailing" secondItem="eoH-Qd-7ni" secondAttribute="trailing" id="Vkv-bb-VfY"/>
                                             <constraint firstItem="tQ5-Qt-3bu" firstAttribute="top" secondItem="Mjc-4n-6Qd" secondAttribute="bottom" id="Vs0-wD-u7Z"/>
                                             <constraint firstItem="dNs-Rm-MaG" firstAttribute="centerX" secondItem="MAE-au-W6Z" secondAttribute="centerX" id="Xkf-tC-d01"/>
@@ -396,6 +404,7 @@
                                             <constraint firstItem="eoH-Qd-7ni" firstAttribute="top" secondItem="MAE-au-W6Z" secondAttribute="top" id="cP7-Su-9Zr"/>
                                             <constraint firstAttribute="trailing" secondItem="liV-BA-Zhr" secondAttribute="trailing" constant="30" id="cs5-w5-4aM"/>
                                             <constraint firstItem="tQ5-Qt-3bu" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="83" id="d0v-My-upc"/>
+                                            <constraint firstItem="e8y-Ej-GqT" firstAttribute="top" secondItem="tQ5-Qt-3bu" secondAttribute="bottom" constant="2" id="dhP-ia-3be"/>
                                             <constraint firstItem="NxU-Mb-n3B" firstAttribute="centerY" secondItem="8dz-D4-EEw" secondAttribute="centerY" id="ege-au-z9B"/>
                                             <constraint firstItem="Wjn-Ch-SDr" firstAttribute="leading" secondItem="MAE-au-W6Z" secondAttribute="leading" constant="20" id="iVJ-ye-fME"/>
                                             <constraint firstItem="nhR-zc-8TF" firstAttribute="top" secondItem="liV-BA-Zhr" secondAttribute="bottom" constant="2" id="j0h-FN-mpy"/>
@@ -454,6 +463,7 @@
                     <connections>
                         <outlet property="btnFBSignUp" destination="F0z-pT-ml4" id="Qme-VR-jui"/>
                         <outlet property="btnSignUp" destination="dNs-Rm-MaG" id="B17-9K-4X5"/>
+                        <outlet property="btnWarningDefault6CharactersPassword" destination="e8y-Ej-GqT" id="BCX-wT-eI2"/>
                         <outlet property="btnWarningDuplicatedEmail" destination="eIr-8e-YOK" id="dhO-IW-T18"/>
                         <outlet property="btnWarningWrongConfirmPassword" destination="nhR-zc-8TF" id="EwQ-Vs-SNe"/>
                         <outlet property="constScrollViewBottomToSuper" destination="cw5-zF-ehL" id="Snw-3l-L44"/>
@@ -479,7 +489,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d2E-s4-SBf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oLU-n4-dWZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oLU-n4-dWZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -497,7 +507,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BYc-3N-njc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="szn-kn-mBU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="szn-kn-mBU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -514,10 +524,10 @@
     <resources>
         <image name="arletIcon" width="13" height="13"/>
         <image name="closeWhite" width="18" height="17"/>
-        <image name="joinBtn.png" width="178" height="45"/>
-        <image name="loginBtn.png" width="178" height="45"/>
-        <image name="loginTopImg" width="364" height="236"/>
-        <image name="signupTopPng.png" width="365" height="214"/>
-        <image name="writeLine" width="277" height="1"/>
+        <image name="joinBtn.png" width="177" height="45"/>
+        <image name="loginBtn.png" width="177" height="45"/>
+        <image name="loginTopImg" width="362" height="234"/>
+        <image name="signupTopPng.png" width="363" height="213"/>
+        <image name="writeLine" width="276" height="1"/>
     </resources>
 </document>

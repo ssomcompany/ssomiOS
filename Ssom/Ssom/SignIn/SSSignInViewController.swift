@@ -158,7 +158,12 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) { [weak self] (finish) in
             guard let wself = self else { return nil }
 
-            wself.close(isSignedIn: finish)
+            if finish {
+                wself.close(isSignedIn: finish)
+            } else {
+                wself.tfPassword.text = ""
+                wself.validateInput()
+            }
 
             return nil
         }

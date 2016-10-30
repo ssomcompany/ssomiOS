@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,15 +13,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <view contentMode="scaleToFill" id="6oQ-LL-Cis" customClass="SSScrollView" customModule="Ssom" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwz-gX-EB1" userLabel="View Background">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMn-nV-LbX" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="22" width="375" height="614"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-8s-7IA">
+                            <rect key="frame" x="0.0" y="0.0" width="1125" height="602"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
@@ -69,16 +75,18 @@
         </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSDetailView" customModule="Ssom" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heartRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="f28-Jl-b2g">
+                    <rect key="frame" x="174" y="0.0" width="27" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="27" id="RJM-z9-Jqh"/>
                         <constraint firstAttribute="height" constant="24" id="gqL-3U-fCP"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pF-Hh-wkX" userLabel="Btn Close">
+                    <rect key="frame" x="358" y="7" width="17" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="17" id="AzC-ph-aqd"/>
                         <constraint firstAttribute="height" constant="17" id="zZ2-4W-9A1"/>
@@ -89,21 +97,28 @@
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0K-bU-mUK">
+                    <rect key="frame" x="0.0" y="38" width="375" height="629"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y9i-sf-ICn"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y9i-sf-ICn">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="262"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSR-GK-pT3">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="262"/>
                             <connections>
                                 <action selector="tapProfileImage:" destination="iN0-l3-epB" eventType="touchUpInside" id="bVf-Ca-mky"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjU-yT-QU9">
+                            <rect key="frame" x="0.0" y="262" width="375" height="46"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏘실 분 찾아요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5m-QY-1g1">
+                                    <rect key="frame" x="17" y="12.5" width="108" height="21.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와의 거리 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcG-Ip-UGn">
+                                    <rect key="frame" x="291.5" y="14.5" width="68.5" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -119,13 +134,16 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lls-X1-RNP">
+                            <rect key="frame" x="44" y="331" width="287" height="18"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반, 2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBW-Oa-4Ph">
+                                    <rect key="frame" x="80.5" y="0.0" width="84" height="18"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="명이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pef-ZQ-XpZ">
+                                    <rect key="frame" x="164.5" y="0.0" width="52" height="18"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                     <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -143,11 +161,13 @@
                             </constraints>
                         </view>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="훈남 2명 있어요 코쿤 근처이구요 ㅋㅋ 소주 한잔도 괜찮고 맥주도 좋고 같이 하실 분들 고고싱~~" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hfz-79-n9V">
+                            <rect key="frame" x="44" y="365" width="287" height="178"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr5-x1-Gdx">
+                            <rect key="frame" x="203" y="557" width="157" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Qr5-x1-Gdx" secondAttribute="height" multiplier="157:54" id="n5Z-h0-hMj"/>
                             </constraints>
@@ -160,6 +180,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oa1-4A-wjc">
+                            <rect key="frame" x="15" y="559" width="157" height="48"/>
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="oa1-4A-wjc" secondAttribute="height" multiplier="157:48" id="TzU-Da-Yqm"/>
@@ -172,6 +193,16 @@
                                 <action selector="tapClose:" destination="iN0-l3-epB" eventType="touchUpInside" id="6P8-fi-Gnt"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MD7-bC-c4N">
+                            <rect key="frame" x="304" y="5" width="66" height="31"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                            <state key="normal" title="신고하기" image="iconPodol">
+                                <color key="titleColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="tapReport:" destination="iN0-l3-epB" eventType="touchUpInside" id="9va-km-tOG"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -181,7 +212,9 @@
                         <constraint firstItem="Hfz-79-n9V" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" constant="44" id="89w-pT-EWm"/>
                         <constraint firstAttribute="trailing" secondItem="hjU-yT-QU9" secondAttribute="trailing" id="Ab4-8m-5w5"/>
                         <constraint firstItem="oa1-4A-wjc" firstAttribute="width" secondItem="m0K-bU-mUK" secondAttribute="width" multiplier="157:375" id="CA2-gG-gQQ"/>
+                        <constraint firstAttribute="trailing" secondItem="MD7-bC-c4N" secondAttribute="trailing" constant="5" id="DHb-fa-N7I"/>
                         <constraint firstItem="hjU-yT-QU9" firstAttribute="leading" secondItem="m0K-bU-mUK" secondAttribute="leading" id="Fhm-oJ-wSs"/>
+                        <constraint firstItem="MD7-bC-c4N" firstAttribute="top" secondItem="m0K-bU-mUK" secondAttribute="top" constant="5" id="Hz6-US-dgS"/>
                         <constraint firstAttribute="trailing" secondItem="y9i-sf-ICn" secondAttribute="trailing" id="JFJ-cJ-iuu"/>
                         <constraint firstItem="KSR-GK-pT3" firstAttribute="leading" secondItem="y9i-sf-ICn" secondAttribute="leading" id="JZZ-zl-ir1"/>
                         <constraint firstAttribute="trailing" secondItem="Hfz-79-n9V" secondAttribute="trailing" constant="44" id="LUR-QZ-Xbl"/>
@@ -216,6 +249,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <connections>
                 <outlet property="btnCancel" destination="oa1-4A-wjc" id="jyA-x7-DtU"/>
+                <outlet property="btnReport" destination="MD7-bC-c4N" id="S8n-k0-Y0u"/>
                 <outlet property="btnSsom" destination="Qr5-x1-Gdx" id="WTf-Bh-ktw"/>
                 <outlet property="imgHeart" destination="f28-Jl-b2g" id="fuk-Th-KgK"/>
                 <outlet property="imgProfile" destination="y9i-sf-ICn" id="Evm-Me-77q"/>
@@ -229,9 +263,10 @@
         </view>
     </objects>
     <resources>
-        <image name="acceptButtonRed.png" width="138" height="51"/>
+        <image name="acceptButtonRed.png" width="139" height="51"/>
         <image name="closeWhite.png" width="26" height="26"/>
         <image name="heartRed.png" width="40" height="35"/>
         <image name="heartWhite" width="30" height="27"/>
+        <image name="iconPodol" width="27" height="31"/>
     </resources>
 </document>

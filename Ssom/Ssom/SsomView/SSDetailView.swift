@@ -26,6 +26,7 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
     @IBOutlet var textViewDescription: UITextView!
     @IBOutlet var btnSsom: UIButton!
     @IBOutlet var btnCancel: UIButton!
+    @IBOutlet var btnReport: UIButton!
 
     var profilePhotoView: SSPhotoView!
 
@@ -84,6 +85,8 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         if self.isMySsom {
             self.btnSsom.setTitle("삭제", forState: UIControlState.Normal)
             self.btnSsom.setImage(nil, forState: UIControlState.Normal)
+
+            self.btnReport.hidden = true
         }
     }
 
@@ -172,6 +175,24 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
             self.profilePhotoView.delegate = self
 
             keyWindow.addSubview(self.profilePhotoView)
+        }
+    }
+
+    @IBAction func tapReport(sender: AnyObject) {
+        SSAlertController.showAlertTextField(title: "신고하기", message: "불량한 쏨을 보셨다면,\n이유와 함께 신고해주세요!", button1Completion: { (action, reason) in
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                SSNetworkAPIClient.postReport(token, postId: self.viewModel.postId, reason: reason, completion: { (data, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                    } else {
+                        SSAlertController.showAlertConfirm(title: "알림", message: "신고 접수되었습니다!\n관리자가 검토 후, 조속히 처리하겠습니다!", completion: nil)
+                    }
+                })
+            }
+        }) { (action) in
+                //
         }
     }
 

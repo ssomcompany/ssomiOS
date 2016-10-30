@@ -1094,4 +1094,38 @@ public struct SSNetworkAPIClient {
             indicator.hideIndicator()
         }
     }
+
+    // MARK: - Report
+    static func postReport(token: String, postId: String, reason: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(.POST,
+            SSNetworkContext.serverUrlPrefixt+"reports",
+            encoding: .JSON,
+            parameters: ["postId": postId,
+                        "content": reason],
+            headers: ["Authorization": "JWT " + token])
+            .responseJSON { (response) in
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let _ = response.result.value as? [String: AnyObject] {
+                        completion(data: nil, error: nil)
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostReport", code: 815, userInfo: nil)
+
+                        completion(data: nil, error: error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+
+                    completion(data: nil, error: response.result.error)
+                }
+                
+                indicator.hideIndicator()
+        }
+    }
 }

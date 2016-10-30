@@ -183,7 +183,9 @@ class SSChatListTableCell: UITableViewCell {
                         if model.lastMessage == "out" {
                             self.lbLastMessage.text = "쏨이 끝났어요, 다른 상대를∙∙∙(T_T)"
                         } else if model.lastMessage == "request" {
-                            self.lbLastMessage.text = "만남 요청을 받았습니다!"
+                            self.lbLastMessage.text = "만남 요청을 했습니다!"
+                        } else if model.lastMessage == "cancel" {
+                            self.lbLastMessage.text = "요청이 취소되었어요"
                         }
                     }
                 }

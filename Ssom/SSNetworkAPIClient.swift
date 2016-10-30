@@ -967,7 +967,7 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postMeetRequest(token: String, chatRoomId: String, completion: (data: AnyObject?, error: NSError?) -> Void) {
+    static func postMeetRequest(token: String, chatRoomId: String, completion: (data: SSChatViewModel?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
@@ -982,8 +982,9 @@ public struct SSNetworkAPIClient {
             if response.result.isSuccess {
                 print("Response JSON : \(response.result.value)")
 
-                if let _ = response.result.value as? [String: AnyObject] {
-                    completion(data: nil, error: nil)
+                if let rawData = response.result.value as? [String: AnyObject] {
+                    let model = SSChatViewModel(modelDict: rawData)
+                    completion(data: model, error: nil)
                 } else {
                     let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostMeetRequest", code: 804, userInfo: nil)
 

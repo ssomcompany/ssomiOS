@@ -199,8 +199,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
             wself.tableViewChat.reloadData()
 
-            let scrollOffset = wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height
-            wself.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+            let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
+            wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
     }
 
@@ -224,8 +224,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                             wself.tableViewChat.reloadData()
 
-                            let scrollOffset = wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height
-                            wself.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+                            let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
+                            wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
 
                             guard let requestUserId = wself.meetRequestUserId else {
                                 wself.showMeetRequest(false)
@@ -267,8 +267,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.tableViewChat.reloadData()
 
-        let scrollOffset = self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height
-        self.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+        let lastIndexPath = NSIndexPath(forRow: self.messages.count, inSection: 0)
+        self.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
 
     func registerForKeyboardNotifications() -> Void {
@@ -351,6 +351,21 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                             } else {
                                 if let wself = self {
                                     wself.showMeetRequest(false, status: .Requested)
+
+                                    // add my sent message on the last of the messages
+                                    if var myLastMessage = data {
+                                        if myLastMessage.messageType == .Request {
+                                            myLastMessage.message = "request"
+                                            myLastMessage.messageType = .System
+                                        }
+                                        myLastMessage.profileImageUrl = wself.myImageUrl
+                                        wself.messages.append(myLastMessage)
+
+                                        wself.tableViewChat.reloadData()
+
+                                        let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
+                                        wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                                    }
                                 }
                             }
                             })
@@ -409,6 +424,19 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             } else {
                 if let wself = self {
                     wself.showMeetRequest(false, status: .Cancelled)
+
+                    // add my sent message on the last of the messages
+                    var myLastMessage = SSChatViewModel()
+                    myLastMessage.message = "cancel"
+                    myLastMessage.messageType = .System
+                    myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
+                    myLastMessage.profileImageUrl = wself.myImageUrl
+                    wself.messages.append(myLastMessage)
+
+                    wself.tableViewChat.reloadData()
+
+                    let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
+                    wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                 }
             }
         }
@@ -505,8 +533,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                         wself.tableViewChat.reloadData()
                                     }
 
-                                    let scrollOffset = wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height
-                                    wself.tableViewChat.setContentOffset(CGPointMake(0, scrollOffset <= 0 ? 0 : scrollOffset), animated: true)
+                                    let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
+                                    wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                                 }
                             })
                         }
@@ -571,7 +599,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                     return cell
                 } else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatMessageTableCell
+                    let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell") as? SSChatMessageTableCell
                     cell!.ssomType = self.ssomType
                     cell!.configView(chatModel)
                     

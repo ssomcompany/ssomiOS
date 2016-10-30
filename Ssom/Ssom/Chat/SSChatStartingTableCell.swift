@@ -34,11 +34,19 @@ class SSChatStartingTableCell: UITableViewCell {
                 self.lbColored.text = "쏨이 끝났어요, "
                 self.lbDetailMessage.text = "다른 상대를∙∙∙(T_T)"
             } else if message.message == "request" {
-                self.lbColored.text = "만남 요청을 받았습니다!"
+                if message.fromUserId == SSAccountManager.sharedInstance.userUUID {
+                    self.lbColored.text = "만남 요청을 했습니다!"
+                } else {
+                    self.lbColored.text = "만남 요청을 받았습니다!"
+                }
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "approve" {
                 self.lbColored.text = "쏨과 만나는 중..."
+                self.lbDetailMessage.text = ""
+                self.constLbColoredCenterXToSuper.constant = 0.0
+            } else if message.message == "cancel" {
+                self.lbColored.text = "요청이 취소되었어요"
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             }

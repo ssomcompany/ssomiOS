@@ -259,10 +259,23 @@ class SSMasterViewController: UIViewController {
         UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveLinear, animations: { 
             self.barButtonItems.imgViewMessage.transform = CGAffineTransformIdentity
         }) { (finish) in
-            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-            let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+            if SSAccountManager.sharedInstance.isAuthorized {
 
-            self.navigationController?.pushViewController(vc, animated: true)
+                let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+
+                self.navigationController?.pushViewController(vc, animated: true)
+
+            } else {
+                SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                    if finish {
+                        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                })
+            }
         }
     }
 }

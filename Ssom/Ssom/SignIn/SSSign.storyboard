@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d2E-s4-SBf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d2E-s4-SBf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -18,24 +21,30 @@
                         <viewControllerLayoutGuide type="bottom" id="aZL-91-W92"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M9k-f7-XGk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOb-1V-AoB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbE-1l-VkR" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
+                                <rect key="frame" x="23.5" y="53" width="328" height="561"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORI-hY-2NH">
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="561"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-vC-V6H">
+                                                <rect key="frame" x="0.0" y="0.0" width="328" height="257"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginTopImg" translatesAutoresizingMaskIntoConstraints="NO" id="JWq-BK-B9N">
+                                                        <rect key="frame" x="0.0" y="0.0" width="328" height="212"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="JWq-BK-B9N" secondAttribute="height" multiplier="181:117" id="9HS-ti-rxe"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 이용을 위해서는 로그인이 필요합니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cs2-jP-ynq">
+                                                        <rect key="frame" x="0.0" y="212" width="328" height="45"/>
                                                         <color key="backgroundColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Bbb-0s-6Q2"/>
@@ -57,6 +66,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lig-Au-fEj">
+                                                <rect key="frame" x="95.5" y="375" width="137" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Lig-Au-fEj" secondAttribute="height" multiplier="147:43" id="JAR-eP-gvj"/>
                                                 </constraints>
@@ -69,6 +79,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDa-VK-PBV">
+                                                <rect key="frame" x="25" y="506" width="137" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zDa-VK-PBV" secondAttribute="height" multiplier="147:43" id="6aj-dF-fD3"/>
                                                 </constraints>
@@ -81,11 +92,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uu6-jK-UC0">
+                                                <rect key="frame" x="20" y="282.5" width="26" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일 주소를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wfe-lR-JPp">
+                                                <rect key="frame" x="63" y="275" width="235" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="zt5-8E-SW6"/>
                                                 </constraints>
@@ -98,13 +111,17 @@
                                                     <outlet property="delegate" destination="fHF-ph-zYB" id="2uh-To-cjn"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="7QE-0R-A6B"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="7QE-0R-A6B">
+                                                <rect key="frame" x="63" y="302" width="235" height="1"/>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ute-j3-yBO">
+                                                <rect key="frame" x="20" y="333.5" width="35" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L40-tM-oxs">
+                                                <rect key="frame" x="63" y="326" width="235" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="MzF-sG-sp1"/>
                                                 </constraints>
@@ -117,8 +134,11 @@
                                                     <outlet property="delegate" destination="fHF-ph-zYB" id="eZt-mZ-3Od"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-vH-Svd"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-vH-Svd">
+                                                <rect key="frame" x="63" y="353" width="235" height="1"/>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylA-ey-b3o">
+                                                <rect key="frame" x="95.5" y="506" width="137" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="ylA-ey-b3o" secondAttribute="height" multiplier="147:43" id="joK-yF-dLc"/>
                                                 </constraints>
@@ -133,6 +153,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXH-m8-MvL" customClass="FBSDKLoginButton">
+                                                <rect key="frame" x="95.5" y="423.5" width="137" height="40"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                         </subviews>
@@ -180,6 +201,7 @@
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTx-py-6ep">
+                                        <rect key="frame" x="291" y="0.0" width="37" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="dTx-py-6ep" secondAttribute="height" multiplier="10:11" id="mRQ-n4-JuD"/>
                                         </constraints>
@@ -249,20 +271,27 @@
                         <viewControllerLayoutGuide type="bottom" id="16W-Yt-27t"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2YK-vR-DHK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUC-OS-gdx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpD-oZ-vmH" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
+                                <rect key="frame" x="23.5" y="53" width="328" height="561"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-au-W6Z">
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="561"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-Qd-7ni">
+                                                <rect key="frame" x="0.0" y="0.0" width="328" height="207.5"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signupTopPng.png" translatesAutoresizingMaskIntoConstraints="NO" id="3qY-na-xMv"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signupTopPng.png" translatesAutoresizingMaskIntoConstraints="NO" id="3qY-na-xMv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="328" height="207.5"/>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨을 가입하고 새로운 만남을 시작해보세요 =)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLQ-ih-3xF">
+                                                        <rect key="frame" x="0.0" y="170.5" width="328" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                         <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -281,6 +310,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-Rm-MaG">
+                                                <rect key="frame" x="86" y="447" width="156" height="36.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="dNs-Rm-MaG" secondAttribute="height" multiplier="43:10" id="G1W-gK-gv9"/>
                                                 </constraints>
@@ -293,11 +323,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT0-B0-XAW">
+                                                <rect key="frame" x="20" y="226.5" width="26" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일 주소를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgJ-kX-SUx">
+                                                <rect key="frame" x="83" y="219" width="215" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="3EF-bN-23c"/>
                                                 </constraints>
@@ -310,8 +342,11 @@
                                                     <outlet property="delegate" destination="Zim-wO-bXh" id="lE8-yI-XOk"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-Ly-2cN"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-Ly-2cN">
+                                                <rect key="frame" x="83" y="246" width="215" height="1"/>
+                                            </imageView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIr-8e-YOK">
+                                                <rect key="frame" x="83" y="249" width="163" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                 <state key="normal" title=" 이미 사용중인 이메일 주소입니다." image="arletIcon">
                                                     <color key="titleColor" red="0.90196078431372551" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -319,11 +354,13 @@
                                                 <state key="disabled" image="arletIcon"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-Ch-SDr">
+                                                <rect key="frame" x="20" y="276.5" width="35" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-4n-6Qd">
+                                                <rect key="frame" x="83" y="269" width="215" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="Fzq-GM-Bjt"/>
                                                 </constraints>
@@ -336,8 +373,11 @@
                                                     <outlet property="delegate" destination="Zim-wO-bXh" id="gPR-lH-EJQ"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-Qt-3bu">
+                                                <rect key="frame" x="83" y="296" width="215" height="1"/>
+                                            </imageView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8y-Ej-GqT">
+                                                <rect key="frame" x="83" y="299" width="132" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                 <state key="normal" title=" 6자리 이상 입력 해주세요." image="arletIcon">
                                                     <color key="titleColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -345,11 +385,13 @@
                                                 <state key="disabled" image="arletIcon"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dz-D4-EEw">
+                                                <rect key="frame" x="20" y="333" width="55" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀 번호를 입력 해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NxU-Mb-n3B">
+                                                <rect key="frame" x="83" y="325.5" width="215" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="dIH-6X-wvQ"/>
                                                 </constraints>
@@ -362,8 +404,11 @@
                                                     <outlet property="delegate" destination="Zim-wO-bXh" id="Wak-U0-NIC"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="liV-BA-Zhr"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="liV-BA-Zhr">
+                                                <rect key="frame" x="83" y="352.5" width="215" height="1"/>
+                                            </imageView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhR-zc-8TF">
+                                                <rect key="frame" x="83" y="355.5" width="144" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                 <state key="normal" title=" 입력한 비밀 번호가 다릅니다." image="arletIcon">
                                                     <color key="titleColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -371,6 +416,7 @@
                                                 <state key="disabled" image="arletIcon"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0z-pT-ml4" customClass="FBSDKLoginButton">
+                                                <rect key="frame" x="86" y="488.5" width="156" height="37"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                         </subviews>
@@ -420,6 +466,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-0X-uXG">
+                                        <rect key="frame" x="291" y="0.0" width="37" height="41"/>
                                         <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bAS-0X-uXG" secondAttribute="height" multiplier="10:11" id="Ljy-BT-bFH"/>
@@ -489,7 +536,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d2E-s4-SBf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oLU-n4-dWZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oLU-n4-dWZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -507,7 +554,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BYc-3N-njc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="szn-kn-mBU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="szn-kn-mBU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -524,10 +571,10 @@
     <resources>
         <image name="arletIcon" width="13" height="13"/>
         <image name="closeWhite" width="18" height="17"/>
-        <image name="joinBtn.png" width="177" height="45"/>
-        <image name="loginBtn.png" width="177" height="45"/>
-        <image name="loginTopImg" width="362" height="234"/>
-        <image name="signupTopPng.png" width="363" height="213"/>
-        <image name="writeLine" width="276" height="1"/>
+        <image name="joinBtn.png" width="178" height="45"/>
+        <image name="loginBtn.png" width="178" height="45"/>
+        <image name="loginTopImg" width="364" height="236"/>
+        <image name="signupTopPng.png" width="365" height="214"/>
+        <image name="writeLine" width="277" height="1"/>
     </resources>
 </document>

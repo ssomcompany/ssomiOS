@@ -482,7 +482,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 // MARK: - Keyboard show & hide event
     func keyboardWillShow(notification: NSNotification) -> Void {
         if let info = notification.userInfo {
-            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
 
                 self.constProfileViewTopToSuper.constant = -self.profileView.bounds.size.height
             }

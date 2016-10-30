@@ -57,7 +57,7 @@ class SSChatMessageTableCell: UITableViewCell {
                 }
 
                 if let imageUrl = profileImageUrl {
-                    self.imgViewMyProfile.sd_setImageWithURL(NSURL(string: imageUrl), completed: { (image, error, _, _) in
+                    self.imgViewMyProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
                             let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPartnerProfile.bounds.size.width, self.imgViewMyProfile.bounds.size.height))
@@ -73,7 +73,7 @@ class SSChatMessageTableCell: UITableViewCell {
                 self.showPartnerViews()
 
                 if let imageUrl = model.profileImageUrl {
-                    self.imgViewPartnerProfile.sd_setImageWithURL(NSURL(string: imageUrl), completed: { (image, error, _, _) in
+                    self.imgViewPartnerProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
                             let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPartnerProfile.bounds.size.width, self.imgViewPartnerProfile.bounds.size.height))

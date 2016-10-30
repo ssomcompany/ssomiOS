@@ -94,7 +94,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
         if SSAccountManager.sharedInstance.isAuthorized {
             self.btnPhoto.hidden = false
             if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
                     guard let wself = self else { return }
 
                     if error != nil {

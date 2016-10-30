@@ -83,7 +83,7 @@ class SSChatListTableCell: UITableViewCell {
             self.isOwnerUser = true
             // show the participant profile image because the login user is the owner of chatting
             if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
                     guard let wself = self else { return }
 
                     if error != nil {
@@ -100,7 +100,7 @@ class SSChatListTableCell: UITableViewCell {
             self.isOwnerUser = false
             // show the owner profile image because the login user is NOT the owner of chatting
             if let imageUrl = model.ownerImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
                     guard let wself = self else { return }
 
                     if error != nil {

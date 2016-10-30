@@ -89,7 +89,7 @@ class SSListTableViewCell: UITableViewCell {
             if imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                 print("imageUrl is \(imageUrl)")
 
-                self.profileImageView?.sd_setImageWithURL(NSURL(string: imageUrl)
+                self.profileImageView?.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200")
                     , placeholderImage: nil
                     , completed: { (image, error, cacheType, url) -> Void in
 

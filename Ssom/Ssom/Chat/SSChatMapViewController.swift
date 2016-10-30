@@ -109,7 +109,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         let maskOfProfileImage: UIImage = UIImage.mergeImages(firstImage: coverOfProfileImage, secondImage: borderOfProfileImage, x: 0, y: 0)
 
         if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
 
                 marker.icon = maskOfProfileImage
 

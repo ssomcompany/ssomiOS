@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 protocol SSDetailViewDelegate: class {
     func closeDetailView(needToReload: Bool)
@@ -179,15 +180,15 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
     }
 
     @IBAction func tapReport(sender: AnyObject) {
-        SSAlertController.showAlertTextField(title: "신고하기", message: "불량한 쏨을 보셨다면,\n이유와 함께 신고해주세요!", button1Completion: { (action, reason) in
+        SSAlertController.showAlertTwoButton(title: "알림", message: "이 게시물을 신고 하시겠어요?\n신고 된 게시물은 운영정책에 따라\n삭제 등의 조치가 이루어집니다.", button1Title: "신고하기", button1Completion: { (action) in
             if let token = SSAccountManager.sharedInstance.sessionToken {
-                SSNetworkAPIClient.postReport(token, postId: self.viewModel.postId, reason: reason, completion: { (data, error) in
+                SSNetworkAPIClient.postReport(token, postId: self.viewModel.postId, reason: "", completion: { (data, error) in
                     if let err = error {
                         print(err.localizedDescription)
 
                         SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                     } else {
-                        SSAlertController.showAlertConfirm(title: "알림", message: "신고 접수되었습니다!\n관리자가 검토 후, 조속히 처리하겠습니다!", completion: nil)
+                        self.makeToast("정상적으로 신고 되었습니다", duration: 2.0, position: .Top)
                     }
                 })
             }

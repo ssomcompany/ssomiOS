@@ -13,7 +13,7 @@ import SDWebImage
     optional func tapPhotoViewClose() -> Void
 }
 
-class SSPhotoView: UIView {
+class SSPhotoView: UIView, UIScrollViewDelegate {
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var imageView: UIImageView!
     weak var delegate: SSPhotoViewDelegate?
@@ -52,5 +52,14 @@ class SSPhotoView: UIView {
         if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapPhotoViewClose))) {
             self.delegate!.tapPhotoViewClose!()
         }
+    }
+
+    // MARK:- UIScrollViewDelegate
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        print("zoom")
+    }
+
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
 }

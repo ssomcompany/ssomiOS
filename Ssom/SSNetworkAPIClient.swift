@@ -695,12 +695,17 @@ public struct SSNetworkAPIClient {
     }
 
 // MARK: - Chat
-    static func getChatroomList(token: String, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
+    static func getChatroomList(token: String, latitude: Double = 0, longitude: Double = 0, completion: (datas: [SSChatroomViewModel]?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
+        var params: String! = nil
+        if !(latitude == 0 && longitude == 0) {
+            params = "?lat=\(latitude)&lng=\(longitude)"
+        }
+
         Alamofire.request(.GET,
-                          SSNetworkContext.serverUrlPrefixt+"chatroom",
+                          SSNetworkContext.serverUrlPrefixt+"chatroom" + (params != nil ? params : ""),
                           encoding: .JSON,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
@@ -734,13 +739,19 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postChatroom(token: String, postId: String, completion: (chatroomId: String?, error: NSError?) -> Void) {
+    static func postChatroom(token: String, postId: String, latitude: Double = 0, longitude: Double = 0, completion: (chatroomId: String?, error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
+        var params: [String: AnyObject] = ["postId": postId]
+        if !(latitude == 0 && longitude == 0) {
+            params["lat"] = "\(latitude)"
+            params["lng"] = "\(longitude)"
+        }
+
         Alamofire.request(.POST,
             SSNetworkContext.serverUrlPrefixt+"chatroom",
-            parameters: ["postId": postId],
+            parameters: params,
             encoding: .JSON,
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
@@ -763,7 +774,11 @@ public struct SSNetworkAPIClient {
                                     errorCode = errorInfo.0
                                     errorDescription = errorInfo.1
                                 } else {
-                                    errorDescription = errName
+                                    if let errDescription = rawDatas["msg"] as? String {
+                                        errorDescription = errDescription
+                                    } else {
+                                        errorDescription = errName
+                                    }
                                 }
                             }
                         }

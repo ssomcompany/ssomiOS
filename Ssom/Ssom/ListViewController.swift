@@ -496,7 +496,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func doSsom(ssomType: SSType, model: SSViewModel) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if model.postId != "" {
-                SSNetworkAPIClient.postChatroom(token, postId: model.postId, completion: { (chatroomId, error) in
+                SSNetworkAPIClient.postChatroom(token, postId: model.postId, latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { (chatroomId, error) in
 
                     if let err = error {
                         print(err.localizedDescription)

@@ -117,7 +117,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
     func loadData() {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
-            SSNetworkAPIClient.getChatroomList(token, completion: { (models, error) in
+            SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { (models, error) in
                 if error != nil {
                     print(error?.localizedDescription)
 

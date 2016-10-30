@@ -520,7 +520,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
 
         self.currentLocation = camera.target
-        mainView.animateToCameraPosition(camera)
+        self.mainView.animateToCameraPosition(camera)
 
         self.loadingData { (finish) in
             if finish {
@@ -615,7 +615,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     func doSsom(ssomType: SSType, model: SSViewModel) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if model.postId != "" {
-                SSNetworkAPIClient.postChatroom(token, postId: model.postId, completion: { (chatroomId, error) in
+                SSNetworkAPIClient.postChatroom(token, postId: model.postId, latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude, completion: { (chatroomId, error) in
 
                     if let err = error {
                         print(err.localizedDescription)

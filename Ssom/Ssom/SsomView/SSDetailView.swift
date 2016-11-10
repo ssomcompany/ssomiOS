@@ -15,7 +15,7 @@ protocol SSDetailViewDelegate: class {
     func doSsom(ssomType: SSType, model: SSViewModel)
 }
 
-class SSDetailView: UIView, SSPhotoViewDelegate {
+class SSDetailView: UIView, SSPhotoViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var viewDetail: UIView!
     @IBOutlet var imgHeart: UIImageView!
@@ -40,6 +40,8 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
 
     var needToReload: Bool = false
 
+    var gradationLayer: CAGradientLayer!
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -61,7 +63,10 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         self.viewModel = viewModel;
 
         if let imageUrl = self.viewModel.imageUrl {
-            self.imgProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil) { (image, error, cacheType, url) -> Void in
+            self.imgProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil) { [weak self] (image, error, cacheType, url) -> Void in
+                guard let wself = self else { return }
+
+                wself.imgProfile.contentMode = .ScaleAspectFill
             }
         }
 
@@ -91,6 +96,21 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if self.gradationLayer == nil {
+            let profileFrame = self.imgProfile.bounds
+
+            self.gradationLayer = CAGradientLayer()
+            self.gradationLayer.colors = [UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0).CGColor, UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5).CGColor, UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.75).CGColor]
+            self.gradationLayer.locations = [0.0, 0.5, 1.0]
+            let gradationLayerHeight = profileFrame.height * 85.0 / 286
+            self.gradationLayer.frame = CGRect(origin: CGPoint(x: 0, y: profileFrame.height - gradationLayerHeight), size: CGSize(width: profileFrame.width, height: gradationLayerHeight))
+            self.imgProfile.layer.addSublayer(self.gradationLayer)
+        }
+    }
+
     func changeTheme(ssomType: SSType) {
         self.ssomType = ssomType
 
@@ -110,6 +130,7 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
     }
     
     @IBAction func tapClose(sender: AnyObject?) {
+        self.textViewDescription.contentOffset = CGPointZero
         guard let _ = self.delegate?.closeDetailView(self.needToReload) else {
             NSLog("%@", "This SSDetailView's delegate isn't implemented closeDetailView function")
 
@@ -197,8 +218,54 @@ class SSDetailView: UIView, SSPhotoViewDelegate {
         }
     }
 
+    var touchedPoint: CGPoint = CGPointZero
+
+    @IBAction func handlePanGesture(sender: UIPanGestureRecognizer) {
+        if sender.state == .Began {
+            self.touchedPoint = sender.translationInView(self)
+            print("touchedPoint (began) : \(self.touchedPoint)")
+        } else if sender.state == .Changed {
+            let touchedPoint = sender.translationInView(self)
+            print("touchedPoint (~ing) : \(touchedPoint)")
+
+            if touchedPoint.y > 0 {
+                self.transform = CGAffineTransformMakeTranslation(0, touchedPoint.y)
+            }
+
+        } else if sender.state == .Ended ||
+            sender.state == .Cancelled ||
+            sender.state == .Failed {
+
+            let touchedPoint = sender.translationInView(self)
+            print("touchedPoint (~ing) : \(touchedPoint)")
+
+            if abs(touchedPoint.x) < abs(touchedPoint.y) {
+                if touchedPoint.y > UIScreen.mainScreen().bounds.height / 2.0 {
+                    self.tapClose(nil)
+                } else {
+                    UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .CurveEaseOut, animations: {
+                        self.transform = CGAffineTransformIdentity
+                        }, completion: { (finish) in
+                            
+                    })
+                }
+            } else {
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .CurveEaseOut, animations: {
+                    self.transform = CGAffineTransformIdentity
+                    }, completion: { (finish) in
+
+                })
+            }
+        }
+    }
+
 // MARK:- SSPhotoViewDelegate
     func tapPhotoViewClose() {
         self.profilePhotoView.removeFromSuperview()
+    }
+
+// MARK:- UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

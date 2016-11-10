@@ -14,6 +14,7 @@ import SDWebImage
 }
 
 class SSPhotoView: UIView, UIScrollViewDelegate {
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var imageView: UIImageView!
     weak var delegate: SSPhotoViewDelegate?
@@ -51,6 +52,13 @@ class SSPhotoView: UIView, UIScrollViewDelegate {
     @IBAction func tapClose(sender: UIButton) {
         if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapPhotoViewClose))) {
             self.delegate!.tapPhotoViewClose!()
+        }
+    }
+    @IBAction func handleDoubleTapImage(sender: AnyObject) {
+        if self.scrollView.zoomScale == 1 {
+            self.scrollView.zoomScale = 2
+        } else {
+            self.scrollView.zoomScale = 1
         }
     }
 

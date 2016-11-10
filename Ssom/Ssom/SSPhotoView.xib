@@ -22,6 +22,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-U8-cjQ">
                             <rect key="frame" x="0.0" y="126" width="375" height="415"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="4Cv-U8-cjQ" secondAttribute="height" multiplier="75:83" id="Zfa-UD-RVl"/>
                             </constraints>
@@ -35,6 +36,7 @@
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="iN0-l3-epB" id="CqL-Ie-J5Q"/>
+                        <outletCollection property="gestureRecognizers" destination="TjE-35-fOM" appends="YES" id="q91-Xk-qfq"/>
                     </connections>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP9-q1-9DO">
@@ -64,8 +66,14 @@
             <connections>
                 <outlet property="closeButton" destination="vP9-q1-9DO" id="oBi-PX-mZb"/>
                 <outlet property="imageView" destination="4Cv-U8-cjQ" id="44s-X8-rgP"/>
+                <outlet property="scrollView" destination="JjR-jZ-flp" id="Z9k-F1-sb1"/>
             </connections>
         </view>
+        <tapGestureRecognizer numberOfTapsRequired="2" id="TjE-35-fOM">
+            <connections>
+                <action selector="handleDoubleTapImage:" destination="iN0-l3-epB" id="KiJ-Ty-W9S"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="closeBtn.png" width="188" height="67"/>

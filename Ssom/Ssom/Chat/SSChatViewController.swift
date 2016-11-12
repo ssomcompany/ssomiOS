@@ -252,18 +252,28 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func reload(with modelDict: [String: AnyObject]) {
-        let newMessage = SSChatViewModel(modelDict: modelDict)
+        var newMessage = SSChatViewModel(modelDict: modelDict)
+        if let imageUrl = self.partnerImageUrl where newMessage.profileImageUrl == nil {
+            newMessage.profileImageUrl = imageUrl
+        }
 
         switch newMessage.messageType {
-        case .Normal:
-            self.messages.append(newMessage)
         case .Request:
             self.showMeetRequest(false, status: .Received)
+            newMessage.message = SSChatMessageType.Request.rawValue
+            newMessage.messageType = .System
         case .Approve:
             self.showMeetRequest(true, status: .Accepted)
+            newMessage.message = SSChatMessageType.Approve.rawValue
+            newMessage.messageType = .System
+        case .Cancel:
+            self.showMeetRequest(false)
+            newMessage.message = SSChatMessageType.Cancel.rawValue
+            newMessage.messageType = .System
         default:
             break
         }
+        self.messages.append(newMessage)
 
         self.tableViewChat.reloadData()
 
@@ -573,52 +583,35 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
-                cell.configView(self.ssomType)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatStartingTableCell
-                cell!.configView(self.ssomType)
-                return cell!
-            }
+            let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as! SSChatStartingTableCell
+            cell.configView(self.ssomType)
+            return cell
         } else {
             let chatModel = self.messages[indexPath.row-1]
             if chatModel.messageType == .System {
-                if let cell: SSChatStartingTableCell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as? SSChatStartingTableCell {
-                    cell.configView(self.ssomType, model: chatModel)
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell") as? SSChatStartingTableCell
-                    cell!.configView(self.ssomType)
-                    return cell!
-                }
+                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as! SSChatStartingTableCell
+                cell.configView(self.ssomType, model: chatModel)
+                return cell
             } else {
-                if let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as? SSChatMessageTableCell {
-                    cell.ssomType = self.ssomType
-                    cell.configView(chatModel)
+                let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as! SSChatMessageTableCell
+                cell.ssomType = self.ssomType
+                cell.configView(chatModel)
 
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell") as? SSChatMessageTableCell
-                    cell!.ssomType = self.ssomType
-                    cell!.configView(chatModel)
-                    
-                    return cell!
-                }
+                return cell
             }
         }
     }
 
 // MARK: - UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        return true;
+        return true
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField.text?.characters.count > 0 {
             self.tapSendMessage(nil)
         }
-        return true;
+        return true
     }
 
 // MARK: - Keyboard show & hide event

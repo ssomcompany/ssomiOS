@@ -30,7 +30,7 @@ class SSChatStartingTableCell: UITableViewCell {
         self.lbDetailMessage.text = "대화가 시작 되었쏨 : )"
 
         if let message = model where message.messageType == .System {
-            if message.message == "out" {
+            if message.message == "out" || message.message == "complete" {
                 self.lbColored.text = "쏨이 끝났어요, "
                 self.lbDetailMessage.text = "다른 상대를∙∙∙(T_T)"
             } else if message.message == "request" {

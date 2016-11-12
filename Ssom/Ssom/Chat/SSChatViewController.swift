@@ -386,6 +386,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     //
                 }
             }
+        default:
+            break
         }
     }
 

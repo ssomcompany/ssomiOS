@@ -180,7 +180,7 @@ class SSChatListTableCell: UITableViewCell {
                     self.lbLastMessage.text = model.lastMessage
 
                     if model.lastMessageType == .System {
-                        if model.lastMessage == "out" {
+                        if model.lastMessage == "out" || model.lastMessage == "complete" {
                             self.lbLastMessage.text = "쏨이 끝났어요, 다른 상대를∙∙∙(T_T)"
                         } else if model.lastMessage == "request" {
                             self.lbLastMessage.text = "만남 요청을 했습니다!"

@@ -14,6 +14,7 @@ enum SSMeetRequestOptions: String {
     case Requested = "Requested"
     case Received = "request"
     case Accepted = "approve"
+    case Finished = "complete"
 }
 
 public struct SSChatroomViewModel {

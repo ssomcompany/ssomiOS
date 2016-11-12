@@ -257,28 +257,32 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             newMessage.profileImageUrl = imageUrl
         }
 
-        switch newMessage.messageType {
-        case .Request:
-            self.showMeetRequest(false, status: .Received)
-            newMessage.message = SSChatMessageType.Request.rawValue
-            newMessage.messageType = .System
-        case .Approve:
-            self.showMeetRequest(true, status: .Accepted)
-            newMessage.message = SSChatMessageType.Approve.rawValue
-            newMessage.messageType = .System
-        case .Cancel:
-            self.showMeetRequest(false)
-            newMessage.message = SSChatMessageType.Cancel.rawValue
-            newMessage.messageType = .System
-        default:
-            break
+        if self.chatRoomId == newMessage.chatroomId {
+
+            switch newMessage.messageType {
+            case .Request:
+                self.showMeetRequest(false, status: .Received)
+                newMessage.message = SSChatMessageType.Request.rawValue
+                newMessage.messageType = .System
+            case .Approve:
+                self.showMeetRequest(true, status: .Accepted)
+                newMessage.message = SSChatMessageType.Approve.rawValue
+                newMessage.messageType = .System
+            case .Cancel:
+                self.showMeetRequest(false)
+                newMessage.message = SSChatMessageType.Cancel.rawValue
+                newMessage.messageType = .System
+            default:
+                break
+            }
+            self.messages.append(newMessage)
+
+            self.tableViewChat.reloadData()
+
+            let lastIndexPath = NSIndexPath(forRow: self.messages.count, inSection: 0)
+            self.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+
         }
-        self.messages.append(newMessage)
-
-        self.tableViewChat.reloadData()
-
-        let lastIndexPath = NSIndexPath(forRow: self.messages.count, inSection: 0)
-        self.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
 
     func registerForKeyboardNotifications() -> Void {

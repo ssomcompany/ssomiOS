@@ -145,12 +145,14 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
             if data.chatroomId == newMessage.chatroomId {
                 self.datas.removeAtIndex(index)
 
+                data.unreadCount += 1
                 if newMessage.meetRequestStatus == .Received {
+                    data.meetRequestUserId = newMessage.meetRequestUserId
                     data.meetRequestStatus = .Received
                 } else if newMessage.meetRequestStatus == .Cancelled {
+                    data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
                     data.meetRequestStatus = .Cancelled
                 } else {
-                    data.unreadCount += 1
                     data.lastMessage = newMessage.lastMessage
                 }
 
@@ -186,17 +188,10 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell: SSChatListTableCell = tableView.dequeueReusableCellWithIdentifier("chatListCell", forIndexPath: indexPath) as? SSChatListTableCell {
-            cell.delegate = self
-            cell.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? SSChatListTableCell
-            cell!.delegate = self
-            cell!.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
-
-            return cell!
-        }
+        let cell: SSChatListTableCell = tableView.dequeueReusableCellWithIdentifier("chatListCell", forIndexPath: indexPath) as! SSChatListTableCell
+        cell.delegate = self
+        cell.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
+        return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

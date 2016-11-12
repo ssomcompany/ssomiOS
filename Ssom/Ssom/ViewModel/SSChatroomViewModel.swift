@@ -10,7 +10,7 @@ import Foundation
 
 enum SSMeetRequestOptions: String {
     case NotRequested = "NotRequested"
-    case Cancelled = "Cancelled"
+    case Cancelled = "cancel"
     case Requested = "Requested"
     case Received = "request"
     case Accepted = "approve"

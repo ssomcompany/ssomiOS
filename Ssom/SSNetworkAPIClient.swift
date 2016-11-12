@@ -638,7 +638,7 @@ public struct SSNetworkAPIClient {
 
         Alamofire.request(.POST,
                           SSNetworkContext.serverUrlPrefixt+"users/hearts",
-                          parameters: ["count" : purchasedHeartCount],
+                          parameters: ["count" : purchasedHeartCount, "deviceType": "iOS"],
                           encoding: .JSON,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in

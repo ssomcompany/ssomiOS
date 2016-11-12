@@ -92,6 +92,8 @@ public struct SSChatroomViewModel {
 
         if let lastMessage = modelDict["lastMsg"] as? String {
             self.lastMessage = lastMessage
+        } else if let message = modelDict["msg"] as? String {
+            self.lastMessage = message
         } else {
             self.lastMessage = ""
         }

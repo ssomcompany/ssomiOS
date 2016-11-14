@@ -9,9 +9,9 @@
 import UIKit
 
 enum SSMenuType: Int {
-    case Privacy = 0, Agreement, Inquiry
+    case Privacy = 0, Agreement, Withdraw, Inquiry
 
-    static let AllValues = [Privacy, Agreement, Inquiry]
+    static let AllValues = [Privacy, Agreement, Withdraw, Inquiry]
 
     var url: NSURL? {
         switch self {
@@ -19,6 +19,8 @@ enum SSMenuType: Int {
             return NSURL(string: "http://ssomcompany.wixsite.com/ssominfo")
         case .Agreement:
             return NSURL(string: "http://ssomcompany.wixsite.com/termsandconditions")
+        case .Withdraw:
+            return nil
         case .Inquiry:
             return NSURL(string: "http://www.myssom.com")
         }
@@ -30,6 +32,8 @@ enum SSMenuType: Int {
             return "개인 정보 처리 방침"
         case .Agreement:
             return "이용 약관"
+        case .Withdraw:
+            return "회원 탈퇴"
         case .Inquiry:
             return "문의 하기"
         }
@@ -41,6 +45,8 @@ enum SSMenuType: Int {
             return UIImage(named: "iconLock")
         case .Agreement:
             return UIImage(named: "iconBook")
+        case .Withdraw:
+            return nil
         case .Inquiry:
             return UIImage(named: "iconMail")
         }

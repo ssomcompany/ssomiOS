@@ -36,13 +36,13 @@ enum SSAgeType: UInt
 enum SSAgeAreaType: String
 {
     case AgeAll = "전체"
-    case AgeEarly20 = "20대 초반"
-    case AgeMiddle20 = "20대 중반"
-    case AgeLate20 = "20대 후반"
+    case AgeEarly20 = "20대 초"
+    case AgeMiddle20 = "20대 중"
+    case AgeLate20 = "20대 후"
     case Age30 = "30대"
-    case Unknown = "알수없음"
+    case Unknown = "정보가 없어요..."
 
-    func toIntType() -> SSAgeType {
+    func toInt() -> SSAgeType {
         switch self {
         case AgeAll:
             return SSAgeType.AgeAll
@@ -67,6 +67,21 @@ enum SSPeopleCountType: Int
     case TwoPeople
     case ThreePeople
     case OverFourPeople
+
+    func toSting() -> SSPeopleCountStringType {
+        switch self {
+        case All:
+            return SSPeopleCountStringType.All
+        case OnePerson:
+            return SSPeopleCountStringType.OnePerson
+        case TwoPeople:
+            return SSPeopleCountStringType.TwoPeople
+        case ThreePeople:
+            return SSPeopleCountStringType.ThreePeople
+        case OverFourPeople:
+            return SSPeopleCountStringType.OverFourPeople
+        }
+    }
 }
 
 enum SSPeopleCountStringType: String
@@ -77,7 +92,7 @@ enum SSPeopleCountStringType: String
     case ThreePeople = "3명"
     case OverFourPeople = "4명 이상"
 
-    func toIntType() -> SSPeopleCountType {
+    func toInt() -> SSPeopleCountType {
         switch self {
         case All:
             return SSPeopleCountType.All

@@ -13,6 +13,7 @@ import Crashlytics
 import Firebase
 import FirebaseMessaging
 import KeychainAccess
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDelegate {
@@ -39,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
         // OneSignal
-        OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey)
         OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
             print("notification: \(notification), payload data: \(notification.payload.additionalData)")
 
@@ -72,7 +72,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
         }, handleNotificationAction: { (openedResult) in
             print("openedResult : \(openedResult)")
+
+            guard let notification = openedResult.notification else { return }
+
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let keyWindow = appDelegate.window else { return }
+            guard let rootViewController = keyWindow.rootViewController else { return }
+            if rootViewController is SSDrawerViewController {
+                guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
+                if mainViewController is UINavigationController {
+                    print("Now MainViewController is : NavigationController")
+
+                    guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
+                    print("Now TopViewController is : \(topViewController)")
+                    if topViewController is SSChatViewController {
+                        // add the received message to the bottom fo the message lists
+                        (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSChatListViewController {
+                        // move up the chat room of the received message & add +1 to unread count
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSMasterViewController {
+                        // add +1 to unread count
+                        (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    }
+                } else {
+                    print("Now MainViewController is : \(mainViewController)")
+                }
+            } else {
+                print("Now view controller is : \(rootViewController)")
+            }
         }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
+
+        // Facebook
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         // DrawerViewController
         self.drawerController = self.window!.rootViewController as? SSDrawerViewController
@@ -88,6 +120,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
         self.window?.rootViewController = self.drawerController
         self.window?.makeKeyAndVisible()
+
+        // Version Check
+        SSNetworkAPIClient.getVersion { (version, error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                SSAlertController.showAlertConfirm(title: "Error", message: "버전 체크에 실패하였습니다!", completion: nil)
+            } else {
+                if let bundleVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String, let currentVersion = version {
+                    print("Current App Version is : ", bundleVersion)
+
+                    if Double(bundleVersion.stringByReplacingOccurrencesOfString(".", withString: "")) < Double(currentVersion.stringByReplacingOccurrencesOfString(".", withString: "")) {
+                        SSAlertController.showAlertTwoButton(title: "알림",
+                            message: "새로운 업데이트가 있습니다.\n 업데이트 후 이용하실 수 있습니다 =)",
+                            button1Title: "업데이트",
+                            button2Title: "종료",
+                            button1Completion: { (action) in
+                                UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/bars/id1083356262")!)
+                                exit(0)
+                            },
+                            button2Completion: { (action) in
+                                exit(0)
+                        })
+                    }
+                }
+            }
+        }
 
         return true
     }
@@ -111,10 +170,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
+
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -157,6 +222,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
     func drawerViewController(drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
         print("Drawer view controller may update to state `\(paneState)` for direction `\(direction)`")
+
+        if paneState == .Open {
+            if let menuViewController = drawerViewController.drawerViewController as? SSMenuViewController {
+                if let headerView = menuViewController.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                    headerView.configView()
+                }
+            }
+        }
     }
 
     func drawerViewController(drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {

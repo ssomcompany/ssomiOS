@@ -35,6 +35,21 @@ class SSMasterViewController: UIViewController {
         }
 
         self.setNavigationBarView()
+
+        NSNotificationCenter.defaultCenter().addObserverForName(SSInternalNotification.PurchasedHeart.rawValue, object: nil, queue: nil) { [weak self] (notification) in
+
+            guard let wself = self else { return }
+
+            if let userInfo = notification.userInfo {
+                if let heartsCount = userInfo["heartsCount"] as? Int {
+                    wself.barButtonItems.changeHeartCount(heartsCount)
+                }
+            }
+        }
+    }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     func setNavigationBarView() {
@@ -149,13 +164,19 @@ class SSMasterViewController: UIViewController {
                 }
             })
         }
+
+        // heart count
+        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+            self.barButtonItems.changeHeartCount(heartsCount)
+        } else {
+            self.barButtonItems.changeHeartCount(0)
+        }
     }
 
     func reload(with modelDict: [String: AnyObject]) {
 //        let newMessage = SSChatViewModel(modelDict: modelDict)
-
-        self.unreadCount += 1
-        self.barButtonItems.changeMessageCount(unreadCount, hiddenIfZero: false)
+        
+        self.loadData()
     }
 
     @IBAction func switchView(sender: AnyObject) {
@@ -212,7 +233,25 @@ class SSMasterViewController: UIViewController {
         UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
             self.barButtonItems.imgViewHeart.transform = CGAffineTransformIdentity
             }) { (finish) in
-                //
+                if SSAccountManager.sharedInstance.isAuthorized {
+
+                    let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
+                    if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                        presentedViewController.presentViewController(vc, animated: true, completion: nil)
+                    }
+
+                } else {
+                    SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                        if finish {
+                            let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+                            let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
+                            if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                                presentedViewController.presentViewController(vc, animated: true, completion: nil)
+                            }
+                        }
+                    })
+                }
         }
     }
 
@@ -220,10 +259,23 @@ class SSMasterViewController: UIViewController {
         UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveLinear, animations: { 
             self.barButtonItems.imgViewMessage.transform = CGAffineTransformIdentity
         }) { (finish) in
-            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-            let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+            if SSAccountManager.sharedInstance.isAuthorized {
 
-            self.navigationController?.pushViewController(vc, animated: true)
+                let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+
+                self.navigationController?.pushViewController(vc, animated: true)
+
+            } else {
+                SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                    if finish {
+                        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+                        let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatListViewController") as! SSChatListViewController
+
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                })
+            }
         }
     }
 }

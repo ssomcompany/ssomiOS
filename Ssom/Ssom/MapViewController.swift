@@ -21,9 +21,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var viewFilterBackground: UIView!
-    @IBOutlet var lbFilteredAgePeople: UILabel!
-    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
-    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
+//    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
+//    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
     
     var locationManager: CLLocationManager!
     var currentLocation: CLLocationCoordinate2D!
@@ -136,33 +135,39 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     func loadingData(completion: ((finish: Bool) -> Void)?) {
+        print(#function)
+
         SSNetworkAPIClient
             .getPosts(latitude: self.currentLocation != nil ? self.currentLocation.latitude : 0,
                       longitude: self.currentLocation != nil ? self.currentLocation.longitude : 0,
-                      completion: { [unowned self] (viewModels, error) -> Void in
+                      completion: { [weak self] (viewModels, error) -> Void in
+
+                        guard let wself = self else { return }
 
                         if let err = error {
                             print("error is : \(err.localizedDescription)")
 
-                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: { (action) in
+                            wself.showOpenAnimation()
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: { (action) in
                                 guard let block = completion else { return }
                                 block(finish: false)
                             })
 
                         } else {
                             if let models = viewModels {
-                                self.datasOfAllSsom = models
-                                self.datas = models
-                                print("result is : \(self.datasOfAllSsom)")
+                                wself.datasOfAllSsom = models
+                                wself.datas = models
+                                print("result is : \(wself.datasOfAllSsom)")
                                 
-                                self.showMarkers()
+                                wself.showMarkers()
                             }
+
+                            wself.showOpenAnimation()
 
                             guard let block = completion else { return }
                             block(finish: true)
                         }
-                        
-                        self.showOpenAnimation()
                 })
     }
 
@@ -223,6 +228,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         locationManager.startUpdatingLocation()
     }
 
+    var loadCompletionBlock: (() -> Void)?
+
     func showMarkers() {
 
         mainView.clear()
@@ -231,7 +238,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         var index: Int = 0;
         for data in self.datas {
-            if let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
                 if loginedUserId == data.userId {
                     self.isAlreadyWrittenMySsom = true
                     self.mySsom = data
@@ -242,8 +249,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
             let latitude: Double = data.latitude 
             let longitude: Double = data.longitude 
-
-            print("position is \(latitude), \(longitude)")
 
             let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let nowLocation: CLLocationCoordinate2D = self.currentLocation != nil ? self.currentLocation : mainView.camera.target
@@ -281,9 +286,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
             }
         }
+
+        guard let completion = self.loadCompletionBlock else { return }
+        completion()
     }
 
-    func setMarker(data: SSViewModel,_ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
+    func setMarker(data: SSViewModel, _ isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) {
         let marker = GMSMarker()
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
@@ -291,13 +299,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
 
         if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
                 marker.icon = maskOfProfileImage
 
                 if image != nil {
                     let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 51.6, 51.6))
 
                     marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+
+                    if data.meetRequestStatus == .Accepted {
+                        if isSell {
+                            marker.icon = UIImage.mergeImages(firstImage: marker.icon!, secondImage: UIImage(named: "ssomIngGreen")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                        } else {
+                            marker.icon = UIImage.mergeImages(firstImage: marker.icon!, secondImage: UIImage(named: "ssomIngRed")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                        }
+                    }
                 }
             })
         } else {
@@ -325,31 +341,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
-        self.view.layoutIfNeeded()
-
-        self.constBottomInfoViewHeight.constant = 283.0
-        self.constBottomInfoViewTrailingToSuper.constant = 64.0
+//        self.view.layoutIfNeeded()
+//
+//        self.constBottomInfoViewHeight.constant = 283.0
+//        self.constBottomInfoViewTrailingToSuper.constant = 64.0
 
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
-            self.view.layoutIfNeeded()
+//            self.view.layoutIfNeeded()
 
-            self.lbFilteredAgePeople.alpha = 0.2
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
 
             self.filterView.alpha = 1.0
 
         }) { (finish) in
             
-            self.constBottomInfoViewHeight.constant = 69.0
-            self.constBottomInfoViewTrailingToSuper.constant = 154.0
+//            self.constBottomInfoViewHeight.constant = 69.0
+//            self.constBottomInfoViewTrailingToSuper.constant = 154.0
 
-            self.lbFilteredAgePeople.alpha = 1.0
             self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)
         }
     }
 
-    @IBAction func tapIPayButton(sender: AnyObject) {
+    @IBAction func tapIPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonLineLeadingToButtonIPay.constant = 0
 
@@ -365,7 +379,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     }
 
-    @IBAction func tapYouPayButton(sender: AnyObject) {
+    @IBAction func tapYouPayButton(sender: AnyObject?) {
 
         self.constViewPayButtonLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
@@ -390,8 +404,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseInOut], animations: {
                 self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    self.openDetailView(self.mySsom)
-                    self.writeButton.layer.transform = CATransform3DIdentity
+                    if self.btnIPay.selected && self.mySsom.ssomType != .SSOM {
+                        self.tapYouPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.writeButton.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else if self.btnYouPay.selected && self.mySsom.ssomType != .SSOSEYO {
+                        self.tapIPayButton(nil)
+
+                        self.loadCompletionBlock = { [weak self] in
+                            if let wself = self {
+                                wself.openDetailView(wself.mySsom)
+                                wself.writeButton.layer.transform = CATransform3DIdentity
+                            }
+                        }
+                    } else {
+                        self.openDetailView(self.mySsom)
+                        self.writeButton.layer.transform = CATransform3DIdentity
+                    }
             })
         } else {
             let transform: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(M_PI * 45.0 / 180.0))
@@ -399,7 +433,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animateWithDuration(0.3, animations: {
                 self.writeButton.transform = transform
             }) { (finish) in
-                self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+                if SSAccountManager.sharedInstance.isAuthorized {
+                    self.performSegueWithIdentifier("SSWriteViewSegueFromMain", sender: nil)
+                } else {
+                    SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
+                        if finish {
+                            self.loadingData(nil)
+                        } else {
+                            self.showOpenAnimation()
+                        }
+                    })
+                }
             }
         }
     }
@@ -476,7 +520,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let camera: GMSCameraPosition = GMSCameraPosition(target: locations.last!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
 
         self.currentLocation = camera.target
-        mainView.animateToCameraPosition(camera)
+        self.mainView.animateToCameraPosition(camera)
 
         self.loadingData { (finish) in
             if finish {
@@ -497,7 +541,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     
                     index += 1
                 }
-
             }
         }
 
@@ -544,8 +587,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.filterModel = filterViewModel
         self.datas = self.datasOfAllSsom
         self.showMarkers()
-
-//        self.lbFilteredAgePeople.text = filterViewModel.ageType.rawValue + ", " + filterViewModel.peopleCountType.rawValue
     }
 
 // MARK: - SSScrollViewDelegate
@@ -559,6 +600,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             self.navigationController?.navigationBar.barStyle = .Default
             view.removeFromSuperview()
 
+            self.loadCompletionBlock = nil
+
             if needToReload {
                 self.initView()
             }
@@ -569,10 +612,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
-    func doSsom(ssomType: SSType, postId: String, partnerImageUrl: String?, ssomLatitude: Double, ssomLongitude: Double) {
+    func doSsom(ssomType: SSType, model: SSViewModel) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
-            if postId != "" {
-                SSNetworkAPIClient.postChatroom(token, postId: postId, completion: { (chatroomId, error) in
+            if model.postId != "" {
+                SSNetworkAPIClient.postChatroom(token, postId: model.postId, latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude, completion: { (chatroomId, error) in
 
                     if let err = error {
                         print(err.localizedDescription)
@@ -583,11 +626,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                             let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
                             let vc: SSChatViewController = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
                             vc.ssomType = ssomType
+                            vc.ageArea = Util.getAgeArea(model.minAge)
+                            if let userCount = model.userCount {
+                                vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
+                            }
                             vc.chatRoomId = createdChatroomId
-                            vc.partnerImageUrl = partnerImageUrl
+                            vc.partnerImageUrl = model.imageUrl
 
-                            vc.ssomLatitude = ssomLatitude
-                            vc.ssomLongitude = ssomLongitude
+                            vc.ssomLatitude = model.latitude
+                            vc.ssomLongitude = model.longitude
+
+                            vc.meetRequestUserId = model.meetRequestUserId
+                            vc.meetRequestStatus = model.meetRequestStatus
                             
                             self.navigationController?.pushViewController(vc, animated: true)
                         }

@@ -1,5 +1,5 @@
 //
-//  SSAcountManager.swift
+//  SSAccountManager.swift
 //  Ssom
 //
 //  Created by DongSoo Lee on 2016. 4. 23..
@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import KeychainAccess
+import FBSDKLoginKit
 
 class SSAccountManager {
     static let sharedInstance = SSAccountManager()
@@ -30,7 +31,7 @@ class SSAccountManager {
     }
 
     var email: String? {
-        if let savedEmail = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
+        if let savedEmail = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String {
             return savedEmail
         } else {
             return nil
@@ -40,6 +41,14 @@ class SSAccountManager {
     var profileImageUrl: String? {
         if let imageUrl = SSNetworkContext.sharedInstance.getSharedAttribute("profileImageUrl") as? String {
             return imageUrl
+        } else {
+            return nil
+        }
+    }
+
+    var userUUID: String? {
+        if let savedUserId = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
+            return savedUserId
         } else {
             return nil
         }
@@ -71,7 +80,7 @@ class SSAccountManager {
     }
 
     func openSignIn(willPresentViewController: UIViewController?, completion: ((finish:Bool) -> Void)?) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSignStoryBoard", bundle: nil)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "SSSign", bundle: nil)
         if let vc = storyBoard.instantiateInitialViewController() as? UINavigationController {
             vc.modalPresentationStyle = .OverFullScreen
 
@@ -91,20 +100,62 @@ class SSAccountManager {
                 print(err.localizedDescription)
 
                 if let viewController = vc {
-                    SSAlertController.alertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", vc: viewController, completion: { (alertAction) in
+                    SSAlertController.alertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        vc: viewController,
+                        completion: { (alertAction) in
                         guard let _ = completion!(finish: false) else {
                             return
                         }
                     })
                 } else {
-                    SSAlertController.showAlertConfirm(title: "Error", message: "로그인 인증에 실패하였습니다!", completion: { (action) in
+                    SSAlertController.showAlertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        completion: { (action) in
                         guard let _ = completion!(finish: false) else {
                             return
                         }
                     })
                 }
             } else {
-                SSNetworkContext.sharedInstance.saveSharedAttributes(["userId" : userId])
+                SSNetworkContext.sharedInstance.saveSharedAttributes(["email" : userId])
+
+                guard let _ = completion!(finish: true) else {
+                    return
+                }
+            }
+        }
+    }
+
+    func doSignIn(withFBSDKAccessToken token: String, email: String, vc:UIViewController?, completion: ((finish: Bool) -> Void?)?) -> Void {
+        SSNetworkAPIClient.postLogin(withFBSDKAccessToken: token, email: email) { error in
+            if let err = error {
+                print(err.localizedDescription)
+
+                if let viewController = vc {
+                    SSAlertController.alertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        vc: viewController,
+                        completion: { (alertAction) in
+                            guard let _ = completion!(finish: false) else {
+                                return
+                            }
+                    })
+                } else {
+                    SSAlertController.showAlertConfirm(
+                        title: "Error",
+                        message: err.code != 999 ? err.localizedDescription : "로그인 인증에 실패하였습니다!",
+                        completion: { (action) in
+                            guard let _ = completion!(finish: false) else {
+                                return
+                            }
+                    })
+                }
+            } else {
+                SSNetworkContext.sharedInstance.saveSharedAttributes(["email" : email])
 
                 guard let _ = completion!(finish: true) else {
                     return
@@ -141,9 +192,16 @@ class SSAccountManager {
                             }
                         } else {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("email")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
+
+                            if let _ = FBSDKAccessToken.currentAccessToken() {
+                                FBSDKLoginManager().logOut()
+                            }
 
                             guard let block = completion else {
                                 return
@@ -197,9 +255,16 @@ class SSAccountManager {
                             }
                         } else {
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("token")
-                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("email")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("userId")
                             SSNetworkContext.sharedInstance.deleteSharedAttribute("userModel")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartsCount")
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
+
+                            if let _ = FBSDKAccessToken.currentAccessToken() {
+                                FBSDKLoginManager().logOut()
+                            }
 
                             guard let block = completion else {
                                 return

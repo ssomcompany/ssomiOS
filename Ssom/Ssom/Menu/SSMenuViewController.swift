@@ -24,7 +24,6 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
     }
 
     override func initView() {
-        
 
         self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.registerNib(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
@@ -43,7 +42,7 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 
 // MARK: - UITableViweDelegate & UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -100,6 +99,8 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
                 wself.menuTableView.reloadData()
 
                 wself.drawerViewController?.mainViewController?.needToReload = finish
+
+
             })
         }
 
@@ -147,6 +148,8 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     UIApplication.sharedApplication().openURL(url)
                 }
+            } else if cell.menuType == .Withdraw {
+                SSAlertController.alertConfirm(title: "알림", message: "쏨 서비스에 가입된 메일로\n탈퇴신청 메일을 아래 주소로 보내주세요.\nssomcompany@gmail.com", vc: self, completion: nil)
             }
         }
     }
@@ -157,8 +160,18 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
     }
 
     func showProfilePhoto() {
-//        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoViewController")
-//        self.presentViewController(vc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoNaviController") as? UINavigationController
+        if let topViewController = vc?.topViewController as? SSTodayPhotoViewController {
+            topViewController.photoSaveCompletion = { [weak self] in
+                if let wself = self {
+                    if let headerView = wself.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                        headerView.showProfileImage()
+                    }
+                }
+            }
+        }
+
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
 }

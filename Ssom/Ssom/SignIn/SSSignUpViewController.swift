@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
-let kPasswordMinLength = 4
+let kPasswordMinLength = 6
 
-class SSSignUpViewController: UIViewController {
+class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet var viewBackground: UIView!
+    @IBOutlet var scrollView: SSCustomScrollView!
+    @IBOutlet var constScrollViewBottomToSuper: NSLayoutConstraint!
 
     @IBOutlet var lbEmail: UILabel!
     @IBOutlet var tfEmail: UITextField!
@@ -21,6 +24,7 @@ class SSSignUpViewController: UIViewController {
     @IBOutlet var lbPassword: UILabel!
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var viewPasswordBottomLine: UIImageView!
+    @IBOutlet var btnWarningDefault6CharactersPassword: UIButton!
 
     @IBOutlet var lbConfirmPassword: UILabel!
     @IBOutlet var tfConfirmPassword: UITextField!
@@ -28,6 +32,9 @@ class SSSignUpViewController: UIViewController {
     @IBOutlet var btnWarningWrongConfirmPassword: UIButton!
 
     @IBOutlet var btnSignUp: UIButton!
+    @IBOutlet var btnFBSignUp: FBSDKLoginButton!
+
+    var defaultScrollContentHeight: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +44,27 @@ class SSSignUpViewController: UIViewController {
 
     override func initView() {
         self.navigationController?.navigationBarHidden = true
+
+        self.registerForKeyboardNotifications()
+
+        self.btnFBSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
+        self.btnFBSignUp.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFBSignUp.layer.shadowRadius = 1.0
+        self.btnFBSignUp.layer.shadowOpacity = 1.0
+        self.btnFBSignUp.clipsToBounds = true
+        self.btnFBSignUp.delegate = self
+        self.btnFBSignUp.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
+        self.btnFBSignUp.readPermissions = ["public_profile", "email"]
+    }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    func registerForKeyboardNotifications() -> Void {
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -49,6 +77,8 @@ class SSSignUpViewController: UIViewController {
         super.viewDidAppear(animated)
 
         self.viewBackground.hidden = false
+
+        self.defaultScrollContentHeight = self.scrollView.contentSize.height
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -113,7 +143,7 @@ class SSSignUpViewController: UIViewController {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func tapSignUp(sender: AnyObject) {
+    @IBAction func tapSignUp(sender: AnyObject?) {
         self.btnWarningDuplicatedEmail.hidden = true
 
         SSNetworkAPIClient.postUser(tfEmail.text!, password: tfPassword.text!) { (error) in
@@ -166,5 +196,84 @@ class SSSignUpViewController: UIViewController {
     }
     @IBAction func editingChangedConfirmPassword(sender: AnyObject) {
         self.validateInput()
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === self.tfEmail {
+            self.tfEmail.resignFirstResponder()
+            self.tfPassword.becomeFirstResponder()
+        }
+        if textField === self.tfPassword {
+            self.tfPassword.resignFirstResponder()
+            self.tfConfirmPassword.becomeFirstResponder()
+        }
+        if textField === self.tfConfirmPassword && self.btnSignUp.enabled {
+            self.tapSignUp(nil)
+        }
+
+        return true;
+    }
+
+    // MARK:- UIScrollView
+
+    // MARK: - Keyboard show & hide event
+    func keyboardWillShow(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight+keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+                self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
+            }
+        }
+    }
+
+    func keyboardWillHide(notification: NSNotification) -> Void {
+        if let info = notification.userInfo {
+            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+
+                self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
+            }
+        }
+    }
+
+    // MARK:- FBSDKLoginButtonDelegate
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("%@", #function)
+
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"]).startWithCompletionHandler { (connection, resultOfQuery, error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+            } else {
+                print("%@", resultOfQuery)
+
+                if let res = resultOfQuery as? [String: String] {
+
+                    self.btnWarningDuplicatedEmail.hidden = true
+
+                    SSNetworkAPIClient.postUser(res["email"]!, password: "facebook") { (error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+                            
+                            if err.code == SSNetworkError.ErrorDuplicatedData.rawValue {
+                                self.btnWarningDuplicatedEmail.hidden = false
+                            } else {
+                                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                            }
+                        } else {
+                            self.tapClose(nil)
+                        }
+
+                        // 가입 후 로그인 하기 때문에..
+                        FBSDKLoginManager().logOut()
+                    }
+                }
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("%@", #function)
     }
 }

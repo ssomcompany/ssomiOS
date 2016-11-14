@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Ssom_development.entitlements
+   Ssom
+
+   Created by DongSoo Lee on 2016. 10. 15..
+   Copyright (c) 2016년 SsomCompany. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+        <key>aps-environment</key>
+        <string>development</string>
+    </dict>
+</plist>

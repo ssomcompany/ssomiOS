@@ -62,6 +62,16 @@ public struct Util {
         }
     }
 
+    static func getTimeIntervalString(from fromDate: NSDate, to toDate: NSDate = NSDate(), format: String = "HH:mm") -> (String, Int, Int) {
+
+        let userCalendar = NSCalendar.currentCalendar()
+        let calendarComponents: NSCalendarUnit = [.Hour, .Minute, .Second]
+        let expiredDate = NSDate(timeInterval: SSDefaultHeartRechargeTimeInterval, sinceDate: fromDate)
+        let expiredDateDifference = userCalendar.components(calendarComponents, fromDate: toDate, toDate: expiredDate, options: [])
+
+        return  ("\(String(format: "%02d", expiredDateDifference.hour)):\(String(format: "%02d", expiredDateDifference.minute))", expiredDateDifference.hour, expiredDateDifference.minute)
+    }
+
     static func getDistanceString(distance: Int) -> String {
         if distance > 1000 {
             let kilometerOfDistance: Double = Double(distance)/1000
@@ -141,5 +151,18 @@ public struct Util {
         case .Byte:
             return "\(Double(size)) bytes"
         }
+    }
+
+    static func getFBLoginButtonTitle(button: UIButton) -> String? {
+        
+        if button.parentViewController is SSSignInViewController {
+            return "로그인"
+        }
+
+        if button.parentViewController is SSSignUpViewController {
+            return "가입하기"
+        }
+
+        return nil
     }
 }

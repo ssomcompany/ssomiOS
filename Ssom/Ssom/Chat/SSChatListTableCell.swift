@@ -72,27 +72,27 @@ class SSChatListTableCell: UITableViewCell {
         switch model.ssomViewModel.ssomType {
         case .SSOM:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.lbNewMessageCount.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
         case .SSOSEYO:
             self.imgViewProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.lbNewMessageCount.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
         }
 
         self.imgViewProfile.image = UIImage(named: "noneProfile")
 
         // check if the login user is the owner of the chatting
-        if model.ownerUserId == SSAccountManager.sharedInstance.userModel?.userId {
+        if model.ownerUserId == SSAccountManager.sharedInstance.userUUID {
             self.isOwnerUser = true
             // show the participant profile image because the login user is the owner of chatting
             if let imageUrl = model.participantImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                    guard let wself = self else { return }
+
                     if error != nil {
                     } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, wself.imgViewProfile.bounds.size.width, wself.imgViewProfile.bounds.size.height))
 
-                        self.imgViewProfile.image = croppedProfileImage
+                        wself.imgViewProfile.image = croppedProfileImage
                     }
-                    })
+                })
 
                 self.profilImageUrl = imageUrl
             }
@@ -100,14 +100,16 @@ class SSChatListTableCell: UITableViewCell {
             self.isOwnerUser = false
             // show the owner profile image because the login user is NOT the owner of chatting
             if let imageUrl = model.ownerImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil, completed: { [unowned self] (image, error, _, _) in
+                self.imgViewProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+                    guard let wself = self else { return }
+
                     if error != nil {
                     } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewProfile.bounds.size.width, self.imgViewProfile.bounds.size.height))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, wself.imgViewProfile.bounds.size.width, wself.imgViewProfile.bounds.size.height))
 
-                        self.imgViewProfile.image = croppedProfileImage
+                        wself.imgViewProfile.image = croppedProfileImage
                     }
-                    })
+                })
 
                 self.profilImageUrl = imageUrl
             }
@@ -119,7 +121,7 @@ class SSChatListTableCell: UITableViewCell {
         self.viewBackground.backgroundColor = UIColor.whiteColor()
         var isReceivedToRequestMeet = false
         if let requestedUserId = model.meetRequestUserId,
-            let loginedUserId = SSAccountManager.sharedInstance.userModel?.userId {
+            let loginedUserId = SSAccountManager.sharedInstance.userUUID {
             if requestedUserId != loginedUserId && model.meetRequestStatus == .Received {
                 self.viewMeetRequest.hidden = false
                 self.viewMeetRequest.layer.cornerRadius = self.viewMeetRequest.bounds.height / 2.0
@@ -154,7 +156,9 @@ class SSChatListTableCell: UITableViewCell {
         let ageArea: SSAgeAreaType = Util.getAgeArea(model.ssomViewModel.minAge)
         memberInfoString = memberInfoString.stringByAppendingFormat("\(ageArea.rawValue)")
         if let userCount = model.ssomViewModel.userCount {
-            memberInfoString = memberInfoString.stringByAppendingFormat(", \(userCount)명 있어요.")
+            if userCount != 0 {
+                memberInfoString = memberInfoString.stringByAppendingFormat(", \(userCount)명 있어요.")
+            }
         }
         self.lbSsomAgePeople.text = memberInfoString
 
@@ -174,6 +178,16 @@ class SSChatListTableCell: UITableViewCell {
             } else {
                 if model.lastMessage.characters.count > 0 {
                     self.lbLastMessage.text = model.lastMessage
+
+                    if model.lastMessageType == .System {
+                        if model.lastMessage == "out" || model.lastMessage == "complete" {
+                            self.lbLastMessage.text = "쏨이 끝났어요, 다른 상대를∙∙∙(T_T)"
+                        } else if model.lastMessage == "request" {
+                            self.lbLastMessage.text = "만남 요청을 했습니다!"
+                        } else if model.lastMessage == "cancel" {
+                            self.lbLastMessage.text = "요청이 취소되었어요"
+                        }
+                    }
                 }
             }
         }
@@ -181,6 +195,11 @@ class SSChatListTableCell: UITableViewCell {
         self.lbNewMessageCount.layoutIfNeeded()
         self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
         self.lbNewMessageCount.text = "\(model.unreadCount)"
+        if model.unreadCount == 0 {
+            self.lbNewMessageCount.hidden = true
+        } else {
+            self.lbNewMessageCount.hidden = false
+        }
 
         if let distance = model.ssomViewModel.distance where distance != 0 {
             self.lbDistance.text = Util.getDistanceString(distance)
@@ -297,8 +316,10 @@ class SSChatListTableCell: UITableViewCell {
                                              message: "끝낸 쏨은 되돌릴 수 없어요...\n쏨을 정말로 끝내시겠어요?",
                                              button1Title: "끝내기",
                                              button2Title: "취소",
-                                             button1Completion: { [unowned self] (action) in
-                                                guard let _ = self.delegate?.deleteCell(self) else {
+                                             button1Completion: { [weak self] (action) in
+                                                guard let wself = self else { return }
+
+                                                guard let _ = wself.delegate?.deleteCell(wself) else {
                                                     return
                                                 }
             }) { (action) in

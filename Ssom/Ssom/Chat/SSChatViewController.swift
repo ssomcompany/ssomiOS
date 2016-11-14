@@ -197,10 +197,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { [weak self] (notification) in
             guard let wself = self else { return }
 
-            wself.tableViewChat.reloadData()
-
-            let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
-            wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            wself.loadData()
         }
     }
 
@@ -285,7 +282,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
-    func registerForKeyboardNotifications() -> Void {
+    func registerForKeyboardNotifications() {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)

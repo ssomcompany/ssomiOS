@@ -15,67 +15,67 @@ extension CGSize {
     }
 }
 
-public func CGRectMakeWithScreenRatio(x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, criteria: DeviceType) -> CGRect {
-    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+public func CGRectMakeWithScreenRatio(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, criteria: DeviceType) -> CGRect {
+    if UIDevice.current.userInterfaceIdiom == .pad {
         return CGRect(x: x, y: y, width: width, height: height)
     }
 
     switch criteria {
-    case .IPhone4, .IPhone4S:
-        let factorWidth = UIScreen.mainScreen().bounds.width / 320.0
-        let factorHeight = UIScreen.mainScreen().bounds.height / 480.0
-        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
-    case .IPhone5, .IPhone5C, .IPhone5S:
-        let factorWidth = UIScreen.mainScreen().bounds.width / 320.0
-        let factorHeight = UIScreen.mainScreen().bounds.height / 568.0
-        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
-    case .IPhone6, .IPhone6S:
-        let factorWidth = UIScreen.mainScreen().bounds.width / 375.0
-        let factorHeight = UIScreen.mainScreen().bounds.height / 667.0
-        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
-    case .IPhone6Plus, .IPhone6SPlus:
-        let factorWidth = UIScreen.mainScreen().bounds.width / 414.0
-        let factorHeight = UIScreen.mainScreen().bounds.height / 736.0
-        return CGRectMake(x * factorWidth, y * factorHeight, width * factorWidth, height * factorHeight)
+    case .iPhone4, .iPhone4S:
+        let factorWidth = UIScreen.main.bounds.width / 320.0
+        let factorHeight = UIScreen.main.bounds.height / 480.0
+        return CGRect(x: x * factorWidth, y: y * factorHeight, width: width * factorWidth, height: height * factorHeight)
+    case .iPhone5, .iPhone5C, .iPhone5S:
+        let factorWidth = UIScreen.main.bounds.width / 320.0
+        let factorHeight = UIScreen.main.bounds.height / 568.0
+        return CGRect(x: x * factorWidth, y: y * factorHeight, width: width * factorWidth, height: height * factorHeight)
+    case .iPhone6, .iPhone6S:
+        let factorWidth = UIScreen.main.bounds.width / 375.0
+        let factorHeight = UIScreen.main.bounds.height / 667.0
+        return CGRect(x: x * factorWidth, y: y * factorHeight, width: width * factorWidth, height: height * factorHeight)
+    case .iPhone6Plus, .iPhone6SPlus:
+        let factorWidth = UIScreen.main.bounds.width / 414.0
+        let factorHeight = UIScreen.main.bounds.height / 736.0
+        return CGRect(x: x * factorWidth, y: y * factorHeight, width: width * factorWidth, height: height * factorHeight)
     default:
-        return CGRectMake(x, y, width, height)
+        return CGRect(x: x, y: y, width: width, height: height)
     }
 }
 
 public enum Axis {
-    case X
-    case Y
+    case x
+    case y
 }
 
-public func CGFloatWithScreenRatio(point: CGFloat, axis: Axis, criteria: DeviceType) -> CGFloat {
-    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+public func CGFloatWithScreenRatio(_ point: CGFloat, axis: Axis, criteria: DeviceType) -> CGFloat {
+    if UIDevice.current.userInterfaceIdiom == .pad {
         return point
     }
 
     switch criteria {
-    case .IPhone4, .IPhone4S:
-        if axis == .X {
-            return point * UIScreen.mainScreen().bounds.width / 320.0
+    case .iPhone4, .iPhone4S:
+        if axis == .x {
+            return point * UIScreen.main.bounds.width / 320.0
         } else {
-            return point * UIScreen.mainScreen().bounds.height / 480.0
+            return point * UIScreen.main.bounds.height / 480.0
         }
-    case .IPhone5, .IPhone5C, .IPhone5S:
-        if axis == .X {
-            return point * UIScreen.mainScreen().bounds.width / 320.0
+    case .iPhone5, .iPhone5C, .iPhone5S:
+        if axis == .x {
+            return point * UIScreen.main.bounds.width / 320.0
         } else {
-            return point * UIScreen.mainScreen().bounds.height / 568.0
+            return point * UIScreen.main.bounds.height / 568.0
         }
-    case .IPhone6, .IPhone6S:
-        if axis == .X {
-            return point * UIScreen.mainScreen().bounds.width / 375.0
+    case .iPhone6, .iPhone6S:
+        if axis == .x {
+            return point * UIScreen.main.bounds.width / 375.0
         } else {
-            return point * UIScreen.mainScreen().bounds.height / 667.0
+            return point * UIScreen.main.bounds.height / 667.0
         }
-    case .IPhone6Plus, .IPhone6SPlus:
-        if axis == .X {
-            return point * UIScreen.mainScreen().bounds.width / 414.0
+    case .iPhone6Plus, .iPhone6SPlus:
+        if axis == .x {
+            return point * UIScreen.main.bounds.width / 414.0
         } else {
-            return point * UIScreen.mainScreen().bounds.height / 736.0
+            return point * UIScreen.main.bounds.height / 736.0
         }
     default:
         return point

@@ -10,26 +10,26 @@ import UIKit
 
 protocol SSFilterViewDelegate: NSObjectProtocol {
     func closeFilterView() -> Void;
-    func applyFilter(filterViewModel: SSFilterViewModel) -> Void;
+    func applyFilter(_ filterViewModel: SSFilterViewModel) -> Void;
 }
 
 extension UIButton {
     var toggledSelected: Bool {
         get {
-            return self.selected
+            return self.isSelected
         }
         set {
             self.toggleSelected(newValue)
         }
     }
 
-    func toggleSelected(selected: Bool) {
-        self.selected = selected
+    func toggleSelected(_ selected: Bool) {
+        self.isSelected = selected
 
-        if self.selected {
+        if self.isSelected {
             self.backgroundColor = UIColor(red: 50.0/255.0, green: 50.0/255.0, blue: 50.0/255.0, alpha: 1.0)
         } else {
-            self.backgroundColor = UIColor.whiteColor()
+            self.backgroundColor = UIColor.white
         }
     }
 }
@@ -77,7 +77,7 @@ class SSFilterView: UIView {
 
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
 
-        if UIScreen.mainScreen().bounds.width <= 320 {
+        if UIScreen.main.bounds.width <= 320 {
             self.constLbAgeTop.constant = self.constLbAgeTop.constant / 2
             self.constPeopleLabelTop.constant = self.constPeopleLabelTop.constant / 2
         }
@@ -85,15 +85,15 @@ class SSFilterView: UIView {
         self.layoutIfNeeded()
         self.filterMainView.layer.cornerRadius = 25
 
-        self.filter20beginAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter20middleAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter20lateAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter30overAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.filter20beginAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter20middleAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter20lateAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter30overAgeButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
 
-        self.filter1PersonButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter2PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter3PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.filter4PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.filter1PersonButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter2PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter3PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
+        self.filter4PeopleButton.addTarget(self, action: #selector(tapFilterOptions(_:)), for: UIControlEvents.touchUpInside)
     }
 
     func configView() {
@@ -150,8 +150,8 @@ class SSFilterView: UIView {
         }
     }
 
-    func handleTap(gesture: UITapGestureRecognizer) {
-        if let _ = self.filterMainView.hitTest(gesture.locationInView(self.filterMainView), withEvent: nil) {
+    func handleTap(_ gesture: UITapGestureRecognizer) {
+        if let _ = self.filterMainView.hitTest(gesture.location(in: self.filterMainView), with: nil) {
 
         } else {
             self.tapCloseButton()
@@ -164,22 +164,22 @@ class SSFilterView: UIView {
         }
     }
 
-    func tapFilterOptions(sender: UIButton) {
+    func tapFilterOptions(_ sender: UIButton) {
         let filterButton = sender
 
-        filterButton.toggledSelected = !filterButton.selected
+        filterButton.toggledSelected = !filterButton.isSelected
     }
 
-    @IBAction func tapInitializieFilter(sender: AnyObject) {
-        self.filter20beginAgeButton.selected = true
-        self.filter20middleAgeButton.selected = true
-        self.filter20lateAgeButton.selected = true
-        self.filter30overAgeButton.selected = true
+    @IBAction func tapInitializieFilter(_ sender: AnyObject) {
+        self.filter20beginAgeButton.isSelected = true
+        self.filter20middleAgeButton.isSelected = true
+        self.filter20lateAgeButton.isSelected = true
+        self.filter30overAgeButton.isSelected = true
 
-        self.filter1PersonButton.selected = true
-        self.filter2PeopleButton.selected = true
-        self.filter3PeopleButton.selected = true
-        self.filter4PeopleButton.selected = true
+        self.filter1PersonButton.isSelected = true
+        self.filter2PeopleButton.isSelected = true
+        self.filter3PeopleButton.isSelected = true
+        self.filter4PeopleButton.isSelected = true
 
         let filterValue: SSFilterViewModel = SSFilterViewModel(ageType: .AgeAll, peopleCount: .All)
 
@@ -190,19 +190,19 @@ class SSFilterView: UIView {
         }
     }
 
-    @IBAction func tapApplyFilter(sender: AnyObject) {
+    @IBAction func tapApplyFilter(_ sender: AnyObject) {
         var filterValue: SSFilterViewModel = SSFilterViewModel()
 
-        if self.filter20beginAgeButton.selected {
+        if self.filter20beginAgeButton.isSelected {
             filterValue.ageTypes.append(.AgeEarly20)
         }
-        if self.filter20middleAgeButton.selected {
+        if self.filter20middleAgeButton.isSelected {
             filterValue.ageTypes.append(.AgeMiddle20)
         }
-        if self.filter20lateAgeButton.selected {
+        if self.filter20lateAgeButton.isSelected {
             filterValue.ageTypes.append(.AgeLate20)
         }
-        if self.filter30overAgeButton.selected {
+        if self.filter30overAgeButton.isSelected {
             filterValue.ageTypes.append(.Age30)
         }
 
@@ -211,16 +211,16 @@ class SSFilterView: UIView {
         }
 
         // how many people
-        if self.filter1PersonButton.selected {
+        if self.filter1PersonButton.isSelected {
             filterValue.peopleCountTypes.append(.OnePerson)
         }
-        if self.filter2PeopleButton.selected {
+        if self.filter2PeopleButton.isSelected {
             filterValue.peopleCountTypes.append(.TwoPeople)
         }
-        if self.filter3PeopleButton.selected {
+        if self.filter3PeopleButton.isSelected {
             filterValue.peopleCountTypes.append(.ThreePeople)
         }
-        if self.filter4PeopleButton.selected {
+        if self.filter4PeopleButton.isSelected {
             filterValue.peopleCountTypes.append(.OverFourPeople)
         }
 

@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
 
@@ -45,7 +69,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     var meetRequestUserId: String?
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested
 
-    var refreshTimer: NSTimer!
+    var refreshTimer: Timer!
     var isAlreadyShownCoachmark: Bool = false
 
 // MARK: - functions
@@ -54,7 +78,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -66,10 +90,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.initView()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if self.tfInput.isFirstResponder() {
+        if self.tfInput.isFirstResponder {
             self.tfInput.resignFirstResponder()
         }
 
@@ -96,13 +120,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 wself.isAlreadyShownCoachmark = true
             }
         }
-        if let appDelgate = UIApplication.sharedApplication().delegate as? AppDelegate {
+        if let appDelgate = UIApplication.shared.delegate as? AppDelegate {
             let keyWindow = appDelgate.window
 
             keyWindow?.addSubview(self.viewChatCoachmark)
             self.viewChatCoachmark.translatesAutoresizingMaskIntoConstraints = false;
-            keyWindow?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
-            keyWindow?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
+            keyWindow?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
+            keyWindow?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[viewChatCoachmark]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["viewChatCoachmark": self.viewChatCoachmark]))
 
             keyWindow?.layoutIfNeeded()
         }
@@ -112,34 +136,34 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.barButtonItems = SSNavigationBarItems(animated: true)
 
-        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), for: UIControlEvents.touchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
         var backButtonFrame = self.barButtonItems.backBarButtonView.frame
         backButtonFrame.size.width = 60
         self.barButtonItems.backBarButtonView.frame = backButtonFrame
 
-        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
-        let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 150, 44))
+        let naviTitleView: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 44))
         if #available(iOS 8.2, *) {
-            naviTitleView.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
             if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
                 naviTitleView.font = font
             }
         }
-        naviTitleView.textAlignment = .Center
+        naviTitleView.textAlignment = .center
         naviTitleView.text = "Chat"
         naviTitleView.sizeToFit()
         self.navigationItem.titleView = naviTitleView;
 
         self.showChatInfoOnNavigation()
 
-        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
         barButtonSpacer.width = -10
 
-        self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapMeetRequest), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapMeetRequest), for: UIControlEvents.touchUpInside)
         let meetRequestButton = UIBarButtonItem(customView: barButtonItems.meetRequestButtonView!)
 
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
@@ -152,9 +176,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             let titleAttributedString = NSMutableAttributedString(string: "Chat \(self.ageArea.rawValue)\(peopleCount)")
 
             if #available(iOS 8.2, *) {
-                let firstAttributesDict = [NSFontAttributeName: UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)]
+                let firstAttributesDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)]
                 let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
-                                            NSFontAttributeName: UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)]
+                                            NSFontAttributeName: UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)]
                 titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
             } else {
@@ -176,10 +200,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     override func initView() {
-        self.tableViewChat.registerNib(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
-        self.tableViewChat.registerNib(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
+        self.tableViewChat.register(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
+        self.tableViewChat.register(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
 
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
 
         (self.tableViewChat as UIScrollView).delegate = self
 
@@ -194,7 +218,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
 //        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
 
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { [weak self] (notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
             guard let wself = self else { return }
 
             wself.loadData()
@@ -221,8 +245,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                             wself.tableViewChat.reloadData()
 
-                            let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
-                            wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                            let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                            wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
 
                             guard let requestUserId = wself.meetRequestUserId else {
                                 wself.showMeetRequest(false)
@@ -250,7 +274,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func reload(with modelDict: [String: AnyObject]) {
         var newMessage = SSChatViewModel(modelDict: modelDict)
-        if let imageUrl = self.partnerImageUrl where newMessage.profileImageUrl == nil {
+        if let imageUrl = self.partnerImageUrl, newMessage.profileImageUrl == nil {
             newMessage.profileImageUrl = imageUrl
         }
 
@@ -276,16 +300,16 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
             self.tableViewChat.reloadData()
 
-            let lastIndexPath = NSIndexPath(forRow: self.messages.count, inSection: 0)
-            self.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            let lastIndexPath = IndexPath(row: self.messages.count, section: 0)
+            self.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
 
         }
     }
 
     func registerForKeyboardNotifications() {
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     func tapBack() {
@@ -295,12 +319,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                              vc: self,
                                              button1Completion: { (action) in
                                                 self.cancelMeetRequest()
-                                                self.navigationController?.popViewControllerAnimated(true)
+                                                self.navigationController?.popViewController(animated: true)
                 }, button2Completion: { (action) in
                     //
             })
         } else {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -321,8 +345,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     //
             })
         case .Received:
-            UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity
             }) { (finish) in
                 SSAlertController.alertTwoButton(title: "만남 요청", message: "상대방이 만남을 요청했습니다!\n수락 하시겠어요?", vc: self, button1Title: "만남 수락", button2Title: "아직은 좀...", button1Completion: { (action) in
                     guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
@@ -345,8 +369,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 })
             }
         case .NotRequested, .Cancelled:
-            UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity
             }) { (finish) in
                 SSAlertController.alertTwoButton(title: "만남 요청", message: "현재 대화상대에게\n만남을 요청 하시겠어요?", vc: self, button1Title: "만나요", button2Title: "취소", button1Completion: { (action) in
 
@@ -374,8 +398,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                                         wself.tableViewChat.reloadData()
 
-                                        let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
-                                        wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                                        let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                                        wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                                     }
                                 }
                             }
@@ -392,7 +416,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
-    func showMeetRequest(enabled: Bool, status: SSMeetRequestOptions = .NotRequested) {
+    func showMeetRequest(_ enabled: Bool, status: SSMeetRequestOptions = .NotRequested) {
         defer {
             self.meetRequestStatus = status
         }
@@ -403,8 +427,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         if enabled {
 
 //            self.constTableViewChatTopToSuper.constant = 69
-            self.constTableViewChatTopToSuper.active = false
-            self.constTableViewChatTopToViewRequest.active = true
+            self.constTableViewChatTopToSuper.isActive = false
+            self.constTableViewChatTopToViewRequest.isActive = true
 
             self.constViewRequestHeight.constant = 43
 
@@ -412,13 +436,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         } else {
 
 //            self.constTableViewChatTopToSuper.constant = 0
-            self.constTableViewChatTopToViewRequest.active = false
-            self.constTableViewChatTopToSuper.active = true
+            self.constTableViewChatTopToViewRequest.isActive = false
+            self.constTableViewChatTopToSuper.isActive = true
 
             self.constViewRequestHeight.constant = 0
         }
 
-        UIView.animateWithDuration(0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
+        UIView.animate(withDuration: 0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.view.layoutIfNeeded()
             self.viewNotificationToStartMeet.alpha = alpha
             }, completion: { (finish) in
@@ -448,28 +472,28 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                     wself.tableViewChat.reloadData()
 
-                    let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
-                    wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                 }
             }
         }
     }
-    @IBAction func tapDownShowMap(sender: AnyObject) {
-        self.btnShowMap.transform = CGAffineTransformMakeScale(0.9, 0.9)
+    @IBAction func tapDownShowMap(_ sender: AnyObject) {
+        self.btnShowMap.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
 
-    @IBAction func tapShowMap(sender: AnyObject) {
-        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
-            self.btnShowMap.transform = CGAffineTransformIdentity
+    @IBAction func tapShowMap(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: { 
+            self.btnShowMap.transform = CGAffineTransform.identity
             }) { (finish) in
 
                 let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
 
-                let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatMapViewController") as! SSChatMapViewController
-                let chatMapDict: [String: AnyObject?] = ["myImageUrl": self.myImageUrl,
+                let vc = chatStoryboard.instantiateViewController(withIdentifier: "chatMapViewController") as! SSChatMapViewController
+                let chatMapDict: [String: Any?] = ["myImageUrl": self.myImageUrl,
                                                          "partnerImageUrl": self.partnerImageUrl,
-                                                         "partnerLatitude": self.ssomLatitude,
-                                                         "partnerLongitude": self.ssomLongitude,
+                                                         "partnerLatitude": "\(self.ssomLatitude)",
+                                                         "partnerLongitude": "\(self.ssomLongitude)",
                                                          "ssomType": self.ssomType.rawValue,
                                                          "ssomMeetRequestOptions": self.meetRequestStatus.rawValue]
                 vc.data = SSChatMapViewModel(modelDict: chatMapDict)
@@ -483,13 +507,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
     
-    @IBAction func tapDownSendMessage(sender: AnyObject) {
-        self.btnSendMessage.transform = CGAffineTransformMakeScale(0.9, 0.9)
+    @IBAction func tapDownSendMessage(_ sender: AnyObject) {
+        self.btnSendMessage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
     
-    @IBAction func tapSendMessage(sender: AnyObject?) {
-        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: { 
-            self.btnSendMessage.transform = CGAffineTransformIdentity
+    @IBAction func tapSendMessage(_ sender: AnyObject?) {
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: { 
+            self.btnSendMessage.transform = CGAffineTransform.identity
             }) { (finish) in
 
                 if let token = SSAccountManager.sharedInstance.sessionToken {
@@ -498,12 +522,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     }
 
                     if messageText.characters.count > 0 {
-                        var lastTimestamp = Int(NSDate().timeIntervalSince1970)
+                        var lastTimestamp = Int(Date().timeIntervalSince1970)
                         if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
                             lastTimestamp = Int(timestamp * 1000.0)
                         }
 
-                        let nowDateTime = NSDate()
+                        let nowDateTime = Date()
 
                         if let roomId = self.chatRoomId {
                             SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
@@ -519,13 +543,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                         wself.tfInput.text = ""
 
                                         if wself.messages.count != 0 {
-                                            wself.messages.appendContentsOf(newDatas)
+                                            wself.messages.append(contentsOf: newDatas)
                                         } else {
                                             wself.messages = newDatas
                                         }
 
                                         // add my sent message on the last of the messages
-                                        if let lastMessage = wself.messages.last where lastMessage.message != messageText && lastMessage.messageDateTime != nowDateTime {
+                                        if let lastMessage = wself.messages.last, lastMessage.message != messageText && lastMessage.messageDateTime != nowDateTime {
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
@@ -546,8 +570,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                         wself.tableViewChat.reloadData()
                                     }
 
-                                    let lastIndexPath = NSIndexPath(forRow: wself.messages.count, inSection: 0)
-                                    wself.tableViewChat.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                                    let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                                 }
                             })
                         }
@@ -556,7 +580,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if touch.view !== self.tfInput {
                 self.tfInput.resignFirstResponder()
@@ -565,38 +589,38 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
 // MARK: - UIScrollViewDelegate
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        if self.tfInput.isFirstResponder() {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if self.tfInput.isFirstResponder {
             self.tfInput.resignFirstResponder()
         }
     }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages.count == 0 ? 1 : self.messages.count + 1
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.row == 0 ? 46 : 61
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as! SSChatStartingTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
             cell.configView(self.ssomType)
             return cell
         } else {
             let chatModel = self.messages[indexPath.row-1]
             if chatModel.messageType == .System {
-                let cell = tableView.dequeueReusableCellWithIdentifier("chatStartingCell", forIndexPath: indexPath) as! SSChatStartingTableCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
                 cell.configView(self.ssomType, model: chatModel)
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("chatMessageCell", forIndexPath: indexPath) as! SSChatMessageTableCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
                 cell.ssomType = self.ssomType
                 cell.configView(chatModel)
 
@@ -606,11 +630,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
 // MARK: - UITextFieldDelegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return true
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text?.characters.count > 0 {
             self.tapSendMessage(nil)
         }
@@ -618,26 +642,26 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(notification: NSNotification) -> Void {
+    func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
-            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+            if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
 
                     self.view.layoutIfNeeded()
 
-                    self.tableViewChat.scrollToRowAtIndexPath(NSIndexPath(forRow: self.messages.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    self.tableViewChat.scrollToRow(at: IndexPath(row: self.messages.count, section: 0), at: UITableViewScrollPosition.bottom, animated: true)
                 })
             }
         }
     }
 
-    func keyboardWillHide(notification: NSNotification) -> Void {
-        UIView.animateWithDuration(0.5) {
+    func keyboardWillHide(_ notification: Notification) -> Void {
+        UIView.animate(withDuration: 0.5, animations: {
             self.constInputBarBottomToSuper.constant = 0
 
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 }

@@ -9,17 +9,17 @@
 import UIKit
 
 extension UIImage {
-    class func resizeImage(image: UIImage, frame: CGRect) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.mainScreen().scale)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+    class func resizeImage(_ image: UIImage, frame: CGRect) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
 
         let scaleFactorX = frame.size.width / image.size.width
         let scaleFactorY = frame.size.height / image.size.height
 
-        CGContextScaleCTM(context, scaleFactorX, scaleFactorY)
+        context.scaleBy(x: scaleFactorX, y: scaleFactorY)
 
-        let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
-        image.drawInRect(myRect)
+        let myRect: CGRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        image.draw(in: myRect)
 
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -27,33 +27,33 @@ extension UIImage {
         return newImage
     }
 
-    class func cropInCircle(image: UIImage, frame: CGRect) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.mainScreen().scale)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+    class func cropInCircle(_ image: UIImage, frame: CGRect) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
 
         let scaleFactorX = frame.size.width / image.size.width
         let scaleFactorY = frame.size.height / image.size.height
 
-        CGContextBeginPath(context)
-        CGContextAddArc(context, frame.size.width/2, frame.size.height/2, frame.size.width/2, 0, CGFloat(2.0 * M_PI), 0)
-        CGContextClosePath(context)
-        CGContextClip(context)
+        context.beginPath()
+        context.addArc(center: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: 0, endAngle: CGFloat(2.0 * M_PI), clockwise: false)
+        context.closePath()
+        context.clip()
 
         if scaleFactorX > scaleFactorY {
-            CGContextScaleCTM(context, scaleFactorX, scaleFactorX)
+            context.scaleBy(x: scaleFactorX, y: scaleFactorX)
 
-            let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
-            image.drawInRect(myRect)
+            let myRect: CGRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            image.draw(in: myRect)
         } else if scaleFactorX < scaleFactorY {
-            CGContextScaleCTM(context, scaleFactorY, scaleFactorY)
+            context.scaleBy(x: scaleFactorY, y: scaleFactorY)
 
-            let myRect: CGRect = CGRectMake((image.size.height - image.size.width) / 2.0, 0, image.size.width, image.size.height)
-            image.drawInRect(myRect)
+            let myRect: CGRect = CGRect(x: (image.size.height - image.size.width) / 2.0, y: 0, width: image.size.width, height: image.size.height)
+            image.draw(in: myRect)
         } else {
-            CGContextScaleCTM(context, scaleFactorX, scaleFactorY)
+            context.scaleBy(x: scaleFactorX, y: scaleFactorY)
 
-            let myRect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
-            image.drawInRect(myRect)
+            let myRect: CGRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            image.draw(in: myRect)
         }
 
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -62,7 +62,7 @@ extension UIImage {
         return newImage
     }
 
-    class func mergeImages(firstImage firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat, isFirstPoint: Bool = true) -> UIImage {
+    class func mergeImages(firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat, isFirstPoint: Bool = true) -> UIImage {
 
         let firstImageWidth: CGFloat = firstImage.size.width
         let firstImageHeight: CGFloat = firstImage.size.height
@@ -70,17 +70,17 @@ extension UIImage {
         let secondImageWidth: CGFloat = secondImage.size.width
         let secondImageHeight: CGFloat = secondImage.size.height
 
-        let mergedSize: CGSize = CGSizeMake(firstImageWidth >= secondImageWidth ? firstImageWidth : secondImageWidth
-                                        , firstImageHeight >= secondImageHeight ? firstImageHeight : secondImageHeight)
+        let mergedSize: CGSize = CGSize(width: firstImageWidth >= secondImageWidth ? firstImageWidth : secondImageWidth
+                                        , height: firstImageHeight >= secondImageHeight ? firstImageHeight : secondImageHeight)
 
-        UIGraphicsBeginImageContextWithOptions(mergedSize, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(mergedSize, false, UIScreen.main.scale)
 
         if isFirstPoint {
-            firstImage.drawInRect(CGRectMake(x, y, CGFloat(firstImageWidth), CGFloat(firstImageHeight)))
-            secondImage.drawInRect(CGRectMake(0, 0, CGFloat(secondImageWidth), CGFloat(secondImageHeight)))
+            firstImage.draw(in: CGRect(x: x, y: y, width: CGFloat(firstImageWidth), height: CGFloat(firstImageHeight)))
+            secondImage.draw(in: CGRect(x: 0, y: 0, width: CGFloat(secondImageWidth), height: CGFloat(secondImageHeight)))
         } else {
-            firstImage.drawInRect(CGRectMake(0, 0, CGFloat(firstImageWidth), CGFloat(firstImageHeight)))
-            secondImage.drawInRect(CGRectMake(x, y, CGFloat(secondImageWidth), CGFloat(secondImageHeight)))
+            firstImage.draw(in: CGRect(x: 0, y: 0, width: CGFloat(firstImageWidth), height: CGFloat(firstImageHeight)))
+            secondImage.draw(in: CGRect(x: x, y: y, width: CGFloat(secondImageWidth), height: CGFloat(secondImageHeight)))
         }
 
         let mergedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!

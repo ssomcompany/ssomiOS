@@ -38,42 +38,42 @@ class SSHeartTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if UIScreen.mainScreen().bounds.width <= 320 {
+        if UIScreen.main.bounds.width <= 320 {
             self.constLbHeartCountPrefixCentorY.constant = 3
         } else {
             self.constLbHeartCountPrefixCentorY.constant = -1
         }
     }
 
-    func configView(heartGood: SSHeartGoods, priceWithTax: String, heartCount: String) {
+    func configView(_ heartGood: SSHeartGoods, priceWithTax: String, heartCount: String) {
 
         self.heartGood = heartGood
 
-        self.viewBoundary.layer.borderColor = heartGood.boundaryColor.CGColor
-        self.imgViewPackageLabel.hidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
+        self.viewBoundary.layer.borderColor = heartGood.boundaryColor.cgColor
+        self.imgViewPackageLabel.isHidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
         self.imgViewPackageLabel.image = heartGood.tagIconImage
-        self.lbPackage.hidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
+        self.lbPackage.isHidden = !(heartGood.isEconomyPackage || heartGood.isHotPackage)
         self.lbPackage.text = heartGood.tagName
         self.imgViewHeartType.image = heartGood.iconImage
         self.lbHeartCount.text = heartCount
         self.lbHeartPrice.text = priceWithTax
         self.imgViewSaleIcon.image = heartGood.saleIconImage
         self.lbSalePercent.text = heartGood.sale
-        self.lbSale.hidden = heartGood == .heart2Package
+        self.lbSale.isHidden = heartGood == .heart2Package
 
-        if UIScreen.mainScreen().bounds.width <= 320 {
-            self.lbHeartCountPrefix.font = UIFont.systemFontOfSize(16)
-            self.lbHeartCount.font = UIFont.boldSystemFontOfSize(21)
+        if UIScreen.main.bounds.width <= 320 {
+            self.lbHeartCountPrefix.font = UIFont.systemFont(ofSize: 16)
+            self.lbHeartCount.font = UIFont.boldSystemFont(ofSize: 21)
         } else {
-            self.lbHeartCountPrefix.font = UIFont.systemFontOfSize(31)
-            self.lbHeartCount.font = UIFont.boldSystemFontOfSize(41)
+            self.lbHeartCountPrefix.font = UIFont.systemFont(ofSize: 31)
+            self.lbHeartCount.font = UIFont.boldSystemFont(ofSize: 41)
         }
     }
 
     func showTapAnimation() {
-        self.viewBoundary.transform = CGAffineTransformMakeScale(0.9, 0.9)
-        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .CurveEaseInOut, animations: { 
-            self.viewBoundary.transform = CGAffineTransformIdentity
+        self.viewBoundary.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: UIViewAnimationOptions(), animations: { 
+            self.viewBoundary.transform = CGAffineTransform.identity
             }) { (finish) in
                 //
         }

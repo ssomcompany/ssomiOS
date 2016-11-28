@@ -11,8 +11,8 @@ import UICountingLabel
 
 @objc protocol SSNavigationBarItemsDelegate : NSObjectProtocol
 {
-    optional func updateTextRechargeTime(rechargeTime: String)
-    optional func updateTextMessageCount(count: String)
+    @objc optional func updateTextRechargeTime(_ rechargeTime: String)
+    @objc optional func updateTextMessageCount(_ count: String)
 }
 
 class SSNavigationBarItems : UIView
@@ -42,21 +42,21 @@ class SSNavigationBarItems : UIView
     var animated: Bool = false
 
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
-        NSBundle.mainBundle().loadNibNamed("SSNavigationBarItems", owner: self, options: nil)
+        Bundle.main.loadNibNamed("SSNavigationBarItems", owner: self, options: nil)
 
-        self.btnHeartBar.addTarget(self, action: #selector(self.tapDownHeart), forControlEvents: UIControlEvents.TouchDown)
-        self.btnHeartBar.addTarget(self, action: #selector(self.cancelTapHeart), forControlEvents: UIControlEvents.TouchCancel)
+        self.btnHeartBar.addTarget(self, action: #selector(self.tapDownHeart), for: UIControlEvents.touchDown)
+        self.btnHeartBar.addTarget(self, action: #selector(self.cancelTapHeart), for: UIControlEvents.touchCancel)
 
-        self.btnMessageBar.addTarget(self, action: #selector(self.tapDownMessage), forControlEvents: UIControlEvents.TouchDown)
-        self.btnMessageBar.addTarget(self, action: #selector(self.cancelTapMessage), forControlEvents: UIControlEvents.TouchCancel)
+        self.btnMessageBar.addTarget(self, action: #selector(self.tapDownMessage), for: UIControlEvents.touchDown)
+        self.btnMessageBar.addTarget(self, action: #selector(self.cancelTapMessage), for: UIControlEvents.touchCancel)
 
-        self.btnMeetRequest.addTarget(self, action: #selector(self.tapDownMeetRequest), forControlEvents: UIControlEvents.TouchDown)
-        self.btnMeetRequest.addTarget(self, action: #selector(self.cancelTapMeetRequest), forControlEvents: UIControlEvents.TouchCancel)
+        self.btnMeetRequest.addTarget(self, action: #selector(self.tapDownMeetRequest), for: UIControlEvents.touchDown)
+        self.btnMeetRequest.addTarget(self, action: #selector(self.cancelTapMeetRequest), for: UIControlEvents.touchCancel)
 
         self.lbHeartCount.format = "%d"
-        self.lbHeartCount.method = UILabelCountingMethod.Linear
+        self.lbHeartCount.method = UILabelCountingMethod.linear
     }
 
     convenience init(animated: Bool) {
@@ -71,17 +71,17 @@ class SSNavigationBarItems : UIView
 
     func tapDownHeart() {
         if self.animated {
-            self.imgViewHeart.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.imgViewHeart.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
     func cancelTapHeart() {
-        self.imgViewHeart.transform = CGAffineTransformIdentity
+        self.imgViewHeart.transform = CGAffineTransform.identity
     }
 
-    func changeHeartCount(count: Int) {
+    func changeHeartCount(_ count: Int) {
         let countNow = Int(self.lbHeartCount.text!)!
-        self.lbHeartCount.countFrom(CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
+        self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
 //            self.lbHeartCount.text = "\(count)"
 
         if count == 0 {
@@ -105,28 +105,28 @@ class SSNavigationBarItems : UIView
 
     func tapDownMessage() {
         if self.animated {
-            self.imgViewMessage.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.imgViewMessage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
     func cancelTapMessage() {
-        self.imgViewMessage.transform = CGAffineTransformIdentity
+        self.imgViewMessage.transform = CGAffineTransform.identity
     }
 
-    func changeMessageCount(count: Int, hiddenIfZero: Bool) {
+    func changeMessageCount(_ count: Int, hiddenIfZero: Bool) {
         if count > 0 {
             self.imgViewMessage.image = UIImage(named: "messageRed")
             self.lbUnreadMessageCount.text = "\(count)"
 
-            self.imgViewMessage.hidden = false
-            self.lbUnreadMessageCount.hidden = false
+            self.imgViewMessage.isHidden = false
+            self.lbUnreadMessageCount.isHidden = false
         } else {
             if hiddenIfZero {
-                self.imgViewMessage.hidden = true
-                self.lbUnreadMessageCount.hidden = true
+                self.imgViewMessage.isHidden = true
+                self.lbUnreadMessageCount.isHidden = true
             } else {
-                self.imgViewMessage.hidden = false
-                self.lbUnreadMessageCount.hidden = false
+                self.imgViewMessage.isHidden = false
+                self.lbUnreadMessageCount.isHidden = false
             }
 
             self.imgViewMessage.image = UIImage(named: "message")
@@ -134,31 +134,31 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    var heartRechargeTimer: NSTimer!
+    var heartRechargeTimer: Timer!
 
-    func startHeartRechargeTimer(needRestart: Bool = false) {
+    func startHeartRechargeTimer(_ needRestart: Bool = false) {
         print(#function)
 
         if needRestart {
-            let now = NSDate()
+            let now = Date()
             SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
             self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
         } else {
-            if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? NSDate {
+            if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
                 self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate).0
             } else {
-                let now = NSDate()
+                let now = Date()
                 SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
                 self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
             }
         }
 
-        self.heartRechargeTimer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+        self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
     }
 
-    func stopHeartRechageTimer(needToSave: Bool = false) {
+    func stopHeartRechageTimer(_ needToSave: Bool = false) {
         print(#function)
 
         if let timer = self.heartRechargeTimer {
@@ -175,13 +175,13 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    func changeHeartRechargerTimer(sender: NSTimer?) {
+    func changeHeartRechargerTimer(_ sender: Timer?) {
         print(#function)
 
-        if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? NSDate {
-            print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(NSDate()), time after 4hours is \(NSDate(timeInterval: SSDefaultHeartRechargeTimeInterval, sinceDate: heartRechargeTimerStartedDate))")
+        if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
+            print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
 
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
 
             let timeIntervalString = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
@@ -200,7 +200,7 @@ class SSNavigationBarItems : UIView
 
                             SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                         } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName(SSInternalNotification.PurchasedHeart.rawValue, object: nil, userInfo: ["purchasedHeartCount": 1,
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1,
                                 "heartsCount": heartsCount])
 
                             // 하트가 2개 이상이면, time 종료 처리
@@ -222,38 +222,38 @@ class SSNavigationBarItems : UIView
 
     func tapDownMeetRequest() {
         if self.animated {
-            self.imgViewMeetRequest.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.imgViewMeetRequest.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
     func cancelTapMeetRequest() {
-        self.imgViewMeetRequest.transform = CGAffineTransformIdentity
+        self.imgViewMeetRequest.transform = CGAffineTransform.identity
     }
 
-    func changeMeetRequest(status: SSMeetRequestOptions = .NotRequested) {
+    func changeMeetRequest(_ status: SSMeetRequestOptions = .NotRequested) {
         self.cancelTapMeetRequest()
 
         switch status {
         case .Requested:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
-            self.btnMeetRequest.setTitle("요청 취소", forState: UIControlState.Normal)
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
+            self.btnMeetRequest.setTitle("요청 취소", for: UIControlState())
         case .Accepted:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonBlack")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
-            self.btnMeetRequest.setTitle("만남 종료", forState: UIControlState.Normal)
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
+            self.btnMeetRequest.setTitle("만남 종료", for: UIControlState())
         case .Received:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(16.0)
-            self.btnMeetRequest.setTitle("만남 수락", forState: UIControlState.Normal)
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
+            self.btnMeetRequest.setTitle("만남 수락", for: UIControlState())
         case .Cancelled:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("만남 요청", forState: UIControlState.Normal)
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14.0)
+            self.btnMeetRequest.setTitle("만남 요청", for: UIControlState())
         default:
             self.imgViewMeetRequest.image = UIImage(named: "meetButtonRed")
-            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFontOfSize(14.0)
-            self.btnMeetRequest.setTitle("만남 요청", forState: UIControlState.Normal)
+            self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14.0)
+            self.btnMeetRequest.setTitle("만남 요청", for: UIControlState())
         }
     }
 }

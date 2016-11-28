@@ -34,8 +34,8 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
     override func initView() {
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
         self.initMapView()
 
@@ -52,7 +52,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
             locationManager.startUpdatingLocation()
         }
 
-        mapView.myLocationEnabled = true
+        mapView.isMyLocationEnabled = true
 
         mapView.delegate = self
     }
@@ -61,13 +61,13 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
         self.barButtonItems = SSNavigationBarItems(animated: true)
 
-        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), for: UIControlEvents.touchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = "채팅으로 돌아가기"
         var backButtonFrame = self.barButtonItems.backBarButtonView.frame
         backButtonFrame.size.width = 165
         self.barButtonItems.backBarButtonView.frame = backButtonFrame
 
-        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
 //        let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 150, 44))
 //        if #available(iOS 8.2, *) {
@@ -81,40 +81,40 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 //        naviTitleView.sizeToFit()
 //        self.navigationItem.titleView = naviTitleView;
 
-        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
         barButtonSpacer.width = -10
 
-        self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapCancelToMeetRequest), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnMeetRequest.addTarget(self, action: #selector(tapCancelToMeetRequest), for: UIControlEvents.touchUpInside)
         self.barButtonItems.changeMeetRequest(self.data.meetRequestedStatus)
         let meetRequestButton = UIBarButtonItem(customView: barButtonItems.meetRequestButtonView!)
 
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
     }
 
-    func applicationDidEnterBackground(sender: NSNotification?) {
+    func applicationDidEnterBackground(_ sender: Notification?) {
         self.locationManager.stopUpdatingLocation()
     }
 
-    func applicationWillEnterForeground(sender: NSNotification?) {
+    func applicationWillEnterForeground(_ sender: Notification?) {
         self.locationManager.startUpdatingLocation()
     }
 
-    func setMarker(data: AnyObject?, isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) -> GMSMarker {
+    func setMarker(_ data: AnyObject?, isSell: Bool, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, imageUrl: String!) -> GMSMarker {
         let marker = GMSMarker()
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
-        let borderOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRectMake(0, 0, 56.2, 64.9))
-        let coverOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "ssomIngGreen" : "ssomIngRed")!, frame: CGRectMake(0, 0, 56.2, 56.2))
+        let borderOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 64.9))
+        let coverOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "ssomIngGreen" : "ssomIngRed")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 56.2))
         let maskOfProfileImage: UIImage = UIImage.mergeImages(firstImage: coverOfProfileImage, secondImage: borderOfProfileImage, x: 0, y: 0)
 
-        if imageUrl != nil && imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
+        if imageUrl != nil && imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
+            SDWebImageManager.shared().downloadImage(with: URL(string: imageUrl+"?thumbnail=200"), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in
 
                 marker.icon = maskOfProfileImage
 
                 if image != nil {
-                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, 51.6, 51.6))
+                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: 51.6, height: 51.6))
 
                     marker.icon = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
                 }
@@ -128,14 +128,14 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
     }
 
     func tapBack() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
     func tapCancelToMeetRequest() {
         print("tapped meet request!!")
 
-        UIView.animateWithDuration(0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .CurveLinear, animations: {
-            self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity
         }) { (finish) in
             SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소하시겠어요?\n취소시 채팅방으로 돌아갑니다.", vc: self, button1Title: "만남 취소", button2Title: "닫기", button1Completion: { (action) in
 
@@ -156,22 +156,22 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
     // MARK: - GMSMapViewDelegate
 
-    func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         locationManager.stopUpdatingLocation()
     }
 
-    func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         print("now finished to move the map camera! : \(position)")
 
         locationManager.startUpdatingLocation()
     }
 
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         return true
     }
 
     // MARK: - CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         // caculate the distance from partner to me
         let latitude: Double = self.data.partnerLatitude
@@ -197,13 +197,13 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         mapBounds = mapBounds.includingCoordinate(tempLocation)
         mapBounds = mapBounds.includingCoordinate(middleLocation)
         mapBounds = mapBounds.includingCoordinate(nowLocation)
-        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(mapBounds, withPadding: 50.0))
+        mapView.animate(with: GMSCameraUpdate.fit(mapBounds, withPadding: 50.0))
 
         locationManager.stopUpdatingLocation()
 
     }
 
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
 
         print(error)
@@ -211,15 +211,15 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.lbDistance.text = "알 수 없음"
     }
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         var shouldIAllow = false
 
         switch status {
-        case CLAuthorizationStatus.Restricted:
+        case CLAuthorizationStatus.restricted:
             print("Restricted Access to location!!")
-        case .Denied:
+        case .denied:
             print("User denied access to location!!")
-        case .NotDetermined:
+        case .notDetermined:
             print("Status not determined!!")
             locationManager.requestWhenInUseAuthorization()
         default:

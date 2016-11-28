@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SSMenuHeadViewDelegate: class {
-    func openSignIn(completion: ((finish: Bool)-> Void)?)
+    func openSignIn(_ completion: ((_ finish: Bool)-> Void)?)
     func showProfilePhoto()
 }
 
@@ -24,9 +24,9 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
 
     weak var delegate: SSMenuHeadViewDelegate?
 
-    var blockLogin: ((finish: Bool) -> Void)?
+    var blockLogin: ((_ finish: Bool) -> Void)?
 
-    var blockLogout: ((finish: Bool) -> Void)?
+    var blockLogout: ((_ finish: Bool) -> Void)?
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -47,81 +47,81 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
         if let contentView = UIView.loadFromNibNamed("SSMenuHeadView", bundle: nil, owner: self) {
             self.contentView.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
-            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
-            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+            self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+            self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
         }
     }
 
     func configView() -> Void {
         var loginButtonStringAttributes = [String: AnyObject]()
         if let currentLoginButtonAttributedText = self.btnLogin.titleLabel?.attributedText {
-            currentLoginButtonAttributedText.enumerateAttributesInRange(NSRange(location: 0, length: currentLoginButtonAttributedText.length), options: NSAttributedStringEnumerationOptions(rawValue: 0), usingBlock: { (attr, _, _) in
-                loginButtonStringAttributes = attr
+            currentLoginButtonAttributedText.enumerateAttributes(in: NSRange(location: 0, length: currentLoginButtonAttributedText.length), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { (attr, _, _) in
+                loginButtonStringAttributes = attr as [String : AnyObject]
                 print("\(attr)")
             })
         }
 
-        self.btnUserId.addTarget(self, action: #selector(tapLogin(_:)), forControlEvents: .TouchUpInside)
+        self.btnUserId.addTarget(self, action: #selector(tapLogin(_:)), for: .touchUpInside)
 
         if SSAccountManager.sharedInstance.isAuthorized {
             self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
             self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String
 
             let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
 
-            self.btnUserId.enabled = false
+            self.btnUserId.isEnabled = false
         } else {
-            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
             let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
 
             let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, forState: UIControlState.Normal)
+            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
 
             self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
             self.lbUserId.attributedText = loginString
 
-            self.btnUserId.enabled = true
+            self.btnUserId.isEnabled = true
         }
 
         self.showProfileImage()
     }
 
     func showProfileImage() {
-        self.btnPhoto.hidden = true
-        self.imgViewPhoto.hidden = true
+        self.btnPhoto.isHidden = true
+        self.imgViewPhoto.isHidden = true
 
         if SSAccountManager.sharedInstance.isAuthorized {
-            self.btnPhoto.hidden = false
-            if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-                self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, completed: { [weak self] (image, error, _, _) in
+            self.btnPhoto.isHidden = false
+            if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl, imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
+                self.imgViewPhoto.sd_setImage(with: URL(string: imageUrl+"?thumbnail=200"), placeholderImage: nil, options: [], completed: { [weak self] (image, error, _, _) in
                     guard let wself = self else { return }
 
                     if error != nil {
                     } else {
-                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, wself.imgViewPhoto.bounds.size.width, wself.imgViewPhoto.bounds.size.height))
+                        let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: wself.imgViewPhoto.bounds.size.width, height: wself.imgViewPhoto.bounds.size.height))
 
                         wself.imgViewPhoto.image = croppedProfileImage
                     }
                     })
-                self.imgViewPhoto.hidden = false
+                self.imgViewPhoto.isHidden = false
             }
         }
     }
 
-    @IBAction func tapPhoto(sender: AnyObject) {
+    @IBAction func tapPhoto(_ sender: AnyObject) {
         guard let _ = self.delegate?.showProfilePhoto() else {
             return
         }
     }
 
-    @IBAction func tapLogin(sender: AnyObject) {
+    @IBAction func tapLogin(_ sender: AnyObject) {
         if SSAccountManager.sharedInstance.isAuthorized {
             guard let block = self.blockLogout else {
                 return
             }
 
-            block(finish: true)
+            block(true)
         } else {
             guard let _ = self.delegate?.openSignIn({ [weak self] (finish) in
                 if finish {
@@ -129,7 +129,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
                         return
                     }
 
-                    block(finish: finish)
+                    block(finish)
                 }
                 }) else {
                     return
@@ -137,25 +137,25 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
         }
     }
 
-    @IBAction func tapMenuPush(sender: AnyObject) {
+    @IBAction func tapMenuPush(_ sender: AnyObject) {
 //        SSAlertController.showAlertConfirm(title: "알림", message: "Cache size : \(Util.getImageCacheSize(.Mega))", completion: nil)
 
-        if let url = SSMenuType.Inquiry.url {
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
+        if let url = SSMenuType.inquiry.url {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
             }
         }
 
     }
 
-    @IBAction func tapMenuHeart(sender: AnyObject) {
+    @IBAction func tapMenuHeart(_ sender: AnyObject) {
 
         if SSAccountManager.sharedInstance.isAuthorized {
 
             let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("HeartNaviController")
-            if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-                presentedViewController.presentViewController(vc, animated: true, completion: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HeartNaviController")
+            if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
+                presentedViewController.present(vc, animated: true, completion: nil)
             }
 
         } else {
@@ -165,7 +165,7 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
                         return
                     }
 
-                    block(finish: finish)
+                    block(finish)
                 }
                 }) else {
                     return

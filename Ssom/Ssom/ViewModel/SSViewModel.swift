@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SSViewModel {
+open class SSViewModel {
     var category: String!
     var content: String!
     var imageUrl: String!
@@ -21,7 +21,7 @@ public class SSViewModel {
     var ssomType: SSType
     var userId: String
     var userCount: Int!
-    var createdDatetime: NSDate
+    var createdDatetime: Date
     var assignedChatroomId: String?
     var meetRequestUserId: String?
     var meetRequestStatus: SSMeetRequestOptions = .NotRequested
@@ -39,15 +39,15 @@ public class SSViewModel {
         self.ssomType = .SSOM
         self.userId = ""
         self.userCount = 0
-        self.createdDatetime = NSDate()
+        self.createdDatetime = Date()
     }
 
-    init(modelDict:[String: AnyObject!]) {
+    init(modelDict:[String: AnyObject?]) {
         if let category = modelDict["category"] as? String {
             self.category = category
         }
         if let content = modelDict["content"] as? String {
-            self.content  = String.encodeSpaceCharacter(content).stringByRemovingPercentEncoding
+            self.content  = String.encodeSpaceCharacter(content).removingPercentEncoding
         }
         if let imageUrl = modelDict["imageUrl"] as? String {
             self.imageUrl = imageUrl
@@ -99,9 +99,9 @@ public class SSViewModel {
         }
 
         if let createdDatetime = modelDict["createdTimestamp"] as? Int {
-            self.createdDatetime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDatetime)/1000.0)
+            self.createdDatetime = Date(timeIntervalSince1970: TimeInterval(createdDatetime)/1000.0)
         } else {
-            self.createdDatetime = NSDate()
+            self.createdDatetime = Date()
         }
 
         if let chatroomId = modelDict["chatroomId"] as? String {

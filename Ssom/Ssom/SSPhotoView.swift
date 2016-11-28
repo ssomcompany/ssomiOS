@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 @objc protocol SSPhotoViewDelegate: NSObjectProtocol {
-    optional func tapPhotoViewClose() -> Void
+    @objc optional func tapPhotoViewClose() -> Void
 }
 
 class SSPhotoView: UIView, UIScrollViewDelegate {
@@ -37,24 +37,24 @@ class SSPhotoView: UIView, UIScrollViewDelegate {
         print("awakeFromNib")
     }
 
-    func loadingImage(frame: CGRect, imageUrl: String) {
+    func loadingImage(_ frame: CGRect, imageUrl: String) {
         self.frame = frame
 
-        self.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
 
-        self.imageView.sd_setImageWithURL(NSURL(string: imageUrl)) { (image, error, cacheType, imageURL) in
+        self.imageView.sd_setImage(with: URL(string: imageUrl)) { (image, error, cacheType, imageURL) in
             if error != nil {
-                SSAlertController.showAlertConfirm(title: "Error", message: error.localizedDescription, completion: nil)
+                SSAlertController.showAlertConfirm(title: "Error", message: (error?.localizedDescription)!, completion: nil)
             }
         }
     }
 
-    @IBAction func tapClose(sender: UIButton) {
-        if (self.delegate!.respondsToSelector(#selector(SSPhotoViewDelegate.tapPhotoViewClose))) {
+    @IBAction func tapClose(_ sender: UIButton) {
+        if (self.delegate!.responds(to: #selector(SSPhotoViewDelegate.tapPhotoViewClose))) {
             self.delegate!.tapPhotoViewClose!()
         }
     }
-    @IBAction func handleDoubleTapImage(sender: AnyObject) {
+    @IBAction func handleDoubleTapImage(_ sender: AnyObject) {
         if self.scrollView.zoomScale == 1 {
             self.scrollView.zoomScale = 2
         } else {
@@ -63,11 +63,11 @@ class SSPhotoView: UIView, UIScrollViewDelegate {
     }
 
     // MARK:- UIScrollViewDelegate
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         print("zoom")
     }
 
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }
 }

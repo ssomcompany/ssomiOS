@@ -42,14 +42,14 @@ class SSChatCoachmarkView: UIView {
         self.viewHeartRound.layer.cornerRadius = self.viewHeartRound.bounds.height / 2.0
     }
 
-    func animateDraw(duration: NSTimeInterval) {
+    func animateDraw(_ duration: TimeInterval) {
         self.layoutIfNeeded()
         self.viewChatCoachmarkLine.animateLine(duration)
 
         let radius = self.imgViewUpArrow.bounds.height / 2.0
         let startingRect = CGRect(x: radius, y: radius, width: 0, height: 0)
-        let startingPath = UIBezierPath(ovalInRect: startingRect)
-        let finishingPath = UIBezierPath(ovalInRect: CGRectInset(startingRect, -radius, -radius))
+        let startingPath = UIBezierPath(ovalIn: startingRect)
+        let finishingPath = UIBezierPath(ovalIn: startingRect.insetBy(dx: -radius, dy: -radius))
 //        let startingRect = CGRect(x: self.imgViewUpArrow.bounds.minX, y: self.imgViewUpArrow.bounds.maxY, width: self.imgViewUpArrow.bounds.width, height: 0)
 //        let startingPath = UIBezierPath(rect: startingRect)
 //        let finishingPath = UIBezierPath(rect: CGRectInset(startingRect, 0, -self.imgViewUpArrow.bounds.height))
@@ -60,8 +60,8 @@ class SSChatCoachmarkView: UIView {
 
         let animation = CABasicAnimation(keyPath: "path")
 
-        animation.fromValue = startingPath.CGPath
-        animation.toValue = finishingPath.CGPath
+        animation.fromValue = startingPath.cgPath
+        animation.toValue = finishingPath.cgPath
 
         animation.duration = duration
 //        animation.mass = 1.0
@@ -71,22 +71,22 @@ class SSChatCoachmarkView: UIView {
 
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
 
-        maskLayer.path = finishingPath.CGPath
+        maskLayer.path = finishingPath.cgPath
 
-        maskLayer.addAnimation(animation, forKey: "animationMaskForImageUpArrow")
+        maskLayer.add(animation, forKey: "animationMaskForImageUpArrow")
 
         self.imgViewUpArrow.layoutIfNeeded()
 
         let finishingPoint = self.imgViewUpArrow.layer.position
 
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: finishingPoint.x - self.viewChatCoachmarkLine.bounds.width, y: finishingPoint.y + self.viewChatCoachmarkLine.bounds.height))
-        path.addCurveToPoint(finishingPoint, controlPoint1: CGPoint(x: 295.6, y: 191.7), controlPoint2: CGPoint(x: finishingPoint.x, y: 145.3))
+        path.move(to: CGPoint(x: finishingPoint.x - self.viewChatCoachmarkLine.bounds.width, y: finishingPoint.y + self.viewChatCoachmarkLine.bounds.height))
+        path.addCurve(to: finishingPoint, controlPoint1: CGPoint(x: 295.6, y: 191.7), controlPoint2: CGPoint(x: finishingPoint.x, y: 145.3))
 
         let movingAnimation = CAKeyframeAnimation(keyPath: "position")
 //            let movingAnimation = CABasicAnimation(keyPath: "position")
 
-        movingAnimation.path = path.CGPath
+        movingAnimation.path = path.cgPath
 //            movingAnimation.fromValue = NSValue(CGPoint: CGPoint(x: finishingPoint.x - self.viewChatCoachmarkLine.bounds.width, y: finishingPoint.y + self.viewChatCoachmarkLine.bounds.height))
 //            movingAnimation.toValue = NSValue(CGPoint: finishingPoint)
 
@@ -94,10 +94,10 @@ class SSChatCoachmarkView: UIView {
 
         movingAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
 
-        self.imgViewUpArrow.layer.addAnimation(movingAnimation, forKey: "animationMovingForImageUpArrow")
+        self.imgViewUpArrow.layer.add(movingAnimation, forKey: "animationMovingForImageUpArrow")
     }
 
-    @IBAction func tapStartChat(sender: AnyObject) {
+    @IBAction func tapStartChat(_ sender: AnyObject) {
         self.removeFromSuperview()
 
         guard let close = self.closeBlock else {

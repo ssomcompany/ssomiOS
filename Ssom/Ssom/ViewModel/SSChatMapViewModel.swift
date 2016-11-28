@@ -28,7 +28,7 @@ public struct SSChatMapViewModel {
         self.partnerLongitude = 0.0
     }
 
-    init(modelDict: [String: AnyObject?]) {
+    init(modelDict: [String: Any?]) {
         if let imageUrl = modelDict["myImageUrl"] as? String {
             self.myImageUrl = imageUrl
         }

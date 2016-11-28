@@ -136,7 +136,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func initView() {
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.default().add(self)
 
         if SKPaymentQueue.canMakePayments() {
             let request = SKProductsRequest(productIdentifiers: Set(SSHeartGoods.AllProductIDs))
@@ -152,55 +152,55 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     deinit {
-        SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
+        SKPaymentQueue.default().remove(self)
     }
 
-    @IBAction func tapNaviClose(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tapNaviClose(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func tapClose(sender: AnyObject?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tapClose(_ sender: AnyObject?) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK:- UITableViewDelegate & UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products == nil ? 0 : self.products.count
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 81
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("heartTableViewCell", forIndexPath: indexPath) as! SSHeartTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "heartTableViewCell", for: indexPath) as! SSHeartTableViewCell
 
         let heartGood = SSHeartGoods(rawValue: indexPath.row)!
         var priceWithTax: String = "$"
         var heartCount: String = ""
         for product in self.products {
             if product.productIdentifier == heartGood.productID {
-                priceWithTax.appendContentsOf("\(product.price)")
-                heartCount = product.localizedTitle.stringByReplacingOccurrencesOfString("하트", withString: "")
+                priceWithTax.append("\(product.price)")
+                heartCount = product.localizedTitle.replacingOccurrences(of: "하트", with: "")
                 break
             }
         }
         cell.configView(SSHeartGoods(rawValue: indexPath.row)!, priceWithTax: priceWithTax, heartCount: heartCount)
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
 
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         // purchase
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSHeartTableViewCell {
+        if let cell = tableView.cellForRow(at: indexPath) as? SSHeartTableViewCell {
             cell.showTapAnimation()
 
             self.indicator = SSIndicatorView()
@@ -210,7 +210,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if product.productIdentifier == cell.heartGood.productID {
                     self.purchasedProduct = product
                     let payment = SKPayment(product: self.purchasedProduct!)
-                    SKPaymentQueue.defaultQueue().addPayment(payment)
+                    SKPaymentQueue.default().add(payment)
                     break
                 }
             }
@@ -218,7 +218,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     // MARK:- SKProductsRequestDelegate
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
 
         if self.products.count != 0 {
@@ -231,30 +231,30 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     // MARK:- SKPaymentTransactionObserver
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
 
         self.indicator.hideIndicator()
 
         for transaction in transactions {
             switch transaction.transactionState {
-            case SKPaymentTransactionState.Purchased:
+            case SKPaymentTransactionState.purchased:
                 if let token = SSAccountManager.sharedInstance.sessionToken {
-                    let purchasedHeartCount: Int = Int(self.purchasedProduct!.localizedTitle.stringByReplacingOccurrencesOfString("하트", withString: ""))!
+                    let purchasedHeartCount: Int = Int(self.purchasedProduct!.localizedTitle.replacingOccurrences(of: "하트", with: ""))!
                     SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: purchasedHeartCount, completion: { (heartsCount, error) in
                         if let err = error {
                             print(err.localizedDescription)
 
                             SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                         } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName(SSInternalNotification.PurchasedHeart.rawValue, object: nil, userInfo: ["purchasedHeartCount": purchasedHeartCount,
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": purchasedHeartCount,
                                 "heartsCount": heartsCount])
                         }
                     })
                 }
-                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                SKPaymentQueue.default().finishTransaction(transaction)
                 self.tapClose(nil)
-            case SKPaymentTransactionState.Failed:
-                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+            case SKPaymentTransactionState.failed:
+                SKPaymentQueue.default().finishTransaction(transaction)
             default:
                 break
             }

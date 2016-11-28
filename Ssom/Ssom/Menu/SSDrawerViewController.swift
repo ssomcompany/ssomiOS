@@ -8,7 +8,7 @@
 
 import UIKit
 
-let SSDrawerDefaultOpenStateRevealWidthHorizontal: CGFloat = UIScreen.mainScreen().bounds.size.width * (332.0 / 414.0)
+let SSDrawerDefaultOpenStateRevealWidthHorizontal: CGFloat = UIScreen.main.bounds.size.width * (332.0 / 414.0)
 let SSDrawerDefaultOpenStateRevealWidthVertical: CGFloat = 300.0
 let SSPaneViewVelocityThreshold: CGFloat = 5.0
 let SSPaneViewVelocityMultiplier: CGFloat = 5.0
@@ -29,7 +29,7 @@ protocol SSDrawerViewControllerDelegate: class {
      @param paneState The pane state that the view controller will attempt to update to.
      @param direction When the pane state is updating to `MSDynamicsDrawerPaneStateClosed`: the direction that the drawer view controller is transitioning from. When the pane state is updating to `MSDynamicsDrawerPaneStateOpen` or `MSDynamicsDrawerPaneStateOpenWide`: the direction that the drawer view controller is transitioning to.
      */
-    func drawerViewController(drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection)
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection)
 
     /**
      Informs the delegate that the drawer view controller did update to a pane state in the specified direction.
@@ -38,7 +38,7 @@ protocol SSDrawerViewControllerDelegate: class {
      @param paneState The pane state that the view controller did update to.
      @param direction When the pane state is updating to `MSDynamicsDrawerPaneStateClosed`: the direction that the drawer view controller is transitioning from. When the pane state is updating to `MSDynamicsDrawerPaneStateOpen` or `MSDynamicsDrawerPaneStateOpenWide`: the direction that the drawer view controller is transitioning to.
      */
-    func drawerViewController(drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection)
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection)
 
     /**
      Queries the delegate for whether the dynamics drawer view controller should begin a pane pan
@@ -48,11 +48,11 @@ protocol SSDrawerViewControllerDelegate: class {
 
      @return Whether the drawer view controller should begin a pane pan
      */
-    func drawerViewController(drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool
 }
 
 extension SSDrawerViewControllerDelegate {
-    func drawerViewController(drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true
     }
 }
@@ -62,41 +62,41 @@ extension SSDrawerViewControllerDelegate {
 
  The values can be masked in some (but not all) cases. See the parameters of individual methods to ensure compatibility with the `MSDynamicsDrawerDirection` that is being passed.
  */
-struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
+struct SSDrawerDirection: OptionSet, Hashable, CustomStringConvertible {
     let rawValue: UInt
 
     /**
      Represents the state of no direction.
      */
-    static let None = SSDrawerDirection(rawValue: UIRectEdge.None.rawValue)
+    static let None = SSDrawerDirection(rawValue: UIRectEdge().rawValue)
     /**
      A drawer that is revealed from underneath the top edge of the pane.
      */
-    static let Top = SSDrawerDirection(rawValue: UIRectEdge.Top.rawValue)
+    static let Top = SSDrawerDirection(rawValue: UIRectEdge.top.rawValue)
     /**
      A drawer that is revealed from underneath the left edge of the pane.
      */
-    static let Left = SSDrawerDirection(rawValue: UIRectEdge.Left.rawValue)
+    static let Left = SSDrawerDirection(rawValue: UIRectEdge.left.rawValue)
     /**
      A drawer that is revealed from underneath the bottom edge of the pane.
      */
-    static let Bottom = SSDrawerDirection(rawValue: UIRectEdge.Bottom.rawValue)
+    static let Bottom = SSDrawerDirection(rawValue: UIRectEdge.bottom.rawValue)
     /**
      A drawer that is revealed from underneath the right edge of the pane.
      */
-    static let Right = SSDrawerDirection(rawValue: UIRectEdge.Right.rawValue)
+    static let Right = SSDrawerDirection(rawValue: UIRectEdge.right.rawValue)
     /**
      The drawers that are revealed from underneath both the left and right edges of the pane.
      */
-    static let Horizontal = SSDrawerDirection(rawValue: UIRectEdge.Left.rawValue | UIRectEdge.Right.rawValue)
+    static let Horizontal = SSDrawerDirection(rawValue: UIRectEdge.left.rawValue | UIRectEdge.right.rawValue)
     /**
      The drawers that are revealed from underneath both the top and bottom edges of the pane.
      */
-    static let Vertical = SSDrawerDirection(rawValue: UIRectEdge.Top.rawValue | UIRectEdge.Bottom.rawValue)
+    static let Vertical = SSDrawerDirection(rawValue: UIRectEdge.top.rawValue | UIRectEdge.bottom.rawValue)
     /**
      The drawers that are revealed from underneath all edges of the pane.
      */
-    static let All = SSDrawerDirection(rawValue: UIRectEdge.All.rawValue)
+    static let All = SSDrawerDirection(rawValue: UIRectEdge.all.rawValue)
 
     static let AllTypes = [None, Top, Left, Bottom, Right, Horizontal, Vertical, All]
 
@@ -127,7 +127,7 @@ struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
         return Int(self.rawValue)
     }
 
-    static func isValid(direction: SSDrawerDirection) -> Bool {
+    static func isValid(_ direction: SSDrawerDirection) -> Bool {
         switch direction {
         case SSDrawerDirection.None, SSDrawerDirection.Top, SSDrawerDirection.Left, SSDrawerDirection.Bottom, SSDrawerDirection.Right, SSDrawerDirection.Horizontal, SSDrawerDirection.Vertical, SSDrawerDirection.All:
             return true
@@ -136,7 +136,7 @@ struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
         }
     }
 
-    static func isCardinal(direction: SSDrawerDirection) -> Bool {
+    static func isCardinal(_ direction: SSDrawerDirection) -> Bool {
         switch direction {
         case SSDrawerDirection.Top, SSDrawerDirection.Left, SSDrawerDirection.Bottom, SSDrawerDirection.Right:
             return true
@@ -145,7 +145,7 @@ struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
         }
     }
 
-    static func isNonMasked(direction: SSDrawerDirection) -> Bool {
+    static func isNonMasked(_ direction: SSDrawerDirection) -> Bool {
         switch direction {
         case None, Top, Left, Bottom, Right:
             return true
@@ -154,7 +154,7 @@ struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
         }
     }
 
-    static func drawerDirectionFromRawValue(rawValue: UInt) -> SSDrawerDirection {
+    static func drawerDirectionFromRawValue(_ rawValue: UInt) -> SSDrawerDirection {
         switch rawValue {
         case SSDrawerDirection.None.rawValue:
             return SSDrawerDirection.None
@@ -177,10 +177,10 @@ struct SSDrawerDirection: OptionSetType, Hashable, CustomStringConvertible {
         }
     }
 
-    static func drawerDirectionActionForMaskedValues(direction: SSDrawerDirection, action: SSDrawerActionBlock) -> Void {
+    static func drawerDirectionActionForMaskedValues(_ direction: SSDrawerDirection, action: SSDrawerActionBlock) -> Void {
         for drawerDirection in SSDrawerDirection.AllTypes {
             if (drawerDirection & direction) != SSDrawerDirection.None {
-                action(maskedValue: drawerDirection)
+                action(drawerDirection)
             }
         }
     }
@@ -204,11 +204,11 @@ func |(left: SSDrawerDirection, right: SSDrawerDirection) -> SSDrawerDirection {
     return SSDrawerDirection(rawValue: left.rawValue | right.rawValue)
 }
 
-func |=(inout left: SSDrawerDirection, right: SSDrawerDirection) -> Void {
+func |=(left: inout SSDrawerDirection, right: SSDrawerDirection) -> Void {
     left = SSDrawerDirection(rawValue: left.rawValue | right.rawValue)
 }
 
-func ^=(inout left: SSDrawerDirection, right: SSDrawerDirection) -> Void {
+func ^=(left: inout SSDrawerDirection, right: SSDrawerDirection) -> Void {
     left = SSDrawerDirection(rawValue: left.rawValue ^ right.rawValue)
 }
 
@@ -224,29 +224,29 @@ func !=(left: SSDrawerDirection, right: SSDrawerDirection) -> Bool {
  The possible drawer/pane visibility states of `MSDynamicsDrawerViewController`.
  */
 enum SSDrawerMainState: Int, CustomStringConvertible {
-    case None = 0
+    case none = 0
     /**
      The the drawer is entirely hidden by the pane.
      */
-    case Closed
+    case closed
     /**
      The drawer is revealed underneath the pane to the specified open width.
      */
-    case Open
+    case open
     /**
      The drawer view is entirely visible, with the pane opened wide enough as to no longer be visible.
      */
-    case OpenWide
+    case openWide
 
-    static let AllValues = [Closed, Open, OpenWide]
+    static let AllValues = [closed, open, openWide]
 
     var description: String {
         switch self {
-        case .Closed:
+        case .closed:
             return "SSDrawerMainState.Closed"
-        case .Open:
+        case .open:
             return "SSDrawerMainState.Open"
-        case .OpenWide:
+        case .openWide:
             return "SSDrawerMainState.OpenWide"
         default:
             return "SSDrawerMainState.None"
@@ -269,13 +269,13 @@ func |(left: SSDrawerMainState, right: SSDrawerMainState) -> SSDrawerMainState {
 /**
  The action block used in @see MSDynamicsDrawerDirectionActionForMaskedValues.
  */
-typealias SSDrawerActionBlock = (maskedValue: SSDrawerDirection) -> Void;
+typealias SSDrawerActionBlock = (_ maskedValue: SSDrawerDirection) -> Void;
 
 /**
  `SSDrawerViewController` is a container view controller that manages the presentation of a single "pane" view controller overlaid over one or two "drawer" view controllers. The drawer view controllers are hidden by default, but can be exposed by a user-initiated swipe in the direction that that drawer view controller is set in.
  */
 class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGestureRecognizerDelegate {
-    private let SSDrawerBoundaryIdentifier = "SSDrawerBoundaryIdentifier"
+    fileprivate let SSDrawerBoundaryIdentifier = "SSDrawerBoundaryIdentifier"
 
     //----------------------
     // @name Container Views
@@ -378,7 +378,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
         set {
             assert(SSDrawerDirection.isNonMasked(newValue), "Only accepts non-masked directions as current reveal direction")
-            assert(!((newValue == .None) && (self.mainState != .Closed)), "Can't set direction to none while we have a non-closed pane state")
+            assert(!((newValue == .None) && (self.mainState != .closed)), "Can't set direction to none while we have a non-closed pane state")
 
             if !(self._currentDrawerDirection == newValue) {
 
@@ -386,7 +386,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 if (self._currentDrawerDirection != .None) {
                     let allStylers: NSMutableSet = NSMutableSet();
                     for stylers in self.stylers.values {
-                        allStylers.unionSet(stylers as Set<NSObject>)
+                        allStylers.union(with: stylers)//union(stylers as Set)
                     }
                     for styler in allStylers {
                         let drawerStyler: SSDrawerStyler = styler as! SSDrawerStyler
@@ -500,11 +500,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
     required init?(coder aDecoder: NSCoder) {
 
-        self._mainState = .Closed
-        self.mainViewSlideOffAnimationEnabled = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone
+        self._mainState = .closed
+        self.mainViewSlideOffAnimationEnabled = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone
         self.shouldAlignStatusBarToPaneView = true
         self._currentDrawerDirection = SSDrawerDirection.None
-        self.potentialPaneState = .None
+        self.potentialPaneState = .none
         self.animatingRotation = false
         self.possibleDrawerDirection = SSDrawerDirection.None
 
@@ -527,22 +527,22 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.initializeGesture()
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
-        self._mainState = .Closed
-        self.mainViewSlideOffAnimationEnabled = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone
+        self._mainState = .closed
+        self.mainViewSlideOffAnimationEnabled = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone
         self.shouldAlignStatusBarToPaneView = true
         self._currentDrawerDirection = SSDrawerDirection.None
-        self.potentialPaneState = .None
+        self.potentialPaneState = .none
         self.animatingRotation = false
         self.possibleDrawerDirection = SSDrawerDirection.None
 
         self.mainView = UIView()
-        self.mainView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.mainView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         self.mainCoverView = UIView()
-        self.mainCoverView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.mainCoverView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         self.drawerView = UIView()
-        self.drawerView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.drawerView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
 
         self.gravityMagnitude = 2.0
         self.elasticity = 0.0
@@ -568,8 +568,8 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         self.drawerView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.drawerView)
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.drawerView]))
 
         self.mainView.frame = self.view.bounds
         self.view.addSubview(self.mainView)
@@ -583,7 +583,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         self.mainBoundaryCollisionBehavior = UICollisionBehavior(items: [self.mainView])
         self.mainGravityBehavior = UIGravityBehavior(items: [self.mainView])
-        self.mainPushBehavior = UIPushBehavior(items: [self.mainView], mode: .Instantaneous)
+        self.mainPushBehavior = UIPushBehavior(items: [self.mainView], mode: .instantaneous)
         self.mainElasticityBehavior = UIDynamicItemBehavior(items: [self.mainView])
 
         self.mainGravityBehavior?.action = { [weak self] in
@@ -593,8 +593,8 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ [weak self] (transitionCoordinatorContext) in
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { [weak self] (transitionCoordinatorContext) in
             guard let wself = self else { return }
 
             wself.animatingRotation = true
@@ -605,11 +605,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 wself.updateStylers()
         }
 
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
 
-    override func shouldAutorotate() -> Bool {
-        return (!self.dynamicAnimator!.running && (self.panePanGestureRecognizer!.state == UIGestureRecognizerState.Possible))
+    override var shouldAutorotate : Bool {
+        return (!self.dynamicAnimator!.isRunning && (self.panePanGestureRecognizer!.state == UIGestureRecognizerState.possible))
     }
 
     func initializeGesture() -> Void {
@@ -641,7 +641,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
      @see paneViewController
      @see paneViewSlideOffAnimationEnabled
      */
-    func setMainViewController(mainViewController: UIViewController, animated: Bool, completion: (()-> Void)?) -> Void {
+    func setMainViewController(_ mainViewController: UIViewController, animated: Bool, completion: (()-> Void)?) -> Void {
         if !animated {
             self.mainViewController = mainViewController
             guard let _ = completion?() else {
@@ -652,22 +652,22 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
 
         if self.mainViewController != mainViewController {
-            self.mainViewController?.willMoveToParentViewController(nil)
+            self.mainViewController?.willMove(toParentViewController: nil)
             self.mainViewController?.beginAppearanceTransition(true, animated: animated)
 
             let transitionToNewMainViewController: () -> Void = {
-                mainViewController.willMoveToParentViewController(self)
+                mainViewController.willMove(toParentViewController: self)
                 self.mainViewController?.view.removeFromSuperview()
                 self.mainViewController?.removeFromParentViewController()
-                self.mainViewController?.didMoveToParentViewController(nil)
+                self.mainViewController?.didMove(toParentViewController: nil)
                 self.mainViewController?.endAppearanceTransition()
 
                 self.addChildViewController(mainViewController)
                 mainViewController.beginAppearanceTransition(true, animated: animated)
                 self.mainView.addSubview(mainViewController.view)
                 mainViewController.view.translatesAutoresizingMaskIntoConstraints = false
-                self.mainView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": mainViewController.view]))
-                self.mainView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": mainViewController.view]))
+                self.mainView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": mainViewController.view]))
+                self.mainView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": mainViewController.view]))
 
                 self.mainViewController = mainViewController
                 self.mainView.setNeedsDisplay()
@@ -685,14 +685,14 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             }
 
             if self.mainViewSlideOffAnimationEnabled {
-                self.setMainState(.OpenWide, animated: animated, allowUserInterruption: false, completion: transitionToNewMainViewController)
+                self.setMainState(.openWide, animated: animated, allowUserInterruption: false, completion: transitionToNewMainViewController)
             } else {
                 transitionToNewMainViewController()
             }
         }
         // If trying to set to the currently visible pane view controller, just close
         else {
-            self.setMainState(.Closed, animated: animated, allowUserInterruption: true, completion: {
+            self.setMainState(.closed, animated: animated, allowUserInterruption: true, completion: {
                 guard let _ = completion else {
                     return
                 }
@@ -702,18 +702,18 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
 // MARK: - Bouncing
 
-    func drawerViewControllerForDirection(direction: SSDrawerDirection) -> UIViewController? {
+    func drawerViewControllerForDirection(_ direction: SSDrawerDirection) -> UIViewController? {
         assert(SSDrawerDirection.isCardinal(direction), "Only cardinal reveal directions are accepted")
         return self.drawerViewControllers[direction]
     }
 
 // MARK: - Generic View Controller Containment
 
-    func replaceViewController(existingViewController: UIViewController?, withViewController newViewController: UIViewController?, inContainerView containerView: UIView, completion: (()-> Void)?) -> Void {
+    func replaceViewController(_ existingViewController: UIViewController?, withViewController newViewController: UIViewController?, inContainerView containerView: UIView, completion: (()-> Void)?) -> Void {
         // Add initial view controller
         if (existingViewController == nil) && (newViewController != nil) {
             if let newVC = newViewController {
-                newVC.willMoveToParentViewController(self)
+                newVC.willMove(toParentViewController: self)
                 newVC.beginAppearanceTransition(true, animated: false)
 
                 self.addChildViewController(newVC)
@@ -722,19 +722,19 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 var metrics: [String: CGFloat] = ["left": 0, "right": 0]
                 switch self.currentDrawerDirection {
                 case SSDrawerDirection.Left:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
                 case SSDrawerDirection.Right:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
                 case SSDrawerDirection.Horizontal:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
                 default:
                     break
                 }
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+                containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
+                containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
 
-                newVC.didMoveToParentViewController(self)
+                newVC.didMove(toParentViewController: self)
                 newVC.endAppearanceTransition()
 
                 guard let _ = completion?() else {
@@ -745,11 +745,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         // Remove existing view controller
         else if (existingViewController != nil) && (newViewController == nil) {
             if let existingVC = existingViewController {
-                existingVC.willMoveToParentViewController(nil)
+                existingVC.willMove(toParentViewController: nil)
                 existingVC.beginAppearanceTransition(false, animated: false)
                 existingVC.view.removeFromSuperview()
                 existingVC.removeFromParentViewController()
-                existingVC.didMoveToParentViewController(nil)
+                existingVC.didMove(toParentViewController: nil)
                 existingVC.endAppearanceTransition()
 
                 guard let _ = completion?() else {
@@ -760,12 +760,12 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         // Replace existing view controller with new view controller
         else if (existingViewController !== newViewController) && (newViewController != nil) {
             if let newVC = newViewController, let existingVC = existingViewController {
-                newVC.willMoveToParentViewController(self)
-                existingVC.willMoveToParentViewController(nil)
+                newVC.willMove(toParentViewController: self)
+                existingVC.willMove(toParentViewController: nil)
                 existingVC.beginAppearanceTransition(false, animated: false)
                 existingVC.view.removeFromSuperview()
                 existingVC.removeFromParentViewController()
-                existingVC.didMoveToParentViewController(nil)
+                existingVC.didMove(toParentViewController: nil)
                 existingVC.endAppearanceTransition()
                 newVC.beginAppearanceTransition(true, animated: false)
 
@@ -775,19 +775,19 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 var metrics: [String: CGFloat] = ["left": 0, "right": 0]
                 switch self.currentDrawerDirection {
                 case SSDrawerDirection.Left:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
                 case SSDrawerDirection.Right:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
                 case SSDrawerDirection.Horizontal:
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
-                    metrics.updateValue(UIScreen.mainScreen().bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "right")
+                    metrics.updateValue(UIScreen.main.bounds.size.width - SSDrawerDefaultOpenStateRevealWidthHorizontal, forKey: "left")
                 default:
                     break
                 }
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
-                containerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
+                containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-left-[view]-right-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: ["view": newVC.view]))
+                containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": newVC.view]))
 
-                newVC.didMoveToParentViewController(self)
+                newVC.didMove(toParentViewController: self)
                 newVC.endAppearanceTransition()
 
                 guard let _ = completion?() else {
@@ -799,7 +799,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
 // MARK: - DrawerViewController
 
-    func setDrawerViewController(drawerViewController: UIViewController?, forDirection direction: SSDrawerDirection) -> Void {
+    func setDrawerViewController(_ drawerViewController: UIViewController?, forDirection direction: SSDrawerDirection) -> Void {
         assert(SSDrawerDirection.isCardinal(direction), "Only accepts cardinal reveal directions")
         for currentDrawerViewController in self.drawerViewControllers.values {
             assert(currentDrawerViewController != drawerViewController, "Unable to add a drawer view controller when it's previously been added")
@@ -819,7 +819,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         // Removing existing drawer view controller
         else if drawerViewController == nil && existingDrawerViewController != nil {
             self.possibleDrawerDirection ^= direction
-            self.drawerViewControllers.removeValueForKey(direction)
+            self.drawerViewControllers.removeValue(forKey: direction)
         }
         // Replace existing drawer view controller
         else if drawerViewController != nil && existingDrawerViewController != nil {
@@ -833,19 +833,19 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.paneViewDidUpdateFrame()
     }
 
-    func addDynamicsBehaviorsToCreatePaneState(paneState: SSDrawerMainState) -> Void {
+    func addDynamicsBehaviorsToCreatePaneState(_ paneState: SSDrawerMainState) -> Void {
         self.addDynamicsBehaviorsToCreatePaneState(paneState, pushMagnitude: 0, pushAngle: 0, pushElasticity: self.elasticity)
     }
 
-    func addDynamicsBehaviorsToCreatePaneState(paneState: SSDrawerMainState, pushMagnitude: CGFloat, pushAngle: CGFloat, pushElasticity: CGFloat) -> Void {
+    func addDynamicsBehaviorsToCreatePaneState(_ paneState: SSDrawerMainState, pushMagnitude: CGFloat, pushAngle: CGFloat, pushElasticity: CGFloat) -> Void {
         if self.currentDrawerDirection == SSDrawerDirection.None {
             return
         }
 
-        self.setPaneViewControllerViewUserInteractionEnabled(paneState == SSDrawerMainState.Closed)
+        self.setPaneViewControllerViewUserInteractionEnabled(paneState == SSDrawerMainState.closed)
 
         self.mainBoundaryCollisionBehavior?.removeAllBoundaries()
-        self.mainBoundaryCollisionBehavior?.addBoundaryWithIdentifier(SSDrawerBoundaryIdentifier, forPath: self.boundaryPathForState(paneState, direction: self.currentDrawerDirection))
+        self.mainBoundaryCollisionBehavior?.addBoundary(withIdentifier: SSDrawerBoundaryIdentifier as NSCopying, for: self.boundaryPathForState(paneState, direction: self.currentDrawerDirection))
         self.dynamicAnimator?.addBehavior(self.mainBoundaryCollisionBehavior!)
 
         self.mainGravityBehavior?.magnitude = self.gravityMagnitude
@@ -872,30 +872,30 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
-    func boundaryPathForState(state: SSDrawerMainState, direction: SSDrawerDirection) -> UIBezierPath {
+    func boundaryPathForState(_ state: SSDrawerMainState, direction: SSDrawerDirection) -> UIBezierPath {
         assert(SSDrawerDirection.isCardinal(direction), "Boundary is undefined for a non-cardinal reveal direction")
 
-        var boundary: CGRect = CGRectZero
-        boundary.origin = CGPointMake(-1.0, -1.0)
+        var boundary: CGRect = CGRect.zero
+        boundary.origin = CGPoint(x: -1.0, y: -1.0)
         if (self.possibleDrawerDirection & SSDrawerDirection.Horizontal) != SSDrawerDirection.None {
-            boundary.size.height = CGRectGetHeight(self.mainView.frame) + 1.0
+            boundary.size.height = self.mainView.frame.height + 1.0
             switch state {
-            case SSDrawerMainState.Closed, .OpenWide:
-                boundary.size.width = CGRectGetWidth(self.mainView.frame) * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
-            case .Open:
-                boundary.size.width = CGRectGetWidth(self.mainView.frame) + self.openStateRevealWidth + 2.0
+            case SSDrawerMainState.closed, .openWide:
+                boundary.size.width = self.mainView.frame.width * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
+            case .open:
+                boundary.size.width = self.mainView.frame.width + self.openStateRevealWidth + 2.0
             default:
                 break
             }
         } else if (self.possibleDrawerDirection & SSDrawerDirection.Vertical) != SSDrawerDirection.None {
-            boundary.size.width = CGRectGetWidth(self.mainView.frame) + 1.0
+            boundary.size.width = self.mainView.frame.width + 1.0
             switch state {
-            case SSDrawerMainState.Closed:
-                boundary.size.height = CGRectGetHeight(self.mainView.frame) * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
-            case SSDrawerMainState.Open:
-                boundary.size.height = CGRectGetHeight(self.mainView.frame) + self.openStateRevealWidth + 2.0
-            case SSDrawerMainState.OpenWide:
-                boundary.size.height = CGRectGetHeight(self.mainView.frame) * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
+            case SSDrawerMainState.closed:
+                boundary.size.height = self.mainView.frame.height * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
+            case SSDrawerMainState.open:
+                boundary.size.height = self.mainView.frame.height + self.openStateRevealWidth + 2.0
+            case SSDrawerMainState.openWide:
+                boundary.size.height = self.mainView.frame.height * 2.0 + self.paneStateOpenWideEdgeOffset + 2.0
             default:
                 break
             }
@@ -903,11 +903,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         switch direction {
         case SSDrawerDirection.Right:
-            boundary.origin.x = CGRectGetWidth(self.mainView.frame) + 1.0 - boundary.size.width
+            boundary.origin.x = self.mainView.frame.width + 1.0 - boundary.size.width
         case SSDrawerDirection.Bottom:
-            boundary.origin.y = CGRectGetHeight(self.mainView.frame) + 1.0 - boundary.size.height
+            boundary.origin.y = self.mainView.frame.height + 1.0 - boundary.size.height
         case SSDrawerDirection.None:
-            boundary = CGRectZero
+            boundary = CGRect.zero
         default:
             break
         }
@@ -915,18 +915,18 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return UIBezierPath(rect: boundary)
     }
 
-    func gravityAngleForState(state: SSDrawerMainState, direction: SSDrawerDirection) -> CGFloat {
+    func gravityAngleForState(_ state: SSDrawerMainState, direction: SSDrawerDirection) -> CGFloat {
         assert(SSDrawerDirection.isCardinal(direction), "Indeterminate gravity angle for non-cardinal reveal direction")
 
         switch direction {
         case SSDrawerDirection.Top:
-            return CGFloat((state != SSDrawerMainState.Closed) ? M_PI_2 : (3.0 * M_PI_2))
+            return CGFloat((state != SSDrawerMainState.closed) ? M_PI_2 : (3.0 * M_PI_2))
         case SSDrawerDirection.Left:
-            return CGFloat((state != SSDrawerMainState.Closed) ? 0.0 : M_PI)
+            return CGFloat((state != SSDrawerMainState.closed) ? 0.0 : M_PI)
         case SSDrawerDirection.Bottom:
-            return CGFloat((state != SSDrawerMainState.Closed) ? (3.0 * M_PI_2) : M_PI_2)
+            return CGFloat((state != SSDrawerMainState.closed) ? (3.0 * M_PI_2) : M_PI_2)
         case SSDrawerDirection.Right:
-            return CGFloat((state != SSDrawerMainState.Closed) ? M_PI : 0.0)
+            return CGFloat((state != SSDrawerMainState.closed) ? M_PI : 0.0)
         default:
             return 0.0
         }
@@ -959,7 +959,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
 // MARK: - Stylers
 
-    func addStyler(styler: SSDrawerStyler, forDirection direction: SSDrawerDirection) -> Void {
+    func addStyler(_ styler: SSDrawerStyler, forDirection direction: SSDrawerDirection) -> Void {
         SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [weak self] (maskedValue) in
             guard let wself = self else { return }
             
@@ -968,11 +968,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             }
 
             if let stylersSet: NSMutableSet = wself.stylers[maskedValue] as? NSMutableSet {
-                stylersSet.addObject(styler)
+                stylersSet.add(styler)
 
                 var existsInCurrentStylers: Bool = false
                 for currentStylersSet: NSSet in wself.stylers.values {
-                    existsInCurrentStylers = currentStylersSet.containsObject(styler)
+                    existsInCurrentStylers = currentStylersSet.contains(styler)
                 }
 
                 if existsInCurrentStylers {
@@ -982,16 +982,16 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
-    func removeStyler(styler: SSDrawerStyler, forDirection: SSDrawerDirection) -> Void {
+    func removeStyler(_ styler: SSDrawerStyler, forDirection: SSDrawerDirection) -> Void {
         SSDrawerDirection.drawerDirectionActionForMaskedValues(forDirection) { [weak self] (maskedValue) in
             guard let wself = self else { return }
 
             if let stylersSet: NSMutableSet = wself.stylers[maskedValue] as? NSMutableSet {
-                stylersSet.removeObject(styler)
+                stylersSet.remove(styler)
 
                 var containedCount: Int = 0
                 for currentStylersSet: NSSet in wself.stylers.values {
-                    if currentStylersSet.containsObject(styler) {
+                    if currentStylersSet.contains(styler) {
                         containedCount += 1
                     }
                 }
@@ -1003,7 +1003,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
-    func addStylerFromArray(stylers: [SSDrawerStyler], forDirection: SSDrawerDirection) -> Void {
+    func addStylerFromArray(_ stylers: [SSDrawerStyler], forDirection: SSDrawerDirection) -> Void {
         for styler in stylers {
             self.addStyler(styler, forDirection: forDirection)
         }
@@ -1016,10 +1016,10 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         let activeStylers: NSMutableSet = NSMutableSet()
         if SSDrawerDirection.isCardinal(self.currentDrawerDirection) {
-            activeStylers.unionSet(self.stylers[self.currentDrawerDirection] as! Set<NSObject>)
+            activeStylers.union(with: self.stylers[self.currentDrawerDirection]!)// as! Set)
         } else {
             for stylers in self.stylers.values {
-                activeStylers.unionSet(stylers as Set<NSObject>)
+                activeStylers.union(with: stylers)//.union(stylers as Set)
             }
         }
 
@@ -1035,18 +1035,18 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         if self.shouldAlignStatusBarToPaneView {
 
             let chars: [CUnsignedChar] = [0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x61, 0x72]
-            let data: NSData = NSData(bytes: chars, length: 9)
-            let key: String = String(data: data, encoding: NSASCIIStringEncoding)!
+            let data: Data = Data(bytes: UnsafePointer<UInt8>(chars), count: 9)
+            let key: String = String(data: data, encoding: String.Encoding.ascii)!
 
-            let application: UIApplication = UIApplication.sharedApplication()
+            let application: UIApplication = UIApplication.shared
             var statusBar: UIView?;
-            if application.respondsToSelector(NSSelectorFromString(key)) {
-                statusBar = application.valueForKey(key) as? UIView
+            if application.responds(to: NSSelectorFromString(key)) {
+                statusBar = application.value(forKey: key) as? UIView
             }
-            statusBar!.transform = CGAffineTransformMakeTranslation(self.mainView.frame.origin.x, self.mainView.frame.origin.y);
+            statusBar!.transform = CGAffineTransform(translationX: self.mainView.frame.origin.x, y: self.mainView.frame.origin.y);
         }
 
-        let openWidePoint: CGPoint = self.paneViewOriginForPaneState(.OpenWide)
+        let openWidePoint: CGPoint = self.paneViewOriginForPaneState(.openWide)
         let paneFrame: CGRect = self.mainView.frame
         var openWideLocation: CGFloat = 0
         var paneLocation: CGFloat = 0
@@ -1070,17 +1070,17 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             }
         }
 
-        if reachedOpenWideState && (self.potentialPaneState == .OpenWide) {
+        if reachedOpenWideState && (self.potentialPaneState == .openWide) {
             self.dynamicAnimator?.removeAllBehaviors()
         }
 
         self.updateStylers()
     }
 
-    func paneViewOriginForPaneState(paneState: SSDrawerMainState) -> CGPoint {
-        var paneViewOrigin: CGPoint = CGPointZero
+    func paneViewOriginForPaneState(_ paneState: SSDrawerMainState) -> CGPoint {
+        var paneViewOrigin: CGPoint = CGPoint.zero
         switch paneState {
-        case .Open:
+        case .open:
             switch self.currentDrawerDirection {
             case SSDrawerDirection.Top:
                 paneViewOrigin.y = CGFloat(self.openStateRevealWidth)
@@ -1093,16 +1093,16 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             default:
                 break
             }
-        case .OpenWide:
+        case .openWide:
             switch self.currentDrawerDirection {
             case SSDrawerDirection.Left:
-                paneViewOrigin.x = (CGRectGetWidth(self.mainView.frame) + self.paneStateOpenWideEdgeOffset)
+                paneViewOrigin.x = (self.mainView.frame.width + self.paneStateOpenWideEdgeOffset)
             case SSDrawerDirection.Top:
-                paneViewOrigin.y = (CGRectGetWidth(self.mainView.frame) + self.paneStateOpenWideEdgeOffset)
+                paneViewOrigin.y = (self.mainView.frame.width + self.paneStateOpenWideEdgeOffset)
             case SSDrawerDirection.Bottom:
-                paneViewOrigin.y = (CGRectGetWidth(self.mainView.frame) + self.paneStateOpenWideEdgeOffset)
+                paneViewOrigin.y = (self.mainView.frame.width + self.paneStateOpenWideEdgeOffset)
             case SSDrawerDirection.Right:
-                paneViewOrigin.x = -(CGRectGetWidth(self.mainView.frame) + self.paneStateOpenWideEdgeOffset)
+                paneViewOrigin.x = -(self.mainView.frame.width + self.paneStateOpenWideEdgeOffset)
             default:
                 break
             }
@@ -1113,14 +1113,14 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return paneViewOrigin
     }
 
-    func setMainState(paneState: SSDrawerMainState, inDirection direction: SSDrawerDirection) -> Void {
+    func setMainState(_ paneState: SSDrawerMainState, inDirection direction: SSDrawerDirection) -> Void {
         self.setMainState(paneState, inDirection: direction, animated: false, allowUserInterruption: false, completion: nil)
     }
 
-    func setMainState(paneState: SSDrawerMainState, animated: Bool, allowUserInterruption: Bool, completion: (()-> Void)?) -> Void {
+    func setMainState(_ paneState: SSDrawerMainState, animated: Bool, allowUserInterruption: Bool, completion: (()-> Void)?) -> Void {
         // If the drawer is getting opened and there's more than one possible direction enforce that the directional eqivalent is used
         var direction: SSDrawerDirection?
-        if (paneState != .Closed) && (self.currentDrawerDirection == .None) {
+        if (paneState != .closed) && (self.currentDrawerDirection == .None) {
             assert(SSDrawerDirection.isCardinal(self.possibleDrawerDirection), "Unable to set the pane to an open state with multiple possible drawer directions, as the drawer direction to open in is indeterminate. Use `setPaneState:inDirection:animated:allowUserInterruption:completion:` instead.")
             direction = self.possibleDrawerDirection
         } else {
@@ -1130,14 +1130,14 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         self.setMainState(paneState, inDirection: direction!, animated: animated, allowUserInterruption: allowUserInterruption, completion: completion)
     }
 
-    func setMainState(paneState: SSDrawerMainState, inDirection direction: SSDrawerDirection, animated: Bool, allowUserInterruption: Bool, completion: (()->Void)?) -> Void {
+    func setMainState(_ paneState: SSDrawerMainState, inDirection direction: SSDrawerDirection, animated: Bool, allowUserInterruption: Bool, completion: (()->Void)?) -> Void {
         assert((self.possibleDrawerDirection & direction) == direction, "Unable to bounce open with impossible or multiple directions")
 
         // If the pane is already positioned in the desired pane state and direction, don't continue
-        var currentPaneState: SSDrawerMainState = .Closed
+        var currentPaneState: SSDrawerMainState = .closed
         if self.paneViewIsPositionedInValidState(&currentPaneState) && (currentPaneState == paneState) {
             // If already closed, *in any direction*, don't continue
-            if currentPaneState == .Closed {
+            if currentPaneState == .closed {
                 guard let _ = completion else {
                     return
                 }
@@ -1153,7 +1153,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
 
         // If opening in a specified direction, set the drawer to that direction
-        if paneState != .Closed {
+        if paneState != .closed {
             self.currentDrawerDirection = direction
         }
 
@@ -1178,16 +1178,16 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         }
     }
 
-    private func _setMainState(paneState: SSDrawerMainState) -> Void {
+    fileprivate func _setMainState(_ paneState: SSDrawerMainState) -> Void {
         let previousDirection: SSDrawerDirection = self.currentDrawerDirection
 
         // When we've actually upated to a pane state, invalidate the `potentialPaneState`
-        self.potentialPaneState = .None
+        self.potentialPaneState = .none
 
         if self.mainState != paneState {
-            self.willChangeValueForKey("mainState")
+            self.willChangeValue(forKey: "mainState")
             self._mainState = paneState
-            if (self.mainState & (SSDrawerMainState.Open | SSDrawerMainState.OpenWide)) != .None {
+            if (self.mainState & (SSDrawerMainState.open | SSDrawerMainState.openWide)) != .none {
                 guard let _ = self.delegate?.drawerViewController(self, didUpdateToPaneState: paneState, forDirection: self.currentDrawerDirection) else {
                     return
                 }
@@ -1196,19 +1196,19 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                     return
                 }
             }
-            self.didChangeValueForKey("mainState")
+            self.didChangeValue(forKey: "mainState")
         }
 
         // Update pane frame regardless of if it's changed
         self.mainView.frame.origin = self.paneViewOriginForPaneState(paneState)
 
         // Update `currentDirection` to `MSDynamicsDrawerDirectionNone` if the `paneState` is `MSDynamicsDrawerPaneStateClosed`
-        if paneState == SSDrawerMainState.Closed {
+        if paneState == SSDrawerMainState.closed {
             self.currentDrawerDirection = SSDrawerDirection.None
         }
     }
 
-    func paneViewIsPositionedInValidState(inout paneState: SSDrawerMainState) -> Bool {
+    func paneViewIsPositionedInValidState(_ paneState: inout SSDrawerMainState) -> Bool {
         var validState = false
         for currentPaneState: SSDrawerMainState in SSDrawerMainState.AllValues {
             let paneStatePaneViewOrigin: CGPoint = self.paneViewOriginForPaneState(currentPaneState)
@@ -1226,11 +1226,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     }
 
     func nearestPaneState() -> SSDrawerMainState {
-        var minDistance: CGFloat = CGFloat.max
-        var minPaneState: SSDrawerMainState = .None
+        var minDistance: CGFloat = CGFloat.greatestFiniteMagnitude
+        var minPaneState: SSDrawerMainState = .none
         for currentPaneState: SSDrawerMainState in SSDrawerMainState.AllValues {
             let paneStatePaneViewOrigin: CGPoint = self.paneViewOriginForPaneState(currentPaneState)
-            let currentPaneViewOrigin: CGPoint = CGPointMake(round(self.mainView.frame.origin.x), round(self.mainView.frame.origin.y))
+            let currentPaneViewOrigin: CGPoint = CGPoint(x: round(self.mainView.frame.origin.x), y: round(self.mainView.frame.origin.y))
             let distance: CGFloat = sqrt(pow(paneStatePaneViewOrigin.x - currentPaneViewOrigin.x, 2) + pow(paneStatePaneViewOrigin.y - currentPaneViewOrigin.y, 2))
             if distance < minDistance {
                 minDistance = distance
@@ -1247,7 +1247,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 //    }
 
 // MARK: Reveal Width
-    func revealWidthForDirection(direction: SSDrawerDirection) -> CGFloat {
+    func revealWidthForDirection(_ direction: SSDrawerDirection) -> CGFloat {
         assert(SSDrawerDirection.isValid(direction), "Only accepts cardinal directions when querying for reveal width")
         var revealWidth: CGFloat = 0
 
@@ -1268,8 +1268,8 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return revealWidth
     }
 
-    func setRevealWidth(revealWidth: CGFloat, forDirection direction:SSDrawerDirection) -> Void {
-        assert(self.mainState == SSDrawerMainState.Closed, "Only able to update the reveal width while the pane view is closed")
+    func setRevealWidth(_ revealWidth: CGFloat, forDirection direction:SSDrawerDirection) -> Void {
+        assert(self.mainState == SSDrawerMainState.closed, "Only able to update the reveal width while the pane view is closed")
         SSDrawerDirection.drawerDirectionActionForMaskedValues(direction) { [weak self] (maskedValue) in
             guard let wself = self else { return }
 
@@ -1289,7 +1289,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     }
 
 // MARK:- User Interaction
-    func setViewUserInteractionEnabled(enabled: Bool) -> Void {
+    func setViewUserInteractionEnabled(_ enabled: Bool) -> Void {
         var disableCount: Int = 0
         if !enabled {
             disableCount += 1
@@ -1297,15 +1297,15 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             disableCount = max((disableCount - 1), 0)
         }
 
-        self.view.userInteractionEnabled = (disableCount == 0)
+        self.view.isUserInteractionEnabled = (disableCount == 0)
     }
 
-    func setPaneViewControllerViewUserInteractionEnabled(enabled: Bool) -> Void {
-        self.mainViewController?.view.userInteractionEnabled = enabled
+    func setPaneViewControllerViewUserInteractionEnabled(_ enabled: Bool) -> Void {
+        self.mainViewController?.view.isUserInteractionEnabled = enabled
     }
 
 // MARK:- Gestures
-    func isPaneDragRevealEnabledForDirection(direction: SSDrawerDirection) -> Bool {
+    func isPaneDragRevealEnabledForDirection(_ direction: SSDrawerDirection) -> Bool {
         assert(SSDrawerDirection.isCardinal(direction), "Only accepts singular directions when querying for drag reveal enabled")
         var paneDragRevealEnabled: Bool = false
 
@@ -1320,7 +1320,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return paneDragRevealEnabled
     }
 
-    func isPaneTapToCloseEnabledForDirection(direction: SSDrawerDirection) -> Bool {
+    func isPaneTapToCloseEnabledForDirection(_ direction: SSDrawerDirection) -> Bool {
         assert(SSDrawerDirection.isCardinal(direction), "Only accepts singular directions when querying for drag reveal enabled")
         var paneTapToCloseEnabled: Bool = false
 
@@ -1335,7 +1335,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return paneTapToCloseEnabled
     }
 
-    func deltaForPanWithStartLocation(startLocation: CGPoint, currentLocation: CGPoint) -> CGFloat {
+    func deltaForPanWithStartLocation(_ startLocation: CGPoint, currentLocation: CGPoint) -> CGFloat {
         var panDelta: CGFloat = 0
         if (self.possibleDrawerDirection & SSDrawerDirection.Horizontal) != SSDrawerDirection.None {
             panDelta = currentLocation.x - startLocation.x
@@ -1346,7 +1346,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return panDelta
     }
 
-    func directionForPanWithStartLocation(startLocation: CGPoint, currentLocation: CGPoint) -> SSDrawerDirection {
+    func directionForPanWithStartLocation(_ startLocation: CGPoint, currentLocation: CGPoint) -> SSDrawerDirection {
         let delta: CGFloat = self.deltaForPanWithStartLocation(startLocation, currentLocation: currentLocation)
         var direction: SSDrawerDirection = SSDrawerDirection.None
 
@@ -1367,7 +1367,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return direction
     }
 
-    func paneViewFrameForPanWithStartLocation(startLocation: CGPoint, currentLocation: CGPoint, inout bounded: Bool) -> CGRect {
+    func paneViewFrameForPanWithStartLocation(_ startLocation: CGPoint, currentLocation: CGPoint, bounded: inout Bool) -> CGRect {
         let panDelta: CGFloat = self.deltaForPanWithStartLocation(startLocation, currentLocation: currentLocation)
         // Track the pane frame to the pan gesture
         var paneFrame: CGRect = self.mainView.frame
@@ -1436,7 +1436,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return paneFrame
     }
 
-    func velocityForPanWithStartLocation(startLocation: CGPoint, currentLocation: CGPoint) -> CGFloat {
+    func velocityForPanWithStartLocation(_ startLocation: CGPoint, currentLocation: CGPoint) -> CGFloat {
         var velocity: CGFloat = 0.0
         if (self.possibleDrawerDirection & SSDrawerDirection.Horizontal) != SSDrawerDirection.None {
             velocity = -(startLocation.x - currentLocation.x)
@@ -1447,61 +1447,61 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return velocity
     }
 
-    func paneStateForPanVelocity(panVelocity: CGFloat) -> SSDrawerMainState {
-        var state: SSDrawerMainState = .Closed
+    func paneStateForPanVelocity(_ panVelocity: CGFloat) -> SSDrawerMainState {
+        var state: SSDrawerMainState = .closed
         if (self.currentDrawerDirection & [SSDrawerDirection.Top, SSDrawerDirection.Left]) != SSDrawerDirection.None {
-            state = (panVelocity > 0) ? .Open : .Closed
+            state = (panVelocity > 0) ? .open : .closed
         } else if (self.currentDrawerDirection & [SSDrawerDirection.Bottom, SSDrawerDirection.Right]) != SSDrawerDirection.None {
-            state = (panVelocity < 0) ? .Open : .Closed
+            state = (panVelocity < 0) ? .open : .closed
         }
 
         return state
     }
 
-    func panGestureRecognizer(panGestureRecognizer: UIPanGestureRecognizer, didStartAtEdgesOfView view: UIView) -> UIRectEdge {
-        let translation: CGPoint = panGestureRecognizer.translationInView(view)
-        let currentLocation: CGPoint = panGestureRecognizer.locationInView(view)
+    func panGestureRecognizer(_ panGestureRecognizer: UIPanGestureRecognizer, didStartAtEdgesOfView view: UIView) -> UIRectEdge {
+        let translation: CGPoint = panGestureRecognizer.translation(in: view)
+        let currentLocation: CGPoint = panGestureRecognizer.location(in: view)
         let startLocation: CGPoint = CGPoint(x: (currentLocation.x - translation.x), y: (currentLocation.y - translation.y))
         let distanceToEdges: UIEdgeInsets = UIEdgeInsets(top: startLocation.y, left: startLocation.x, bottom: (view.bounds.size.height - startLocation.y), right: (view.bounds.size.width - startLocation.x))
 
-        var rectEdge: UIRectEdge = UIRectEdge.None
+        var rectEdge: UIRectEdge = UIRectEdge()
         if distanceToEdges.top < SSPaneViewScreenEdgeThreshold {
-            rectEdge = UIRectEdge.Top
+            rectEdge = UIRectEdge.top
         }
         if distanceToEdges.left < SSPaneViewScreenEdgeThreshold {
-            rectEdge = UIRectEdge.Left
+            rectEdge = UIRectEdge.left
         }
         if distanceToEdges.right < SSPaneViewScreenEdgeThreshold {
-            rectEdge = UIRectEdge.Right
+            rectEdge = UIRectEdge.right
         }
         if distanceToEdges.bottom < SSPaneViewScreenEdgeThreshold {
-            rectEdge = UIRectEdge.Bottom
+            rectEdge = UIRectEdge.bottom
         }
 
         return rectEdge
     }
 
 // MARK:- UIGestureRecognizer Callbacks
-    func paneTapped(gesture: UITapGestureRecognizer) -> Void {
+    func paneTapped(_ gesture: UITapGestureRecognizer) -> Void {
         if self.isPaneTapToCloseEnabledForDirection(self.currentDrawerDirection) {
-            self.addDynamicsBehaviorsToCreatePaneState(SSDrawerMainState.Closed)
+            self.addDynamicsBehaviorsToCreatePaneState(SSDrawerMainState.closed)
         }
     }
 
-    private var panStartLocation: CGPoint = CGPointZero
-    private var paneVelocity: CGFloat = 0
-    private var panDirection: SSDrawerDirection = SSDrawerDirection.None
+    fileprivate var panStartLocation: CGPoint = CGPoint.zero
+    fileprivate var paneVelocity: CGFloat = 0
+    fileprivate var panDirection: SSDrawerDirection = SSDrawerDirection.None
 
-    func panePanned(gesture: UIPanGestureRecognizer) -> Void {
+    func panePanned(_ gesture: UIPanGestureRecognizer) -> Void {
 
         switch gesture.state {
-        case UIGestureRecognizerState.Began:
+        case UIGestureRecognizerState.began:
             // Initialize static variables
-            panStartLocation = gesture.locationInView(self.mainView)
+            panStartLocation = gesture.location(in: self.mainView)
             paneVelocity = 0
             panDirection = self.currentDrawerDirection
-        case .Changed:
-            let currentPanLocation: CGPoint = gesture.locationInView(self.mainView)
+        case .changed:
+            let currentPanLocation: CGPoint = gesture.location(in: self.mainView)
             let currentPanDirection: SSDrawerDirection = self.directionForPanWithStartLocation(panStartLocation, currentLocation: currentPanLocation)
             // If there's no current direction, try to determine it
             if self.currentDrawerDirection == SSDrawerDirection.None {
@@ -1530,15 +1530,15 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                 }
                 // If these criteria aren't met, cancel the gesture
                 else {
-                    gesture.enabled = false
-                    gesture.enabled = true
+                    gesture.isEnabled = false
+                    gesture.isEnabled = true
                     return
                 }
             }
             // If the current reveal direction's pane drag reveal is disabled, cancel the gesture
             else if !self.isPaneDragRevealEnabledForDirection(self.currentDrawerDirection) {
-                gesture.enabled = false
-                gesture.enabled = true
+                gesture.isEnabled = false
+                gesture.isEnabled = true
                 return
             }
 
@@ -1560,11 +1560,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             // If the drawer is being swiped into the closed state, set the direciton to none and the state to closed since the user is manually doing so
             if self.currentDrawerDirection != SSDrawerDirection.None &&
                 currentPanDirection != SSDrawerDirection.None &&
-                CGPointEqualToPoint(self.mainView.frame.origin, self.paneViewOriginForPaneState(SSDrawerMainState.Closed)) {
-                self._setMainState(SSDrawerMainState.Closed)
+                self.mainView.frame.origin.equalTo(self.paneViewOriginForPaneState(SSDrawerMainState.closed)) {
+                self._setMainState(SSDrawerMainState.closed)
                 self.currentDrawerDirection = SSDrawerDirection.None
             }
-        case .Ended:
+        case .ended:
             if self.currentDrawerDirection != SSDrawerDirection.None {
                 // If the user released the pane over the velocity threshold
                 if fabs(paneVelocity) > SSPaneViewVelocityThreshold {
@@ -1582,16 +1582,16 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     }
 
 // MARK: - UIGestureRecognizerDelegate
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer === self.panePanGestureRecognizer {
             if self.paneDragRequiresScreenEdgePan {
-                var paneState: SSDrawerMainState = .Closed
-                if self.paneViewIsPositionedInValidState(&paneState) && (paneState == .Closed) {
+                var paneState: SSDrawerMainState = .closed
+                if self.paneViewIsPositionedInValidState(&paneState) && (paneState == .closed) {
                     let panStartEdges: UIRectEdge = self.panGestureRecognizer(self.panePanGestureRecognizer!, didStartAtEdgesOfView: self.mainView)
 
                     // Mask to only edges that are possible (there's a drawer view controller set in that direction)
                     let possibleDirectionsForPanStartEdges: SSDrawerDirection = SSDrawerDirection(rawValue: panStartEdges.rawValue & self.possibleDrawerDirection.rawValue)
-                    let gestureStartedAtPossibleEdge: Bool = possibleDirectionsForPanStartEdges.rawValue != UIRectEdge.None.rawValue
+                    let gestureStartedAtPossibleEdge: Bool = possibleDirectionsForPanStartEdges.rawValue != UIRectEdge().rawValue
 
                     // If the gesture didn't start at a possible edge, return no
                     if !gestureStartedAtPossibleEdge {
@@ -1612,7 +1612,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return true
     }
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if gestureRecognizer === self.panePanGestureRecognizer {
             var shouldReceiveTouch: Bool = true
 
@@ -1625,26 +1625,26 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
                     return
                 }
                 // If the touch was in a touch forwarding view, don't handle the gesture
-                wself.touchForwardingClasses.enumerateObjectsUsingBlock({ (touchForwardingClass, stop) in
-                    if view.isKindOfClass(touchForwardingClass as! AnyClass) {
+                wself.touchForwardingClasses.enumerateObjects({ (touchForwardingClass, stop) in
+                    if view.isKind(of: touchForwardingClass as! AnyClass) {
                         shouldReceiveTouch = false
-                        stop.memory = true
+                        stop.pointee = true
                     }
                 })
             })
 
             return shouldReceiveTouch
         } else if gestureRecognizer === self.paneTapGestureRecognizer {
-            var paneState: SSDrawerMainState = .Closed
+            var paneState: SSDrawerMainState = .closed
             if self.paneViewIsPositionedInValidState(&paneState) {
-                return paneState != .Closed
+                return paneState != .closed
             }
         }
 
         return true
     }
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOfGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if (gestureRecognizer === self.panePanGestureRecognizer) && self.screenEdgePanCancelsConflictingGestures {
             let edges: UIRectEdge = self.panGestureRecognizer(self.panePanGestureRecognizer!, didStartAtEdgesOfView: self.mainView)
 
@@ -1652,7 +1652,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
             let validEdges: Bool = (edges.rawValue & self.possibleDrawerDirection.rawValue) != 0
 
             // If there is a valid edge and pane drag is revealed for that edge's direction
-            if validEdges && self.isPaneDragRevealEnabledForDirection(SSDrawerDirection(rawValue: UInt(validEdges))) {
+            if validEdges && self.isPaneDragRevealEnabledForDirection(SSDrawerDirection(rawValue: validEdges ? 1 : 0)) {
                 return true
             }
         }
@@ -1660,11 +1660,11 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
         return false
     }
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 
         // If the other gesture recognizer's view is a `UITableViewCell` instance's internal `UIScrollView`, require failure
         if let view = otherGestureRecognizer.view {
-            if view.nextResponder() is UITableViewCell && view is UIScrollView {
+            if view.next is UITableViewCell && view is UIScrollView {
                 return true
             }
         }
@@ -1673,21 +1673,23 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     }
 
 // MARK: - NSKeyValueObserving
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
-        if (keyPath == "frame") && (object === self.mainView) {
-            if let _ = object?.valueForKey(keyPath!) {
-                self.paneViewDidUpdateFrame()
+        if let view = object as? UIView {
+            if (keyPath == "frame") && (view === self.mainView) {
+                if let _ = (object as AnyObject).value(forKey: keyPath!) {
+                    self.paneViewDidUpdateFrame()
+                }
             }
         }
     }
 }
 
-typealias ViewActionBlock = (view: UIView) -> Void
+typealias ViewActionBlock = (_ view: UIView) -> Void
 
 extension UIView {
-    func superviewHierarchyAction(viewAction: ViewActionBlock) -> Void {
-        viewAction(view: self)
+    func superviewHierarchyAction(_ viewAction: ViewActionBlock) -> Void {
+        viewAction(self)
         self.superview?.superviewHierarchyAction(viewAction)
     }
 }

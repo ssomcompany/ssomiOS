@@ -10,16 +10,16 @@ import UIKit
 
 public struct SSAlertController
 {
-    static func alertConfirm(title title: String, message: String, vc:UIViewController, completion:((UIAlertAction) -> Void)?) -> Void {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.Default, handler: completion)
+    static func alertConfirm(title: String, message: String, vc:UIViewController, completion:((UIAlertAction) -> Void)?) -> Void {
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: completion)
         alert.addAction(okAction)
 
-        vc.presentViewController(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 
-    static func showAlertConfirm(title title: String, message: String, completion:((UIAlertAction) -> Void)?) -> Void {
-        if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+    static func showAlertConfirm(title: String, message: String, completion:((UIAlertAction) -> Void)?) -> Void {
+        if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
 
             if presentedViewController is UINavigationController {
                 if let nowPresentedViewController = presentedViewController.presentedViewController {
@@ -31,29 +31,29 @@ public struct SSAlertController
         }
     }
 
-    static func alertTwoButton(title title: String,
+    static func alertTwoButton(title: String,
                                      message: String,
                                      vc:UIViewController,
                                      button1Title: String? = "확인",
                                      button2Title: String? = "취소",
                                      button1Completion:((UIAlertAction) -> Void)?,
                                      button2Completion:((UIAlertAction) -> Void)?) -> Void {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: button1Title, style: UIAlertActionStyle.Default, handler: button1Completion)
-        let cancelAction: UIAlertAction = UIAlertAction(title: button2Title, style: UIAlertActionStyle.Cancel, handler: button2Completion)
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction: UIAlertAction = UIAlertAction(title: button1Title, style: UIAlertActionStyle.default, handler: button1Completion)
+        let cancelAction: UIAlertAction = UIAlertAction(title: button2Title, style: UIAlertActionStyle.cancel, handler: button2Completion)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
 
-        vc.presentViewController(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 
-    static func showAlertTwoButton(title title: String,
+    static func showAlertTwoButton(title: String,
                                          message: String,
                                          button1Title: String? = "확인",
                                          button2Title: String? = "취소",
                                          button1Completion:((UIAlertAction) -> Void)?,
                                          button2Completion:((UIAlertAction) -> Void)?) -> Void {
-        if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+        if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
 
             if presentedViewController is UINavigationController {
                 if let nowPresentedViewController = presentedViewController.presentedViewController {
@@ -65,37 +65,37 @@ public struct SSAlertController
         }
     }
 
-    static func alertTextField(title title: String,
+    static func alertTextField(title: String,
                                      message: String,
                                      vc:UIViewController,
                                      button1Title: String? = "확인",
                                      button2Title: String? = "취소",
                                      button1Completion:((UIAlertAction, String) -> Void)?,
                                      button2Completion:((UIAlertAction) -> Void)?) -> Void {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: button1Title, style: UIAlertActionStyle.Default) { (action) in
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction: UIAlertAction = UIAlertAction(title: button1Title, style: UIAlertActionStyle.default) { (action) in
             guard let completion = button1Completion, let alertTextField = alert.textFields?.first else { return }
 
             completion(action, alertTextField.text!)
         }
-        let cancelAction: UIAlertAction = UIAlertAction(title: button2Title, style: UIAlertActionStyle.Cancel, handler: button2Completion)
+        let cancelAction: UIAlertAction = UIAlertAction(title: button2Title, style: UIAlertActionStyle.cancel, handler: button2Completion)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
 
-        alert.addTextFieldWithConfigurationHandler { (textField) in
+        alert.addTextField { (textField) in
             textField.placeholder = "신고 사유를 알려주세요!"
         }
 
-        vc.presentViewController(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 
-    static func showAlertTextField(title title: String,
+    static func showAlertTextField(title: String,
                                          message: String,
                                          button1Title: String? = "확인",
                                          button2Title: String? = "취소",
                                          button1Completion:((UIAlertAction, String) -> Void)?,
                                          button2Completion:((UIAlertAction) -> Void)?) -> Void {
-        if let presentedViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+        if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
 
             if presentedViewController is UINavigationController {
                 if let nowPresentedViewController = presentedViewController.presentedViewController {

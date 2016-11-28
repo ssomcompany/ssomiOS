@@ -11,10 +11,10 @@ import UIKit
 protocol SSDrawerStyler: class {
 
     static func styler() -> SSDrawerStyler
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) -> Void
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) -> Void
 
-    func stylerWasAddedToDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void
+    func stylerWasAddedToDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void
 
 //    @available(*, deprecated=1.0, obsoleted=2.0, message="Trying to avoid using this!!")
 //    func stylerWasAddedToDrawerViewController(drawerViewController: SSDrawerViewController) -> Void
@@ -25,10 +25,10 @@ protocol SSDrawerStyler: class {
 extension SSDrawerStyler {
     
 
-    func stylerWasAddedToDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void {
+    func stylerWasAddedToDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void {
 
     }
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void {
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) -> Void {
 
     }
 }
@@ -44,7 +44,7 @@ class SSDrawerParallaxStyler: SSDrawerStyler {
         return SSDrawerParallaxStyler()
     }
 
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
         let mainRevealWidth: CGFloat = drawerViewController.revealWidthForDirection(direction)
         var translate: CGFloat = (mainRevealWidth * paneClosedFraction) * self.parallaxOffsetFraction
         if (direction & [SSDrawerDirection.Top, SSDrawerDirection.Left]) != SSDrawerDirection.None {
@@ -52,9 +52,9 @@ class SSDrawerParallaxStyler: SSDrawerStyler {
         }
         var drawerViewTransform: CGAffineTransform = drawerViewController.drawerView.transform
         if (direction & SSDrawerDirection.Horizontal) != SSDrawerDirection.None {
-            drawerViewTransform.tx = CGAffineTransformMakeTranslation(CGFloat(translate), 0).tx
+            drawerViewTransform.tx = CGAffineTransform(translationX: CGFloat(translate), y: 0).tx
         } else if (direction & SSDrawerDirection.Vertical) != SSDrawerDirection.None {
-            drawerViewTransform.ty = CGAffineTransformMakeTranslation(0.0, CGFloat(translate)).ty;
+            drawerViewTransform.ty = CGAffineTransform(translationX: 0.0, y: CGFloat(translate)).ty;
         } else {
             drawerViewTransform.tx = 0;
             drawerViewTransform.ty = 0;
@@ -62,8 +62,8 @@ class SSDrawerParallaxStyler: SSDrawerStyler {
         drawerViewController.drawerView.transform = drawerViewTransform;
     }
 
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
-        let translate: CGAffineTransform = CGAffineTransformMakeTranslation(0.0, 0.0)
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
+        let translate: CGAffineTransform = CGAffineTransform(translationX: 0.0, y: 0.0)
         var drawerViewTransform: CGAffineTransform = drawerViewController.drawerView.transform
         drawerViewTransform.tx = translate.tx
         drawerViewTransform.ty = translate.ty
@@ -78,7 +78,7 @@ class SSDrawerFadeStyler: SSDrawerStyler {
         return SSDrawerFadeStyler()
     }
 
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
         if (direction & SSDrawerDirection.All) != SSDrawerDirection.None {
             drawerViewController.drawerView.alpha = (1.0 - self.closeAlpha) * (1.0 - paneClosedFraction)
         } else {
@@ -86,7 +86,7 @@ class SSDrawerFadeStyler: SSDrawerStyler {
         }
     }
 
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
         drawerViewController.drawerView.alpha = 1.0
     }
 }
@@ -102,14 +102,14 @@ class SSDrawerScaleStyler: SSDrawerStyler {
         return SSDrawerScaleStyler()
     }
 
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
         var scale: CGFloat = 0.0
         if (direction & SSDrawerDirection.All) != SSDrawerDirection.None {
             scale = 1.0 - paneClosedFraction * self.closedScale
         } else {
             scale = 1.0
         }
-        let scaleTransform: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+        let scaleTransform: CGAffineTransform = CGAffineTransform(scaleX: scale, y: scale)
         var drawerViewTransform: CGAffineTransform = drawerViewController.drawerView.transform
         drawerViewTransform.a = scaleTransform.a
         drawerViewTransform.d = scaleTransform.d
@@ -142,7 +142,7 @@ class SSDrawerResizeStyler: SSDrawerStyler {
         return SSDrawerResizeStyler()
     }
 
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
         if direction == SSDrawerDirection.None {
             return
         }
@@ -162,9 +162,9 @@ class SSDrawerResizeStyler: SSDrawerStyler {
         let paneViewFrame: CGRect = (drawerViewController.mainView.frame)
         switch direction {
         case SSDrawerDirection.Right:
-            drawerViewFrame.origin.x = CGRectGetMaxX(paneViewFrame)
+            drawerViewFrame.origin.x = paneViewFrame.maxX
         case SSDrawerDirection.Bottom:
-            drawerViewFrame.origin.y = CGRectGetMaxY(paneViewFrame)
+            drawerViewFrame.origin.y = paneViewFrame.maxY
         default:
             break
         }
@@ -172,7 +172,7 @@ class SSDrawerResizeStyler: SSDrawerStyler {
         drawerViewController.drawerViewControllerForDirection(direction)?.view.frame = drawerViewFrame
     }
 
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
         // Reset the drawer view controller's view to be the size of the drawerView (before the styler was added)
         var drawerViewFrame: CGRect = (drawerViewController.drawerViewControllerForDirection(direction)?.view.frame)!
         drawerViewFrame.size = (drawerViewController.drawerView.frame.size)
@@ -181,10 +181,10 @@ class SSDrawerResizeStyler: SSDrawerStyler {
 }
 
 class SSDrawerShadowStyler: SSDrawerStyler {
-    var shadowColor: UIColor = UIColor.blackColor() {
+    var shadowColor: UIColor = UIColor.black {
         didSet {
             if shadowColor != oldValue {
-                shadowLayer?.shadowColor = shadowColor.CGColor
+                shadowLayer?.shadowColor = shadowColor.cgColor
             }
         }
     }
@@ -202,7 +202,7 @@ class SSDrawerShadowStyler: SSDrawerStyler {
             }
         }
     }
-    var shadowOffset: CGSize = CGSizeZero {
+    var shadowOffset: CGSize = CGSize.zero {
         didSet {
             if shadowOffset == oldValue {
                 shadowLayer?.shadowOffset = shadowOffset
@@ -212,47 +212,47 @@ class SSDrawerShadowStyler: SSDrawerStyler {
     var shadowLayer: CALayer?
 
     init() {
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidChangeStatusBarOrientationNotification, object: nil, queue: nil) { (notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil, queue: nil) { (notification) in
             self.shadowLayer?.removeFromSuperlayer()
         }
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     static func styler() -> SSDrawerStyler {
         return SSDrawerShadowStyler()
     }
 
-    func stylerWasAddedToDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
+    func stylerWasAddedToDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
         self.shadowLayer = CALayer()
-        self.shadowLayer?.shadowPath = UIBezierPath(rect: drawerViewController.mainView.frame).CGPath
-        self.shadowLayer?.shadowColor = self.shadowColor.CGColor
+        self.shadowLayer?.shadowPath = UIBezierPath(rect: drawerViewController.mainView.frame).cgPath
+        self.shadowLayer?.shadowColor = self.shadowColor.cgColor
         self.shadowLayer?.shadowOpacity = self.shadowOpacity
         self.shadowLayer?.shadowRadius = self.shadowRadius
         self.shadowLayer?.shadowOffset = self.shadowOffset
     }
 
-    func styleDrawerViewController(drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
+    func styleDrawerViewController(_ drawerViewController: SSDrawerViewController, didUpdatePaneClosedFraction paneClosedFraction: CGFloat, forDirection direction: SSDrawerDirection) {
         if (direction & SSDrawerDirection.All) != SSDrawerDirection.None {
             if self.shadowLayer?.superlayer == nil {
                 let paneViewSize: CGSize = drawerViewController.mainView.frame.size
-                var shadowRect: CGRect = CGRectMake(0, 0, paneViewSize.width, paneViewSize.height)
+                var shadowRect: CGRect = CGRect(x: 0, y: 0, width: paneViewSize.width, height: paneViewSize.height)
                 if (direction & SSDrawerDirection.Horizontal) != SSDrawerDirection.None {
-                    shadowRect = CGRectInset(shadowRect, 0.0, -self.shadowRadius)
+                    shadowRect = shadowRect.insetBy(dx: 0.0, dy: -self.shadowRadius)
                 } else if (direction & SSDrawerDirection.Vertical) != SSDrawerDirection.None {
-                    shadowRect = CGRectInset(shadowRect, -self.shadowRadius, 0.0)
+                    shadowRect = shadowRect.insetBy(dx: -self.shadowRadius, dy: 0.0)
                 }
-                self.shadowLayer?.shadowPath = UIBezierPath(rect: shadowRect).CGPath
-                drawerViewController.mainView.layer.insertSublayer(self.shadowLayer!, atIndex: 0)
+                self.shadowLayer?.shadowPath = UIBezierPath(rect: shadowRect).cgPath
+                drawerViewController.mainView.layer.insertSublayer(self.shadowLayer!, at: 0)
             }
         } else {
             self.shadowLayer?.removeFromSuperlayer()
         }
     }
 
-    func stylerWasRemovedFromDrawerViewController(drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
+    func stylerWasRemovedFromDrawerViewController(_ drawerViewController: SSDrawerViewController, forDirection direction: SSDrawerDirection) {
         self.shadowLayer?.removeFromSuperlayer()
         self.shadowLayer = nil
     }

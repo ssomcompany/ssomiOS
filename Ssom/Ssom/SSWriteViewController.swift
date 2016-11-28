@@ -69,7 +69,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
     var pickedImageExtension: String!
     var pickedImageName: String!
-    var pickedImageData: NSData!
+    var pickedImageData: Data!
 
     init() {
         self.writeViewModel = SSWriteViewModel()
@@ -84,7 +84,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -96,15 +96,15 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     override func initView() {
         self.barButtonItems = SSNavigationBarItems()
 
-        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), for: UIControlEvents.touchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = "쏨 등록하기"
 
-        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
         self.textView.delegate = self;
 
-        if UIScreen.mainScreen().bounds.width == 320 {
-            self.textGuideLabel.font = UIFont.systemFontOfSize(13)
+        if UIScreen.main.bounds.width == 320 {
+            self.textGuideLabel.font = UIFont.systemFont(ofSize: 13)
         }
 
         self.registerForKeyboardNotifications()
@@ -112,178 +112,178 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
     func registerForKeyboardNotifications() -> Void {
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     func tapBack() {
         if self.pickedImageData != nil || self.writeViewModel.content.characters.count != 0 {
             SSAlertController.alertTwoButton(title: "알림", message: "쏨 등록이 완료되지 않았어요.\n작성했던 내용을 삭제 하시겠어요?", vc: self, button1Title: "삭제하기", button1Completion: { (action) in
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }, button2Completion: { (action) in
                 //
             })
         } else {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
-    @IBAction func tapAgeButton1(sender: AnyObject) {
+    @IBAction func tapAgeButton1(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.ageButton1.selected = true;
-        self.ageButton2.selected = false;
-        self.ageButton3.selected = false;
-        self.ageButton4.selected = false;
+        self.ageButton1.isSelected = true;
+        self.ageButton2.isSelected = false;
+        self.ageButton3.isSelected = false;
+        self.ageButton4.isSelected = false;
 
         self.ageButton1.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.ageButton2.backgroundColor = UIColor.whiteColor()
-        self.ageButton3.backgroundColor = UIColor.whiteColor()
-        self.ageButton4.backgroundColor = UIColor.whiteColor()
+        self.ageButton2.backgroundColor = UIColor.white
+        self.ageButton3.backgroundColor = UIColor.white
+        self.ageButton4.backgroundColor = UIColor.white
 
         self.lbAge.text = (self.ageButton1.titleLabel!.text)!+"반"
 
-        self.writeViewModel.ageType = .AgeEarly20
+        self.writeViewModel.ageType = .ageEarly20
     }
 
-    @IBAction func tapAgeButton2(sender: AnyObject) {
+    @IBAction func tapAgeButton2(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.ageButton1.selected = false;
-        self.ageButton2.selected = true;
-        self.ageButton3.selected = false;
-        self.ageButton4.selected = false;
+        self.ageButton1.isSelected = false;
+        self.ageButton2.isSelected = true;
+        self.ageButton3.isSelected = false;
+        self.ageButton4.isSelected = false;
 
-        self.ageButton1.backgroundColor = UIColor.whiteColor()
+        self.ageButton1.backgroundColor = UIColor.white
         self.ageButton2.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.ageButton3.backgroundColor = UIColor.whiteColor()
-        self.ageButton4.backgroundColor = UIColor.whiteColor()
+        self.ageButton3.backgroundColor = UIColor.white
+        self.ageButton4.backgroundColor = UIColor.white
 
         self.lbAge.text = (self.ageButton2.titleLabel!.text)!+"반"
 
-        self.writeViewModel.ageType = .AgeMiddle20
+        self.writeViewModel.ageType = .ageMiddle20
     }
 
-    @IBAction func tapAgeButton3(sender: AnyObject) {
+    @IBAction func tapAgeButton3(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.ageButton1.selected = false;
-        self.ageButton2.selected = false;
-        self.ageButton3.selected = true;
-        self.ageButton4.selected = false;
+        self.ageButton1.isSelected = false;
+        self.ageButton2.isSelected = false;
+        self.ageButton3.isSelected = true;
+        self.ageButton4.isSelected = false;
 
-        self.ageButton1.backgroundColor = UIColor.whiteColor()
-        self.ageButton2.backgroundColor = UIColor.whiteColor()
+        self.ageButton1.backgroundColor = UIColor.white
+        self.ageButton2.backgroundColor = UIColor.white
         self.ageButton3.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.ageButton4.backgroundColor = UIColor.whiteColor()
+        self.ageButton4.backgroundColor = UIColor.white
 
         self.lbAge.text = (self.ageButton3.titleLabel!.text)!+"반"
 
-        self.writeViewModel.ageType = .AgeLate20
+        self.writeViewModel.ageType = .ageLate20
     }
 
-    @IBAction func tapAgeButton4(sender: AnyObject) {
+    @IBAction func tapAgeButton4(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
         
-        self.ageButton1.selected = false;
-        self.ageButton2.selected = false;
-        self.ageButton3.selected = false;
-        self.ageButton4.selected = true;
+        self.ageButton1.isSelected = false;
+        self.ageButton2.isSelected = false;
+        self.ageButton3.isSelected = false;
+        self.ageButton4.isSelected = true;
 
-        self.ageButton1.backgroundColor = UIColor.whiteColor()
-        self.ageButton2.backgroundColor = UIColor.whiteColor()
-        self.ageButton3.backgroundColor = UIColor.whiteColor()
+        self.ageButton1.backgroundColor = UIColor.white
+        self.ageButton2.backgroundColor = UIColor.white
+        self.ageButton3.backgroundColor = UIColor.white
         self.ageButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
 
         self.lbAge.text = (self.ageButton4.titleLabel!.text)!
 
-        self.writeViewModel.ageType = .Age30
+        self.writeViewModel.ageType = .age30
     }
 
-    @IBAction func tapPeopleButton1(sender: AnyObject) {
+    @IBAction func tapPeopleButton1(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.peopleButton1.selected = true;
-        self.peopleButton2.selected = false;
-        self.peopleButton3.selected = false;
-        self.peopleButton4.selected = false;
+        self.peopleButton1.isSelected = true;
+        self.peopleButton2.isSelected = false;
+        self.peopleButton3.isSelected = false;
+        self.peopleButton4.isSelected = false;
 
         self.peopleButton1.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.peopleButton2.backgroundColor = UIColor.whiteColor()
-        self.peopleButton3.backgroundColor = UIColor.whiteColor()
-        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+        self.peopleButton2.backgroundColor = UIColor.white
+        self.peopleButton3.backgroundColor = UIColor.white
+        self.peopleButton4.backgroundColor = UIColor.white
 
         self.lbPeopleCount.text = "1"
 
-        self.writeViewModel.peopleCountType = .OnePerson
+        self.writeViewModel.peopleCountType = .onePerson
     }
 
-    @IBAction func tapPeopleButton2(sender: AnyObject) {
+    @IBAction func tapPeopleButton2(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.peopleButton1.selected = false;
-        self.peopleButton2.selected = true;
-        self.peopleButton3.selected = false;
-        self.peopleButton4.selected = false;
+        self.peopleButton1.isSelected = false;
+        self.peopleButton2.isSelected = true;
+        self.peopleButton3.isSelected = false;
+        self.peopleButton4.isSelected = false;
 
-        self.peopleButton1.backgroundColor = UIColor.whiteColor()
+        self.peopleButton1.backgroundColor = UIColor.white
         self.peopleButton2.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.peopleButton3.backgroundColor = UIColor.whiteColor()
-        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+        self.peopleButton3.backgroundColor = UIColor.white
+        self.peopleButton4.backgroundColor = UIColor.white
 
         self.lbPeopleCount.text = "2"
 
-        self.writeViewModel.peopleCountType = .TwoPeople
+        self.writeViewModel.peopleCountType = .twoPeople
     }
 
-    @IBAction func tapPeopleButton3(sender: AnyObject) {
+    @IBAction func tapPeopleButton3(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.peopleButton1.selected = false;
-        self.peopleButton2.selected = false;
-        self.peopleButton3.selected = true;
-        self.peopleButton4.selected = false;
+        self.peopleButton1.isSelected = false;
+        self.peopleButton2.isSelected = false;
+        self.peopleButton3.isSelected = true;
+        self.peopleButton4.isSelected = false;
 
-        self.peopleButton1.backgroundColor = UIColor.whiteColor()
-        self.peopleButton2.backgroundColor = UIColor.whiteColor()
+        self.peopleButton1.backgroundColor = UIColor.white
+        self.peopleButton2.backgroundColor = UIColor.white
         self.peopleButton3.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
-        self.peopleButton4.backgroundColor = UIColor.whiteColor()
+        self.peopleButton4.backgroundColor = UIColor.white
 
         self.lbPeopleCount.text = "3"
 
-        self.writeViewModel.peopleCountType = .ThreePeople
+        self.writeViewModel.peopleCountType = .threePeople
     }
 
-    @IBAction func tapPeopleButton4(sender: AnyObject) {
+    @IBAction func tapPeopleButton4(_ sender: AnyObject) {
         self.textView.resignFirstResponder();
 
-        self.peopleButton1.selected = false;
-        self.peopleButton2.selected = false;
-        self.peopleButton3.selected = false;
-        self.peopleButton4.selected = true;
+        self.peopleButton1.isSelected = false;
+        self.peopleButton2.isSelected = false;
+        self.peopleButton3.isSelected = false;
+        self.peopleButton4.isSelected = true;
 
-        self.peopleButton1.backgroundColor = UIColor.whiteColor()
-        self.peopleButton2.backgroundColor = UIColor.whiteColor()
-        self.peopleButton3.backgroundColor = UIColor.whiteColor()
+        self.peopleButton1.backgroundColor = UIColor.white
+        self.peopleButton2.backgroundColor = UIColor.white
+        self.peopleButton3.backgroundColor = UIColor.white
         self.peopleButton4.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
 
         self.lbPeopleCount.text = "4+"
 
-        self.writeViewModel.peopleCountType = .OverFourPeople
+        self.writeViewModel.peopleCountType = .overFourPeople
     }
 
-    func switchTheme(isIPay:Bool) {
+    func switchTheme(_ isIPay:Bool) {
         self.isIPay = isIPay
 
         if self.isIPay {
 
-            self.btnIPay.selected = true
-            self.btnYouPay.selected = false
-            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonGreen.png"), forState: .Normal)
+            self.btnIPay.isSelected = true
+            self.btnYouPay.isSelected = false
+            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonGreen.png"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
-                self.btnIPay.titleLabel?.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
-                self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
+                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
@@ -299,26 +299,26 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             self.textGuideLabel.text = SSType.SSOM.guideText
 
-            self.constBtnIPayWidthRatio.active = true
-            self.constBtnIPayAspectRatio.active = true
+            self.constBtnIPayWidthRatio.isActive = true
+            self.constBtnIPayAspectRatio.isActive = true
 
-            self.constBtnIPayMinWidthRatio.active = false
-            self.constBtnIPayMinAspectRatio.active = false
+            self.constBtnIPayMinWidthRatio.isActive = false
+            self.constBtnIPayMinAspectRatio.isActive = false
 
-            self.constBtnYouPayWidthRatio.active = true
-            self.constBtnYouPayAspectRatio.active = true
+            self.constBtnYouPayWidthRatio.isActive = true
+            self.constBtnYouPayAspectRatio.isActive = true
 
-            self.constBtnYouPayMinWidthRatio.active = false
-            self.constBtnYouPayMinAspectRatio.active = false
+            self.constBtnYouPayMinWidthRatio.isActive = false
+            self.constBtnYouPayMinAspectRatio.isActive = false
         } else {
 
-            self.btnIPay.selected = false
-            self.btnYouPay.selected = true
-            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonRed.png"), forState: .Normal)
+            self.btnIPay.isSelected = false
+            self.btnYouPay.isSelected = true
+            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonRed.png"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
-                self.btnIPay.titleLabel?.font = UIFont.systemFontOfSize(13, weight: UIFontWeightMedium)
-                self.btnYouPay.titleLabel?.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
@@ -334,17 +334,17 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             self.textGuideLabel.text = SSType.SSOSEYO.guideText
 
-            self.constBtnIPayWidthRatio.active = false
-            self.constBtnIPayAspectRatio.active = false
+            self.constBtnIPayWidthRatio.isActive = false
+            self.constBtnIPayAspectRatio.isActive = false
 
-            self.constBtnIPayMinWidthRatio.active = true
-            self.constBtnIPayMinAspectRatio.active = true
+            self.constBtnIPayMinWidthRatio.isActive = true
+            self.constBtnIPayMinAspectRatio.isActive = true
 
-            self.constBtnYouPayWidthRatio.active = false
-            self.constBtnYouPayAspectRatio.active = false
+            self.constBtnYouPayWidthRatio.isActive = false
+            self.constBtnYouPayAspectRatio.isActive = false
 
-            self.constBtnYouPayMinWidthRatio.active = true
-            self.constBtnYouPayMinAspectRatio.active = true
+            self.constBtnYouPayMinWidthRatio.isActive = true
+            self.constBtnYouPayMinAspectRatio.isActive = true
         }
 
         self.btnIPay.layoutIfNeeded()
@@ -352,25 +352,25 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.profileView.layoutIfNeeded()
     }
 
-    @IBAction func tapIPayButton(sender: AnyObject) {
+    @IBAction func tapIPayButton(_ sender: AnyObject) {
         self.writeViewModel.ssomType = .SSOM
         self.switchTheme(true)
     }
 
-    @IBAction func tapYouPayButton(sender: AnyObject) {
+    @IBAction func tapYouPayButton(_ sender: AnyObject) {
         self.writeViewModel.ssomType = .SSOSEYO
         self.switchTheme(false)
     }
 
-    @IBAction func tapCameraButton(sender: AnyObject) {
+    @IBAction func tapCameraButton(_ sender: AnyObject) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self;
-        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
     }
 
-    @IBAction func tapRegisterButton(sender: AnyObject) {
+    @IBAction func tapRegisterButton(_ sender: AnyObject) {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
             let userId: String = SSNetworkContext.sharedInstance.getSharedAttribute("email") as! String
             self.writeViewModel.userId = userId
@@ -387,7 +387,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
                         SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
                     } else {
-                        self.writeViewModel.profilePhotoUrl = NSURL(string: photoURLPath!)
+                        self.writeViewModel.profilePhotoUrl = URL(string: photoURLPath!)
                         SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [weak self] (error) in
                             guard let wself = self else { return }
 
@@ -398,7 +398,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 //                                    self.navigationController!.popViewControllerAnimated(true)
                                 })
                             } else {
-                                wself.navigationController!.popViewControllerAnimated(true)
+                                wself.navigationController!.popViewController(animated: true)
                             }
                         })
                     }
@@ -409,15 +409,15 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         }
     }
 
-    func openSignIn(completion: ((finish:Bool) -> Void)?) {
+    func openSignIn(_ completion: ((_ finish:Bool) -> Void)?) {
         SSAccountManager.sharedInstance.openSignIn(self, completion: nil)
     }
 
-    @IBAction func tapCloseButton(sender: AnyObject) {
+    @IBAction func tapCloseButton(_ sender: AnyObject) {
         self.tapBack()
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if touch.view !== self.textView {
                 self.textView.resignFirstResponder()
@@ -426,29 +426,29 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
 // MARK: - UITextViewDelegate
-    func textViewDidBeginEditing(textView: UITextView) {
-        self.textGuideLabel.hidden = true;
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.textGuideLabel.isHidden = true;
     }
 
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.characters.count == 0 {
-            self.textGuideLabel.hidden = false;
+            self.textGuideLabel.isHidden = false;
         }
     }
 
 
 // MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.imgDefaultProfile.hidden = true
-        self.imgPhotoGradation.hidden = true    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.imgDefaultProfile.isHidden = true
+        self.imgPhotoGradation.isHidden = true    
 
-        self.imgProfile.contentMode = .ScaleAspectFill
+        self.imgProfile.contentMode = .scaleAspectFill
         self.imgProfile.clipsToBounds = true
         self.imgProfile.image = image
-        self.imgProfile.hidden = false
+        self.imgProfile.isHidden = false
 
-        let pickedImageURL: NSURL = editingInfo![UIImagePickerControllerReferenceURL] as! NSURL
-        let pickedImageURLQueryParams: Array = pickedImageURL.query!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "=&"))
+        let pickedImageURL: URL = editingInfo![UIImagePickerControllerReferenceURL] as! URL
+        let pickedImageURLQueryParams: Array = pickedImageURL.query!.components(separatedBy: CharacterSet(charactersIn: "=&"))
         let pickedImage: UIImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
         var isExt: Bool = false;
         for queryParam: String in pickedImageURLQueryParams {
@@ -474,22 +474,22 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         }
         self.pickedImageName = pickedImageURL.lastPathComponent
 
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
 
-        self.btnRegister.enabled = true
+        self.btnRegister.isEnabled = true
     }
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(notification: NSNotification) -> Void {
+    func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
-            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+            if let _ = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
                 self.constProfileViewTopToSuper.constant = -self.profileView.bounds.size.height
             }
         }
     }
 
-    func keyboardWillHide(notification: NSNotification) -> Void {
+    func keyboardWillHide(_ notification: Notification) -> Void {
         self.constProfileViewTopToSuper.constant = 0
     }
 }

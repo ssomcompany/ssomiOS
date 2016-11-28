@@ -17,7 +17,7 @@ class SSChatStartingTableCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func configView(ssomType: SSType, model: SSChatViewModel? = nil) {
+    func configView(_ ssomType: SSType, model: SSChatViewModel? = nil) {
         switch ssomType {
         case .SSOM:
             self.lbColored.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1)
@@ -29,7 +29,7 @@ class SSChatStartingTableCell: UITableViewCell {
         self.constLbColoredCenterXToSuper.constant = -48.0
         self.lbDetailMessage.text = "대화가 시작 되었쏨 : )"
 
-        if let message = model where message.messageType == .System {
+        if let message = model, message.messageType == .System {
             if message.message == "out" || message.message == "complete" {
                 self.lbColored.text = "쏨이 끝났어요, "
                 self.lbDetailMessage.text = "다른 상대를∙∙∙(T_T)"

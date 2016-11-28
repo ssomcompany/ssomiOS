@@ -71,7 +71,7 @@ class SSDetailView: UIView, SSPhotoViewDelegate, UIGestureRecognizerDelegate {
         }
 
         let ageArea: SSAgeAreaType = Util.getAgeArea(self.viewModel.minAge)
-        self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount)")
+        self.lbAge.text = String("\(ageArea.rawValue), \(self.viewModel.userCount!)")
 
         self.textViewDescription.text = self.viewModel.content
 

@@ -183,6 +183,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func tapIPayButton(_ sender: AnyObject?) {
+        self.view.layoutIfNeeded()
 
         self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = 0
 
@@ -202,6 +203,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func tapYouPayButton(_ sender: AnyObject?) {
+        self.view.layoutIfNeeded()
 
         self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
 
@@ -316,7 +318,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadData() {
         if self.needReload {
 
-            SSNetworkAPIClient.getPosts { [weak self] (viewModels, error) -> Void in
+            SSNetworkAPIClient.getPosts(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { [weak self] (viewModels, error) -> Void in
                 guard let wself = self else { return }
 
                 if let models = viewModels {
@@ -328,7 +330,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } else {
                     print("error is : \(error?.localizedDescription)")
                 }
-            }
+            })
         } else {
             // initially loading
             self.filterData()

@@ -54,7 +54,7 @@ public struct SSNetworkAPIClient {
     static func getPosts(latitude: Double = 0, longitude: Double = 0, completion: @escaping (_ viewModels: [SSViewModel]?, _ error: NSError?) -> Void) {
         var params: String! = nil
         if !(latitude == 0 && longitude == 0) {
-//            params = "?lat=\(latitude)&lng=\(longitude)"
+            params = "?lat=\(latitude)&lng=\(longitude)"
         }
         if let userId = SSAccountManager.sharedInstance.userUUID {
             let queryString = "userId=\(userId)"

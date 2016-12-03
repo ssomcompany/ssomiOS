@@ -14,6 +14,7 @@ enum SSChatMessageType: String {
     case Request = "request"
     case Approve = "approve"
     case Cancel = "cancel"
+    case Finished = "complete"
     case Unknown = "UNKNOWN"
 }
 

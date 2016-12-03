@@ -293,6 +293,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 self.showMeetRequest(false)
                 newMessage.message = SSChatMessageType.Cancel.rawValue
                 newMessage.messageType = .System
+            case .Finished:
+                self.showMeetRequest(false)
+                newMessage.message = SSChatMessageType.Finished.rawValue
+                newMessage.messageType = .System
             default:
                 break
             }

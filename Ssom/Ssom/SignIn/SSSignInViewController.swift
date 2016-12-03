@@ -242,7 +242,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
                 SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
             } else {
-                print("%@", resultOfQuery)
+                print("%@", resultOfQuery!)
 
                 if let res = resultOfQuery as? [String: String] {
 

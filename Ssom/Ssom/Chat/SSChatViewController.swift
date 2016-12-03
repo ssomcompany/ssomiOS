@@ -328,12 +328,28 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                              vc: self,
                                              button1Completion: { (action) in
                                                 self.cancelMeetRequest()
-                                                self.navigationController?.popViewController(animated: true)
+                                                self.doBack()
                 }, button2Completion: { (action) in
                     //
             })
         } else {
-            self.navigationController?.popViewController(animated: true)
+            self.doBack()
+        }
+    }
+
+    func doBack() {
+        if let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId {
+            SSNetworkAPIClient.putChatroomLastAccessTime(token, chatroomId: chatRoomId, completion: { [weak self] (_, error) in
+                guard let wself = self else { return }
+
+                if let err = error {
+                    print(err.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                } else {
+                    wself.navigationController?.popViewController(animated: true)
+                }
+            })
         }
     }
 

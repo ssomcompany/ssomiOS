@@ -804,6 +804,43 @@ public struct SSNetworkAPIClient {
         }
     }
 
+    static func putChatroomLastAccessTime(_ token: String, chatroomId: String, completion: @escaping (_ data: AnyObject?, _ error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        Alamofire.request(SSNetworkContext.serverUrlPrefixt+"chatroom/\(chatroomId)/lastAccessTimestamp",
+            method: .put,
+            headers: ["Authorization": "JWT " + token])
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let _ = response.result.value as? [String: AnyObject] {
+                    completion(nil, nil)
+                } else {
+                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PutChatroomLastAccessTime", code: 816, userInfo: nil)
+
+                    completion(nil, error)
+                }
+            } else {
+                if acceptableStatusCodes.contains(response.response!.statusCode) {
+                    print("putChatroomLastAccessTime result : \(response.result.value)")
+
+                    completion(nil, nil)
+                } else {
+                    print("Response Error : \(response.result.error)")
+
+                    completion(nil, response.result.error as NSError?)
+                }
+            }
+            
+            indicator.hideIndicator()
+        }
+    }
+
     static func deleteChatroom(_ token: String, chatroomId: String, completion: @escaping (_ data: AnyObject?, _ error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()

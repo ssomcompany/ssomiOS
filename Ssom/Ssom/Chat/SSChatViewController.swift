@@ -274,8 +274,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func reload(with modelDict: [String: AnyObject]) {
         var newMessage = SSChatViewModel(modelDict: modelDict)
-        if let imageUrl = self.partnerImageUrl, newMessage.profileImageUrl == nil {
-            newMessage.profileImageUrl = imageUrl
+
+        if let loginUserId = SSAccountManager.sharedInstance.userUUID {
+            if loginUserId == newMessage.fromUserId {
+                newMessage.profileImageUrl = self.myImageUrl
+            } else {
+                newMessage.profileImageUrl = self.partnerImageUrl
+            }
         }
 
         if self.chatRoomId == newMessage.chatroomId {

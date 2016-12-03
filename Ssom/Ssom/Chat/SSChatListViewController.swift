@@ -138,14 +138,16 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         }
     }
 
-    func reload(with modelDict: [String: AnyObject]) {
+    func reload(with modelDict: [String: AnyObject], needRecount: Bool = true) {
         let newMessage = SSChatroomViewModel(modelDict: modelDict)
 
         for (index, var data) in self.datas.enumerated() {
             if data.chatroomId == newMessage.chatroomId {
                 self.datas.remove(at: index)
 
-                data.unreadCount += 1
+                if needRecount {
+                    data.unreadCount += 1
+                }
                 if newMessage.meetRequestStatus == .Received {
                     data.meetRequestUserId = newMessage.meetRequestUserId
                     data.meetRequestStatus = .Received

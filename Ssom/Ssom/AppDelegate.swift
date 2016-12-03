@@ -102,8 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                         // add the received message to the bottom fo the message lists
                         (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
                     } else if topViewController is SSChatListViewController {
-                        // move up the chat room of the received message & add +1 to unread count
-                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                        // move up the chat room of the received message
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject], needRecount: false)
                     } else if topViewController is SSMasterViewController {
                         // add +1 to unread count
                         (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])

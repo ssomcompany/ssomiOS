@@ -61,7 +61,7 @@ public struct SSNetworkAPIClient {
             if params == nil {
                 params = "?"+queryString
             } else {
-                params = params + queryString
+                params = params + "&" + queryString
             }
         }
 

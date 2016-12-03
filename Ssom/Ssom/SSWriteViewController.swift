@@ -107,6 +107,18 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             self.textGuideLabel.font = UIFont.systemFont(ofSize: 13)
         }
 
+        if let profileImageUrl = SSNetworkContext.sharedInstance.getSharedAttribute("profileImageUrl") as? String {
+            self.imgProfile.sd_setImage(with: URL(string: profileImageUrl), placeholderImage: nil, options: [], completed: { (image, error, _, _) in
+                self.imgProfile.contentMode = .scaleAspectFill
+                self.imgProfile.clipsToBounds = true
+                self.imgProfile.isHidden = false
+
+                self.btnRegister.isEnabled = true
+
+                self.writeViewModel.profilePhotoUrl = URL(string: profileImageUrl)
+            })
+        }
+
         self.registerForKeyboardNotifications()
     }
 
@@ -398,6 +410,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 //                                    self.navigationController!.popViewControllerAnimated(true)
                                 })
                             } else {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(wself.writeViewModel.profilePhotoUrl?.absoluteString as Any, forKey: "profileImageUrl")
                                 wself.navigationController!.popViewController(animated: true)
                             }
                         })

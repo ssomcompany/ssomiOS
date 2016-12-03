@@ -97,10 +97,14 @@ class SSChatMessageTableCell: UITableViewCell {
         self.lbPartnerMessageTime.isHidden = true
 
         self.imgViewMyProfile.isHidden = false
-        self.imgViewMyProfileBorder.isHidden = false
+        self.imgViewMyProfileBorder.isHidden = true
         self.viewMyMessage.isHidden = false
         self.lbMyMessage.isHidden = false
         self.lbMyMessageTime.isHidden = false
+
+        self.imgViewMyProfile.layer.cornerRadius = self.imgViewMyProfile.bounds.height / 2.0
+        self.imgViewMyProfile.layer.borderWidth = 1.5
+        self.imgViewMyProfile.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
     }
 
     func showPartnerViews() {

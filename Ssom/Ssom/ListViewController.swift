@@ -302,7 +302,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } else {
                     SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
                         if finish {
-                            self.performSegue(withIdentifier: "SSWriteViewSegueFromList", sender: nil)
+                            self.loadData()
                         } else {
                             self.showOpenAnimation()
                         }
@@ -368,7 +368,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
 
-        self.setMySsomButton()
+        self.showOpenAnimation()
 
         self.mainViewModel.datas = tempDatas
         self.datas = tempDatas

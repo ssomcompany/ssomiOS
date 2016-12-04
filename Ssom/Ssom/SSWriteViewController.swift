@@ -390,8 +390,13 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             print("SSWrite is : \(self.writeViewModel)")
 
+            // 미리 설정된 사진이 있으면, 쏨 등록 가능하게 함.
             if self.pickedImageData == nil {
-                SSAlertController.alertConfirm(title: "Error", message: "사진 등록은 필수입니다!", vc: self, completion: nil)
+                if let _ = self.writeViewModel.profilePhotoUrl {
+                    self.registerSsom()
+                } else {
+                    SSAlertController.alertConfirm(title: "Error", message: "사진 등록은 필수입니다!", vc: self, completion: nil)
+                }
             } else {
                 SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { (photoURLPath, error) in
                     if error != nil {
@@ -400,25 +405,31 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                         SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
                     } else {
                         self.writeViewModel.profilePhotoUrl = URL(string: photoURLPath!)
-                        SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [weak self] (error) in
-                            guard let wself = self else { return }
-
-                            if error != nil {
-                                print(error?.localizedDescription)
-
-                                SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: wself, completion: { (action) in
-//                                    self.navigationController!.popViewControllerAnimated(true)
-                                })
-                            } else {
-                                SSNetworkContext.sharedInstance.saveSharedAttribute(wself.writeViewModel.profilePhotoUrl?.absoluteString as Any, forKey: "profileImageUrl")
-                                wself.navigationController!.popViewController(animated: true)
-                            }
-                        })
+                        self.registerSsom()
                     }
                 })
             }
         } else {
             self.openSignIn(nil)
+        }
+    }
+
+    func registerSsom() {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [weak self] (error) in
+                guard let wself = self else { return }
+
+                if error != nil {
+                    print(error?.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: wself, completion: { (action) in
+//                                    self.navigationController!.popViewControllerAnimated(true)
+                    })
+                } else {
+                    SSNetworkContext.sharedInstance.saveSharedAttribute(wself.writeViewModel.profilePhotoUrl?.absoluteString as Any, forKey: "profileImageUrl")
+                    wself.navigationController!.popViewController(animated: true)
+                }
+            })
         }
     }
 

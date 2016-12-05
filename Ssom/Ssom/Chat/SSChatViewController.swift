@@ -207,6 +207,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         (self.tableViewChat as UIScrollView).delegate = self
 
+        self.tableViewChat.rowHeight = UITableViewAutomaticDimension
+        self.tableViewChat.estimatedRowHeight = 61
+
         self.registerForKeyboardNotifications()
 
 //        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).CGColor
@@ -623,14 +626,6 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 // MARK: - UITableViewDelegate & UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages.count == 0 ? 1 : self.messages.count + 1
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 46 : 61
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

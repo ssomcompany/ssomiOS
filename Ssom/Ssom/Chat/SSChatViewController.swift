@@ -248,7 +248,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                             wself.tableViewChat.reloadData()
 
-                            let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                            let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
                             wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
 
                             guard let requestUserId = wself.meetRequestUserId else {
@@ -276,45 +276,50 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func reload(with modelDict: [String: AnyObject]) {
-        var newMessage = SSChatViewModel(modelDict: modelDict)
 
-        if let loginUserId = SSAccountManager.sharedInstance.userUUID {
-            if loginUserId == newMessage.fromUserId {
-                newMessage.profileImageUrl = self.myImageUrl
-            } else {
-                newMessage.profileImageUrl = self.partnerImageUrl
+        DispatchQueue.main.async { [weak self] in
+            guard let wself = self else { return }
+
+            var newMessage = SSChatViewModel(modelDict: modelDict)
+
+            if let loginUserId = SSAccountManager.sharedInstance.userUUID {
+                if loginUserId == newMessage.fromUserId {
+                    newMessage.profileImageUrl = wself.myImageUrl
+                } else {
+                    newMessage.profileImageUrl = wself.partnerImageUrl
+                }
             }
-        }
 
-        if self.chatRoomId == newMessage.chatroomId {
+            if wself.chatRoomId == newMessage.chatroomId {
 
-            switch newMessage.messageType {
-            case .Request:
-                self.showMeetRequest(false, status: .Received)
-                newMessage.message = SSChatMessageType.Request.rawValue
-                newMessage.messageType = .System
-            case .Approve:
-                self.showMeetRequest(true, status: .Accepted)
-                newMessage.message = SSChatMessageType.Approve.rawValue
-                newMessage.messageType = .System
-            case .Cancel:
-                self.showMeetRequest(false)
-                newMessage.message = SSChatMessageType.Cancel.rawValue
-                newMessage.messageType = .System
-            case .Finished:
-                self.showMeetRequest(false)
-                newMessage.message = SSChatMessageType.Finished.rawValue
-                newMessage.messageType = .System
-            default:
-                break
+                switch newMessage.messageType {
+                case .Request:
+                    wself.showMeetRequest(false, status: .Received)
+                    newMessage.message = SSChatMessageType.Request.rawValue
+                    newMessage.messageType = .System
+                case .Approve:
+                    wself.showMeetRequest(true, status: .Accepted)
+                    newMessage.message = SSChatMessageType.Approve.rawValue
+                    newMessage.messageType = .System
+                case .Cancel:
+                    wself.showMeetRequest(false)
+                    newMessage.message = SSChatMessageType.Cancel.rawValue
+                    newMessage.messageType = .System
+                case .Finished:
+                    wself.showMeetRequest(false)
+                    newMessage.message = SSChatMessageType.Finished.rawValue
+                    newMessage.messageType = .System
+                default:
+                    break
+                }
+                wself.messages.append(newMessage)
+
+                wself.tableViewChat.reloadData()
+
+                let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                
             }
-            self.messages.append(newMessage)
-
-            self.tableViewChat.reloadData()
-
-            let lastIndexPath = IndexPath(row: self.messages.count, section: 0)
-            self.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-
         }
     }
 
@@ -357,7 +362,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
 
     func tapMeetRequest() {
-        print("tapped meet request!!")
+        print(#function)
 
         switch self.meetRequestStatus {
         case .Requested:
@@ -426,7 +431,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                                         wself.tableViewChat.reloadData()
 
-                                        let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                                        let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
                                         wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                                     }
                                 }
@@ -500,7 +505,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                     wself.tableViewChat.reloadData()
 
-                    let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
+                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
                     wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                 }
             }
@@ -556,10 +561,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         }
 
                         let nowDateTime = Date()
-
+print("start: \(Date())")
                         if let roomId = self.chatRoomId {
-                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
+                            self.tfInput.text = ""
 
+                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
+print("returned: \(Date())")
                                 guard let wself = self else { return }
 
                                 if let err = error {
@@ -568,11 +575,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                     SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
                                 } else {
                                     if let newDatas = datas {
-                                        wself.tfInput.text = ""
-
-                                        if wself.messages.count != 0 {
+                                        if wself.messages.count != 0 {print("new message: \(Date())")
                                             wself.messages.append(contentsOf: newDatas)
-                                        } else {
+                                        } else {print("all new message: \(Date())")
                                             wself.messages = newDatas
                                         }
 
@@ -585,7 +590,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                             myLastMessage.profileImageUrl = wself.myImageUrl
                                             wself.messages.append(myLastMessage)
                                         }
-
+print("last message: \(Date())")
                                         if wself.messages.count == 0 {
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
@@ -597,9 +602,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                                         wself.tableViewChat.reloadData()
                                     }
+print("same message: \(Date())")
 
-                                    let lastIndexPath = IndexPath(row: wself.messages.count, section: 0)
-                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                                        let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                                        wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+//                                        wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
+                                        print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                                 }
                             })
                         }
@@ -607,6 +615,14 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 }
         }
     }
+
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        if self.messages.count > 0 {
+//            self.tableViewChat.setContentOffset(CGPoint(x: 0, y: self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height), animated: true)
+//        }
+//    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -623,28 +639,97 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
+    var needToLoadMore: Bool = true
+    var pageNumber: Int = 1
+    var previousOffsetY: CGFloat = 0
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("chat table scrolled : \(scrollView.contentOffset)")
+
+        // scroll 방향 체크
+        if scrollView.contentOffset.y < self.previousOffsetY {
+            // scroll 거의 상단에 다다랐을때...
+            if scrollView.contentOffset.y <= 50 {
+                if self.previousOffsetY == 0 {
+                    self.needToLoadMore = true
+                }
+
+                if self.needToLoadMore {
+                    self.pageNumber += 1
+                    self.needToLoadMore = false
+
+                    DispatchQueue.main.async(execute: { [weak self] in
+                        guard let wself = self else { return }
+
+                        wself.tableViewChat.reloadData()
+                    })
+                }
+            } else {
+                self.needToLoadMore = true
+            }
+        }
+
+        self.previousOffsetY = scrollView.contentOffset.y
+    }
+
 // MARK: - UITableViewDelegate & UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count == 0 ? 1 : self.messages.count + 1
+        if self.messages.count == 0 {
+            return 1
+        } else if self.messages.count >= 60 {
+            let pagingMessageCount = 60 * self.pageNumber + 1
+            if pagingMessageCount > self.messages.count + 1 {
+                return self.messages.count + 1
+            }
+            return pagingMessageCount
+        } else {
+            return self.messages.count + 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
-            cell.configView(self.ssomType)
-            return cell
-        } else {
-            let chatModel = self.messages[indexPath.row-1]
-            if chatModel.messageType == .System {
+        if self.messages.count <= 60 {
+            if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
-                cell.configView(self.ssomType, model: chatModel)
+                cell.configView(self.ssomType)
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
-                cell.ssomType = self.ssomType
-                cell.configView(chatModel)
+                let chatModel = self.messages[indexPath.row-1]
+                if chatModel.messageType == .System {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
+                    cell.configView(self.ssomType, model: chatModel)
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
+                    cell.ssomType = self.ssomType
+                    cell.configView(chatModel)
+                    
+                    return cell
+                }
+            }
+        } else {
+            var messageIndex = self.messages.count - (60 * self.pageNumber) - 1
+            if self.messages.count <= 60 * self.pageNumber {
+                messageIndex = -1
+            }
 
+            if (messageIndex + indexPath.row) == -1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
+                cell.configView(self.ssomType)
                 return cell
+            } else {
+                let chatModel = self.messages[messageIndex + indexPath.row]
+                if chatModel.messageType == .System {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "chatStartingCell", for: indexPath) as! SSChatStartingTableCell
+                    cell.configView(self.ssomType, model: chatModel)
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
+                    cell.ssomType = self.ssomType
+                    cell.configView(chatModel)
+
+                    return cell
+                }
             }
         }
     }
@@ -671,7 +756,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                     self.view.layoutIfNeeded()
 
-                    self.tableViewChat.scrollToRow(at: IndexPath(row: self.messages.count, section: 0), at: UITableViewScrollPosition.bottom, animated: true)
+                    let lastIndexPath = IndexPath(row: self.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                    self.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                 })
             }
         }

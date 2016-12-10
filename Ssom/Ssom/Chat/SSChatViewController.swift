@@ -556,9 +556,9 @@ print("returned: \(Date())")
                                         } else {print("all new message: \(Date())")
                                             wself.messages = newDatas
                                         }
-
+print("last is : \(wself.messages.last!), sentDate is : \(nowDateTime)")
                                         // add my sent message on the last of the messages
-                                        if let lastMessage = wself.messages.last, lastMessage.message != messageText && lastMessage.messageDateTime != nowDateTime {
+                                        if let lastMessage = wself.messages.last, lastMessage.messageDateTime != nowDateTime {
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
@@ -580,9 +580,14 @@ print("last message: \(Date())")
                                     }
 print("same message: \(Date())")
 
-                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
+//                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+//                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+
+                                    DispatchQueue.main.async(execute: { 
+
+                                        wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
+                                    })
+print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                                 }
                             })
                         }
@@ -611,12 +616,10 @@ print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
     var previousOffsetY: CGFloat = 0
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("chat table scrolled : \(scrollView.contentOffset)")
-
         // scroll 방향 체크
         if scrollView.contentOffset.y < self.previousOffsetY {
             // scroll 거의 상단에 다다랐을때...
-            if scrollView.contentOffset.y <= 50 {
+            if scrollView.contentOffset.y <= 44 {
                 if self.previousOffsetY == 0 {
                     self.needToLoadMore = true
                 }
@@ -629,6 +632,10 @@ print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                         guard let wself = self else { return }
 
                         wself.tableViewChat.reloadData()
+
+                        if (wself.messages.count + 1) != wself.tableViewChat.numberOfRows(inSection: 0) {
+                            wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height / CGFloat(wself.pageNumber)), animated: false)
+                        }
                     })
                 }
             } else {

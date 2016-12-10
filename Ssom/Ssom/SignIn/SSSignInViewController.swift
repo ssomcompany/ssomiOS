@@ -103,14 +103,12 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     func validateInput() -> Bool {
         var isSuccessToValidate = true
 
-        if let email:String = tfEmail.text! {
-            if email.characters.count <= 0 {
-                isSuccessToValidate = isSuccessToValidate && false
-            } else {
-//                if !Util.isValidEmail(email) {
-//                    isSuccessToValidate = isSuccessToValidate && false
-//                }
-            }
+        if let email = self.tfEmail.text, email.characters.count <= 0 {
+            isSuccessToValidate = isSuccessToValidate && false
+        } else {
+//            if !Util.isValidEmail(email) {
+//                isSuccessToValidate = isSuccessToValidate && false
+//            }
         }
 
         let password:String = tfPassword.text!

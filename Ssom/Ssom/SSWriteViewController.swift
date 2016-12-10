@@ -399,8 +399,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
                 }
             } else {
                 SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { (photoURLPath, error) in
-                    if error != nil {
-                        print(error?.localizedDescription)
+                    if let err = error {
+                        print(err.localizedDescription)
 
                         SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
                     } else {
@@ -419,8 +419,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             SSNetworkAPIClient.postPost(token, model: self.writeViewModel, completion: { [weak self] (error) in
                 guard let wself = self else { return }
 
-                if error != nil {
-                    print(error?.localizedDescription)
+                if let err = error {
+                    print(err.localizedDescription)
 
                     SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: wself, completion: { (action) in
 //                                    self.navigationController!.popViewControllerAnimated(true)

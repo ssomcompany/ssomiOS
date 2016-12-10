@@ -118,8 +118,8 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     func loadData() {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
             SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { (models, error) in
-                if error != nil {
-                    print(error?.localizedDescription)
+                if let err = error {
+                    print(err.localizedDescription)
 
                     SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
 
@@ -139,34 +139,38 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
     func reload(with modelDict: [String: AnyObject], needRecount: Bool = true) {
-        let newMessage = SSChatroomViewModel(modelDict: modelDict)
+        DispatchQueue.main.async { [weak self] in
+            guard let wself = self else { return }
 
-        for (index, var data) in self.datas.enumerated() {
-            if data.chatroomId == newMessage.chatroomId {
-                self.datas.remove(at: index)
+            let newMessage = SSChatroomViewModel(modelDict: modelDict)
 
-                if needRecount {
-                    data.unreadCount += 1
+            for (index, var data) in wself.datas.enumerated() {
+                if data.chatroomId == newMessage.chatroomId {
+                    wself.datas.remove(at: index)
+
+                    if needRecount {
+                        data.unreadCount += 1
+                    }
+                    if newMessage.meetRequestStatus == .Received {
+                        data.meetRequestUserId = newMessage.meetRequestUserId
+                        data.meetRequestStatus = .Received
+                    } else if newMessage.meetRequestStatus == .Cancelled {
+                        data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
+                        data.meetRequestStatus = .Cancelled
+                    } else {
+                        data.lastMessage = newMessage.lastMessage
+                    }
+
+                    wself.datas.insert(data, at: 0)
+
+                    break
                 }
-                if newMessage.meetRequestStatus == .Received {
-                    data.meetRequestUserId = newMessage.meetRequestUserId
-                    data.meetRequestStatus = .Received
-                } else if newMessage.meetRequestStatus == .Cancelled {
-                    data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
-                    data.meetRequestStatus = .Cancelled
-                } else {
-                    data.lastMessage = newMessage.lastMessage
-                }
-
-                self.datas.insert(data, at: 0)
-
-                break
             }
+            
+            wself.setChattingCount(wself.unreadCount)
+            
+            wself.chatListTableView.reloadData()
         }
-
-        self.setChattingCount(self.unreadCount)
-
-        self.chatListTableView.reloadData()
     }
 
     func showChatroomCountOnNavigation() {
@@ -206,31 +210,32 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                 if cell.isCellClosed {
                     let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
                     let vc = chatStoryboard.instantiateViewController(withIdentifier: "chatViewController") as! SSChatViewController
-                    if let model: SSChatroomViewModel = self.datas[indexPath.row] {
-                        vc.chatRoomId = model.chatroomId
-                        vc.ssomType = model.ssomViewModel.ssomType
-                        vc.postId = model.ssomViewModel.postId
-                        vc.ageArea = Util.getAgeArea(model.ssomViewModel.minAge)
-                        if let userCount = model.ssomViewModel.userCount {
-                            vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
-                        }
 
-                        if cell.isOwnerUser {
-                            vc.myImageUrl = model.ownerImageUrl
-                            vc.partnerImageUrl = model.participantImageUrl
-                        } else {
-                            vc.myImageUrl = model.participantImageUrl
-                            vc.partnerImageUrl = model.ownerImageUrl
-                        }
-
-                        vc.ssomLatitude = model.ssomViewModel.latitude
-                        vc.ssomLongitude = model.ssomViewModel.longitude
-
-                        if let requestUserId = model.meetRequestUserId {
-                            vc.meetRequestUserId = requestUserId
-                        }
-                        vc.meetRequestStatus = model.meetRequestStatus
+                    let model = self.datas[indexPath.row]
+                    vc.chatRoomId = model.chatroomId
+                    vc.ssomType = model.ssomViewModel.ssomType
+                    vc.postId = model.ssomViewModel.postId
+                    vc.ageArea = Util.getAgeArea(model.ssomViewModel.minAge)
+                    if let userCount = model.ssomViewModel.userCount {
+                        vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
                     }
+
+                    if cell.isOwnerUser {
+                        vc.myImageUrl = model.ownerImageUrl
+                        vc.partnerImageUrl = model.participantImageUrl
+                    } else {
+                        vc.myImageUrl = model.participantImageUrl
+                        vc.partnerImageUrl = model.ownerImageUrl
+                    }
+
+                    vc.ssomLatitude = model.ssomViewModel.latitude
+                    vc.ssomLongitude = model.ssomViewModel.longitude
+
+                    if let requestUserId = model.meetRequestUserId {
+                        vc.meetRequestUserId = requestUserId
+                    }
+                    vc.meetRequestStatus = model.meetRequestStatus
+
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

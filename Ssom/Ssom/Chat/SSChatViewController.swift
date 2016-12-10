@@ -7,30 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
 
@@ -604,10 +580,9 @@ print("last message: \(Date())")
                                     }
 print("same message: \(Date())")
 
-                                        let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-                                        wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-//                                        wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
-                                        print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
+                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+print("finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                                 }
                             })
                         }
@@ -615,14 +590,6 @@ print("same message: \(Date())")
                 }
         }
     }
-
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//        if self.messages.count > 0 {
-//            self.tableViewChat.setContentOffset(CGPoint(x: 0, y: self.tableViewChat.contentSize.height - self.tableViewChat.bounds.height), animated: true)
-//        }
-//    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -740,7 +707,7 @@ print("same message: \(Date())")
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text?.characters.count > 0 {
+        if let text = textField.text, text.characters.count > 0 {
             self.tapSendMessage(nil)
         }
         return true

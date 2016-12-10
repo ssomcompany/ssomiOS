@@ -14,19 +14,6 @@ import Firebase
 import FirebaseMessaging
 import KeychainAccess
 import FBSDKCoreKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDelegate {
@@ -144,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                 if let bundleVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String, let currentVersion = version {
                     print("Current App Version is : ", bundleVersion)
 
-                    if Double(bundleVersion.replacingOccurrences(of: ".", with: "")) < Double(currentVersion.replacingOccurrences(of: ".", with: "")) {
+                    if Double(bundleVersion.replacingOccurrences(of: ".", with: ""))! < Double(currentVersion.replacingOccurrences(of: ".", with: ""))! {
                         SSAlertController.showAlertTwoButton(title: "알림",
                             message: "새로운 업데이트가 있습니다.\n 업데이트 후 이용하실 수 있습니다 =)",
                             button1Title: "업데이트",

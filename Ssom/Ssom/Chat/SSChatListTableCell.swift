@@ -210,7 +210,11 @@ class SSChatListTableCell: UITableViewCell {
             let distance: Int = Int(Util.getDistance(locationFrom: nowCoordinate, locationTo: ssomCoordinate))
             model.ssomViewModel.distance = distance
 
-            self.lbDistance.text = Util.getDistanceString(distance)
+            if ssomCoordinate == CLLocationCoordinate2D(latitude: 0, longitude: 0) {
+                self.lbDistance.text = "알 수 없음"
+            } else {
+                self.lbDistance.text = Util.getDistanceString(distance)
+            }
         }
 
         self.lbCreatedDate.text = Util.getDateString(model.createdDateTime)

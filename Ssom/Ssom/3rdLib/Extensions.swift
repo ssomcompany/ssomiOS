@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension NSMutableSet {
     func union(with otherSet: NSSet) {
@@ -16,4 +17,8 @@ extension NSMutableSet {
             }
         }
     }
+}
+
+func == (left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> Bool {
+    return (left.latitude == right.latitude) && (left.longitude == right.longitude)
 }

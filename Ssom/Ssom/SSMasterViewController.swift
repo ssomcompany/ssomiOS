@@ -247,7 +247,11 @@ class SSMasterViewController: UIViewController {
                             let storyboard = UIStoryboard(name: "Menu", bundle: nil)
                             let vc = storyboard.instantiateViewController(withIdentifier: "HeartNaviController")
                             if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
-                                presentedViewController.present(vc, animated: true, completion: nil)
+                                if presentedViewController is SSDrawerViewController {
+                                    (presentedViewController as! SSDrawerViewController).mainViewController?.present(vc, animated: true, completion: nil)
+                                } else {
+                                    presentedViewController.present(vc, animated: true, completion: nil)
+                                }
                             }
                         }
                     })

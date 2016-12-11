@@ -147,9 +147,9 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
             return
         }
 
-        completionBlock(isSignedIn)
-
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            completionBlock(isSignedIn)
+        })
     }
 
     @IBAction func tapSignInButton(_ sender: AnyObject?) {

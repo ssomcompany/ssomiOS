@@ -128,6 +128,12 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
                         self.datas = datas
 
+                        if self.datas.count > 0 {
+                            self.chatListTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        } else {
+                            self.chatListTableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+                        }
+
                         self.setChattingCount(self.unreadCount)
 
                         self.showChatroomCountOnNavigation()

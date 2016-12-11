@@ -22,9 +22,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFaceTT" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-0d-JWU">
+                                <rect key="frame" x="163" y="278.5" width="48" height="49"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="진행 중인 대화가 없어요…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSR-uk-872">
+                                <rect key="frame" x="95" y="342.5" width="184" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-wU-cBg" userLabel="Chat List Table View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pbd-UI-vDd" id="yrn-gY-4IM"/>
                                     <outlet property="delegate" destination="pbd-UI-vDd" id="ZGS-1C-yBY"/>
@@ -34,9 +43,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fjO-T2-K7J" firstAttribute="top" secondItem="2hs-wU-cBg" secondAttribute="bottom" id="9LQ-ml-nJu"/>
+                            <constraint firstItem="HSR-uk-872" firstAttribute="top" secondItem="9GR-0d-JWU" secondAttribute="bottom" constant="15" id="Glu-7P-lih"/>
+                            <constraint firstItem="HSR-uk-872" firstAttribute="centerX" secondItem="lOj-kO-tuG" secondAttribute="centerX" id="JpI-7y-Et9"/>
+                            <constraint firstItem="9GR-0d-JWU" firstAttribute="centerX" secondItem="lOj-kO-tuG" secondAttribute="centerX" id="OzP-0y-AhQ"/>
                             <constraint firstAttribute="trailing" secondItem="2hs-wU-cBg" secondAttribute="trailing" id="evn-4p-OKh"/>
                             <constraint firstItem="2hs-wU-cBg" firstAttribute="leading" secondItem="lOj-kO-tuG" secondAttribute="leading" id="jGz-p8-M8f"/>
                             <constraint firstItem="2hs-wU-cBg" firstAttribute="top" secondItem="HUJ-9T-kk2" secondAttribute="bottom" id="oUI-r3-xgV"/>
+                            <constraint firstItem="9GR-0d-JWU" firstAttribute="centerY" secondItem="lOj-kO-tuG" secondAttribute="centerY" multiplier="1:1.1" id="qBh-he-f8b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chat list" id="baM-hd-U9E" userLabel="Chat list">
@@ -279,7 +292,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NXQ-A8-Jsy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qxA-uy-RKu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qxA-uy-RKu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -295,6 +308,7 @@
     </scenes>
     <resources>
         <image name="chat_btn_send" width="23" height="23"/>
+        <image name="iconFaceTT" width="48" height="49"/>
         <image name="iconSsomMap" width="26" height="18"/>
         <image name="mapShadow" width="416" height="76"/>
     </resources>

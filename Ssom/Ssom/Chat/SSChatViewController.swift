@@ -257,6 +257,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             guard let wself = self else { return }
 
             var newMessage = SSChatViewModel(modelDict: modelDict)
+            print("newMessage is : \(newMessage)")
 
             if let loginUserId = SSAccountManager.sharedInstance.userUUID {
                 if loginUserId == newMessage.fromUserId {
@@ -311,7 +312,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                                              message: "만남 중에는 채팅방을 나갈 수 없습니다.\n만남을 종료하고 나가시겠습니까?",
                                              vc: self,
                                              button1Completion: { (action) in
-                                                self.cancelMeetRequest()
+                                                self.cancelMeetRequest(isFinished: true)
                                                 self.doBack()
                 }, button2Completion: { (action) in
                     //
@@ -343,13 +344,13 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         switch self.meetRequestStatus {
         case .Requested:
             SSAlertController.alertTwoButton(title: "알림", message: "만남 요청을 취소 하시겠어요?", vc: self, button1Title: "요청취소", button2Title: "닫기", button1Completion: { (action) in
-                self.cancelMeetRequest()
+                self.cancelMeetRequest(isFinished: false)
                 }, button2Completion: { (action) in
                     //
             })
         case .Accepted:
             SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
-                self.cancelMeetRequest()
+                self.cancelMeetRequest(isFinished: true)
                 }, button2Completion: { (action) in
                     //
             })
@@ -459,7 +460,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         })
     }
 
-    func cancelMeetRequest() {
+    func cancelMeetRequest(isFinished: Bool) {
         guard let token = SSAccountManager.sharedInstance.sessionToken, let chatRoomId = self.chatRoomId else {
             return
         }
@@ -473,7 +474,11 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                     // add my sent message on the last of the messages
                     var myLastMessage = SSChatViewModel()
-                    myLastMessage.message = "cancel"
+                    if isFinished {
+                        myLastMessage.message = "complete"
+                    } else {
+                        myLastMessage.message = "cancel"
+                    }
                     myLastMessage.messageType = .System
                     myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                     myLastMessage.profileImageUrl = wself.myImageUrl
@@ -508,7 +513,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 vc.data = SSChatMapViewModel(modelDict: chatMapDict)
                 vc.blockCancelToMeet = { [weak self] in
                     if let wself = self {
-                        wself.cancelMeetRequest()
+                        wself.cancelMeetRequest(isFinished: true)
                     }
                 }
                 

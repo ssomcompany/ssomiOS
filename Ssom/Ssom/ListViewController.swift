@@ -498,37 +498,45 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func doSsom(_ ssomType: SSType, model: SSViewModel) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if model.postId != "" {
-                SSNetworkAPIClient.postChatroom(token, postId: model.postId, latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { (chatroomId, error) in
+                // 나랑 채팅중인 쏨이면..
+                if let chatroomId = model.assignedChatroomId {
+                    self.goChat(chatroomId: chatroomId, model: model, ssomType: ssomType)
+                } else {
+                    SSNetworkAPIClient.postChatroom(token, postId: model.postId, latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { (chatroomId, error) in
 
-                    if let err = error {
-                        print(err.localizedDescription)
+                        if let err = error {
+                            print(err.localizedDescription)
 
-                        SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
-                    } else {
-                        if let createdChatroomId = chatroomId {
-                            let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-                            let vc: SSChatViewController = chatStoryboard.instantiateViewController(withIdentifier: "chatViewController") as! SSChatViewController
-                            vc.ssomType = ssomType
-                            vc.ageArea = Util.getAgeArea(model.minAge)
-                            if let userCount = model.userCount {
-                                vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+                        } else {
+                            if let createdChatroomId = chatroomId {
+                                self.goChat(chatroomId: createdChatroomId, model: model, ssomType: ssomType)
                             }
-                            vc.chatRoomId = createdChatroomId
-                            vc.myImageUrl = SSAccountManager.sharedInstance.profileImageUrl
-                            vc.partnerImageUrl = model.imageUrl
-
-                            vc.ssomLatitude = model.latitude
-                            vc.ssomLongitude = model.longitude
-
-                            vc.meetRequestUserId = model.meetRequestUserId
-                            vc.meetRequestStatus = model.meetRequestStatus
-
-                            self.navigationController?.pushViewController(vc, animated: true)
                         }
-                    }
-                })
+                    })
+                }
             }
         }
+    }
+
+    func goChat(chatroomId: String, model: SSViewModel, ssomType: SSType) {
+        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let vc: SSChatViewController = chatStoryboard.instantiateViewController(withIdentifier: "chatViewController") as! SSChatViewController
+        vc.ssomType = ssomType
+        vc.ageArea = Util.getAgeArea(model.minAge)
+        if let userCount = model.userCount {
+            vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
+        }
+        vc.chatRoomId = chatroomId
+        vc.partnerImageUrl = model.imageUrl
+
+        vc.ssomLatitude = model.latitude
+        vc.ssomLongitude = model.longitude
+
+        vc.meetRequestUserId = model.meetRequestUserId
+        vc.meetRequestStatus = model.meetRequestStatus
+
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 // MARK: - SSListTableViewCellDelegate
@@ -541,19 +549,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if let err = error {
                         SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                     } else {
-                        if let wself = self {
-                            wself.datas.remove(at: indexPath.row)
-                            wself.ssomListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                        guard let wself = self else { return }
 
-                            wself.isAlreadyWrittenMySsom = false
-                            wself.mySsom = nil
+                        wself.datas.remove(at: indexPath.row)
+                        wself.ssomListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
 
-                            wself.setMySsomButton()
+                        wself.isAlreadyWrittenMySsom = false
+                        wself.mySsom = nil
 
-                            SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
-                                //
-                            })
-                        }
+                        wself.setMySsomButton()
+
+                        SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
+                            //
+                        })
                     }
                 })
             }

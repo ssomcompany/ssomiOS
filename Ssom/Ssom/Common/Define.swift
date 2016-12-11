@@ -15,6 +15,7 @@ open class PreDefine {
 
 enum SSInternalNotification: String {
     case PurchasedHeart = "PurchasedHeart"
+    case SignOut = "SignOut"
 }
 
 let SSDefaultHeartCount = 2

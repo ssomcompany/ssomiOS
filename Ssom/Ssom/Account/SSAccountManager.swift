@@ -203,6 +203,8 @@ class SSAccountManager {
                                 FBSDKLoginManager().logOut()
                             }
 
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: SSInternalNotification.SignOut.rawValue), object: nil)
+
                             guard let block = completion else {
                                 return
                             }

@@ -57,6 +57,8 @@ class SSNavigationBarItems : UIView
 
         self.lbHeartCount.format = "%d"
         self.lbHeartCount.method = UILabelCountingMethod.linear
+
+        NotificationCenter.default.addObserver(self, selector: #selector(changeHeartCount(_:)), name: NSNotification.Name(rawValue: SSInternalNotification.SignOut.rawValue), object: nil)
     }
 
     convenience init(animated: Bool) {
@@ -69,6 +71,10 @@ class SSNavigationBarItems : UIView
         super.init(coder: aDecoder)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func tapDownHeart() {
         if self.animated {
             self.imgViewHeart.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -79,7 +85,7 @@ class SSNavigationBarItems : UIView
         self.imgViewHeart.transform = CGAffineTransform.identity
     }
 
-    func changeHeartCount(_ count: Int) {
+    func changeHeartCount(_ count: Int = 0) {
         let countNow = Int(self.lbHeartCount.text!)!
         self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
 //            self.lbHeartCount.text = "\(count)"

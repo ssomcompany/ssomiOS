@@ -172,6 +172,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         connectToFcm()
 
         FBSDKAppEvents.activateApp()
+
+        self.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -200,6 +202,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         }
 
         print("%@", userInfo)
+    }
+
+// MARK: - private
+    fileprivate func activateApp() {
+        if let token = SSAccountManager.sharedInstance.sessionToken, let email = SSAccountManager.sharedInstance.email {
+            SSNetworkAPIClient.getUser(token, email: email, completion: { (user, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+                }
+
+                if let model = user {
+                    print("user is : \(model)")
+
+                    if let imageUrl = model.profileImageUrl {
+                        SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                    } else {
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                    }
+                }
+            })
+        }
     }
 
 // MARK: - FirebaseMessage

@@ -44,17 +44,17 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
     }
 
     func initMapView() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
         if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingLocation()
         }
 
-        mapView.isMyLocationEnabled = true
+        self.mapView.isMyLocationEnabled = true
 
-        mapView.delegate = self
+        self.mapView.delegate = self
     }
 
     func setNavigationBarView() {

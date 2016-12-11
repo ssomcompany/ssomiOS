@@ -45,14 +45,14 @@ public struct SSChatMapViewModel {
             self.partnerImageUrl = imageUrl
         }
 
-        if let latitude = modelDict["partnerLatitude"] as? Double {
-            self.partnerLatitude = latitude
+        if let latitude = modelDict["partnerLatitude"] as? String {
+            self.partnerLatitude = Double(latitude)!
         } else {
             self.partnerLatitude = 0.0
         }
 
-        if let longitudue = modelDict["partnerLongitude"] as? Double {
-            self.partnerLongitude = longitudue
+        if let longitudue = modelDict["partnerLongitude"] as? String {
+            self.partnerLongitude = Double(longitudue)!
         } else {
             self.partnerLongitude = 0.0
         }

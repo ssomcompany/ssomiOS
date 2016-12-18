@@ -13,6 +13,7 @@ import Toast_Swift
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
+    @IBOutlet var viewNoSsom: UIView!
     @IBOutlet var viewBottomInfo: UIView!
 //    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
 //    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
@@ -373,6 +374,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.mainViewModel.datas = tempDatas
         self.datas = tempDatas
 
+        if self.datas.count > 0 {
+            self.ssomListTableView.backgroundColor = UIColor.white
+        } else {
+            self.ssomListTableView.backgroundColor = UIColor.clear
+        }
+
         self.ssomListTableView.reloadData()
 
         guard let completion = self.loadCompletionBlock else { return }
@@ -426,16 +433,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SSListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SSListTableViewCell
 
-        let model:SSViewModel = datas[indexPath.row]
+        let model:SSViewModel = self.datas[indexPath.row]
         cell.configView(model, isMySsom: self.mySsom === model, isSsom: self.mainViewModel.isSell, withCoordinate: CLLocationCoordinate2DMake(self.mainViewModel.nowLatitude, self.mainViewModel.nowLongitude))
 
         cell.delegate = self
 
-        return cell;
+        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count;
+        return datas.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

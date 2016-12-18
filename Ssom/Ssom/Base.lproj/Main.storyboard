@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dAM-Ki-GQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dAM-Ki-GQ0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -76,19 +76,19 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k0-s1-1ct" userLabel="Bottom Info View">
-                                <rect key="frame" x="23" y="511" width="69" height="69"/>
+                                <rect key="frame" x="23" y="529" width="51" height="51"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-ru-cnK">
-                                        <rect key="frame" x="1" y="0.0" width="68" height="69"/>
+                                        <rect key="frame" x="1" y="0.0" width="50" height="51"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQd-kY-OEr" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQd-kY-OEr" userLabel="Filter Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="SQd-kY-OEr" secondAttribute="height" multiplier="1:1" id="hkM-eD-6Ss"/>
                                         </constraints>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" backgroundImage="oval4Fill30.png"/>
+                                        <state key="normal" image="filterBtn"/>
                                         <connections>
                                             <action selector="tapFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X0t-yz-3KL"/>
                                         </connections>
@@ -118,15 +118,14 @@
                                     <action selector="tapWriteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oQe-YD-Yus"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
                                 <rect key="frame" x="23" y="80" width="51" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="UAU-je-txb"/>
                                     <constraint firstAttribute="height" constant="51" id="hxu-l1-4zl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" backgroundImage="locationFound.png">
+                                <state key="normal" image="locationFound">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -136,7 +135,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3k0-s1-1ct" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="69:603" id="0vH-ey-tik"/>
+                            <constraint firstItem="3k0-s1-1ct" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="51:603" id="0vH-ey-tik"/>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="top" secondItem="puq-gM-UxI" secondAttribute="bottom" id="3XK-AA-Gg6"/>
                             <constraint firstAttribute="trailing" secondItem="puq-gM-UxI" secondAttribute="trailing" id="4vs-KF-zT6"/>
                             <constraint firstItem="VC7-ei-KcX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="5Mz-wL-A3s"/>
@@ -224,9 +223,152 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDU-tQ-2vC">
+                                <rect key="frame" x="73.5" y="246.5" width="227.5" height="109"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCoupleGray" translatesAutoresizingMaskIntoConstraints="NO" id="1jh-2X-vKM">
+                                        <rect key="frame" x="89.5" y="0.0" width="48" height="44"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDp-4s-Gei">
+                                        <rect key="frame" x="0.0" y="66" width="227.5" height="43"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="아직">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="등록된">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="글이">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="없어요">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">.
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="당신이">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="먼저">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="쏨">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="/">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="쏴를">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="올려보세요">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="!">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="1jh-2X-vKM" firstAttribute="centerX" secondItem="HDU-tQ-2vC" secondAttribute="centerX" id="USd-Ze-pe8"/>
+                                    <constraint firstItem="qDp-4s-Gei" firstAttribute="leading" secondItem="HDU-tQ-2vC" secondAttribute="leading" id="XZT-cF-1vp"/>
+                                    <constraint firstItem="qDp-4s-Gei" firstAttribute="top" secondItem="1jh-2X-vKM" secondAttribute="bottom" constant="21.699999999999999" id="Xum-oe-iCV"/>
+                                    <constraint firstAttribute="trailing" secondItem="qDp-4s-Gei" secondAttribute="trailing" id="m4D-Ao-2GQ"/>
+                                    <constraint firstItem="1jh-2X-vKM" firstAttribute="top" secondItem="HDU-tQ-2vC" secondAttribute="top" id="nZZ-Ad-hIW"/>
+                                    <constraint firstAttribute="bottom" secondItem="qDp-4s-Gei" secondAttribute="bottom" id="vdZ-rr-WHz"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
                                 <rect key="frame" x="0.0" y="57" width="375" height="546"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="j6y-F4-SAC" id="ekK-6e-cSP"/>
                                     <outlet property="delegate" destination="j6y-F4-SAC" id="EEV-1V-fsr"/>
@@ -276,19 +418,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
-                                <rect key="frame" x="23" y="511" width="69" height="69"/>
+                                <rect key="frame" x="23" y="529" width="51" height="51"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-aR-jK1">
-                                        <rect key="frame" x="1" y="0.0" width="68" height="68"/>
+                                        <rect key="frame" x="1" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFS-Jw-YTg" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFS-Jw-YTg" userLabel="Filter Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tFS-Jw-YTg" secondAttribute="height" multiplier="1:1" id="XnW-gQ-AAs"/>
                                         </constraints>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" backgroundImage="oval4Fill30.png"/>
+                                        <state key="normal" image="filterBtn"/>
                                         <connections>
                                             <action selector="tapFilterButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="EqO-L6-0ta"/>
                                         </connections>
@@ -324,7 +466,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="23" id="3Br-So-WTx"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="bottom" constant="23" id="8cd-P3-BhS"/>
-                            <constraint firstItem="4cE-r7-rmG" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="69:603" id="9BQ-rH-0DO"/>
+                            <constraint firstItem="4cE-r7-rmG" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="51:603" id="9BQ-rH-0DO"/>
                             <constraint firstItem="OM2-Da-teJ" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="B1H-7V-VWS"/>
                             <constraint firstItem="wmH-tP-FXB" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="leading" id="GQY-Mp-re4"/>
                             <constraint firstItem="hYp-m4-vLX" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="LdE-6x-8lG"/>
@@ -340,11 +482,13 @@
                             <constraint firstItem="W9o-t2-VQr" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="fjK-f6-gdV"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="width" secondItem="W9o-t2-VQr" secondAttribute="width" multiplier="24:414" id="g7W-Z4-0fy"/>
                             <constraint firstItem="OM2-Da-teJ" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="57:603" id="kR5-QK-ad9"/>
+                            <constraint firstItem="HDU-tQ-2vC" firstAttribute="centerY" secondItem="hHc-Mm-TP3" secondAttribute="centerY" id="kk8-kl-n5C"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="mBm-St-mEp"/>
                             <constraint firstAttribute="trailing" secondItem="W9o-t2-VQr" secondAttribute="trailing" id="mGh-xm-IEo"/>
                             <constraint firstItem="wmH-tP-FXB" firstAttribute="bottom" secondItem="OM2-Da-teJ" secondAttribute="bottom" id="mjb-fp-PMg"/>
                             <constraint firstAttribute="trailing" secondItem="hYp-m4-vLX" secondAttribute="trailing" id="ogN-wf-ZLy"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="top" id="ohL-uo-y07"/>
+                            <constraint firstItem="HDU-tQ-2vC" firstAttribute="centerX" secondItem="hHc-Mm-TP3" secondAttribute="centerX" id="uUX-2e-gMC"/>
                             <constraint firstItem="hYp-m4-vLX" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="trailing" id="vch-Oj-4EI"/>
                             <constraint firstItem="4cE-r7-rmG" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" constant="23" id="wN3-Wb-nF2"/>
                             <constraint firstItem="wmH-tP-FXB" firstAttribute="width" secondItem="OM2-Da-teJ" secondAttribute="width" id="ypa-wq-qvv"/>
@@ -383,6 +527,7 @@
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
                         <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
                         <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
+                        <outlet property="viewNoSsom" destination="HDU-tQ-2vC" id="v51-Vr-Z7p"/>
                         <outlet property="viewPayButtonBottomLine" destination="wmH-tP-FXB" id="h20-dc-dDN"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>
                     </connections>
@@ -934,7 +1079,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="C9b-Hi-3uS" userLabel="Menu"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="09n-6W-TdW">
-                            <rect key="frame" x="76" y="7" width="166" height="30"/>
+                            <rect key="frame" x="105" y="7" width="166" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="MAP"/>
@@ -967,9 +1112,10 @@
         <image name="acceptButtonGreen.png" width="241" height="87"/>
         <image name="buttonCancel.png" width="139" height="50"/>
         <image name="camera.png" width="27" height="24"/>
-        <image name="locationFound.png" width="55" height="55"/>
+        <image name="filterBtn" width="55" height="56"/>
+        <image name="iconCoupleGray" width="48" height="44"/>
+        <image name="locationFound" width="55" height="56"/>
         <image name="mapShadow.png" width="621" height="114"/>
-        <image name="oval4Fill30.png" width="62" height="62"/>
         <image name="photoDefault.png" width="183" height="106"/>
         <image name="photoMapbg" width="482" height="234"/>
         <image name="photoShadow.png" width="226" height="40"/>
@@ -977,7 +1123,7 @@
         <image name="ssomSelectNone.png" width="102" height="92"/>
         <image name="ssomSelectNone2.png" width="105" height="91"/>
         <image name="ssomSelectRed.png" width="91" height="84"/>
-        <image name="writeBtn" width="76" height="75"/>
+        <image name="writeBtn" width="76" height="76"/>
         <image name="writeLine" width="277" height="1"/>
         <image name="writePhotoArea.png" width="243" height="202"/>
     </resources>

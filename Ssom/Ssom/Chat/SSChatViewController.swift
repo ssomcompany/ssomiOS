@@ -224,8 +224,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
                             wself.tableViewChat.reloadData()
 
-                            let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-                            wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+//                            let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+//                            wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: false)
+                            wself.tableViewChat.scrollRectToVisible(CGRect(x: wself.tableViewChat.contentSize.width - 1, y: wself.tableViewChat.contentSize.height - 1, width: 1, height: 1), animated: true)
 
                             guard let requestUserId = wself.meetRequestUserId else {
                                 wself.showMeetRequest(false)
@@ -253,7 +254,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     func reload(with modelDict: [String: AnyObject]) {
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.async(execute: { [weak self] in
             guard let wself = self else { return }
 
             var newMessage = SSChatViewModel(modelDict: modelDict)
@@ -291,13 +292,15 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                 }
                 wself.messages.append(newMessage)
 
-                wself.tableViewChat.reloadData()
+                    wself.tableViewChat.reloadData()
 
-                let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-                wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+//                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+//                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                    wself.tableViewChat.scrollRectToVisible(CGRect(x: wself.tableViewChat.contentSize.width - 1, y: wself.tableViewChat.contentSize.height - 1, width: 1, height: 1), animated: true)
+//                    wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
                 
             }
-        }
+        })
     }
 
     func registerForKeyboardNotifications() {
@@ -711,6 +714,10 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                 }
             }
         }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layoutIfNeeded()
     }
 
 // MARK: - UITextFieldDelegate

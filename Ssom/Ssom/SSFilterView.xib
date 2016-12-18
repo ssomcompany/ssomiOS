@@ -18,10 +18,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="084-nz-SrR" userLabel="Filter Main View">
-                    <rect key="frame" x="6" y="345.5" width="363" height="298.5"/>
+                    <rect key="frame" x="6" y="357.5" width="363" height="298.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvM-oc-t2h" userLabel="Close Button">
-                            <rect key="frame" x="0.0" y="231.5" width="67" height="67"/>
+                            <rect key="frame" x="13" y="230" width="56.5" height="56.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="hvM-oc-t2h" secondAttribute="height" multiplier="1:1" id="d5P-Ff-AT4"/>
                             </constraints>
@@ -198,7 +198,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-n4-Vsg" userLabel="Cancel Button">
-                            <rect key="frame" x="198" y="231.5" width="63" height="34"/>
+                            <rect key="frame" x="198" y="230" width="63" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="63" id="dkl-fE-WnU"/>
                             </constraints>
@@ -211,7 +211,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-nG-dgi" userLabel="Apply Button">
-                            <rect key="frame" x="271" y="231.5" width="63" height="34"/>
+                            <rect key="frame" x="271" y="230" width="63" height="34"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                             <state key="normal" title="적용하기">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -221,7 +221,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-8R-tgd">
-                            <rect key="frame" x="121" y="232" width="67" height="33"/>
+                            <rect key="frame" x="121" y="230.5" width="67" height="33"/>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
                                     <fragment content="모두">
@@ -255,7 +255,7 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="jOa-gb-If4" firstAttribute="top" secondItem="rBP-xd-zDR" secondAttribute="bottom" constant="6" id="1p0-Tq-qfy"/>
-                        <constraint firstItem="hvM-oc-t2h" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" id="3Q6-0E-Ulp"/>
+                        <constraint firstItem="hvM-oc-t2h" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="13" id="3Q6-0E-Ulp"/>
                         <constraint firstItem="pJR-Qi-8AN" firstAttribute="width" secondItem="084-nz-SrR" secondAttribute="width" multiplier="276:328" id="4Ad-Nj-0Yh"/>
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="B6u-eJ-uyB"/>
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="top" secondItem="HHI-JE-2OX" secondAttribute="bottom" constant="20" id="BqB-tJ-mE0"/>
@@ -273,7 +273,7 @@
                         <constraint firstItem="SFI-w6-8e1" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="23" id="faZ-dQ-u2M"/>
                         <constraint firstItem="HHI-JE-2OX" firstAttribute="leading" secondItem="084-nz-SrR" secondAttribute="leading" constant="24" id="jwv-2q-zHR"/>
                         <constraint firstItem="jOa-gb-If4" firstAttribute="width" secondItem="084-nz-SrR" secondAttribute="width" multiplier="276:328" id="la0-5V-APY"/>
-                        <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" id="onz-ux-gbH"/>
+                        <constraint firstAttribute="bottom" secondItem="hvM-oc-t2h" secondAttribute="bottom" constant="12" id="onz-ux-gbH"/>
                         <constraint firstItem="B0P-n4-Vsg" firstAttribute="centerY" secondItem="3F4-8R-tgd" secondAttribute="centerY" id="rKV-SW-HVO"/>
                         <constraint firstItem="rBP-xd-zDR" firstAttribute="top" secondItem="pJR-Qi-8AN" secondAttribute="bottom" constant="15" id="u6X-VY-QnU"/>
                         <constraint firstAttribute="trailing" secondItem="HHI-JE-2OX" secondAttribute="trailing" constant="38" id="uBa-X9-1zw"/>
@@ -283,10 +283,10 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hvM-oc-t2h" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="74:414" id="2cu-4Q-0zG"/>
+                <constraint firstItem="hvM-oc-t2h" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="51:603" id="2cu-4Q-0zG"/>
                 <constraint firstItem="084-nz-SrR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="3gC-qs-ZIZ"/>
                 <constraint firstAttribute="trailing" secondItem="084-nz-SrR" secondAttribute="trailing" constant="6" id="VzN-UD-biO"/>
-                <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="23" id="kwE-a0-1s0"/>
+                <constraint firstAttribute="bottom" secondItem="084-nz-SrR" secondAttribute="bottom" constant="11" id="kwE-a0-1s0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

@@ -59,7 +59,7 @@ class SSListTableViewCell: UITableViewCell {
         if UIScreen.main.bounds.width == 320.0 {
             self.constUpdatedTimeLabelLeadingToMemberInfoLabel.isActive = false
             self.constUpdatedTimeLableTrailingToSuper.isActive = true
-            self.constDistanceLabelTopToSuper.constant = 10
+            self.constDistanceLabelTopToSuper.constant = 15
         }
 
         super.layoutSubviews()

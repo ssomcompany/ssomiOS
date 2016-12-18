@@ -97,7 +97,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil
 
-        ssomListTableView.register(UINib.init(nibName: "SSListTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "cell")
+        self.ssomListTableView.register(UINib.init(nibName: "SSListTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "cell")
 
         self.edgesForExtendedLayout = UIRectEdge()
 

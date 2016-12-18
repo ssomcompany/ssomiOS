@@ -17,6 +17,7 @@ import CoreLocation
 class SSListTableViewCell: UITableViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var imgViewSsomIcon: UIImageView!
     @IBOutlet var updatedTimeLabel: UILabel!
     @IBOutlet var constUpdatedTimeLabelLeadingToMemberInfoLabel: NSLayoutConstraint!
     @IBOutlet var constUpdatedTimeLableTrailingToSuper: NSLayoutConstraint!
@@ -82,8 +83,14 @@ class SSListTableViewCell: UITableViewCell {
             self.contentView.addGestureRecognizer(self.panGesture)
         }
 
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSsom ? "bigGreen" : "bigRed")!, frame: CGRect(x: 0, y: 0, width: 89.2, height: 77.2))
-        self.profileImageView!.image = maskOfProfileImage
+        if isSsom {
+            self.imgViewSsomIcon.image = #imageLiteral(resourceName: "listMarkGreen")
+        } else {
+            self.imgViewSsomIcon.image = #imageLiteral(resourceName: "listMarkRed")
+        }
+
+//        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSsom ? "bigGreen" : "bigRed")!, frame: CGRect(x: 0, y: 0, width: 89.2, height: 77.2))
+//        self.profileImageView!.image = maskOfProfileImage
 
         if let imageUrl = model.imageUrl {
             if imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
@@ -94,19 +101,24 @@ class SSListTableViewCell: UITableViewCell {
                     , options: []
                     , completed: { (image, error, cacheType, url) -> Void in
 
+                        self.viewCell.layoutIfNeeded()
+                        self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.height / 2.0
+                        self.profileImageView.layer.borderColor = isSsom ? UIColor(red: 0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0).cgColor : UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0).cgColor
+                        self.profileImageView.layer.borderWidth = 1.7
+
                         if let err = error {
                             print(err.localizedDescription)
 
                             SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                         } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: 72.2, height: 72.2))
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: 70, height: 70))
 
-                            self.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
+                            self.profileImageView.image = croppedProfileImage
+//                            self.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
 
                             if model.meetRequestStatus == .Accepted {
                                 if isSsom {
                                     self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngGreenBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
-
                                 } else {
                                     self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngRedBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
                                 }

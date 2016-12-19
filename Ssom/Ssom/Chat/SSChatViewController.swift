@@ -27,6 +27,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     @IBOutlet var lbNotificationToStartMeet: UILabel!
     @IBOutlet var btnShowMap: UIButton!
 
+    @IBOutlet var viewMeetIng: UIView!
+
     var barButtonItems: SSNavigationBarItems!
 
     var chatRoomId: String?
@@ -153,7 +155,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
             if #available(iOS 8.2, *) {
                 let firstAttributesDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)]
-                let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
+                let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
                                             NSFontAttributeName: UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)]
                 titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
@@ -164,7 +166,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 }
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
-                    let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0),
+                    let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
                                                 NSFontAttributeName: font]
                     titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
                 }
@@ -184,7 +186,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         (self.tableViewChat as UIScrollView).delegate = self
 
         self.tableViewChat.rowHeight = UITableViewAutomaticDimension
-        self.tableViewChat.estimatedRowHeight = 61
+        self.tableViewChat.estimatedRowHeight = 57
 
         self.registerForKeyboardNotifications()
 
@@ -194,8 +196,6 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 //        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
 
         self.loadData()
-
-//        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
             guard let wself = self else { return }
@@ -446,6 +446,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             self.constViewRequestHeight.constant = 43
 
             alpha = 1.0
+
+            self.view.backgroundColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            self.viewMeetIng.isHidden = false
         } else {
 
 //            self.constTableViewChatTopToSuper.constant = 0
@@ -453,12 +456,17 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             self.constTableViewChatTopToSuper.isActive = true
 
             self.constViewRequestHeight.constant = 0
+
+            self.view.backgroundColor = UIColor(red: 253.0/255.0, green: 253.0/255.0, blue: 253.0/255.0, alpha: 1.0)
+            self.viewMeetIng.isHidden = true
         }
 
         UIView.animate(withDuration: 0.9, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.view.layoutIfNeeded()
+
             self.viewNotificationToStartMeet.alpha = alpha
-            }, completion: { (finish) in
+
+        }, completion: { (finish) in
                 //
         })
     }
@@ -564,9 +572,10 @@ print("returned: \(Date())")
                                         } else {print("all new message: \(Date())")
                                             wself.messages = newDatas
                                         }
-print("last is : \(wself.messages.last!), sentDate is : \(nowDateTime)")
+
                                         // add my sent message on the last of the messages
                                         if let lastMessage = wself.messages.last, lastMessage.messageDateTime != nowDateTime {
+print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
@@ -714,10 +723,6 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                 }
             }
         }
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.layoutIfNeeded()
     }
 
 // MARK: - UITextFieldDelegate

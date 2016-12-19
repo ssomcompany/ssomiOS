@@ -22,7 +22,6 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var btnChatDelete: UIButton!
 
     @IBOutlet var imgViewProfile: UIImageView!
-    @IBOutlet var imgViewProfileBorder: UIImageView!
     @IBOutlet var lbSsomAgePeople: UILabel!
     @IBOutlet var lbLastMessage: UILabel!
     @IBOutlet var lbNewMessageCount: UILabel!
@@ -69,13 +68,9 @@ class SSChatListTableCell: UITableViewCell {
     func configView(_ model: SSChatroomViewModel, withCoordinate coordinate: CLLocationCoordinate2D) {
         self.model = model
 
-        switch model.ssomViewModel.ssomType {
-        case .SSOM:
-            self.imgViewProfileBorder.image = UIImage(named: "profileBorderGreen")
-        case .SSOSEYO:
-            self.imgViewProfileBorder.image = UIImage(named: "profileBorderRed")
-        }
-
+        self.imgViewProfile.layer.borderWidth = 1.7
+        self.imgViewProfile.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+        self.imgViewProfile.layer.cornerRadius = self.imgViewProfile.bounds.height / 2.0
         self.imgViewProfile.image = UIImage(named: "noneProfile")
 
         // check if the login user is the owner of the chatting
@@ -127,13 +122,6 @@ class SSChatListTableCell: UITableViewCell {
                 self.viewMeetRequest.layer.cornerRadius = self.viewMeetRequest.bounds.height / 2.0
 
                 isReceivedToRequestMeet = true
-
-                switch model.ssomViewModel.ssomType {
-                case .SSOM:
-                    self.viewMeetRequest.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 0.5)
-                case .SSOSEYO:
-                    self.viewMeetRequest.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 0.5)
-                }
 
                 self.viewBackground.backgroundColor = UIColor(red: 253.0/255.0, green: 234.0/255.0, blue: 237.0/255.0, alpha: 1.0)
             }
@@ -194,6 +182,10 @@ class SSChatListTableCell: UITableViewCell {
 
         self.lbNewMessageCount.layoutIfNeeded()
         self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
+        self.lbNewMessageCount.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        self.lbNewMessageCount.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.lbNewMessageCount.layer.shadowRadius = 1
+        self.lbNewMessageCount.layer.shadowOpacity = 1
         self.lbNewMessageCount.text = "\(model.unreadCount)"
         if model.unreadCount == 0 {
             self.lbNewMessageCount.isHidden = true

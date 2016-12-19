@@ -26,21 +26,25 @@ class SSChatMessageTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.viewPartnerMessage.layer.cornerRadius = 2.3
-        self.viewMyMessage.layer.cornerRadius = 2.3
+        self.viewPartnerMessage.layer.cornerRadius = 6.0
+        self.viewPartnerMessage.layer.borderWidth = 0.6
+        self.viewPartnerMessage.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+
+        self.viewMyMessage.layer.cornerRadius = 6.0
+        self.viewMyMessage.layer.borderWidth = 0.6
+        self.viewMyMessage.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
     }
 
     func configView(_ model: SSChatViewModel) {
         self.model = model
 
-        switch self.ssomType {
-        case .SSOM:
-            self.imgViewPartnerProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.viewPartnerMessage.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
-        case .SSOSEYO:
-            self.imgViewPartnerProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.viewPartnerMessage.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
-        }
+        self.backgroundColor = UIColor.clear
+
+        self.imgViewPartnerProfileBorder.layer.borderWidth = 1.3
+        self.imgViewPartnerProfileBorder.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+
+        self.imgViewMyProfileBorder.layer.borderWidth = 1.3
+        self.imgViewMyProfileBorder.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
 
         self.imgViewPartnerProfile.image = UIImage(named: "noneProfile")
         self.imgViewMyProfile.image = UIImage(named: "noneProfile")
@@ -97,14 +101,13 @@ class SSChatMessageTableCell: UITableViewCell {
         self.lbPartnerMessageTime.isHidden = true
 
         self.imgViewMyProfile.isHidden = false
-        self.imgViewMyProfileBorder.isHidden = true
+        self.imgViewMyProfileBorder.isHidden = false
         self.viewMyMessage.isHidden = false
         self.lbMyMessage.isHidden = false
         self.lbMyMessageTime.isHidden = false
 
         self.imgViewMyProfile.layer.cornerRadius = self.imgViewMyProfile.bounds.height / 2.0
-        self.imgViewMyProfile.layer.borderWidth = 1.5
-        self.imgViewMyProfile.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
+        self.imgViewMyProfileBorder.layer.cornerRadius = self.imgViewMyProfileBorder.bounds.height / 2.0
     }
 
     func showPartnerViews() {
@@ -119,5 +122,8 @@ class SSChatMessageTableCell: UITableViewCell {
         self.viewMyMessage.isHidden = true
         self.lbMyMessage.isHidden = true
         self.lbMyMessageTime.isHidden = true
+
+        self.imgViewPartnerProfile.layer.cornerRadius = self.imgViewPartnerProfile.bounds.height / 2.0
+        self.imgViewPartnerProfileBorder.layer.cornerRadius = self.imgViewPartnerProfileBorder.bounds.height / 2.0
     }
 }

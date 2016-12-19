@@ -9,21 +9,21 @@
 import UIKit
 
 class SSChatStartingTableCell: UITableViewCell {
+    @IBOutlet var viewBackground: UIView!
     @IBOutlet var lbColored: UILabel!
     @IBOutlet var constLbColoredCenterXToSuper: NSLayoutConstraint!
     @IBOutlet var lbDetailMessage: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        self.viewBackground.layer.borderWidth = 0.3
+        self.viewBackground.layer.borderColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
     }
 
     func configView(_ ssomType: SSType, model: SSChatViewModel? = nil) {
-        switch ssomType {
-        case .SSOM:
-            self.lbColored.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1)
-        case .SSOSEYO:
-            self.lbColored.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1)
-        }
+
+        self.backgroundColor = UIColor.clear
 
         self.lbColored.text = "두근두근, "
         self.constLbColoredCenterXToSuper.constant = -48.0

@@ -190,10 +190,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         self.registerForKeyboardNotifications()
 
-//        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).CGColor
-//        self.viewNotificationToStartMeet.layer.shadowOffset = CGSizeMake(0, 2)
-//        self.viewNotificationToStartMeet.layer.shadowRadius = 1
-//        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
+        self.viewNotificationToStartMeet.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        self.viewNotificationToStartMeet.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.viewNotificationToStartMeet.layer.shadowRadius = 1
+        self.viewNotificationToStartMeet.layer.shadowOpacity = 1
 
         self.loadData()
 
@@ -373,6 +373,21 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                             } else {
                                 if let wself = self {
                                     wself.showMeetRequest(true, status: .Accepted)
+
+                                    // add my sent message on the last of the messages
+                                    if var myLastMessage = data {
+                                        if myLastMessage.messageType == .Approve {
+                                            myLastMessage.message = SSChatMessageType.Approve.rawValue
+                                            myLastMessage.messageType = .System
+                                        }
+                                        myLastMessage.profileImageUrl = wself.myImageUrl
+                                        wself.messages.append(myLastMessage)
+
+                                        wself.tableViewChat.reloadData()
+
+                                        let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                                        wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                                    }
                                 }
                             }
                         })

@@ -12,11 +12,13 @@ import GoogleMaps
 let kMapButtonTitle: String = "MAP"
 let kListButtonTitle: String = "LIST"
 
-class SSMasterViewController: UIViewController {
+class SSMasterViewController: UIViewController, UITabBarDelegate {
 
     var barButtonItems: SSNavigationBarItems!
     var segButton1: UIButton!
     var segButton2: UIButton!
+
+    @IBOutlet var tabBar: UITabBar!
 
     @IBOutlet var mapView: UIView!
     @IBOutlet var listView: UIView!
@@ -280,6 +282,33 @@ class SSMasterViewController: UIViewController {
                     }
                 })
             }
+        }
+    }
+
+    // MARK: - UITabBarDelegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.tag {
+        case 0, 1:
+            self.mapView.isHidden = item.tag != 0
+            self.listView.isHidden = item.tag != 1
+
+            let mapVC: MapViewController = self.childViewControllers[0] as! MapViewController
+            let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
+            if !self.listView.isHidden {
+                let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation != nil ? mapVC.currentLocation : mapVC.mainView.camera.target
+                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.isSelected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.filterModel = mapVC.filterModel
+                listVC.initView()
+            } else {
+                mapVC.filterModel = listVC.filterModel
+                mapVC.initView()
+            }
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
         }
     }
 }

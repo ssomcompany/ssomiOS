@@ -25,52 +25,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="52.5" width="375" height="497.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Grf-fV-pHB">
-                                <rect key="frame" x="0.0" y="52.5" width="22" height="497.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="550"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC7-ei-KcX" userLabel="I Pay Button">
-                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="52.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="내가 쏨">
-                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hR3-hZ-JGs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puq-gM-UxI" userLabel="You Pay Button">
-                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="52.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="니가 쏴">
-                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapYouPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2nP-id-IzE"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REB-B3-KMj">
-                                <rect key="frame" x="0.0" y="49.5" width="187.5" height="3"/>
-                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="An0-nF-6AW"/>
-                                </constraints>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
-                                <rect key="frame" x="0.0" y="52.5" width="375" height="76"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
                                 </constraints>
@@ -119,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
-                                <rect key="frame" x="19" y="75.5" width="46" height="46.5"/>
+                                <rect key="frame" x="19" y="20" width="46" height="46.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1Me-Mu-v0q" secondAttribute="height" multiplier="55:56" id="uHv-AS-Scr"/>
                                 </constraints>
@@ -135,34 +98,23 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3k0-s1-1ct" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="51:603" id="0vH-ey-tik"/>
-                            <constraint firstItem="TOk-Md-hmy" firstAttribute="top" secondItem="puq-gM-UxI" secondAttribute="bottom" id="3XK-AA-Gg6"/>
-                            <constraint firstAttribute="trailing" secondItem="puq-gM-UxI" secondAttribute="trailing" id="4vs-KF-zT6"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="5Mz-wL-A3s"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="leading" secondItem="VC7-ei-KcX" secondAttribute="trailing" id="6aJ-zk-nYm"/>
-                            <constraint firstItem="REB-B3-KMj" firstAttribute="leading" secondItem="VC7-ei-KcX" secondAttribute="leading" id="7v2-Ef-Qbc"/>
+                            <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="38z-ch-TGt"/>
+                            <constraint firstItem="TOk-Md-hmy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6gu-VW-dH1"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="bottom" constant="23" id="Ay6-7D-5kX"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BUB-9t-wde"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="57:603" id="BWl-RU-bFy"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="51:603" id="C1H-yq-HLp"/>
-                            <constraint firstItem="2ul-5f-kgq" firstAttribute="top" secondItem="VC7-ei-KcX" secondAttribute="bottom" id="Fgr-4o-IOg"/>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IHi-Ee-4jy"/>
+                            <constraint firstItem="2ul-5f-kgq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="K7f-Ng-zn2"/>
                             <constraint firstItem="aCj-wE-maY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="69:603" id="Odu-HR-kN0"/>
                             <constraint firstItem="2ul-5f-kgq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="V5U-h0-Y49"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="57:603" id="Xwe-tl-ft8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Grf-fV-pHB" secondAttribute="bottom" id="aqb-IJ-DBn"/>
                             <constraint firstAttribute="trailing" secondItem="TOk-Md-hmy" secondAttribute="trailing" id="bNm-mO-izV"/>
-                            <constraint firstItem="puq-gM-UxI" firstAttribute="width" secondItem="VC7-ei-KcX" secondAttribute="width" id="cPg-TH-oVZ"/>
-                            <constraint firstItem="VC7-ei-KcX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dE9-kc-Dll"/>
-                            <constraint firstItem="REB-B3-KMj" firstAttribute="bottom" secondItem="VC7-ei-KcX" secondAttribute="bottom" id="dKK-iP-S24"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TOk-Md-hmy" secondAttribute="bottom" id="eAY-sy-q0v"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="19" id="eM5-Fb-GdN"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="width" secondItem="TOk-Md-hmy" secondAttribute="width" multiplier="24:414" id="hQU-Jv-aYA"/>
-                            <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="VC7-ei-KcX" secondAttribute="bottom" constant="23" id="hlG-uj-tkM"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lhs-GT-3Oj"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="top" secondItem="TOk-Md-hmy" secondAttribute="top" id="p1X-gp-5SK"/>
                             <constraint firstAttribute="trailing" secondItem="aCj-wE-maY" secondAttribute="trailing" constant="19" id="piM-CJ-3vt"/>
                             <constraint firstItem="3k0-s1-1ct" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="19" id="u2G-vD-sBZ"/>
-                            <constraint firstItem="REB-B3-KMj" firstAttribute="width" secondItem="VC7-ei-KcX" secondAttribute="width" id="uKj-Hb-DqJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aCj-wE-maY" secondAttribute="bottom" constant="20" id="vxQ-Zw-VZV"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="x0S-cE-bND"/>
                             <constraint firstAttribute="trailing" secondItem="2ul-5f-kgq" secondAttribute="trailing" id="x2m-zs-evF"/>
@@ -194,15 +146,11 @@
                         </connections>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnIPay" destination="VC7-ei-KcX" id="ZSa-sa-OCM"/>
-                        <outlet property="btnYouPay" destination="puq-gM-UxI" id="V1F-Ej-WZH"/>
-                        <outlet property="constViewPayButtonLineLeadingToButtonIPay" destination="7v2-Ef-Qbc" id="kTQ-XV-TNq"/>
                         <outlet property="mainView" destination="TOk-Md-hmy" id="aGJ-vw-d5K"/>
                         <outlet property="myLocationButton" destination="1Me-Mu-v0q" id="SSr-Eg-NK7"/>
                         <outlet property="navigationItem" destination="JzG-2m-bAY" id="iDJ-wG-R6L"/>
                         <outlet property="viewBottomInfo" destination="3k0-s1-1ct" id="TJE-qL-He7"/>
                         <outlet property="viewFilterBackground" destination="Pu5-ru-cnK" id="4O7-QZ-LCm"/>
-                        <outlet property="viewPayButtonLine" destination="REB-B3-KMj" id="7Zi-Rx-4Me"/>
                         <outlet property="writeButton" destination="aCj-wE-maY" id="dyw-E3-jIZ"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="CUJ-52-fKz"/>
                     </connections>
@@ -367,7 +315,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
-                                <rect key="frame" x="0.0" y="52.5" width="375" height="497.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="j6y-F4-SAC" id="ekK-6e-cSP"/>
@@ -375,47 +323,8 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpO-RO-Jix">
-                                <rect key="frame" x="0.0" y="52.5" width="22" height="497.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="550"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-Da-teJ" userLabel="I Pay Button">
-                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="52.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="내가 쏨">
-                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapIPayButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="opa-I4-0Bz"/>
-                                    <action selector="tapIPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKq-fa-mdY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-m4-vLX" userLabel="You Pay Button">
-                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="52.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="니가 쏴">
-                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapYouPayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Li1-Ut-Hxv"/>
-                                    <action selector="tapYouPayButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="fXD-Eb-tyM"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmH-tP-FXB">
-                                <rect key="frame" x="0.0" y="49.5" width="187.5" height="3"/>
-                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="X7Y-lG-zCi"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
                                 <rect key="frame" x="19" y="480" width="47" height="47"/>
@@ -467,31 +376,20 @@
                             <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="19" id="3Br-So-WTx"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="bottom" constant="23" id="8cd-P3-BhS"/>
                             <constraint firstItem="4cE-r7-rmG" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="51:603" id="9BQ-rH-0DO"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="B1H-7V-VWS"/>
-                            <constraint firstItem="wmH-tP-FXB" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="leading" id="GQY-Mp-re4"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="LdE-6x-8lG"/>
+                            <constraint firstItem="W9o-t2-VQr" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="Fqf-vg-GZy"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="bottom" id="Lrr-7r-ctf"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="57:603" id="Pc7-67-BuD"/>
                             <constraint firstItem="6oW-Xv-XcV" firstAttribute="centerY" secondItem="4cE-r7-rmG" secondAttribute="centerY" id="Pd0-5w-sez"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="mpO-RO-Jix" secondAttribute="bottom" id="QQr-Cm-hTG"/>
                             <constraint firstItem="6oW-Xv-XcV" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="69:603" id="R5C-Aa-iJA"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="width" secondItem="OM2-Da-teJ" secondAttribute="width" id="VNn-1C-2Al"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="6oW-Xv-XcV" secondAttribute="bottom" constant="20" id="auv-TR-VXw"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="bht-oi-3Rw"/>
-                            <constraint firstItem="W9o-t2-VQr" firstAttribute="top" secondItem="hYp-m4-vLX" secondAttribute="bottom" id="czW-I0-1JH"/>
                             <constraint firstItem="W9o-t2-VQr" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="fjK-f6-gdV"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="width" secondItem="W9o-t2-VQr" secondAttribute="width" multiplier="24:414" id="g7W-Z4-0fy"/>
-                            <constraint firstItem="OM2-Da-teJ" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="57:603" id="kR5-QK-ad9"/>
                             <constraint firstItem="HDU-tQ-2vC" firstAttribute="centerY" secondItem="hHc-Mm-TP3" secondAttribute="centerY" id="kk8-kl-n5C"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" id="mBm-St-mEp"/>
                             <constraint firstAttribute="trailing" secondItem="W9o-t2-VQr" secondAttribute="trailing" id="mGh-xm-IEo"/>
-                            <constraint firstItem="wmH-tP-FXB" firstAttribute="bottom" secondItem="OM2-Da-teJ" secondAttribute="bottom" id="mjb-fp-PMg"/>
-                            <constraint firstAttribute="trailing" secondItem="hYp-m4-vLX" secondAttribute="trailing" id="ogN-wf-ZLy"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="top" id="ohL-uo-y07"/>
                             <constraint firstItem="HDU-tQ-2vC" firstAttribute="centerX" secondItem="hHc-Mm-TP3" secondAttribute="centerX" id="uUX-2e-gMC"/>
-                            <constraint firstItem="hYp-m4-vLX" firstAttribute="leading" secondItem="OM2-Da-teJ" secondAttribute="trailing" id="vch-Oj-4EI"/>
                             <constraint firstItem="4cE-r7-rmG" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" constant="19" id="wN3-Wb-nF2"/>
-                            <constraint firstItem="wmH-tP-FXB" firstAttribute="width" secondItem="OM2-Da-teJ" secondAttribute="width" id="ypa-wq-qvv"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -520,15 +418,11 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnIPay" destination="OM2-Da-teJ" id="JsT-p4-qgJ"/>
                         <outlet property="btnWrite" destination="6oW-Xv-XcV" id="9hG-yZ-94B"/>
-                        <outlet property="btnYouPay" destination="hYp-m4-vLX" id="Sjq-gE-zbw"/>
-                        <outlet property="constViewPayButtonBottomLineLeadingToButtonIPay" destination="GQY-Mp-re4" id="3QW-a4-6KW"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
                         <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
                         <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
                         <outlet property="viewNoSsom" destination="HDU-tQ-2vC" id="v51-Vr-Z7p"/>
-                        <outlet property="viewPayButtonBottomLine" destination="wmH-tP-FXB" id="h20-dc-dDN"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>
                     </connections>
                 </viewController>
@@ -1074,11 +968,9 @@
                                     </tabBarItem>
                                     <tabBarItem tag="1" image="footIconListOff" selectedImage="footIconListOn" id="Zgc-L9-ojB">
                                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="50"/>
                                     </tabBarItem>
                                     <tabBarItem tag="2" title="" image="footIconHeartOff" selectedImage="footIconHeartOn" id="R4Y-xA-Wiq">
                                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="20"/>
                                     </tabBarItem>
                                     <tabBarItem tag="3" title="" image="footIconChatOff" selectedImage="footIconChatOn" id="ner-MZ-pgb">
                                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>

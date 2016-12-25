@@ -37,7 +37,8 @@ extension UIButton {
 class SSFilterView: UIView {
     @IBOutlet var filterMainView: UIView!
 
-    @IBOutlet var constLbAgeTop: NSLayoutConstraint!
+    @IBOutlet var btnFilterSsom: UIButton!
+    @IBOutlet var btnFilterSsoseyo: UIButton!
 
     @IBOutlet var filter20beginAgeButton: UIButton!
     @IBOutlet var filter20middleAgeButton: UIButton!
@@ -77,10 +78,14 @@ class SSFilterView: UIView {
 
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
 
-        if UIScreen.main.bounds.width <= 320 {
-            self.constLbAgeTop.constant = self.constLbAgeTop.constant / 2
-            self.constPeopleLabelTop.constant = self.constPeopleLabelTop.constant / 2
-        }
+        self.btnFilterSsom.layer.borderWidth = 0.3
+        self.btnFilterSsom.layer.borderColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
+
+        self.btnFilterSsoseyo.layer.borderWidth = 0.3
+        self.btnFilterSsoseyo.layer.borderColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
+
+        self.btnFilterSsom.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpOutside)
+        self.btnFilterSsoseyo.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpOutside)
 
         self.layoutIfNeeded()
         self.filterMainView.layer.cornerRadius = 25
@@ -171,6 +176,9 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapInitializieFilter(_ sender: AnyObject) {
+        self.btnFilterSsom.isSelected = true
+        self.btnFilterSsoseyo.isSelected = true
+
         self.filter20beginAgeButton.isSelected = true
         self.filter20middleAgeButton.isSelected = true
         self.filter20lateAgeButton.isSelected = true
@@ -192,6 +200,13 @@ class SSFilterView: UIView {
 
     @IBAction func tapApplyFilter(_ sender: AnyObject) {
         var filterValue: SSFilterViewModel = SSFilterViewModel()
+
+        if self.btnFilterSsom.isSelected {
+            filterValue.ssomType.append(.SSOM)
+        }
+        if self.btnFilterSsoseyo.isSelected {
+            filterValue.ssomType.append(.SSOSEYO)
+        }
 
         if self.filter20beginAgeButton.isSelected {
             filterValue.ageTypes.append(.AgeEarly20)

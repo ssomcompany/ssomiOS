@@ -9,18 +9,21 @@
 import Foundation
 
 public struct SSFilterViewModel {
+    var ssomType: [SSType]
     var ageTypes: [SSAgeAreaType]
 
     var peopleCountTypes: [SSPeopleCountStringType]
 
     init() {
+        self.ssomType = []
         self.ageTypes = []
         self.peopleCountTypes = []
     }
 
-    init(ageType: SSAgeAreaType, peopleCount: SSPeopleCountStringType) {
+    init(ssomType: SSType! = nil, ageType: SSAgeAreaType, peopleCount: SSPeopleCountStringType) {
         self.init()
 
+        self.ssomType = ssomType == nil ? [.SSOM, .SSOSEYO] : [ssomType]
         self.ageTypes.append(ageType)
         self.peopleCountTypes.append(peopleCount)
     }

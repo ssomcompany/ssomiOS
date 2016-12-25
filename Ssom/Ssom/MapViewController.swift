@@ -14,10 +14,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
-    @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var viewPayButtonLine: UIView!
-    @IBOutlet var constViewPayButtonLineLeadingToButtonIPay: NSLayoutConstraint!
-    @IBOutlet var btnYouPay: UIButton!
 
     @IBOutlet var viewBottomInfo: UIView!
     @IBOutlet var viewFilterBackground: UIView!
@@ -103,16 +99,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         self.viewBottomInfo.layoutIfNeeded()
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
-
-        self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        self.btnIPay.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.btnIPay.layer.shadowRadius = 1
-        self.btnIPay.layer.shadowOpacity = 1
-
-        self.btnYouPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        self.btnYouPay.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.btnYouPay.layer.shadowRadius = 1
-        self.btnYouPay.layer.shadowOpacity = 1
 
         self.initMapView()
 
@@ -264,7 +250,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             let sellString: String = data.ssomType.rawValue
             let isSell = sellString == SSType.SSOM.rawValue
 
-            if self.btnIPay.isSelected {
+            if let filter = self.filterModel {
+                if filter.ssomType == [.SSOM] {
+                    if isSell {
+                        self.datasForSsom.append(data)
+                        if let imageUrl:String = data.imageUrl {
+                            self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
+                        } else {
+                            self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
+                        }
+                    }
+                }
+
+                if filter.ssomType == [.SSOSEYO] {
+                    if !isSell {
+                        self.datasForSsoseyo.append(data)
+                        if let imageUrl:String = data.imageUrl {
+                            self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
+                        } else {
+                            self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
+                        }
+                    }
+                }
+            } else {
                 if isSell {
                     self.datasForSsom.append(data)
                     if let imageUrl:String = data.imageUrl {
@@ -272,11 +280,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     } else {
                         self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
                     }
-                }
-            }
-
-            if self.btnYouPay.isSelected {
-                if !isSell {
+                } else {
                     self.datasForSsoseyo.append(data)
                     if let imageUrl:String = data.imageUrl {
                         self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
@@ -363,38 +367,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
 
-    @IBAction func tapIPayButton(_ sender: AnyObject?) {
-
-        self.constViewPayButtonLineLeadingToButtonIPay.constant = 0
-
-        UIView.animate(withDuration: 0.3, animations: {
-
-            self.btnIPay.isSelected = true
-            self.viewPayButtonLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
-            self.view.layoutIfNeeded()
-            self.btnYouPay.isSelected = false
-        }, completion: { (finish) in
-            self.showMarkers()
-        }) 
-
-    }
-
-    @IBAction func tapYouPayButton(_ sender: AnyObject?) {
-
-        self.constViewPayButtonLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
-
-        UIView.animate(withDuration: 0.3, animations: {
-
-            self.btnYouPay.isSelected = true
-            self.viewPayButtonLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
-            self.view.layoutIfNeeded()
-            self.btnIPay.isSelected = false
-        }, completion: { (finish) in
-            self.showMarkers()
-        }) 
-
-    }
-
     @IBAction func tapWriteButton(_ sender: AnyObject) {
 
         if self.isAlreadyWrittenMySsom {
@@ -404,18 +376,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    if self.btnIPay.isSelected && self.mySsom.ssomType != .SSOM {
-                        self.tapYouPayButton(nil)
-
+                    if (self.filterModel?.ssomType)! == [.SSOM] && self.mySsom.ssomType != .SSOM {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)
                                 wself.writeButton.layer.transform = CATransform3DIdentity
                             }
                         }
-                    } else if self.btnYouPay.isSelected && self.mySsom.ssomType != .SSOSEYO {
-                        self.tapIPayButton(nil)
-
+                    } else if (self.filterModel?.ssomType)! == [.SSOSEYO] && self.mySsom.ssomType != .SSOSEYO {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)
@@ -454,7 +422,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             let vc: ListViewController = segue.destination as! ListViewController
 
             let nowLocation: CLLocationCoordinate2D = self.currentLocation
-            vc.mainViewModel = SSMainViewModel(datas: self.datasOfAllSsom, isSell: self.btnIPay.isSelected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+            vc.mainViewModel = SSMainViewModel(datas: self.datasOfAllSsom, isSell: (self.filterModel?.ssomType)! == [.SSOM], nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
         }
 
         if (segue.identifier == "SSWriteViewSegueFromMain") {
@@ -482,15 +450,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.scrollDetailView.frame = UIScreen.main.bounds
         self.scrollDetailView.delegate = self
 
-        if self.btnIPay.isSelected {
-            self.scrollDetailView.ssomType = .SSOM
-            self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOM)
-        }
-        if self.btnYouPay.isSelected {
-            self.scrollDetailView.ssomType = .SSOSEYO
-            self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOSEYO)
+        if let filter = self.filterModel {
+            if filter.ssomType == [.SSOM] {
+                self.scrollDetailView.ssomType = .SSOM
+                self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
+                self.scrollDetailView.changeTheme(.SSOM)
+            }
+            if filter.ssomType == [.SSOSEYO] {
+                self.scrollDetailView.ssomType = .SSOSEYO
+                self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
+                self.scrollDetailView.changeTheme(.SSOSEYO)
+            }
+        } else {
+            if model.ssomType == .SSOM {
+                self.scrollDetailView.ssomType = .SSOM
+                self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
+                self.scrollDetailView.changeTheme(.SSOM)
+            }
+            if model.ssomType == .SSOSEYO {
+                self.scrollDetailView.ssomType = .SSOSEYO
+                self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
+                self.scrollDetailView.changeTheme(.SSOSEYO)
+            }
         }
 
         self.navigationController?.navigationBar.barStyle = .black

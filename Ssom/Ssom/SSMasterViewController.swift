@@ -215,7 +215,7 @@ class SSMasterViewController: UIViewController, UITabBarDelegate {
             let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
             if !self.listView.isHidden {
                 let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation != nil ? mapVC.currentLocation : mapVC.mainView.camera.target
-                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.isSelected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: (mapVC.filterModel?.ssomType)! == [.SSOM], nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
                 listVC.filterModel = mapVC.filterModel
                 listVC.initView()
             } else {
@@ -296,7 +296,7 @@ class SSMasterViewController: UIViewController, UITabBarDelegate {
             let listVC: ListViewController = self.childViewControllers[1] as! ListViewController
             if !self.listView.isHidden {
                 let nowLocation: CLLocationCoordinate2D = mapVC.currentLocation != nil ? mapVC.currentLocation : mapVC.mainView.camera.target
-                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: mapVC.btnIPay.isSelected, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+                listVC.mainViewModel = SSMainViewModel(datas: mapVC.datasOfAllSsom, isSell: (mapVC.filterModel?.ssomType)! == [.SSOM], nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
                 listVC.filterModel = mapVC.filterModel
                 listVC.initView()
             } else {

@@ -21,11 +21,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet var btnWrite: UIButton!
 
-    @IBOutlet var btnIPay: UIButton!
-    @IBOutlet var viewPayButtonBottomLine: UIView!
-    @IBOutlet var constViewPayButtonBottomLineLeadingToButtonIPay: NSLayoutConstraint!
-    @IBOutlet var btnYouPay: UIButton!
-
     var mainViewModel: SSMainViewModel
     lazy var _datasOfFilteredSsom: [SSViewModel] = []
     var datas: [SSViewModel] {
@@ -103,22 +98,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.height / 2
 
-        self.btnIPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        self.btnIPay.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.btnIPay.layer.shadowRadius = 1
-        self.btnIPay.layer.shadowOpacity = 1
-
-        self.btnYouPay.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        self.btnYouPay.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.btnYouPay.layer.shadowRadius = 1
-        self.btnYouPay.layer.shadowOpacity = 1
-
-        if self.mainViewModel.isSell {
-            self.tapIPayButton(self.btnIPay);
-        } else {
-            self.tapYouPayButton(self.btnYouPay);
-        }
-
         self.closeFilterView()
         self.closeScrollView(false)
     }
@@ -183,46 +162,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    @IBAction func tapIPayButton(_ sender: AnyObject?) {
-        self.view.layoutIfNeeded()
-
-        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = 0
-
-        UIView.animate(withDuration: 0.3, animations: {
-
-            self.btnIPay.isSelected = true;
-            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
-            self.btnYouPay.isSelected = false;
-
-            self.view.layoutIfNeeded()
-        }, completion: { (finish) in
-
-            self.mainViewModel.isSell = true;
-
-            self.loadData()
-        }) 
-    }
-
-    @IBAction func tapYouPayButton(_ sender: AnyObject?) {
-        self.view.layoutIfNeeded()
-
-        self.constViewPayButtonBottomLineLeadingToButtonIPay.constant = self.btnIPay.bounds.width
-
-        UIView.animate(withDuration: 0.3, animations: {
-            
-            self.btnIPay.isSelected = false;
-            self.viewPayButtonBottomLine.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
-            self.btnYouPay.isSelected = true;
-
-            self.view.layoutIfNeeded()
-        }, completion: { (finish) in
-
-            self.mainViewModel.isSell = false;
-
-            self.loadData()
-        }) 
-    }
-
     @IBAction func tapFilterButton(_ sender: AnyObject) {
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
@@ -269,18 +208,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    if self.btnIPay.isSelected && self.mySsom.ssomType != .SSOM {
-                        self.tapYouPayButton(nil)
-
+                    if self.filterModel.ssomType == [.SSOM] && self.mySsom.ssomType != .SSOM {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)
                                 wself.btnWrite.layer.transform = CATransform3DIdentity
                             }
                         }
-                    } else if self.btnYouPay.isSelected && self.mySsom.ssomType != .SSOSEYO {
-                        self.tapIPayButton(nil)
-
+                    } else if self.filterModel.ssomType == [.SSOSEYO] && self.mySsom.ssomType != .SSOSEYO {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)
@@ -396,12 +331,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.scrollDetailView.frame = UIScreen.main.bounds
         self.scrollDetailView.delegate = self
 
-        if self.btnIPay.isSelected {
+        if self.filterModel.ssomType == [.SSOM] {
             self.scrollDetailView.ssomType = .SSOM
             self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
             self.scrollDetailView.changeTheme(.SSOM)
         }
-        if self.btnYouPay.isSelected {
+        if self.filterModel.ssomType == [.SSOSEYO] {
             self.scrollDetailView.ssomType = .SSOSEYO
             self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
             self.scrollDetailView.changeTheme(.SSOSEYO)

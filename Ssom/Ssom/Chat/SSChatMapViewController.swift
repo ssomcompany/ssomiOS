@@ -104,7 +104,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
-        let borderOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 64.9))
+        let borderOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "miniGreen" : "miniRed")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 64.9))
         let coverOfProfileImage: UIImage = UIImage.resizeImage(UIImage(named: isSell ? "ssomIngGreen" : "ssomIngRed")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 56.2))
         let maskOfProfileImage: UIImage = UIImage.mergeImages(firstImage: coverOfProfileImage, secondImage: borderOfProfileImage, x: 0, y: 0)
 

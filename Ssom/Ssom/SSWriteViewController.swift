@@ -291,7 +291,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             self.btnIPay.isSelected = true
             self.btnYouPay.isSelected = false
-            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonGreen.png"), for: UIControlState())
+            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonGreen"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
                 self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
@@ -326,7 +326,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
 
             self.btnIPay.isSelected = false
             self.btnYouPay.isSelected = true
-            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonRed.png"), for: UIControlState())
+            self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonRed"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
                 self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)

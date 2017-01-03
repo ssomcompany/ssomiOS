@@ -113,7 +113,7 @@ class SSMasterViewController: UIViewController, UITabBarDelegate {
 
         let leftBarButtonItem: UIBarButtonItem = self.navigationItem.leftBarButtonItem!
         leftBarButtonItem.title = ""
-        leftBarButtonItem.image = UIImage.resizeImage(UIImage(named: "manu.png")!, frame: CGRect(x: 0, y: 0, width: 21, height: 14))
+        leftBarButtonItem.image = UIImage.resizeImage(UIImage(named: "manu")!, frame: CGRect(x: 0, y: 0, width: 21, height: 14))
         leftBarButtonItem.target = self
         leftBarButtonItem.action = #selector(tapMenu)
 

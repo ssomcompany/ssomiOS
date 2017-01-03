@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlc-QC-6Z4">
                         <rect key="frame" x="240" y="0.0" width="80" height="80"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="treshIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="OUg-xt-IrD">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="treshIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OUg-xt-IrD">
                                 <rect key="frame" x="35" y="25" width="11" height="14"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨 끝내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXG-6g-iJH">
@@ -198,6 +198,6 @@
         <image name="iconWait" width="23" height="28"/>
         <image name="noneProfile" width="45" height="45"/>
         <image name="ssomIngGreenSmall" width="46" height="46"/>
-        <image name="treshIcon.png" width="11" height="14"/>
+        <image name="treshIcon" width="11" height="14"/>
     </resources>
 </document>

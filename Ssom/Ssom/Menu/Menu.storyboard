@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9GA-hO-09J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9GA-hO-09J">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -301,7 +301,7 @@ Cg
                                     <constraint firstAttribute="width" secondItem="6VX-t1-ORu" secondAttribute="height" multiplier="155:53" id="TQw-hq-GpO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="취소" backgroundImage="buttonCancel.png">
+                                <state key="normal" title="취소" backgroundImage="buttonCancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -314,7 +314,7 @@ Cg
                                     <constraint firstAttribute="width" secondItem="bfC-w8-NZf" secondAttribute="height" multiplier="155:53" id="C5a-Q5-p9P"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="저장" backgroundImage="acceptButtonRed.png">
+                                <state key="normal" title="저장" backgroundImage="acceptButtonRed">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -634,7 +634,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="TodayPhotoNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sCp-bE-o3d" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Q7-76-UnS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Q7-76-UnS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -657,7 +657,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="HeartNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J6i-fC-qW8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zj7-ly-MBw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zj7-ly-MBw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -677,8 +677,8 @@ Cg
         </scene>
     </scenes>
     <resources>
-        <image name="acceptButtonRed.png" width="138" height="51"/>
-        <image name="buttonCancel.png" width="138" height="49"/>
+        <image name="acceptButtonRed" width="161" height="58"/>
+        <image name="buttonCancel" width="161" height="58"/>
         <image name="closeWhite" width="18" height="17"/>
         <image name="greenRibSmall" width="42" height="20"/>
         <image name="heartShadowX2" width="52" height="35"/>

@@ -102,7 +102,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-6Z-5cd" userLabel="Bottom Line View">
                                 <rect key="frame" x="0.0" y="93" width="414" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="crZ-Z8-q2E"/>
@@ -172,7 +172,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="line.png" width="480" height="1"/>
+        <image name="line" width="323" height="1"/>
         <image name="listMarkGreen" width="16" height="16"/>
     </resources>
 </document>

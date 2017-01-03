@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,6 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11c-dW-v1c">
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="DVK-fx-GiV"/>
@@ -20,19 +24,32 @@
                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <state key="normal" title="Finish"/>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomLogoStyle01.png" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-Cr-BZU"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Cb-1N-Rvb"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-na-T2i"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minired.png" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-BJ-ot1"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minigreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="som-2j-NBF"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomLogoStyle01.png" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-Cr-BZU">
+                    <rect key="frame" x="144" y="154.5" width="87" height="126"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngRed" translatesAutoresizingMaskIntoConstraints="NO" id="1Cb-1N-Rvb">
+                    <rect key="frame" x="222" y="307.5" width="52" height="52"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-na-T2i">
+                    <rect key="frame" x="158" y="325.5" width="59" height="16"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="miniRed" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-BJ-ot1">
+                    <rect key="frame" x="220" y="307" width="56" height="65"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="miniGreen" translatesAutoresizingMaskIntoConstraints="NO" id="som-2j-NBF">
+                    <rect key="frame" x="99" y="307" width="56" height="65"/>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P60-hh-S9Z">
+                    <rect key="frame" x="106.5" y="386.5" width="162" height="41"/>
                     <string key="text">만남이 성사되었습니다!
 즐거운 쏨타임 되세요 =)</string>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngGreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="sG8-4W-KuG"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ssomIngGreen" translatesAutoresizingMaskIntoConstraints="NO" id="sG8-4W-KuG">
+                    <rect key="frame" x="101" y="307.5" width="52" height="52"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -61,10 +78,10 @@
     </objects>
     <resources>
         <image name="bow.png" width="59" height="16"/>
-        <image name="minigreen.png" width="57" height="67"/>
-        <image name="minired.png" width="57" height="67"/>
-        <image name="ssomIngGreen.png" width="52" height="52"/>
-        <image name="ssomIngRed.png" width="52" height="52"/>
+        <image name="miniGreen" width="56" height="65"/>
+        <image name="miniRed" width="56" height="65"/>
+        <image name="ssomIngGreen" width="52" height="52"/>
+        <image name="ssomIngRed" width="52" height="52"/>
         <image name="ssomLogoStyle01.png" width="87" height="126"/>
     </resources>
 </document>

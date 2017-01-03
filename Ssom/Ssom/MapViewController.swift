@@ -300,7 +300,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
 
-        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "minigreen.png" : "minired.png")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 64.9))
+        let maskOfProfileImage: UIImage = UIImage.resizeImage(UIImage.init(named: isSell ? "miniGreen" : "miniRed")!, frame: CGRect(x: 0, y: 0, width: 56.2, height: 64.9))
 
         if imageUrl != nil && imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
             SDWebImageManager.shared().downloadImage(with: URL(string: imageUrl+"?thumbnail=200"), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, cacheType, finish, imageURL) in

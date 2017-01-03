@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,32 +21,32 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Md-hmy" userLabel="Main View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Grf-fV-pHB">
-                                <rect key="frame" x="0.0" y="0.0" width="22" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="594"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow" translatesAutoresizingMaskIntoConstraints="NO" id="2ul-5f-kgq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k0-s1-1ct" userLabel="Bottom Info View">
-                                <rect key="frame" x="19" y="480" width="47" height="47"/>
+                                <rect key="frame" x="19" y="521" width="50" height="50"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-ru-cnK">
-                                        <rect key="frame" x="1" y="0.0" width="46" height="47"/>
+                                        <rect key="frame" x="1" y="0.0" width="49" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQd-kY-OEr" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="47" height="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="SQd-kY-OEr" secondAttribute="height" multiplier="1:1" id="hkM-eD-6Ss"/>
                                         </constraints>
@@ -69,7 +69,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCj-wE-maY">
-                                <rect key="frame" x="291.5" y="466.5" width="64.5" height="63.5"/>
+                                <rect key="frame" x="287" y="506" width="69" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aCj-wE-maY" secondAttribute="height" multiplier="76:75" id="tF1-Dk-mZM"/>
                                 </constraints>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Mu-v0q" userLabel="My Location Button">
-                                <rect key="frame" x="19" y="20" width="46" height="46.5"/>
+                                <rect key="frame" x="19" y="20" width="49" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1Me-Mu-v0q" secondAttribute="height" multiplier="55:56" id="uHv-AS-Scr"/>
                                 </constraints>
@@ -125,6 +125,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="TeU-4O-UAL"/>
                     <navigationItem key="navigationItem" id="JzG-2m-bAY">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="lJY-Id-bi2" userLabel="Menu"/>
@@ -159,6 +160,25 @@
             </objects>
             <point key="canvasLocation" x="1257" y="427"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jrh-df-xgl">
+            <objects>
+                <tabBarController id="4gj-Da-ejC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="DUP-rM-LbV"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="CIa-sc-Dex">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="PvD-Up-dWj"/>
+                        <segue destination="j6y-F4-SAC" kind="relationship" relationship="viewControllers" id="gyR-KU-Zad"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5I7-nV-KKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47" y="1467"/>
+        </scene>
         <!--List View Controller-->
         <scene sceneID="GoR-vV-C1c">
             <objects>
@@ -168,11 +188,11 @@
                         <viewControllerLayoutGuide type="bottom" id="iLn-76-4kV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hHc-Mm-TP3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDU-tQ-2vC">
-                                <rect key="frame" x="73" y="220.5" width="228" height="109"/>
+                                <rect key="frame" x="73" y="242.5" width="228" height="109"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCoupleGray" translatesAutoresizingMaskIntoConstraints="NO" id="1jh-2X-vKM">
                                         <rect key="frame" x="90" y="0.0" width="48" height="44"/>
@@ -315,7 +335,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="94" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-t2-VQr" userLabel="Ssom List Table View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="j6y-F4-SAC" id="ekK-6e-cSP"/>
@@ -323,18 +343,18 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpO-RO-Jix">
-                                <rect key="frame" x="0.0" y="0.0" width="22" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="594"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
-                                <rect key="frame" x="19" y="480" width="47" height="47"/>
+                                <rect key="frame" x="19" y="521" width="50" height="50"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-aR-jK1">
-                                        <rect key="frame" x="1" y="0.0" width="46" height="46"/>
+                                        <rect key="frame" x="1" y="0.0" width="49" height="49"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFS-Jw-YTg" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="47" height="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tFS-Jw-YTg" secondAttribute="height" multiplier="1:1" id="XnW-gQ-AAs"/>
                                         </constraints>
@@ -358,7 +378,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-Xv-XcV">
-                                <rect key="frame" x="291.5" y="466.5" width="64.5" height="63.5"/>
+                                <rect key="frame" x="287" y="506" width="69" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6oW-Xv-XcV" secondAttribute="height" multiplier="76:75" id="lkW-Fc-uDD"/>
                                 </constraints>
@@ -397,11 +417,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="91A-bc-gkg"/>
                     <navigationItem key="navigationItem" id="lFp-Gg-7Ws">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="by3-ot-9zM" userLabel="Menu"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="UaL-uS-KtH">
-                            <rect key="frame" x="212.5" y="7" width="175" height="30"/>
+                            <rect key="frame" x="95" y="7" width="175" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Map"/>
@@ -440,56 +461,56 @@
                         <viewControllerLayoutGuide type="bottom" id="886-fy-T46"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n3k-wc-hNq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-pw-n2I" userLabel="Profile View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoMapbg" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-Bg-Hra" userLabel="Profile Bg Image View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xip-mw-Qj2" userLabel="Profile Bg View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writePhotoArea.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bpd-P8-zgt" userLabel="Photo Area Bg Image View">
-                                        <rect key="frame" x="33" y="0.0" width="197" height="165.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writePhotoArea" translatesAutoresizingMaskIntoConstraints="NO" id="Bpd-P8-zgt" userLabel="Photo Area Bg Image View">
+                                        <rect key="frame" x="33" y="0.0" width="213" height="179"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Bpd-P8-zgt" secondAttribute="height" multiplier="241:202" id="WgZ-ZT-aMb"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-IU-A95" userLabel="Photo Area Gradation Image View">
-                                        <rect key="frame" x="42" y="117.5" width="179" height="40"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoShadow" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-IU-A95" userLabel="Photo Area Gradation Image View">
+                                        <rect key="frame" x="42" y="131" width="195" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="KXm-Wb-nSJ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-3P-WDp" userLabel="Photo Default Image View">
-                                        <rect key="frame" x="57" y="41" width="149" height="76.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoDefault" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-3P-WDp" userLabel="Photo Default Image View">
+                                        <rect key="frame" x="57" y="41" width="165" height="90"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="23d-05-cuL" userLabel="Profile Image View">
-                                        <rect key="frame" x="42" y="9" width="179" height="147.5"/>
+                                        <rect key="frame" x="42" y="9" width="195" height="161"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pF2-h3-AGe" userLabel="Camera Button">
-                                        <rect key="frame" x="42" y="9" width="166" height="139.5"/>
-                                        <state key="normal" image="camera.png"/>
+                                        <rect key="frame" x="42" y="9" width="182" height="153"/>
+                                        <state key="normal" image="camera"/>
                                         <connections>
                                             <action selector="tapCameraButton:" destination="W7J-dT-Mhm" eventType="touchUpInside" id="n6y-LB-mLQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT6-Gk-hiB" userLabel="I Pay Button">
-                                        <rect key="frame" x="241" y="10" width="87" height="77"/>
+                                        <rect key="frame" x="257" y="14" width="87" height="77"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HT6-Gk-hiB" secondAttribute="height" multiplier="19:17" id="Aax-KU-lMm"/>
                                             <constraint firstAttribute="width" secondItem="HT6-Gk-hiB" secondAttribute="height" multiplier="76:67" id="gWF-d3-SSK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="   내가 쏨" backgroundImage="ssomSelectNone2.png">
+                                        <state key="normal" title="   내가 쏨" backgroundImage="ssomSelectNone2">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="ssomSelectGreen.png">
+                                        <state key="selected" backgroundImage="ssomSelectGreen">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -502,17 +523,17 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKC-ov-S6Q" userLabel="You Pay Button">
-                                        <rect key="frame" x="241" y="85" width="69" height="61"/>
+                                        <rect key="frame" x="257" y="94" width="69" height="61"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gKC-ov-S6Q" secondAttribute="height" multiplier="19:17" id="OpW-WX-sDo"/>
                                             <constraint firstAttribute="width" secondItem="gKC-ov-S6Q" secondAttribute="height" multiplier="76:67" id="kOo-MS-u8t"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="   니가 쏴" backgroundImage="ssomSelectNone.png">
+                                        <state key="normal" title="   니가 쏴" backgroundImage="ssomSelectNone">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="ssomSelectRed.png">
+                                        <state key="selected" backgroundImage="ssomSelectRed">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -570,7 +591,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리 나이는 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-Re-L2o" userLabel="Age Leading Text Label">
-                                <rect key="frame" x="64" y="172" width="73" height="17"/>
+                                <rect key="frame" x="64" y="186" width="73" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="u9S-wu-oW2"/>
                                 </constraints>
@@ -579,13 +600,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20대 초반" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-FR-tNQ" userLabel="Age Label">
-                                <rect key="frame" x="137" y="172" width="63" height="18"/>
+                                <rect key="frame" x="137" y="186" width="63" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miY-9s-Jb3" userLabel="Age Trailing Text Label">
-                                <rect key="frame" x="200" y="172" width="43" height="17"/>
+                                <rect key="frame" x="200" y="186" width="43" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="kqz-o9-1BP"/>
                                 </constraints>
@@ -594,7 +615,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
-                                <rect key="frame" x="64" y="196" width="248" height="32.5"/>
+                                <rect key="frame" x="64" y="210" width="248" height="32.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-SN-Qwf" userLabel="Age Button1">
                                         <rect key="frame" x="1" y="1" width="61" height="30.5"/>
@@ -679,13 +700,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-h6-nXu" userLabel="People Count Label">
-                                <rect key="frame" x="64" y="237.5" width="8" height="18"/>
+                                <rect key="frame" x="64" y="251.5" width="8" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 명이 기다리고 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-sc-hgh" userLabel="People Count Trailing Text Label">
-                                <rect key="frame" x="72" y="237.5" width="129" height="17"/>
+                                <rect key="frame" x="72" y="251.5" width="129" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="bTY-ct-QT1"/>
                                 </constraints>
@@ -694,7 +715,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
-                                <rect key="frame" x="64" y="261.5" width="248" height="32.5"/>
+                                <rect key="frame" x="64" y="275.5" width="248" height="32.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-hH-yT4" userLabel="People Button1">
                                         <rect key="frame" x="1" y="1" width="61" height="30.5"/>
@@ -779,14 +800,14 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-Tn-LzI">
-                                <rect key="frame" x="64" y="305" width="248" height="151"/>
+                                <rect key="frame" x="64" y="320" width="248" height="176"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
-                                <rect key="frame" x="64" y="337" width="242" height="86"/>
+                                <rect key="frame" x="64" y="364.5" width="242" height="86"/>
                                 <string key="text">오늘은 내가 쏜다!
 쏘고 싶은 메뉴와 센스 있는 멘트를
 적어보세요. 좋은 쏨을 만날 확률이
@@ -796,18 +817,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeLine" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-sx-d3O">
-                                <rect key="frame" x="64" y="462" width="248" height="1"/>
+                                <rect key="frame" x="64" y="502" width="248" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="wbz-2q-EyB"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l93-S8-Q3c" userLabel="Register Button">
-                                <rect key="frame" x="197" y="481" width="140" height="48"/>
+                                <rect key="frame" x="197" y="523" width="140" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="l93-S8-Q3c" secondAttribute="height" multiplier="155:53" id="Kr1-74-ReU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="등록하기" backgroundImage="acceptButtonGreen.png">
+                                <state key="normal" title="등록하기" backgroundImage="acceptButtonGreen">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -815,12 +836,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJ2-h7-Pzq" userLabel="Close Button">
-                                <rect key="frame" x="47" y="481" width="141" height="48"/>
+                                <rect key="frame" x="47" y="523" width="141" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zJ2-h7-Pzq" secondAttribute="height" multiplier="155:53" id="X3j-RP-aH9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="취소" backgroundImage="buttonCancel.png">
+                                <state key="normal" title="취소" backgroundImage="buttonCancel">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -828,7 +849,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프라이버시를 위해 등록한 글은 아침 9시 자동삭제되요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXj-YE-d2r">
-                                <rect key="frame" x="68" y="464" width="239" height="14"/>
+                                <rect key="frame" x="68" y="504" width="239" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -925,7 +946,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="scD-c4-l1x" kind="relationship" relationship="rootViewController" id="AdR-ld-dVi"/>
+                        <segue destination="4gj-Da-ejC" kind="relationship" relationship="rootViewController" id="OaJ-gx-UCm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ce7-Yc-I3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -945,13 +966,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iet-2Y-aRS" userLabel="Map Container View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="594"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="embed" identifier="SSMapViewSegue" id="ymv-nY-Vrx"/>
                                 </connections>
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvk-oq-itq" userLabel="List Container View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="594"/>
                                 <connections>
                                     <segue destination="j6y-F4-SAC" kind="embed" identifier="SSListViewSegue" id="4Qm-gh-L9K"/>
                                 </connections>
@@ -1031,9 +1052,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="acceptButtonGreen.png" width="241" height="87"/>
-        <image name="buttonCancel.png" width="139" height="50"/>
-        <image name="camera.png" width="27" height="24"/>
+        <image name="acceptButtonGreen" width="162" height="58"/>
+        <image name="buttonCancel" width="162" height="58"/>
+        <image name="camera" width="27" height="24"/>
         <image name="filterBtn" width="55" height="56"/>
         <image name="footIconChatOff" width="23" height="23"/>
         <image name="footIconChatOn" width="30" height="30"/>
@@ -1045,19 +1066,21 @@
         <image name="footIconMapOn" width="22" height="29"/>
         <image name="iconCoupleGray" width="48" height="44"/>
         <image name="locationFound" width="55" height="56"/>
-        <image name="mapShadow.png" width="621" height="114"/>
-        <image name="photoDefault.png" width="183" height="106"/>
+        <image name="mapShadow" width="414" height="79"/>
+        <image name="photoDefault" width="183" height="106"/>
         <image name="photoMapbg" width="482" height="234"/>
-        <image name="photoShadow.png" width="226" height="40"/>
-        <image name="ssomSelectGreen.png" width="138" height="126"/>
-        <image name="ssomSelectNone.png" width="102" height="92"/>
-        <image name="ssomSelectNone2.png" width="105" height="91"/>
-        <image name="ssomSelectRed.png" width="91" height="84"/>
+        <image name="photoShadow" width="226" height="40"/>
+        <image name="ssomSelectGreen" width="93" height="85"/>
+        <image name="ssomSelectNone" width="68" height="61"/>
+        <image name="ssomSelectNone2" width="70" height="61"/>
+        <image name="ssomSelectRed" width="92" height="84"/>
         <image name="writeBtn" width="76" height="76"/>
         <image name="writeLine" width="277" height="1"/>
-        <image name="writePhotoArea.png" width="243" height="202"/>
+        <image name="writePhotoArea" width="243" height="202"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ymv-nY-Vrx"/>
+        <segue reference="4Qm-gh-L9K"/>
         <segue reference="R5c-a2-BYk"/>
     </inferredMetricsTieBreakers>
 </document>

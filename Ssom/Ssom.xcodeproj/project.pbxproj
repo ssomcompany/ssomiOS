@@ -52,6 +52,7 @@
 		9764D9E11D35FF6400BBE4C6 /* SSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D9DD1D35FF6400BBE4C6 /* SSViewModel.swift */; };
 		9764D9E21D35FF6400BBE4C6 /* SSWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D9DE1D35FF6400BBE4C6 /* SSWriteViewModel.swift */; };
 		9764D9E41D36017B00BBE4C6 /* SSMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */; };
+		9766D9D71E1B981A0033CF0C /* SSTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9766D9D61E1B981A0033CF0C /* SSTabBarController.swift */; };
 		9773F95B1CB14E20008E79FE /* SSSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */; };
 		977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */; };
 		977DBA6D1D23A26A00CFD98F /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */; };
@@ -188,6 +189,7 @@
 		9764D9DD1D35FF6400BBE4C6 /* SSViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSViewModel.swift; path = ViewModel/SSViewModel.swift; sourceTree = "<group>"; };
 		9764D9DE1D35FF6400BBE4C6 /* SSWriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSWriteViewModel.swift; path = ViewModel/SSWriteViewModel.swift; sourceTree = "<group>"; };
 		9764D9E31D36017B00BBE4C6 /* SSMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMenuTableViewCell.xib; path = Menu/SSMenuTableViewCell.xib; sourceTree = "<group>"; };
+		9766D9D61E1B981A0033CF0C /* SSTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSTabBarController.swift; sourceTree = "<group>"; };
 		9773F95A1CB14E20008E79FE /* SSSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSSignUpViewController.swift; path = SignIn/SSSignUpViewController.swift; sourceTree = "<group>"; };
 		977DBA651D20BDCD00CFD98F /* CGSize+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Float.swift"; path = "Ssom/3rdLib/CGSize+Float.swift"; sourceTree = "<group>"; };
 		977DBA6C1D23A26A00CFD98F /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
+				9766D9D61E1B981A0033CF0C /* SSTabBarController.swift */,
 				977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */,
 				97343E291BE65AB300A9D39D /* MapViewController.swift */,
 				97D5A3CA1BEBB23500F3DDFB /* ListViewController.swift */,
@@ -881,6 +884,7 @@
 				977DBA661D20BDCD00CFD98F /* CGSize+Float.swift in Sources */,
 				97E21D471D69D6A8004E3EBC /* SSMenuBottomView.swift in Sources */,
 				979D76171DA11F700055B3EE /* SSCustomScrollView.swift in Sources */,
+				9766D9D71E1B981A0033CF0C /* SSTabBarController.swift in Sources */,
 				978410B81D7ABAF800C71C63 /* SSChatMapViewModel.swift in Sources */,
 				97B2D1671D488FA700B5EBD2 /* SSIndicatorView.swift in Sources */,
 				9787ACEE1D0452EE001CF18C /* SSDrawerViewController.swift in Sources */,

@@ -206,7 +206,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="골라보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaF-fQ-taQ">
-                    <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -221,10 +221,10 @@
                 <constraint firstItem="PAq-r4-pWP" firstAttribute="leading" secondItem="DW5-rO-iay" secondAttribute="leading" id="J4n-6R-jMc"/>
                 <constraint firstItem="PAq-r4-pWP" firstAttribute="top" secondItem="DW5-rO-iay" secondAttribute="top" id="QJA-Qf-aoZ"/>
                 <constraint firstAttribute="bottom" secondItem="JaF-fQ-taQ" secondAttribute="bottom" id="S46-UN-qRD"/>
+                <constraint firstItem="qhK-Hq-t9Y" firstAttribute="leading" secondItem="JaF-fQ-taQ" secondAttribute="trailing" constant="7" id="SDJ-oo-fTe"/>
                 <constraint firstItem="JaF-fQ-taQ" firstAttribute="top" secondItem="DW5-rO-iay" secondAttribute="top" id="guf-on-ZwU"/>
                 <constraint firstItem="qhK-Hq-t9Y" firstAttribute="centerY" secondItem="DW5-rO-iay" secondAttribute="centerY" id="hCp-HU-doc"/>
                 <constraint firstItem="JaF-fQ-taQ" firstAttribute="leading" secondItem="DW5-rO-iay" secondAttribute="leading" id="tZv-Qy-V8G"/>
-                <constraint firstItem="qhK-Hq-t9Y" firstAttribute="leading" secondItem="JaF-fQ-taQ" secondAttribute="trailing" id="xy1-3b-wmE"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

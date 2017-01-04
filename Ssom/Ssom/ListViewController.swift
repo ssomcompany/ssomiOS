@@ -92,7 +92,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.edgesForExtendedLayout = UIRectEdge()
 
-        self.closeFilterView()
+        if let filterView = self.filterView {
+            filterView.tapCloseButton()
+        }
         self.closeScrollView(false)
     }
     
@@ -115,6 +117,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
 
         self.showOpenAnimation()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let filterView = self.filterView {
+            filterView.tapCloseButton()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -164,10 +174,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.filterView.configView()
         
         self.filterView.alpha = 0.0
-        self.view.addSubview(self.filterView)
+        self.navigationController?.view.addSubview(self.filterView)
         self.filterView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.navigationController?.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
+        self.navigationController?.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[view]-44-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
 
@@ -376,14 +386,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK: - SSFilterViewDelegate
-    func closeFilterView() {
-        if let view = self.filterView {
-            view.removeFromSuperview()
-        }
-    }
-
     func applyFilter(_ filterViewModel: SSFilterViewModel) {
-        self.filterView.removeFromSuperview()
+        self.filterView.tapCloseButton()
 
         // apply filter value to get the ssom list
         self.filterModel = filterViewModel

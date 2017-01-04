@@ -9,7 +9,6 @@
 import UIKit
 
 protocol SSFilterViewDelegate: NSObjectProtocol {
-    func closeFilterView() -> Void;
     func applyFilter(_ filterViewModel: SSFilterViewModel) -> Void;
 }
 
@@ -53,6 +52,8 @@ class SSFilterView: UIView {
     @IBOutlet var filter3PeopleButton: UIButton!
     @IBOutlet var filter4PeopleButton: UIButton!
 
+    @IBOutlet var imgViewSsomFilterIcon: UIImageView!
+
     @IBOutlet var btnClose: UIButton!
 
     weak var delegate: SSFilterViewDelegate?
@@ -84,8 +85,8 @@ class SSFilterView: UIView {
         self.btnFilterSsoseyo.layer.borderWidth = 0.3
         self.btnFilterSsoseyo.layer.borderColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
 
-        self.btnFilterSsom.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpOutside)
-        self.btnFilterSsoseyo.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpOutside)
+        self.btnFilterSsom.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpInside)
+        self.btnFilterSsoseyo.addTarget(self, action: #selector(tapFilterOptions(_:)), for: .touchUpInside)
 
         self.layoutIfNeeded()
         self.filterMainView.layer.cornerRadius = 25
@@ -164,15 +165,45 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapCloseButton() {
-        guard let _ = self.delegate?.closeFilterView() else {
-            return
+        if let _ = self.superview {
+            self.removeFromSuperview()
         }
     }
 
     func tapFilterOptions(_ sender: UIButton) {
         let filterButton = sender
 
+        if filterButton === self.btnFilterSsom {
+            if !self.btnFilterSsoseyo.isSelected && filterButton.isSelected {
+                self.makeToast("\"쏨\"과 \"쏴\" 둘 중 하나는 반드시 선택되어야 합니다!!", duration: 2.0, position: .top)
+                return
+            }
+        }
+        if filterButton === self.btnFilterSsoseyo {
+            if !self.btnFilterSsom.isSelected && filterButton.isSelected {
+                self.makeToast("\"쏨\"과 \"쏴\" 둘 중 하나는 반드시 선택되어야 합니다!!", duration: 2.0, position: .top)
+                return
+            }
+        }
+
         filterButton.toggledSelected = !filterButton.isSelected
+
+        self.changeSsomFilterIcon()
+    }
+
+    func changeSsomFilterIcon() -> UIImage! {
+        if self.btnFilterSsom.isSelected && self.btnFilterSsoseyo.isSelected {
+            self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconGreenred")
+            return #imageLiteral(resourceName: "topIconGreenred")
+        } else if !self.btnFilterSsom.isSelected && self.btnFilterSsoseyo.isSelected {
+            self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconRed")
+            return #imageLiteral(resourceName: "topIconRed")
+        } else if self.btnFilterSsom.isSelected && !self.btnFilterSsoseyo.isSelected {
+            self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconGreen")
+            return #imageLiteral(resourceName: "topIconGreen")
+        }
+
+        return nil
     }
 
     @IBAction func tapInitializieFilter(_ sender: AnyObject) {

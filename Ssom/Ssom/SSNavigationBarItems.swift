@@ -37,6 +37,9 @@ class SSNavigationBarItems : UIView
     @IBOutlet var imgViewMeetRequest: UIImageView!
     @IBOutlet var btnMeetRequest: UIButton!
 
+    @IBOutlet var filterBarButtonView: UIView!
+    @IBOutlet var imgViewFilterIcon: UIImageView!
+
     weak var delegate: SSNavigationBarItemsDelegate!
 
     var animated: Bool = false

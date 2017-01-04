@@ -82,7 +82,7 @@ class SSTabBarController: UITabBarController {
             self.barButtonItems = SSNavigationBarItems(animated: true)
 
             self.barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), for: UIControlEvents.touchUpInside)
-            let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
+            let messageBarButton = UIBarButtonItem(customView: self.barButtonItems.messageBarButtonView!)
 
             self.navigationItem.rightBarButtonItems = [messageBarButton]
         }
@@ -91,36 +91,6 @@ class SSTabBarController: UITabBarController {
     func tapMenu() {
         if let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.drawerController?.setMainState(.open, inDirection: .Left, animated: true, allowUserInterruption: true, completion: nil)
-        }
-    }
-
-    func tapHeart() {
-        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
-            self.barButtonItems.imgViewHeart.transform = CGAffineTransform.identity
-        }) { (finish) in
-            if SSAccountManager.sharedInstance.isAuthorized {
-
-                let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "HeartNaviController")
-                if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
-                    presentedViewController.present(vc, animated: true, completion: nil)
-                }
-
-            } else {
-                SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
-                    if finish {
-                        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "HeartNaviController")
-                        if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController {
-                            if presentedViewController is SSDrawerViewController {
-                                (presentedViewController as! SSDrawerViewController).mainViewController?.present(vc, animated: true, completion: nil)
-                            } else {
-                                presentedViewController.present(vc, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                })
-            }
         }
     }
 

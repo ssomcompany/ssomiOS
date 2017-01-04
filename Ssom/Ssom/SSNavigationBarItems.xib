@@ -17,8 +17,10 @@
                 <outlet property="btnHeartBar" destination="iIy-ck-co3" id="Ytu-7B-xoj"/>
                 <outlet property="btnMeetRequest" destination="n4K-cw-3pf" id="naM-jK-cBF"/>
                 <outlet property="btnMessageBar" destination="TSt-lB-147" id="TzT-Cw-zn0"/>
+                <outlet property="filterBarButtonView" destination="DW5-rO-iay" id="cor-Xf-3d6"/>
                 <outlet property="heartBarButtonView" destination="iN0-l3-epB" id="wOU-9f-KkU"/>
                 <outlet property="imgTopPlus" destination="0gU-i4-1gd" id="nR7-Q9-YEf"/>
+                <outlet property="imgViewFilterIcon" destination="qhK-Hq-t9Y" id="FfW-EY-T5c"/>
                 <outlet property="imgViewHeart" destination="tcn-oA-gic" id="I8p-oQ-uMI"/>
                 <outlet property="imgViewMeetRequest" destination="PxP-UG-XIa" id="CUc-lW-eG9"/>
                 <outlet property="imgViewMessage" destination="IjY-co-gUF" id="tWW-o0-gn3"/>
@@ -191,12 +193,51 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="364.5" y="286.5"/>
         </view>
+        <view contentMode="scaleToFill" id="DW5-rO-iay" userLabel="FilterBarButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topIconRed" translatesAutoresizingMaskIntoConstraints="NO" id="qhK-Hq-t9Y">
+                    <rect key="frame" x="52" y="8" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="14" id="G1s-sW-A9p"/>
+                        <constraint firstAttribute="height" constant="14" id="oNW-n2-ZcQ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="골라보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaF-fQ-taQ">
+                    <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAq-r4-pWP">
+                    <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="PAq-r4-pWP" secondAttribute="trailing" id="0b0-sz-4XR"/>
+                <constraint firstAttribute="trailing" secondItem="qhK-Hq-t9Y" secondAttribute="trailing" id="DPo-NU-jYw"/>
+                <constraint firstAttribute="bottom" secondItem="PAq-r4-pWP" secondAttribute="bottom" id="Fzk-VU-kDn"/>
+                <constraint firstItem="PAq-r4-pWP" firstAttribute="leading" secondItem="DW5-rO-iay" secondAttribute="leading" id="J4n-6R-jMc"/>
+                <constraint firstItem="PAq-r4-pWP" firstAttribute="top" secondItem="DW5-rO-iay" secondAttribute="top" id="QJA-Qf-aoZ"/>
+                <constraint firstAttribute="bottom" secondItem="JaF-fQ-taQ" secondAttribute="bottom" id="S46-UN-qRD"/>
+                <constraint firstItem="JaF-fQ-taQ" firstAttribute="top" secondItem="DW5-rO-iay" secondAttribute="top" id="guf-on-ZwU"/>
+                <constraint firstItem="qhK-Hq-t9Y" firstAttribute="centerY" secondItem="DW5-rO-iay" secondAttribute="centerY" id="hCp-HU-doc"/>
+                <constraint firstItem="JaF-fQ-taQ" firstAttribute="leading" secondItem="DW5-rO-iay" secondAttribute="leading" id="tZv-Qy-V8G"/>
+                <constraint firstItem="qhK-Hq-t9Y" firstAttribute="leading" secondItem="JaF-fQ-taQ" secondAttribute="trailing" id="xy1-3b-wmE"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="337" y="436"/>
+        </view>
     </objects>
     <resources>
         <image name="backIcon" width="18" height="18"/>
         <image name="meetButtonRed" width="105" height="36"/>
         <image name="message" width="27" height="27"/>
         <image name="topHeartShop" width="32" height="28"/>
+        <image name="topIconRed" width="14" height="14"/>
         <image name="topPlus" width="13" height="13"/>
     </resources>
 </document>

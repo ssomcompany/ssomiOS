@@ -37,6 +37,14 @@ class SSTabBarController: UITabBarController {
                 }
             }
         }
+
+        let menuStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+        let heartVC = menuStoryboard.instantiateViewController(withIdentifier: "HeartViewController")
+        self.addChildViewController(heartVC)
+
+        let chatStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
+        let chatListVC = chatStoryboard.instantiateViewController(withIdentifier: "chatListViewController")
+        self.addChildViewController(chatListVC)
     }
 
     deinit {

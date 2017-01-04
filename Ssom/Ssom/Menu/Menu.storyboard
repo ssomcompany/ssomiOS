@@ -634,7 +634,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="TodayPhotoNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sCp-bE-o3d" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Q7-76-UnS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Q7-76-UnS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -657,7 +657,7 @@ Cg
             <objects>
                 <navigationController storyboardIdentifier="HeartNaviController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J6i-fC-qW8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zj7-ly-MBw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zj7-ly-MBw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -679,7 +679,7 @@ Cg
     <resources>
         <image name="acceptButtonRed" width="161" height="58"/>
         <image name="buttonCancel" width="161" height="58"/>
-        <image name="closeWhite" width="18" height="17"/>
+        <image name="closeWhite" width="17" height="18"/>
         <image name="greenRibSmall" width="42" height="20"/>
         <image name="heartShadowX2" width="52" height="35"/>
         <image name="iconSsomDim" width="60" height="42"/>

@@ -75,7 +75,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.init(coder: aDecoder)
     }
 
-    convenience init(datas:[SSViewModel], isSell: Bool) {
+    convenience init(datas: [SSViewModel], isSell: Bool) {
         self.init()
 
         self.mainViewModel = SSMainViewModel(datas: datas, isSell: isSell)

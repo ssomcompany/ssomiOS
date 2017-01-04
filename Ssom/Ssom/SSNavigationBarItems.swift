@@ -39,6 +39,7 @@ class SSNavigationBarItems : UIView
 
     @IBOutlet var filterBarButtonView: UIView!
     @IBOutlet var imgViewFilterIcon: UIImageView!
+    @IBOutlet var btnFilterBar: UIButton!
 
     weak var delegate: SSNavigationBarItemsDelegate!
 
@@ -54,6 +55,9 @@ class SSNavigationBarItems : UIView
 
         self.btnMessageBar.addTarget(self, action: #selector(self.tapDownMessage), for: UIControlEvents.touchDown)
         self.btnMessageBar.addTarget(self, action: #selector(self.cancelTapMessage), for: UIControlEvents.touchCancel)
+
+        self.btnFilterBar.addTarget(self, action: #selector(self.tapDownFilter), for: UIControlEvents.touchDown)
+        self.btnFilterBar.addTarget(self, action: #selector(self.cancelTapFilter), for: UIControlEvents.touchCancel)
 
         self.btnMeetRequest.addTarget(self, action: #selector(self.tapDownMeetRequest), for: UIControlEvents.touchDown)
         self.btnMeetRequest.addTarget(self, action: #selector(self.cancelTapMeetRequest), for: UIControlEvents.touchCancel)
@@ -264,5 +268,19 @@ class SSNavigationBarItems : UIView
             self.btnMeetRequest.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14.0)
             self.btnMeetRequest.setTitle("만남 요청", for: UIControlState())
         }
+    }
+
+    func tapDownFilter() {
+        if self.animated {
+            self.imgViewFilterIcon.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }
+    }
+
+    func cancelTapFilter() {
+        self.imgViewFilterIcon.transform = CGAffineTransform.identity
+    }
+
+    func changeFilter() {
+        
     }
 }

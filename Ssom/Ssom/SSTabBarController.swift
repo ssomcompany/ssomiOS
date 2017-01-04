@@ -42,9 +42,23 @@ class SSTabBarController: UITabBarController {
         let heartVC = menuStoryboard.instantiateViewController(withIdentifier: "HeartViewController")
         self.addChildViewController(heartVC)
 
+        if let tabBarItem = heartVC.tabBarItem {
+            tabBarItem.image = #imageLiteral(resourceName: "footIconHeartOff")
+            tabBarItem.selectedImage = #imageLiteral(resourceName: "footIconHeartOn")
+
+            tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        }
+
         let chatStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
         let chatListVC = chatStoryboard.instantiateViewController(withIdentifier: "chatListViewController")
         self.addChildViewController(chatListVC)
+
+        if let tabBarItem = chatListVC.tabBarItem {
+            tabBarItem.image = #imageLiteral(resourceName: "footIconChatOff")
+            tabBarItem.selectedImage = #imageLiteral(resourceName: "footIconChatOn")
+
+            tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        }
     }
 
     deinit {
@@ -89,10 +103,10 @@ class SSTabBarController: UITabBarController {
         if rightBarButtonItems.count == 1 {
             self.barButtonItems = SSNavigationBarItems(animated: true)
 
-            self.barButtonItems.btnMessageBar.addTarget(self, action: #selector(tapChat), for: UIControlEvents.touchUpInside)
-            let messageBarButton = UIBarButtonItem(customView: self.barButtonItems.messageBarButtonView!)
+            self.barButtonItems.btnFilterBar.addTarget(self, action: #selector(tapFilter), for: UIControlEvents.touchUpInside)
+            let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
 
-            self.navigationItem.rightBarButtonItems = [messageBarButton]
+            self.navigationItem.rightBarButtonItems = [btnFilterBar]
         }
     }
 
@@ -102,27 +116,11 @@ class SSTabBarController: UITabBarController {
         }
     }
 
-    func tapChat() {
-        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.curveLinear, animations: {
-            self.barButtonItems.imgViewMessage.transform = CGAffineTransform.identity
-        }) { (finish) in
-            if SSAccountManager.sharedInstance.isAuthorized {
-
-                let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-                let vc = chatStoryboard.instantiateViewController(withIdentifier: "chatListViewController") as! SSChatListViewController
-
-                self.navigationController?.pushViewController(vc, animated: true)
-
-            } else {
-                SSAccountManager.sharedInstance.openSignIn(self, completion: { (finish) in
-                    if finish {
-                        let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-                        let vc = chatStoryboard.instantiateViewController(withIdentifier: "chatListViewController") as! SSChatListViewController
-
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                })
-            }
+    func tapFilter() {
+        if let vc = self.selectedViewController as? MapViewController {
+            vc.tapFilter()
+        } else if let vc = self.selectedViewController as? ListViewController {
+            vc.tapFilterButton()
         }
     }
 }

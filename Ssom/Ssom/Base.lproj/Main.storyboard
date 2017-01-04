@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Ssom" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,36 +38,6 @@
                                     <constraint firstAttribute="height" constant="76" id="d01-Yb-nK0"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k0-s1-1ct" userLabel="Bottom Info View">
-                                <rect key="frame" x="19" y="539" width="56" height="56"/>
-                                <subviews>
-                                    <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-ru-cnK">
-                                        <rect key="frame" x="1" y="0.0" width="55" height="56"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQd-kY-OEr" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="SQd-kY-OEr" secondAttribute="height" multiplier="1:1" id="hkM-eD-6Ss"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="filterBtn"/>
-                                        <connections>
-                                            <action selector="tapFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X0t-yz-3KL"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="SQd-kY-OEr" secondAttribute="bottom" id="99r-Dp-af4"/>
-                                    <constraint firstAttribute="bottom" secondItem="Pu5-ru-cnK" secondAttribute="bottom" id="JHf-RW-Qm7"/>
-                                    <constraint firstItem="SQd-kY-OEr" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" id="MZT-ih-RWG"/>
-                                    <constraint firstAttribute="width" secondItem="3k0-s1-1ct" secondAttribute="height" multiplier="1:1" id="NbU-Jf-YoZ"/>
-                                    <constraint firstItem="Pu5-ru-cnK" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="Zck-of-CeJ"/>
-                                    <constraint firstItem="Pu5-ru-cnK" firstAttribute="leading" secondItem="3k0-s1-1ct" secondAttribute="leading" constant="1" id="kvu-tk-2sb"/>
-                                    <constraint firstItem="SQd-kY-OEr" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="top" id="mnz-OZ-cp2"/>
-                                    <constraint firstAttribute="trailing" secondItem="Pu5-ru-cnK" secondAttribute="trailing" id="u1C-SL-CMF"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCj-wE-maY">
                                 <rect key="frame" x="279" y="522" width="77" height="76"/>
                                 <constraints>
@@ -97,10 +67,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3k0-s1-1ct" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="51:603" id="0vH-ey-tik"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="38z-ch-TGt"/>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6gu-VW-dH1"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3k0-s1-1ct" secondAttribute="bottom" constant="23" id="Ay6-7D-5kX"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="51:603" id="C1H-yq-HLp"/>
                             <constraint firstItem="TOk-Md-hmy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IHi-Ee-4jy"/>
                             <constraint firstItem="2ul-5f-kgq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="K7f-Ng-zn2"/>
@@ -114,7 +82,6 @@
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lhs-GT-3Oj"/>
                             <constraint firstItem="Grf-fV-pHB" firstAttribute="top" secondItem="TOk-Md-hmy" secondAttribute="top" id="p1X-gp-5SK"/>
                             <constraint firstAttribute="trailing" secondItem="aCj-wE-maY" secondAttribute="trailing" constant="19" id="piM-CJ-3vt"/>
-                            <constraint firstItem="3k0-s1-1ct" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="19" id="u2G-vD-sBZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aCj-wE-maY" secondAttribute="bottom" constant="20" id="vxQ-Zw-VZV"/>
                             <constraint firstItem="1Me-Mu-v0q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="x0S-cE-bND"/>
                             <constraint firstAttribute="trailing" secondItem="2ul-5f-kgq" secondAttribute="trailing" id="x2m-zs-evF"/>
@@ -125,7 +92,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="TeU-4O-UAL"/>
+                    <tabBarItem key="tabBarItem" title="" image="footIconMapOff" selectedImage="footIconMapOn" id="TeU-4O-UAL">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="JzG-2m-bAY">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="lJY-Id-bi2" userLabel="Menu"/>
@@ -150,8 +120,6 @@
                         <outlet property="mainView" destination="TOk-Md-hmy" id="aGJ-vw-d5K"/>
                         <outlet property="myLocationButton" destination="1Me-Mu-v0q" id="SSr-Eg-NK7"/>
                         <outlet property="navigationItem" destination="JzG-2m-bAY" id="iDJ-wG-R6L"/>
-                        <outlet property="viewBottomInfo" destination="3k0-s1-1ct" id="TJE-qL-He7"/>
-                        <outlet property="viewFilterBackground" destination="Pu5-ru-cnK" id="4O7-QZ-LCm"/>
                         <outlet property="writeButton" destination="aCj-wE-maY" id="dyw-E3-jIZ"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromMain" id="CUJ-52-fKz"/>
                     </connections>
@@ -349,39 +317,8 @@
                                 <rect key="frame" x="0.0" y="64" width="22" height="554"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cE-r7-rmG" userLabel="Bottom Info View">
-                                <rect key="frame" x="19" y="538.5" width="56.5" height="56.5"/>
-                                <subviews>
-                                    <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-aR-jK1">
-                                        <rect key="frame" x="1" y="0.0" width="55.5" height="55.5"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFS-Jw-YTg" userLabel="Filter Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="56.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="tFS-Jw-YTg" secondAttribute="height" multiplier="1:1" id="XnW-gQ-AAs"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="filterBtn"/>
-                                        <connections>
-                                            <action selector="tapFilterButton:" destination="j6y-F4-SAC" eventType="touchUpInside" id="EqO-L6-0ta"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="sOY-aR-jK1" secondAttribute="bottom" constant="1" id="6Mx-ns-upr"/>
-                                    <constraint firstItem="sOY-aR-jK1" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="9Pr-vj-vmm"/>
-                                    <constraint firstAttribute="bottom" secondItem="tFS-Jw-YTg" secondAttribute="bottom" id="Dwz-BT-lMm"/>
-                                    <constraint firstAttribute="width" secondItem="4cE-r7-rmG" secondAttribute="height" multiplier="1:1" id="RdM-mG-4hH"/>
-                                    <constraint firstItem="sOY-aR-jK1" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" constant="1" id="SPy-xQ-J7b"/>
-                                    <constraint firstItem="tFS-Jw-YTg" firstAttribute="leading" secondItem="4cE-r7-rmG" secondAttribute="leading" id="cIH-0S-vxE"/>
-                                    <constraint firstAttribute="trailing" secondItem="sOY-aR-jK1" secondAttribute="trailing" id="osG-mr-N9q"/>
-                                    <constraint firstItem="tFS-Jw-YTg" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="top" id="wSv-3w-kEX"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-Xv-XcV">
-                                <rect key="frame" x="278.5" y="521.5" width="77.5" height="76.5"/>
+                                <rect key="frame" x="279" y="522" width="77" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6oW-Xv-XcV" secondAttribute="height" multiplier="76:75" id="lkW-Fc-uDD"/>
                                 </constraints>
@@ -397,11 +334,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6oW-Xv-XcV" secondAttribute="trailing" constant="19" id="3Br-So-WTx"/>
-                            <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="4cE-r7-rmG" secondAttribute="bottom" constant="23" id="8cd-P3-BhS"/>
-                            <constraint firstItem="4cE-r7-rmG" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="51:603" id="9BQ-rH-0DO"/>
                             <constraint firstItem="W9o-t2-VQr" firstAttribute="top" secondItem="Auf-2S-Xgv" secondAttribute="bottom" id="Fqf-vg-GZy"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="bottom" id="Lrr-7r-ctf"/>
-                            <constraint firstItem="6oW-Xv-XcV" firstAttribute="centerY" secondItem="4cE-r7-rmG" secondAttribute="centerY" id="Pd0-5w-sez"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="mpO-RO-Jix" secondAttribute="bottom" id="QQr-Cm-hTG"/>
                             <constraint firstItem="6oW-Xv-XcV" firstAttribute="height" secondItem="hHc-Mm-TP3" secondAttribute="height" multiplier="69:603" id="R5C-Aa-iJA"/>
                             <constraint firstItem="iLn-76-4kV" firstAttribute="top" secondItem="6oW-Xv-XcV" secondAttribute="bottom" constant="20" id="auv-TR-VXw"/>
@@ -412,15 +346,11 @@
                             <constraint firstAttribute="trailing" secondItem="W9o-t2-VQr" secondAttribute="trailing" id="mGh-xm-IEo"/>
                             <constraint firstItem="mpO-RO-Jix" firstAttribute="top" secondItem="W9o-t2-VQr" secondAttribute="top" id="ohL-uo-y07"/>
                             <constraint firstItem="HDU-tQ-2vC" firstAttribute="centerX" secondItem="hHc-Mm-TP3" secondAttribute="centerX" id="uUX-2e-gMC"/>
-                            <constraint firstItem="4cE-r7-rmG" firstAttribute="leading" secondItem="hHc-Mm-TP3" secondAttribute="leading" constant="19" id="wN3-Wb-nF2"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Pd0-5w-sez"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="91A-bc-gkg"/>
+                    <tabBarItem key="tabBarItem" title="" image="footIconListOff" selectedImage="footIconListOn" id="91A-bc-gkg">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="lFp-Gg-7Ws">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="by3-ot-9zM" userLabel="Menu"/>
@@ -444,8 +374,6 @@
                     <connections>
                         <outlet property="btnWrite" destination="6oW-Xv-XcV" id="9hG-yZ-94B"/>
                         <outlet property="ssomListTableView" destination="W9o-t2-VQr" id="3rB-Hn-i1R"/>
-                        <outlet property="viewBottomInfo" destination="4cE-r7-rmG" id="C3i-fF-l31"/>
-                        <outlet property="viewFilterBackground" destination="sOY-aR-jK1" id="B7i-Tb-ep4"/>
                         <outlet property="viewNoSsom" destination="HDU-tQ-2vC" id="v51-Vr-Z7p"/>
                         <segue destination="W7J-dT-Mhm" kind="show" identifier="SSWriteViewSegueFromList" id="R5c-a2-BYk"/>
                     </connections>
@@ -618,10 +546,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-3P-eLe" userLabel="Age Button Bar View">
-                                <rect key="frame" x="64" y="299" width="248" height="32.5"/>
+                                <rect key="frame" x="64" y="299" width="248" height="33"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-SN-Qwf" userLabel="Age Button1">
-                                        <rect key="frame" x="1" y="1" width="61" height="30.5"/>
+                                        <rect key="frame" x="1" y="1" width="61" height="31"/>
                                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -636,7 +564,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egP-i1-2wh" userLabel="Age Button2">
-                                        <rect key="frame" x="63" y="1" width="60.5" height="30.5"/>
+                                        <rect key="frame" x="63" y="1" width="61" height="31"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -651,7 +579,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-Md-B2c" userLabel="Age Button3">
-                                        <rect key="frame" x="124.5" y="1" width="61" height="30.5"/>
+                                        <rect key="frame" x="125" y="1" width="61" height="31"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -666,7 +594,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="js8-Ld-NN5" userLabel="Age Button4">
-                                        <rect key="frame" x="186.5" y="1" width="60.5" height="30.5"/>
+                                        <rect key="frame" x="187" y="1" width="60" height="31"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -718,10 +646,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-Ct-aeF" userLabel="People Button Bar View">
-                                <rect key="frame" x="64" y="369" width="248" height="32.5"/>
+                                <rect key="frame" x="64" y="369" width="248" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q13-hH-yT4" userLabel="People Button1">
-                                        <rect key="frame" x="1" y="1" width="61" height="30.5"/>
+                                        <rect key="frame" x="1" y="2" width="61" height="30"/>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -736,7 +664,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pk-cD-fEN" userLabel="People Button2">
-                                        <rect key="frame" x="63" y="1" width="60.5" height="30.5"/>
+                                        <rect key="frame" x="63" y="2" width="61" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -751,7 +679,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6l-XD-moD" userLabel="People Button3">
-                                        <rect key="frame" x="124.5" y="1" width="61" height="30.5"/>
+                                        <rect key="frame" x="125" y="2" width="61" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -766,7 +694,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1M-Rt-P8A" userLabel="People Button4">
-                                        <rect key="frame" x="186.5" y="1" width="60.5" height="30.5"/>
+                                        <rect key="frame" x="187" y="2" width="60" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -803,14 +731,14 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-Tn-LzI">
-                                <rect key="frame" x="64" y="417.5" width="248" height="100.5"/>
+                                <rect key="frame" x="64" y="417" width="248" height="101"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3U-71-a8X" userLabel="Text Guide Label">
-                                <rect key="frame" x="64" y="424" width="242" height="86"/>
+                                <rect key="frame" x="64" y="425" width="242" height="86"/>
                                 <string key="text">오늘은 내가 쏜다!
 쏘고 싶은 메뉴와 센스 있는 멘트를
 적어보세요. 좋은 쏨을 만날 확률이
@@ -941,7 +869,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MasterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAM-Ki-GQ0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="az7-rU-r1z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="az7-rU-r1z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1058,7 +986,6 @@
         <image name="acceptButtonGreen" width="162" height="58"/>
         <image name="buttonCancel" width="162" height="58"/>
         <image name="camera" width="27" height="24"/>
-        <image name="filterBtn" width="55" height="56"/>
         <image name="footIconChatOff" width="23" height="23"/>
         <image name="footIconChatOn" width="30" height="30"/>
         <image name="footIconHeartOff" width="32" height="22"/>
@@ -1082,8 +1009,8 @@
         <image name="writePhotoArea" width="243" height="202"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gyR-KU-Zad"/>
+        <segue reference="CUJ-52-fKz"/>
         <segue reference="PvD-Up-dWj"/>
-        <segue reference="R5c-a2-BYk"/>
+        <segue reference="gyR-KU-Zad"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -137,6 +137,8 @@ class SSChatListTableCell: UITableViewCell {
                 self.imgIngMeet.image = UIImage(named: "ssomIngGreenSmall")
             case .SSOSEYO:
                 self.imgIngMeet.image = UIImage(named: "ssomIngRedSmall")
+            default:
+                break
             }
         }
 
@@ -157,6 +159,8 @@ class SSChatListTableCell: UITableViewCell {
                 self.lbLastMessage.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
             case .SSOSEYO:
                 self.lbLastMessage.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
+            default:
+                break
             }
             self.lbLastMessage.text = "만남 요청을 받았습니다!"
         } else {

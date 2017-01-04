@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backBarButtonView" destination="bUy-qz-A2O" id="IIr-nw-1Lu"/>
                 <outlet property="btnBack" destination="DOE-Tp-R0t" id="4eX-fr-NHr"/>
+                <outlet property="btnFilterBar" destination="PAq-r4-pWP" id="rYU-pf-E31"/>
                 <outlet property="btnHeartBar" destination="iIy-ck-co3" id="Ytu-7B-xoj"/>
                 <outlet property="btnMeetRequest" destination="n4K-cw-3pf" id="naM-jK-cBF"/>
                 <outlet property="btnMessageBar" destination="TSt-lB-147" id="TzT-Cw-zn0"/>
@@ -197,7 +198,7 @@
             <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topIconRed" translatesAutoresizingMaskIntoConstraints="NO" id="qhK-Hq-t9Y">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topIconGreenred" translatesAutoresizingMaskIntoConstraints="NO" id="qhK-Hq-t9Y">
                     <rect key="frame" x="52" y="8" width="14" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="14" id="G1s-sW-A9p"/>
@@ -237,7 +238,7 @@
         <image name="meetButtonRed" width="105" height="36"/>
         <image name="message" width="27" height="27"/>
         <image name="topHeartShop" width="32" height="28"/>
-        <image name="topIconRed" width="14" height="14"/>
+        <image name="topIconGreenred" width="14" height="14"/>
         <image name="topPlus" width="13" height="13"/>
     </resources>
 </document>

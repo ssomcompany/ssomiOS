@@ -15,11 +15,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
 
-    @IBOutlet var viewBottomInfo: UIView!
-    @IBOutlet var viewFilterBackground: UIView!
-//    @IBOutlet var constBottomInfoViewHeight: NSLayoutConstraint!
-//    @IBOutlet var constBottomInfoViewTrailingToSuper: NSLayoutConstraint!
-    
     var locationManager: CLLocationManager!
     var currentLocation: CLLocationCoordinate2D!
 
@@ -94,11 +89,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil
 
-        self.viewBottomInfo.transform = CGAffineTransform(translationX: 0, y: 200)
         self.writeButton.transform = CGAffineTransform(translationX: 0, y: 200)
-
-        self.viewBottomInfo.layoutIfNeeded()
-        self.viewFilterBackground.layer.cornerRadius = self.viewFilterBackground.bounds.size.height / 2
 
         self.initMapView()
 
@@ -179,7 +170,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        self.viewBottomInfo.transform = CGAffineTransform(translationX: 0, y: 200)
         self.writeButton.transform = CGAffineTransform(translationX: 0, y: 200)
     }
 
@@ -194,7 +184,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 
-            self.viewBottomInfo.transform = CGAffineTransform.identity
             self.writeButton.transform = CGAffineTransform.identity
         }) { (finish) in
             //
@@ -330,7 +319,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.showCurrentLocation()
     }
 
-    @IBAction func tapFilter(_ sender: AnyObject) {
+    @IBAction func tapFilter(_ sender: AnyObject? = nil) {
 
         self.filterView = UIView.loadFromNibNamed("SSFilterView") as! SSFilterView
         self.filterView.delegate = self
@@ -345,25 +334,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
-//        self.view.layoutIfNeeded()
-//
-//        self.constBottomInfoViewHeight.constant = 283.0
-//        self.constBottomInfoViewTrailingToSuper.constant = 64.0
-
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-
-//            self.view.layoutIfNeeded()
-
-            self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 1)
 
             self.filterView.alpha = 1.0
 
         }) { (finish) in
-            
-//            self.constBottomInfoViewHeight.constant = 69.0
-//            self.constBottomInfoViewTrailingToSuper.constant = 154.0
-
-            self.viewFilterBackground.backgroundColor = UIColor(white: 1, alpha: 0.8)
         }
     }
 

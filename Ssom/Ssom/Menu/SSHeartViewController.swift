@@ -122,7 +122,10 @@ enum SSHeartGoods: Int {
 
 class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPaymentTransactionObserver, SKProductsRequestDelegate {
 
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var heartTableView: UITableView!
+    @IBOutlet var lbHeartCount: UILabel!
+
     var products: [SKProduct]!
 
     var indicator: SSIndicatorView!
@@ -135,7 +138,19 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.initView()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+//        self.scrollView.contentInset = UIEdgeInsets.zero
+    }
+
     override func initView() {
+        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+            self.lbHeartCount.text = "\(heartsCount)"
+        }
+
+        self.automaticallyAdjustsScrollViewInsets = false
+
         SKPaymentQueue.default().add(self)
 
         if SKPaymentQueue.canMakePayments() {

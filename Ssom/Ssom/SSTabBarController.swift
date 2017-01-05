@@ -101,12 +101,15 @@ class SSTabBarController: UITabBarController {
 
         let rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
         if rightBarButtonItems.count == 1 {
+            let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+            barButtonSpacer.width = -4
+
             self.barButtonItems = SSNavigationBarItems(animated: true)
 
             self.barButtonItems.btnFilterBar.addTarget(self, action: #selector(tapFilter), for: UIControlEvents.touchUpInside)
             let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
 
-            self.navigationItem.rightBarButtonItems = [btnFilterBar]
+            self.navigationItem.rightBarButtonItems = [barButtonSpacer, btnFilterBar]
         }
     }
 

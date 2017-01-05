@@ -141,15 +141,13 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-//        self.scrollView.contentInset = UIEdgeInsets.zero
+        self.scrollView.contentInset = UIEdgeInsets.zero
     }
 
     override func initView() {
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
             self.lbHeartCount.text = "\(heartsCount)"
         }
-
-        self.automaticallyAdjustsScrollViewInsets = false
 
         SKPaymentQueue.default().add(self)
 

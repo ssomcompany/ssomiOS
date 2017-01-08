@@ -65,7 +65,7 @@ class SSListTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
 
-    func configView(_ model: SSViewModel, isMySsom: Bool, isSsom: Bool, withCoordinate coordinate: CLLocationCoordinate2D) {
+    func configView(_ model: SSViewModel, isMySsom: Bool, ssomType: SSType, withCoordinate coordinate: CLLocationCoordinate2D) {
         if let content = model.content {
             print("content is \(content.removingPercentEncoding)")
 
@@ -83,7 +83,7 @@ class SSListTableViewCell: UITableViewCell {
             self.contentView.addGestureRecognizer(self.panGesture)
         }
 
-        if isSsom {
+        if ssomType == .SSOM {
             self.imgViewSsomIcon.image = #imageLiteral(resourceName: "listMarkGreen")
         } else {
             self.imgViewSsomIcon.image = #imageLiteral(resourceName: "listMarkRed")
@@ -103,7 +103,7 @@ class SSListTableViewCell: UITableViewCell {
 
                         self.viewCell.layoutIfNeeded()
                         self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.height / 2.0
-                        self.profileImageView.layer.borderColor = isSsom ? UIColor(red: 0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0).cgColor : UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0).cgColor
+                        self.profileImageView.layer.borderColor = ssomType == .SSOM ? UIColor(red: 0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0).cgColor : UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0).cgColor
                         self.profileImageView.layer.borderWidth = 1.7
 
                         if let err = error {
@@ -117,7 +117,7 @@ class SSListTableViewCell: UITableViewCell {
 //                            self.profileImageView!.image = UIImage.mergeImages(firstImage: croppedProfileImage, secondImage: maskOfProfileImage, x:2.3, y:2.3)
 
                             if model.meetRequestStatus == .Accepted {
-                                if isSsom {
+                                if ssomType == .SSOM {
                                     self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngGreenBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
                                 } else {
                                     self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngRedBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
@@ -140,7 +140,7 @@ class SSListTableViewCell: UITableViewCell {
             memberInfoString = memberInfoString.appendingFormat(" \(userCount)명 있어요.")
         }
         self.memberInfoLabel.text = memberInfoString
-        self.memberInfoLabel.textColor = isSsom ? UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1) : UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
+        self.memberInfoLabel.textColor = ssomType == .SSOM ? UIColor(red: 0, green: 180/255, blue: 143/255, alpha: 1) : UIColor(red: 237/255, green: 52/255, blue: 75/255, alpha: 1)
 
         if let distance = model.distance, distance != 0 {
             self.distanceLabel.text = Util.getDistanceString(distance)

@@ -119,6 +119,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if let filterView = self.filterView {
             filterView.tapCloseButton()
         }
+
+        self.saveMainViewModel()
     }
 
     func loadingData(_ completion: ((_ finish: Bool) -> Void)?) {
@@ -173,10 +175,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.initView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
@@ -186,6 +184,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func saveMainViewModel() {
+        let nowLocation: CLLocationCoordinate2D = self.currentLocation != nil ? self.currentLocation : self.mainView.camera.target
+        var ssomTypes: [SSType] = []
+        if let mainFilteredSsomTypes = self.filterModel?.ssomType {
+            ssomTypes = mainFilteredSsomTypes
+        }
+
+        if let tabBarController = self.tabBarController as? SSTabBarController {
+            tabBarController.mainViewModel = SSMainViewModel(datas: self.datasOfAllSsom, ssomTypes: ssomTypes, nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
+
+            if let filterModel = self.filterModel {
+                tabBarController.filterModel = filterModel
+            }
+        }
     }
 
     func showOpenAnimation() {
@@ -402,13 +416,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if (segue.identifier == "SSListViewSegue") {
-            let vc: ListViewController = segue.destination as! ListViewController
-
-            let nowLocation: CLLocationCoordinate2D = self.currentLocation
-            vc.mainViewModel = SSMainViewModel(datas: self.datasOfAllSsom, isSell: (self.filterModel?.ssomType)! == [.SSOM], nowLatitude: nowLocation.latitude, nowLongitude: nowLocation.longitude)
-        }
 
         if (segue.identifier == "SSWriteViewSegueFromMain") {
             let vc: SSWriteViewController = segue.destination as! SSWriteViewController

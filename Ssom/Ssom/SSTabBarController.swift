@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SSTabBarController: UITabBarController {
 
@@ -16,6 +17,9 @@ class SSTabBarController: UITabBarController {
     var lbTitle: UILabel!
 
     var unreadCount: Int = 0
+
+    var mainViewModel: SSMainViewModel!
+    var filterModel: SSFilterViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +63,8 @@ class SSTabBarController: UITabBarController {
 
             tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         }
+
+        self.loadData()
     }
 
     deinit {
@@ -110,6 +116,20 @@ class SSTabBarController: UITabBarController {
             let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
 
             self.navigationItem.rightBarButtonItems = [barButtonSpacer, btnFilterBar]
+        }
+    }
+
+    func loadData() {
+        SSNetworkAPIClient.getConnectedUsersCount { [weak self] (count, error) in
+            guard let wself = self else { return }
+
+            if let err = error {
+                print("error is : \(err.localizedDescription)")
+
+                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+            } else {
+                wself.lbTitle.text = "현재 \(count)명 접속 중"
+            }
         }
     }
 

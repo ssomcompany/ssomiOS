@@ -685,10 +685,48 @@ public struct SSNetworkAPIClient {
         }
     }
 
+    static func getConnectedUsersCount(completion: @escaping (_ count: Int, _ error: Error?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        defer {
+            indicator.hideIndicator()
+        }
+
+        Alamofire.request(SSNetworkContext.serverUrlPrefixt+"users?status=connected&field=count",
+                          method: .get)
+        .responseJSON { (response) in
+
+            print("request is : \(response.request)")
+
+            if response.result.isSuccess {
+                print("Response JSON : \(response.result.value)")
+
+                if let rawData = response.result.value as? [String: Any] {
+                    if let userCount = rawData["userCount"] as? String {
+                        completion(Int(userCount)!, nil)
+
+                        return
+                    }
+                }
+
+                completion(0, nil)
+            } else {
+                print("Response Error : \(response.result.error)")
+
+                completion(0, response.result.error)
+            }
+        }
+    }
+
 // MARK: - Chat
     static func getChatroomList(_ token: String, latitude: Double = 0, longitude: Double = 0, completion: @escaping (_ datas: [SSChatroomViewModel]?, _ error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
+
+        defer {
+            indicator.hideIndicator()
+        }
 
         var params: String! = nil
         if !(latitude == 0 && longitude == 0) {
@@ -714,18 +752,18 @@ public struct SSNetworkAPIClient {
                     }
 
                     completion(datas, nil)
-                } else {
-                    let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatRooms", code: 811, userInfo: nil)
 
-                    completion(nil, error)
+                    return
                 }
+
+                let error = NSError(domain: "com.ssom.error.NotJSONDataFound.ListChatRooms", code: 811, userInfo: nil)
+
+                completion(nil, error)
             } else {
                 print("Response Error : \(response.result.error)")
 
                 completion(nil, response.result.error as NSError?)
             }
-
-            indicator.hideIndicator()
         }
     }
 

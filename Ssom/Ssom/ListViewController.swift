@@ -71,16 +71,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.init(coder: aDecoder)
     }
 
-    convenience init(datas: [SSViewModel], isSell: Bool) {
-        self.init()
-
-        self.mainViewModel = SSMainViewModel(datas: datas, isSell: isSell)
-        self.datas = self.mainViewModel.datas
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+
+    }
+
+    func getMainViewModel() {
+        if let tabBarController = self.tabBarController as? SSTabBarController {
+            if let mainViewModel = tabBarController.mainViewModel {
+                self.mainViewModel = mainViewModel
+            } else {
+                SSAlertController.alertConfirm(title: "Error", message: "메인 쏨 데이터를 가져오는데 실패했습니다!\n네트워크 상태를 체크 후 다시 시도해주세요!!", vc: self, completion: nil)
+            }
+
+            if let filterModel = tabBarController.filterModel {
+                self.filterModel = filterModel
+            }
+        }
     }
 
     override func initView() {
@@ -88,7 +97,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil
 
-        self.ssomListTableView.register(UINib.init(nibName: "SSListTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "cell")
+        self.ssomListTableView.register(UINib(nibName: "SSListTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
         self.edgesForExtendedLayout = UIRectEdge()
 
@@ -267,19 +276,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func filterData() {
         var tempDatas: [SSViewModel] = []
 
-        let ssomType: SSType
-        if self.mainViewModel.isSell {
-            ssomType = .SSOM
+        let ssomTypes: [SSType]
+        if self.mainViewModel.ssomTypes == [.SSOM] {
+            ssomTypes = [.SSOM]
+        } else if self.mainViewModel.ssomTypes == [.SSOSEYO] {
+            ssomTypes = [.SSOSEYO]
         } else {
-            ssomType = .SSOSEYO
+            ssomTypes = SSType.allValues
         }
 
         self.isAlreadyWrittenMySsom = false
 
         for data: SSViewModel in self.mainViewModel.datas {
-            let ssomString = data.ssomType.rawValue
-            if ssomString == ssomType.rawValue {
+            if ssomTypes == SSType.allValues {
                 tempDatas.append(data)
+            } else {
+                if [data.ssomType] == ssomTypes {
+                    tempDatas.append(data)
+                }
             }
 
             // check if my ssom exists
@@ -357,8 +371,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SSListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SSListTableViewCell
 
-        let model:SSViewModel = self.datas[indexPath.row]
-        cell.configView(model, isMySsom: self.mySsom === model, isSsom: self.mainViewModel.isSell, withCoordinate: CLLocationCoordinate2DMake(self.mainViewModel.nowLatitude, self.mainViewModel.nowLongitude))
+        let model: SSViewModel = self.datas[indexPath.row]
+        cell.configView(model, isMySsom: self.mySsom === model, ssomType: model.ssomType, withCoordinate: CLLocationCoordinate2DMake(self.mainViewModel.nowLatitude, self.mainViewModel.nowLongitude))
 
         cell.delegate = self
 

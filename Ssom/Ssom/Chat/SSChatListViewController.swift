@@ -117,27 +117,29 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
     func loadData() {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
-            SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { (models, error) in
+            SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { [weak self] (models, error) in
+                guard let wself = self else { return }
+
                 if let err = error {
                     print(err.localizedDescription)
 
-                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
 
                 } else {
                     if let datas = models {
 
-                        self.datas = datas
+                        wself.datas = datas
 
-                        if self.datas.count > 0 {
-                            self.chatListTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        if wself.datas.count > 0 {
+                            wself.chatListTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                         } else {
-                            self.chatListTableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+                            wself.chatListTableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
                         }
 
-                        self.setChattingCount(self.unreadCount)
+                        wself.setChattingCount(wself.unreadCount)
 
-                        self.showChatroomCountOnNavigation()
-                        self.chatListTableView.reloadData()
+                        wself.showChatroomCountOnNavigation()
+                        wself.chatListTableView.reloadData()
                     }
                 }
             })

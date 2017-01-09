@@ -24,18 +24,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return self._datasOfFilteredSsom
         }
         set {
-            if let filterViewModel = self.filterModel, self.filterModel.ageTypes != [.AgeAll] || self.filterModel.peopleCountTypes != [.All] {
+            if let filterViewModel = self.filterModel, filterViewModel.ssomType != [.SSOM, .SSOSEYO] || filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
 
-                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                    if filterViewModel.includedSsomTypes(model.ssomType) &&
+                        filterViewModel.includedAgeAreaTypes(model.minAge) &&
+                        filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                        if filterViewModel.includedSsomTypes(model.ssomType) &&
+                            filterViewModel.ageTypes == [.AgeAll] &&
+                            filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
+                        if filterViewModel.includedSsomTypes(model.ssomType) &&
+                            filterViewModel.includedAgeAreaTypes(model.minAge) &&
+                            filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -373,7 +379,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
+        return self.datas.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -31,7 +31,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
     weak var delegate: SSScrollViewDelegate?
     fileprivate var datas: [SSViewModel]?
-    var ssomType: SSType?
+    var ssomTypes: [SSType] = [.SSOM, .SSOSEYO]
 
     fileprivate var previousView: SSDetailView?
     fileprivate var currentView: SSDetailView?
@@ -121,7 +121,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         self.contentView.addSubview(self.previousView!)
         self.previousView!.translatesAutoresizingMaskIntoConstraints = false
 
-        self.previousView!.changeTheme(self.ssomType!)
+        self.previousView!.changeTheme()
     }
 
     func setNextView(_ viewModel: SSViewModel) -> Void {
@@ -135,7 +135,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         self.contentView.addSubview(self.nextView!)
         self.nextView!.translatesAutoresizingMaskIntoConstraints = false
 
-        self.nextView!.changeTheme(self.ssomType!)
+        self.nextView!.changeTheme()
     }
 
     func resetConstraints(_ needScroll: Bool) -> Void {
@@ -210,16 +210,14 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         }
     }
 
-    func changeTheme(_ ssomType: SSType) -> Void {
-        if self.ssomType == nil {
-            self.ssomType = ssomType
-        }
+    func changeTheme(_ ssomTypes: [SSType]) -> Void {
+        self.ssomTypes = ssomTypes
 
-        self.previousView?.changeTheme(ssomType)
+        self.previousView?.changeTheme()
 
-        self.currentView?.changeTheme(ssomType)
+        self.currentView?.changeTheme()
 
-        self.nextView?.changeTheme(ssomType)
+        self.nextView?.changeTheme()
     }
 
 // MARK:- SSDetailViewDelegate

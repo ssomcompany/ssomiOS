@@ -119,8 +119,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if let filterView = self.filterView {
             filterView.tapCloseButton()
         }
-
-        self.saveMainViewModel()
     }
 
     func loadingData(_ completion: ((_ finish: Bool) -> Void)?) {
@@ -150,6 +148,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                                 print("result is : \(wself.datasOfAllSsom)")
                                 
                                 wself.showMarkers()
+
+                                wself.saveMainViewModel()
                             }
 
                             wself.showOpenAnimation()
@@ -443,27 +443,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.scrollDetailView.delegate = self
 
         if let filter = self.filterModel {
+            self.scrollDetailView.ssomTypes = filter.ssomType
             if filter.ssomType == [.SSOM] {
-                self.scrollDetailView.ssomType = .SSOM
                 self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
-                self.scrollDetailView.changeTheme(.SSOM)
-            }
-            if filter.ssomType == [.SSOSEYO] {
-                self.scrollDetailView.ssomType = .SSOSEYO
+            } else if filter.ssomType == [.SSOSEYO] {
                 self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
-                self.scrollDetailView.changeTheme(.SSOSEYO)
+            } else {
+                self.scrollDetailView.configureWithDatas(self.datasOfAllSsom, currentViewModel: model)
             }
+            self.scrollDetailView.changeTheme(filter.ssomType)
         } else {
-            if model.ssomType == .SSOM {
-                self.scrollDetailView.ssomType = .SSOM
-                self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
-                self.scrollDetailView.changeTheme(.SSOM)
-            }
-            if model.ssomType == .SSOSEYO {
-                self.scrollDetailView.ssomType = .SSOSEYO
-                self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
-                self.scrollDetailView.changeTheme(.SSOSEYO)
-            }
+            self.scrollDetailView.ssomTypes = [.SSOM, .SSOSEYO]
+            self.scrollDetailView.configureWithDatas(self.datasOfAllSsom, currentViewModel: model)
+            self.scrollDetailView.changeTheme([.SSOM, .SSOSEYO])
         }
 
         self.navigationController?.navigationBar.barStyle = .black
@@ -517,12 +509,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             }
         }
 
-        locationManager.stopUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
         print(error)
+
+        self.loadingData { (finish) in
+            if finish {
+
+                var index: Int = 0;
+                for data in self.datasOfAllSsom {
+                    let latitude: Double = data.latitude
+                    let longitude: Double = data.longitude
+
+                    let tempLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let nowLocation: CLLocationCoordinate2D = self.mainView.camera.target
+
+                    let distance: Int = Int(Util.getDistance(locationFrom: nowLocation, locationTo: tempLocation))
+
+                    let dataWithDistance: SSViewModel = data
+                    dataWithDistance.distance = distance
+                    self.datasOfAllSsom[index] = dataWithDistance
+
+                    index += 1
+                }
+            }
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

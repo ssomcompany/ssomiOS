@@ -74,16 +74,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-
     }
 
     func getMainViewModel() {
         if let tabBarController = self.tabBarController as? SSTabBarController {
             if let mainViewModel = tabBarController.mainViewModel {
                 self.mainViewModel = mainViewModel
-            } else {
-                SSAlertController.alertConfirm(title: "Error", message: "메인 쏨 데이터를 가져오는데 실패했습니다!\n네트워크 상태를 체크 후 다시 시도해주세요!!", vc: self, completion: nil)
             }
 
             if let filterModel = tabBarController.filterModel {
@@ -105,6 +101,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             filterView.tapCloseButton()
         }
         self.closeScrollView(false)
+
+        self.loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,6 +116,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+
+        self.getMainViewModel()
 
         self.initView()
     }
@@ -334,15 +334,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.scrollDetailView.frame = UIScreen.main.bounds
         self.scrollDetailView.delegate = self
 
-        if self.filterModel.ssomType == [.SSOM] {
-            self.scrollDetailView.ssomType = .SSOM
+        if let filterModel = self.filterModel {
+            self.scrollDetailView.ssomTypes = filterModel.ssomType
             self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOM)
-        }
-        if self.filterModel.ssomType == [.SSOSEYO] {
-            self.scrollDetailView.ssomType = .SSOSEYO
+            self.scrollDetailView.changeTheme(filterModel.ssomType)
+        } else {
+            self.scrollDetailView.ssomTypes = [.SSOM, .SSOSEYO]
             self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
-            self.scrollDetailView.changeTheme(.SSOSEYO)
+            self.scrollDetailView.changeTheme([.SSOM, .SSOSEYO])
         }
 
         self.navigationController?.navigationBar.barStyle = .black

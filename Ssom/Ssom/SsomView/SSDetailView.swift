@@ -111,8 +111,8 @@ class SSDetailView: UIView, SSPhotoViewDelegate, UIGestureRecognizerDelegate {
         }
     }
 
-    func changeTheme(_ ssomType: SSType) {
-        self.ssomType = ssomType
+    func changeTheme() {
+        self.ssomType = self.viewModel.ssomType
 
         if self.ssomType == .SSOM {
             self.imgHeart.image = UIImage(named: "heartGreen")

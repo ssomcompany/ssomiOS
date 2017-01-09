@@ -358,12 +358,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.navigationController?.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
         self.navigationController?.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[view]-44-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.filterView]))
 
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-
-            self.filterView.alpha = 1.0
-
-        }) { (finish) in
-        }
+        self.filterView.openAnimation()
     }
 
     @IBAction func tapWriteButton(_ sender: AnyObject) {

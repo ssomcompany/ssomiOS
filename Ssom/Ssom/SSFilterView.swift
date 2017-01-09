@@ -154,6 +154,19 @@ class SSFilterView: UIView {
                 self.filter4PeopleButton.toggledSelected = true
             }
         }
+
+        let translateTrasnform = CGAffineTransform(translationX: UIScreen.main.bounds.width / 2.0 - 20, y: -(UIScreen.main.bounds.height / 4.0 - 20))
+        let scaleTransform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        self.filterMainView.transform = scaleTransform.concatenating(translateTrasnform)
+    }
+
+    func openAnimation() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+            self.filterMainView.transform = CGAffineTransform.identity
+            self.alpha = 1.0
+        }) { (finish) in
+            //
+        }
     }
 
     func handleTap(_ gesture: UITapGestureRecognizer) {
@@ -191,19 +204,14 @@ class SSFilterView: UIView {
         self.changeSsomFilterIcon()
     }
 
-    func changeSsomFilterIcon() -> UIImage! {
+    func changeSsomFilterIcon() {
         if self.btnFilterSsom.isSelected && self.btnFilterSsoseyo.isSelected {
             self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconGreenred")
-            return #imageLiteral(resourceName: "topIconGreenred")
         } else if !self.btnFilterSsom.isSelected && self.btnFilterSsoseyo.isSelected {
             self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconRed")
-            return #imageLiteral(resourceName: "topIconRed")
         } else if self.btnFilterSsom.isSelected && !self.btnFilterSsoseyo.isSelected {
             self.imgViewSsomFilterIcon.image = #imageLiteral(resourceName: "topIconGreen")
-            return #imageLiteral(resourceName: "topIconGreen")
         }
-
-        return nil
     }
 
     @IBAction func tapInitializieFilter(_ sender: AnyObject) {

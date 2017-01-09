@@ -25,18 +25,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             return self._datasOfFilteredSsom
         }
         set {
-            if let filterViewModel = self.filterModel, filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
+            if let filterViewModel = self.filterModel, filterViewModel.ssomType != [.SSOM, .SSOSEYO] || filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
 
-                    if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                    if filterViewModel.includedSsomTypes(model.ssomType) &&
+                        filterViewModel.includedAgeAreaTypes(model.minAge) &&
+                        filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                         filteredData.append(model)
                     } else {
-                        if filterViewModel.ageTypes == [.AgeAll] && filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                        if filterViewModel.includedSsomTypes(model.ssomType) &&
+                            filterViewModel.ageTypes == [.AgeAll] &&
+                            filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
                         }
-                        if filterViewModel.includedAgeAreaTypes(model.minAge) && filterViewModel.peopleCountTypes == [.All] {
+                        if filterViewModel.includedSsomTypes(model.ssomType) &&
+                            filterViewModel.includedAgeAreaTypes(model.minAge) &&
+                            filterViewModel.peopleCountTypes == [.All] {
                             filteredData.append(model)
                         }
                     }
@@ -231,7 +237,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     func showMarkers() {
 
-        mainView.clear()
+        self.mainView.clear()
         self.datasForSsom = []
         self.datasForSsoseyo = []
 
@@ -263,29 +269,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             let sellString: String = data.ssomType.rawValue
             let isSell = sellString == SSType.SSOM.rawValue
 
-            if let filter = self.filterModel {
-                if filter.ssomType == [.SSOM] {
-                    if isSell {
-                        self.datasForSsom.append(data)
-                        if let imageUrl:String = data.imageUrl {
-                            self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
-                        } else {
-                            self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
-                        }
-                    }
-                }
-
-                if filter.ssomType == [.SSOSEYO] {
-                    if !isSell {
-                        self.datasForSsoseyo.append(data)
-                        if let imageUrl:String = data.imageUrl {
-                            self.setMarker(data, isSell, latitude, longitude, imageUrl: imageUrl)
-                        } else {
-                            self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
-                        }
-                    }
-                }
-            } else {
+            let setMarkerBlock: () -> Void = {
                 if isSell {
                     self.datasForSsom.append(data)
                     if let imageUrl:String = data.imageUrl {
@@ -301,6 +285,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                         self.setMarker(data, isSell, latitude, longitude, imageUrl: nil)
                     }
                 }
+            }
+
+            if let filter = self.filterModel {
+                if filter.ssomType == [.SSOM] {
+                    setMarkerBlock()
+                } else if filter.ssomType == [.SSOSEYO] {
+                    setMarkerBlock()
+                } else {
+                    setMarkerBlock()
+                }
+            } else {
+                setMarkerBlock()
             }
         }
 
@@ -563,6 +559,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.filterModel = filterViewModel
         self.datas = self.datasOfAllSsom
         self.showMarkers()
+
+        self.view.makeToast("쏨 필터가 적용 되었습니다 =)", duration: 2.0, position: .top)
     }
 
 // MARK: - SSScrollViewDelegate

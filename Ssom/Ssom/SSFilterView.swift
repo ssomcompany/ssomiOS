@@ -103,6 +103,19 @@ class SSFilterView: UIView {
     }
 
     func configView() {
+        if self.model.ssomType == [.SSOM, .SSOSEYO] {
+            self.btnFilterSsom.toggledSelected = true
+            self.btnFilterSsoseyo.toggledSelected = true
+        } else {
+            if self.model.ssomType == [.SSOM] {
+                self.btnFilterSsom.toggledSelected = true
+                self.btnFilterSsoseyo.toggledSelected = false
+            } else {
+                self.btnFilterSsom.toggledSelected = false
+                self.btnFilterSsoseyo.toggledSelected = true
+            }
+        }
+
         if self.model.ageTypes.contains(.AgeAll) {
             self.filter20beginAgeButton.toggledSelected = true
             self.filter20middleAgeButton.toggledSelected = true

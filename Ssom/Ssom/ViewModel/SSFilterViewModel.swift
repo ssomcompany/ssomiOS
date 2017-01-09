@@ -29,7 +29,21 @@ public struct SSFilterViewModel {
     }
 
     // MARK: Validation
+    func includedSsomTypes(_ ssomType: SSType) -> Bool {
+        var validated: Bool = true
+
+        for filterSsomType in self.ssomType {
+            validated = validated && (filterSsomType == ssomType)
+        }
+
+        return validated
+    }
+
     func includedAgeAreaTypes(_ ageTypeRawValue: UInt) -> Bool {
+        if self.ageTypes == [.AgeAll] {
+            return true
+        }
+
         let ageType = SSAgeType(rawValue: ageTypeRawValue)
 
         for filterAgeAreaType in self.ageTypes {
@@ -42,6 +56,10 @@ public struct SSFilterViewModel {
     }
 
     func includedAgeAreaTypes(_ ageType: SSAgeType) -> Bool {
+        if self.ageTypes == [.AgeAll] {
+            return true
+        }
+
         for filterAgeAreaType in self.ageTypes {
             if filterAgeAreaType.toInt() == ageType {
                 return true
@@ -52,6 +70,10 @@ public struct SSFilterViewModel {
     }
 
     func includedAgeAreaTypes(_ ageAreaType: SSAgeAreaType) -> Bool {
+        if self.ageTypes == [.AgeAll] {
+            return true
+        }
+
         for filterAgeAreaType in self.ageTypes {
             if filterAgeAreaType == ageAreaType {
                 return true
@@ -62,6 +84,10 @@ public struct SSFilterViewModel {
     }
 
     func includedPeopleCountStringTypes(_ peopleCountTypeRawValue: Int) -> Bool {
+        if self.peopleCountTypes == [.All] {
+            return true
+        }
+
         if let peopleCountType = SSPeopleCountType(rawValue: peopleCountTypeRawValue) {
             for filterPeopleCountStringType in self.peopleCountTypes {
                 if filterPeopleCountStringType.toInt() == peopleCountType {
@@ -74,6 +100,10 @@ public struct SSFilterViewModel {
     }
 
     func includedPeopleCountStringTypes(_ peopleCountType: SSPeopleCountType) -> Bool {
+        if self.peopleCountTypes == [.All] {
+            return true
+        }
+
         for filterPeopleCountStringType in self.peopleCountTypes {
             if filterPeopleCountStringType.toInt() == peopleCountType {
                 return true
@@ -84,6 +114,10 @@ public struct SSFilterViewModel {
     }
 
     func includedPeopleCountStringTypes(_ peopleCountStringType: SSPeopleCountStringType) -> Bool {
+        if self.peopleCountTypes == [.All] {
+            return true
+        }
+
         for filterPeopleCountStringType in self.peopleCountTypes {
             if filterPeopleCountStringType == peopleCountStringType {
                 return true

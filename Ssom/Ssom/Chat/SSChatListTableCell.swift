@@ -207,7 +207,7 @@ class SSChatListTableCell: UITableViewCell {
             model.ssomViewModel.distance = distance
 
             if nowCoordinate == CLLocationCoordinate2D(latitude: 0, longitude: 0) || ssomCoordinate == CLLocationCoordinate2D(latitude: 0, longitude: 0) {
-                self.lbDistance.text = "알 수 없음"
+                self.lbDistance.text = "-"
             } else {
                 self.lbDistance.text = Util.getDistanceString(distance)
             }

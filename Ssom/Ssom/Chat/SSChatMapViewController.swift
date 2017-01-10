@@ -208,7 +208,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
 
         print(error)
         
-        self.lbDistance.text = "알 수 없음"
+        self.lbDistance.text = "-"
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -206,29 +206,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
 // MARK: - private
     fileprivate func activateApp() {
-        if let token = SSAccountManager.sharedInstance.sessionToken, let email = SSAccountManager.sharedInstance.email {
-            SSNetworkAPIClient.getUser(token, email: email, completion: { (user, error) in
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            if let email = SSAccountManager.sharedInstance.userUUID {
+                SSNetworkAPIClient.getUser(token, email: email, completion: { (user, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+                    }
+
+                    if let model = user {
+                        print("user is : \(model)")
+
+                        if let imageUrl = model.profileImageUrl {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                        } else {
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                        }
+                    }
+                })
+            }
+        } else {
+            SSNetworkAPIClient.postLoginWithoutId { (error) in
                 if let err = error {
                     print(err.localizedDescription)
+
+                    SSAlertController.showAlertConfirm(title: "Error", message: "유저 세션 갱신에 실패하였습니다!", completion: nil)
                 }
-
-                if let model = user {
-                    print("user is : \(model)")
-
-                    if let imageUrl = model.profileImageUrl {
-                        SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
-                    } else {
-                        SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
-                    }
-                }
-            })
-        }
-
-        SSNetworkAPIClient.postLoginWithoutId { (error) in
-            if let err = error {
-                print(err.localizedDescription)
-
-                SSAlertController.showAlertConfirm(title: "Error", message: "유저 세션 갱신에 실패하였습니다!", completion: nil)
             }
         }
     }

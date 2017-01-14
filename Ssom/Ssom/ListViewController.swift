@@ -354,7 +354,35 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
-        self.view.addSubview(self.profileImageView!)
+        self.navigationController?.view.addSubview(self.profileImageView!)
+    }
+
+    func deleteCell(_ cell: UITableViewCell) {
+        if let indexPath: IndexPath = self.ssomListTableView.indexPath(for: cell) {
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                let data = self.datas[indexPath.row]
+
+                SSNetworkAPIClient.deletePost(token, postId: data.postId, completion: { [weak self] (error) in
+                    if let err = error {
+                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                    } else {
+                        guard let wself = self else { return }
+
+                        wself.datas.remove(at: indexPath.row)
+                        wself.ssomListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+
+                        wself.isAlreadyWrittenMySsom = false
+                        wself.mySsom = nil
+
+                        wself.setMySsomButton()
+
+                        SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
+                            //
+                        })
+                    }
+                })
+            }
+        }
     }
 
 // MARK:- SSPhotoViewDelegate
@@ -473,34 +501,5 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc.meetRequestStatus = model.meetRequestStatus
 
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-// MARK: - SSListTableViewCellDelegate
-    func deleteCell(_ cell: UITableViewCell) {
-        if let indexPath: IndexPath = self.ssomListTableView.indexPath(for: cell) {
-            if let token = SSAccountManager.sharedInstance.sessionToken {
-                let data = self.datas[indexPath.row]
-
-                SSNetworkAPIClient.deletePost(token, postId: data.postId, completion: { [weak self] (error) in
-                    if let err = error {
-                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
-                    } else {
-                        guard let wself = self else { return }
-
-                        wself.datas.remove(at: indexPath.row)
-                        wself.ssomListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-
-                        wself.isAlreadyWrittenMySsom = false
-                        wself.mySsom = nil
-
-                        wself.setMySsomButton()
-
-                        SSAlertController.showAlertConfirm(title: "알림", message: "성공적으로 삭제 되었쏨!", completion: { (action) in
-                            //
-                        })
-                    }
-                })
-            }
-        }
     }
 }

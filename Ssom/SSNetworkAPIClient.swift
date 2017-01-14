@@ -359,8 +359,8 @@ public struct SSNetworkAPIClient {
 
                 indicator.hideIndicator()
         }
-
     }
+
     static func postLogin(withFBSDKAccessToken token: String, email: String, completion: @escaping (_ error:NSError?) -> Void ) {
 
         guard let playerId = SSAccountManager.sharedInstance.oneSignalPlayerId else {
@@ -502,6 +502,117 @@ public struct SSNetworkAPIClient {
             }
 
             indicator.hideIndicator()
+        }
+    }
+
+    static func postLoginWithoutId(completion: @escaping (_ error:NSError?) -> Void) {
+        guard let playerId = SSAccountManager.sharedInstance.oneSignalPlayerId else {
+            var errorCode = 601
+            var errorDescription = "Unknown"
+            if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errorCode) {
+                errorCode = errorInfo.0
+                errorDescription = errorInfo.1
+            }
+
+            let error = NSError(domain: "com.ssom.error.AuthFailed.NoPushKey", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+            completion(error)
+
+            return
+        }
+
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        defer {
+            indicator.hideIndicator()
+        }
+
+        // Basic Auth
+        Alamofire.request(SSNetworkContext.serverUrlPrefixt+"loginWithoutId",
+                          method: .post,
+                          parameters: ["playerId": playerId],
+                          encoding: JSONEncoding.default)
+            .responseJSON { response in
+
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
+
+                        if let token = rawDatas["token"] as? String {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(token, forKey: "token")
+                            if let userUUID = rawDatas["userId"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(userUUID, forKey: "userId")
+                            }
+                            if let heartsCount = rawDatas["hearts"] as? Int {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
+                            }
+
+                            completion(nil)
+
+                            if let imageUrl = rawDatas["profileImgUrl"] as? String {
+                                SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                            }
+
+                            guard let userUUID = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String else { return }
+                            SSNetworkAPIClient.getUser(token, email: userUUID, completion: { (model, error) in
+                                if let err = error {
+                                    print(err.localizedDescription)
+
+                                    SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                                } else {
+                                    if let m = model {
+                                        SSNetworkContext.sharedInstance.saveSharedAttribute(m.toDictionary(), forKey: "userModel")
+                                    }
+                                }
+                            })
+
+                        } else {
+                            let errorHandleBlock: (_ errorParamName: String, _ datas: [String: AnyObject]) -> Void = { (name, datas) in
+                                var errorCode = 999
+                                var errorDescription = datas["result"] as! String
+                                if let err = rawDatas[name] as? Int {
+                                    errorCode = err
+                                } else {
+                                    if let errName = datas["msg"] as? String {
+                                        if let errorInfo = SSNetworkErrorHandler.sharedInstance.getErrorInfo(errName) {
+                                            errorCode = errorInfo.0
+                                            errorDescription = errorInfo.1
+                                        } else {
+                                            errorDescription = errName
+                                        }
+                                    }
+                                }
+                                let error = NSError(domain: "com.ssom.error.ServeError.AuthFailed", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+
+                                completion(error)
+                            }
+
+                            if rawDatas.keys.contains("err") {
+                                errorHandleBlock("err", rawDatas)
+                            } else if rawDatas.keys.contains("error") {
+                                errorHandleBlock("error", rawDatas)
+                            }
+                            else {
+                                let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+
+                                completion(error)
+                            }
+
+                        }
+                    } else {
+                        let error: NSError = NSError(domain: "com.ssom.error.AuthFailed.Unknown", code: 999, userInfo: nil)
+                        
+                        completion(error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+                    
+                    completion(response.result.error! as NSError?)
+                }
         }
     }
 

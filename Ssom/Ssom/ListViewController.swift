@@ -130,8 +130,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        self.showOpenAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -206,14 +204,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    if self.filterModel.ssomType == [.SSOM] && self.mySsom.ssomType != .SSOM {
+                    if let filterModel = self.filterModel, filterModel.ssomType == [.SSOM] && self.mySsom.ssomType != .SSOM {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)
                                 wself.btnWrite.layer.transform = CATransform3DIdentity
                             }
                         }
-                    } else if self.filterModel.ssomType == [.SSOSEYO] && self.mySsom.ssomType != .SSOSEYO {
+                    } else if let filterModel = self.filterModel, filterModel.ssomType == [.SSOSEYO] && self.mySsom.ssomType != .SSOSEYO {
                         self.loadCompletionBlock = { [weak self] in
                             if let wself = self {
                                 wself.openDetailView(wself.mySsom)

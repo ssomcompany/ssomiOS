@@ -53,36 +53,36 @@ class SSMenuHeadView: UITableViewHeaderFooterView {
     }
 
     func configView() -> Void {
-        var loginButtonStringAttributes = [String: AnyObject]()
-        if let currentLoginButtonAttributedText = self.btnLogin.titleLabel?.attributedText {
-            currentLoginButtonAttributedText.enumerateAttributes(in: NSRange(location: 0, length: currentLoginButtonAttributedText.length), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { (attr, _, _) in
-                loginButtonStringAttributes = attr as [String : AnyObject]
-                print("\(attr)")
-            })
-        }
-
-        self.btnUserId.addTarget(self, action: #selector(tapLogin(_:)), for: .touchUpInside)
-
-        if SSAccountManager.sharedInstance.isAuthorized {
-            self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
-            self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String
-
-            let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
-
-            self.btnUserId.isEnabled = false
-        } else {
-            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-            let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
-
-            let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
-            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
-
-            self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
-            self.lbUserId.attributedText = loginString
-
-            self.btnUserId.isEnabled = true
-        }
+//        var loginButtonStringAttributes = [String: AnyObject]()
+//        if let currentLoginButtonAttributedText = self.btnLogin.titleLabel?.attributedText {
+//            currentLoginButtonAttributedText.enumerateAttributes(in: NSRange(location: 0, length: currentLoginButtonAttributedText.length), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { (attr, _, _) in
+//                loginButtonStringAttributes = attr as [String : AnyObject]
+//                print("\(attr)")
+//            })
+//        }
+//
+//        self.btnUserId.addTarget(self, action: #selector(tapLogin(_:)), for: .touchUpInside)
+//
+//        if SSAccountManager.sharedInstance.isAuthorized {
+//            self.lbUserId.textColor = UIColor(red: 81.0/255.0, green: 81.0/255.0, blue: 81.0/255.0, alpha: 1)
+//            self.lbUserId.text = SSNetworkContext.sharedInstance.getSharedAttribute("email") as? String
+//
+//            let loginButtonTitle = NSAttributedString(string: "로그아웃", attributes: loginButtonStringAttributes)
+//            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
+//
+//            self.btnUserId.isEnabled = false
+//        } else {
+//            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+//            let loginString = NSAttributedString(string: "로그인 후 이용할 수 있습니다.", attributes: stringAttributes)
+//
+//            let loginButtonTitle = NSAttributedString(string: "로그인", attributes: loginButtonStringAttributes)
+//            self.btnLogin.setAttributedTitle(loginButtonTitle, for: UIControlState())
+//
+//            self.lbUserId.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
+//            self.lbUserId.attributedText = loginString
+//
+//            self.btnUserId.isEnabled = true
+//        }
 
         self.showProfileImage()
     }

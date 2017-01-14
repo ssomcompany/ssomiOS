@@ -223,6 +223,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                 }
             })
         }
+
+        SSNetworkAPIClient.postLoginWithoutId { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+
+                SSAlertController.showAlertConfirm(title: "Error", message: "유저 세션 갱신에 실패하였습니다!", completion: nil)
+            }
+        }
     }
 
 // MARK: - FirebaseMessage

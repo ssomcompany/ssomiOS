@@ -182,6 +182,19 @@ class SSFilterView: UIView {
         }
     }
 
+    func closeAnimation() {
+        let translateTrasnform = CGAffineTransform(translationX: UIScreen.main.bounds.width / 2.0 - 20, y: -(UIScreen.main.bounds.height / 4.0 - 20))
+        let scaleTransform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+            self.filterMainView.transform = scaleTransform.concatenating(translateTrasnform)
+            self.alpha = 0.0
+        }) { (finish) in
+            if let _ = self.superview {
+                self.removeFromSuperview()
+            }
+        }
+    }
+
     func handleTap(_ gesture: UITapGestureRecognizer) {
         if let _ = self.filterMainView.hitTest(gesture.location(in: self.filterMainView), with: nil) {
 
@@ -191,9 +204,7 @@ class SSFilterView: UIView {
     }
 
     @IBAction func tapCloseButton() {
-        if let _ = self.superview {
-            self.removeFromSuperview()
-        }
+        self.closeAnimation()
     }
 
     func tapFilterOptions(_ sender: UIButton) {

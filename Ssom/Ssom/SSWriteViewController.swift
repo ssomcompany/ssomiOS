@@ -383,8 +383,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
     @IBAction func tapRegisterButton(_ sender: AnyObject) {
-        if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
-            let userId: String = SSNetworkContext.sharedInstance.getSharedAttribute("email") as! String
+        if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String,
+            let userId: String = SSNetworkContext.sharedInstance.getSharedAttribute("userId") as? String {
             self.writeViewModel.userId = userId
             self.writeViewModel.content = self.textView.text
 

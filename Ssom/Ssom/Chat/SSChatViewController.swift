@@ -346,17 +346,25 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         switch self.meetRequestStatus {
         case .Requested:
-            SSAlertController.alertTwoButton(title: "알림", message: "만남 요청을 취소 하시겠어요?", vc: self, button1Title: "요청취소", button2Title: "닫기", button1Completion: { (action) in
-                self.cancelMeetRequest(isFinished: false)
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity
+            }) { (finish) in
+                SSAlertController.alertTwoButton(title: "알림", message: "만남 요청을 취소 하시겠어요?", vc: self, button1Title: "요청 취소", button2Title: "닫기", button1Completion: { (action) in
+                    self.cancelMeetRequest(isFinished: false)
                 }, button2Completion: { (action) in
                     //
-            })
+                })
+            }
         case .Accepted:
-            SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남취소", button2Title: "닫기", button1Completion: { (action) in
-                self.cancelMeetRequest(isFinished: true)
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity
+            }) { (finish) in
+                SSAlertController.alertTwoButton(title: "알림", message: "만남을 정말 취소 하시겠어요?", vc: self, button1Title: "만남 취소", button2Title: "닫기", button1Completion: { (action) in
+                    self.cancelMeetRequest(isFinished: true)
                 }, button2Completion: { (action) in
                     //
-            })
+                })
+            }
         case .Received:
             UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
                 self.barButtonItems.imgViewMeetRequest.transform = CGAffineTransform.identity

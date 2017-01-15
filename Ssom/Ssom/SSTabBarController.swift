@@ -15,7 +15,7 @@ enum SSTabBarMode {
     case chatList
 }
 
-class SSTabBarController: UITabBarController {
+class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     var barButtonItems: SSNavigationBarItems!
 
@@ -49,6 +49,8 @@ class SSTabBarController: UITabBarController {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+
+        self.delegate = self
 
         self.setNavigationBarView()
 
@@ -188,6 +190,13 @@ class SSTabBarController: UITabBarController {
                 }
             })
         }
+
+        // heart count
+        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+            self.barButtonItems.changeHeartCount(heartsCount)
+        } else {
+            self.barButtonItems.changeHeartCount(0)
+        }
     }
 
     func tapMenu() {
@@ -202,5 +211,10 @@ class SSTabBarController: UITabBarController {
         } else if let vc = self.selectedViewController as? ListViewController {
             vc.tapFilterButton()
         }
+    }
+
+    // MARK: - UITabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print(viewController)
     }
 }

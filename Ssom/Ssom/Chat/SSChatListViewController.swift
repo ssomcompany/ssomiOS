@@ -100,8 +100,6 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     override func initView() {
         self.chatListTableView.register(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
 
-        self.edgesForExtendedLayout = UIRectEdge()
-
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest

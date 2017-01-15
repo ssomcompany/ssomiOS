@@ -30,13 +30,13 @@ public struct SSFilterViewModel {
 
     // MARK: Validation
     func includedSsomTypes(_ ssomType: SSType) -> Bool {
-        var validated: Bool = true
-
         for filterSsomType in self.ssomType {
-            validated = validated && (filterSsomType == ssomType)
+            if filterSsomType == ssomType {
+                return true
+            }
         }
 
-        return validated
+        return false
     }
 
     func includedAgeAreaTypes(_ ageTypeRawValue: UInt) -> Bool {

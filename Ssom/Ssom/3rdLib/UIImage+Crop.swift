@@ -62,7 +62,7 @@ extension UIImage {
         return newImage
     }
 
-    class func mergeImages(firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat, isFirstPoint: Bool = true) -> UIImage {
+    class func mergeImages(firstImage: UIImage, secondImage: UIImage, x: CGFloat, y: CGFloat, isFirstPoint: Bool = true, isKeepFirstSize: Bool = false) -> UIImage {
 
         let firstImageWidth: CGFloat = firstImage.size.width
         let firstImageHeight: CGFloat = firstImage.size.height
@@ -70,10 +70,14 @@ extension UIImage {
         let secondImageWidth: CGFloat = secondImage.size.width
         let secondImageHeight: CGFloat = secondImage.size.height
 
-        let mergedSize: CGSize = CGSize(width: firstImageWidth >= secondImageWidth ? firstImageWidth : secondImageWidth
-                                        , height: firstImageHeight >= secondImageHeight ? firstImageHeight : secondImageHeight)
+        if isKeepFirstSize {
+            UIGraphicsBeginImageContextWithOptions(firstImage.size, false, UIScreen.main.scale)
+        } else {
+            let mergedSize: CGSize = CGSize(width: firstImageWidth >= secondImageWidth ? firstImageWidth : secondImageWidth
+                , height: firstImageHeight >= secondImageHeight ? firstImageHeight : secondImageHeight)
 
-        UIGraphicsBeginImageContextWithOptions(mergedSize, false, UIScreen.main.scale)
+            UIGraphicsBeginImageContextWithOptions(mergedSize, false, UIScreen.main.scale)
+        }
 
         if isFirstPoint {
             firstImage.draw(in: CGRect(x: x, y: y, width: CGFloat(firstImageWidth), height: CGFloat(firstImageHeight)))

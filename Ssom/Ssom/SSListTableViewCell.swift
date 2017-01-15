@@ -118,9 +118,9 @@ class SSListTableViewCell: UITableViewCell {
 
                             if model.meetRequestStatus == .Accepted {
                                 if ssomType == .SSOM {
-                                    self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngGreenBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                                    self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: #imageLiteral(resourceName: "ssomIngGreenBig"), x: -1, y: -1, isFirstPoint: false, isKeepFirstSize: true)
                                 } else {
-                                    self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: UIImage(named: "ssomIngRedBig")!, x: 2.3, y: 2.3, isFirstPoint: false)
+                                    self.profileImageView!.image = UIImage.mergeImages(firstImage: self.profileImageView!.image!, secondImage: #imageLiteral(resourceName: "ssomIngRedBig"), x: -1, y: -1, isFirstPoint: false, isKeepFirstSize: true)
                                 }
                             }
                         }

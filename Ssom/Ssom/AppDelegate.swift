@@ -62,6 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     } else if topViewController is SSMasterViewController {
                         // add +1 to unread count
                         (topViewController as! SSMasterViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSTabBarController {
+                        // add +1 to unread count
+                        (topViewController as! SSTabBarController).loadData()
+
+                        guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
+
+                        if selectedViewController is SSChatListViewController {
+                            (selectedViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
+                        }
                     }
                 } else {
                     print("Now MainViewController is : \(mainViewController)")
@@ -94,6 +103,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     } else if topViewController is SSMasterViewController {
                         // add +1 to unread count
                         (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSTabBarController {
+                        // add +1 to unread count
+                        (topViewController as! SSTabBarController).loadData()
+
+                        guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
+
+                        if selectedViewController is SSChatListViewController {
+                            (selectedViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject], needRecount: false)
+                        }
                     }
                 } else {
                     print("Now MainViewController is : \(mainViewController)")

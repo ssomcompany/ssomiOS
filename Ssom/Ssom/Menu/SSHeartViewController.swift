@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import UICountingLabel
 
 enum SSHeartGoods: Int {
     case heart2Package
@@ -124,7 +125,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var heartTableView: UITableView!
-    @IBOutlet var lbHeartCount: UILabel!
+    @IBOutlet var lbHeartCount: UICountingLabel!
+    @IBOutlet var lbHeartRechargeTime: UILabel!
 
     var products: [SKProduct]!
 
@@ -134,6 +136,21 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, queue: nil) { [weak self] (notification) in
+
+            guard let wself = self else { return }
+
+            if let userInfo = notification.userInfo {
+                if let heartsCount = userInfo["heartsCount"] as? Int {
+                    wself.changeHeartCount(heartsCount)
+                }
+            }
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         self.initView()
     }
@@ -145,8 +162,11 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func initView() {
+        self.lbHeartCount.format = "%d"
+        self.lbHeartCount.method = UILabelCountingMethod.linear
+
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
-            self.lbHeartCount.text = "\(heartsCount)"
+            self.changeHeartCount(heartsCount)
         }
 
         SKPaymentQueue.default().add(self)
@@ -174,6 +194,107 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBAction func tapClose(_ sender: AnyObject?) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    func changeHeartCount(_ count: Int = 0) {
+        let countNow = Int(self.lbHeartCount.text!)!
+        self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
+
+        if SSAccountManager.sharedInstance.isAuthorized {
+            if count < SSDefaultHeartCount {
+                self.startHeartRechargeTimer()
+            } else {
+                self.stopHeartRechageTimer()
+            }
+        } else {
+            self.stopHeartRechageTimer()
+        }
+    }
+
+    var heartRechargeTimer: Timer!
+
+    func startHeartRechargeTimer(_ needRestart: Bool = false) {
+        print(#function)
+
+        if needRestart {
+            let now = Date()
+            SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
+
+            self.lbHeartRechargeTime.text = Util.getTimeIntervalString(from: now).0
+        } else {
+            if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
+                self.lbHeartRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate).0
+            } else {
+                let now = Date()
+                SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
+
+                self.lbHeartRechargeTime.text = Util.getTimeIntervalString(from: now).0
+            }
+        }
+
+        self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+    }
+
+    func stopHeartRechageTimer(_ needToSave: Bool = false) {
+        print(#function)
+
+        if let timer = self.heartRechargeTimer {
+            timer.invalidate()
+            self.heartRechargeTimer = nil
+
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
+        }
+
+        self.lbHeartRechargeTime.text = "00:00"
+
+        if needToSave {
+            // 타이머 값 서버에 저장
+        }
+    }
+
+    func changeHeartRechargerTimer(_ sender: Timer?) {
+        print(#function)
+
+        if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
+            print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+
+            let timeIntervalString = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
+            self.lbHeartRechargeTime.text = timeIntervalString.0
+
+            if timeIntervalString.1 <= 0 && timeIntervalString.2 <= 0 {
+                // 하트 1개 구매 처리
+                if let token = SSAccountManager.sharedInstance.sessionToken {
+
+                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: 1, completion: { [weak self] (heartsCount, error) in
+
+                        guard let wself = self else { return }
+
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                        } else {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1,
+                                                                                                                                                                       "heartsCount": heartsCount])
+
+                            // 하트가 2개 이상이면, time 종료 처리
+                            if heartsCount >= SSDefaultHeartCount {
+                                wself.stopHeartRechageTimer()
+
+                                SSAlertController.showAlertConfirm(title: "알림", message: String(format: "%d시간이 지나서 하트가 1개 충전되었습니다!!", SSDefaultHeartRechargeHour), completion: nil)
+                            } else { // 하트가 2개 미만이면, time restart 처리
+                                wself.startHeartRechargeTimer(true)
+                            }
+                        }
+                    })
+                }
+            }
+        } else {
+            sender?.invalidate()
+        }
     }
 
     // MARK:- UITableViewDelegate & UITableViewDataSource

@@ -86,8 +86,6 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
 
             tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         }
-
-        self.loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,8 +98,8 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setNavigationBarView(configMode: SSTabBarMode = .basic) {
-        self.navigationItem.titleView = UIView(frame: CGRect(x: UIScreen.main.bounds.width / 2.0 - 50, y: 20, width: 100, height: 44))
+    func setNavigationBarView(configMode: SSTabBarMode = .basic, userInfo: [String: Any]? = nil) {
+        self.navigationItem.titleView = UIView(frame: CGRect(x: UIScreen.main.bounds.width / 2.0 - 50, y: 0, width: 100, height: 44))
         self.navigationItem.titleView?.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin, .flexibleWidth, .flexibleHeight]
         self.navigationItem.titleView?.clipsToBounds = false
 
@@ -112,6 +110,10 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
         leftBarButtonItem.action = #selector(tapMenu)
 
         let configTitleForUserCount: () -> Void = {
+            if let _lbTitle = self.lbTitle, let _ = _lbTitle.superview {
+                self.lbTitle.removeFromSuperview()
+            }
+            
             self.imgViewSsomIcon = UIImageView(image: #imageLiteral(resourceName: "iconSsomMapMini"))
             self.navigationItem.titleView!.addSubview(self.imgViewSsomIcon)
             self.imgViewSsomIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -136,19 +138,47 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
 
-        let configFilterButton: () -> Void = {
-            let rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
-            if rightBarButtonItems.count == 1 {
-                let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-                barButtonSpacer.width = -4
-
-                self.barButtonItems = SSNavigationBarItems(animated: true)
-
-                self.barButtonItems.btnFilterBar.addTarget(self, action: #selector(self.tapFilter), for: UIControlEvents.touchUpInside)
-                let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
-
-                self.navigationItem.rightBarButtonItems = [barButtonSpacer, btnFilterBar]
+        let configTitleForChatList: () -> Void = {
+            if let _lbTitle = self.lbTitle, let _ = _lbTitle.superview {
+                self.lbTitle.removeFromSuperview()
             }
+
+            self.lbTitle = UILabel()
+            self.lbTitle.text = "Chat list"
+            if let _userInfo = userInfo, let chatListCount = _userInfo["count"] {
+                self.lbTitle.text = "Chat list (\(chatListCount))"
+            }
+            self.lbTitle.textColor = UIColor(red: 77.0/255.0, green: 77.0/255.0, blue: 77.0/255.0, alpha: 1.0)
+            self.navigationItem.titleView!.addSubview(self.lbTitle)
+            self.lbTitle.translatesAutoresizingMaskIntoConstraints = false
+
+            self.navigationItem.titleView!.addConstraint(NSLayoutConstraint(item: self.navigationItem.titleView!, attribute: .centerX, relatedBy: .equal, toItem: self.lbTitle, attribute: .centerX, multiplier: 1, constant: 0))
+            self.navigationItem.titleView!.addConstraint(NSLayoutConstraint(item: self.navigationItem.titleView!, attribute: .centerY, relatedBy: .equal, toItem: self.lbTitle, attribute: .centerY, multiplier: 1, constant: 0))
+
+            if #available(iOS 8.2, *) {
+                self.lbTitle.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
+            } else {
+                // Fallback on earlier versions
+                if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 16) {
+                    self.lbTitle.font = font
+                }
+            }
+        }
+
+        let configFilterButton: () -> Void = {
+            let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+            barButtonSpacer.width = -4
+
+            self.barButtonItems = SSNavigationBarItems(animated: true)
+
+            self.barButtonItems.btnFilterBar.addTarget(self, action: #selector(self.tapFilter), for: UIControlEvents.touchUpInside)
+            let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
+
+            self.navigationItem.rightBarButtonItems = [barButtonSpacer, btnFilterBar]
+        }
+
+        let removeFilterButton: () -> Void = {
+            self.navigationItem.rightBarButtonItems = nil
         }
 
         switch configMode {
@@ -157,8 +187,10 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             configFilterButton()
         case .noFilter:
             configTitleForUserCount()
+            removeFilterButton()
         case .chatList:
-            break
+            configTitleForChatList()
+            removeFilterButton()
         }
     }
 
@@ -171,7 +203,11 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
 
                 SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
             } else {
-                wself.lbTitle.text = "현재 \(count)명 접속 중"
+                if let viewController = wself.selectedViewController, viewController is SSChatListViewController {
+
+                } else {
+                    wself.lbTitle.text = "현재 \(count)명 접속 중"
+                }
             }
         }
 
@@ -215,6 +251,15 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     // MARK: - UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print(viewController)
+        if viewController is SSChatListViewController {
+            let chatListCount = (viewController as! SSChatListViewController).datas.count
+            self.setNavigationBarView(configMode: .chatList, userInfo: ["count": chatListCount])
+        } else if viewController is MapViewController || viewController is ListViewController {
+            self.setNavigationBarView()
+        } else if viewController is SSHeartViewController {
+            self.setNavigationBarView(configMode: .noFilter)
+        }
+
+        self.loadData()
     }
 }

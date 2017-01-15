@@ -101,8 +101,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.ssomListTableView.register(UINib(nibName: "SSListTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
-        self.edgesForExtendedLayout = UIRectEdge()
-
         if let filterView = self.filterView {
             filterView.tapCloseButton()
         }

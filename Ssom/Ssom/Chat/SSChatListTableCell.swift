@@ -137,8 +137,6 @@ class SSChatListTableCell: UITableViewCell {
                 self.imgIngMeet.image = UIImage(named: "ssomIngGreenSmall")
             case .SSOSEYO:
                 self.imgIngMeet.image = UIImage(named: "ssomIngRedSmall")
-            default:
-                break
             }
         }
 
@@ -159,21 +157,19 @@ class SSChatListTableCell: UITableViewCell {
                 self.lbLastMessage.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
             case .SSOSEYO:
                 self.lbLastMessage.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
-            default:
-                break
             }
             self.lbLastMessage.text = "만남 요청을 받았습니다!"
         } else {
             if isAcceptedToMeet {
                 self.lbLastMessage.textColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
-                self.lbLastMessage.text = "쏨과 만나는 중..."
+                self.lbLastMessage.text = "만남이 시작되었습니다."
             } else {
                 if model.lastMessage.characters.count > 0 {
                     self.lbLastMessage.text = model.lastMessage
 
                     if model.lastMessageType == .System {
                         if model.lastMessage == "out" || model.lastMessage == "complete" {
-                            self.lbLastMessage.text = "쏨이 끝났어요, 다른 상대를∙∙∙(T_T)"
+                            self.lbLastMessage.text = "만남이 종료되었습니다."
                         } else if model.lastMessage == "request" {
                             self.lbLastMessage.text = "만남 요청을 했습니다!"
                         } else if model.lastMessage == "cancel" {

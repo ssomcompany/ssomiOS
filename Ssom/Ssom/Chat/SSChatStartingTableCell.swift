@@ -31,8 +31,8 @@ class SSChatStartingTableCell: UITableViewCell {
 
         if let message = model, message.messageType == .System {
             if message.message == "out" || message.message == "complete" {
-                self.lbColored.text = "쏨이 끝났어요, "
-                self.lbDetailMessage.text = "다른 상대를∙∙∙(T_T)"
+                self.lbColored.text = "만남이 종료되었습니다"
+                self.lbDetailMessage.text = ""
             } else if message.message == "request" {
                 if message.fromUserId == SSAccountManager.sharedInstance.userUUID {
                     self.lbColored.text = "만남 요청을 했습니다!"
@@ -42,7 +42,7 @@ class SSChatStartingTableCell: UITableViewCell {
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "approve" {
-                self.lbColored.text = "쏨과 만나는 중..."
+                self.lbColored.text = "만남이 시작되었습니다."
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "cancel" {

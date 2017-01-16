@@ -175,6 +175,10 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             let btnFilterBar = UIBarButtonItem(customView: self.barButtonItems.filterBarButtonView!)
 
             self.navigationItem.rightBarButtonItems = [barButtonSpacer, btnFilterBar]
+
+            if let filterModel = self.filterModel {
+                self.barButtonItems.changeFilter(ssomTypes: filterModel.ssomType)
+            }
         }
 
         let removeFilterButton: () -> Void = {

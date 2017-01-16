@@ -178,6 +178,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             appDelegate.isDrawable = true
         }
 
+        self.getMainViewModel()
+
         self.initView()
     }
 
@@ -190,6 +192,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func getMainViewModel() {
+        if let tabBarController = self.tabBarController as? SSTabBarController {
+            if let filterModel = tabBarController.filterModel {
+                self.filterModel = filterModel
+            }
+        }
     }
 
     func saveMainViewModel() {

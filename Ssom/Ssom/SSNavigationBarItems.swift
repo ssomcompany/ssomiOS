@@ -280,7 +280,13 @@ class SSNavigationBarItems : UIView
         self.imgViewFilterIcon.transform = CGAffineTransform.identity
     }
 
-    func changeFilter() {
-        
+    func changeFilter(ssomTypes: [SSType] = [.SSOM, .SSOSEYO]) {
+        if ssomTypes == [.SSOM] {
+            self.imgViewFilterIcon.image = #imageLiteral(resourceName: "topIconGreen")
+        } else if ssomTypes == [.SSOSEYO] {
+            self.imgViewFilterIcon.image = #imageLiteral(resourceName: "topIconRed")
+        } else {
+            self.imgViewFilterIcon.image = #imageLiteral(resourceName: "topIconGreenred")
+        }
     }
 }

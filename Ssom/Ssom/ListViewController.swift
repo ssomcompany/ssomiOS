@@ -431,7 +431,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.datas = self.mainViewModel.datas
         self.ssomListTableView.reloadData()
 
-        self.view.makeToast("쏨 필터가 적용 되었습니다 =)", duration: 2.0, position: .top)
+        if let tabBarController = self.tabBarController as? SSTabBarController {
+            tabBarController.barButtonItems.changeFilter(ssomTypes: filterViewModel.ssomType)
+        }
+
+        self.view.makeToast("쏨 필터가 적용 되었습니다 =)", duration: 2.0, position: CGPoint(x: UIScreen.main.bounds.width / 2.0, y: 104))
     }
 
 // MARK: - SSScrollViewDelegate

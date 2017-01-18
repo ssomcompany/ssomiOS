@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SSFilterViewDelegate: NSObjectProtocol {
-    func applyFilter(_ filterViewModel: SSFilterViewModel) -> Void;
+    func applyFilter(_ filterViewModel: SSFilterViewModel?) -> Void;
 }
 
 extension UIButton {
@@ -115,6 +115,8 @@ class SSFilterView: UIView {
                 self.btnFilterSsoseyo.toggledSelected = true
             }
         }
+
+        self.changeSsomFilterIcon()
 
         if self.model.ageTypes.contains(.AgeAll) {
             self.filter20beginAgeButton.toggledSelected = true

@@ -60,7 +60,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var profileImageView: SSPhotoView?
 
     var filterView: SSFilterView!
-    var filterModel: SSFilterViewModel!
+    var filterModel: SSFilterViewModel! {
+        didSet {
+            if let tabBarController = self.tabBarController as? SSTabBarController {
+                tabBarController.filterModel = self.filterModel
+            }
+        }
+    }
     var scrollDetailView: SSScrollView!
 
     var needReload: Bool = false
@@ -423,17 +429,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 // MARK: - SSFilterViewDelegate
-    func applyFilter(_ filterViewModel: SSFilterViewModel) {
+    func applyFilter(_ filterViewModel: SSFilterViewModel?) {
         self.filterView.tapCloseButton()
 
         // apply filter value to get the ssom list
-        self.filterModel = filterViewModel
+        if let _filterViewModel = filterViewModel {
+            self.filterModel = _filterViewModel
+
+            if let tabBarController = self.tabBarController as? SSTabBarController {
+                tabBarController.barButtonItems.changeFilter(ssomTypes: _filterViewModel.ssomType)
+            }
+        } else {
+            if let tabBarController = self.tabBarController as? SSTabBarController {
+                tabBarController.barButtonItems.changeFilter()
+            }
+        }
         self.datas = self.mainViewModel.datas
         self.ssomListTableView.reloadData()
-
-        if let tabBarController = self.tabBarController as? SSTabBarController {
-            tabBarController.barButtonItems.changeFilter(ssomTypes: filterViewModel.ssomType)
-        }
 
         self.view.makeToast("쏨 필터가 적용 되었습니다 =)", duration: 2.0, position: CGPoint(x: UIScreen.main.bounds.width / 2.0, y: 104))
     }

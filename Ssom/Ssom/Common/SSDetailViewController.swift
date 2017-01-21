@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSDetailViewController: UIViewController {
+class SSDetailViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,5 +16,12 @@ class SSDetailViewController: UIViewController {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = false
         }
+
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+
+    // MARK:- UIGestureRecognizerDelegate
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

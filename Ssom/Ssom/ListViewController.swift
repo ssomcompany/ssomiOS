@@ -24,6 +24,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return self._datasOfFilteredSsom
         }
         set {
+            // check if my ssom exists
+            for model: SSViewModel in newValue {
+                if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
+                    if loginedUserId == model.userId {
+                        self.isAlreadyWrittenMySsom = true
+                        self.mySsom = model
+                        break
+                    } else {
+                        self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
+                    }
+                }
+            }
+
             if let filterViewModel = self.filterModel, filterViewModel.ssomType != [.SSOM, .SSOSEYO] || filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
@@ -239,67 +252,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var loadCompletionBlock: (() -> Void)?
 
     func loadData() {
-        if self.needReload {
+        SSNetworkAPIClient.getPosts(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { [weak self] (viewModels, error) -> Void in
+            guard let wself = self else { return }
 
-            SSNetworkAPIClient.getPosts(latitude: self.mainViewModel.nowLatitude, longitude: self.mainViewModel.nowLongitude, completion: { [weak self] (viewModels, error) -> Void in
-                guard let wself = self else { return }
+            if let models = viewModels {
+                wself.mainViewModel.datas = models
+                wself.datas = models
+                print("result is : \(wself.mainViewModel.datas)")
 
-                if let models = viewModels {
-                    wself.mainViewModel.datas = models
-                    wself._datasOfFilteredSsom = models
-                    print("result is : \(wself.mainViewModel.datas)")
-
-                    wself.filterData()
-                } else {
-                    print("error is : \(error?.localizedDescription)")
-                }
-            })
-        } else {
-            // initially loading
-            self.filterData()
-
-            self.needReload = true;
-        }
+                wself.filterData()
+            } else {
+                print("error is : \(error?.localizedDescription)")
+            }
+        })
     }
 
     func filterData() {
-        var tempDatas: [SSViewModel] = []
-
-        let ssomTypes: [SSType]
-        if self.mainViewModel.ssomTypes == [.SSOM] {
-            ssomTypes = [.SSOM]
-        } else if self.mainViewModel.ssomTypes == [.SSOSEYO] {
-            ssomTypes = [.SSOSEYO]
-        } else {
-            ssomTypes = SSType.allValues
-        }
-
-        self.isAlreadyWrittenMySsom = false
-
-        for data: SSViewModel in self.mainViewModel.datas {
-            if ssomTypes == SSType.allValues {
-                tempDatas.append(data)
-            } else {
-                if [data.ssomType] == ssomTypes {
-                    tempDatas.append(data)
-                }
-            }
-
-            // check if my ssom exists
-            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
-                if loginedUserId == data.userId {
-                    self.isAlreadyWrittenMySsom = true
-                    self.mySsom = data
-                } else {
-                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
-                }
-            }
-        }
-
         self.showOpenAnimation()
-
-        self.mainViewModel.datas = tempDatas
-        self.datas = tempDatas
 
         if self.datas.count > 0 {
             self.ssomListTableView.backgroundColor = UIColor.white

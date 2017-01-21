@@ -25,6 +25,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             return self._datasOfFilteredSsom
         }
         set {
+            for model: SSViewModel in newValue {
+                if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
+                    if loginedUserId == model.userId {
+                        self.isAlreadyWrittenMySsom = true
+                        self.mySsom = model
+                        break
+                    } else {
+                        self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
+                    }
+                }
+            }
+
             if let filterViewModel = self.filterModel, filterViewModel.ssomType != [.SSOM, .SSOSEYO] || filterViewModel.ageTypes != [.AgeAll] || filterViewModel.peopleCountTypes != [.All] {
                 var filteredData = [SSViewModel]()
 
@@ -262,14 +274,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         var index: Int = 0;
         for data in self.datas {
-            if let loginedUserId = SSAccountManager.sharedInstance.userUUID {
-                if loginedUserId == data.userId {
-                    self.isAlreadyWrittenMySsom = true
-                    self.mySsom = data
-                } else {
-                    self.isAlreadyWrittenMySsom = self.isAlreadyWrittenMySsom || false
-                }
-            }
 
             let latitude: Double = data.latitude 
             let longitude: Double = data.longitude 

@@ -24,6 +24,7 @@ class SSChatListTableCell: UITableViewCell {
     @IBOutlet var imgViewProfile: UIImageView!
     @IBOutlet var lbSsomAgePeople: UILabel!
     @IBOutlet var lbLastMessage: UILabel!
+    @IBOutlet var viewNewMessageCount: UIView!
     @IBOutlet var lbNewMessageCount: UILabel!
     @IBOutlet var lbDistance: UILabel!
     @IBOutlet var lbCreatedDate: UILabel!
@@ -180,16 +181,22 @@ class SSChatListTableCell: UITableViewCell {
             }
         }
 
+        self.viewNewMessageCount.layoutIfNeeded()
+        self.viewNewMessageCount.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        self.viewNewMessageCount.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.viewNewMessageCount.layer.shadowRadius = 1
+        self.viewNewMessageCount.layer.shadowOpacity = 1
+        self.viewNewMessageCount.layer.shadowPath = UIBezierPath(roundedRect: self.viewNewMessageCount.bounds, cornerRadius: self.viewNewMessageCount.bounds.size.height / 2).cgPath
+        self.viewNewMessageCount.layer.masksToBounds = false
+
         self.lbNewMessageCount.layoutIfNeeded()
         self.lbNewMessageCount.layer.cornerRadius = self.lbNewMessageCount.bounds.size.height / 2
-        self.lbNewMessageCount.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        self.lbNewMessageCount.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.lbNewMessageCount.layer.shadowRadius = 1
-        self.lbNewMessageCount.layer.shadowOpacity = 1
         self.lbNewMessageCount.text = "\(model.unreadCount)"
         if model.unreadCount == 0 {
+            self.viewNewMessageCount.isHidden = true
             self.lbNewMessageCount.isHidden = true
         } else {
+            self.viewNewMessageCount.isHidden = false
             self.lbNewMessageCount.isHidden = false
         }
 

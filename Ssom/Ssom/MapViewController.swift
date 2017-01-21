@@ -29,21 +29,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 var filteredData = [SSViewModel]()
 
                 for model: SSViewModel in newValue {
-
-                    if filterViewModel.includedSsomTypes(model.ssomType) &&
-                        filterViewModel.includedAgeAreaTypes(model.minAge) &&
-                        filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                    if let mySsom = self.mySsom, mySsom === model {
                         filteredData.append(model)
                     } else {
                         if filterViewModel.includedSsomTypes(model.ssomType) &&
-                            filterViewModel.ageTypes == [.AgeAll] &&
+                            filterViewModel.includedAgeAreaTypes(model.minAge) &&
                             filterViewModel.includedPeopleCountStringTypes(model.userCount) {
                             filteredData.append(model)
-                        }
-                        if filterViewModel.includedSsomTypes(model.ssomType) &&
-                            filterViewModel.includedAgeAreaTypes(model.minAge) &&
-                            filterViewModel.peopleCountTypes == [.All] {
-                            filteredData.append(model)
+                        } else {
+                            if filterViewModel.includedSsomTypes(model.ssomType) &&
+                                filterViewModel.ageTypes == [.AgeAll] &&
+                                filterViewModel.includedPeopleCountStringTypes(model.userCount) {
+                                filteredData.append(model)
+                            }
+                            if filterViewModel.includedSsomTypes(model.ssomType) &&
+                                filterViewModel.includedAgeAreaTypes(model.minAge) &&
+                                filterViewModel.peopleCountTypes == [.All] {
+                                filteredData.append(model)
+                            }
                         }
                     }
                 }
@@ -382,24 +385,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
                 }, completion: { (finish) in
-                    if let filterModel = self.filterModel, filterModel.ssomType == [.SSOM] && self.mySsom.ssomType != .SSOM {
-                        self.loadCompletionBlock = { [weak self] in
-                            if let wself = self {
-                                wself.openDetailView(wself.mySsom)
-                                wself.writeButton.layer.transform = CATransform3DIdentity
-                            }
-                        }
-                    } else if let filterModel = self.filterModel, filterModel.ssomType == [.SSOSEYO] && self.mySsom.ssomType != .SSOSEYO {
-                        self.loadCompletionBlock = { [weak self] in
-                            if let wself = self {
-                                wself.openDetailView(wself.mySsom)
-                                wself.writeButton.layer.transform = CATransform3DIdentity
-                            }
-                        }
-                    } else {
-                        self.openDetailView(self.mySsom)
-                        self.writeButton.layer.transform = CATransform3DIdentity
-                    }
+                    self.openDetailView(self.mySsom)
+                    self.writeButton.layer.transform = CATransform3DIdentity
             })
         } else {
             let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 45.0 / 180.0))
@@ -451,13 +438,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         if let filter = self.filterModel {
             self.scrollDetailView.ssomTypes = filter.ssomType
-            if filter.ssomType == [.SSOM] {
-                self.scrollDetailView.configureWithDatas(self.datasForSsom, currentViewModel: model)
-            } else if filter.ssomType == [.SSOSEYO] {
-                self.scrollDetailView.configureWithDatas(self.datasForSsoseyo, currentViewModel: model)
-            } else {
-                self.scrollDetailView.configureWithDatas(self.datasOfAllSsom, currentViewModel: model)
-            }
+            self.scrollDetailView.configureWithDatas(self.datas, currentViewModel: model)
             self.scrollDetailView.changeTheme(filter.ssomType)
         } else {
             self.scrollDetailView.ssomTypes = [.SSOM, .SSOSEYO]

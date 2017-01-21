@@ -198,7 +198,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func changeHeartCount(_ count: Int = 0) {
         let countNow = Int(self.lbHeartCount.text!)!
-        self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
+        self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 0.3)
 
         if SSAccountManager.sharedInstance.isAuthorized {
             if count < SSDefaultHeartCount {

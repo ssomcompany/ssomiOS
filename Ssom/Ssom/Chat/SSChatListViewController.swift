@@ -319,7 +319,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
-        self.view.addSubview(self.profileImageView!)
+        self.navigationController?.view.addSubview(self.profileImageView!)
     }
 
 // MARK:- SSPhotoViewDelegate

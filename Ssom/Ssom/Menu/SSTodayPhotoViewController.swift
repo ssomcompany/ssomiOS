@@ -18,7 +18,7 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
 
     var pickedImageExtension: String!
     var pickedImageName: String!
-    var pickedImageData: NSData!
+    var pickedImageData: Data!
 
     var photoSaveCompletion: (()-> Void)?
 
@@ -29,11 +29,11 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     override func initView() {
-        if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl where imageUrl.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
-            self.imgViewPhoto.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: nil) { (image, error, _, _) in
+        if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl, imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
+            self.imgViewPhoto.sd_setImage(with: URL(string: imageUrl), placeholderImage: nil, options: []) { (image, error, _, _) in
                 if error != nil {
                 } else {
-                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPhoto.bounds.size.width, self.imgViewPhoto.bounds.size.height))
+                    let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: self.imgViewPhoto.bounds.size.width, height: self.imgViewPhoto.bounds.size.height))
 
                     self.imgViewPhoto.image = croppedProfileImage
                 }
@@ -44,29 +44,29 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if UIScreen.mainScreen().bounds.height < 568.0 {
-            self.constBtnSaveBottomToSuper.active = false
-            self.constBtnCancelTopMin.active = true
+        if UIScreen.main.bounds.height < 568.0 {
+            self.constBtnSaveBottomToSuper.isActive = false
+            self.constBtnCancelTopMin.isActive = true
         }
     }
 
-    @IBAction func tapPhotoLibrary(sender: AnyObject) {
+    @IBAction func tapPhotoLibrary(_ sender: AnyObject) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
     }
 
-    @IBAction func tapCamera(sender: AnyObject) {
+    @IBAction func tapCamera(_ sender: AnyObject) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .Camera
+        imagePickerController.sourceType = .camera
         imagePickerController.allowsEditing = true
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
     }
 
-    @IBAction func tapDeletePhoto(sender: AnyObject) {
+    @IBAction func tapDeletePhoto(_ sender: AnyObject) {
         SSAlertController.alertTwoButton(title: "알림", message: "정말로 오늘의 사진을 삭제하시겠습니까?", vc: self, button1Completion: { (action) in
 
             if let token = SSAccountManager.sharedInstance.sessionToken {
@@ -83,7 +83,7 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
                                 completion()
                             }
 
-                            wself.dismissViewControllerAnimated(true, completion: nil)
+                            wself.dismiss(animated: true, completion: nil)
                         }
                     }
                     })
@@ -94,15 +94,15 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
 
-    @IBAction func tapNaviClose(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tapNaviClose(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func tapCancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tapCancel(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func tapSubmit(sender: AnyObject) {
+    @IBAction func tapSubmit(_ sender: AnyObject) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             SSNetworkAPIClient.postFile(token, fileExt: self.pickedImageExtension, fileName: self.pickedImageName, fileData: self.pickedImageData, completion: { [weak self] (photoURLPath, error) in
                 if let wself = self {
@@ -119,7 +119,7 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
                             }
                         }
 
-                        wself.dismissViewControllerAnimated(true, completion: nil)
+                        wself.dismiss(animated: true, completion: nil)
                     }
                 }
             })
@@ -127,12 +127,12 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     // MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
 
         let pickedImage: UIImage!
         // photo library
-        if let pickedImageURL: NSURL = editingInfo![UIImagePickerControllerReferenceURL] as? NSURL {
-            let pickedImageURLQueryParams: Array = pickedImageURL.query!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "=&"))
+        if let pickedImageURL: URL = editingInfo![UIImagePickerControllerReferenceURL] as? URL {
+            let pickedImageURLQueryParams: Array = pickedImageURL.query!.components(separatedBy: CharacterSet(charactersIn: "=&"))
             pickedImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
 
             var isExt: Bool = false;
@@ -166,14 +166,14 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
             self.pickedImageData = UIImagePNGRepresentation(pickedImage)
         }
 
-        picker.dismissViewControllerAnimated(true, completion: { [weak self] in
+        picker.dismiss(animated: true, completion: { [weak self] in
             if let wself = self {
-                let croppedProfileImage: UIImage = UIImage.cropInCircle(pickedImage, frame: CGRectMake(0, 0, wself.imgViewPhoto.bounds.size.width, wself.imgViewPhoto.bounds.size.height))
+                let croppedProfileImage: UIImage = UIImage.cropInCircle(pickedImage, frame: CGRect(x: 0, y: 0, width: wself.imgViewPhoto.bounds.size.width, height: wself.imgViewPhoto.bounds.size.height))
 
                 wself.imgViewPhoto.image = croppedProfileImage
             }
         })
 
-        self.btnSave.enabled = true
+        self.btnSave.isEnabled = true
     }
 }

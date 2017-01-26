@@ -10,25 +10,25 @@ import Foundation
 
 enum SSAgeType: UInt
 {
-    case AgeAll = 0
-    case AgeEarly20 = 20
-    case AgeMiddle20 = 25
-    case AgeLate20 = 29
-    case Age30 = 30
-    case Unknown = 99
+    case ageAll = 0
+    case ageEarly20 = 20
+    case ageMiddle20 = 25
+    case ageLate20 = 29
+    case age30 = 30
+    case unknown = 99
 
     init(rawValue: UInt) {
         switch rawValue {
         case 0:
-            self = .AgeAll
+            self = .ageAll
         case 20..<25:
-            self = .AgeEarly20
+            self = .ageEarly20
         case 25..<29:
-            self = .AgeMiddle20
+            self = .ageMiddle20
         case 29..<30:
-            self = .AgeLate20
+            self = .ageLate20
         default:
-            self = .Age30
+            self = .age30
         }
     }
 }
@@ -44,41 +44,41 @@ enum SSAgeAreaType: String
 
     func toInt() -> SSAgeType {
         switch self {
-        case AgeAll:
-            return SSAgeType.AgeAll
-        case AgeEarly20:
-            return SSAgeType.AgeEarly20
-        case AgeMiddle20:
-            return SSAgeType.AgeMiddle20
-        case AgeLate20:
-            return SSAgeType.AgeLate20
-        case Age30:
-            return SSAgeType.Age30
+        case .AgeAll:
+            return SSAgeType.ageAll
+        case .AgeEarly20:
+            return SSAgeType.ageEarly20
+        case .AgeMiddle20:
+            return SSAgeType.ageMiddle20
+        case .AgeLate20:
+            return SSAgeType.ageLate20
+        case .Age30:
+            return SSAgeType.age30
         default:
-            return SSAgeType.Unknown
+            return SSAgeType.unknown
         }
     }
 }
 
 enum SSPeopleCountType: Int
 {
-    case All = 0
-    case OnePerson = 1
-    case TwoPeople
-    case ThreePeople
-    case OverFourPeople
+    case all = 0
+    case onePerson = 1
+    case twoPeople
+    case threePeople
+    case overFourPeople
 
     func toSting() -> SSPeopleCountStringType {
         switch self {
-        case All:
+        case .all:
             return SSPeopleCountStringType.All
-        case OnePerson:
+        case .onePerson:
             return SSPeopleCountStringType.OnePerson
-        case TwoPeople:
+        case .twoPeople:
             return SSPeopleCountStringType.TwoPeople
-        case ThreePeople:
+        case .threePeople:
             return SSPeopleCountStringType.ThreePeople
-        case OverFourPeople:
+        case .overFourPeople:
             return SSPeopleCountStringType.OverFourPeople
         }
     }
@@ -94,16 +94,16 @@ enum SSPeopleCountStringType: String
 
     func toInt() -> SSPeopleCountType {
         switch self {
-        case All:
-            return SSPeopleCountType.All
-        case OnePerson:
-            return SSPeopleCountType.OnePerson
-        case TwoPeople:
-            return SSPeopleCountType.TwoPeople
-        case ThreePeople:
-            return SSPeopleCountType.ThreePeople
-        case OverFourPeople:
-            return SSPeopleCountType.OverFourPeople
+        case .All:
+            return SSPeopleCountType.all
+        case .OnePerson:
+            return SSPeopleCountType.onePerson
+        case .TwoPeople:
+            return SSPeopleCountType.twoPeople
+        case .ThreePeople:
+            return SSPeopleCountType.threePeople
+        case .OverFourPeople:
+            return SSPeopleCountType.overFourPeople
         }
     }
 }
@@ -117,7 +117,7 @@ public struct SSWriteViewModel
     var peopleCountType: SSPeopleCountType  //userCount
     var ageType: SSAgeType  //minAge, maxAge
 
-    var profilePhotoUrl: NSURL?  //imageUrl
+    var profilePhotoUrl: URL?  //imageUrl
 
     var myLatitude: Double  //latitude
     var myLongitude: Double //longitude
@@ -131,9 +131,9 @@ public struct SSWriteViewModel
 
         content = ""
 
-        peopleCountType = .OnePerson
+        peopleCountType = .onePerson
 
-        ageType = .AgeEarly20
+        ageType = .ageEarly20
 
         profilePhotoUrl = nil
 
@@ -149,7 +149,7 @@ public struct SSWriteViewModel
         , content: String
         , peopleCount: SSPeopleCountType
         , age: SSAgeType
-        , profilePhotoUrl: NSURL
+        , profilePhotoUrl: URL
         , myLatitude: Double
         , myLongitude: Double
         , isSell: Bool)
@@ -174,7 +174,7 @@ public struct SSWriteViewModel
 
         ageType = data["age"] as! SSAgeType
 
-        profilePhotoUrl = data["profilePhotoUrl"] as? NSURL
+        profilePhotoUrl = data["profilePhotoUrl"] as? URL
 
         myLatitude = data["latitude"] as! Double
         myLongitude = data["longitude"] as! Double

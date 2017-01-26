@@ -29,26 +29,28 @@ enum SSType : String {
             return "쏘실 분 찾아요!"
         }
     }
+
+    static let allValues: [SSType] = [SSOM, SSOSEYO]
 }
 
 public struct SSMainViewModel {
     var datas: [SSViewModel]
 
-    var isSell: Bool
+    var ssomTypes: [SSType]
 
     var nowLatitude: Double
     var nowLongitude: Double
 
     init() {
         self.datas = []
-        self.isSell = true
+        self.ssomTypes = SSType.allValues
         self.nowLatitude = 0
         self.nowLongitude = 0
     }
 
-    init(datas:[SSViewModel], isSell: Bool, nowLatitude: Double = 0, nowLongitude: Double = 0) {
+    init(datas:[SSViewModel], ssomTypes: [SSType] = SSType.allValues, nowLatitude: Double = 0, nowLongitude: Double = 0) {
         self.datas = datas
-        self.isSell = isSell
+        self.ssomTypes = ssomTypes
         self.nowLatitude = nowLatitude
         self.nowLongitude = nowLongitude
     }

@@ -10,8 +10,8 @@ import UIKit
 import FBSDKLoginKit
 
 extension FBSDKLoginButton {
-    override public func layoutSubviews() {
-        self.setTitle(Util.getFBLoginButtonTitle(self), forState: .Normal)
+    override open func layoutSubviews() {
+        self.setTitle(Util.getFBLoginButtonTitle(self), for: UIControlState())
 
         super.layoutSubviews()
     }
@@ -34,12 +34,12 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     @IBOutlet var btnFindPassword: UIButton!
     @IBOutlet var btnSignUp: UIButton!
 
-    var completion: ((finish: Bool) -> Void)?
+    var completion: ((_ finish: Bool) -> Void)?
 
     var defaultScrollContentHeight: CGFloat = 0.0
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -49,32 +49,32 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
 
     override func initView() {
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.isHidden = true
 
-        self.viewBackground.hidden = true
+        self.viewBackground.isHidden = true
 
-        self.btnSignIn.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
-        self.btnSignIn.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnSignIn.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).cgColor
+        self.btnSignIn.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.btnSignIn.layer.shadowRadius = 1.0
         self.btnSignIn.layer.shadowOpacity = 1.0
 
-        self.btnFindPassword.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
-        self.btnFindPassword.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFindPassword.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).cgColor
+        self.btnFindPassword.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.btnFindPassword.layer.shadowRadius = 1.0
         self.btnFindPassword.layer.shadowOpacity = 1.0
 
-        self.btnFBLogin.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
-        self.btnFBLogin.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnFBLogin.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).cgColor
+        self.btnFBLogin.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.btnFBLogin.layer.shadowRadius = 1.0
         self.btnFBLogin.layer.shadowOpacity = 1.0
         self.btnFBLogin.clipsToBounds = true
         self.btnFBLogin.delegate = self
-        self.btnFBLogin.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
-        self.btnFBLogin.setTitle("로그아웃", forState: UIControlState.Selected)
+        self.btnFBLogin.titleLabel!.font = UIFont.boldSystemFont(ofSize: 15)
+        self.btnFBLogin.setTitle("로그아웃", for: UIControlState.selected)
         self.btnFBLogin.readPermissions = ["public_profile", "email"]
 
-        self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).CGColor
-        self.btnSignUp.layer.shadowOffset = CGSizeMake(0, 1)
+        self.btnSignUp.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3).cgColor
+        self.btnSignUp.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.btnSignUp.layer.shadowRadius = 1.0
         self.btnSignUp.layer.shadowOpacity = 1.0
 
@@ -84,18 +84,18 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
     func registerForKeyboardNotifications() -> Void {
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.viewBackground.hidden = false
+        self.viewBackground.isHidden = false
 
         self.defaultScrollContentHeight = self.scrollView.contentSize.height
     }
@@ -103,14 +103,12 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     func validateInput() -> Bool {
         var isSuccessToValidate = true
 
-        if let email:String = tfEmail.text! {
-            if email.characters.count <= 0 {
-                isSuccessToValidate = isSuccessToValidate && false
-            } else {
-//                if !Util.isValidEmail(email) {
-//                    isSuccessToValidate = isSuccessToValidate && false
-//                }
-            }
+        if let email = self.tfEmail.text, email.characters.count <= 0 {
+            isSuccessToValidate = isSuccessToValidate && false
+        } else {
+//            if !Util.isValidEmail(email) {
+//                isSuccessToValidate = isSuccessToValidate && false
+//            }
         }
 
         let password:String = tfPassword.text!
@@ -118,43 +116,43 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
             isSuccessToValidate = isSuccessToValidate && false
         }
 
-        self.btnSignIn.enabled = isSuccessToValidate;
+        self.btnSignIn.isEnabled = isSuccessToValidate;
 
         return isSuccessToValidate;
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             if touch.view != self.tfEmail {
-                if self.tfEmail.isFirstResponder() {
+                if self.tfEmail.isFirstResponder {
                     self.tfEmail.resignFirstResponder()
                 }
             }
 
             if touch.view != self.tfPassword {
-                if self.tfPassword.isFirstResponder() {
+                if self.tfPassword.isFirstResponder {
                     self.tfPassword.resignFirstResponder()
                 }
             }
         }
     }
 
-    @IBAction func tapClose(sender: AnyObject?) {
+    @IBAction func tapClose(_ sender: AnyObject?) {
         self.close(isSignedIn: false)
     }
 
-    func close(isSignedIn isSignedIn: Bool) {
+    func close(isSignedIn: Bool) {
         guard let completionBlock = self.completion else {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             return
         }
 
-        completionBlock(finish: isSignedIn)
-
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            completionBlock(isSignedIn)
+        })
     }
 
-    @IBAction func tapSignInButton(sender: AnyObject?) {
+    @IBAction func tapSignInButton(_ sender: AnyObject?) {
         SSAccountManager.sharedInstance.doSignIn(self.tfEmail.text!, password: self.tfPassword.text!, vc: self) { [weak self] (finish) in
             guard let wself = self else { return nil }
 
@@ -169,41 +167,41 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         }
     }
     
-    @IBAction func tapFindPasswordButton(sender: AnyObject) {
+    @IBAction func tapFindPasswordButton(_ sender: AnyObject) {
         SSAlertController.alertConfirm(title: "알림", message: "아직 지원되지 않는 기능입니다.", vc: self, completion: nil)
     }
 
-    @IBAction func editingDidBeginEmail(sender: AnyObject) {
-        self.lbEmail.textColor = UIColor.blackColor()
+    @IBAction func editingDidBeginEmail(_ sender: AnyObject) {
+        self.lbEmail.textColor = UIColor.black
         self.viewEmailBottomLine.image = UIImage(named: "pointWriteLine")
     }
-    @IBAction func editingDidEndEmail(sender: AnyObject) {
+    @IBAction func editingDidEndEmail(_ sender: AnyObject) {
         self.lbEmail.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
         self.viewEmailBottomLine.image = UIImage(named: "writeLine")
     }
-    @IBAction func editingChangedEmail(sender: AnyObject) {
+    @IBAction func editingChangedEmail(_ sender: AnyObject) {
         self.validateInput()
     }
 
-    @IBAction func editingDidBeginPassword(sender: AnyObject) {
-        self.lbPassword.textColor = UIColor.blackColor()
+    @IBAction func editingDidBeginPassword(_ sender: AnyObject) {
+        self.lbPassword.textColor = UIColor.black
         self.viewPasswordBottomLine.image = UIImage(named: "pointWriteLine")
     }
-    @IBAction func editingDidEndPassword(sender: AnyObject) {
+    @IBAction func editingDidEndPassword(_ sender: AnyObject) {
         self.lbPassword.textColor = UIColor.init(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
         self.viewPasswordBottomLine.image = UIImage(named: "writeLine")
     }
-    @IBAction func editingChangedPassword(sender: AnyObject) {
+    @IBAction func editingChangedPassword(_ sender: AnyObject) {
         self.validateInput()
     }
 
 // MARK:- UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === self.tfEmail {
             self.tfEmail.resignFirstResponder()
             self.tfPassword.becomeFirstResponder()
         }
-        if textField === self.tfPassword && self.btnSignIn.enabled {
+        if textField === self.tfPassword && self.btnSignIn.isEnabled {
             self.tapSignInButton(nil)
         }
 
@@ -213,9 +211,9 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 // MARK:- UIScrollView
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(notification: NSNotification) -> Void {
+    func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
-            if let keyboardFrame: CGRect = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+            if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
                 self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight+keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
                 self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height-self.constScrollViewBottomToSuper.constant)
@@ -223,9 +221,9 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         }
     }
 
-    func keyboardWillHide(notification: NSNotification) -> Void {
+    func keyboardWillHide(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
-            if let _ = info[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+            if let _ = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
                 self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: self.defaultScrollContentHeight)
             }
@@ -233,16 +231,16 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
 
 // MARK:- FBSDKLoginButtonDelegate
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         print("%@", #function)
 
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"]).startWithCompletionHandler { (connection, resultOfQuery, error) in
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"]).start { (connection, resultOfQuery, error) in
             if let err = error {
                 print(err.localizedDescription)
 
                 SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
             } else {
-                print("%@", resultOfQuery)
+                print("%@", resultOfQuery!)
 
                 if let res = resultOfQuery as? [String: String] {
 
@@ -254,7 +252,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                                 guard let completionBlock = wself.completion else {
                                     return nil
                                 }
-                                completionBlock(finish: finish)
+                                completionBlock(finish)
                             } else {
                                 FBSDKLoginManager().logOut()
                             }
@@ -267,7 +265,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         }
     }
 
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("%@", #function)
     }
 }

@@ -23,7 +23,7 @@ public struct SSChatroomViewModel {
     var ownerImageUrl: String?              // ownerImageUrl
     var participantUserId: String           // participantId
     var participantImageUrl: String?        // participantImageUrl
-    var createdDateTime: NSDate             // createdTimestamp
+    var createdDateTime: Date             // createdTimestamp
     var unreadCount: Int
     var lastMessage: String                 // lastMsg
     var lastMessageType: SSChatMessageType  // lastMsgType
@@ -35,7 +35,7 @@ public struct SSChatroomViewModel {
         self.chatroomId = ""
         self.ownerUserId = ""
         self.participantUserId = ""
-        self.createdDateTime = NSDate()
+        self.createdDateTime = Date()
         self.unreadCount = 0
         self.lastMessage = ""
         self.lastMessageType = .Normal
@@ -80,9 +80,9 @@ public struct SSChatroomViewModel {
         }
 
         if let createdDateTime = modelDict["lastTimestamp"] as? Int {
-            self.createdDateTime = NSDate(timeIntervalSince1970: NSTimeInterval(createdDateTime)/1000.0)
+            self.createdDateTime = Date(timeIntervalSince1970: TimeInterval(createdDateTime)/1000.0)
         } else {
-            self.createdDateTime = NSDate()
+            self.createdDateTime = Date()
         }
 
         if let unreadCount = modelDict["unreadCount"] as? Int {

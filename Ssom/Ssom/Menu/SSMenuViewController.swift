@@ -25,40 +25,40 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 
     override func initView() {
 
-        self.menuTableView.registerNib(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
-        self.menuTableView.registerNib(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
-        self.menuTableView.registerNib(UINib(nibName: "SSMenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
+        self.menuTableView.register(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
+        self.menuTableView.register(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
+        self.menuTableView.register(UINib(nibName: "SSMenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
 
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
     }
 
     func transitionToViewController() -> Void {
         let animateTransition: Bool = self.drawerViewController?.mainViewController != nil
 
-        let mainNavigationController: UINavigationController = (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MasterNavigationController") as? UINavigationController)!
+        let mainNavigationController: UINavigationController = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MasterNavigationController") as? UINavigationController)!
 
         self.drawerViewController?.setMainViewController(mainNavigationController, animated: animateTransition, completion: nil)
     }
 
 // MARK: - UITableViweDelegate & UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.size.height * (56.0 / 736.0)
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (56.0 / 736.0)
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.size.height * (56.0 / 736.0)
     }
 
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height * (366.0 / 736.0)
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return UIScreen.main.bounds.size.height * (366.0 / 736.0)
     }
 
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -69,20 +69,20 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 //        return UIScreen.mainScreen().bounds.size.height * (69.0 / 736.0)
 //    }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if let cell: SSMenuTableViewCell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as? SSMenuTableViewCell {
+        if let cell: SSMenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as? SSMenuTableViewCell {
             cell.configCell(SSMenuType(rawValue: indexPath.row)!)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as? SSMenuTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell") as? SSMenuTableViewCell
 
             return cell!
         }
 
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view: SSMenuHeadView = SSMenuHeadView(reuseIdentifier: "MenuHeader")
         view.delegate = self
 
@@ -140,38 +140,38 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
 //        }
 //    }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SSMenuTableViewCell {
+        if let cell = tableView.cellForRow(at: indexPath) as? SSMenuTableViewCell {
             if let url = cell.menuType.url {
-                if UIApplication.sharedApplication().canOpenURL(url) {
-                    UIApplication.sharedApplication().openURL(url)
+                if UIApplication.shared.canOpenURL(url as URL) {
+                    UIApplication.shared.openURL(url as URL)
                 }
-            } else if cell.menuType == .Withdraw {
+            } else if cell.menuType == .withdraw {
                 SSAlertController.alertConfirm(title: "알림", message: "쏨 서비스에 가입된 메일로\n탈퇴신청 메일을 아래 주소로 보내주세요.\nssomcompany@gmail.com", vc: self, completion: nil)
             }
         }
     }
 
 // MARK: - SSMenuHeadViewDelegate
-    func openSignIn(completion: ((finish: Bool) -> Void)?) {
+    func openSignIn(_ completion: ((_ finish: Bool) -> Void)?) {
         SSAccountManager.sharedInstance.openSignIn(self, completion: completion)
     }
 
     func showProfilePhoto() {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("TodayPhotoNaviController") as? UINavigationController
+        let vc = storyboard.instantiateViewController(withIdentifier: "TodayPhotoNaviController") as? UINavigationController
         if let topViewController = vc?.topViewController as? SSTodayPhotoViewController {
             topViewController.photoSaveCompletion = { [weak self] in
                 if let wself = self {
-                    if let headerView = wself.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                    if let headerView = wself.menuTableView.headerView(forSection: 0) as? SSMenuHeadView {
                         headerView.showProfileImage()
                     }
                 }
             }
         }
 
-        self.presentViewController(vc!, animated: true, completion: nil)
+        self.present(vc!, animated: true, completion: nil)
     }
 }

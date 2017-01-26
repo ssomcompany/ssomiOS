@@ -14,31 +14,31 @@ public struct SSNetworkContext {
 
     static let sharedInstance = SSNetworkContext()
 
-    func getSharedAttribute(key: String) -> AnyObject? {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    func getSharedAttribute(_ key: String) -> Any? {
+        let defaults: UserDefaults = UserDefaults.standard
 
-        return defaults.objectForKey(key)
+        return defaults.object(forKey: key)
     }
 
-    func saveSharedAttribute(value: AnyObject, forKey: String) {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(value, forKey: forKey)
+    func saveSharedAttribute(_ value: Any, forKey: String) {
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.set(value, forKey: forKey)
 
         defaults.synchronize()
     }
 
-    func saveSharedAttributes(attr: [String: AnyObject!]) {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    func saveSharedAttributes(_ attr: [String: Any?]) {
+        let defaults: UserDefaults = UserDefaults.standard
         for (key, value) in attr {
-            defaults.setObject(value, forKey: key)
+            defaults.set(value, forKey: key)
         }
 
         defaults.synchronize()
     }
 
-    func deleteSharedAttribute(key: String) {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey(key)
+    func deleteSharedAttribute(_ key: String) {
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: key)
 
         defaults.synchronize()
     }

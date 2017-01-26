@@ -8,15 +8,16 @@
 
 import Foundation
 
-public class PreDefine {
+open class PreDefine {
     static let GoogleMapKey: String = "AIzaSyCrQIOi-sQBvikxrc577aXER7Rl0wEnROQ"
     static let OneSignalKey: String = "b0c678d6-45d3-4868-96bd-2e28f0340e10"
 }
 
 enum SSInternalNotification: String {
     case PurchasedHeart = "PurchasedHeart"
+    case SignOut = "SignOut"
 }
 
 let SSDefaultHeartCount = 2
-let SSDefaultHeartRechargeTimeInterval: NSTimeInterval = 4*60*60
+let SSDefaultHeartRechargeTimeInterval: TimeInterval = 4*60*60
 let SSDefaultHeartRechargeHour: Int = Int(SSDefaultHeartRechargeTimeInterval/60/60)

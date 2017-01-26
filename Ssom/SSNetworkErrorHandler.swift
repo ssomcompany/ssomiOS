@@ -9,7 +9,7 @@
 import Foundation
 
 enum SSNetworkError:Int {
-    case ErrorDuplicatedData = 502
+    case errorDuplicatedData = 502
 }
 
 public struct SSNetworkErrorHandler {
@@ -19,31 +19,31 @@ public struct SSNetworkErrorHandler {
     let kSSErrorCodeKey: String = "errorCode"
     let kSSErrorDescriptionKey: String = "description"
 
-    func getErrorInfo(errorKey: String) -> (Int, String)? {
-        if let errorTableFilePath: String = NSBundle.mainBundle().pathForResource(kSSErrorTable, ofType: "plist") {
+    func getErrorInfo(_ errorKey: String) -> (Int, String)? {
+        if let errorTableFilePath: String = Bundle.main.path(forResource: kSSErrorTable, ofType: "plist") {
             guard let errorTableMap = NSDictionary(contentsOfFile: errorTableFilePath) else {
                 return nil
             }
 
-            if let errorInfo = errorTableMap[errorKey] {
-                return (Int(errorInfo[kSSErrorCodeKey] as! String)!, errorInfo[kSSErrorDescriptionKey] as! String)
+            if let errorInfo = errorTableMap[errorKey] as? [String: String] {
+                return (Int(errorInfo[kSSErrorCodeKey]!)!, errorInfo[kSSErrorDescriptionKey]!)
             }
         }
 
         return nil
     }
 
-    func getErrorInfo(errorCode: Int) -> (Int, String)? {
-        if let errorTableFilePath: String = NSBundle.mainBundle().pathForResource(kSSErrorTable, ofType: "plist") {
+    func getErrorInfo(_ errorCode: Int) -> (Int, String)? {
+        if let errorTableFilePath: String = Bundle.main.path(forResource: kSSErrorTable, ofType: "plist") {
             guard let errorTableMap = NSDictionary(contentsOfFile: errorTableFilePath) else {
                 return nil
             }
 
             for errorKey in errorTableMap.allKeys {
-                guard let errorInfo = errorTableMap[errorKey as! String] else { continue }
+                guard let errorInfo = errorTableMap[errorKey as! String] as? [String: String] else { continue }
 
-                if Int(errorInfo[kSSErrorCodeKey] as! String)! == errorCode {
-                    return (Int(errorInfo[kSSErrorCodeKey] as! String)!, errorInfo[kSSErrorDescriptionKey] as! String)
+                if Int(errorInfo[kSSErrorCodeKey]!)! == errorCode {
+                    return (Int(errorInfo[kSSErrorCodeKey]!)!, errorInfo[kSSErrorDescriptionKey]!)
                 }
             }
         }

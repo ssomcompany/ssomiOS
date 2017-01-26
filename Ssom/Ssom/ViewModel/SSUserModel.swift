@@ -53,8 +53,8 @@ public struct SSUserModel {
         }
     }
 
-    func toDictionary() -> [String: AnyObject] {
-        var dict: [String: AnyObject] = [String: AnyObject]()
+    func toDictionary() -> [String: Any] {
+        var dict: [String: Any] = [String: Any]()
 
         dict["email"] = self.email
         dict["gender"] = self.gender

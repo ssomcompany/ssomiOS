@@ -43,12 +43,12 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.initView()
@@ -58,34 +58,34 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
         self.barButtonItems = SSNavigationBarItems()
 
-        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), for: UIControlEvents.touchUpInside)
         self.barButtonItems.lbBackButtonTitle.text = ""
         var backButtonFrame = self.barButtonItems.backBarButtonView.frame
         backButtonFrame.size.width = 60
         self.barButtonItems.backBarButtonView.frame = backButtonFrame
 
-        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: barButtonItems.backBarButtonView), animated: true)
 
-        let naviTitleView: UILabel = UILabel(frame: CGRectMake(0, 0, 200, 44))
+        let naviTitleView: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         if #available(iOS 8.2, *) {
-            naviTitleView.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
         } else {
             // Fallback on earlier versions
             if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
                 naviTitleView.font = font
             }
         }
-        naviTitleView.textAlignment = .Center
+        naviTitleView.textAlignment = .center
         naviTitleView.text = "Chat list"
         naviTitleView.sizeToFit()
         self.navigationItem.titleView = naviTitleView;
 
         var rightBarButtonItems: Array = self.navigationItem.rightBarButtonItems!
 
-        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+        let barButtonSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
         barButtonSpacer.width = 20
 
-        self.barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action, forControlEvents: UIControlEvents.TouchUpInside)
+        self.barButtonItems.btnMessageBar.addTarget(rightBarButtonItems[0].target, action: rightBarButtonItems[0].action!, for: UIControlEvents.touchUpInside)
         let messageBarButton = UIBarButtonItem(customView: barButtonItems.messageBarButtonView!)
 
         self.navigationItem.rightBarButtonItems = [messageBarButton]
@@ -93,14 +93,12 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.setChattingCount(0)
     }
 
-    func setChattingCount(count: Int) {
+    func setChattingCount(_ count: Int) {
         self.barButtonItems.changeMessageCount(count, hiddenIfZero: true)
     }
 
     override func initView() {
-        self.chatListTableView.registerNib(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
-
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.chatListTableView.register(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
 
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
@@ -112,59 +110,77 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
     func tapBack() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
     func loadData() {
         if let token: String = SSNetworkContext.sharedInstance.getSharedAttribute("token") as? String {
-            SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { (models, error) in
-                if error != nil {
-                    print(error?.localizedDescription)
+            SSNetworkAPIClient.getChatroomList(token, latitude: self.nowLocationCoordinate2D.latitude, longitude: self.nowLocationCoordinate2D.longitude, completion: { [weak self] (models, error) in
+                guard let wself = self else { return }
 
-                    SSAlertController.alertConfirm(title: "Error", message: (error?.localizedDescription)!, vc: self, completion: nil)
+                if let err = error {
+                    print(err.localizedDescription)
+
+                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
 
                 } else {
                     if let datas = models {
 
-                        self.datas = datas
+                        wself.datas = datas
 
-                        self.setChattingCount(self.unreadCount)
+                        if wself.datas.count > 0 {
+                            wself.chatListTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 
-                        self.showChatroomCountOnNavigation()
-                        self.chatListTableView.reloadData()
+                            if let tabBarController = wself.tabBarController as? SSTabBarController {
+                                tabBarController.setNavigationBarView(configMode: .chatList, userInfo: ["count": wself.datas.count])
+                            }
+                        } else {
+                            wself.chatListTableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+                        }
+
+                        wself.setChattingCount(wself.unreadCount)
+
+                        wself.showChatroomCountOnNavigation()
+                        wself.chatListTableView.reloadData()
                     }
                 }
             })
         }
     }
 
-    func reload(with modelDict: [String: AnyObject]) {
-        let newMessage = SSChatroomViewModel(modelDict: modelDict)
+    func reload(with modelDict: [String: AnyObject], needRecount: Bool = true) {
+        DispatchQueue.main.async { [weak self] in
+            guard let wself = self else { return }
 
-        for (index, var data) in self.datas.enumerate() {
-            if data.chatroomId == newMessage.chatroomId {
-                self.datas.removeAtIndex(index)
+            let newMessage = SSChatroomViewModel(modelDict: modelDict)
 
-                data.unreadCount += 1
-                if newMessage.meetRequestStatus == .Received {
-                    data.meetRequestUserId = newMessage.meetRequestUserId
-                    data.meetRequestStatus = .Received
-                } else if newMessage.meetRequestStatus == .Cancelled {
-                    data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
-                    data.meetRequestStatus = .Cancelled
-                } else {
-                    data.lastMessage = newMessage.lastMessage
+            for (index, var data) in wself.datas.enumerated() {
+                if data.chatroomId == newMessage.chatroomId {
+                    wself.datas.remove(at: index)
+
+                    if needRecount {
+                        data.unreadCount += 1
+                    }
+                    if newMessage.meetRequestStatus == .Received {
+                        data.meetRequestUserId = newMessage.meetRequestUserId
+                        data.meetRequestStatus = .Received
+                    } else if newMessage.meetRequestStatus == .Cancelled {
+                        data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
+                        data.meetRequestStatus = .Cancelled
+                    } else {
+                        data.lastMessage = newMessage.lastMessage
+                    }
+
+                    wself.datas.insert(data, at: 0)
+
+                    break
                 }
-
-                self.datas.insert(data, atIndex: 0)
-
-                break
             }
+            
+            wself.setChattingCount(wself.unreadCount)
+            
+            wself.chatListTableView.reloadData()
         }
-
-        self.setChattingCount(self.unreadCount)
-
-        self.chatListTableView.reloadData()
     }
 
     func showChatroomCountOnNavigation() {
@@ -175,60 +191,61 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.datas.count
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: SSChatListTableCell = tableView.dequeueReusableCellWithIdentifier("chatListCell", forIndexPath: indexPath) as! SSChatListTableCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: SSChatListTableCell = tableView.dequeueReusableCell(withIdentifier: "chatListCell", for: indexPath) as! SSChatListTableCell
         cell.delegate = self
         cell.configView(self.datas[indexPath.row], withCoordinate: self.nowLocationCoordinate2D)
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        if let cell: SSChatListTableCell = tableView.cellForRowAtIndexPath(indexPath) as? SSChatListTableCell {
+        if let cell: SSChatListTableCell = tableView.cellForRow(at: indexPath) as? SSChatListTableCell {
             if cell.isCellOpened {
                 cell.closeCell(true)
             } else {
                 if cell.isCellClosed {
                     let chatStoryboard: UIStoryboard = UIStoryboard(name: "SSChatStoryboard", bundle: nil)
-                    let vc = chatStoryboard.instantiateViewControllerWithIdentifier("chatViewController") as! SSChatViewController
-                    if let model: SSChatroomViewModel = self.datas[indexPath.row] {
-                        vc.chatRoomId = model.chatroomId
-                        vc.ssomType = model.ssomViewModel.ssomType
-                        vc.postId = model.ssomViewModel.postId
-                        vc.ageArea = Util.getAgeArea(model.ssomViewModel.minAge)
-                        if let userCount = model.ssomViewModel.userCount {
-                            vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
-                        }
+                    let vc = chatStoryboard.instantiateViewController(withIdentifier: "chatViewController") as! SSChatViewController
 
-                        if cell.isOwnerUser {
-                            vc.myImageUrl = model.ownerImageUrl
-                            vc.partnerImageUrl = model.participantImageUrl
-                        } else {
-                            vc.myImageUrl = model.participantImageUrl
-                            vc.partnerImageUrl = model.ownerImageUrl
-                        }
-
-                        vc.ssomLatitude = model.ssomViewModel.latitude
-                        vc.ssomLongitude = model.ssomViewModel.longitude
-
-                        if let requestUserId = model.meetRequestUserId {
-                            vc.meetRequestUserId = requestUserId
-                        }
-                        vc.meetRequestStatus = model.meetRequestStatus
+                    let model = self.datas[indexPath.row]
+                    vc.chatRoomId = model.chatroomId
+                    vc.ssomType = model.ssomViewModel.ssomType
+                    vc.postId = model.ssomViewModel.postId
+                    vc.ageArea = Util.getAgeArea(model.ssomViewModel.minAge)
+                    if let userCount = model.ssomViewModel.userCount {
+                        vc.peopleCount = SSPeopleCountType(rawValue: userCount)!.toSting()
                     }
+
+                    if cell.isOwnerUser {
+                        vc.myImageUrl = model.ownerImageUrl
+                        vc.partnerImageUrl = model.participantImageUrl
+                    } else {
+                        vc.myImageUrl = model.participantImageUrl
+                        vc.partnerImageUrl = model.ownerImageUrl
+                    }
+
+                    vc.ssomLatitude = model.ssomViewModel.latitude
+                    vc.ssomLongitude = model.ssomViewModel.longitude
+
+                    if let requestUserId = model.meetRequestUserId {
+                        vc.meetRequestUserId = requestUserId
+                    }
+                    vc.meetRequestStatus = model.meetRequestStatus
+
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
@@ -236,7 +253,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
 // MARK: - SSChatListTableCellDelegate
-    func deleteCell(cell: SSChatListTableCell) {
+    func deleteCell(_ cell: SSChatListTableCell) {
         if let token = SSAccountManager.sharedInstance.sessionToken {
             if let model: SSChatroomViewModel = cell.model {
                 SSNetworkAPIClient.deleteChatroom(token, chatroomId: model.chatroomId, completion: { (data, error) in
@@ -246,9 +263,9 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                         })
                     }
                 })
-                if let indexPath: NSIndexPath = self.chatListTableView.indexPathForCell(cell) {
-                    self.datas.removeAtIndex(indexPath.row)
-                    self.chatListTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                if let indexPath: IndexPath = self.chatListTableView.indexPath(for: cell) {
+                    self.datas.remove(at: indexPath.row)
+                    self.chatListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                     self.showChatroomCountOnNavigation()
                 }
             }
@@ -256,7 +273,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
 // MARK: - CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.nowLocationCoordinate2D = locations.last!.coordinate
 
         self.locationManager.stopUpdatingLocation()
@@ -264,7 +281,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.loadData()
     }
 
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         self.locationManager.stopUpdatingLocation()
         print(error)
 
@@ -273,15 +290,15 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.loadData()
     }
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         var shouldIAllow = false
 
         switch status {
-        case CLAuthorizationStatus.Restricted:
+        case CLAuthorizationStatus.restricted:
             print("Restricted Access to location!!")
-        case .Denied:
+        case .denied:
             print("User denied access to location!!")
-        case .NotDetermined:
+        case .notDetermined:
             print("Status not determined!!")
             self.locationManager.requestWhenInUseAuthorization()
         default:
@@ -295,19 +312,19 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
 // MARK:- SSChatListTableCellDelegate
-    func tapProfileImage(imageUrl: String) {
-        self.navigationController?.navigationBarHidden = true;
+    func tapProfileImage(_ imageUrl: String) {
+        self.navigationController?.isNavigationBarHidden = true;
 
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
-        self.view.addSubview(self.profileImageView!)
+        self.navigationController?.view.addSubview(self.profileImageView!)
     }
 
 // MARK:- SSPhotoViewDelegate
     func tapPhotoViewClose() {
-        self.navigationController?.navigationBarHidden = false;
+        self.navigationController?.isNavigationBarHidden = false;
 
         self.profileImageView!.removeFromSuperview()
     }

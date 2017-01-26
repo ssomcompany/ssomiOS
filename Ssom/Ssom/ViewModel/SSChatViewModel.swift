@@ -14,6 +14,7 @@ enum SSChatMessageType: String {
     case Request = "request"
     case Approve = "approve"
     case Cancel = "cancel"
+    case Finished = "complete"
     case Unknown = "UNKNOWN"
 }
 
@@ -23,14 +24,14 @@ public struct SSChatViewModel {
     var profileImageUrl: String?
     var toUserId: String
     var message: String
-    var messageDateTime: NSDate
+    var messageDateTime: Date
     var messageType: SSChatMessageType
 
     init() {
         self.fromUserId = ""
         self.toUserId = ""
         self.message = ""
-        self.messageDateTime = NSDate()
+        self.messageDateTime = Date()
         self.messageType = .Normal
     }
 
@@ -70,9 +71,9 @@ public struct SSChatViewModel {
         }
 
         if let timestamp = modelDict["timestamp"] as? Int {
-            self.messageDateTime = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp)/1000.0)
+            self.messageDateTime = Date(timeIntervalSince1970: TimeInterval(timestamp)/1000.0)
         } else {
-            self.messageDateTime = NSDate()
+            self.messageDateTime = Date()
         }
 
         if let messageType = modelDict["msgType"] as? String {

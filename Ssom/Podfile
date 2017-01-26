@@ -9,12 +9,12 @@ target 'Ssom' do
  pod 'SDWebImage'
  pod 'UICountingLabel'
 
- pod 'Toast-Swift', '~> 1.4.0'
+ pod 'Toast-Swift'
 
  pod 'Fabric'
  pod 'Crashlytics'
 
- pod 'KeychainAccess', '~> 2.4'
+ pod 'KeychainAccess'
 
  pod 'Firebase'
  pod 'Firebase/Crash'

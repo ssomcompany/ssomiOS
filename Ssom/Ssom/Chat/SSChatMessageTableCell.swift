@@ -26,21 +26,25 @@ class SSChatMessageTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.viewPartnerMessage.layer.cornerRadius = 2.3
-        self.viewMyMessage.layer.cornerRadius = 2.3
+        self.viewPartnerMessage.layer.cornerRadius = 6.0
+        self.viewPartnerMessage.layer.borderWidth = 0.6
+        self.viewPartnerMessage.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+
+        self.viewMyMessage.layer.cornerRadius = 6.0
+        self.viewMyMessage.layer.borderWidth = 0.6
+        self.viewMyMessage.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
     }
 
-    func configView(model: SSChatViewModel) {
+    func configView(_ model: SSChatViewModel) {
         self.model = model
 
-        switch self.ssomType {
-        case .SSOM:
-            self.imgViewPartnerProfileBorder.image = UIImage(named: "profileBorderGreen")
-            self.viewPartnerMessage.backgroundColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1.0)
-        case .SSOSEYO:
-            self.imgViewPartnerProfileBorder.image = UIImage(named: "profileBorderRed")
-            self.viewPartnerMessage.backgroundColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1.0)
-        }
+        self.backgroundColor = UIColor.clear
+
+        self.imgViewPartnerProfileBorder.layer.borderWidth = 1.3
+        self.imgViewPartnerProfileBorder.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+
+        self.imgViewMyProfileBorder.layer.borderWidth = 1.3
+        self.imgViewMyProfileBorder.layer.borderColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
 
         self.imgViewPartnerProfile.image = UIImage(named: "noneProfile")
         self.imgViewMyProfile.image = UIImage(named: "noneProfile")
@@ -57,10 +61,10 @@ class SSChatMessageTableCell: UITableViewCell {
                 }
 
                 if let imageUrl = profileImageUrl {
-                    self.imgViewMyProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
+                    self.imgViewMyProfile.sd_setImage(with: URL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPartnerProfile.bounds.size.width, self.imgViewMyProfile.bounds.size.height))
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: self.imgViewPartnerProfile.bounds.size.width, height: self.imgViewMyProfile.bounds.size.height))
 
                             self.imgViewMyProfile.image = croppedProfileImage
                         }
@@ -73,10 +77,10 @@ class SSChatMessageTableCell: UITableViewCell {
                 self.showPartnerViews()
 
                 if let imageUrl = model.profileImageUrl {
-                    self.imgViewPartnerProfile.sd_setImageWithURL(NSURL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
+                    self.imgViewPartnerProfile.sd_setImage(with: URL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
-                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image, frame: CGRectMake(0, 0, self.imgViewPartnerProfile.bounds.size.width, self.imgViewPartnerProfile.bounds.size.height))
+                            let croppedProfileImage: UIImage = UIImage.cropInCircle(image!, frame: CGRect(x: 0, y: 0, width: self.imgViewPartnerProfile.bounds.size.width, height: self.imgViewPartnerProfile.bounds.size.height))
 
                             self.imgViewPartnerProfile.image = croppedProfileImage
                         }
@@ -90,30 +94,36 @@ class SSChatMessageTableCell: UITableViewCell {
     }
 
     func showMyViews() {
-        self.imgViewPartnerProfile.hidden = true
-        self.imgViewPartnerProfileBorder.hidden = true
-        self.viewPartnerMessage.hidden = true
-        self.lbPartnerMessage.hidden = true
-        self.lbPartnerMessageTime.hidden = true
+        self.imgViewPartnerProfile.isHidden = true
+        self.imgViewPartnerProfileBorder.isHidden = true
+        self.viewPartnerMessage.isHidden = true
+        self.lbPartnerMessage.isHidden = true
+        self.lbPartnerMessageTime.isHidden = true
 
-        self.imgViewMyProfile.hidden = false
-        self.imgViewMyProfileBorder.hidden = false
-        self.viewMyMessage.hidden = false
-        self.lbMyMessage.hidden = false
-        self.lbMyMessageTime.hidden = false
+        self.imgViewMyProfile.isHidden = false
+        self.imgViewMyProfileBorder.isHidden = false
+        self.viewMyMessage.isHidden = false
+        self.lbMyMessage.isHidden = false
+        self.lbMyMessageTime.isHidden = false
+
+        self.imgViewMyProfile.layer.cornerRadius = self.imgViewMyProfile.bounds.height / 2.0
+        self.imgViewMyProfileBorder.layer.cornerRadius = self.imgViewMyProfileBorder.bounds.height / 2.0
     }
 
     func showPartnerViews() {
-        self.imgViewPartnerProfile.hidden = false
-        self.imgViewPartnerProfileBorder.hidden = false
-        self.viewPartnerMessage.hidden = false
-        self.lbPartnerMessage.hidden = false
-        self.lbPartnerMessageTime.hidden = false
+        self.imgViewPartnerProfile.isHidden = false
+        self.imgViewPartnerProfileBorder.isHidden = false
+        self.viewPartnerMessage.isHidden = false
+        self.lbPartnerMessage.isHidden = false
+        self.lbPartnerMessageTime.isHidden = false
 
-        self.imgViewMyProfile.hidden = true
-        self.imgViewMyProfileBorder.hidden = true
-        self.viewMyMessage.hidden = true
-        self.lbMyMessage.hidden = true
-        self.lbMyMessageTime.hidden = true
+        self.imgViewMyProfile.isHidden = true
+        self.imgViewMyProfileBorder.isHidden = true
+        self.viewMyMessage.isHidden = true
+        self.lbMyMessage.isHidden = true
+        self.lbMyMessageTime.isHidden = true
+
+        self.imgViewPartnerProfile.layer.cornerRadius = self.imgViewPartnerProfile.bounds.height / 2.0
+        self.imgViewPartnerProfileBorder.layer.cornerRadius = self.imgViewPartnerProfileBorder.bounds.height / 2.0
     }
 }

@@ -9,44 +9,44 @@
 import UIKit
 
 enum SSScrollViewDirection: Int {
-    case Unknown = 0
-    case Left
-    case Right
+    case unknown = 0
+    case left
+    case right
 }
 
 protocol SSScrollViewDelegate: class {
-    func closeScrollView(needToReload: Bool)
-    func openSignIn(completion: ((finish:Bool) -> Void)?)
-    func doSsom(ssomType: SSType, model: SSViewModel)
+    func closeScrollView(_ needToReload: Bool)
+    func openSignIn(_ completion: ((_ finish:Bool) -> Void)?)
+    func doSsom(_ ssomType: SSType, model: SSViewModel)
 }
 
 class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
-    @IBOutlet private var viewBackground: UIView!
-    @IBOutlet private var scrollView: SSCustomScrollView!
-    @IBOutlet private var contentView: UIView!
+    @IBOutlet fileprivate var viewBackground: UIView!
+    @IBOutlet fileprivate var scrollView: SSCustomScrollView!
+    @IBOutlet fileprivate var contentView: UIView!
     @IBOutlet var constContentViewWidth: NSLayoutConstraint!
     @IBOutlet var constContentViewWidthMin: NSLayoutConstraint!
     @IBOutlet var constContentViewToScrollViewWidthRatio: NSLayoutConstraint!
     @IBOutlet var constContentViewToScrollViewWidthRatioMin: NSLayoutConstraint!
 
     weak var delegate: SSScrollViewDelegate?
-    private var datas: [SSViewModel]?
-    var ssomType: SSType?
+    fileprivate var datas: [SSViewModel]?
+    var ssomTypes: [SSType] = [.SSOM, .SSOSEYO]
 
-    private var previousView: SSDetailView?
-    private var currentView: SSDetailView?
-    private var nextView: SSDetailView?
+    fileprivate var previousView: SSDetailView?
+    fileprivate var currentView: SSDetailView?
+    fileprivate var nextView: SSDetailView?
 
-    private var currentIndex: Int = 0
-    private var startScrollContentOffset: CGPoint = CGPointZero
-    private var scrolledContentOffset: CGPoint = CGPointZero
-    private var scrollDirection: SSScrollViewDirection = .Unknown
-    private var isScrolled: Bool = false
-    private var isScrollBounced: Bool = false
+    fileprivate var currentIndex: Int = 0
+    fileprivate var startScrollContentOffset: CGPoint = CGPoint.zero
+    fileprivate var scrolledContentOffset: CGPoint = CGPoint.zero
+    fileprivate var scrollDirection: SSScrollViewDirection = .unknown
+    fileprivate var isScrolled: Bool = false
+    fileprivate var isScrollBounced: Bool = false
 
-    private var constPreviousViewToContentView: [NSLayoutConstraint] = []
-    private var constCurrentViewToContentView: [NSLayoutConstraint] = []
-    private var constNextViewToContentView: [NSLayoutConstraint] = []
+    fileprivate var constPreviousViewToContentView: [NSLayoutConstraint] = []
+    fileprivate var constCurrentViewToContentView: [NSLayoutConstraint] = []
+    fileprivate var constNextViewToContentView: [NSLayoutConstraint] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,16 +71,16 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         if self.datas!.count == 1 {
             startingOffsetX = 0
         }
-        self.scrollView.setContentOffset(CGPointMake(startingOffsetX, 0), animated: false)
+        self.scrollView.setContentOffset(CGPoint(x: startingOffsetX, y: 0), animated: false)
     }
 
-    func configureWithDatas(datas: [SSViewModel], currentViewModel: SSViewModel?) {
+    func configureWithDatas(_ datas: [SSViewModel], currentViewModel: SSViewModel?) {
         self.scrollView.delegate = self
         
         self.datas = datas
 
         if let viewModel = currentViewModel {
-            if let index = datas.indexOf({ $0 === viewModel }) {
+            if let index = datas.index(where: { $0 === viewModel }) {
                 self.currentIndex = index
             }
         }
@@ -110,7 +110,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         }
     }
 
-    func setPreviousView(viewModel: SSViewModel) -> Void {
+    func setPreviousView(_ viewModel: SSViewModel) -> Void {
         if self.previousView != nil {
             self.previousView!.removeFromSuperview()
         }
@@ -121,10 +121,10 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         self.contentView.addSubview(self.previousView!)
         self.previousView!.translatesAutoresizingMaskIntoConstraints = false
 
-        self.previousView!.changeTheme(self.ssomType!)
+        self.previousView!.changeTheme()
     }
 
-    func setNextView(viewModel: SSViewModel) -> Void {
+    func setNextView(_ viewModel: SSViewModel) -> Void {
         if self.nextView != nil {
             self.nextView!.removeFromSuperview()
         }
@@ -135,10 +135,10 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         self.contentView.addSubview(self.nextView!)
         self.nextView!.translatesAutoresizingMaskIntoConstraints = false
 
-        self.nextView!.changeTheme(self.ssomType!)
+        self.nextView!.changeTheme()
     }
 
-    func resetConstraints(needScroll: Bool) -> Void {
+    func resetConstraints(_ needScroll: Bool) -> Void {
         if self.currentIndex >= 0 && self.currentIndex < self.datas!.count {
             self.contentView.removeConstraints(self.constPreviousViewToContentView)
             self.contentView.removeConstraints(self.constCurrentViewToContentView)
@@ -153,27 +153,27 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
             // determine if it needs to make nextView
             if self.datas!.count > (self.currentIndex + 1) {
-                self.constPreviousViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("|-31-[previousView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["previousView": self.previousView!]))
-                self.constPreviousViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[previousView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["previousView": self.previousView!]))
+                self.constPreviousViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-31-[previousView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["previousView": self.previousView!]))
+                self.constPreviousViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[previousView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["previousView": self.previousView!]))
 
                 self.contentView.addConstraints(self.constPreviousViewToContentView)
 
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("[previousView]-62-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!, "previousView": self.previousView!]))
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[previousView]-62-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!, "previousView": self.previousView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
 
                 self.contentView.addConstraints(self.constCurrentViewToContentView)
 
-                self.constNextViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("[currentView]-62-[nextView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": self.currentView!, "nextView": self.nextView!]))
-                self.constNextViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[nextView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["nextView": self.nextView!]))
+                self.constNextViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[currentView]-62-[nextView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": self.currentView!, "nextView": self.nextView!]))
+                self.constNextViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[nextView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["nextView": self.nextView!]))
 
                 self.contentView.addConstraints(self.constNextViewToContentView)
             } else if self.datas!.count == (self.currentIndex + 1) {
-                self.constPreviousViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[previousView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["previousView": self.previousView!]))
+                self.constPreviousViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[previousView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["previousView": self.previousView!]))
 
                 self.contentView.addConstraints(self.constPreviousViewToContentView)
 
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("[previousView(width)]-62-[currentView(width)]-31-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!, "previousView": self.previousView!]))
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[previousView(width)]-62-[currentView(width)]-31-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!, "previousView": self.previousView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
 
                 self.contentView.addConstraints(self.constCurrentViewToContentView)
             }
@@ -183,60 +183,58 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
                 // determine if it needs to make nextView
                 if self.datas!.count > (self.currentIndex + 1) {
-                    self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("|-31-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
-                    self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
+                    self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-31-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
+                    self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
 
                     self.contentView.addConstraints(self.constCurrentViewToContentView)
 
-                    self.constNextViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("[currentView]-62-[nextView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": self.currentView!, "nextView": self.nextView!]))
-                    self.constNextViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[nextView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["nextView": self.nextView!]))
+                    self.constNextViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[currentView]-62-[nextView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": self.currentView!, "nextView": self.nextView!]))
+                    self.constNextViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[nextView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["nextView": self.nextView!]))
 
                     self.contentView.addConstraints(self.constNextViewToContentView)
                 } else if self.datas!.count == (self.currentIndex + 1) {
-                    self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
-                    self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["currentView": currentView!]))
+                    self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
+                    self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions.alignAllCenterX, metrics: nil, views: ["currentView": currentView!]))
                     
                     self.contentView.addConstraints(self.constCurrentViewToContentView)
                 }
 
             } else {
-                self.scrollView.scrollEnabled = needScroll
+                self.scrollView.isScrollEnabled = needScroll
 
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("|-31-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
-                self.constCurrentViewToContentView.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-31-[currentView(width)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": (self.bounds.size.width - 31 - 31)], views: ["currentView": currentView!]))
+                self.constCurrentViewToContentView.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[currentView]-12-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentView": currentView!]))
 
                 self.contentView.addConstraints(self.constCurrentViewToContentView)
             }
         }
     }
 
-    func changeTheme(ssomType: SSType) -> Void {
-        if self.ssomType == nil {
-            self.ssomType = ssomType
-        }
+    func changeTheme(_ ssomTypes: [SSType]) -> Void {
+        self.ssomTypes = ssomTypes
 
-        self.previousView?.changeTheme(ssomType)
+        self.previousView?.changeTheme()
 
-        self.currentView?.changeTheme(ssomType)
+        self.currentView?.changeTheme()
 
-        self.nextView?.changeTheme(ssomType)
+        self.nextView?.changeTheme()
     }
 
 // MARK:- SSDetailViewDelegate
 
-    func closeDetailView(needToReload: Bool) {
+    func closeDetailView(_ needToReload: Bool) {
         guard let _ = self.delegate?.closeScrollView(needToReload) else {
             return
         }
     }
 
-    func openSignIn(completion: ((finish:Bool) -> Void)?) {
+    func openSignIn(_ completion: ((_ finish:Bool) -> Void)?) {
         guard let _ = self.delegate?.openSignIn(completion) else {
             return
         }
     }
 
-    func doSsom(ssomType: SSType, model: SSViewModel) {
+    func doSsom(_ ssomType: SSType, model: SSViewModel) {
         guard let _ = self.delegate?.doSsom(ssomType, model: model) else {
             return
         }
@@ -244,7 +242,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
 // MARK:- UIScrollViewDelegate
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x < 0 {
             self.isScrollBounced = true
 //            self.isScrolled = false
@@ -275,41 +273,41 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
         if self.scrolledContentOffset.x < scrollView.contentOffset.x {
             print("left! ==> \(self.scrolledContentOffset), \(scrollView.contentOffset), isScrollBounced ==> \(self.isScrollBounced), isScrolled ==> \(self.isScrolled)")
 
-            self.scrollDirection = .Left
+            self.scrollDirection = .left
         } else if self.scrolledContentOffset.x > scrollView.contentOffset.x {
             print("right! ==> \(self.scrolledContentOffset), \(scrollView.contentOffset), isScrollBounced ==> \(self.isScrollBounced), isScrolled ==> \(self.isScrolled)")
 
-            self.scrollDirection = .Right
+            self.scrollDirection = .right
         } else {
-            self.scrollDirection = .Unknown
+            self.scrollDirection = .unknown
         }
 
         self.scrolledContentOffset = scrollView.contentOffset
     }
 
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         print("willBeginDragging! \(scrollView.contentOffset)")
 
         self.startScrollContentOffset = scrollView.contentOffset
     }
 
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print("willEndDragging! \(scrollView.contentOffset), \(targetContentOffset.memory), velocity ==> \(velocity)")
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        print("willEndDragging! \(scrollView.contentOffset), \(targetContentOffset.pointee), velocity ==> \(velocity)")
 
-        self.isScrolled = !(self.startScrollContentOffset == targetContentOffset.memory)
+        self.isScrolled = !(self.startScrollContentOffset == targetContentOffset.pointee)
     }
 
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("endDragging! \(scrollView.contentOffset), decelerate ==> \(decelerate)")
 
-        self.startScrollContentOffset = CGPointZero
+        self.startScrollContentOffset = CGPoint.zero
     }
 
-    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         print("willBeginDecelerationg!")
     }
 
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("didEndDecelerating!, \(scrollView.contentOffset)")
         if self.isScrollBounced {
             return
@@ -321,7 +319,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
         var offsetX: CGFloat = 0.0
 
-        if self.scrollDirection == .Left {
+        if self.scrollDirection == .left {
 
             if self.previousView != nil {
                 self.previousView!.removeFromSuperview()
@@ -350,7 +348,7 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
             }
         }
 
-        if self.scrollDirection == .Right {
+        if self.scrollDirection == .right {
 
             if self.nextView != nil {
                 self.nextView!.removeFromSuperview()
@@ -383,6 +381,6 @@ class SSScrollView: UIView, SSDetailViewDelegate, UIScrollViewDelegate {
 
         self.resetConstraints(true)
 
-        scrollView.contentOffset = CGPointMake(offsetX, 0)
+        scrollView.contentOffset = CGPoint(x: offsetX, y: 0)
     }
 }

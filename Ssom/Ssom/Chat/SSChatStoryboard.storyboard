@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NXQ-A8-Jsy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NXQ-A8-Jsy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,9 +23,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFaceTT" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-0d-JWU">
+                                <rect key="frame" x="163" y="279" width="48" height="49"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="진행 중인 대화가 없어요…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSR-uk-872">
+                                <rect key="frame" x="95" y="343" width="184" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-wU-cBg" userLabel="Chat List Table View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pbd-UI-vDd" id="yrn-gY-4IM"/>
                                     <outlet property="delegate" destination="pbd-UI-vDd" id="ZGS-1C-yBY"/>
@@ -34,13 +44,21 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fjO-T2-K7J" firstAttribute="top" secondItem="2hs-wU-cBg" secondAttribute="bottom" id="9LQ-ml-nJu"/>
+                            <constraint firstItem="HSR-uk-872" firstAttribute="top" secondItem="9GR-0d-JWU" secondAttribute="bottom" constant="15" id="Glu-7P-lih"/>
+                            <constraint firstItem="HSR-uk-872" firstAttribute="centerX" secondItem="lOj-kO-tuG" secondAttribute="centerX" id="JpI-7y-Et9"/>
+                            <constraint firstItem="9GR-0d-JWU" firstAttribute="centerX" secondItem="lOj-kO-tuG" secondAttribute="centerX" id="OzP-0y-AhQ"/>
                             <constraint firstAttribute="trailing" secondItem="2hs-wU-cBg" secondAttribute="trailing" id="evn-4p-OKh"/>
                             <constraint firstItem="2hs-wU-cBg" firstAttribute="leading" secondItem="lOj-kO-tuG" secondAttribute="leading" id="jGz-p8-M8f"/>
                             <constraint firstItem="2hs-wU-cBg" firstAttribute="top" secondItem="HUJ-9T-kk2" secondAttribute="bottom" id="oUI-r3-xgV"/>
+                            <constraint firstItem="9GR-0d-JWU" firstAttribute="centerY" secondItem="lOj-kO-tuG" secondAttribute="centerY" multiplier="1:1.1" id="qBh-he-f8b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chat list" id="baM-hd-U9E" userLabel="Chat list">
-                        <barButtonItem key="rightBarButtonItem" title="chat" id="ICg-8y-hwR" userLabel="chat"/>
+                        <barButtonItem key="rightBarButtonItem" title="chat" id="ICg-8y-hwR" userLabel="chat">
+                            <connections>
+                                <segue destination="tih-SM-SIo" kind="show" id="mAE-Lf-av7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="chatListTableView" destination="2hs-wU-cBg" id="Z3W-QS-qVf"/>
@@ -62,20 +80,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-5O-J26">
-                                <rect key="frame" x="0.0" y="20" width="375" height="593"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKp-PV-6xT">
+                                <rect key="frame" x="142" y="288" width="90" height="91.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨과 만나는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1A-wZ-u4K">
+                                        <rect key="frame" x="-0.5" y="0.0" width="91" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" red="0.92941176470588238" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconSsomMap" translatesAutoresizingMaskIntoConstraints="NO" id="dQm-nQ-kFq">
+                                        <rect key="frame" x="0.0" y="29.5" width="90" height="62"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dQm-nQ-kFq" secondAttribute="height" multiplier="13:9" id="the-P3-LsA"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="dQm-nQ-kFq" firstAttribute="leading" secondItem="CKp-PV-6xT" secondAttribute="leading" id="L2h-7a-1h4"/>
+                                    <constraint firstAttribute="trailing" secondItem="dQm-nQ-kFq" secondAttribute="trailing" id="afI-oJ-wKs"/>
+                                    <constraint firstAttribute="bottom" secondItem="dQm-nQ-kFq" secondAttribute="bottom" id="eYQ-zP-eEk"/>
+                                    <constraint firstItem="x1A-wZ-u4K" firstAttribute="centerX" secondItem="CKp-PV-6xT" secondAttribute="centerX" id="jrd-hZ-r4C"/>
+                                    <constraint firstItem="x1A-wZ-u4K" firstAttribute="top" secondItem="CKp-PV-6xT" secondAttribute="top" id="py2-sU-4hX"/>
+                                    <constraint firstItem="dQm-nQ-kFq" firstAttribute="top" secondItem="x1A-wZ-u4K" secondAttribute="bottom" constant="10" id="wLu-pF-Pbu"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-5O-J26">
+                                <rect key="frame" x="0.0" y="64" width="375" height="549"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="tih-SM-SIo" id="nUf-TZ-5r7"/>
                                     <outlet property="delegate" destination="tih-SM-SIo" id="eQ2-oi-VMs"/>
                                 </connections>
                             </tableView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-P0-Lst">
-                                <rect key="frame" x="0.0" y="20" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="만남이 시작되었습니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I9-42-WCS">
-                                        <rect key="frame" x="20" y="-9.5" width="148" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <rect key="frame" x="20" y="-7" width="112" height="15"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" red="0.92941176469999998" green="0.20392156859999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -128,7 +172,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQr-Vv-DQ7">
-                                        <rect key="frame" x="318" y="3.5" width="47" height="47"/>
+                                        <rect key="frame" x="318" y="4" width="47" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="gVH-YG-l7j"/>
                                             <constraint firstAttribute="width" constant="47" id="tl1-7E-4Ki"/>
@@ -164,9 +208,12 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Ew7-iN-Spu" secondAttribute="trailing" id="Cfw-FE-HV0"/>
+                            <constraint firstItem="CKp-PV-6xT" firstAttribute="centerY" secondItem="vZV-by-0pE" secondAttribute="centerY" id="ChP-pj-dYd"/>
+                            <constraint firstItem="CKp-PV-6xT" firstAttribute="centerX" secondItem="vZV-by-0pE" secondAttribute="centerX" id="EQK-JI-BMl"/>
+                            <constraint firstItem="CKp-PV-6xT" firstAttribute="width" secondItem="vZV-by-0pE" secondAttribute="width" multiplier="99:414" id="ICU-Tf-NM7"/>
                             <constraint firstAttribute="trailing" secondItem="Pp4-5O-J26" secondAttribute="trailing" id="Kzy-Ph-HRU"/>
                             <constraint firstItem="Pp4-5O-J26" firstAttribute="leading" secondItem="vZV-by-0pE" secondAttribute="leading" id="PKe-SK-mAz"/>
                             <constraint firstItem="Pp4-5O-J26" firstAttribute="top" secondItem="cdy-RK-2cG" secondAttribute="bottom" id="PZC-yI-YhI"/>
@@ -195,6 +242,7 @@
                         <outlet property="tableViewChat" destination="Pp4-5O-J26" id="sHW-am-ayz"/>
                         <outlet property="tfInput" destination="BQ6-fu-HdD" id="N9u-EL-hhY"/>
                         <outlet property="viewInputBar" destination="Ew7-iN-Spu" id="qrk-d2-mBn"/>
+                        <outlet property="viewMeetIng" destination="CKp-PV-6xT" id="0OJ-KK-AFq"/>
                         <outlet property="viewNotificationToStartMeet" destination="B2p-P0-Lst" id="Xq9-0C-2FV"/>
                     </connections>
                 </viewController>
@@ -219,19 +267,19 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapShadow" translatesAutoresizingMaskIntoConstraints="NO" id="jrD-ff-a7l">
-                                <rect key="frame" x="0.0" y="20" width="375" height="76"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="79"/>
                             </imageView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFn-Eq-eLK">
-                                <rect key="frame" x="0.0" y="612.5" width="375" height="54.5"/>
+                                <rect key="frame" x="0.0" y="613" width="375" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쏨과의 거리," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esW-Zo-PV2">
-                                        <rect key="frame" x="99.5" y="16.5" width="88" height="21.5"/>
+                                        <rect key="frame" x="100" y="16" width="88" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJw-mF-lC4">
-                                        <rect key="frame" x="197.5" y="13.5" width="34" height="27.5"/>
+                                        <rect key="frame" x="198" y="13" width="34" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -291,7 +339,8 @@
     </scenes>
     <resources>
         <image name="chat_btn_send" width="23" height="23"/>
+        <image name="iconFaceTT" width="48" height="49"/>
         <image name="iconSsomMap" width="26" height="18"/>
-        <image name="mapShadow" width="416" height="76"/>
+        <image name="mapShadow" width="414" height="79"/>
     </resources>
 </document>

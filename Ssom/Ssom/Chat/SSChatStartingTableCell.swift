@@ -9,30 +9,30 @@
 import UIKit
 
 class SSChatStartingTableCell: UITableViewCell {
+    @IBOutlet var viewBackground: UIView!
     @IBOutlet var lbColored: UILabel!
     @IBOutlet var constLbColoredCenterXToSuper: NSLayoutConstraint!
     @IBOutlet var lbDetailMessage: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        self.viewBackground.layer.borderWidth = 0.3
+        self.viewBackground.layer.borderColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
     }
 
-    func configView(ssomType: SSType, model: SSChatViewModel? = nil) {
-        switch ssomType {
-        case .SSOM:
-            self.lbColored.textColor = UIColor(red: 0.0, green: 180.0/255.0, blue: 143.0/255.0, alpha: 1)
-        case .SSOSEYO:
-            self.lbColored.textColor = UIColor(red: 237.0/255.0, green: 52.0/255.0, blue: 75.0/255.0, alpha: 1)
-        }
+    func configView(_ ssomType: SSType, model: SSChatViewModel? = nil) {
+
+        self.backgroundColor = UIColor.clear
 
         self.lbColored.text = "두근두근, "
         self.constLbColoredCenterXToSuper.constant = -48.0
         self.lbDetailMessage.text = "대화가 시작 되었쏨 : )"
 
-        if let message = model where message.messageType == .System {
+        if let message = model, message.messageType == .System {
             if message.message == "out" || message.message == "complete" {
-                self.lbColored.text = "쏨이 끝났어요, "
-                self.lbDetailMessage.text = "다른 상대를∙∙∙(T_T)"
+                self.lbColored.text = "만남이 종료되었습니다"
+                self.lbDetailMessage.text = ""
             } else if message.message == "request" {
                 if message.fromUserId == SSAccountManager.sharedInstance.userUUID {
                     self.lbColored.text = "만남 요청을 했습니다!"
@@ -42,7 +42,7 @@ class SSChatStartingTableCell: UITableViewCell {
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "approve" {
-                self.lbColored.text = "쏨과 만나는 중..."
+                self.lbColored.text = "만남이 시작되었습니다."
                 self.lbDetailMessage.text = ""
                 self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "cancel" {

@@ -9,18 +9,18 @@
 import UIKit
 
 extension UIView {
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> UIView? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as? UIView
+    class func loadFromNibNamed(_ nibNamed: String, bundle : Bundle? = nil) -> UIView? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
 
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, owner: AnyObject) -> UIView? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(owner, options: nil)[0] as? UIView
+    class func loadFromNibNamed(_ nibNamed: String, bundle : Bundle? = nil, owner: AnyObject) -> UIView? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: owner, options: nil)[0] as? UIView
     }
 
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil, className: AnyClass) -> UIView? {
-        let loadedViews = UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil, options: nil)
+    class func loadFromNibNamed(_ nibNamed: String, bundle : Bundle? = nil, className: AnyClass) -> UIView? {
+        let loadedViews = UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: nil, options: nil)
         for loadedView in loadedViews {
-            if loadedView.dynamicType === className {
+            if type(of: (loadedView) as AnyObject) === className {
                 return loadedView as? UIView
             }
         }
@@ -33,7 +33,7 @@ extension UIView {
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
-            parentResponder = parentResponder!.nextResponder()
+            parentResponder = parentResponder!.next
             if let viewController = parentResponder as? UIViewController {
                 return viewController
             }

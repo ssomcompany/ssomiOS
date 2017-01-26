@@ -12,7 +12,7 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
 
     @IBOutlet var lbLogout: UILabel!
 
-    var blockLogout: ((finish: Bool) -> Void)!
+    var blockLogout: ((_ finish: Bool) -> Void)!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,15 +33,15 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
         if let contentView = UIView.loadFromNibNamed("SSMenuBottomView", bundle: nil, owner: self) {
             self.contentView.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
-            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
-            self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+            self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
+            self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": contentView]))
         }
     }
 
     func configView() {
         if SSAccountManager.sharedInstance.isAuthorized {
         } else {
-            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
             let logoutString = NSAttributedString(string: "로그아웃", attributes: stringAttributes)
 
             self.lbLogout.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)
@@ -50,11 +50,11 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
 
     }
 
-    @IBAction func tapLogout(sender: AnyObject) {
+    @IBAction func tapLogout(_ sender: AnyObject) {
         guard let _ = self.blockLogout else {
             return
         }
 
-        self.blockLogout(finish: true)
+        self.blockLogout(true)
     }
 }

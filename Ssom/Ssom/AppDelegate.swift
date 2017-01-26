@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     var drawerController: SSDrawerViewController?
     var isDrawable: Bool = true
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         // Fabric
@@ -33,17 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         FIRApp.configure()
 
         // Add observer for InstanceID token refresh callback.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
-                                                         name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification),
+                                                         name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
 
         // Google Maps
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
 
         // OneSignal
         OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
-            print("notification: \(notification), payload data: \(notification.payload.additionalData)")
+            print("notification: \(notification), payload data: \(notification?.payload.additionalData)")
 
-            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             guard let keyWindow = appDelegate.window else { return }
             guard let rootViewController = keyWindow.rootViewController else { return }
             if rootViewController is SSDrawerViewController {
@@ -55,13 +55,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     print("Now TopViewController is : \(topViewController)")
                     if topViewController is SSChatViewController {
                         // add the received message to the bottom fo the message lists
-                        (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                        (topViewController as! SSChatViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
                     } else if topViewController is SSChatListViewController {
                         // move up the chat room of the received message & add +1 to unread count
-                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                        (topViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
                     } else if topViewController is SSMasterViewController {
                         // add +1 to unread count
-                        (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                        (topViewController as! SSMasterViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSTabBarController {
+                        // add +1 to unread count
+                        (topViewController as! SSTabBarController).loadData()
+
+                        guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
+
+                        if selectedViewController is SSChatListViewController {
+                            (selectedViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
+                        }
                     }
                 } else {
                     print("Now MainViewController is : \(mainViewController)")
@@ -73,9 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         }, handleNotificationAction: { (openedResult) in
             print("openedResult : \(openedResult)")
 
-            guard let notification = openedResult.notification else { return }
+            guard let notification = openedResult?.notification else { return }
 
-            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             guard let keyWindow = appDelegate.window else { return }
             guard let rootViewController = keyWindow.rootViewController else { return }
             if rootViewController is SSDrawerViewController {
@@ -89,11 +98,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                         // add the received message to the bottom fo the message lists
                         (topViewController as! SSChatViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
                     } else if topViewController is SSChatListViewController {
-                        // move up the chat room of the received message & add +1 to unread count
-                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                        // move up the chat room of the received message
+                        (topViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject], needRecount: false)
                     } else if topViewController is SSMasterViewController {
                         // add +1 to unread count
                         (topViewController as! SSMasterViewController).reload(with: notification.payload.additionalData as! [String: AnyObject])
+                    } else if topViewController is SSTabBarController {
+                        // add +1 to unread count
+                        (topViewController as! SSTabBarController).loadData()
+
+                        guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
+
+                        if selectedViewController is SSChatListViewController {
+                            (selectedViewController as! SSChatListViewController).reload(with: notification.payload.additionalData as! [String: AnyObject], needRecount: false)
+                        }
                     }
                 } else {
                     print("Now MainViewController is : \(mainViewController)")
@@ -111,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         self.drawerController?.delegate = self
         self.drawerController?.addStylerFromArray([SSDrawerScaleStyler.styler(), SSDrawerFadeStyler.styler(), SSDrawerShadowStyler.styler()], forDirection: SSDrawerDirection.Left)
 
-        let menuViewController: SSMenuViewController = (self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as? SSMenuViewController)!
+        let menuViewController: SSMenuViewController = (self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? SSMenuViewController)!
         menuViewController.drawerViewController = self.drawerController
         self.drawerController?.setDrawerViewController(menuViewController, forDirection: SSDrawerDirection.Left)
 
@@ -128,16 +146,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
                 SSAlertController.showAlertConfirm(title: "Error", message: "버전 체크에 실패하였습니다!", completion: nil)
             } else {
-                if let bundleVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String, let currentVersion = version {
+                if let bundleVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String, let currentVersion = version {
                     print("Current App Version is : ", bundleVersion)
 
-                    if Double(bundleVersion.stringByReplacingOccurrencesOfString(".", withString: "")) < Double(currentVersion.stringByReplacingOccurrencesOfString(".", withString: "")) {
+                    if Double(bundleVersion.replacingOccurrences(of: ".", with: ""))! < Double(currentVersion.replacingOccurrences(of: ".", with: ""))! {
                         SSAlertController.showAlertTwoButton(title: "알림",
                             message: "새로운 업데이트가 있습니다.\n 업데이트 후 이용하실 수 있습니다 =)",
                             button1Title: "업데이트",
                             button2Title: "종료",
                             button1Completion: { (action) in
-                                UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/app/bars/id1083356262")!)
+                                UIApplication.shared.openURL(URL(string: "itms-apps://itunes.apple.com/app/bars/id1083356262")!)
                                 exit(0)
                             },
                             button2Completion: { (action) in
@@ -151,50 +169,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         FIRMessaging.messaging().disconnect()
         print("Disconnected from FCM.")
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
 
         FBSDKAppEvents.activateApp()
+
+        self.activateApp()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // TODO: UUID 관리 관련해서 수정해야됨..
         print("deviceToken : \(deviceToken)")
         let keyChain = Keychain(service: "com.ssom")
         keyChain[data: "pushDeviceToken"] = deviceToken
 
-        OneSignal.IdsAvailable { (oneSignalPlayerID, pushToken) in
+        OneSignal.idsAvailable { (oneSignalPlayerID, pushToken) in
             print("playerId : \(oneSignalPlayerID), pushToken : \(pushToken)")
             keyChain[string: "oneSignalPlayerID"] = oneSignalPlayerID
         }
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let gcmMessageId = userInfo["gcm.message_id"] {
             print("Message ID : \(gcmMessageId)")
         }
@@ -202,14 +222,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         print("%@", userInfo)
     }
 
+// MARK: - private
+    fileprivate func activateApp() {
+        if let token = SSAccountManager.sharedInstance.sessionToken {
+            if let email = SSAccountManager.sharedInstance.userUUID {
+                SSNetworkAPIClient.getUser(token, email: email, completion: { (user, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+                    }
+
+                    if let model = user {
+                        print("user is : \(model)")
+
+                        if let imageUrl = model.profileImageUrl {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
+                        } else {
+                            SSNetworkContext.sharedInstance.deleteSharedAttribute("profileImageUrl")
+                        }
+                    }
+                })
+            }
+        } else {
+            SSNetworkAPIClient.postLoginWithoutId { (error) in
+                if let err = error {
+                    print(err.localizedDescription)
+
+                    SSAlertController.showAlertConfirm(title: "Error", message: "유저 세션 갱신에 실패하였습니다!", completion: nil)
+                }
+            }
+        }
+    }
+
 // MARK: - FirebaseMessage
-    func tokenRefreshNotification(notification: NSNotification) {
+    func tokenRefreshNotification(_ notification: Notification) {
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
 
     func connectToFcm() {
-        FIRMessaging.messaging().connectWithCompletion { (error) in
+        FIRMessaging.messaging().connect { (error) in
             if (error != nil) {
                 print("Unable to connect with FCM. \(error)")
             } else {
@@ -220,23 +271,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
 // MARK: - SSDrawerViewControllerDelegate
 
-    func drawerViewController(drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, mayUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
         print("Drawer view controller may update to state `\(paneState)` for direction `\(direction)`")
 
-        if paneState == .Open {
+        if paneState == .open {
             if let menuViewController = drawerViewController.drawerViewController as? SSMenuViewController {
-                if let headerView = menuViewController.menuTableView.headerViewForSection(0) as? SSMenuHeadView {
+                if let headerView = menuViewController.menuTableView.headerView(forSection: 0) as? SSMenuHeadView {
                     headerView.configView()
                 }
             }
         }
     }
 
-    func drawerViewController(drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, didUpdateToPaneState paneState: SSDrawerMainState, forDirection direction: SSDrawerDirection) {
         print("Drawer view controller did update to state `\(paneState)` for direction `\(direction)`")
     }
 
-    func drawerViewController(drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+    func drawerViewController(_ drawerViewController: SSDrawerViewController, shouldBeginPanePan panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return self.isDrawable
     }
 }

@@ -938,16 +938,16 @@ public struct SSNetworkAPIClient {
 
                         completion(nil, error)
                     } else {
+                        if let heartsCount = rawDatas["hearts"] as? Int {
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
+                        }
+
                         if let chatroomId = rawDatas["chatroomId"] as? Int {
                             completion(String(chatroomId), nil)
                         } else {
                             let error = NSError(domain: "com.ssom.error.NotJSONDataFound.PostChatRoom", code: 812, userInfo: nil)
 
                             completion(nil, error)
-                        }
-
-                        if let heartsCount = rawDatas["hearts"] as? Int {
-                            SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
                         }
                     }
                 } else {

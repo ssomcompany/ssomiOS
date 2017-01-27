@@ -611,6 +611,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
                             SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                         } else {
+                            // heart count
+                            guard let tabBarController = self.tabBarController as? SSTabBarController else { return }
+                            if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+                                tabBarController.barButtonItems.changeHeartCount(heartsCount)
+                            } else {
+                                tabBarController.barButtonItems.changeHeartCount(2)
+                            }
+
                             if let createdChatroomId = chatroomId {
                                 self.goChat(chatroomId: createdChatroomId, model: model, ssomType: ssomType)
                             }

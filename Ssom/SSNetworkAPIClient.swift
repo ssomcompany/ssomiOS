@@ -735,6 +735,43 @@ public struct SSNetworkAPIClient {
         }
     }
 
+    static func getHearts(_ token: String, completion: @escaping (_ count: Int, _ error: NSError?) -> Void) {
+        let indicator: SSIndicatorView = SSIndicatorView()
+        indicator.showIndicator()
+
+        defer {
+            indicator.hideIndicator()
+        }
+
+        Alamofire.request(SSNetworkContext.serverUrlPrefixt+"users/hearts",
+                          method: .get,
+                          headers: ["Authorization": "JWT " + token])
+            .responseJSON { (response) in
+                print("request is : \(response.request)")
+
+                if response.result.isSuccess {
+                    print("Response JSON : \(response.result.value)")
+
+                    if let rawDatas = response.result.value as? [String: Any] {
+                        if let heartsCount = rawDatas["heartsCount"] as? Int {
+
+                            SSNetworkContext.sharedInstance.saveSharedAttribute(heartsCount, forKey: "heartsCount")
+
+                            completion(heartsCount, nil)
+                        }
+                    } else {
+                        let error = NSError(domain: "com.ssom.error.NotJSONDataFound.GetHearts", code: 815, userInfo: nil)
+
+                        completion(0, error)
+                    }
+                } else {
+                    print("Response Error : \(response.result.error)")
+
+                    completion(0, response.result.error as NSError?)
+                }
+        }
+    }
+
     static func postPurchaseHearts(_ token: String, purchasedHeartCount: Int, completion: @escaping (_ heartsCount: Int, _ error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
@@ -766,30 +803,6 @@ public struct SSNetworkAPIClient {
                     print("Response Error : \(response.result.error)")
 
                     completion(0, response.result.error as NSError?)
-                }
-
-                indicator.hideIndicator()
-        }
-    }
-
-    static func getHearts(_ token: String, completion: @escaping (_ data: AnyObject?, _ error: NSError?) -> Void) {
-        let indicator: SSIndicatorView = SSIndicatorView()
-        indicator.showIndicator()
-
-        Alamofire.request(SSNetworkContext.serverUrlPrefixt+"users/hearts",
-                          method: .get,
-                          headers: ["Authorization": "JWT " + token])
-            .responseJSON { (response) in
-                print("request is : \(response.request)")
-
-                if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
-
-                    completion(nil, nil)
-                } else {
-                    print("Response Error : \(response.result.error)")
-
-                    completion(nil, response.result.error as NSError?)
                 }
 
                 indicator.hideIndicator()

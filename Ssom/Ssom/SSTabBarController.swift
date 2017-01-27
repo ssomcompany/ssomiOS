@@ -27,13 +27,16 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             if let barItems = self.tabBar.items, let barItemForChat = barItems.last {
                 print("bar item is : \(barItemForChat)")
 
-                if self.unreadCount > 0 {
-                    if #available(iOS 10.0, *) {
-                        barItemForChat.badgeColor = #colorLiteral(red: 0.9294117647, green: 0.2039215686, blue: 0.2941176471, alpha: 1)
+                let barButtons = self.tabBar.subviews
+                if let barButtonForChat = barButtons.last {
+                    if self.unreadCount > 0 {
+                        if #available(iOS 10.0, *) {
+                            barItemForChat.badgeColor = #colorLiteral(red: 0.9294117647, green: 0.2039215686, blue: 0.2941176471, alpha: 1)
+                        }
+                        barItemForChat.badgeValue = "\(self.unreadCount)"
+                    } else {
+                        barItemForChat.badgeValue = nil
                     }
-                    barItemForChat.badgeValue = "\(self.unreadCount)"
-                } else {
-                    barItemForChat.badgeValue = nil
                 }
             }
         }
@@ -219,7 +222,7 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             SSNetworkAPIClient.getUnreadCount(token, completion: { (data, error) in
                 if let err = error {
                     print(err.localizedDescription)
-                    //                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
+//                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: self, completion: nil)
                 } else {
                     if let rawData = data, let unreadCount = rawData["unreadCount"] as? Int {
                         print("unreadCount : \(unreadCount)")
@@ -229,13 +232,21 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
                     }
                 }
             })
-        }
 
-        // heart count
-        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
-            self.barButtonItems.changeHeartCount(heartsCount)
-        } else {
-            self.barButtonItems.changeHeartCount(0)
+            SSNetworkAPIClient.getHearts(token, completion: { (heartsCount, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+
+                    // heart count
+                    if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int {
+                        self.barButtonItems.changeHeartCount(heartsCount)
+                    } else {
+                        self.barButtonItems.changeHeartCount(2)
+                    }
+                } else {
+                    self.barButtonItems.changeHeartCount(heartsCount)
+                }
+            })
         }
     }
 

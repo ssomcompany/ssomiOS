@@ -33,6 +33,7 @@ class SSChatStartingTableCell: UITableViewCell {
             if message.message == "out" || message.message == "complete" {
                 self.lbColored.text = "만남이 종료되었습니다"
                 self.lbDetailMessage.text = ""
+                self.constLbColoredCenterXToSuper.constant = 0.0
             } else if message.message == "request" {
                 if message.fromUserId == SSAccountManager.sharedInstance.userUUID {
                     self.lbColored.text = "만남 요청을 했습니다!"

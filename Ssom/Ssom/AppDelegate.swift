@@ -51,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                 if mainViewController is UINavigationController {
                     print("Now MainViewController is : NavigationController")
 
+                    if #available(iOS 10.0, *) {
+                        var feedbackGenerator = UINotificationFeedbackGenerator()
+
+                        feedbackGenerator.prepare()
+
+                        feedbackGenerator.notificationOccurred(.success)
+                    }
+
                     guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
                     print("Now TopViewController is : \(topViewController)")
                     if topViewController is SSChatViewController {
@@ -91,6 +99,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                 guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
                 if mainViewController is UINavigationController {
                     print("Now MainViewController is : NavigationController")
+
+                    if #available(iOS 10.0, *) {
+                        var feedbackGenerator = UINotificationFeedbackGenerator()
+
+                        feedbackGenerator.prepare()
+
+                        feedbackGenerator.notificationOccurred(.success)
+                    }
 
                     guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
                     print("Now TopViewController is : \(topViewController)")

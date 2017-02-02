@@ -164,6 +164,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
                     if newMessage.meetRequestStatus == .Received {
                         data.meetRequestUserId = newMessage.meetRequestUserId
                         data.meetRequestStatus = .Received
+                        data.lastMessage = newMessage.lastMessage
                     } else if newMessage.meetRequestStatus == .Cancelled {
                         data.lastMessage = SSMeetRequestOptions.Cancelled.rawValue
                         data.meetRequestStatus = .Cancelled

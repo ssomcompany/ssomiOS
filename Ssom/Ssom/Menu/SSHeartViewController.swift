@@ -235,7 +235,10 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
 
-        self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+        if let _ = self.heartRechargeTimer {
+        } else {
+            self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+        }
     }
 
     func pauseHeartRechageTimer() {

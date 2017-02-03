@@ -147,6 +147,9 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseHeartRechageTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeHeartRechargerTimer(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -235,6 +238,14 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
     }
 
+    func pauseHeartRechageTimer() {
+        print(#function)
+
+        if let timer = self.heartRechargeTimer {
+            timer.invalidate()
+        }
+    }
+
     func stopHeartRechageTimer(_ needToSave: Bool = false) {
         print(#function)
 
@@ -293,7 +304,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
         } else {
-            sender?.invalidate()
+            self.pauseHeartRechageTimer()
         }
     }
 

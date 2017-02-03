@@ -28,7 +28,7 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
                 print("bar item is : \(barItemForChat)")
 
                 let barButtons = self.tabBar.subviews
-                if let barButtonForChat = barButtons.last {
+                if barButtons.last != nil {
                     if self.unreadCount > 0 {
                         if #available(iOS 10.0, *) {
                             barItemForChat.badgeColor = #colorLiteral(red: 0.9294117647, green: 0.2039215686, blue: 0.2941176471, alpha: 1)

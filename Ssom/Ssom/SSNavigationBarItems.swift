@@ -66,6 +66,9 @@ class SSNavigationBarItems : UIView
         self.lbHeartCount.method = UILabelCountingMethod.linear
 
         NotificationCenter.default.addObserver(self, selector: #selector(changeHeartCount(_:)), name: NSNotification.Name(rawValue: SSInternalNotification.SignOut.rawValue), object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseHeartRechageTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeHeartRechargerTimer(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
 
     convenience init(animated: Bool) {
@@ -171,6 +174,14 @@ class SSNavigationBarItems : UIView
         self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
     }
 
+    func pauseHeartRechageTimer() {
+        print(#function)
+
+        if let timer = self.heartRechargeTimer {
+            timer.invalidate()
+        }
+    }
+
     func stopHeartRechageTimer(_ needToSave: Bool = false) {
         print(#function)
 
@@ -229,7 +240,7 @@ class SSNavigationBarItems : UIView
                 }
             }
         } else {
-            sender?.invalidate()
+            self.pauseHeartRechageTimer()
         }
     }
 

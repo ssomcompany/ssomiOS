@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     print("Now MainViewController is : NavigationController")
 
                     if #available(iOS 10.0, *) {
-                        var feedbackGenerator = UINotificationFeedbackGenerator()
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
 
                         feedbackGenerator.prepare()
 
@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                     print("Now MainViewController is : NavigationController")
 
                     if #available(iOS 10.0, *) {
-                        var feedbackGenerator = UINotificationFeedbackGenerator()
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
 
                         feedbackGenerator.prepare()
 

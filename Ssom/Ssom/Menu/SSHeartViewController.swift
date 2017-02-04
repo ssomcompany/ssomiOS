@@ -269,6 +269,12 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     func changeHeartRechargerTimer(_ sender: Timer?) {
         print(#function)
 
+        if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount >= SSDefaultHeartCount {
+            self.stopHeartRechageTimer()
+
+            return
+        }
+
         if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
             print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
 

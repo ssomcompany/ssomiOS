@@ -156,18 +156,22 @@ class SSNavigationBarItems : UIView
         print(#function)
 
         if needRestart {
-            let now = Date()
-            SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
-
-            self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
+            self.initHeartRechargeTime()
         } else {
             if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
-                self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate).0
-            } else {
-                let now = Date()
-                SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
 
-                self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
+                let timeIntervalString = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate)
+                self.lbRechargeTime.text = timeIntervalString.0
+
+                if timeIntervalString.1 <= 0 && timeIntervalString.2 <= 0 {
+                    self.initHeartRechargeTime()
+                } else {
+                    self.lbRechargeTime.text = Util.getTimeIntervalString(from: heartRechargeTimerStartedDate).0
+                }
+            } else {
+                self.initHeartRechargeTime()
             }
         }
 
@@ -175,6 +179,13 @@ class SSNavigationBarItems : UIView
         } else {
             self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
         }
+    }
+
+    func initHeartRechargeTime() {
+        let now = Date()
+        SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
+
+        self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
     }
 
     func pauseHeartRechageTimer() {

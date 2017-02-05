@@ -772,13 +772,18 @@ public struct SSNetworkAPIClient {
         }
     }
 
-    static func postPurchaseHearts(_ token: String, purchasedHeartCount: Int, completion: @escaping (_ heartsCount: Int, _ error: NSError?) -> Void) {
+    static func postPurchaseHearts(_ token: String, purchasedHeartCount: Int, isAuto: Bool = false, completion: @escaping (_ heartsCount: Int, _ error: NSError?) -> Void) {
         let indicator: SSIndicatorView = SSIndicatorView()
         indicator.showIndicator()
 
+        var params = ["count" : purchasedHeartCount, "deviceType": "iOS"] as [String : Any]
+        if isAuto {
+            params["token"] = "automatic"
+        }
+
         Alamofire.request(SSNetworkContext.serverUrlPrefixt+"users/hearts",
                           method: .post,
-                          parameters: ["count" : purchasedHeartCount, "deviceType": "iOS"],
+                          parameters: params,
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in

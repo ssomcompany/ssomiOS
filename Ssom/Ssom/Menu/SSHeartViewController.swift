@@ -217,7 +217,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     var heartRechargeTimer: Timer!
 
     func startHeartRechargeTimer(_ needRestart: Bool = false) {
-        print(#function)
+        print("\(#function, #line)")
 
         if needRestart {
             self.initHeartRechargeTime()
@@ -246,6 +246,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func initHeartRechargeTime() {
+        print("\(#function, #line)")
+
         let now = Date()
         SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
@@ -253,7 +255,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func pauseHeartRechageTimer() {
-        print(#function)
+        print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
@@ -261,7 +263,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func stopHeartRechageTimer(_ needToSave: Bool = false) {
-        print(#function)
+        print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
@@ -278,7 +280,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func changeHeartRechargerTimer(_ sender: Timer?) {
-        print(#function)
+        print("\(#function, #line)")
 
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount >= SSDefaultHeartCount {
             self.stopHeartRechageTimer()
@@ -287,7 +289,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
 
         if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
-            print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
+            print("heartRechargeTimerStartedDate for ##HeartPurchase## is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
 
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
@@ -308,8 +310,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
                             SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                         } else {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1,
-                                                                                                                                                                       "heartsCount": heartsCount])
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1, "heartsCount": heartsCount])
 
                             // 하트가 2개 이상이면, time 종료 처리
                             if heartsCount >= SSDefaultHeartCount {
@@ -322,6 +323,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                     })
                 }
+            } else {
+                self.startHeartRechargeTimer()
             }
         } else {
             self.pauseHeartRechageTimer()

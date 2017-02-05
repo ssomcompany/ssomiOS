@@ -153,7 +153,12 @@ class SSNavigationBarItems : UIView
     var heartRechargeTimer: Timer!
 
     func startHeartRechargeTimer(_ needRestart: Bool = false) {
-        print(#function)
+        print("\(#function, #line)")
+
+        // check if the heart recharging timer is already running..
+        if let _ = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargetTimerStartedForNavigation") as? Bool {
+            return
+        }
 
         if needRestart {
             self.initHeartRechargeTime()
@@ -178,10 +183,14 @@ class SSNavigationBarItems : UIView
         if let _ = self.heartRechargeTimer {
         } else {
             self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+
+            SSNetworkContext.sharedInstance.saveSharedAttribute(true, forKey: "heartRechargetTimerStartedForNavigation")
         }
     }
 
     func initHeartRechargeTime() {
+        print("\(#function, #line)")
+
         let now = Date()
         SSNetworkContext.sharedInstance.saveSharedAttribute(now, forKey: "heartRechargeTimerStartedDate")
 
@@ -189,21 +198,25 @@ class SSNavigationBarItems : UIView
     }
 
     func pauseHeartRechageTimer() {
-        print(#function)
+        print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
+
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargetTimerStartedForNavigation")
         }
     }
 
     func stopHeartRechageTimer(_ needToSave: Bool = false) {
-        print(#function)
+        print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
             self.heartRechargeTimer = nil
 
             SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
+
+            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargetTimerStartedForNavigation")
         }
 
         self.lbRechargeTime.text = "00:00"
@@ -214,7 +227,7 @@ class SSNavigationBarItems : UIView
     }
 
     func changeHeartRechargerTimer(_ sender: Timer?) {
-        print(#function)
+        print("\(#function, #line)")
 
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount >= SSDefaultHeartCount {
             self.stopHeartRechageTimer()
@@ -223,7 +236,7 @@ class SSNavigationBarItems : UIView
         }
 
         if let heartRechargeTimerStartedDate = SSNetworkContext.sharedInstance.getSharedAttribute("heartRechargeTimerStartedDate") as? Date {
-            print("heartRechargeTimerStartedDate is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
+            print("heartRechargeTimerStartedDate for ##Navi## is \(heartRechargeTimerStartedDate), now is \(Date()), time after 4hours is \(Date(timeInterval: SSDefaultHeartRechargeTimeInterval, since: heartRechargeTimerStartedDate))")
 
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
@@ -244,8 +257,7 @@ class SSNavigationBarItems : UIView
 
                             SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
                         } else {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1,
-                                "heartsCount": heartsCount])
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: SSInternalNotification.PurchasedHeart.rawValue), object: nil, userInfo: ["purchasedHeartCount": 1, "heartsCount": heartsCount])
 
                             // 하트가 2개 이상이면, time 종료 처리
                             if heartsCount >= SSDefaultHeartCount {
@@ -258,6 +270,8 @@ class SSNavigationBarItems : UIView
                         }
                     })
                 }
+            } else {
+                self.startHeartRechargeTimer()
             }
         } else {
             self.pauseHeartRechageTimer()

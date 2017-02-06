@@ -212,12 +212,13 @@ class SSNavigationBarItems : UIView
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
-            self.heartRechargeTimer = nil
-
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
-
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargetTimerStartedForNavigation")
         }
+
+        self.heartRechargeTimer = nil
+
+        SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
+
+        SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargetTimerStartedForNavigation")
 
         self.lbRechargeTime.text = "00:00"
 

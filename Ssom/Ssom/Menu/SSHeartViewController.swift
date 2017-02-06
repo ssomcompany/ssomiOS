@@ -267,10 +267,11 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         if let timer = self.heartRechargeTimer {
             timer.invalidate()
-            self.heartRechargeTimer = nil
-
-            SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
         }
+
+        self.heartRechargeTimer = nil
+
+        SSNetworkContext.sharedInstance.deleteSharedAttribute("heartRechargeTimerStartedDate")
 
         self.lbHeartRechargeTime.text = "00:00"
 

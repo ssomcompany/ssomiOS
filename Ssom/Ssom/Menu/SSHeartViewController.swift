@@ -242,6 +242,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let _ = self.heartRechargeTimer {
         } else {
             self.heartRechargeTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(changeHeartRechargerTimer(_:)), userInfo: nil, repeats: true)
+
+            print("\(#function, #line): Heart Timer Started!!")
         }
     }
 
@@ -299,10 +301,16 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.lbHeartRechargeTime.text = timeIntervalString.0
 
             if timeIntervalString.1 <= 0 && timeIntervalString.2 <= 0 {
+                if let _ = SSNetworkContext.sharedInstance.getSharedAttribute("heartAutoPurchaseRequested") {
+                    return
+                } else {
+                    SSNetworkContext.sharedInstance.saveSharedAttribute(true, forKey: "heartAutoPurchaseRequested")
+                }
+
                 // 하트 1개 구매 처리
                 if let token = SSAccountManager.sharedInstance.sessionToken {
 
-                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: 1, completion: { [weak self] (heartsCount, error) in
+                    SSNetworkAPIClient.postPurchaseHearts(token, purchasedHeartCount: 1, isAuto: true, completion: { [weak self] (heartsCount, error) in
 
                         guard let wself = self else { return }
 
@@ -322,6 +330,8 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 wself.startHeartRechargeTimer(true)
                             }
                         }
+
+                        SSNetworkContext.sharedInstance.deleteSharedAttribute("heartAutoPurchaseRequested")
                     })
                 }
             } else {

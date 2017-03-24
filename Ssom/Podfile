@@ -31,6 +31,9 @@ target 'Ssom' do
  pod 'Reveal-SDK', :configurations => ['Debug']
 
  pod 'OneSignal'
+
+ pod 'BRYXBanner'
+
 end
 
 target 'SsomTests' do

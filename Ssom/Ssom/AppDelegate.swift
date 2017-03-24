@@ -14,6 +14,8 @@ import Firebase
 import FirebaseMessaging
 import KeychainAccess
 import FBSDKCoreKit
+import BRYXBanner
+import SDWebImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDelegate {
@@ -78,6 +80,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
                         if selectedViewController is SSChatListViewController {
                             (selectedViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
+                        } else {
+                            guard let payload = notification?.payload.additionalData, let message = payload["msg"] as? String else { return }
+
+                            let profileImage: UIImage = #imageLiteral(resourceName: "noneProfile")
+                            let banner = Banner(title: "신규 메세지가 도착했습니다!!", subtitle: message, image: profileImage, backgroundColor: UIColor.white, didTapBlock: {
+                                (topViewController as! SSTabBarController).selectedIndex = 3
+                            })
+                            banner.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+                            banner.dismissesOnTap = true
+                            if let profileImgUrl = payload["profileImgUrl"] as? String {
+                                _ = SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: profileImgUrl), options: [], progress: nil, completed: { (image, _, _, _) in
+                                    banner.imageView.contentMode = .scaleAspectFill
+                                    if let img = image {
+                                        DispatchQueue.main.async {
+                                            banner.imageView.image = UIImage.cropInCircle(img, frame: banner.imageView.frame)
+                                        }
+                                    } else {
+                                        banner.imageView.image = profileImage
+                                    }
+                                    banner.show(duration: 3.0)
+                                })
+                            } else {
+                                banner.show(duration: 3.0)
+                            }
                         }
                     }
                 } else {

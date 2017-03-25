@@ -89,6 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                             })
                             banner.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
                             banner.dismissesOnTap = true
+                            banner.imageView.layoutIfNeeded()
+                            banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
+                            banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
+                            banner.imageView.layer.borderWidth = 1.3
+                            banner.imageView.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
                             if let profileImgUrl = payload["profileImgUrl"] as? String {
                                 _ = SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: profileImgUrl), options: [], progress: nil, completed: { (image, _, _, _) in
                                     banner.imageView.contentMode = .scaleAspectFill
@@ -102,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                                     banner.show(duration: 3.0)
                                 })
                             } else {
+                                banner.imageView.image = profileImage
                                 banner.show(duration: 3.0)
                             }
                         }

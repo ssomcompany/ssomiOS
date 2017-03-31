@@ -122,7 +122,7 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             self.imgViewSsomIcon.translatesAutoresizingMaskIntoConstraints = false
 
             self.lbTitle = UILabel()
-            self.lbTitle.text = "현재 5,021명 접속 중"
+            self.lbTitle.text = ""
             self.lbTitle.textColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
             self.navigationItem.titleView!.addSubview(self.lbTitle)
             self.lbTitle.translatesAutoresizingMaskIntoConstraints = false

@@ -35,7 +35,7 @@ extension UIImage {
         let scaleFactorY = frame.size.height / image.size.height
 
         context.beginPath()
-        context.addArc(center: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: 0, endAngle: CGFloat(2.0 * M_PI), clockwise: false)
+        context.addArc(center: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: 0, endAngle: CGFloat(2.0 * .pi), clockwise: false)
         context.closePath()
         context.clip()
 

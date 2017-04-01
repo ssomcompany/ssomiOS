@@ -28,10 +28,10 @@ public struct SSNetworkAPIClient {
         Alamofire.request(SSNetworkContext.serverUrlPrefixt + "version/ios",
                           method: .get)
         .responseJSON { (response) in
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawData = response.result.value as? [String: String] {
                     completion(rawData["version"], nil)
@@ -41,7 +41,7 @@ public struct SSNetworkAPIClient {
                     completion(nil, error)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -72,10 +72,10 @@ public struct SSNetworkAPIClient {
                           method: .get)
         .responseJSON { response in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 let rawDatas: Array = response.result.value as! [[String: AnyObject?]]
                 var datas: Array = [SSViewModel]()
@@ -88,7 +88,7 @@ public struct SSNetworkAPIClient {
 
                 completion(datas, nil)
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -117,11 +117,11 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
                     if acceptableStatusCodes.contains(response.response!.statusCode) {
-                        print("postPost result : \(response.result.value)")
+                        print("postPost result : \(response.result.value.debugDescription)")
 
                         completion(nil)
                     } else {
@@ -148,11 +148,11 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
                 if acceptableStatusCodes.contains(response.response!.statusCode) {
-                    print("postPost result : \(response.result.value)")
+                    print("postPost result : \(response.result.value.debugDescription)")
 
                     completion(nil)
                 } else {
@@ -162,7 +162,7 @@ public struct SSNetworkAPIClient {
                     completion(err)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
                 
                 completion(response.result.error as NSError?)
             }
@@ -183,10 +183,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseData { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("getFile result : \(response.result.value)")
+                print("getFile result : \(response.result.value.debugDescription)")
 
                 completion(nil)
             } else {
@@ -215,7 +215,7 @@ public struct SSNetworkAPIClient {
                 req.responseJSON(completionHandler: { (response) in
 
                     if response.result.isSuccess {
-                        print("postFile result : \(response.result.value)")
+                        print("postFile result : \(response.result.value.debugDescription)")
 
                         let rawData = response.result.value as! NSDictionary
                         let fileId: String = rawData["fileId"] as! String
@@ -269,10 +269,10 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "Basic " + base64String!])
             .responseJSON { response in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
 
@@ -296,7 +296,7 @@ public struct SSNetworkAPIClient {
                                     if let err = error {
                                         print("Firebase Sign in is failed!! : \(err)")
                                     } else {
-                                        print("Firebase Sign in succeeds!! : \(user)")
+                                        print("Firebase Sign in succeeds!! : \(user.debugDescription)")
                                     }
                                 })
                             }
@@ -352,7 +352,7 @@ public struct SSNetworkAPIClient {
                         completion(error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(response.result.error! as NSError?)
                 }
@@ -389,10 +389,10 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "Bearer " + token])
             .responseJSON { response in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
 
@@ -416,7 +416,7 @@ public struct SSNetworkAPIClient {
                                     if let err = error {
                                         print("Firebase Sign-in is failed!! : \(err)")
                                     } else {
-                                        print("Firebase Sign-in succeeds!! : \(user)")
+                                        print("Firebase Sign-in succeeds!! : \(user.debugDescription)")
                                     }
                                 })
                             }
@@ -472,7 +472,7 @@ public struct SSNetworkAPIClient {
                         completion(error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
                     
                     completion(response.result.error! as NSError?)
                 }
@@ -491,10 +491,10 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("getUser result : \(response.result.value)")
+                print("getUser result : \(response.result.value.debugDescription)")
                 
                 completion(nil)
             } else {
@@ -535,10 +535,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default)
             .responseJSON { response in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas: [String: AnyObject] = response.result.value as? [String: AnyObject] {
 
@@ -609,7 +609,7 @@ public struct SSNetworkAPIClient {
                         completion(error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
                     
                     completion(response.result.error! as NSError?)
                 }
@@ -625,10 +625,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("getUser result : \(response.result.value)")
+                print("getUser result : \(response.result.value.debugDescription)")
 
                 if let rawData = response.result.value as? [String: AnyObject] {
                     let userModel = SSUserModel(modelDict: rawData)
@@ -657,10 +657,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default)
             .responseJSON { (response) in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas = response.result.value as? [String: AnyObject] {
 
@@ -688,7 +688,7 @@ public struct SSNetworkAPIClient {
                                     if let err = error {
                                         print("Firebase Sign Up is failed!! : " + err.localizedDescription)
                                     } else {
-                                        print("Firebase Sign Up is succeeded!! : \(user)")
+                                        print("Firebase Sign Up is succeeded!! : \(user.debugDescription)")
                                     }
                                 })
                             }
@@ -701,7 +701,7 @@ public struct SSNetworkAPIClient {
                         completion(error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(response.result.error as NSError?)
                 }
@@ -719,14 +719,14 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 completion(nil, nil)
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -747,10 +747,10 @@ public struct SSNetworkAPIClient {
                           method: .get,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas = response.result.value as? [String: Any] {
                         if let heartsCount = rawDatas["heartsCount"] as? Int {
@@ -765,7 +765,7 @@ public struct SSNetworkAPIClient {
                         completion(0, error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(0, response.result.error as NSError?)
                 }
@@ -787,10 +787,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas = response.result.value as? [String: AnyObject] {
                         if let heartsCount = rawDatas["heartsCount"] as? Int {
@@ -805,7 +805,7 @@ public struct SSNetworkAPIClient {
                         completion(0, error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(0, response.result.error as NSError?)
                 }
@@ -826,10 +826,10 @@ public struct SSNetworkAPIClient {
                           method: .get)
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawData = response.result.value as? [String: Any] {
                     if let userCount = rawData["userCount"] as? String {
@@ -841,7 +841,7 @@ public struct SSNetworkAPIClient {
 
                 completion(0, nil)
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(0, response.result.error)
             }
@@ -867,10 +867,10 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawDatas = response.result.value as? [[String: AnyObject]] {
                     var datas: [SSChatroomViewModel] = [SSChatroomViewModel]()
@@ -889,7 +889,7 @@ public struct SSNetworkAPIClient {
 
                 completion(nil, error)
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -913,10 +913,10 @@ public struct SSNetworkAPIClient {
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawDatas = response.result.value as? [String: AnyObject] {
 
@@ -962,7 +962,7 @@ public struct SSNetworkAPIClient {
                 }
 
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -980,10 +980,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let _ = response.result.value as? [String: AnyObject] {
                     completion(nil, nil)
@@ -994,11 +994,11 @@ public struct SSNetworkAPIClient {
                 }
             } else {
                 if acceptableStatusCodes.contains(response.response!.statusCode) {
-                    print("putChatroomLastAccessTime result : \(response.result.value)")
+                    print("putChatroomLastAccessTime result : \(response.result.value.debugDescription)")
 
                     completion(nil, nil)
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(nil, response.result.error as NSError?)
                 }
@@ -1017,10 +1017,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let _ = response.result.value as? [String: AnyObject] {
                     completion(nil, nil)
@@ -1030,7 +1030,7 @@ public struct SSNetworkAPIClient {
                     completion(nil, error)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -1048,10 +1048,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
 
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawDatas = response.result.value as? [String: AnyObject] {
 
@@ -1093,7 +1093,7 @@ public struct SSNetworkAPIClient {
 
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
                     
                     completion(nil, response.result.error as NSError?)
                 }
@@ -1113,10 +1113,10 @@ public struct SSNetworkAPIClient {
             headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
 
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawDatas = response.result.value as? [String: AnyObject] {
 
@@ -1165,7 +1165,7 @@ public struct SSNetworkAPIClient {
                     
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -1184,10 +1184,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawData = response.result.value as? [String: AnyObject] {
                     let model = SSChatViewModel(modelDict: rawData)
@@ -1198,7 +1198,7 @@ public struct SSNetworkAPIClient {
                     completion(nil, error)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -1217,10 +1217,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let rawData = response.result.value as? [String: AnyObject] {
                         let model = SSChatViewModel(modelDict: rawData)
@@ -1231,7 +1231,7 @@ public struct SSNetworkAPIClient {
                         completion(nil, error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(nil, response.result.error as NSError?)
                 }
@@ -1250,10 +1250,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let _ = response.result.value as? [String: AnyObject] {
                     completion(nil, nil)
@@ -1263,7 +1263,7 @@ public struct SSNetworkAPIClient {
                     completion(nil, error)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -1280,10 +1280,10 @@ public struct SSNetworkAPIClient {
                           method: .get,
                           headers: ["Authorization": "JWT " + token])
         .responseJSON { (response) in
-            print("request is : \(response.request)")
+            print("request is : \(response.request.debugDescription)")
 
             if response.result.isSuccess {
-                print("Response JSON : \(response.result.value)")
+                print("Response JSON : \(response.result.value.debugDescription)")
 
                 if let rawData = response.result.value as? [String: AnyObject] {
                     completion(rawData as AnyObject?, nil)
@@ -1293,7 +1293,7 @@ public struct SSNetworkAPIClient {
                     completion(nil, error)
                 }
             } else {
-                print("Response Error : \(response.result.error)")
+                print("Response Error : \(response.result.error.debugDescription)")
 
                 completion(nil, response.result.error as NSError?)
             }
@@ -1314,10 +1314,10 @@ public struct SSNetworkAPIClient {
                           encoding: JSONEncoding.default,
                           headers: ["Authorization": "JWT " + token])
             .responseJSON { (response) in
-                print("request is : \(response.request)")
+                print("request is : \(response.request.debugDescription)")
 
                 if response.result.isSuccess {
-                    print("Response JSON : \(response.result.value)")
+                    print("Response JSON : \(response.result.value.debugDescription)")
 
                     if let _ = response.result.value as? [String: AnyObject] {
                         completion(nil, nil)
@@ -1327,7 +1327,7 @@ public struct SSNetworkAPIClient {
                         completion(nil, error)
                     }
                 } else {
-                    print("Response Error : \(response.result.error)")
+                    print("Response Error : \(response.result.error.debugDescription)")
 
                     completion(nil, response.result.error as NSError?)
                 }

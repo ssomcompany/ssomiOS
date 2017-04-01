@@ -160,7 +160,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 wself.close(isSignedIn: finish)
             } else {
                 wself.tfPassword.text = ""
-                wself.validateInput()
+                _ = wself.validateInput()
             }
 
             return nil
@@ -180,7 +180,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.viewEmailBottomLine.image = UIImage(named: "writeLine")
     }
     @IBAction func editingChangedEmail(_ sender: AnyObject) {
-        self.validateInput()
+        _ = self.validateInput()
     }
 
     @IBAction func editingDidBeginPassword(_ sender: AnyObject) {
@@ -192,7 +192,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.viewPasswordBottomLine.image = UIImage(named: "writeLine")
     }
     @IBAction func editingChangedPassword(_ sender: AnyObject) {
-        self.validateInput()
+        _ = self.validateInput()
     }
 
 // MARK:- UITextFieldDelegate

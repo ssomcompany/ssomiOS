@@ -920,13 +920,13 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
 
         switch direction {
         case SSDrawerDirection.Top:
-            return CGFloat((state != SSDrawerMainState.closed) ? M_PI_2 : (3.0 * M_PI_2))
+            return CGFloat((state != SSDrawerMainState.closed) ? .pi / 2 : (3.0 * .pi / 2))
         case SSDrawerDirection.Left:
-            return CGFloat((state != SSDrawerMainState.closed) ? 0.0 : M_PI)
+            return CGFloat((state != SSDrawerMainState.closed) ? 0.0 : .pi)
         case SSDrawerDirection.Bottom:
-            return CGFloat((state != SSDrawerMainState.closed) ? (3.0 * M_PI_2) : M_PI_2)
+            return CGFloat((state != SSDrawerMainState.closed) ? (3.0 * .pi / 2) : .pi / 2)
         case SSDrawerDirection.Right:
-            return CGFloat((state != SSDrawerMainState.closed) ? M_PI : 0.0)
+            return CGFloat((state != SSDrawerMainState.closed) ? .pi : 0.0)
         default:
             return 0.0
         }

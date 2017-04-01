@@ -67,7 +67,7 @@ class SSListTableViewCell: UITableViewCell {
 
     func configView(_ model: SSViewModel, isMySsom: Bool, ssomType: SSType, withCoordinate coordinate: CLLocationCoordinate2D) {
         if let content = model.content {
-            print("content is \(content.removingPercentEncoding)")
+            print("content is \(content.removingPercentEncoding ?? "")")
 
             self.descriptionLabel.text = content.removingPercentEncoding
         }

@@ -384,7 +384,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         if self.isAlreadyWrittenMySsom {
             let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.writeButton.bounds.width * 2)
-            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
+            let transform: CATransform3D = CATransform3DMakeRotation(.pi, 0.0, 1.0, 0.0)
 
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.writeButton.layer.transform = CATransform3DConcat(transformZ, transform)
@@ -393,7 +393,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.writeButton.layer.transform = CATransform3DIdentity
             })
         } else {
-            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 45.0 / 180.0))
+            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * 45.0 / 180.0))
 
             UIView.animate(withDuration: 0.3, animations: {
                 self.writeButton.transform = transform

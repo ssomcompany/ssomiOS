@@ -40,7 +40,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.initMapView()
 
         let dataObject = SSModelToObjectConverter<SSChatMapViewModel>(value: self.data)
-        self.setMarker(dataObject, isSell: self.data.ssomType == .SSOM, self.data.partnerLatitude, self.data.partnerLongitude, imageUrl: self.data.partnerImageUrl)
+        _ = self.setMarker(dataObject, isSell: self.data.ssomType == .SSOM, self.data.partnerLatitude, self.data.partnerLongitude, imageUrl: self.data.partnerImageUrl)
     }
 
     func initMapView() {

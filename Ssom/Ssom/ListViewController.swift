@@ -219,7 +219,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         if self.isAlreadyWrittenMySsom {
             let transformZ: CATransform3D = CATransform3DMakeTranslation(0.0, 0.0, -self.btnWrite.bounds.width * 2)
-            let transform: CATransform3D = CATransform3DMakeRotation(CGFloat(M_PI), 0.0, 1.0, 0.0)
+            let transform: CATransform3D = CATransform3DMakeRotation(.pi, 0.0, 1.0, 0.0)
 
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.btnWrite.layer.transform = CATransform3DConcat(transformZ, transform)
@@ -228,7 +228,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.btnWrite.layer.transform = CATransform3DIdentity
             })
         } else {
-            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 45.0 / 180.0))
+            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * 45.0 / 180.0))
 
             UIView.animate(withDuration: 0.3, animations: {
                 self.btnWrite.transform = transform
@@ -262,7 +262,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 wself.filterData()
             } else {
-                print("error is : \(error?.localizedDescription)")
+                print("error is : \(error.debugDescription)")
             }
         })
     }

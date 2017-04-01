@@ -43,7 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
 
         // OneSignal
         OneSignal.initWithLaunchOptions(launchOptions, appId: PreDefine.OneSignalKey, handleNotificationReceived: { (notification) in
-            print("notification: \(notification), payload data: \(notification?.payload.additionalData)")
+            if let payload = notification?.payload.additionalData {
+                print("notification: \(notification.debugDescription), payload data: \(payload)")
+            } else {
+                print("notification: \(notification.debugDescription), payload data: nil")
+            }
 
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             guard let keyWindow = appDelegate.window else { return }
@@ -120,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
             }
 
         }, handleNotificationAction: { (openedResult) in
-            print("openedResult : \(openedResult)")
+            print("openedResult : \(openedResult.debugDescription)")
 
             guard let notification = openedResult?.notification else { return }
 
@@ -167,7 +171,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
             } else {
                 print("Now view controller is : \(rootViewController)")
             }
-        }, settings: [kOSSettingsKeyInFocusDisplayOption : "None"])
+        }, settings: nil)
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.none
 
         // Facebook
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -257,7 +262,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         keyChain[data: "pushDeviceToken"] = deviceToken
 
         OneSignal.idsAvailable { (oneSignalPlayerID, pushToken) in
-            print("playerId : \(oneSignalPlayerID), pushToken : \(pushToken)")
+            print("playerId : \(oneSignalPlayerID ?? ""), pushToken : \(pushToken ?? "")")
             keyChain[string: "oneSignalPlayerID"] = oneSignalPlayerID
         }
     }
@@ -310,7 +315,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     func connectToFcm() {
         FIRMessaging.messaging().connect { (error) in
             if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
+                print("Unable to connect with FCM. \(error.debugDescription)")
             } else {
                 print("Connected to FCM.")
             }

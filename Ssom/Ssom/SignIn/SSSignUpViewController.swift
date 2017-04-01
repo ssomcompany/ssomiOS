@@ -172,7 +172,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.viewEmailBottomLine.image = UIImage(named: "writeLine")
     }
     @IBAction func editingChangedEmail(_ sender: AnyObject) {
-        self.validateInput()
+        _ = self.validateInput()
     }
 
     @IBAction func editingDidBeginPassword(_ sender: AnyObject) {
@@ -184,7 +184,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.viewPasswordBottomLine.image = UIImage(named: "writeLine")
     }
     @IBAction func editingChangedPassword(_ sender: AnyObject) {
-        self.validateInput()
+        _ = self.validateInput()
     }
 
     @IBAction func editingDidBeginConfirmPassword(_ sender: AnyObject) {
@@ -196,7 +196,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.viewConfirmPasswordBottomLine.image = UIImage(named: "writeLine")
     }
     @IBAction func editingChangedConfirmPassword(_ sender: AnyObject) {
-        self.validateInput()
+        _ = self.validateInput()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

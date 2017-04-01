@@ -21,6 +21,9 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     @IBOutlet var constInputBarBottomToSuper: NSLayoutConstraint!
     @IBOutlet var tfInput: UITextField!
     @IBOutlet var btnSendMessage: UIButton!
+    @IBOutlet var btnAttach: UIButton!
+    @IBOutlet var viewAddOn: UIView!
+    @IBOutlet var chatAddOnView: SSChatAddOnView!
 
     @IBOutlet var viewNotificationToStartMeet: UIView!
     @IBOutlet var constViewRequestHeight: NSLayoutConstraint!
@@ -73,6 +76,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         if self.tfInput.isFirstResponder {
             self.tfInput.resignFirstResponder()
+        }
+
+        if self.btnAttach.isSelected {
+            self.tapShowAddOn(nil)
         }
 
 //        self.refreshTimer.invalidate()
@@ -202,6 +209,10 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
             wself.loadData()
         }
+
+        self.viewAddOn.addSubview(self.chatAddOnView)
+        self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
+        self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
     }
 
     func loadData() {
@@ -526,6 +537,15 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             }
         }
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            if touch.view !== self.tfInput {
+                self.tfInput.resignFirstResponder()
+            }
+        }
+    }
+
     @IBAction func tapDownShowMap(_ sender: AnyObject) {
         self.btnShowMap.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
@@ -576,12 +596,12 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         }
 
                         let nowDateTime = Date()
-print("start: \(Date())")
+//print("start: \(Date())")
                         if let roomId = self.chatRoomId {
                             self.tfInput.text = ""
 
                             SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
-print("returned: \(Date())")
+//print("returned: \(Date())")
                                 guard let wself = self else { return }
 
                                 if let err = error {
@@ -598,7 +618,7 @@ print("returned: \(Date())")
 
                                         // add my sent message on the last of the messages
                                         if let lastMessage = wself.messages.last, lastMessage.messageDateTime != nowDateTime {
-print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
+//print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
                                             myLastMessage.message = messageText
@@ -606,7 +626,7 @@ print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
                                             myLastMessage.profileImageUrl = wself.myImageUrl
                                             wself.messages.append(myLastMessage)
                                         }
-print("last message: \(Date())")
+//print("last message: \(Date())")
                                         if wself.messages.count == 0 {
                                             var myLastMessage = SSChatViewModel()
                                             myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
@@ -618,7 +638,7 @@ print("last message: \(Date())")
 
                                         wself.tableViewChat.reloadData()
                                     }
-print("same message: \(Date())")
+//print("same message: \(Date())")
 
 //                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
 //                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
@@ -627,7 +647,7 @@ print("same message: \(Date())")
 
                                         wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
                                     })
-print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
+//print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                                 }
                             })
                         }
@@ -636,18 +656,56 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
         }
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if touch.view !== self.tfInput {
-                self.tfInput.resignFirstResponder()
+    var needTfInputResign: Bool = true
+    @IBAction func tapShowAddOn(_ sender: Any?) {
+        self.btnAttach.isSelected = !self.btnAttach.isSelected
+
+        if self.needTfInputResign {
+            self.tfInput.resignFirstResponder()
+        }
+
+        UIView.animate(withDuration: 0.15, animations: {
+            if self.btnAttach.isSelected {
+                self.btnAttach.transform = CGAffineTransform(rotationAngle: .pi / 4)
+            } else {
+                self.btnAttach.transform = CGAffineTransform.identity
+            }
+        }) { (finish) in
+            if self.btnAttach.isSelected {
+                self.showBottomArea(distance: self.chatAddOnView.bounds.height)
+            } else {
+                self.hideBottomArea()
             }
         }
+    }
+
+    func showBottomArea(distance: CGFloat, completion: (() -> Void)? = nil) {
+        self.constInputBarBottomToSuper.constant = distance
+
+        UIView.animate(withDuration: 0.35, animations: {
+            self.view.layoutIfNeeded()
+
+            let lastIndexPath = IndexPath(row: self.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+            self.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        })
+    }
+
+    func hideBottomArea(completion: (() -> Void)? = nil) {
+        self.constInputBarBottomToSuper.constant = 0
+
+        UIView.animate(withDuration: 0.235, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 
 // MARK: - UIScrollViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if self.tfInput.isFirstResponder {
             self.tfInput.resignFirstResponder()
+        }
+
+        if self.btnAttach.isSelected {
+            self.tapShowAddOn(nil)
         }
     }
 
@@ -762,26 +820,23 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
 
 // MARK: - Keyboard show & hide event
     func keyboardWillShow(_ notification: Notification) -> Void {
+        if self.btnAttach.isSelected {
+            self.needTfInputResign = false
+            self.tapShowAddOn(nil)
+            self.needTfInputResign = true
+        }
+
         if let info = notification.userInfo {
             if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.constInputBarBottomToSuper.constant = keyboardFrame.size.height
-
-                    self.view.layoutIfNeeded()
-
-                    let lastIndexPath = IndexPath(row: self.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-                    self.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-                })
+                self.showBottomArea(distance: keyboardFrame.size.height)
             }
         }
     }
 
     func keyboardWillHide(_ notification: Notification) -> Void {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.constInputBarBottomToSuper.constant = 0
-
-            self.view.layoutIfNeeded()
-        }) 
+        if !self.btnAttach.isSelected {
+            self.hideBottomArea()
+        }
     }
 }

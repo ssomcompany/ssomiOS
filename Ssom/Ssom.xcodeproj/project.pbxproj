@@ -24,6 +24,7 @@
 		9730034B1C0F38EC00734D8D /* SSFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730034A1C0F38EB00734D8D /* SSFilterView.swift */; };
 		9730034D1C1091E700734D8D /* SSFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9730034C1C1091E700734D8D /* SSFilterView.xib */; };
 		9730C9D11D5229BB0042B9FD /* SSError.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9730C9D01D5229BB0042B9FD /* SSError.plist */; };
+		97323D0E1E90134D000DA41C /* SSChatAddOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97323D0D1E90134D000DA41C /* SSChatAddOnView.swift */; };
 		97343E281BE65AB300A9D39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E271BE65AB300A9D39D /* AppDelegate.swift */; };
 		97343E2A1BE65AB300A9D39D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97343E291BE65AB300A9D39D /* MapViewController.swift */; };
 		97343E2D1BE65AB300A9D39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97343E2B1BE65AB300A9D39D /* Main.storyboard */; };
@@ -155,6 +156,7 @@
 		9730034A1C0F38EB00734D8D /* SSFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSFilterView.swift; sourceTree = "<group>"; };
 		9730034C1C1091E700734D8D /* SSFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFilterView.xib; sourceTree = "<group>"; };
 		9730C9D01D5229BB0042B9FD /* SSError.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SSError.plist; sourceTree = "<group>"; };
+		97323D0D1E90134D000DA41C /* SSChatAddOnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSChatAddOnView.swift; path = Chat/SSChatAddOnView.swift; sourceTree = "<group>"; };
 		97343E241BE65AB300A9D39D /* Ssom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ssom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97343E271BE65AB300A9D39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97343E291BE65AB300A9D39D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				97B2D1701D48A51B00B5EBD2 /* SSChatListTableCell.xib */,
 				97B2D1761D4B48AC00B5EBD2 /* SSChatListTableCell.swift */,
 				97A6BFF71CCA868C00DA06D2 /* SSChatViewController.swift */,
+				97323D0D1E90134D000DA41C /* SSChatAddOnView.swift */,
 				97B2D16C1D48A3F500B5EBD2 /* SSChatStartingTableCell.xib */,
 				97B2D1781D4B535A00B5EBD2 /* SSChatStartingTableCell.swift */,
 				97B2D16E1D48A4D600B5EBD2 /* SSChatMessageTableCell.xib */,
@@ -921,6 +924,7 @@
 				9764D9E01D35FF6400BBE4C6 /* SSMainViewModel.swift in Sources */,
 				97830FF11C524957008BD6DC /* SSNavigationBarItems.swift in Sources */,
 				977DBA721D2A5C2900CFD98F /* SSMasterViewController.swift in Sources */,
+				97323D0E1E90134D000DA41C /* SSChatAddOnView.swift in Sources */,
 				9799746C1D63022A00F511D7 /* SSChatCoachmarkLineView.swift in Sources */,
 				974C9DBA1C6B5A5800E17A2B /* SSDetailView.swift in Sources */,
 				979A4A061BF4527400FAFB21 /* UIDevice+Util.swift in Sources */,

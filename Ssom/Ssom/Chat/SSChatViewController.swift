@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
 
@@ -213,6 +214,45 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.viewAddOn.addSubview(self.chatAddOnView)
         self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
         self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
+
+        self.chatAddOnView.handleAttach = { [weak self] in
+            guard let wself = self else { return }
+
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                SSNetworkAPIClient.postFile(token, fileExt: wself.chatAddOnView.pickedImageExtension, fileName: wself.chatAddOnView.pickedImageName, fileData: wself.chatAddOnView.pickedImageData, completion: { [weak self] (photoURLPath, error) in
+                    if let wself = self {
+                        if let err = error {
+                            print(err.localizedDescription)
+
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                        } else {
+                            if let imageUrl = photoURLPath {
+                                wself.sendMessage(imageUrl: imageUrl)
+                            }
+
+                            wself.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+        }
+
+        self.chatAddOnView.handleReport = { [weak self] in
+            guard let wself = self else { return }
+
+            if let token = SSAccountManager.sharedInstance.sessionToken, let postId: String = wself.postId {
+                SSNetworkAPIClient.postReport(token, postId: postId, reason: "", completion: { (data, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+
+                        SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
+                    } else {
+                        wself.view.makeToast("정상적으로 신고 되었습니다", duration: 2.0, position: .top)
+                        wself.tapShowAddOn(nil)
+                    }
+                })
+            }
+        }
 
         self.chatAddOnView.handleFinishSsom = { [weak self] in
             guard let wself = self else { return }
@@ -598,79 +638,91 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func tapSendMessage(_ sender: AnyObject?) {
-        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: { 
-            self.btnSendMessage.transform = CGAffineTransform.identity
-            }) { (finish) in
+        self.sendMessage()
+    }
 
-                if let token = SSAccountManager.sharedInstance.sessionToken {
-                    guard let messageText = self.tfInput.text else {
-                        return
+    func sendMessage(imageUrl: String! = nil) {
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.btnSendMessage.transform = CGAffineTransform.identity
+        }) { (finish) in
+
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                guard var messageText = self.tfInput.text else {
+                    return
+                }
+
+                if messageText.characters.count > 0 || imageUrl != nil {
+                    if imageUrl != nil {
+                        if messageText.characters.count > 0 {
+                            messageText = messageText.appendingFormat("%@\n%@", messageText)
+                        } else {
+                            messageText = imageUrl
+                        }
                     }
 
-                    if messageText.characters.count > 0 {
-                        var lastTimestamp = Int(Date().timeIntervalSince1970)
-                        if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
-                            lastTimestamp = Int(timestamp * 1000.0)
-                        }
+                    var lastTimestamp = Int(Date().timeIntervalSince1970)
+                    if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
+                        lastTimestamp = Int(timestamp * 1000.0)
+                    }
 
-                        let nowDateTime = Date()
-//print("start: \(Date())")
-                        if let roomId = self.chatRoomId {
-                            self.tfInput.text = ""
+                    let nowDateTime = Date()
+                    //print("start: \(Date())")
+                    if let roomId = self.chatRoomId {
+                        self.tfInput.text = ""
 
-                            SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
-//print("returned: \(Date())")
-                                guard let wself = self else { return }
+                        SSNetworkAPIClient.postChatMessage(token, chatroomId: roomId, message: messageText, lastTimestamp: lastTimestamp, completion: { [weak self] (datas, error) in
+                            //print("returned: \(Date())")
+                            guard let wself = self else { return }
 
-                                if let err = error {
-                                    print(err.localizedDescription)
+                            if let err = error {
+                                print(err.localizedDescription)
 
-                                    SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
-                                } else {
-                                    if let newDatas = datas {
-                                        if wself.messages.count != 0 {print("new message: \(Date())")
-                                            wself.messages.append(contentsOf: newDatas)
-                                        } else {print("all new message: \(Date())")
-                                            wself.messages = newDatas
-                                        }
-
-                                        // add my sent message on the last of the messages
-                                        if let lastMessage = wself.messages.last, lastMessage.messageDateTime != nowDateTime {
-//print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
-                                            var myLastMessage = SSChatViewModel()
-                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
-                                            myLastMessage.message = messageText
-                                            myLastMessage.messageDateTime = nowDateTime
-                                            myLastMessage.profileImageUrl = wself.myImageUrl
-                                            wself.messages.append(myLastMessage)
-                                        }
-//print("last message: \(Date())")
-                                        if wself.messages.count == 0 {
-                                            var myLastMessage = SSChatViewModel()
-                                            myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
-                                            myLastMessage.message = messageText
-                                            myLastMessage.messageDateTime = nowDateTime
-                                            myLastMessage.profileImageUrl = wself.myImageUrl
-                                            wself.messages.append(myLastMessage)
-                                        }
-
-                                        wself.tableViewChat.reloadData()
+                                SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: nil)
+                            } else {
+                                if let newDatas = datas {
+                                    if wself.messages.count != 0 {print("new message: \(Date())")
+                                        wself.messages.append(contentsOf: newDatas)
+                                    } else {print("all new message: \(Date())")
+                                        wself.messages = newDatas
                                     }
-//print("same message: \(Date())")
 
-//                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
-//                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                                    // add my sent message on the last of the messages
+                                    if let lastMessage = wself.messages.last, lastMessage.messageDateTime != nowDateTime {
+                                        //print("last is : \(lastMessage), sentDate is : \(nowDateTime)")
+                                        var myLastMessage = SSChatViewModel()
+                                        myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
+                                        myLastMessage.message = messageText
+                                        myLastMessage.messageDateTime = nowDateTime
+                                        myLastMessage.profileImageUrl = wself.myImageUrl
+                                        wself.messages.append(myLastMessage)
+                                    }
+                                    //print("last message: \(Date())")
+                                    if wself.messages.count == 0 {
+                                        var myLastMessage = SSChatViewModel()
+                                        myLastMessage.fromUserId = SSAccountManager.sharedInstance.userUUID!
+                                        myLastMessage.message = messageText
+                                        myLastMessage.messageDateTime = nowDateTime
+                                        myLastMessage.profileImageUrl = wself.myImageUrl
+                                        wself.messages.append(myLastMessage)
+                                    }
 
-                                    DispatchQueue.main.async(execute: { 
-
-                                        wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
-                                    })
-//print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
+                                    wself.tableViewChat.reloadData()
                                 }
-                            })
-                        }
+                                //print("same message: \(Date())")
+
+                                //                                    let lastIndexPath = IndexPath(row: wself.tableViewChat.numberOfRows(inSection: 0) - 1, section: 0)
+                                //                                    wself.tableViewChat.scrollToRow(at: lastIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+
+                                DispatchQueue.main.async(execute: {
+
+                                    wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height - wself.tableViewChat.bounds.height), animated: true)
+                                })
+                                //print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
+                            }
+                        })
                     }
                 }
+            }
         }
     }
 
@@ -680,6 +732,16 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         if self.needTfInputResign {
             self.tfInput.resignFirstResponder()
+        } else {
+            UIView.animate(withDuration: 0.15, animations: {
+                if self.btnAttach.isSelected {
+                    self.btnAttach.transform = CGAffineTransform(rotationAngle: .pi / 4)
+                } else {
+                    self.btnAttach.transform = CGAffineTransform.identity
+                }
+            })
+
+            return
         }
 
         UIView.animate(withDuration: 0.15, animations: {
@@ -711,7 +773,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
     func hideBottomArea(completion: (() -> Void)? = nil) {
         self.constInputBarBottomToSuper.constant = 0
 
-        UIView.animate(withDuration: 0.235, animations: {
+        UIView.animate(withDuration: 0.35, animations: {
             self.view.layoutIfNeeded()
         })
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var addOnButtonCollectionView: UICollectionView!
 
@@ -17,12 +17,16 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     var handleReport: (() -> Void)?
     var handleFinishSsom: (() -> Void)?
 
+    var pickedImageExtension: String!
+    var pickedImageName: String!
+    var pickedImageData: Data!
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,11 +34,11 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         switch indexPath.row {
         case 0:
             cellID = "cellAttach"
+//        case 1:
+//            cellID = "cellSsomLocation"
         case 1:
-            cellID = "cellSsomLocation"
-        case 2:
             cellID = "cellReport"
-        case 3:
+        case 2:
             cellID = "cellFinishSsom"
         default:
             break
@@ -50,11 +54,11 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         switch indexPath.row {
         case 0:
             self.tapAttachPhoto()
+//        case 1:
+//            self.tapShowSsomPosition()
         case 1:
-            self.tapShowSsomPosition()
-        case 2:
             self.tapReport()
-        case 3:
+        case 2:
             self.tapFinishSssom()
         default:
             break
@@ -64,8 +68,11 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func tapAttachPhoto() {
         print(#function)
 
-        guard let block = self.handleAttach else { return }
-        block()
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
+        self.parentViewController?.present(imagePickerController, animated: true, completion: nil)
     }
 
     func tapShowSsomPosition() {
@@ -78,8 +85,12 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func tapReport() {
         print(#function)
 
-        guard let block = self.handleReport else { return }
-        block()
+        SSAlertController.showAlertTwoButton(title: "알림", message: "이 게시물을 신고 하시겠어요?\n신고 된 게시물은 운영정책에 따라\n삭제 등의 조치가 이루어집니다.", button1Title: "신고하기", button1Completion: { (action) in
+            guard let block = self.handleReport else { return }
+            block()
+        }) { (action) in
+            //
+        }
     }
 
     func tapFinishSssom() {
@@ -96,5 +107,57 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                                                 block()
         }) { (action) in
         }
+    }
+
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+
+        let pickedImage: UIImage!
+        // photo library
+        if let pickedImageURL: URL = editingInfo![UIImagePickerControllerReferenceURL] as? URL {
+            let pickedImageURLQueryParams: Array = pickedImageURL.query!.components(separatedBy: CharacterSet(charactersIn: "=&"))
+            pickedImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
+
+            var isExt: Bool = false;
+            for queryParam: String in pickedImageURLQueryParams {
+                if queryParam == "ext" {
+                    isExt = true
+                    continue
+                }
+                if isExt {
+                    switch queryParam {
+                    case "PNG":
+                        self.pickedImageExtension = "png"
+                        self.pickedImageData = UIImagePNGRepresentation(pickedImage)
+                    case "JPG", "JPEG":
+                        self.pickedImageExtension = "jpeg"
+                        self.pickedImageData = UIImageJPEGRepresentation(pickedImage, 1.0)
+                    default:
+                        print("unable to upload!!")
+                        break
+                    }
+
+                    break
+                }
+            }
+            self.pickedImageName = pickedImageURL.lastPathComponent
+        } else {
+            pickedImage = image
+
+            self.pickedImageExtension = "png"
+            self.pickedImageName = "camera.png"
+            self.pickedImageData = UIImagePNGRepresentation(pickedImage)
+        }
+
+        picker.dismiss(animated: true, completion: { [weak self] in
+            if let wself = self {
+//                let croppedProfileImage: UIImage = UIImage.cropInCircle(pickedImage, frame: CGRect(x: 0, y: 0, width: wself.imgViewPhoto.bounds.size.width, height: wself.imgViewPhoto.bounds.size.height))
+
+//                wself.imgViewPhoto.image = croppedProfileImage
+
+                guard let block = wself.handleAttach else { return }
+                block()
+            }
+        })
     }
 }

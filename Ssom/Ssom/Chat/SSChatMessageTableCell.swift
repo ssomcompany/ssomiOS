@@ -13,11 +13,13 @@ class SSChatMessageTableCell: UITableViewCell {
     @IBOutlet var imgViewPartnerProfileBorder: UIImageView!
     @IBOutlet var viewPartnerMessage: UIView!
     @IBOutlet var lbPartnerMessage: UILabel!
+    @IBOutlet var imgViewPartnerMessage: UIImageView!
     @IBOutlet var lbPartnerMessageTime: UILabel!
     @IBOutlet var imgViewMyProfile: UIImageView!
     @IBOutlet var imgViewMyProfileBorder: UIImageView!
     @IBOutlet var viewMyMessage: UIView!
     @IBOutlet var lbMyMessage: UILabel!
+    @IBOutlet var imgViewMyMessage: UIImageView!
     @IBOutlet var lbMyMessageTime: UILabel!
 
     var ssomType: SSType = .SSOM
@@ -71,7 +73,17 @@ class SSChatMessageTableCell: UITableViewCell {
                     })
                 }
 
-                self.lbMyMessage.text = model.message
+                if self.validateImageUrl(message: model.message) {
+                    self.imgViewMyMessage.sd_setImage(with: URL(string: model.message), completed: { (image, error, _, _) in
+                        if error != nil {
+                        } else {
+                            self.imgViewMyMessage.image = image
+                            self.imgViewMyMessage.addConstraint(NSLayoutConstraint(item: self.imgViewMyMessage, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.imgViewMyMessage, attribute: NSLayoutAttribute.height, multiplier: image!.size.width / image!.size.height, constant: 0.0))
+                        }
+                    })
+                } else {
+                    self.lbMyMessage.text = model.message
+                }
                 self.lbMyMessageTime.text = Util.getDateString(model.messageDateTime)
             } else {
                 self.showPartnerViews()
@@ -87,7 +99,17 @@ class SSChatMessageTableCell: UITableViewCell {
                     })
                 }
 
-                self.lbPartnerMessage.text = model.message
+                if self.validateImageUrl(message: model.message) {
+                    self.imgViewPartnerMessage.sd_setImage(with: URL(string: model.message), completed: { (image, error, _, _) in
+                        if error != nil {
+                        } else {
+                            self.imgViewPartnerMessage.image = image
+                            self.imgViewPartnerMessage.addConstraint(NSLayoutConstraint(item: self.imgViewPartnerMessage, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.imgViewPartnerMessage, attribute: NSLayoutAttribute.height, multiplier: image!.size.width / image!.size.height, constant: 0.0))
+                        }
+                    })
+                } else {
+                    self.lbPartnerMessage.text = model.message
+                }
                 self.lbPartnerMessageTime.text = Util.getDateString(model.messageDateTime)
             }
         }
@@ -125,5 +147,9 @@ class SSChatMessageTableCell: UITableViewCell {
 
         self.imgViewPartnerProfile.layer.cornerRadius = self.imgViewPartnerProfile.bounds.height / 2.0
         self.imgViewPartnerProfileBorder.layer.cornerRadius = self.imgViewPartnerProfileBorder.bounds.height / 2.0
+    }
+
+    func validateImageUrl(message: String) -> Bool {
+        return message.contains("api.myssom.com/file/images/")
     }
 }

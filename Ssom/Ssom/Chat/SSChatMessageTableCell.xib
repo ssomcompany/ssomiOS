@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1e-AX-ooj" id="Wcs-FJ-Ny3">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Kfx-YD-rO7">
@@ -44,12 +44,19 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IWK-ZM-d6W">
+                                <rect key="frame" x="7" y="7" width="41" height="26.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IWK-ZM-d6W" firstAttribute="top" secondItem="k0C-5H-mcP" secondAttribute="top" constant="7" id="2ou-a9-W0a"/>
                             <constraint firstAttribute="bottom" secondItem="1Aq-Sq-bC3" secondAttribute="bottom" constant="12" id="9rw-y3-u8g"/>
+                            <constraint firstAttribute="bottom" secondItem="IWK-ZM-d6W" secondAttribute="bottom" constant="7" id="OuQ-xG-YZ1"/>
                             <constraint firstAttribute="trailing" secondItem="1Aq-Sq-bC3" secondAttribute="trailing" constant="11" id="QOp-nj-rQl"/>
+                            <constraint firstAttribute="trailing" secondItem="IWK-ZM-d6W" secondAttribute="trailing" constant="7" id="U6N-2R-kIM"/>
                             <constraint firstItem="1Aq-Sq-bC3" firstAttribute="leading" secondItem="k0C-5H-mcP" secondAttribute="leading" constant="11" id="Utk-Rq-0na"/>
+                            <constraint firstItem="IWK-ZM-d6W" firstAttribute="leading" secondItem="k0C-5H-mcP" secondAttribute="leading" constant="7" id="YQO-BN-RrY"/>
                             <constraint firstItem="1Aq-Sq-bC3" firstAttribute="top" secondItem="k0C-5H-mcP" secondAttribute="top" constant="12" id="ea9-WS-hGT"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="vmi-r2-JL2"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="wuK-j7-6eH"/>
@@ -77,12 +84,19 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1PJ-nA-7bR">
+                                <rect key="frame" x="7" y="7" width="41" height="26.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aSP-M5-DlD" firstAttribute="top" secondItem="hr3-OD-uVx" secondAttribute="top" constant="12" id="HsP-rb-w5O"/>
                             <constraint firstItem="aSP-M5-DlD" firstAttribute="leading" secondItem="hr3-OD-uVx" secondAttribute="leading" constant="11" id="LSZ-Dj-CqT"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="LWs-RH-Q1z"/>
+                            <constraint firstAttribute="trailing" secondItem="1PJ-nA-7bR" secondAttribute="trailing" constant="7" id="abj-qG-koY"/>
+                            <constraint firstAttribute="bottom" secondItem="1PJ-nA-7bR" secondAttribute="bottom" constant="7" id="bBu-QK-gPY"/>
+                            <constraint firstItem="1PJ-nA-7bR" firstAttribute="top" secondItem="hr3-OD-uVx" secondAttribute="top" constant="7" id="ci7-zE-8Da"/>
+                            <constraint firstItem="1PJ-nA-7bR" firstAttribute="leading" secondItem="hr3-OD-uVx" secondAttribute="leading" constant="7" id="sRz-Xe-0u6"/>
                             <constraint firstAttribute="bottom" secondItem="aSP-M5-DlD" secondAttribute="bottom" constant="12" id="tcD-vy-Rup"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="wzm-wb-9aS"/>
                             <constraint firstAttribute="trailing" secondItem="aSP-M5-DlD" secondAttribute="trailing" constant="11" id="yZF-Uw-ybm"/>
@@ -137,8 +151,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgViewMyMessage" destination="1PJ-nA-7bR" id="h1G-Vk-OLp"/>
                 <outlet property="imgViewMyProfile" destination="BHm-6B-BLb" id="UJC-fW-d2J"/>
                 <outlet property="imgViewMyProfileBorder" destination="GBn-9Z-KUg" id="zxo-Ih-Bte"/>
+                <outlet property="imgViewPartnerMessage" destination="IWK-ZM-d6W" id="bh8-7v-DoT"/>
                 <outlet property="imgViewPartnerProfile" destination="Kfx-YD-rO7" id="eXG-Z9-BLh"/>
                 <outlet property="imgViewPartnerProfileBorder" destination="ymb-qv-HTv" id="TxU-5W-pLt"/>
                 <outlet property="lbMyMessage" destination="aSP-M5-DlD" id="CMS-wn-oXe"/>

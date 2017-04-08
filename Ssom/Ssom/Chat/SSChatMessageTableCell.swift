@@ -83,6 +83,7 @@ class SSChatMessageTableCell: UITableViewCell {
                     })
                 } else {
                     self.lbMyMessage.text = model.message
+                    self.imgViewMyMessage.image = nil
                 }
                 self.lbMyMessageTime.text = Util.getDateString(model.messageDateTime)
             } else {
@@ -109,6 +110,7 @@ class SSChatMessageTableCell: UITableViewCell {
                     })
                 } else {
                     self.lbPartnerMessage.text = model.message
+                    self.imgViewPartnerMessage.image = nil
                 }
                 self.lbPartnerMessageTime.text = Util.getDateString(model.messageDateTime)
             }

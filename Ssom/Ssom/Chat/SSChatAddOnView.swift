@@ -12,6 +12,11 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
 
     @IBOutlet var addOnButtonCollectionView: UICollectionView!
 
+    var handleAttach: (() -> Void)?
+    var handleSsomLocation: (() -> Void)?
+    var handleReport: (() -> Void)?
+    var handleFinishSsom: (() -> Void)?
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -58,17 +63,38 @@ class SSChatAddOnView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
 
     func tapAttachPhoto() {
         print(#function)
+
+        guard let block = self.handleAttach else { return }
+        block()
     }
 
     func tapShowSsomPosition() {
         print(#function)
+
+        guard let block = self.handleSsomLocation else { return }
+        block()
     }
 
     func tapReport() {
         print(#function)
+
+        guard let block = self.handleReport else { return }
+        block()
     }
 
     func tapFinishSssom() {
         print(#function)
+
+        SSAlertController.showAlertTwoButton(title: "알림",
+                                             message: "끝낸 쏨은 되돌릴 수 없어요...\n쏨을 정말로 끝내시겠어요?",
+                                             button1Title: "끝내기",
+                                             button2Title: "취소",
+                                             button1Completion: { [weak self] (action) in
+                                                guard let wself = self else { return }
+
+                                                guard let block = wself.handleFinishSsom else { return }
+                                                block()
+        }) { (action) in
+        }
     }
 }

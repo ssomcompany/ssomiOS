@@ -185,7 +185,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
     }
 
     func showChatroomCountOnNavigation() {
-        if let naviTitleView = self.navigationItem.titleView as? UILabel {
+        if let tabBarController = self.tabBarController as? SSTabBarController, let naviTitleView = tabBarController.lbTitle {
             naviTitleView.text = "Chat list (\(self.datas.count))"
             naviTitleView.sizeToFit()
         }

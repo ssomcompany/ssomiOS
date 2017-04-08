@@ -213,6 +213,24 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         self.viewAddOn.addSubview(self.chatAddOnView)
         self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
         self.viewAddOn.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view" : self.chatAddOnView]))
+
+        self.chatAddOnView.handleFinishSsom = { [weak self] in
+            guard let wself = self else { return }
+
+            if let token = SSAccountManager.sharedInstance.sessionToken {
+                if let roomId: String = wself.chatRoomId {
+                    SSNetworkAPIClient.deleteChatroom(token, chatroomId: roomId, completion: { (data, error) in
+                        if let err = error {
+                            SSAlertController.alertConfirm(title: "Error", message: err.localizedDescription, vc: wself, completion: { (action) in
+                                //
+                            })
+                        }
+                    })
+
+                    wself.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
 
     func loadData() {

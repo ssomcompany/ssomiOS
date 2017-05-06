@@ -107,6 +107,12 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         if (CLLocationManager.locationServicesEnabled()) {
             self.locationManager.startUpdatingLocation()
         }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
+            guard let wself = self else { return }
+
+            wself.loadData()
+        }
     }
 
     func tapBack() {

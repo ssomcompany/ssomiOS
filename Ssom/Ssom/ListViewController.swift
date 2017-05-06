@@ -287,6 +287,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = false
         }
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.main.bounds
@@ -309,6 +310,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 // MARK:- SSListTableViewCellDelegate
     func tapProfileImage(_ sender: AnyObject, imageUrl: String) {
         self.navigationController?.isNavigationBarHidden = true;
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
         self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
@@ -348,6 +350,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 // MARK:- SSPhotoViewDelegate
     func tapPhotoViewClose() {
         self.navigationController?.isNavigationBarHidden = false;
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
 
         self.profileImageView!.removeFromSuperview()
     }
@@ -412,6 +415,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
 
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .default

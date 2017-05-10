@@ -802,18 +802,20 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                     self.needToLoadMore = true
                 }
 
-                if self.needToLoadMore {
+                if self.needToLoadMore && ((self.messages.count + 1) != self.tableViewChat.numberOfRows(inSection: 0)) {
                     self.pageNumber += 1
                     self.needToLoadMore = false
 
                     DispatchQueue.main.async(execute: { [weak self] in
                         guard let wself = self else { return }
 
+                        let previousContentSize: CGSize = wself.tableViewChat.contentSize
+
                         wself.tableViewChat.reloadData()
 
-                        if (wself.messages.count + 1) != wself.tableViewChat.numberOfRows(inSection: 0) {
-                            wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: wself.tableViewChat.contentSize.height / CGFloat(wself.pageNumber)), animated: false)
-                        }
+                        let offsetY: CGFloat = wself.tableViewChat.contentSize.height - previousContentSize.height
+
+                        wself.tableViewChat.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
                     })
                 }
             } else {

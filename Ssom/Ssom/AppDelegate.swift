@@ -49,80 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
                 print("notification: \(notification.debugDescription), payload data: nil")
             }
 
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            guard let keyWindow = appDelegate.window else { return }
-            guard let rootViewController = keyWindow.rootViewController else { return }
-            if rootViewController is SSDrawerViewController {
-                guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
-                if mainViewController is UINavigationController {
-                    print("Now MainViewController is : NavigationController")
-
-                    if #available(iOS 10.0, *) {
-                        let feedbackGenerator = UINotificationFeedbackGenerator()
-
-                        feedbackGenerator.prepare()
-
-                        feedbackGenerator.notificationOccurred(.success)
-                    }
-
-                    guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
-                    print("Now TopViewController is : \(topViewController)")
-                    if topViewController is SSChatViewController {
-                        // add the received message to the bottom fo the message lists
-                        (topViewController as! SSChatViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
-                    } else if topViewController is SSChatListViewController {
-                        // move up the chat room of the received message & add +1 to unread count
-                        (topViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
-                    } else if topViewController is SSMasterViewController {
-                        // add +1 to unread count
-                        (topViewController as! SSMasterViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
-                    } else if topViewController is SSTabBarController {
-                        // add +1 to unread count
-                        (topViewController as! SSTabBarController).loadData()
-
-                        guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
-
-                        if selectedViewController is SSChatListViewController {
-                            (selectedViewController as! SSChatListViewController).reload(with: notification?.payload.additionalData as! [String: AnyObject])
-                        } else {
-                            guard let payload = notification?.payload.additionalData, let message = payload["msg"] as? String else { return }
-
-                            let profileImage: UIImage = #imageLiteral(resourceName: "noneProfile")
-                            let banner = Banner(title: "신규 메세지가 도착했습니다!!", subtitle: message, image: profileImage, backgroundColor: UIColor.white, didTapBlock: {
-                                (topViewController as! SSTabBarController).selectedIndex = 3
-                            })
-                            banner.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-                            banner.dismissesOnTap = true
-                            banner.imageView.layoutIfNeeded()
-                            banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
-                            banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
-                            banner.imageView.layer.borderWidth = 1.3
-                            banner.imageView.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
-                            if let profileImgUrl = payload["profileImgUrl"] as? String {
-                                _ = SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: profileImgUrl), options: [], progress: nil, completed: { (image, _, _, _) in
-                                    banner.imageView.contentMode = .scaleAspectFill
-                                    if let img = image {
-                                        DispatchQueue.main.async {
-                                            banner.imageView.image = UIImage.cropInCircle(img, frame: banner.imageView.frame)
-                                        }
-                                    } else {
-                                        banner.imageView.image = profileImage
-                                    }
-                                    banner.show(duration: 3.0)
-                                })
-                            } else {
-                                banner.imageView.image = profileImage
-                                banner.show(duration: 3.0)
-                            }
-                        }
-                    }
-                } else {
-                    print("Now MainViewController is : \(mainViewController)")
-                }
-            } else {
-                print("Now view controller is : \(rootViewController)")
-            }
-
+            // Bug : catch the push notification twice!!
         }, handleNotificationAction: { (openedResult) in
             print("openedResult : \(openedResult.debugDescription)")
 
@@ -273,6 +200,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         }
 
         print("%@", userInfo)
+        guard let customPayload = userInfo["custom"] as? [AnyHashable: Any] else { return }
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let keyWindow = appDelegate.window else { return }
+        guard let rootViewController = keyWindow.rootViewController else { return }
+        if rootViewController is SSDrawerViewController {
+            guard let mainViewController = (rootViewController as! SSDrawerViewController).mainViewController else { return }
+            if mainViewController is UINavigationController {
+                print("Now MainViewController is : NavigationController")
+
+                if #available(iOS 10.0, *) {
+                    let feedbackGenerator = UINotificationFeedbackGenerator()
+
+                    feedbackGenerator.prepare()
+
+                    feedbackGenerator.notificationOccurred(.success)
+                }
+
+                guard let topViewController = (mainViewController as! UINavigationController).topViewController else { return }
+                print("Now TopViewController is : \(topViewController)")
+                if topViewController is SSChatViewController {
+                    // add the received message to the bottom fo the message lists
+                    (topViewController as! SSChatViewController).reload(with: customPayload["a"] as! [String: AnyObject])
+                } else if topViewController is SSChatListViewController {
+                    // move up the chat room of the received message & add +1 to unread count
+                    (topViewController as! SSChatListViewController).reload(with: customPayload["a"] as! [String: AnyObject])
+                } else if topViewController is SSMasterViewController {
+                    // add +1 to unread count
+                    (topViewController as! SSMasterViewController).reload(with: customPayload["a"] as! [String: AnyObject])
+                } else if topViewController is SSTabBarController {
+                    // add +1 to unread count
+                    (topViewController as! SSTabBarController).loadData()
+
+                    guard let selectedViewController = (topViewController as! SSTabBarController).selectedViewController else { return }
+
+                    if selectedViewController is SSChatListViewController {
+                        (selectedViewController as! SSChatListViewController).reload(with: customPayload["a"] as! [String: AnyObject])
+                    } else {
+                        guard let payload = customPayload["a"] as? [AnyHashable: Any], let message = payload["msg"] as? String else { return }
+
+                        let profileImage: UIImage = #imageLiteral(resourceName: "noneProfile")
+                        let banner = Banner(title: "신규 메세지가 도착했습니다!!", subtitle: message, image: profileImage, backgroundColor: UIColor.white, didTapBlock: {
+                            (topViewController as! SSTabBarController).selectedIndex = 3
+                        })
+                        banner.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+                        banner.dismissesOnTap = true
+                        banner.imageView.layoutIfNeeded()
+                        banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
+                        banner.imageView.layer.cornerRadius = banner.imageView.bounds.height / 2.0
+                        banner.imageView.layer.borderWidth = 1.3
+                        banner.imageView.layer.borderColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+                        if let profileImgUrl = payload["profileImgUrl"] as? String {
+                            _ = SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: profileImgUrl), options: [], progress: nil, completed: { (image, _, _, _) in
+                                banner.imageView.contentMode = .scaleAspectFill
+                                if let img = image {
+                                    DispatchQueue.main.async {
+                                        banner.imageView.image = UIImage.cropInCircle(img, frame: banner.imageView.frame)
+                                    }
+                                } else {
+                                    banner.imageView.image = profileImage
+                                }
+                                banner.show(duration: 3.0)
+                            })
+                        } else {
+                            banner.imageView.image = profileImage
+                            banner.show(duration: 3.0)
+                        }
+                    }
+                }
+            } else {
+                print("Now MainViewController is : \(mainViewController)")
+            }
+        } else {
+            print("Now view controller is : \(rootViewController)")
+        }
     }
 
 // MARK: - private

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,11 +20,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMn-nV-LbX" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="22" width="414" height="683"/>
+                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMn-nV-LbX" customClass="SSCustomScrollView" customModule="Ssom" customModuleProvider="target">
+                    <rect key="frame" x="22" y="22" width="370" height="683"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-8s-7IA">
-                            <rect key="frame" x="0.0" y="0.0" width="1242" height="671"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1110" height="671"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
@@ -35,6 +35,7 @@
                         <constraint firstAttribute="bottom" secondItem="oRr-8s-7IA" secondAttribute="bottom" id="JAK-aH-M8k"/>
                         <constraint firstItem="oRr-8s-7IA" firstAttribute="top" secondItem="gMn-nV-LbX" secondAttribute="top" id="RlC-3Z-C1E"/>
                         <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="gMn-nV-LbX" secondAttribute="width" id="dvI-jQ-lmd"/>
+                        <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="gMn-nV-LbX" secondAttribute="width" multiplier="3:1" id="oPP-ve-wRF"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -48,14 +49,13 @@
             <constraints>
                 <constraint firstItem="zwz-gX-EB1" firstAttribute="leading" secondItem="6oQ-LL-Cis" secondAttribute="leading" id="38R-nl-915"/>
                 <constraint firstItem="gMn-nV-LbX" firstAttribute="top" secondItem="6oQ-LL-Cis" secondAttribute="top" constant="22" id="5pE-7M-D8N"/>
-                <constraint firstItem="gMn-nV-LbX" firstAttribute="leading" secondItem="6oQ-LL-Cis" secondAttribute="leading" id="N68-dD-49D"/>
+                <constraint firstItem="gMn-nV-LbX" firstAttribute="leading" secondItem="6oQ-LL-Cis" secondAttribute="leading" constant="22" id="N68-dD-49D"/>
                 <constraint firstAttribute="bottom" secondItem="zwz-gX-EB1" secondAttribute="bottom" id="Pjs-ck-CLp"/>
                 <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="6oQ-LL-Cis" secondAttribute="width" multiplier="2:1" id="YtW-4f-nDO"/>
                 <constraint firstItem="oRr-8s-7IA" firstAttribute="height" secondItem="6oQ-LL-Cis" secondAttribute="height" constant="-65" id="cOo-eT-dZf"/>
-                <constraint firstItem="oRr-8s-7IA" firstAttribute="width" secondItem="6oQ-LL-Cis" secondAttribute="width" multiplier="3:1" id="fab-QL-f1t"/>
                 <constraint firstAttribute="trailing" secondItem="zwz-gX-EB1" secondAttribute="trailing" id="fxJ-4r-W45"/>
                 <constraint firstAttribute="bottom" secondItem="gMn-nV-LbX" secondAttribute="bottom" constant="31" id="lbL-h7-Zs8"/>
-                <constraint firstAttribute="trailing" secondItem="gMn-nV-LbX" secondAttribute="trailing" id="rmT-mC-mU6"/>
+                <constraint firstAttribute="trailing" secondItem="gMn-nV-LbX" secondAttribute="trailing" constant="22" id="rmT-mC-mU6"/>
                 <constraint firstItem="zwz-gX-EB1" firstAttribute="top" secondItem="6oQ-LL-Cis" secondAttribute="top" id="tGS-Id-CpG"/>
             </constraints>
             <variation key="default">
@@ -66,7 +66,6 @@
             <connections>
                 <outlet property="constContentViewToScrollViewWidthRatio" destination="9v6-Eo-9d8" id="s6e-lN-62U"/>
                 <outlet property="constContentViewToScrollViewWidthRatioMin" destination="dvI-jQ-lmd" id="fDQ-gC-N0j"/>
-                <outlet property="constContentViewWidth" destination="fab-QL-f1t" id="qHL-z5-NLR"/>
                 <outlet property="constContentViewWidthMin" destination="YtW-4f-nDO" id="A3H-Kq-hKM"/>
                 <outlet property="contentView" destination="oRr-8s-7IA" id="0YD-hh-cbb"/>
                 <outlet property="scrollView" destination="gMn-nV-LbX" id="MLG-hY-d66"/>

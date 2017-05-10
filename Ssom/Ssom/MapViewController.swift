@@ -112,6 +112,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     override func initView() {
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
 
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil
@@ -435,6 +436,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = false
         }
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 
         self.scrollDetailView = UIView.loadFromNibNamed("SSDetailView", className: SSScrollView.self) as! SSScrollView
         self.scrollDetailView.frame = UIScreen.main.bounds
@@ -580,6 +582,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.isDrawable = true
         }
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
 
         if let view = self.scrollDetailView {
             self.navigationController?.navigationBar.barStyle = .default

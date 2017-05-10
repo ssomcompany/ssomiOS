@@ -551,9 +551,9 @@
 				97343E221BE65AB300A9D39D /* Resources */,
 				97D5A3F21BF23E5500F3DDFB /* Embed Frameworks */,
 				97F2FBC91C705202003CE93C /* ShellScript */,
+				977DBA6E1D23A2A900CFD98F /* ShellScript */,
 				5BA7F3A24E27AB3382D2A663 /* [CP] Embed Pods Frameworks */,
 				9DDD3F6F3A21C26D42D37463 /* [CP] Copy Pods Resources */,
-				977DBA6E1D23A2A900CFD98F /* ShellScript */,
 			);
 			buildRules = (
 			);

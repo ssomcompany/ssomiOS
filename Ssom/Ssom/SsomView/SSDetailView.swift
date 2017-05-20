@@ -154,6 +154,17 @@ class SSDetailView: UIView, SSPhotoViewDelegate, UIGestureRecognizerDelegate {
                     })
                 }
             } else {
+                if let _ = self.viewModel.assignedChatroomId {
+                    guard let _ = self.delegate?.doSsom(self.ssomType, model: self.viewModel) else {
+                        NSLog("%@", "This SSDetailView's delegate isn't implemented doSsom function")
+
+                        return
+                    }
+
+                    self.tapClose(nil)
+
+                    return
+                }
                 if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount > 0 {
 
                     guard let _ = self.delegate?.doSsom(self.ssomType, model: self.viewModel) else {

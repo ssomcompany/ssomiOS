@@ -228,7 +228,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.btnWrite.layer.transform = CATransform3DIdentity
             })
         } else {
-            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * 45.0 / 180.0))
+            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * -135.0 / 180.0))
 
             UIView.animate(withDuration: 0.3, animations: {
                 self.btnWrite.transform = transform

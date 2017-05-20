@@ -395,7 +395,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.writeButton.layer.transform = CATransform3DIdentity
             })
         } else {
-            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * 45.0 / 180.0))
+            let transform: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(.pi * -135.0 / 180.0))
 
             UIView.animate(withDuration: 0.3, animations: {
                 self.writeButton.transform = transform

@@ -137,6 +137,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
 
         mainView.isMyLocationEnabled = true
+        mainView.settings.compassButton = true
 
         mainView.delegate = self
     }

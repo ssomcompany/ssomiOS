@@ -204,7 +204,7 @@ class SSDetailView: UIView, SSPhotoViewDelegate, UIGestureRecognizerDelegate {
             }
 
             self.profilePhotoView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
-            self.profilePhotoView.loadingImage(keyWindow.bounds, imageUrl: self.viewModel.imageUrl)
+            self.profilePhotoView.loadImage(keyWindow.bounds, imageUrl: self.viewModel.imageUrl)
             self.profilePhotoView.delegate = self
 
             keyWindow.addSubview(self.profilePhotoView)

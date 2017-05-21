@@ -9,13 +9,18 @@
 import UIKit
 
 class SSChatMessageTableCell: UITableViewCell {
-    @IBOutlet var imgViewPartnerProfile: UIImageView!
+    @IBOutlet var imgViewPartnerProfile: SSImageView!
     @IBOutlet var imgViewPartnerProfileBorder: UIImageView!
+    @IBOutlet var btnPartnerProfile: UIButton!
+
     @IBOutlet var viewPartnerMessage: UIView!
     @IBOutlet var lbPartnerMessage: UILabel!
     @IBOutlet var lbPartnerMessageTime: UILabel!
-    @IBOutlet var imgViewMyProfile: UIImageView!
+
+    @IBOutlet var imgViewMyProfile: SSImageView!
     @IBOutlet var imgViewMyProfileBorder: UIImageView!
+    @IBOutlet var btnMyProfile: UIButton!
+
     @IBOutlet var viewMyMessage: UIView!
     @IBOutlet var lbMyMessage: UILabel!
     @IBOutlet var lbMyMessageTime: UILabel!
@@ -61,6 +66,7 @@ class SSChatMessageTableCell: UITableViewCell {
                 }
 
                 if let imageUrl = profileImageUrl {
+                    self.imgViewMyProfile.imageUrl = URL(string: imageUrl)
                     self.imgViewMyProfile.sd_setImage(with: URL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
@@ -77,6 +83,7 @@ class SSChatMessageTableCell: UITableViewCell {
                 self.showPartnerViews()
 
                 if let imageUrl = model.profileImageUrl {
+                    self.imgViewPartnerProfile.imageUrl = URL(string: imageUrl)
                     self.imgViewPartnerProfile.sd_setImage(with: URL(string: imageUrl+"?thumbnail=200"), completed: { (image, error, _, _) in
                         if error != nil {
                         } else {
@@ -126,4 +133,30 @@ class SSChatMessageTableCell: UITableViewCell {
         self.imgViewPartnerProfile.layer.cornerRadius = self.imgViewPartnerProfile.bounds.height / 2.0
         self.imgViewPartnerProfileBorder.layer.cornerRadius = self.imgViewPartnerProfileBorder.bounds.height / 2.0
     }
+
+    var showProfileBlock: ((URL) -> Void)?
+
+    @IBAction func tapProfileImage(_ sender: Any) {
+        if let btn = sender as? UIButton {
+            guard let vc = self.parentViewController, vc is SSChatViewController else { return }
+            if btn === self.btnPartnerProfile {
+                if self.imgViewPartnerProfile.image != #imageLiteral(resourceName: "noneProfile") {
+                    guard let block = self.showProfileBlock else { return }
+                    block(self.imgViewPartnerProfile.imageUrl)
+                }
+                return
+            }
+            if btn === self.btnMyProfile {
+                if self.imgViewMyProfile.image != #imageLiteral(resourceName: "noneProfile") {
+                    guard let block = self.showProfileBlock else { return }
+                    block(self.imgViewMyProfile.imageUrl)
+                }
+                return
+            }
+        }
+    }
+}
+
+class SSImageView: UIImageView {
+    var imageUrl: URL!
 }

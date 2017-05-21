@@ -320,10 +320,11 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
 // MARK:- SSChatListTableCellDelegate
     func tapProfileImage(_ imageUrl: String) {
-        self.navigationController?.isNavigationBarHidden = true;
+        self.navigationController?.isNavigationBarHidden = true
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
-        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
+        self.profileImageView!.loadImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
         self.navigationController?.view.addSubview(self.profileImageView!)

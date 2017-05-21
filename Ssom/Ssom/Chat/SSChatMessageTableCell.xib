@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1e-AX-ooj" id="Wcs-FJ-Ny3">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Kfx-YD-rO7">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Kfx-YD-rO7" customClass="SSImageView" customModule="Ssom" customModuleProvider="target">
                         <rect key="frame" x="6" y="0.0" width="46" height="46"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="irF-tb-0EB"/>
@@ -28,6 +28,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-qv-HTv">
                         <rect key="frame" x="6" y="0.0" width="46" height="46"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsE-IY-SZh">
+                        <rect key="frame" x="6" y="0.0" width="46" height="46"/>
+                        <connections>
+                            <action selector="tapProfileImage:" destination="e1e-AX-ooj" eventType="touchUpInside" id="Gdy-do-8HS"/>
+                        </connections>
+                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0C-5H-mcP">
                         <rect key="frame" x="60" y="0.0" width="55" height="40.5"/>
                         <subviews>
@@ -88,7 +94,7 @@
                             <constraint firstAttribute="trailing" secondItem="aSP-M5-DlD" secondAttribute="trailing" constant="11" id="yZF-Uw-ybm"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-6B-BLb">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noneProfile" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-6B-BLb" customClass="SSImageView" customModule="Ssom" customModuleProvider="target">
                         <rect key="frame" x="268" y="0.0" width="46" height="46"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="IdY-0a-CAT"/>
@@ -98,6 +104,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GBn-9Z-KUg">
                         <rect key="frame" x="268" y="0.0" width="46" height="46"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crG-4v-RjP">
+                        <rect key="frame" x="268" y="0.0" width="46" height="46"/>
+                        <connections>
+                            <action selector="tapProfileImage:" destination="e1e-AX-ooj" eventType="touchUpInside" id="uDG-gK-qQC"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzW-d7-fu0">
                         <rect key="frame" x="167" y="26" width="34" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -115,9 +127,15 @@
                     <constraint firstItem="BHm-6B-BLb" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" id="AcR-e8-ag8"/>
                     <constraint firstItem="GBn-9Z-KUg" firstAttribute="centerX" secondItem="BHm-6B-BLb" secondAttribute="centerX" id="CHH-dU-o1w"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="centerY" secondItem="Kfx-YD-rO7" secondAttribute="centerY" id="Dsc-49-z7R"/>
+                    <constraint firstItem="FsE-IY-SZh" firstAttribute="leading" secondItem="ymb-qv-HTv" secondAttribute="leading" id="Eiq-tA-NLz"/>
+                    <constraint firstItem="FsE-IY-SZh" firstAttribute="top" secondItem="ymb-qv-HTv" secondAttribute="top" id="EoL-61-gtt"/>
                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="hr3-OD-uVx" secondAttribute="bottom" constant="16" id="Hxi-qt-5e4"/>
                     <constraint firstItem="hr3-OD-uVx" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" id="JUF-4B-UU1"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hr3-OD-uVx" secondAttribute="bottom" constant="10" id="Ljx-5g-eQe"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="top" secondItem="crG-4v-RjP" secondAttribute="top" id="MT7-J8-0cg"/>
+                    <constraint firstItem="FsE-IY-SZh" firstAttribute="bottom" secondItem="ymb-qv-HTv" secondAttribute="bottom" id="NvZ-xe-Mub"/>
+                    <constraint firstItem="FsE-IY-SZh" firstAttribute="trailing" secondItem="ymb-qv-HTv" secondAttribute="trailing" id="P7e-we-7yO"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="leading" secondItem="crG-4v-RjP" secondAttribute="leading" id="Plc-c5-c4b"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="centerX" secondItem="Kfx-YD-rO7" secondAttribute="centerX" id="Pwf-e2-ziP"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="width" secondItem="Kfx-YD-rO7" secondAttribute="width" id="Rdp-M2-yGG"/>
                     <constraint firstItem="gy1-aS-bnd" firstAttribute="leading" secondItem="k0C-5H-mcP" secondAttribute="trailing" constant="4" id="UBC-bK-B9O"/>
@@ -130,13 +148,17 @@
                     <constraint firstItem="GBn-9Z-KUg" firstAttribute="height" secondItem="BHm-6B-BLb" secondAttribute="height" id="fEV-ey-s8o"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gy1-aS-bnd" secondAttribute="trailing" constant="40" id="fwx-48-AD9"/>
                     <constraint firstItem="gy1-aS-bnd" firstAttribute="bottom" secondItem="k0C-5H-mcP" secondAttribute="bottom" id="huV-60-M6k"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="bottom" secondItem="crG-4v-RjP" secondAttribute="bottom" id="pIM-zi-eKh"/>
                     <constraint firstItem="k0C-5H-mcP" firstAttribute="leading" secondItem="Wcs-FJ-Ny3" secondAttribute="leading" constant="60" id="tJO-sf-z9H"/>
                     <constraint firstItem="ymb-qv-HTv" firstAttribute="height" secondItem="Kfx-YD-rO7" secondAttribute="height" id="tkO-tA-b7T"/>
                     <constraint firstItem="GBn-9Z-KUg" firstAttribute="centerY" secondItem="BHm-6B-BLb" secondAttribute="centerY" id="wsw-Dj-dYM"/>
                     <constraint firstItem="Kfx-YD-rO7" firstAttribute="top" secondItem="Wcs-FJ-Ny3" secondAttribute="top" id="xau-VY-PbL"/>
+                    <constraint firstItem="GBn-9Z-KUg" firstAttribute="trailing" secondItem="crG-4v-RjP" secondAttribute="trailing" id="zcU-nA-aZj"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnMyProfile" destination="crG-4v-RjP" id="xjS-Jx-nIz"/>
+                <outlet property="btnPartnerProfile" destination="FsE-IY-SZh" id="yhu-nX-2a1"/>
                 <outlet property="imgViewMyProfile" destination="BHm-6B-BLb" id="UJC-fW-d2J"/>
                 <outlet property="imgViewMyProfileBorder" destination="GBn-9Z-KUg" id="zxo-Ih-Bte"/>
                 <outlet property="imgViewPartnerProfile" destination="Kfx-YD-rO7" id="eXG-Z9-BLh"/>

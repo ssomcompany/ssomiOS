@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
+class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate, SSPhotoViewDelegate {
 
 // MARK: - properties
     var viewChatCoachmark: SSChatCoachmarkView!
@@ -49,6 +49,8 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
     var refreshTimer: Timer!
     var isAlreadyShownCoachmark: Bool = false
+
+    var profileImageView: SSPhotoView!
 
 // MARK: - functions
     required init?(coder aDecoder: NSCoder) {
@@ -719,6 +721,21 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                     let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
                     cell.ssomType = self.ssomType
                     cell.configView(chatModel)
+
+                    cell.showProfileBlock = { (imageURL) in
+                        if self.tfInput.isFirstResponder {
+                            self.tfInput.resignFirstResponder()
+                        }
+
+                        self.navigationController?.isNavigationBarHidden = true
+                        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
+
+                        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+                        self.profileImageView.delegate = self
+                        self.profileImageView.loadImageURL(self.view.bounds, imageUrl: imageURL)
+
+                        self.navigationController?.view.addSubview(self.profileImageView)
+                    }
                     
                     return cell
                 }
@@ -743,6 +760,21 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
                     let cell = tableView.dequeueReusableCell(withIdentifier: "chatMessageCell", for: indexPath) as! SSChatMessageTableCell
                     cell.ssomType = self.ssomType
                     cell.configView(chatModel)
+
+                    cell.showProfileBlock = { (imageURL) in
+                        if self.tfInput.isFirstResponder {
+                            self.tfInput.resignFirstResponder()
+                        }
+
+                        self.navigationController?.isNavigationBarHidden = true
+                        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
+
+                        self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
+                        self.profileImageView.delegate = self
+                        self.profileImageView.loadImageURL(self.view.bounds, imageUrl: imageURL)
+
+                        self.navigationController?.view.addSubview(self.profileImageView)
+                    }
 
                     return cell
                 }
@@ -785,5 +817,13 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
 
             self.view.layoutIfNeeded()
         }) 
+    }
+
+    // MARK:- SSPhotoViewDelegate
+    func tapPhotoViewClose() {
+        self.navigationController?.isNavigationBarHidden = false;
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
+
+        self.profileImageView!.removeFromSuperview()
     }
 }

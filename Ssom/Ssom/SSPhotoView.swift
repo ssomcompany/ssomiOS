@@ -37,12 +37,24 @@ class SSPhotoView: UIView, UIScrollViewDelegate {
         print("awakeFromNib")
     }
 
-    func loadingImage(_ frame: CGRect, imageUrl: String) {
+    func loadImage(_ frame: CGRect, imageUrl: String) {
         self.frame = frame
 
         self.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
 
         self.imageView.sd_setImage(with: URL(string: imageUrl)) { (image, error, cacheType, imageURL) in
+            if error != nil {
+                SSAlertController.showAlertConfirm(title: "Error", message: (error?.localizedDescription)!, completion: nil)
+            }
+        }
+    }
+
+    func loadImageURL(_ frame: CGRect, imageUrl: URL) {
+        self.frame = frame
+
+        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+
+        self.imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, imageURL) in
             if error != nil {
                 SSAlertController.showAlertConfirm(title: "Error", message: (error?.localizedDescription)!, completion: nil)
             }

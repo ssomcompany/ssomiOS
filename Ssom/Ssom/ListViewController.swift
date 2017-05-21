@@ -313,7 +313,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 
         self.profileImageView = UIView.loadFromNibNamed("SSPhotoView") as? SSPhotoView
-        self.profileImageView!.loadingImage(self.view.bounds, imageUrl: imageUrl)
+        self.profileImageView!.loadImage(self.view.bounds, imageUrl: imageUrl)
         self.profileImageView!.delegate = self
 
         self.navigationController?.view.addSubview(self.profileImageView!)

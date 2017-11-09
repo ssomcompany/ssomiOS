@@ -291,15 +291,13 @@ public struct SSNetworkAPIClient {
                                 SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
                             }
 
-                            if let auth = FIRAuth.auth() {
-                                auth.signIn(withEmail: email, password: password, completion: { (user, error) in
-                                    if let err = error {
-                                        print("Firebase Sign in is failed!! : \(err)")
-                                    } else {
-                                        print("Firebase Sign in succeeds!! : \(user.debugDescription)")
-                                    }
-                                })
-                            }
+                            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                                if let err = error {
+                                    print("Firebase Sign in is failed!! : \(err)")
+                                } else {
+                                    print("Firebase Sign in succeeds!! : \(user.debugDescription)")
+                                }
+                            })
 
                             SSNetworkAPIClient.getUser(token, email: email, completion: { (model, error) in
                                 if let err = error {
@@ -411,15 +409,13 @@ public struct SSNetworkAPIClient {
                                 SSNetworkContext.sharedInstance.saveSharedAttribute(imageUrl, forKey: "profileImageUrl")
                             }
 
-                            if let auth = FIRAuth.auth() {
-                                auth.signIn(withEmail: email, password: "facebook", completion: { (user, error) in
-                                    if let err = error {
-                                        print("Firebase Sign-in is failed!! : \(err)")
-                                    } else {
-                                        print("Firebase Sign-in succeeds!! : \(user.debugDescription)")
-                                    }
-                                })
-                            }
+                            Auth.auth().signIn(withEmail: email, password: "facebook", completion: { (user, error) in
+                                if let err = error {
+                                    print("Firebase Sign-in is failed!! : \(err)")
+                                } else {
+                                    print("Firebase Sign-in succeeds!! : \(user.debugDescription)")
+                                }
+                            })
 
                             SSNetworkAPIClient.getUser(token, email: email, completion: { (model, error) in
                                 if let err = error {
@@ -683,15 +679,13 @@ public struct SSNetworkAPIClient {
 
                             completion(error)
                         } else {
-                            if let auth = FIRAuth.auth() {
-                                auth.createUser(withEmail: email, password: password, completion: { (user, error) in
-                                    if let err = error {
-                                        print("Firebase Sign Up is failed!! : " + err.localizedDescription)
-                                    } else {
-                                        print("Firebase Sign Up is succeeded!! : \(user.debugDescription)")
-                                    }
-                                })
-                            }
+                            Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
+                                if let err = error {
+                                    print("Firebase Sign Up is failed!! : " + err.localizedDescription)
+                                } else {
+                                    print("Firebase Sign Up is succeeded!! : \(user.debugDescription)")
+                                }
+                            })
                             completion(nil)
                         }
                         

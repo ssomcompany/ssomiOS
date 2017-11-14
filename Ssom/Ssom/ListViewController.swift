@@ -11,7 +11,7 @@ import CoreLocation
 import SDWebImage
 import Toast_Swift
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
+class ListViewController: UIViewController, Reloadable, UITableViewDelegate, UITableViewDataSource, SSListTableViewCellDelegate, SSPhotoViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var ssomListTableView: UITableView!
     @IBOutlet var viewNoSsom: UIView!
 
@@ -116,7 +116,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    override func initView() {
+    func initView() {
 
         self.isAlreadyWrittenMySsom = false
         self.mySsom = nil

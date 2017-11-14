@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 let kPasswordMinLength = 6
 
-class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
+class SSSignUpViewController: UIViewController, Reloadable, FBSDKLoginButtonDelegate {
 
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var scrollView: SSCustomScrollView!
@@ -43,7 +43,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
         self.navigationController?.isNavigationBarHidden = true
 
         self.registerForKeyboardNotifications()
@@ -218,7 +218,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
     // MARK:- UIScrollView
 
     // MARK: - Keyboard show & hide event
-    func keyboardWillShow(_ notification: Notification) -> Void {
+    @objc func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
@@ -228,7 +228,7 @@ class SSSignUpViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
 
-    func keyboardWillHide(_ notification: Notification) -> Void {
+    @objc func keyboardWillHide(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let _ = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 

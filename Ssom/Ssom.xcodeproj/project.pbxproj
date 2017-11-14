@@ -13,6 +13,7 @@
 		9703C6241DABC0EA00469BEE /* SSHeartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703C6231DABC0EA00469BEE /* SSHeartViewController.swift */; };
 		9703C6261DB12B6600469BEE /* SSHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */; };
 		9703C6281DB205C400469BEE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9703C6271DB205C400469BEE /* StoreKit.framework */; };
+		970E77541FBB45D200643B74 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970E77531FBB45D200643B74 /* Launch Screen.storyboard */; };
 		9725A3C51D9ADA4800AB7116 /* SSTodayPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */; };
 		972C87071DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */; };
 		9730033B1BF84F1500734D8D /* SSNetworkContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9730033A1BF84F1500734D8D /* SSNetworkContext.swift */; };
@@ -143,6 +144,7 @@
 		9703C6251DB12B6600469BEE /* SSHeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHeartTableViewCell.swift; path = Menu/SSHeartTableViewCell.swift; sourceTree = "<group>"; };
 		9703C6271DB205C400469BEE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9703C6291DB2064600469BEE /* Ssom_development.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = Ssom_development.entitlements; path = Ssom/Ssom_development.entitlements; sourceTree = "<group>"; };
+		970E77531FBB45D200643B74 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9717EB151D8E6F8400B47718 /* Ssom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Ssom.entitlements; path = Ssom/Ssom.entitlements; sourceTree = "<group>"; };
 		9725A3C41D9ADA4800AB7116 /* SSTodayPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSTodayPhotoViewController.swift; path = Menu/SSTodayPhotoViewController.swift; sourceTree = "<group>"; };
 		972C87061DB351BB00E890B3 /* SsomFirebaseRemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SsomFirebaseRemoteConfigDefaults.plist; path = Ssom/SsomFirebaseRemoteConfigDefaults.plist; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				97DE88941C4561FE0043B8E2 /* MyPlayground.playground */,
 				97343E271BE65AB300A9D39D /* AppDelegate.swift */,
 				97343E2B1BE65AB300A9D39D /* Main.storyboard */,
+				970E77531FBB45D200643B74 /* Launch Screen.storyboard */,
 				9766D9D61E1B981A0033CF0C /* SSTabBarController.swift */,
 				977DBA711D2A5C2900CFD98F /* SSMasterViewController.swift */,
 				97343E291BE65AB300A9D39D /* MapViewController.swift */,
@@ -679,6 +682,7 @@
 				973003451BFCE06400734D8D /* SSPhotoView.xib in Resources */,
 				978DDB771CCBDD8700567169 /* SSChat.xcassets in Resources */,
 				978AFDD51DBBDB8C00F965EE /* GoogleService-Info.plist in Resources */,
+				970E77541FBB45D200643B74 /* Launch Screen.storyboard in Resources */,
 				9764D9E41D36017B00BBE4C6 /* SSMenuTableViewCell.xib in Resources */,
 				978DDB751CCBD57700567169 /* SSChatStoryboard.storyboard in Resources */,
 				97343E2F1BE65AB300A9D39D /* Assets.xcassets in Resources */,
@@ -1158,7 +1162,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1199,7 +1203,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Ssom/Common/ObjcBridge.h;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

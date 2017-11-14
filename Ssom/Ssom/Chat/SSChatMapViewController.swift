@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import SDWebImage
 
-class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class SSChatMapViewController: SSDetailViewController, Reloadable, CLLocationManagerDelegate, GMSMapViewDelegate {
 
     @IBOutlet var mapView: GMSMapView!
     @IBOutlet var lbDistance: UILabel!
@@ -32,7 +32,7 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -91,11 +91,11 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         self.navigationItem.rightBarButtonItems = [barButtonSpacer, meetRequestButton]
     }
 
-    func applicationDidEnterBackground(_ sender: Notification?) {
+    @objc func applicationDidEnterBackground(_ sender: Notification?) {
         self.locationManager.stopUpdatingLocation()
     }
 
-    func applicationWillEnterForeground(_ sender: Notification?) {
+    @objc func applicationWillEnterForeground(_ sender: Notification?) {
         self.locationManager.startUpdatingLocation()
     }
 
@@ -127,11 +127,11 @@ class SSChatMapViewController: SSDetailViewController, CLLocationManagerDelegate
         return marker
     }
 
-    func tapBack() {
+    @objc func tapBack() {
         self.navigationController?.popViewController(animated: true)
     }
 
-    func tapCancelToMeetRequest() {
+    @objc func tapCancelToMeetRequest() {
         print("tapped meet request!!")
 
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: {

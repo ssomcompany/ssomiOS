@@ -62,13 +62,7 @@ class SSAccountManager {
         }
     }
 
-    var userInFIB: FIRUser? {
-        if let auth = FIRAuth.auth() {
-            return auth.currentUser
-        }
-
-        return nil
-    }
+    let userInFIB: User? = Auth.auth().currentUser
 
     var oneSignalPlayerId: String? {
         let keyChain = Keychain(service: "com.ssom")

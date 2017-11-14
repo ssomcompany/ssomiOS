@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSWriteViewController: SSDetailViewController, UITextViewDelegate
+class SSWriteViewController: SSDetailViewController, Reloadable, UITextViewDelegate
 , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var barButtonItems: SSNavigationBarItems!
@@ -93,7 +93,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
         self.barButtonItems = SSNavigationBarItems()
 
         self.barButtonItems.btnBack.addTarget(self, action: #selector(tapBack), for: UIControlEvents.touchUpInside)
@@ -128,7 +128,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func tapBack() {
+    @objc func tapBack() {
         if self.pickedImageData != nil || self.writeViewModel.content.characters.count != 0 {
             SSAlertController.alertTwoButton(title: "알림", message: "쏨 등록이 완료되지 않았어요.\n작성했던 내용을 삭제 하시겠어요?", vc: self, button1Title: "삭제하기", button1Completion: { (action) in
                 self.navigationController?.popViewController(animated: true)
@@ -294,8 +294,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonGreen"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
-                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
-                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
+                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
@@ -329,8 +329,8 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
             self.btnRegister.setBackgroundImage(UIImage(named: "acceptButtonRed"), for: UIControlState())
 
             if #available(iOS 8.2, *) {
-                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
-                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+                self.btnIPay.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
+                self.btnYouPay.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
@@ -504,7 +504,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
     }
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(_ notification: Notification) -> Void {
+    @objc func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let _ = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
@@ -513,7 +513,7 @@ class SSWriteViewController: SSDetailViewController, UITextViewDelegate
         }
     }
 
-    func keyboardWillHide(_ notification: Notification) -> Void {
+    @objc func keyboardWillHide(_ notification: Notification) -> Void {
         self.constProfileViewTopToSuper.constant = 0
     }
 }

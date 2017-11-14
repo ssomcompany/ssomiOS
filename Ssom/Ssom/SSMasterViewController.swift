@@ -12,7 +12,7 @@ import GoogleMaps
 let kMapButtonTitle: String = "MAP"
 let kListButtonTitle: String = "LIST"
 
-class SSMasterViewController: UIViewController {
+class SSMasterViewController: UIViewController, Reloadable {
 
     var barButtonItems: SSNavigationBarItems!
     var segButton1: UIButton!
@@ -94,10 +94,10 @@ class SSMasterViewController: UIViewController {
         self.navigationItem.titleView!.addSubview(self.segButton2)
 
         if #available(iOS 8.2, *) {
-            self.segButton1.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
-            self.segButton2.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+            self.segButton1.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
+            self.segButton2.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
 
-            self.lbButtonTitle.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+            self.lbButtonTitle.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
         } else {
             // Fallback on earlier versions
             if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
@@ -138,7 +138,7 @@ class SSMasterViewController: UIViewController {
         self.loadData()
     }
 
-    override func initView() {
+    func initView() {
         if let segmentControl = self.navigationItem.titleView as? UISegmentedControl {
             segmentControl.selectedSegmentIndex = 0
 
@@ -227,13 +227,13 @@ class SSMasterViewController: UIViewController {
         }
     }
 
-    func tapMenu() {
+    @objc func tapMenu() {
         if let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.drawerController?.setMainState(.open, inDirection: .Left, animated: true, allowUserInterruption: true, completion: nil)
         }
     }
 
-    func tapHeart() {
+    @objc func tapHeart() {
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveLinear, animations: { 
             self.barButtonItems.imgViewHeart.transform = CGAffineTransform.identity
             }) { (finish) in
@@ -263,7 +263,7 @@ class SSMasterViewController: UIViewController {
         }
     }
 
-    func tapChat() {
+    @objc func tapChat() {
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.curveLinear, animations: { 
             self.barButtonItems.imgViewMessage.transform = CGAffineTransform.identity
         }) { (finish) in

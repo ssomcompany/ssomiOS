@@ -197,7 +197,7 @@ class SSFilterView: UIView {
         }
     }
 
-    func handleTap(_ gesture: UITapGestureRecognizer) {
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         if let _ = self.filterMainView.hitTest(gesture.location(in: self.filterMainView), with: nil) {
 
         } else {
@@ -209,7 +209,7 @@ class SSFilterView: UIView {
         self.closeAnimation()
     }
 
-    func tapFilterOptions(_ sender: UIButton) {
+    @objc func tapFilterOptions(_ sender: UIButton) {
         let filterButton = sender
 
         if filterButton === self.btnFilterSsom {

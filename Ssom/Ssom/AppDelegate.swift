@@ -32,11 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
         Fabric.sharedSDK().debug = true
 
         // Firebase
-        FIRApp.configure()
+        FirebaseApp.configure()
 
         // Add observer for InstanceID token refresh callback.
         NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification),
-                                                         name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+                                                         name: Notification.Name.InstanceIDTokenRefresh, object: nil)
 
         // Google Maps
         GMSServices.provideAPIKey(PreDefine.GoogleMapKey);
@@ -157,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        FIRMessaging.messaging().disconnect()
+        Messaging.messaging().disconnect()
         print("Disconnected from FCM.")
     }
 
@@ -309,13 +309,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SSDrawerViewControllerDel
     }
 
 // MARK: - FirebaseMessage
-    func tokenRefreshNotification(_ notification: Notification) {
+    @objc func tokenRefreshNotification(_ notification: Notification) {
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
 
     func connectToFcm() {
-        FIRMessaging.messaging().connect { (error) in
+        Messaging.messaging().connect { (error) in
             if (error != nil) {
                 print("Unable to connect with FCM. \(error.debugDescription)")
             } else {

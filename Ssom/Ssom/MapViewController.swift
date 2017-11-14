@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import SDWebImage
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
+class MapViewController: UIViewController, Reloadable, CLLocationManagerDelegate, GMSMapViewDelegate, SSFilterViewDelegate, SSScrollViewDelegate {
     @IBOutlet var mainView: GMSMapView!
     @IBOutlet var writeButton: UIButton!
     @IBOutlet var myLocationButton: UIButton!
@@ -111,7 +111,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         super.init(coder: aDecoder)
     }
 
-    override func initView() {
+    func initView() {
         UIApplication.shared.setStatusBarStyle(.default, animated: false)
 
         self.isAlreadyWrittenMySsom = false

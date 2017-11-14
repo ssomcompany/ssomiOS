@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SSTodayPhotoViewController: UIViewController, Reloadable, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var imgViewPhoto: UIImageView!
 
     @IBOutlet var constBtnCancelTopMin: NSLayoutConstraint!
@@ -28,7 +28,7 @@ class SSTodayPhotoViewController: UIViewController, UIImagePickerControllerDeleg
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
         if let imageUrl = SSAccountManager.sharedInstance.profileImageUrl, imageUrl.lengthOfBytes(using: String.Encoding.utf8) != 0 {
             self.imgViewPhoto.sd_setImage(with: URL(string: imageUrl), placeholderImage: nil, options: []) { (image, error, _, _) in
                 if error != nil {

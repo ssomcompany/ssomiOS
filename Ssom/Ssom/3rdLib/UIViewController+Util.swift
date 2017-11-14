@@ -8,7 +8,12 @@
 
 import UIKit
 
-extension UIViewController {
+public protocol Reloadable: class {
+    var needToReload: Bool { get set }
+    func initView()
+}
+
+extension Reloadable where Self: UIViewController {
     var needToReload: Bool {
         get {
             return false
@@ -16,7 +21,7 @@ extension UIViewController {
         set {
             if newValue {
                 if self is UINavigationController {
-                    if let topViewController = (self as! UINavigationController).topViewController {
+                    if let topViewController = (self as! UINavigationController).topViewController as? Reloadable {
                         topViewController.initView()
                     }
                 } else {

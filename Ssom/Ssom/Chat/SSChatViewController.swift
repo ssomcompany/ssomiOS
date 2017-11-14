@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate, SSPhotoViewDelegate {
+class SSChatViewController: SSDetailViewController, Reloadable, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate, SSPhotoViewDelegate {
 
 // MARK: - properties
     var viewChatCoachmark: SSChatCoachmarkView!
@@ -126,7 +126,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
 
         let naviTitleView: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 44))
         if #available(iOS 8.2, *) {
-            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
         } else {
             // Fallback on earlier versions
             if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
@@ -156,20 +156,20 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
             let titleAttributedString = NSMutableAttributedString(string: "Chat \(self.ageArea.rawValue)\(peopleCount)")
 
             if #available(iOS 8.2, *) {
-                let firstAttributesDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)]
-                let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
-                                            NSFontAttributeName: UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)]
+                let firstAttributesDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)]
+                let secondAttributesDict = [NSAttributedStringKey.foregroundColor: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
+                                            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)]
                 titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
-                    let firstAttributesDict = [NSFontAttributeName: font]
+                    let firstAttributesDict = [NSAttributedStringKey.font: font]
                     titleAttributedString.addAttributes(firstAttributesDict, range: NSRange(location: 0, length: 5))
                 }
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
-                    let secondAttributesDict = [NSForegroundColorAttributeName: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
-                                                NSFontAttributeName: font]
+                    let secondAttributesDict = [NSAttributedStringKey.foregroundColor: UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0),
+                                                NSAttributedStringKey.font: font]
                     titleAttributedString.addAttributes(secondAttributesDict, range: NSRange(location: 5, length: titleAttributedString.length - 5))
                 }
             }
@@ -179,7 +179,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
-    override func initView() {
+    func initView() {
         self.tableViewChat.register(UINib(nibName: "SSChatStartingTableCell", bundle: nil), forCellReuseIdentifier: "chatStartingCell")
         self.tableViewChat.register(UINib(nibName: "SSChatMessageTableCell", bundle: nil), forCellReuseIdentifier: "chatMessageCell")
 
@@ -311,7 +311,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func tapBack() {
+    @objc func tapBack() {
         if self.meetRequestStatus == .Accepted {
             SSAlertController.alertTwoButton(title: "알림",
                                              message: "만남 중에는 채팅방을 나갈 수 없습니다.\n만남을 종료하고 나가시겠습니까?",
@@ -343,7 +343,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
         }
     }
 
-    func tapMeetRequest() {
+    @objc func tapMeetRequest() {
         print(#function)
 
         switch self.meetRequestStatus {
@@ -376,7 +376,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         return
                     }
 
-                    if chatRoomId.characters.count > 0 {
+                    if chatRoomId.count > 0 {
                         SSNetworkAPIClient.putMeetRequest(token, chatRoomId: chatRoomId, completion: { [weak self] (data, error) in
                             if let err = error {
                                 SSAlertController.showAlertConfirm(title: "Error", message: err.localizedDescription, completion: nil)
@@ -416,7 +416,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         return
                     }
 
-                    if chatRoomId.characters.count > 0 {
+                    if chatRoomId.count > 0 {
 
                         SSNetworkAPIClient.postMeetRequest(token, chatRoomId: chatRoomId, completion: { [weak self] (data, error) in
                             if let err = error {
@@ -571,7 +571,7 @@ class SSChatViewController: SSDetailViewController, UITableViewDelegate, UITable
                         return
                     }
 
-                    if messageText.characters.count > 0 {
+                    if messageText.count > 0 {
                         var lastTimestamp = Int(Date().timeIntervalSince1970)
                         if let timestamp = self.messages.last?.messageDateTime.timeIntervalSince1970 {
                             lastTimestamp = Int(timestamp * 1000.0)
@@ -788,14 +788,14 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let text = textField.text, text.characters.count > 0 {
+        if let text = textField.text, text.count > 0 {
             self.tapSendMessage(nil)
         }
         return true
     }
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(_ notification: Notification) -> Void {
+    @objc func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
@@ -811,7 +811,7 @@ print("### finished: \(Date()), contentSize:\(wself.tableViewChat.contentSize)")
         }
     }
 
-    func keyboardWillHide(_ notification: Notification) -> Void {
+    @objc func keyboardWillHide(_ notification: Notification) -> Void {
         UIView.animate(withDuration: 0.5, animations: {
             self.constInputBarBottomToSuper.constant = 0
 

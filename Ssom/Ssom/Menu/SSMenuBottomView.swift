@@ -41,7 +41,7 @@ class SSMenuBottomView: UITableViewHeaderFooterView {
     func configView() {
         if SSAccountManager.sharedInstance.isAuthorized {
         } else {
-            let stringAttributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            let stringAttributes = [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
             let logoutString = NSAttributedString(string: "로그아웃", attributes: stringAttributes)
 
             self.lbLogout.textColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1)

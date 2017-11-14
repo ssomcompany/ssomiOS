@@ -17,7 +17,7 @@ extension FBSDKLoginButton {
     }
 }
 
-class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, FBSDKLoginButtonDelegate {
+class SSSignInViewController: UIViewController, Reloadable, UITextFieldDelegate, UIScrollViewDelegate, FBSDKLoginButtonDelegate {
 
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var scrollView: SSCustomScrollView!
@@ -48,7 +48,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
         self.navigationController?.navigationBar.isHidden = true
 
         self.viewBackground.isHidden = true
@@ -211,7 +211,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 // MARK:- UIScrollView
 
 // MARK: - Keyboard show & hide event
-    func keyboardWillShow(_ notification: Notification) -> Void {
+    @objc func keyboardWillShow(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let keyboardFrame: CGRect = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 
@@ -221,7 +221,7 @@ class SSSignInViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         }
     }
 
-    func keyboardWillHide(_ notification: Notification) -> Void {
+    @objc func keyboardWillHide(_ notification: Notification) -> Void {
         if let info = notification.userInfo {
             if let _ = (info[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue {
 

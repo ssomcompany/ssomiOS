@@ -121,7 +121,7 @@ enum SSHeartGoods: Int {
     }
 }
 
-class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPaymentTransactionObserver, SKProductsRequestDelegate {
+class SSHeartViewController: UIViewController, Reloadable, UITableViewDelegate, UITableViewDataSource, SKPaymentTransactionObserver, SKProductsRequestDelegate {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var heartTableView: UITableView!
@@ -164,7 +164,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.scrollView.contentInset = UIEdgeInsets.zero
     }
 
-    override func initView() {
+    func initView() {
         self.lbHeartCount.format = "%d"
         self.lbHeartCount.method = UILabelCountingMethod.linear
 
@@ -256,7 +256,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.lbHeartRechargeTime.text = Util.getTimeIntervalString(from: now).0
     }
 
-    func pauseHeartRechageTimer() {
+    @objc func pauseHeartRechageTimer() {
         print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
@@ -282,7 +282,7 @@ class SSHeartViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    func changeHeartRechargerTimer(_ sender: Timer?) {
+    @objc func changeHeartRechargerTimer(_ sender: Timer?) {
         print("\(#function, #line)")
 
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount >= SSDefaultHeartCount {

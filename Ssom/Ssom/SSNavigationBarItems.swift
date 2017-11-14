@@ -85,17 +85,17 @@ class SSNavigationBarItems : UIView
         NotificationCenter.default.removeObserver(self)
     }
 
-    func tapDownHeart() {
+    @objc func tapDownHeart() {
         if self.animated {
             self.imgViewHeart.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
-    func cancelTapHeart() {
+    @objc func cancelTapHeart() {
         self.imgViewHeart.transform = CGAffineTransform.identity
     }
 
-    func changeHeartCount(_ count: Int = 0) {
+    @objc func changeHeartCount(_ count: Int = 0) {
         let countNow = Int(self.lbHeartCount.text!)!
         self.lbHeartCount.count(from: CGFloat(countNow), to: CGFloat(count), withDuration: 1.0)
 //            self.lbHeartCount.text = "\(count)"
@@ -119,13 +119,13 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    func tapDownMessage() {
+    @objc func tapDownMessage() {
         if self.animated {
             self.imgViewMessage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
-    func cancelTapMessage() {
+    @objc func cancelTapMessage() {
         self.imgViewMessage.transform = CGAffineTransform.identity
     }
 
@@ -199,7 +199,7 @@ class SSNavigationBarItems : UIView
         self.lbRechargeTime.text = Util.getTimeIntervalString(from: now).0
     }
 
-    func pauseHeartRechageTimer() {
+    @objc func pauseHeartRechageTimer() {
         print("\(#function, #line)")
 
         if let timer = self.heartRechargeTimer {
@@ -229,7 +229,7 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    func changeHeartRechargerTimer(_ sender: Timer?) {
+    @objc func changeHeartRechargerTimer(_ sender: Timer?) {
         print("\(#function, #line)")
 
         if let heartsCount = SSNetworkContext.sharedInstance.getSharedAttribute("heartsCount") as? Int, heartsCount >= SSDefaultHeartCount {
@@ -289,13 +289,13 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    func tapDownMeetRequest() {
+    @objc func tapDownMeetRequest() {
         if self.animated {
             self.imgViewMeetRequest.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
-    func cancelTapMeetRequest() {
+    @objc func cancelTapMeetRequest() {
         self.imgViewMeetRequest.transform = CGAffineTransform.identity
     }
 
@@ -326,13 +326,13 @@ class SSNavigationBarItems : UIView
         }
     }
 
-    func tapDownFilter() {
+    @objc func tapDownFilter() {
         if self.animated {
             self.imgViewFilterIcon.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
     }
 
-    func cancelTapFilter() {
+    @objc func cancelTapFilter() {
         self.imgViewFilterIcon.transform = CGAffineTransform.identity
     }
 

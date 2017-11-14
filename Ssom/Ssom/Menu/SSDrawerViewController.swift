@@ -1482,7 +1482,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     }
 
 // MARK:- UIGestureRecognizer Callbacks
-    func paneTapped(_ gesture: UITapGestureRecognizer) -> Void {
+    @objc func paneTapped(_ gesture: UITapGestureRecognizer) -> Void {
         if self.isPaneTapToCloseEnabledForDirection(self.currentDrawerDirection) {
             self.addDynamicsBehaviorsToCreatePaneState(SSDrawerMainState.closed)
         }
@@ -1492,7 +1492,7 @@ class SSDrawerViewController: UIViewController, UIDynamicAnimatorDelegate, UIGes
     fileprivate var paneVelocity: CGFloat = 0
     fileprivate var panDirection: SSDrawerDirection = SSDrawerDirection.None
 
-    func panePanned(_ gesture: UIPanGestureRecognizer) -> Void {
+    @objc func panePanned(_ gesture: UIPanGestureRecognizer) -> Void {
 
         switch gesture.state {
         case UIGestureRecognizerState.began:

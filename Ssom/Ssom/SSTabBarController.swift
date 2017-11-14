@@ -132,7 +132,7 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             self.navigationItem.titleView!.addConstraint(NSLayoutConstraint(item: self.navigationItem.titleView!, attribute: .centerX, relatedBy: .equal, toItem: self.lbTitle, attribute: .centerX, multiplier: 1, constant: -(#imageLiteral(resourceName: "iconSsomMapMini").size.width / 2.0)))
 
             if #available(iOS 8.2, *) {
-                self.lbTitle.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+                self.lbTitle.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 13) {
@@ -159,7 +159,7 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
             self.navigationItem.titleView!.addConstraint(NSLayoutConstraint(item: self.navigationItem.titleView!, attribute: .centerY, relatedBy: .equal, toItem: self.lbTitle, attribute: .centerY, multiplier: 1, constant: 0))
 
             if #available(iOS 8.2, *) {
-                self.lbTitle.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
+                self.lbTitle.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
             } else {
                 // Fallback on earlier versions
                 if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 16) {
@@ -250,13 +250,13 @@ class SSTabBarController: UITabBarController, UITabBarControllerDelegate {
         }
     }
 
-    func tapMenu() {
+    @objc func tapMenu() {
         if let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.drawerController?.setMainState(.open, inDirection: .Left, animated: true, allowUserInterruption: true, completion: nil)
         }
     }
 
-    func tapFilter() {
+    @objc func tapFilter() {
         if let vc = self.selectedViewController as? MapViewController {
             vc.tapFilter()
         } else if let vc = self.selectedViewController as? ListViewController {

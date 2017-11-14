@@ -77,6 +77,8 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Menu</string>
 	<key>UIRequiredDeviceCapabilities</key>

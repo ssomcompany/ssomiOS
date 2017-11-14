@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UITableViewDataSource, SSChatListTableCellDelegate, CLLocationManagerDelegate, SSPhotoViewDelegate {
+class SSChatListViewController : SSDetailViewController, Reloadable, UITableViewDelegate, UITableViewDataSource, SSChatListTableCellDelegate, CLLocationManagerDelegate, SSPhotoViewDelegate {
 
     var locationManager: CLLocationManager!
     var nowLocationCoordinate2D: CLLocationCoordinate2D!
@@ -68,7 +68,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
 
         let naviTitleView: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         if #available(iOS 8.2, *) {
-            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+            naviTitleView.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
         } else {
             // Fallback on earlier versions
             if let font = UIFont.init(name: "HelveticaNeue-Medium", size: 18) {
@@ -97,7 +97,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         self.barButtonItems.changeMessageCount(count, hiddenIfZero: true)
     }
 
-    override func initView() {
+    func initView() {
         self.chatListTableView.register(UINib(nibName: "SSChatListTableCell", bundle: nil), forCellReuseIdentifier: "chatListCell")
 
         self.locationManager = CLLocationManager()
@@ -115,7 +115,7 @@ class SSChatListViewController : SSDetailViewController, UITableViewDelegate, UI
         }
     }
 
-    func tapBack() {
+    @objc func tapBack() {
         self.navigationController?.popViewController(animated: true)
     }
 

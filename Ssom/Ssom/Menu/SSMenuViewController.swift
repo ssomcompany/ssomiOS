@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class SSMenuViewController: UIViewController, Reloadable, SSMenuHeadViewDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var menuTableView: UITableView!
 
     weak var drawerViewController: SSDrawerViewController?
@@ -23,7 +23,7 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
         self.initView()
     }
 
-    override func initView() {
+    func initView() {
 
         self.menuTableView.register(UINib(nibName: "SSMenuHeadView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuHeader")
         self.menuTableView.register(UINib(nibName: "SSMenuBottomView", bundle: nil), forHeaderFooterViewReuseIdentifier: "MenuFooter")
@@ -90,7 +90,7 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
             guard let wself = self else { return }
             wself.menuTableView.reloadData()
 
-            wself.drawerViewController?.mainViewController?.needToReload = finish
+            (wself.drawerViewController?.mainViewController as? Reloadable)?.needToReload = finish
         }
         
         view.blockLogout = { [weak self] (finish) in
@@ -98,7 +98,7 @@ class SSMenuViewController: UIViewController, SSMenuHeadViewDelegate, UITableVie
             SSAccountManager.sharedInstance.doSignOut(wself, completion: { (finish) in
                 wself.menuTableView.reloadData()
 
-                wself.drawerViewController?.mainViewController?.needToReload = finish
+                (wself.drawerViewController?.mainViewController as? Reloadable)?.needToReload = finish
 
 
             })

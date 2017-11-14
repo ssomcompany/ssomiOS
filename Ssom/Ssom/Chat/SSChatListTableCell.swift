@@ -222,7 +222,7 @@ class SSChatListTableCell: UITableViewCell {
     fileprivate var panStartPoint: CGPoint = CGPoint.zero
     fileprivate var startingRightLayoutConstraintConstant: CGFloat = 0.0
 
-    func panCell(_ gesture: UIPanGestureRecognizer) {
+    @objc func panCell(_ gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
             self.panStartPoint = gesture.translation(in: self.contentView)
